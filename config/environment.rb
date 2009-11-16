@@ -7,6 +7,8 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  config.middleware.use 'Rack::Bug', :password => rpass
+  rpass = (GlobalPreference.get(:rack_bug_password) || 'event123') rescue 'event123'
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org'
   config.gem 'will_paginate', :source => 'http://gemcutter.org'
   config.gem 'formtastic', :source => 'http://gemcutter.org'
