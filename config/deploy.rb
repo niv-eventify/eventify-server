@@ -1,5 +1,5 @@
 # require "vladify/delayed_job"
-# require "vladify/delayed_job_monit"
+require "vladify/delayed_job_monit"
 # require "vladify/fast_gettext"
 # require "vladify/gettext"
 # require "vladify/thinking_sphinx"
@@ -8,5 +8,5 @@
 # require "vladify/workling"
 
 set :application, "eventify.com"
-set :repository, "git@astrails.com:eventify"
+set :repository, "git@astrails.com:eventify/eventify-server"
 set :domain, "astrails@astrails.com"
