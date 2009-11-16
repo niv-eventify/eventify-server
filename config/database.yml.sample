@@ -1,0 +1,17 @@
+defaults: &defaults
+  adapter: mysql
+  username: astrails
+  password:
+  encoding: utf8
+
+production:
+  database: eventify
+  <<: *defaults
+
+development:
+  database: eventify
+  <<: *defaults
+
+test:
+  database: eventify_test
+  <<: *defaults
