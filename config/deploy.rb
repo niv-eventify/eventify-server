@@ -9,4 +9,4 @@ require "vladify/delayed_job_monit"
 
 set :application, "eventify.com"
 set :repository, "git@astrails.com:eventify/eventify-server"
-set :domain, "astrails@astrails.com"
+set :domain, "astrails@eventify.astrails.com"
