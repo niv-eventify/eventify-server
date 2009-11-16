@@ -8,5 +8,5 @@ require "vladify/delayed_job_monit"
 # require "vladify/workling"
 
 set :application, "eventify.com"
-set :repository, "git@astrails.com:eventify/eventify-server"
+set :repository, "git@alpha.astrails.com:eventify/eventify-server"
 set :domain, "astrails@eventify.astrails.com"
