@@ -61,5 +61,17 @@ describe ContactsController do
       put :update, :id => 1, :contact => {:name => "foo", :email => "foo@bar.com", :city => "New York"}
       response.should redirect_to("/contacts")
     end
+
+    it "should mark as removed" do
+      @contact = stub_model(Contact)
+      @contacts = mock("contacts")
+      @contacts.stub!(:find).with("1").and_return(@contact)
+      @controller.current_user.stub!(:contacts).and_return(@contacts)
+
+      @contact.should_receive(:removed_at=)
+      @contact.should_receive(:save!)
+      delete :destroy, :id => 1
+      response.should redirect_to("/contacts")
+    end
   end
 end
