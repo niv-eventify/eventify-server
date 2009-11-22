@@ -2,8 +2,7 @@
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-type" }
     %title!= @page_title || h(controller.action_name)
-    != stylesheet_link_tag 'formtastic', 'formtastic_changes', 'application', :media => 'all'
-    != javascript_include_tag "jquery.min.js", "jquery-ui.min.js", "jquery.validate.min.js", "application"
+    != render(:partial => "layouts/html_head")
     != yield :head
   %body
     .header
