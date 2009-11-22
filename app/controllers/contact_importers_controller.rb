@@ -1,6 +1,6 @@
 class ContactImportersController < ApplicationController
   before_filter :require_user
-  before_filter :set_importer, :only => :create
+  before_filter :set_importer, :only => [:edit, :update]
 
   def index
   end
@@ -21,11 +21,10 @@ class ContactImportersController < ApplicationController
     end
   end
 
-  def new
-    @contact_importer = ContactImporter.new(:contact_source => params[:contact_source])
+  def edit
   end
 
-  def create
+  def update
     return _import_csv if "csv" == params[:contact_source]
 
     _import_from_web
@@ -33,7 +32,7 @@ class ContactImportersController < ApplicationController
 
 protected
   def set_importer
-    @contact_importer = current_user.contact_importers.reset_source!(params[:contact_importer][:contact_source])
+    @contact_importer = current_user.contact_importers.reset_source!(params[:id])
   end
 
   def _import_csv
@@ -43,7 +42,7 @@ protected
 
   def _import_from_web
     unless @contact_importer.validate_user_password(params[:contact_importer])
-      render :action => :new
+      render :action => :edit
       return
     end
 

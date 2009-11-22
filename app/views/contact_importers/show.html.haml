@@ -18,4 +18,4 @@
       \:
       = @contact_importer.last_error
     %p
-      != link_to "Try Again", new_contact_importer_path(:contact_source => @contact_importer)
+      != link_to "Try Again", edit_contact_importer_path(:id => @contact_importer)

@@ -39,13 +39,13 @@ class ContactImporter < ActiveRecord::Base
       begin
         Contacts.new(contact_source.to_sym, username, password).contacts
       rescue Contacts::StandardError, Contacts::ContactsError
-        _error($1)
+        _error!($!)
       end
     when 'aol'
       begin
        contacts = Blackbook.get :username => username, :password => password
      rescue Blackbook::BlackbookError
-       _error($1)
+       _error!($!)
      end
     when 'csv'  
     end

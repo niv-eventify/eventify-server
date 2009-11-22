@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
   has_many :contact_importers do
     def reset_source!(new_source)
-      importer = find_by_contact_source(new_source) || build(:source => new_source)
+      importer = find_by_contact_source(new_source) || build(:contact_source => new_source)
       importer.completed_at = importer.last_error = importer.contacts_imported = nil
       importer.save!
 
