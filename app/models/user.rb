@@ -10,4 +10,7 @@ class User < ActiveRecord::Base
   include Astrails::Auth::Model
   attr_accessible :name, :password, :password_confirmation
   validates_presence_of :name
+
+
+  has_many :contacts, :conditions => "contacts.removed_at IS NULL", :order => "contacts.email DESC"
 end

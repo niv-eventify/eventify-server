@@ -46,3 +46,5 @@
 # i.e. :label => true, or :hint => true (or opposite depending on initialized value)
 # Formtastic::SemanticFormBuilder.i18n_lookups_by_default = false
 Formtastic::SemanticFormBuilder.i18n_lookups_by_default = true
+
+Formtastic::SemanticFormBuilder.priority_countries = ["Israel", "United States", "United Kingdom", "Canada"]

@@ -1,0 +1,7 @@
+%tr
+  %td!= link_to h(contact.name), edit_contact_path(contact)
+  %td= contact.email
+  %td= contact.mobile
+  %td= [contact.company, contact.title].compact_blanks.join(", ")
+  %td= [contact.street, contact.city, contact.country, contact.zip].compact_blanks.join(", ")
+  %td!= link_to "Remove", contact_path(contact), :method => :delete, :confirm => "Are you sure?"

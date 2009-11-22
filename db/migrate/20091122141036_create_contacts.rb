@@ -11,10 +11,11 @@ class CreateContacts < ActiveRecord::Migration
       t.string  :zip
       t.string  :company
       t.string  :title
+      t.datetime  :removed_at
       t.timestamps
     end
 
-    add_index :contacts, [:user_id, :email], :name => "user_email"
+    add_index :contacts, [:user_id, :removed_at, :email], :name => "user_removed_email"
   end
 
   def self.down

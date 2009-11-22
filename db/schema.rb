@@ -32,11 +32,12 @@ ActiveRecord::Schema.define(:version => 20091122141036) do
     t.string   "zip"
     t.string   "company"
     t.string   "title"
+    t.datetime "removed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "contacts", ["user_id", "email"], :name => "user_email"
+  add_index "contacts", ["user_id", "removed_at", "email"], :name => "user_removed_email"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0

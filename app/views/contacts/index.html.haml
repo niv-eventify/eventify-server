@@ -1,0 +1,13 @@
+!= link_to "New", new_contact_path
+
+%table
+  %tr
+    %th Name
+    %th Email
+    %th Mobile
+    %th Business Info
+    %th Address
+    %th &nbsp;
+  != render(:partial => @contacts)
+
+!= will_paginate(@contacts)
