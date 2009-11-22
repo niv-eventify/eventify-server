@@ -1,0 +1,21 @@
+- if @contact_importer.completed_at.blank?
+  %p
+    Importing from
+    = @contact_importer.name
+    %br
+    Please wait...
+  != javascript_tag(check_for_importer_status_js)
+- else
+  %p
+    != link_to @contact_importer.contacts_imported.to_i.to_s, contacts_path
+    contact(s) imported
+    %br
+    TODO: pluralize after gettext
+  - unless @contact_importer.last_error.blank?
+    %p
+      An error occured during importing contacts from
+      = @contact_importer.name
+      \:
+      = @contact_importer.last_error
+    %p
+      != link_to "Try Again", new_contact_importer_path(:contact_source => @contact_importer)

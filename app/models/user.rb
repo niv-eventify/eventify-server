@@ -12,5 +12,24 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
 
-  has_many :contacts, :conditions => "contacts.removed_at IS NULL", :order => "contacts.email DESC"
+  has_many :contacts, :conditions => "contacts.removed_at IS NULL", :order => "contacts.email" do
+    def add(name, email)
+      return false if find_by_email(email)
+      return false if email.blank?
+      unless name
+        email =~ /(.+)@/
+        name = $1
+      end
+      !create(:name => name, :email => email).new_record?
+    end
+  end
+  has_many :contact_importers do
+    def reset_source!(new_source)
+      importer = find_by_contact_source(new_source) || build(:source => new_source)
+      importer.completed_at = importer.last_error = importer.contacts_imported = nil
+      importer.save!
+
+      importer
+    end
+  end
 end

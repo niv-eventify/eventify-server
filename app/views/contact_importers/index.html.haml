@@ -1,0 +1,5 @@
+%h3 Import contracts
+
+Import contacts using:
+- ContactImporter::SOURCES.each do |key, value|
+  != link_to value, new_contact_importer_path(:contact_source => key)

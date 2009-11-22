@@ -11,7 +11,7 @@ describe ContactImporter do
     end
 
     it "should validate source" do
-      @contact_importer.errors.on(:source).should_not be_blank
+      @contact_importer.errors.on(:contact_source).should_not be_blank
     end
   end
 end

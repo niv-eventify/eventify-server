@@ -9,11 +9,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091122141036) do
+ActiveRecord::Schema.define(:version => 20091122164007) do
 
   create_table "contact_importers", :force => true do |t|
     t.integer  "user_id"
-    t.string   "source",            :limit => 16
+    t.string   "contact_source",    :limit => 16
     t.datetime "completed_at"
     t.string   "last_error"
     t.integer  "contacts_imported"

@@ -1,0 +1,12 @@
+%h3
+  Import from
+  = @contact_importer.name
+
+- semantic_form_for(:contact_importer, @contact_importer.clone, :url => contact_importers_path, :method => :post) do |f|
+  = f.object.errors.on(:base)
+  - f.inputs do
+    != f.hidden_field :contact_source
+    != f.input :username, :required => true
+    != f.input :password, :as => :password, :required => true
+  != f.submit "Import"
+  != link_to "Cancel", contact_importers_path
