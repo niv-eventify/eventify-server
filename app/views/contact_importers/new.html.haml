@@ -6,7 +6,7 @@
   = f.object.errors.on(:base)
   - f.inputs do
     != f.hidden_field :contact_source
-    != f.input :username, :required => true
+    != f.input :username, :required => true, :label => "Email or Username"
     != f.input :password, :as => :password, :required => true
   != f.submit "Import"
   != link_to "Cancel", contact_importers_path

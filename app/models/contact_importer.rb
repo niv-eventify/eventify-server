@@ -39,12 +39,14 @@ class ContactImporter < ActiveRecord::Base
       begin
         Contacts.new(contact_source.to_sym, username, password).contacts
       rescue Contacts::StandardError, Contacts::ContactsError
-        self.last_error = $!.to_s
-        self.completed_at = Time.now.utc
-        save!
-        nil
+        _error($1)
       end
     when 'aol'
+      begin
+       contacts = Blackbook.get :username => username, :password => password
+     rescue Blackbook::BlackbookError
+       _error($1)
+     end
     when 'csv'  
     end
 
@@ -59,5 +61,12 @@ protected
     end
     self.completed_at = Time.now.utc
     save!
+  end
+
+  def _error!(exception)
+    self.last_error = exception.to_s
+    self.completed_at = Time.now.utc
+    save!
+    nil
   end
 end
