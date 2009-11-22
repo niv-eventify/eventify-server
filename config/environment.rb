@@ -18,6 +18,9 @@ Rails::Initializer.run do |config|
   config.gem 'mocha', :version => '0.9.8', :library => false
   config.gem 'rspec-rails', :lib => false, :version => '1.2.6'
   config.gem 'rspec', :lib => false, :version => '1.2.6'
+
+  config.gem 'blackbook', :lib => false
+  config.gem 'contacts', :lib => false
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
