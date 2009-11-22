@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091122135642) do
+ActiveRecord::Schema.define(:version => 20091122141036) do
 
   create_table "contact_importers", :force => true do |t|
     t.integer  "user_id"
@@ -20,6 +20,23 @@ ActiveRecord::Schema.define(:version => 20091122135642) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "contacts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "mobile"
+    t.string   "country"
+    t.string   "city"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "company"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contacts", ["user_id", "email"], :name => "user_email"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
