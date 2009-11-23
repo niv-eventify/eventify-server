@@ -12,18 +12,28 @@ class ContactImporter < ActiveRecord::Base
   validates_inclusion_of :contact_source, :in => SOURCES.keys, :message => "not included in the list"
   attr_accessible :contact_source
   
-  attr_accessor :username, :password
-  attr_accessible :username, :password
-  attr_reader :validate_credentials
+  attr_accessor :username, :password, :csv
+  attr_accessible :username, :password, :csv
+  attr_reader :validate_credentials, :validate_file
   validates_presence_of :username, :password, :if => :validate_credentials
+  validates_presence_of :csv, :if => :validate_file
   def validate_user_password(opts)
     self.attributes = opts
     @validate_credentials = true
     valid?
   end
+  def validate_csv(opts)
+    self.attributes = opts
+    @validate_file = true
+    valid?
+  end
 
   def to_param
     contact_source
+  end
+
+  def csv?
+    "csv" == contact_source
   end
 
   def name
@@ -47,7 +57,12 @@ class ContactImporter < ActiveRecord::Base
      rescue Blackbook::BlackbookError
        _error!($!)
      end
-    when 'csv'  
+    when 'csv'
+      begin
+        Blackbook.get :csv, :file => opts[:contact_importer][:csv]
+      rescue Blackbook::BlackbookError
+        _error!($!)
+      end
     end
 
     _import!(contacts) if contacts
@@ -56,7 +71,13 @@ class ContactImporter < ActiveRecord::Base
 protected
   def _import!(contacts)
     self.contacts_imported = 0
-    contacts.each do |name, email|
+    contacts.each do |c|
+      if c.is_a?(Array)
+        name, email = c.first, c.last
+      elsif c.is_a?(Hash)
+        name = c[:name]
+        email = c[:email]
+      end
       self.contacts_imported += 1 if user.contacts.add(name, email)
     end
     self.completed_at = Time.now.utc

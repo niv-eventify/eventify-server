@@ -25,7 +25,7 @@ class ContactImportersController < ApplicationController
   end
 
   def update
-    return _import_csv if "csv" == params[:contact_source]
+    return _import_csv if params[:contact_importer] && "csv" == params[:contact_importer][:contact_source]
 
     _import_from_web
   end
@@ -36,6 +36,10 @@ protected
   end
 
   def _import_csv
+    unless @contact_importer.validate_csv(params[:contact_importer])
+      render :action => :edit
+      return
+    end
     @contact_importer.import!(params)
     redirect_to contact_importer_path(@contact_importer)
   end

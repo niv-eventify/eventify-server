@@ -1,0 +1,15 @@
+%h3
+  Import from
+  = @contact_importer.name
+
+- semantic_form_for(@contact_importer, :live_validations => true, :html => { :multipart => true }) do |f|
+  = f.object.errors.on(:base)
+  - f.inputs do
+    != f.hidden_field :contact_source
+    - if @contact_importer.csv?
+      != f.input :csv, :as => :file, :required => true, :label => "Choose CSV file (name, email)"
+    - else
+      != f.input :username, :required => true, :label => "Email or Username"
+      != f.input :password, :as => :password, :required => true
+  != f.submit "Import"
+  != link_to "Cancel", contact_importers_path
