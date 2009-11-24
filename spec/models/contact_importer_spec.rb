@@ -49,7 +49,7 @@ describe ContactImporter do
           Contacts.stub!(:new).with(s.to_sym, "username", "password").and_return(@contacts)
           Contacts.should_receive(:new).with(s.to_sym, "username", "password").and_return(@contacts)
           @contact_importer.should_receive(:_import!).with(@contacts)
-          @contact_importer.import!
+          @contact_importer.import!("username", "password")
         end
       end
       it "should use Blackbook for aol" do
@@ -57,7 +57,7 @@ describe ContactImporter do
         Blackbook.stub!(:get).with(:username => "username", :password => "password").and_return(@contacts)
         Blackbook.should_receive(:get).with(:username => "username", :password => "password").and_return(@contacts)
         @contact_importer.should_receive(:_import!).with(@contacts)
-        @contact_importer.import!
+        @contact_importer.import!("username", "password")
       end
       it "should use Blackbook for csv" do
         @contact_importer.contact_source = "csv"

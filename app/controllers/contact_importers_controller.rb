@@ -25,7 +25,7 @@ class ContactImportersController < ApplicationController
   end
 
   def update
-    @contact_importer.attributes = params[:contact_importer].merge(:validate_importing => true)
+    @contact_importer.attributes = (params[:contact_importer] || {}).merge(:validate_importing => true)
 
     unless @contact_importer.valid?
       render :action => :edit
@@ -33,10 +33,9 @@ class ContactImportersController < ApplicationController
     end
 
     if @contact_importer.csv?
-      # @contact_importer.import!
-      @contact_importer.send_later(:import!, params)
-    else
       @contact_importer.import!
+    else
+      @contact_importer.send_later(:import!, @contact_importer.username, @contact_importer.password)
     end
 
     redirect_to contact_importer_path(@contact_importer)

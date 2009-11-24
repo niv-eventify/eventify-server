@@ -33,7 +33,7 @@ class ContactImporter < ActiveRecord::Base
     SOURCES[contact_source]
   end
 
-  def import!
+  def import!(username = nil, password = nil)
     contacts = case contact_source
     when 'gmail', 'yahoo', 'hotmail'
       begin

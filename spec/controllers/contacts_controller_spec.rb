@@ -19,8 +19,8 @@ describe ContactsController do
     integrate_views
 
     before(:each) do
-      @admin = Factory.create(:active_user)
-      UserSession.create(@admin)
+      @user = Factory.create(:active_user)
+      UserSession.create(@user)
     end
 
     it "should render index" do
