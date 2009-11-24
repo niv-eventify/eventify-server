@@ -33,10 +33,10 @@ class ContactImportersController < ApplicationController
     end
 
     if @contact_importer.csv?
-      @contact_importer.import!(params)
-      # @contact_importer.send_later(:import!, params)
+      # @contact_importer.import!
+      @contact_importer.send_later(:import!, params)
     else
-      @contact_importer.import!(params)
+      @contact_importer.import!
     end
 
     redirect_to contact_importer_path(@contact_importer)
