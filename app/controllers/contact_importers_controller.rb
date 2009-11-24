@@ -25,34 +25,25 @@ class ContactImportersController < ApplicationController
   end
 
   def update
-    return _import_csv if params[:contact_importer] && "csv" == params[:contact_importer][:contact_source]
+    @contact_importer.attributes = params[:contact_importer].merge(:validate_importing => true)
 
-    _import_from_web
+    unless @contact_importer.valid?
+      render :action => :edit
+      return
+    end
+
+    if @contact_importer.csv?
+      @contact_importer.import!(params)
+      # @contact_importer.send_later(:import!, params)
+    else
+      @contact_importer.import!(params)
+    end
+
+    redirect_to contact_importer_path(@contact_importer)
   end
 
 protected
   def set_importer
     @contact_importer = current_user.contact_importers.reset_source!(params[:id])
-  end
-
-  def _import_csv
-    unless @contact_importer.validate_csv(params[:contact_importer])
-      render :action => :edit
-      return
-    end
-    @contact_importer.import!(params)
-    redirect_to contact_importer_path(@contact_importer)
-  end
-
-  def _import_from_web
-    unless @contact_importer.validate_user_password(params[:contact_importer])
-      render :action => :edit
-      return
-    end
-
-    @contact_importer.send_later(:import!, params)
-    flash[:notice] = "Importing from #{@contact_importer.name}"
-
-    redirect_to contact_importer_path(@contact_importer)
   end
 end

@@ -8,7 +8,7 @@
 - else
   %p
     != link_to @contact_importer.contacts_imported.to_i.to_s, contacts_path
-    contact(s) imported
+    new contact(s) imported
     %br
     TODO: pluralize after gettext
   - unless @contact_importer.last_error.blank?

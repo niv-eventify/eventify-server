@@ -14,8 +14,7 @@ class User < ActiveRecord::Base
 
   has_many :contacts, :conditions => "contacts.removed_at IS NULL", :order => "contacts.email" do
     def add(name, email)
-      return false if find_by_email(email)
-      return false if email.blank?
+      return false if email.blank? || find_by_email(email)
       unless name
         email =~ /(.+)@/
         name = $1

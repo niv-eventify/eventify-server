@@ -12,21 +12,14 @@ class ContactImporter < ActiveRecord::Base
   validates_inclusion_of :contact_source, :in => SOURCES.keys, :message => "not included in the list"
   attr_accessible :contact_source
   
-  attr_accessor :username, :password, :csv
-  attr_accessible :username, :password, :csv
-  attr_reader :validate_credentials, :validate_file
-  validates_presence_of :username, :password, :if => :validate_credentials
-  validates_presence_of :csv, :if => :validate_file
-  def validate_user_password(opts)
-    self.attributes = opts
-    @validate_credentials = true
-    valid?
-  end
-  def validate_csv(opts)
-    self.attributes = opts
-    @validate_file = true
-    valid?
-  end
+  attr_accessor :username, :password, :csv, :validate_importing
+  attr_accessible :username, :password, :csv, :validate_importing
+
+  validates_presence_of :username, :password, :if => :validate_credentials?
+  validates_presence_of :csv, :if => :validate_csv?
+
+  def validate_credentials?; @validate_importing && !csv?; end
+  def validate_csv?; @validate_importing && csv?; end
 
   def to_param
     contact_source
@@ -41,9 +34,6 @@ class ContactImporter < ActiveRecord::Base
   end
 
   def import!(opts)
-    username = opts[:contact_importer][:username]
-    password = opts[:contact_importer][:password]
-
     contacts = case contact_source
     when 'gmail', 'yahoo', 'hotmail'
       begin
@@ -53,13 +43,13 @@ class ContactImporter < ActiveRecord::Base
       end
     when 'aol'
       begin
-       contacts = Blackbook.get :username => username, :password => password
+       contacts = Blackbook.get(:username => username, :password => password)
      rescue Blackbook::BlackbookError
        _error!($!)
      end
     when 'csv'
       begin
-        Blackbook.get :csv, :file => opts[:contact_importer][:csv]
+        Blackbook.get(:csv, :file => csv)
       rescue Blackbook::BlackbookError
         _error!($!)
       end
