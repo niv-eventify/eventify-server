@@ -1,0 +1,18 @@
+%h1 Categories
+
+!= link_to 'New category', new_category_path 
+
+%table
+  %tr
+    %th English
+    %th Hebrew
+    %th &nbsp;
+    %th &nbsp;
+
+  - for category in @categories
+    %tr
+      %td= category.name_en
+      %td= category.name_he
+      %td!= link_to 'Edit', edit_category_path(category)
+      %td!= link_to 'Disable', category_path(category), :confirm => 'Are you sure?', :method => :delete
+    

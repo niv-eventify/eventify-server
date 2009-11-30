@@ -1,0 +1,6 @@
+%h1 Editing category
+
+- semantic_form_for(@category, :live_validations => true) do |f|
+  != render :partial => "form", :locals => { :f => f }
+  != f.submit "Update"
+  != link_to 'Back', categories_path

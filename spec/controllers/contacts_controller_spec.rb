@@ -63,7 +63,7 @@ describe ContactsController do
     end
 
     it "should mark as removed" do
-      @contact = stub_model(Contact)
+      @contact = mock_model(Contact)
       @contacts = mock("contacts")
       @contacts.stub!(:find).with("1").and_return(@contact)
       @controller.current_user.stub!(:contacts).and_return(@contacts)

@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091130104121) do
+ActiveRecord::Schema.define(:version => 20091130112123) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name_en"
+    t.string   "name_he"
+    t.datetime "disabled_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["disabled_at"], :name => "index_categories_on_disabled_at"
 
   create_table "contact_importers", :force => true do |t|
     t.integer  "user_id"
