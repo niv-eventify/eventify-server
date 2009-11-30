@@ -3,4 +3,4 @@
   %td= user.email
   %td= user.is_admin
   %td.edit!= link_to "Edit", edit_user_path(user)
-  %td.delete!= link_to "Delete", user, :method => "delete"
+  %td.delete!= link_to "Disable", user, :method => "delete", :confirm => "Are you sure?"

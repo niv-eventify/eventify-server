@@ -17,8 +17,15 @@ class UsersController < InheritedResources::Base
   end
 
   def destroy
-    destroy!
-    current_user_session.destroy
+    @user = User.enabled.find(params[:id])
+    if @user.id == current_user.id
+      flash[:error] = "You cannot remove your own account"
+      redirect_to users_path
+      return
+    end
+    @user.update_attribute(:disabled_at, Time.now.utc)
+    flash[:notice] = "User disabled"
+    redirect_to users_path
   end
 
   protected
@@ -35,7 +42,7 @@ class UsersController < InheritedResources::Base
   end
 
   def collection
-    @users ||= end_of_association_chain.paginate(params[:page]).all
+    @users ||= end_of_association_chain.enabled.paginate(params[:page]).all
   end
 
   def resource
