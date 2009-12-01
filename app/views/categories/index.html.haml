@@ -1,5 +1,9 @@
-%h1 Categories
+%h1
+  Categories
+  = " (disabled)" if params[:disabled]
 
+!= link_to "Enabled", categories_path
+!= link_to "Disabled", categories_path(:disabled => true)
 != link_to 'New category', new_category_path 
 
 %table
@@ -14,5 +18,9 @@
       %td= category.name_en
       %td= category.name_he
       %td!= link_to 'Edit', edit_category_path(category)
-      %td!= link_to 'Disable', category_path(category), :confirm => 'Are you sure?', :method => :delete
+      %td
+        - if category.disabled?
+          != link_to 'Enable', category_path(category, :category => {:disabled_at => nil}), :confirm => 'Are you sure?', :method => :put
+        - else
+          != link_to 'Disable', category_path(category), :confirm => 'Are you sure?', :method => :delete
     

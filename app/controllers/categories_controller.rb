@@ -26,6 +26,6 @@ class CategoriesController < InheritedResources::Base
 
 protected
   def collection
-    @categories = end_of_association_chain.enabled 
+    @categories = end_of_association_chain.send("true" == params[:disabled] ? :disabled : :enabled)
   end
 end
