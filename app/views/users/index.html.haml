@@ -1,4 +1,9 @@
-%h1 Listing users
+%h1
+  Users
+  = " (disabled)" if params[:disabled]
+
+!= link_to "Enabled", users_path
+!= link_to "Disabled", users_path(:disabled => true)
 
 %table
   %tr

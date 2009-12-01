@@ -25,9 +25,16 @@ class UsersController < InheritedResources::Base
     end
     # manual update protected attributes
     if current_user.is_admin?
-      @user.is_admin = params[:user].delete(:is_admin)
+      @user.is_admin = params[:user].delete(:is_admin) if params[:user] && params[:user][:is_admin]
     end
-    update!
+    if "true" == params[:enable]
+      @user.disabled_at = nil
+      @user.save!
+      flash[:notice] = "User #{@user.email} enabled"
+      redirect_to users_path
+    else
+      update!
+    end
   end
 
   def destroy
@@ -56,7 +63,7 @@ class UsersController < InheritedResources::Base
   end
 
   def collection
-    @users ||= end_of_association_chain.enabled.paginate(:page => params[:page], :per_page => params[:per_page])
+    @users ||= end_of_association_chain.send("true" == params[:disabled] ? :disabled : :enabled).paginate(:page => params[:page], :per_page => params[:per_page])
   end
 
   def resource

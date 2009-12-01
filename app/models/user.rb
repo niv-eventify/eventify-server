@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   validates_presence_of :name
 
   named_scope :enabled, {:conditions => "users.disabled_at IS NULL"}
+  named_scope :disabled, {:conditions => "users.disabled_at IS NOT NULL"}
   def disabled?
     !disabled_at.blank?
   end
