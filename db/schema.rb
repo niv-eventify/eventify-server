@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091130112123) do
+ActiveRecord::Schema.define(:version => 20091207103930) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -61,6 +61,28 @@ ActiveRecord::Schema.define(:version => 20091130112123) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "designs", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "creator_id"
+    t.datetime "disabled_at"
+    t.string   "card_file_name"
+    t.string   "card_content_type"
+    t.integer  "card_file_size"
+    t.datetime "card_updated_at"
+    t.string   "background_file_name"
+    t.string   "background_content_type"
+    t.integer  "background_file_size"
+    t.datetime "background_updated_at"
+    t.string   "preview_file_name"
+    t.string   "preview_content_type"
+    t.integer  "preview_file_size"
+    t.datetime "preview_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "designs", ["category_id"], :name => "index_designs_on_category_id"
 
   create_table "global_preferences", :force => true do |t|
     t.string   "name"

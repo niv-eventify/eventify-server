@@ -1,0 +1,15 @@
+%h1 New Design
+
+- semantic_form_for(@design, :live_validations => false, :url => admin_designs_path, :html => {:multipart => true}) do |f|
+  = f.object.errors.on(:base)
+
+  - f.inputs do
+    != f.input :category, :allow_blank => false
+
+  - f.inputs do
+    != f.input :card, :as => :file, :label => "Card (transparent png)"
+    != f.input :background, :as => :file, :label => "Background"
+    != f.input :preview, :as => :file, :label => "Preview"
+
+  != f.submit "Save"
+  != link_to "Cancel", admin_designs_path

@@ -15,4 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :contacts
   map.resources :contact_importers
   map.resources :categories
+  map.namespace :admin do |admin|
+    admin.resources :designs
+  end
 end
