@@ -2,6 +2,17 @@
 
 %h3= "#{@design.category.name_en} / #{@design.category.name_he}"
 
+%h4 Text Area
+Topx:
+= @design.text_top_x
+TopY:
+= @design.text_top_y
+Width:
+= @design.text_width
+Height:
+= @design.text_height
+
+
 %h4 Preview
 != image_tag(@design.preview.url(:medium))
 

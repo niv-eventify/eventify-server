@@ -5,6 +5,10 @@
 
   - f.inputs do
     != f.input :category, :allow_blank => false
+    != f.input :text_top_x
+    != f.input :text_top_y
+    != f.input :text_width
+    != f.input :text_height
 
   - f.inputs do
     != f.input :card, :as => :file, :label => "Card (transparent png)"

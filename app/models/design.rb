@@ -2,8 +2,9 @@ class Design < ActiveRecord::Base
   belongs_to :category
   belongs_to :creator, :class_name => "User"
 
-  validates_presence_of :category
-  attr_accessible :category_id
+  validates_presence_of :category, :text_top_x, :text_top_y, :text_width, :text_height
+  validates_numericality_of :text_top_x, :text_top_y, :text_width, :text_height
+  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height
 
   named_scope :available, {:conditions => "designs.disabled_at IS NULL"}
 
