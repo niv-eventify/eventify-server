@@ -2,5 +2,12 @@
 
 != link_to "New", new_admin_design_path
 
-!= render(:partial => @designs)
+%table
+  %tr
+    %th ID
+    %th Category
+    %th Preview
+    %th &nbsp;
+  != render(:partial => @designs)
+
 != will_paginate(@designs)

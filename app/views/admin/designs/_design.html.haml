@@ -1,0 +1,5 @@
+%tr
+  %td= design.id
+  %td= "#{design.category.name_en} / #{design.category.name_he}"
+  %td!= link_to image_tag(design.preview.url(:small)), admin_design_path(design)
+  %td!= link_to "Delete", admin_design_path(design), :method => :delete, :confirm => "Are you sure?"
