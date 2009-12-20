@@ -1,4 +1,4 @@
-!= stylesheet_link_tag 'application', 'formtastic', 'formtastic_changes', :media => 'all', :cache => "main"
+!= stylesheet_link_tag 'all', :media => 'all'
 
 != render(:partial => "layouts/javascripts")
-!= javascript_include_tag "jrails", "jquery.validate.min.js", "application", :cache => "main"
+!= javascript_include_tag "jrails", "jquery.validate.min.js", "application", "hide-input-text.js", :cache => "main"

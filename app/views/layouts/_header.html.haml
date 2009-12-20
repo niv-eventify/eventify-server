@@ -1,0 +1,65 @@
+#header
+  .header-area
+    %strong.logo
+      %a{ :href => "/" }
+        Eventify
+    .search-form
+      %form{ :action => "#" }
+        %fieldset
+          %input.search-btn{ :src => "images/ico-search-en.gif", :type => "image" }
+          .input-bg
+            %input.text{ :value => "lorem", :type => "text" }
+    %ul#top-nav
+      %li
+        %a{ :href => "#" }
+          Categories
+        .popup{ :style => "" }
+          %a.close{ :href => "#", :style => "" }
+            close
+          .popup-t{ :style => "" }
+            \&nbsp;
+          .popup-c{ :style => "" }
+            .popup-content{ :style => "" }
+              %ul{ :style => "" }
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+              %ul{ :style => "" }
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+              %ul{ :style => "" }
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+                %li{ :style => "" }
+                  %a{ :href => "#", :style => "" }
+                    LOREM IPSUM
+          .popup-b{ :style => "" }
+            \&nbsp;
+      %li
+        %a{ :href => "#" }
+          FAQ
+      %li
+        - unless logged_in?
+          != link_to "Sign Up", signup_path
+        - else
+          != link_to "Sign Out", user_session_path, :method => :delete
+    %a.blue-btn{ :href => "#" }
+    - unless logged_in?
+      != link_to content_tag(:span, "Sign in"), login_path, :class => "blue-btn"
