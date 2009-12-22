@@ -21,6 +21,12 @@ class ContactImporter < ActiveRecord::Base
   def validate_credentials?; @validate_importing && !csv?; end
   def validate_csv?; @validate_importing && csv?; end
 
+  def validate
+    if @validate_importing && "yahoo" == contact_source && !(username =~ /@yahoo.com$/i)
+      errors.add(:username, "is not a yahoo email")
+    end
+  end
+
   def to_param
     contact_source
   end
@@ -35,16 +41,18 @@ class ContactImporter < ActiveRecord::Base
 
   def import!(username = nil, password = nil)
     contacts = case contact_source
-    when 'gmail', 'yahoo', 'hotmail'
+    when 'gmail', 'hotmail', 'yahoo'
       begin
         Contacts.new(contact_source.to_sym, username, password).contacts
       rescue Contacts::StandardError, Contacts::ContactsError
         _error!($!)
+      rescue
+        _error!("A problem importing your contacts occured, please try again later.")
       end
     when 'aol'
       begin
        contacts = Blackbook.get(:username => username, :password => password)
-     rescue Blackbook::BlackbookError
+     rescue Blackbook::BlackbookError, ArgumentError
        _error!($!)
      end
     when 'csv'

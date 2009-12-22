@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'mocha', :version => '0.9.8', :library => false
   config.gem 'rspec-rails', :lib => false, :version => '1.2.6'
   config.gem 'rspec', :lib => false, :version => '1.2.6'
+  config.gem 'fastercsv', :lib => false, :version => '1.5.0'
 
   config.gem 'blackbook', :lib => false
   config.gem 'contacts', :lib => false
