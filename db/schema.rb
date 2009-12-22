@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091208115807) do
+ActiveRecord::Schema.define(:version => 20091222160000) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -88,6 +88,25 @@ ActiveRecord::Schema.define(:version => 20091208115807) do
 
   add_index "designs", ["category_id"], :name => "index_designs_on_category_id"
 
+  create_table "events", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "category_id"
+    t.integer  "design_id"
+    t.string   "name"
+    t.datetime "starting_at"
+    t.datetime "ending_at"
+    t.string   "location_name"
+    t.string   "location_address"
+    t.string   "map_link"
+    t.string   "map_file_name"
+    t.string   "map_content_type"
+    t.integer  "map_file_size"
+    t.datetime "map_updated_at"
+    t.string   "guest_message",    :limit => 345
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "global_preferences", :force => true do |t|
     t.string   "name"
     t.string   "value"
@@ -97,6 +116,19 @@ ActiveRecord::Schema.define(:version => 20091208115807) do
   end
 
   add_index "global_preferences", ["name"], :name => "index_global_preferences_on_name", :unique => true
+
+  create_table "hosts", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "name"
+    t.integer  "email"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hosts", ["email"], :name => "index_hosts_on_email"
+  add_index "hosts", ["event_id"], :name => "index_hosts_on_event_id"
+  add_index "hosts", ["user_id"], :name => "index_hosts_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name",                :limit => 48
