@@ -17,11 +17,11 @@ class Event < ActiveRecord::Base
     }
   attr_accessible :map
   validates_attachment_presence :map
-  validates_attachment_size :file, :less_than => 10.megabytes
+  validates_attachment_size :map, :less_than => 10.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :guest_message
 
   validates_presence_of :category_id, :design_id, :name, :starting_at, :guest_message, :location_name
-  validates_length_of :guest_message, :with => 10..345, :allow_nil => false, :allow_blank => false
+  validates_length_of :guest_message, :within => 10..345, :allow_nil => false, :allow_blank => false
 end
