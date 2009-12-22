@@ -31,4 +31,5 @@ body {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : 
 	);
 }
 #top-nav li .popup a.close { filter:none;}
-.tabset-nav li{background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+.tabset-nav li {background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+.hebrew  .tabset-nav li {background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");}

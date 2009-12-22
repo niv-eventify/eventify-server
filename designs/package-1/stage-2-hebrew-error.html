@@ -8,7 +8,7 @@
 	<!--[if IE]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
 	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/lt7.css" media="screen"/><![endif]-->
 </head>
-<body>
+<body class="hebrew">
 <div id="wrapper">
 	<div id="main">
 		<div id="content" class="stars-bg">
@@ -22,7 +22,7 @@
 									<a href="#">
 										<span>
 											<strong>1</strong>
-											<em>Design your invite</em>
+											<em>עיצוב הזמנה</em>
 										</span>
 									</a>
 								</li>
@@ -30,7 +30,7 @@
 									<a href="#">
 										<span>
 											<strong>2</strong>
-											<em>Event details</em>
+											<em>פרטי האירוע</em>
 										</span>
 									</a>
 								</li>
@@ -38,7 +38,7 @@
 									<a href="#">
 										<span>
 											<strong>3</strong>
-											<em>Invite guests</em>
+											<em>הזמנת אורחים</em>
 										</span>
 									</a>
 								</li>
@@ -46,14 +46,14 @@
 									<a href="#">
 										<span>
 											<strong>4</strong>
-											<em>&amp; Reminders<br /> RSVP’s</em>
+											<em>תזכורות והודעות</em>
 										</span>
 									</a>
 								</li>
 							</ul>
 							<div class="content-section">
 								<div class="content-section-heading">
-									<h1>Please fill out the events details</h1>
+									<h1>מלא כאן את פרטי האירוע</h1>
 								</div>
 								<div class="twocolumns">
 									<div class="side-area">
@@ -63,14 +63,15 @@
 													<span>Section Name</span>
 												</legend>
 												<ol class="form-items-h">
-													<li class="string optional name">
-														<label for="user_name">Event name:</label>
+													<li class="string optional name error">
+														<label for="user_name">שם האירוע:</label>
 														<div class="input-bg-alt">
 															<input id="user_name" maxlength="48" class="input-text" name="user[name]" size="40" type="text" />
 														</div>
+														<p class="error-msg">לא מילאת את שם האירוע</p>
 													</li>
 													<li class="select optional">
-														<label>Event type:</label>
+														<label>סוג האירוע:</label>
 														<select name="">
 															<option value="">&nbsp;</option>
 															<option value="1">1</option>
@@ -80,9 +81,9 @@
 														</select>
 													</li>
 													<li class="select optional">
-														<label >Date:</label>
+														<label >תאריך:</label>
 														<select class="middle">
-															<option value="1" selected="selected">Feb</option>
+															<option value="1" selected="selected">פברואר </option>
 															<option value="2">2</option>
 															<option value="3">3</option>
 															<option value="4">4</option>
@@ -102,7 +103,7 @@
 														<a href="#" class="calendar">calendar</a>
 													</li>
 													<li class="select optional">
-														<label>Time:</label>
+														<label>שעה: </label>
 														<select class="short marg">
 															<option value="1" selected="selected">18</option>
 															<option value="2">&nbsp;</option>
@@ -115,38 +116,38 @@
 															<option value="3">&nbsp;</option>
 															<option value="4">&nbsp;</option>
 														</select>
-														<div class="f-row"><a href="#" class="add-link">Add End date &amp; Time</a></div>
+														<div class="f-row"><a href="#" class="add-link">הוסף תאריך ושעת סיום</a></div>
 													</li>
 													<li class="string optional name">
-														<label>Location:</label>
+														<label>שם המקום:</label>
 														<div class="input-bg-alt">
 															<input maxlength="48" class="input-text" name="" size="40" type="text" />
 														</div>
 													</li>
 													<li class="string optional name">
-														<label>Address:</label>
+														<label>כתובת:</label>
 														<div class="input-bg-alt">
 															<input maxlength="48" class="input-text" name="" size="40" type="text" />
 														</div>
 														<div class="check-h">
 															<input class="input-check" id="map" type="checkbox" />
-															<label for="map">Add Map</label>
+															<label for="map">הוסף מפה</label>
 														</div>
 														<div class="divider">&nbsp;</div>
 													</li>
 													<li class="string optional name">
-														<label>Host Name:</label>
+														<label>שם המארח: </label>
 														<div class="input-bg-alt input-text-middle">
 															<input maxlength="48" class="input-text input-text-middle" name="" size="30" type="text" />
 														</div>
-														<span class="note">(one name only)</span>
-														<div class="f-row"><a href="#" class="add-link">Add Host</a></div>
+														<span class="note"> (שם אחד בלבד)</span>
+														<div class="f-row"><a href="#" class="add-link"> הוסף מארח</a></div>
 														<div class="divider">&nbsp;</div>
 													</li>
 													<li class="text optional custom_value">
-														<label>Message to Guests:</label>
+														<label>מסר לאורחים:</label>
 														<div class="textarea-bg"><textarea cols="50" name="" rows="9"></textarea></div>
-														<span class="note"> (Maximum 345 Notes)</span>
+														<span class="note"> (עד 345 תוים)</span>
 													</li>
 												</ol>
 											</fieldset>
@@ -155,8 +156,8 @@
 									<div class="visual-box">
 										<div class="holder">
 											<div class="frame">
-												<div class="image-h"><img src="images/img-ill-5.jpg" alt="ill-5"/></div>
-												<a href="#" class="blue-btn-mdl"><span>Advanced design options</span></a>
+												<div class="image-h"><img src="images/img-ill-5-1.jpg" alt="ill-5"/></div>
+												<a href="#" class="blue-btn-mdl"><span>עיצוב מתקדם</span></a>
 											</div>
 										</div>
 									</div>
@@ -166,8 +167,8 @@
 					</div>
 					<div class="b">
 						<div class="btns">
-							<a href="#" class="previous-btn">Previous</a>
-							<a href="#" class="next-btn">Next</a>
+							<a href="#" class="previous-btn">חזור</a>
+							<a href="#" class="next-btn">המשך </a>
 						</div>
 					</div>
 				</div>
@@ -181,14 +182,14 @@
 						<fieldset>
 							<input type="image" src="images/ico-search-en.gif" class="search-btn"/>
 							<div class="input-bg">
-								<input type="text" class="text" value="lorem" />
+								<input type="text" class="text" value="חפש הזמנה" />
 							</div>
 						</fieldset>
 					</form>
 				</div>
 				<ul id="top-nav">
 					<li>
-						<a href="#">Categories</a>
+						<a href="#">קטגוריות</a>
 						<div class="popup">
 							<a href="#" class="close">close</a>
 							<div class="popup-t">&nbsp;</div>
@@ -214,96 +215,76 @@
 							<div class="popup-b">&nbsp;</div>
 						</div>
 					</li>
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Sign Up</a></li>
+					<li><a href="#">שאלות נפוצות</a></li>
+					<li><a href="#">הרשם לאתר</a></li>
 				</ul>
-				<div class="personal-menu-w">
-					<div class="personal-menu">
-						<div class="personal-menu-c">
-							<a href="#" class="exit">Exit</a>
-							<strong>Hello, Yaniv</strong>
-							<p>Next event: <a href="#">karen's birthday</a></p>
-							<div class="personal-menu-h">
-								<div class="personal-menu-h-frame">
-									<div class="opener"><a href="#">My Page</a></div>
-									<ul>
-										<li><a href="#">Lorem</a></li>
-										<li><a href="#">Lorem</a></li>
-										<li><a href="#">Lorem</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="personal-menu-b">&nbsp;</div>
-					</div>
-				</div>
+				<a href="#" class="blue-btn"><span>כניסה לחשבון שלך</span></a>
 			</div>
 		</div>
 	</div>
 	<div id="footer">
 		<div class="footer-area">
-			<h3>Categories</h3>
+			<h3>קטגוריות</h3>
 			<div class="foot-lists">
 				<ul class="list">
-					<li><a href="#">Birthdays</a></li>
-					<li><a href="#">Birthdays-kids</a></li>
-					<li><a href="#">Weddings</a></li>
-					<li><a href="#">Engagement party</a></li>
-					<li><a href="#">Poker Night</a></li>
+					<li><a href="#">ארוחת בוקר</a></li>
+					<li><a href="#">ארוחת ערב</a></li>
+					<li><a href="#">ארוחת צהריים</a></li>
+					<li><a href="#">ארוסין</a></li>
+					<li><a href="#">ארועי חברה</a></li>
 				</ul>
 				<ul class="list">
-					<li><a href="#">Mondial</a></li>
-					<li><a href="#">Thanksgiving</a></li>
-					<li><a href="#">Christmast</a></li>
-					<li><a href="#">Girls’ night out</a></li>
-					<li><a href="#">Bacheloore party</a></li>
+					<li><a href="#">ארועי ספורט</a></li>
+					<li><a href="#">בראנץ'</a></li>
+					<li><a href="#">ברית</a></li>
+					<li><a href="#">בריתה</a></li>
+					<li><a href="#">בר מצווה</a></li>
 				</ul>
 				<ul class="list">
-					<li><a href="#">Birthdays</a></li>
-					<li><a href="#">Birthdays-kids</a></li>
-					<li><a href="#">Weddings</a></li>
-					<li><a href="#">Engagement party</a></li>
-					<li><a href="#">Poker Night</a></li>
+					<li><a href="#">ארוחת בוקר</a></li>
+					<li><a href="#">ארוחת ערב</a></li>
+					<li><a href="#">ארוחת צהריים</a></li>
+					<li><a href="#">ארוסין</a></li>
+					<li><a href="#">ארועי חברה</a></li>
 				</ul>
 				<ul class="list">
-					<li><a href="#">Mondial</a></li>
-					<li><a href="#">Thanksgiving</a></li>
-					<li><a href="#">Christmast</a></li>
-					<li><a href="#">Girls’ night out</a></li>
-					<li><a href="#">Bacheloore party</a></li>
+					<li><a href="#">ארועי ספורט</a></li>
+					<li><a href="#">בראנץ'</a></li>
+					<li><a href="#">ברית</a></li>
+					<li><a href="#">בריתה</a></li>
+					<li><a href="#">בר מצווה</a></li>
 				</ul>
 				<ul class="list">
-					<li><a href="#">Birthdays</a></li>
-					<li><a href="#">Birthdays-kids</a></li>
-					<li><a href="#">Weddings</a></li>
-					<li><a href="#">Engagement party</a></li>
-					<li><a href="#">Poker Night</a></li>
+					<li><a href="#">ארוחת בוקר</a></li>
+					<li><a href="#">ארוחת ערב</a></li>
+					<li><a href="#">ארוחת צהריים</a></li>
+					<li><a href="#">ארוסין</a></li>
+					<li><a href="#">ארועי חברה</a></li>
 				</ul>
 				<ul class="list">
-					<li><a href="#">Mondial</a></li>
-					<li><a href="#">Thanksgiving</a></li>
-					<li><a href="#">Christmast</a></li>
-					<li><a href="#">Girls’ night out</a></li>
-					<li><a href="#">Bacheloore party</a></li>
+					<li><a href="#">ארועי ספורט</a></li>
+					<li><a href="#">בראנץ'</a></li>
+					<li><a href="#">ברית</a></li>
+					<li><a href="#">בריתה</a></li>
+					<li><a href="#">בר מצווה</a></li>
 				</ul>
 				<ul class="list">
-					<li><a href="#">Mondial</a></li>
-					<li><a href="#">Thanksgiving</a></li>
-					<li><a href="#">Christmast</a></li>
-					<li><a href="#">Girls’ night out</a></li>
-					<li><a href="#">Engagement party</a></li>
+					<li><a href="#">ארועי ספורט</a></li>
+					<li><a href="#">בראנץ'</a></li>
+					<li><a href="#">ברית</a></li>
+					<li><a href="#">בריתה</a></li>
+					<li><a href="#">בר מצווה</a></li>
 				</ul>
 			</div>
 			<div class="foot-box">
-				<ul>
-					<li><a href="#">About Eventify </a></li>
-					<li><a href="#">Pricing</a></li>
-					<li><a href="#">Contact Us</a></li>
-					<li><a href="#">Terms of Use</a></li>
-					<li><a href="#">Site Map</a></li>
+				<ul class="other">
+					<li><a href="#">אודות eventify </a></li>
+					<li><a href="#">צור קשר</a></li>
+					<li><a href="#">תנאי שימוש</a></li>
+					<li><a href="#">מפת אתר</a></li>
 				</ul>
-				<p>All right resevred to Eventify &copy;</p>
-				<p class="by">Design and UI <a href="#">Cat&amp;Dog Studio</a></p>
+				<p>&copy; כל הזכויות שמורות לאוונטיפי </p>
+				<p class="by">עיצוב וייעוץ <a href="#">Cat&amp;Dog Studio</a></p>
 			</div>
 		</div>
 	</div>
