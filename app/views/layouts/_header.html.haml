@@ -19,6 +19,5 @@
           != link_to "Sign Up", signup_path
         - else
           != link_to "Sign Out", user_session_path, :method => :delete
-    %a.blue-btn{ :href => "#" }
-    - unless logged_in?
-      != link_to content_tag(:span, "Sign in"), login_path, :class => "blue-btn"
+
+    != render(:partial => "layouts/user_menu")
