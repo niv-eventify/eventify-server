@@ -1,3 +1,6 @@
 != render(:partial => 'promo')
 != render(:partial => 'container123')
-!= render(:partial => 'popular')
+
+.popular
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories.first, :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories.last, :surround => "col-2"})

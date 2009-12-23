@@ -1,0 +1,7 @@
+- if design
+  .img-box-t
+    .img-box-b
+      .content-h
+        .image
+          != image_tag(design.preview.url(:medium), :alt => "")
+      != select_design_link(design)

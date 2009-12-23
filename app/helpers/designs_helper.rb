@@ -5,4 +5,12 @@ module DesignsHelper
       haml_tag(:div, "Internal Text", :style => "position:absolute;top:#{design.text_top_y}px;left:#{design.text_top_x}px;width:#{design.text_width}px;height:#{design.text_height}px;border:2px solid red")
     end
   end
+
+  def more_designs_link(category)
+    link_to_function content_tag(:span, "MORE"), "alert('more designs from same category')", :class => "btn-brown"
+  end
+
+  def select_design_link(design)
+    link_to_function content_tag(:span, "SELECT"), "alert('select design and create event')", :class => "blue-btn-sml"
+  end
 end
