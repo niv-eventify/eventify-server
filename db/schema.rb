@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091222160000) do
+ActiveRecord::Schema.define(:version => 20091223191615) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -129,6 +129,20 @@ ActiveRecord::Schema.define(:version => 20091222160000) do
   add_index "hosts", ["email"], :name => "index_hosts_on_email"
   add_index "hosts", ["event_id"], :name => "index_hosts_on_event_id"
   add_index "hosts", ["user_id"], :name => "index_hosts_on_user_id"
+
+  create_table "translation_keys", :force => true do |t|
+    t.string   "key",        :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "translation_texts", :force => true do |t|
+    t.text     "text"
+    t.string   "locale",             :limit => 16
+    t.integer  "translation_key_id",               :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name",                :limit => 48
