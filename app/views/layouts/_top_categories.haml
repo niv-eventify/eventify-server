@@ -1,12 +1,12 @@
 %li#categories_link
   != link_to_function("Categories", "$('#categories_link').toggleClass('active');")
 
-  .popup{ :style => "" }
+  .popup
     != link_to_function("close", "$('#categories_link').removeClass('active');", :class => "close")
-    .popup-t{ :style => "" }
+    .popup-t
       \&nbsp;
-    .popup-c{ :style => "" }
-      .popup-content{ :style => "" }
+    .popup-c
+      .popup-content
         - categories_header
-    .popup-b{ :style => "" }
+    .popup-b
       \&nbsp;

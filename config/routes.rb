@@ -14,7 +14,9 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :contacts
   map.resources :contact_importers
-  map.resources :categories
+  map.resources :categories do |category|
+    category.resources :designs
+  end
   map.namespace :admin do |admin|
     admin.resources :designs
   end
