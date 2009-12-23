@@ -10,48 +10,7 @@
           .input-bg
             %input.text{ :value => "lorem", :type => "text" }
     %ul#top-nav
-      %li
-        %a{ :href => "#" }
-          Categories
-        .popup{ :style => "" }
-          %a.close{ :href => "#", :style => "" }
-            close
-          .popup-t{ :style => "" }
-            \&nbsp;
-          .popup-c{ :style => "" }
-            .popup-content{ :style => "" }
-              %ul{ :style => "" }
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-              %ul{ :style => "" }
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-              %ul{ :style => "" }
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-                %li{ :style => "" }
-                  %a{ :href => "#", :style => "" }
-                    LOREM IPSUM
-          .popup-b{ :style => "" }
-            \&nbsp;
+      != render(:partial => "layouts/top_categories")
       %li
         %a{ :href => "#" }
           FAQ
