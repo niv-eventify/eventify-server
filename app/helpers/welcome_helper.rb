@@ -13,9 +13,8 @@ module WelcomeHelper
   end
 
   def categories_header
-    cats = Category.enabled.all
-    groups = (cats.size/3).to_i
-    Category.enabled.all.in_groups_of(groups).each do |group|
+    groups = (all_enabled_categories.size/3).to_i
+    all_enabled_categories.in_groups_of(groups).each do |group|
       haml_tag :ul do
         categories_links(group)
       end
@@ -23,7 +22,7 @@ module WelcomeHelper
   end
 
   def categories_footer
-    Category.enabled.all.in_groups_of(5).each do |group|
+    all_enabled_categories.in_groups_of(5).each do |group|
       haml_tag(:ul, :class => "list") do
         categories_links(group)
       end

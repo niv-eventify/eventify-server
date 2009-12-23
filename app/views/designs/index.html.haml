@@ -1,6 +1,7 @@
 .twocolumns
   .content-wrapper
     .content-wrapper-top
+      todo: paginator
       != will_paginate(collection)
       %h1= @category.name
 
@@ -12,13 +13,14 @@
               != render(:partial => "designs/selector", :locals => {:design => d})
 
     .content-wrapper-bottom
+      todo: paginator
       != will_paginate(collection)
     
   #sidebar
     .holder
       %h2 Categories
       %ul.sub-nav
-        - Category.enabled.each do |c|
+        - all_enabled_categories.each do |c|
           %li{:class => (c.id == @category.id ? "active" : "")}
             != link_to c.name, category_designs_path(c)
         
