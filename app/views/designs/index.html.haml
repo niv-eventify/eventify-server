@@ -1,8 +1,7 @@
 .twocolumns
   .content-wrapper
     .content-wrapper-top
-      todo: paginator
-      != will_paginate(collection)
+      != will_paginate(collection, :renderer => DesignsWillPaginate)
       %h1= @category.name
 
     .image-boxes-h
@@ -13,8 +12,7 @@
               != render(:partial => "designs/selector", :locals => {:design => d})
 
     .content-wrapper-bottom
-      todo: paginator
-      != will_paginate(collection)
+      != will_paginate(collection, :renderer => DesignsWillPaginate)
     
   #sidebar
     .holder
