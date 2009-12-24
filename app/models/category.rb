@@ -3,7 +3,7 @@ class Category < ActiveRecord::Base
   validates_presence_of :name_en
   validates_presence_of :name_he
 
-  has_many :designs do
+  has_many :designs, :conditions => "designs.disabled_at IS NULL" do
     def popular(offset)
       find(:first, :offset => offset)
     end
