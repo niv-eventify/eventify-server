@@ -26,6 +26,13 @@
           %li!= link_to "conf", global_preferences_path
           %li!= link_to "restart", restart_path, :method => :post, :confirm => "Really RESTART the server??!"
       %p
+        - FastGettext.available_locales.each do |locale|
+          - if current_locale == locale
+            %font{:color=>:black}= locale
+          - else
+            != link_to locale, canonic_url_for(locale)
+
+      %p
         All right resevred to Eventify ©
       %p.by
         Design and UI
