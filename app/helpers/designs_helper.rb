@@ -15,6 +15,6 @@ module DesignsHelper
   end
 
   def select_design_link_plus(design)
-    link_to_function "+", "alert('select design and create event')", :class => "plus"
+    link_to_function "+", "alert('preview with popup')", :class => "plus"
   end
 end

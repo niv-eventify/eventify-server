@@ -4,7 +4,7 @@
 
     %h2= category.name
 
-    .img-box
-      != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(0)})
-    .img-box.img-box-1
-      != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(1)})
+  .img-box
+    != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(0)})
+  .img-box.img-box-1
+    != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(1)})
