@@ -30,7 +30,7 @@
           - if current_locale == locale
             %font{:color=>:black}= locale
           - else
-            != link_to locale, canonic_url_for(locale)
+            != link_to locale, locale_url_for(locale)
 
       %p
         All right resevred to Eventify ©
