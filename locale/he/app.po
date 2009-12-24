@@ -20,6 +20,26 @@ msgstr ""
 msgid "Hello World"
 msgstr ""
 
+#: app/views/passwords/new.html.haml:1
+msgid "Password Reset"
+msgstr ""
+
+#: app/views/users/new.html.haml:1
+msgid "Register"
+msgstr ""
+
+#: app/views/passwords/new.html.haml:5
+msgid "Send Password Reset instructions"
+msgstr ""
+
+#: app/views/users/new.html.haml:6
+msgid "Signup"
+msgstr ""
+
+#: app/views/users/_form.html.haml:1
+msgid "User Settings"
+msgstr ""
+
 #: app/views/pages/home.html.haml:5
 msgid "bar"
 msgid_plural "bars"
@@ -34,4 +54,16 @@ msgstr[1] ""
 
 #: app/views/pages/home.html.haml:7
 msgid "foo|bar"
+msgstr ""
+
+#: app/views/user_session/new.html.haml:7
+msgid "forgot_password"
+msgstr ""
+
+#: app/views/passwords/new.html.haml:7 app/views/users/new.html.haml:8
+msgid "login"
+msgstr ""
+
+#: app/views/user_session/new.html.haml:9
+msgid "register"
 msgstr ""
