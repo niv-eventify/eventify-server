@@ -1,4 +1,4 @@
-%h2 New contact
+%h2= New contact
 
 - semantic_form_for(@contact, :live_validations => true) do |f|
   = f.object.errors.on(:base)

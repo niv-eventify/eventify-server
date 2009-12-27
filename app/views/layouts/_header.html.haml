@@ -12,8 +12,7 @@
     %ul#top-nav
       != render(:partial => "layouts/top_categories")
       %li
-        %a{ :href => "#" }
-          FAQ
+        %a{ :href => "#" }= _("FAQ")
       - (FastGettext.available_locales - ["ru"]).each do |locale|
         - if current_locale != locale
           %li
@@ -21,6 +20,6 @@
 
     != render(:partial => "layouts/user_menu")
     - unless logged_in?
-      != link_to "Sign Up", signup_path, :class => "signup-out"
+      != link_to _("Sign Up"), signup_path, :class => "signup-out"
     - else
-      != link_to "Sign Out", user_session_path, :method => :delete, :class => "signup-out"
+      != link_to _("Sign Out"), user_session_path, :method => :delete, :class => "signup-out"

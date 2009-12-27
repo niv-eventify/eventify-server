@@ -4,8 +4,7 @@
       .promo-gallery
         %img.png{ :src => "images/img-gallery.png", :alt => "gallery" }
       .promo-nav
-        %a.prev{ :href => "#" }
-          Prev
+        %a.prev{ :href => "#" }= _("Prev")
         .promo-nav-h
           %ul
             %li.active
@@ -41,5 +40,4 @@
             %li
               %a{ :href => "#" }
                 Nav
-        %a.next{ :href => "#" }
-          Next
+        %a.next{ :href => "#" }= _("Next")

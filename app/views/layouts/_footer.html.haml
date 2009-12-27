@@ -1,26 +1,22 @@
 #footer
   .footer-area
     %h3
-      Categories
+      = _("Categories")
     .foot-lists
       - categories_footer
     .foot-box
       %ul
         %li
-          %a{ :href => "#" }
-            About Eventify
+          %a{ :href => "#" }= _("About Eventify")
         %li
-          %a{ :href => "#" }
-            Pricing
+          %a{ :href => "#" }= _("Pricing")
         %li
-          %a{ :href => "#" }
-            Contact Us
+          %a{ :href => "#" }= _("Contact Us")
         %li
-          %a{ :href => "#" }
-            Terms of Use
+          %a{ :href => "#" }= _("Terms of Use")
         %li
-          %a{ :href => "#" }
-            Site Map
+          %a{ :href => "#" }= _("Site Map")
+
         - if current_user.try(:is_admin?)
           %li!= link_to "i18n", translation_keys_path
           %li!= link_to "conf", global_preferences_path
@@ -31,9 +27,5 @@
             - else
               %li!= link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale)
 
-      %p
-        All right resevred to Eventify ©
-      %p.by
-        Design and UI
-        %a{ :href => "#" }
-          Cat&amp;Dog Studio
+      %p= _("All right resevred to Eventify ©")
+      %p.by= _("Design and UI %{link}") % {:link => link_to(_("Cat&amp;Dog Studio"), "#")}

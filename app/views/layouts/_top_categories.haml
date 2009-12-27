@@ -1,8 +1,8 @@
 %li#categories_link
-  != link_to_function("Categories", "$('#categories_link').toggleClass('active');")
+  != link_to_function(_("Categories"), "$('#categories_link').toggleClass('active');")
 
   .popup
-    != link_to_function("close", "$('#categories_link').removeClass('active');", :class => "close")
+    != link_to_function(_("close"), "$('#categories_link').removeClass('active');", :class => "close")
     .popup-t
       \&nbsp;
     .popup-c

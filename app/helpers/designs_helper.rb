@@ -7,11 +7,11 @@ module DesignsHelper
   end
 
   def more_designs_link(category)
-    link_to content_tag(:span, "MORE"), category_designs_path(category), :class => "btn-brown"
+    link_to content_tag(:span, _("MORE")), category_designs_path(category), :class => "btn-brown"
   end
 
   def select_design_link(design)
-    link_to_function content_tag(:span, "SELECT"), "alert('select design and create event')", :class => "blue-btn-sml"
+    link_to_function content_tag(:span, _("SELECT")), "alert('select design and create event')", :class => "blue-btn-sml"
   end
 
   def select_design_link_plus(design)

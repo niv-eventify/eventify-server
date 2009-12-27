@@ -7,9 +7,9 @@
   - f.inputs do
     != f.hidden_field :contact_source
     - if @contact_importer.csv?
-      != f.input :csv, :as => :file, :required => true, :label => "Choose CSV file (name, email)"
+      != f.input :csv, :as => :file, :required => true, :label => _("Choose CSV file (name, email)")
     - else
-      != f.input :username, :required => true, :label => "Email or Username"
-      != f.input :password, :as => :password, :required => true
-  != f.submit "Import"
-  != link_to "Cancel", contact_importers_path
+      != f.input :username, :required => true, :label => _("Email or Username")
+      != f.input :password, :as => :password, :required => true, :label => _("Password")
+  != f.submit _("Import")
+  != link_to _("Cancel"), contact_importers_path

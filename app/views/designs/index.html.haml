@@ -16,7 +16,7 @@
     
   #sidebar
     .holder
-      %h2 Categories
+      %h2= _("Categories")
       %ul.sub-nav
         - all_enabled_categories.each do |c|
           %li{:class => (c.id == @category.id ? "active" : "")}

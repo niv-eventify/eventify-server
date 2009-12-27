@@ -1,19 +1,19 @@
 - unless logged_in?
-  != link_to content_tag(:span, "Sign in"), login_path, :class => "blue-btn"
+  != link_to content_tag(:span, _("Sign in")), login_path, :class => "blue-btn"
 - else
   .personal-menu-w
     .personal-menu
       .personal-menu-c
-        != link_to "Exit", user_session_path, :method => :delete, :class => "exit"
-        %strong= "Hello, #{current_user.name}"
+        != link_to _("Exit"), user_session_path, :method => :delete, :class => "exit"
+        %strong= _("Hello, %user") % {:user => current_user.name}
         %p
-          Next event
+          = _("Next event")
           != link_to_function "todo", "alert('todo')"
         .personal-menu-h
           .personal-menu-h-frame
-            .opener!= link_to_function "My Page", "jQuery(this).parents('.personal-menu-h-frame').toggleClass('open')"
+            .opener!= link_to_function _("My Page"), "jQuery(this).parents('.personal-menu-h-frame').toggleClass('open')"
             %ul
-              %li!= link_to "Contacts", contacts_path
-              %li!= link_to_function content_tag(:strong, "Events"), "alert('todo')"
-              %li!= link_to "Profile", profile_path
+              %li!= link_to _("Contacts"), contacts_path
+              %li!= link_to_function content_tag(:strong, _("Events")), "alert('todo')"
+              %li!= link_to _("Profile"), profile_path
       .personal-menu-b &nbsp;
