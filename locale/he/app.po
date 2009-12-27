@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2009-12-27 13:55+0200\n"
+"POT-Creation-Date: 2009-12-27 14:33+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,6 +131,10 @@ msgstr ""
 
 #: app/views/users/_form.html.haml:2
 msgid "Name"
+msgstr ""
+
+#: app/views/contacts/new.html.haml:1
+msgid "New contact"
 msgstr ""
 
 #: app/views/welcome/_promo.html.haml:43
