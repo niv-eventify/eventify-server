@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2009-12-24 04:44+0200\n"
+"POT-Creation-Date: 2009-12-24 20:12+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgid "foo|bar"
 msgstr ""
 
 #: app/views/user_session/new.html.haml:7
-msgid "forgot_password"
+msgid "forgot password"
 msgstr ""
 
 #: app/views/passwords/new.html.haml:7 app/views/users/new.html.haml:8
