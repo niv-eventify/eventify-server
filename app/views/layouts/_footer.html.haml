@@ -28,4 +28,4 @@
               %li!= link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale)
 
       %p= _("All right resevred to Eventify ©")
-      %p.by= _("Design and UI %{link}") % {:link => link_to(_("Cat&amp;Dog Studio"), "#")}
+      %p.by!= _("Design and UI %{link}") % {:link => link_to(_("Cat&amp;Dog Studio"), "#")}
