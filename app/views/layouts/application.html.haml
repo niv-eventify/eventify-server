@@ -9,7 +9,7 @@
       != stylesheet_link_tag 'ie', :media => 'scren'
     /[if lt IE 7]
       != stylesheet_link_tag 'lt7', :media => 'scren'
-  %body
+  %body{:class => body_class}
     #wrapper
       #main
         #content

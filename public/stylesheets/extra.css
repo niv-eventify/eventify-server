@@ -1,0 +1,11 @@
+a.signup-out {
+	float:right;
+	margin:83px 5px 0 5px;
+	color:#56C8D7;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+.hebrew a.signup-out {
+	float:left;
+}

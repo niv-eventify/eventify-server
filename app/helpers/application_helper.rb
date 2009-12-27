@@ -8,6 +8,6 @@ module ApplicationHelper
   end
 
   def body_class
-    "#{controller.controller_name} #{controller.controller_name}-#{controller.action_name}"
+    "#{current_locale == "he" ? "hebrew" : ""}"
   end
 end

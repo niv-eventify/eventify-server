@@ -25,12 +25,11 @@
           %li!= link_to "i18n", translation_keys_path
           %li!= link_to "conf", global_preferences_path
           %li!= link_to "restart", restart_path, :method => :post, :confirm => "Really RESTART the server??!"
-      %p
-        - FastGettext.available_locales.each do |locale|
-          - if current_locale == locale
-            %font{:color=>:black}= locale
-          - else
-            != link_to locale, locale_url_for(locale)
+          - FastGettext.available_locales.each do |locale|
+            - if current_locale == locale
+              %li= locale
+            - else
+              %li!= link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale)
 
       %p
         All right resevred to Eventify ©
