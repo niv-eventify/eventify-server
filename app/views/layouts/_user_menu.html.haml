@@ -5,7 +5,7 @@
     .personal-menu
       .personal-menu-c
         != link_to _("Exit"), user_session_path, :method => :delete, :class => "exit"
-        %strong= _("Hello, %user") % {:user => current_user.name}
+        %strong= _("Hello, %{user}") % {:user => current_user.name}
         %p
           = _("Next event")
           != link_to_function "todo", "alert('todo')"
