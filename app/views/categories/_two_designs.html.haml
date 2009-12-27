@@ -2,9 +2,11 @@
   .col-h
     != more_designs_link(category)
 
-    %h2= category.name
+    %h2= category.name if category
 
   .img-box
-    != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(0)})
+    - if category
+      != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(0)})
   .img-box.img-box-1
-    != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(1)})
+    - if category
+      != render(:partial => "designs/selector", :locals => {:design => category.designs.popular(1)})
