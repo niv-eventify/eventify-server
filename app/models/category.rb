@@ -20,7 +20,8 @@ class Category < ActiveRecord::Base
 
   def name
     #TODO: use current language
-    name_en
+    msg = "name_#{current_controller.send(:current_locale)}"
+    respond_to?(msg) ? send(msg) : name_en
   end
 
   def self.popular(limit)
