@@ -12,11 +12,11 @@
     %ul#top-nav
       != render(:partial => "layouts/top_categories")
       %li
-        %a{ :href => "#" }= _("FAQ")
+        %a.top{ :href => "#" }= _("FAQ")
       - (FastGettext.available_locales - ["ru"]).each do |locale|
         - if current_locale != locale
           %li
-            != link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale)
+            != link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale), :class => "top"
 
     != render(:partial => "layouts/user_menu")
     - unless logged_in?

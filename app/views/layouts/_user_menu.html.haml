@@ -11,8 +11,8 @@
           != link_to_function "todo", "alert('todo')"
         .personal-menu-h
           .personal-menu-h-frame
-            .opener!= link_to_function _("My Page"), "jQuery(this).parents('.personal-menu-h-frame').toggleClass('open')"
-            %ul
+            .opener!= link_to_function _("My Page"), "jQuery('.menu-list').toggle()"
+            %ul.menu-list
               %li!= link_to _("Contacts"), contacts_path
               %li!= link_to_function content_tag(:strong, _("Events")), "alert('todo')"
               %li!= link_to _("Profile"), profile_path

@@ -1,5 +1,5 @@
 %li#categories_link
-  != link_to_function(_("Categories"), "$('#categories_link').toggleClass('active');")
+  != link_to_function(_("Categories"), "$('#categories_link').toggleClass('active');", :class => "top")
 
   .popup
     != link_to_function(_("close"), "$('#categories_link').removeClass('active');", :class => "close")
