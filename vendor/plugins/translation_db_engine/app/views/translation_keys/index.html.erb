@@ -14,7 +14,7 @@
   <tbody>
     <% @translation_keys.each do |key| %>
       <tr class="<%= cycle "even","odd"%>">
-        <td><%= key.key %></td>
+        <td><%= link_to key.key, key %></td>
         <% translations = key.translations.map{|t| [t.locale, t]} %>
         <% locales.each do |locale| %>
           <td><%= translations.assoc(locale)[1].text if translations.assoc(locale) %></td>
