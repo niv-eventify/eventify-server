@@ -13,7 +13,7 @@ module WelcomeHelper
   end
 
   def categories_header
-    return if all_enabled_categories.blank?
+    return if all_enabled_categories.blank? || all_enabled_categories.size.zero?
 
     groups = (all_enabled_categories.size/3).to_i
     all_enabled_categories.in_groups_of(groups).each do |group|
