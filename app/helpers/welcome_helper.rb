@@ -16,6 +16,8 @@ module WelcomeHelper
     return if all_enabled_categories.blank? || all_enabled_categories.size.zero?
 
     groups = (all_enabled_categories.size/3).to_i
+    groups = all_enabled_categories.size if groups < all_enabled_categories.size
+
     all_enabled_categories.in_groups_of(groups).each do |group|
       haml_tag :ul do
         categories_links(group)
