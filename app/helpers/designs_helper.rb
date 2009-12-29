@@ -10,8 +10,8 @@ module DesignsHelper
     link_to content_tag(:span, _("MORE")), category_designs_path(category), :class => "btn-brown"
   end
 
-  def select_design_link(design)
-    link_to_function content_tag(:span, _("SELECT")), "alert('select design and create event')", :class => "blue-btn-sml"
+  def select_design_link(category, design)
+    link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => category), :class => "blue-btn-sml"
   end
 
   def select_design_link_plus(design)

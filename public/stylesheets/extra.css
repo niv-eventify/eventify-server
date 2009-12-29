@@ -9,3 +9,19 @@ a.signup-out {
 .hebrew a.signup-out {
 	float:left;
 }
+
+.form ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	height: 1%;
+}
+
+.form ol li{
+	float: left;
+	overflow: hidden;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.form ol li.error .input-bg-alt { background-position: 0 -24px !important;}

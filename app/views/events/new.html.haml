@@ -1,0 +1,20 @@
+.h-container
+  .t
+    \&nbsp;
+  .c
+    .h-container-content
+      != render(:partial => "events/stages", :locals => {:stage => 2})
+      .content-section
+        .content-section-heading
+          %h1= _("Please fill out the events details")
+        .twocolumns
+
+          .side-area
+            - semantic_form_for(@event, :live_validations => false, :html => {:class => "form"}) do |f|
+              != render(:partial => "form", :locals => {:f => f})
+
+          != render(:partial => "selected_design")
+  .b
+    .btns
+      != link_to_function _("Previous"), "alert('todo')", :class => "previous-btn"
+      != link_to_function _("Next"), "alert('todo')", :class => "next-btn"

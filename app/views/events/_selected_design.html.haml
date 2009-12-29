@@ -1,0 +1,23 @@
+.visual-box
+  .holder
+    .frame
+      .image-h
+        %img{ :src => "/images/img-ill-5.jpg", :alt => "ill-5" }
+        .info-holder
+          %h3
+            Lorem ipsum
+          %ul
+            %li
+              %strong
+                Lorem: dd/mm/yy
+            %li
+              %strong
+                Lorem:
+              00:00
+            %li
+              Lorem
+            %li
+              Lorem
+            %li
+              Lorem
+      != link_to_function content_tag(:span, _("Advanced design options")), "alert('todo')", :class => "blue-btn-mdl"

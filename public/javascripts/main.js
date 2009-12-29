@@ -389,4 +389,6 @@ $(document).ready(function(){
 	clearInputs();
 	initSlide();
 	promoNav();
+	$('select').customSelect();
+	$('input:checkbox').customCheckbox();
 });
