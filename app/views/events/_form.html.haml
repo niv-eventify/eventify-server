@@ -1,6 +1,6 @@
 - f.inputs do
   - event_text_input(f, :name, _("Event name"))
-  != f.input :category, :label => _("Event Type")
+  != f.input :category, :label => _("Event Type"), :required => nil
 
   - event_date_time_select(f, :starting_at) do
     .f-row
@@ -8,7 +8,8 @@
       != link_to_function _("Remove End date &amp; Time"), toggle_ending_at_block, :class => "add-link hide_ending_at"
 
 - f.inputs :class => "ending_at_block" do
-  - event_date_time_select(f, :ending_at)
+  - event_date_time_select(f, :ending_at) do
+    .f-row &nbsp;
   - show_hide_ending_block_js(f)
 
 - f.inputs do
@@ -17,11 +18,5 @@
     .f-row
       != link_to_function _("Add Map"), "alert('todo')", :class => "add-link"
     != form_divider
-
-  - f.fields_for :host do |hosts|
-    - event_text_input(hosts, :name, _("Host Name"))
-    - event_text_input(hosts, :name, _("Host Address")) do
-      .f-row &nbsp;
-      != form_divider
 
   - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"))

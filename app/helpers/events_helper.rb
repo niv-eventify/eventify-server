@@ -3,10 +3,11 @@ module EventsHelper
     haml_tag(:li, :class => "#{attribute}_date_select") do
       haml_tag :label, _("Date")
       haml_concat f.date_select(attribute, :order => [:month, :day, :year], :start_year => Time.now.utc.year, :date_separator => "", :use_short_month => true)
+      haml_concat f.inline_errors_for(attribute)
     end
     haml_tag(:im, :class => "#{attribute}_time_select") do
       haml_tag :label, _("Time")
-      haml_concat f.time_select(attribute, {:time_separator => ""}, :class => "short")
+      haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true}, :class => "short")
     end
     haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
     yield if block_given?
@@ -62,7 +63,7 @@ module EventsHelper
     JAVASCRIPT
     haml_concat javascript_tag(remove_ending_date)
     unless show_ending_at_block?(f)
-      haml_concat javascript_tag(toggle_ending_at_block)
+      haml_concat javascript_tag(toggle_ending_at_block + ";jQuery('.ending_at_block').html('')")
     end
   end
 

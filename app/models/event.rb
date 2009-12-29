@@ -22,6 +22,12 @@ class Event < ActiveRecord::Base
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :guest_message, :category, :design
 
-  validates_presence_of :category_id, :design_id, :name, :starting_at, :guest_message, :location_name
+  datetime_select_accessible :starting_at, :ending_at
+
+  validates_presence_of :category, :design, :name, :starting_at, :location_name
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
+
+  def validate
+    errors.add(:starting_at, _("should be in a future")) if starting_at < Time.now.utc
+  end
 end

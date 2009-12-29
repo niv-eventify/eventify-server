@@ -11,10 +11,17 @@
 
           .side-area
             - semantic_form_for(@event, :live_validations => false, :html => {:class => "form"}) do |f|
+              != f.hidden_field :design_id
               != render(:partial => "form", :locals => {:f => f})
 
           != render(:partial => "selected_design")
   .b
     .btns
       != link_to_function _("Previous"), "alert('todo')", :class => "previous-btn"
-      != link_to_function _("Next"), "alert('todo')", :class => "next-btn"
+      != link_to_function _("Next"), "jQuery('.form').submit()", :class => "next-btn"
+
+:javascript
+  $(function() {
+    $("#event_name").focus();
+  });
+  

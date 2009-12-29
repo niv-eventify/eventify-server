@@ -20,5 +20,8 @@ module Formtastic #:nodoc:
       end
     end
 
+    def error_sentence(errors) #:nodoc:
+      template.content_tag(:p, errors.to_sentence.untaint, :class => 'error-msg')
+    end
   end
 end
