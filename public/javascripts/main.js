@@ -384,6 +384,14 @@ jQuery.fn.customCheckbox = function(_options){
 		else _this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault);
 	}
 }
+
+function show_carusela(category_id) {
+	$(".promo-nav li").removeClass("active");
+	$("#category_chooser" + category_id).parents("li").addClass("active");
+
+	alert("TODO: show carusela for category_id=" + category_id);
+}
+
 $(document).ready(function(){
 	ieHover('div.img-box,.edit');
 	clearInputs();
@@ -391,4 +399,28 @@ $(document).ready(function(){
 	promoNav();
 	$('input:checkbox').customCheckbox();
 /*	$('select').customSelect();*/
+	if ($(".promo-nav").get(0)) {
+		var first_shown = false;
+		$("a.category_chooser").each(function(i, e){
+			var cid = $(e).attr("id").substr(16);
+			$(e).bind("click", {category_id: cid}, function(e){
+				show_carusela(e.data.category_id);
+			});
+			if (!first_shown) {
+				first_shown = true;
+				show_carusela(cid);
+				$(e).parents("li").addClass("active");
+			}
+		});
+		$(".promo-nav a.next").click(function(){
+			var first = $(".promo-nav li:first").clone();
+			$(".promo-nav li:first").remove();
+			$(".promo-nav li:last").after(first);
+		});
+		$(".promo-nav a.prev").click(function(){
+			var last = $(".promo-nav li:last").clone();
+			$(".promo-nav li:last").remove();
+			$(".promo-nav li:first").before(last);
+		});
+	}
 });

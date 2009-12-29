@@ -4,40 +4,10 @@
       .promo-gallery
         %img.png{ :src => "images/img-gallery.png", :alt => "gallery" }
       .promo-nav
-        %a.prev{ :href => "#" }= _("Prev")
+        != link_to_function _("Prev"), "", :class => "prev"
         .promo-nav-h
           %ul
-            %li.active
-              %a{ :href => "#" }
-                New Designs
-            %li
-              %a{ :href => "#" }
-                Halloween
-            %li
-              %a{ :href => "#" }
-                Christmas
-            %li
-              %a{ :href => "#" }
-                Kids Birthdays
-            %li
-              %a{ :href => "#" }
-                Thanksgiving
-            %li
-              %a{ :href => "#" }
-                Poker Party
-            %li
-              %a{ :href => "#" }
-                Nav
-            %li
-              %a{ :href => "#" }
-                Nav
-            %li
-              %a{ :href => "#" }
-                Nav
-            %li
-              %a{ :href => "#" }
-                Nav
-            %li
-              %a{ :href => "#" }
-                Nav
-        %a.next{ :href => "#" }= _("Next")
+            - all_enabled_categories.each do |c|
+              %li
+                != link_to_function(c.name, "", :class => "category_chooser", :id => "category_chooser#{c.id}")
+        != link_to_function _("Next"), "", :class => "next"
