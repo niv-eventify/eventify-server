@@ -3,8 +3,12 @@ class EventsController < InheritedResources::Base
 
   def create
     @event = Event.new(params[:event])
+    @event.user = current_user if logged_in?
     create! do |success, failure|
       failure.html { render(:action => "new") }
+      success.html {
+        session[:event_id] = @event.id unless logged_in?
+      }
     end
   end
 

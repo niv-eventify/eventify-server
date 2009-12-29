@@ -16,7 +16,6 @@ class Event < ActiveRecord::Base
       :secret_access_key => GlobalPreference.get(:s3_secret),
     }
   attr_accessible :map
-  validates_attachment_presence :map
   validates_attachment_size :map, :less_than => 10.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
