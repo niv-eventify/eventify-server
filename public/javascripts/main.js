@@ -393,7 +393,7 @@ function show_carusela(category_id) {
 }
 
 $(document).ready(function(){
-	ieHover('div.img-box,.edit');
+	ieHover('div.img-box,.edit-bg');
 	clearInputs();
 	initSlide();
 	promoNav();

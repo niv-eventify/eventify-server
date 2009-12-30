@@ -152,10 +152,18 @@ p{margin:0;}
 .hebrew #top-nav li a {	margin:-9px -10px -7px -22px;}
 #top-nav li.active .popup{ display: block;}
 #top-nav li.active a{
-	color: #523733;
+	z-index: 20;
+	color: #523733 !important;
 	text-decoration: none;
-	background: url(/images/top-nav-btn-h.png) no-repeat;
+	background: url(/images/top-nav-btn-h.png) no-repeat !important;
 }
+#top-nav li a:hover{
+	z-index: 19;
+	color: #fff;
+	text-decoration: none;
+	background: url(/images/bg-top-nav-h-en.png) no-repeat;
+} 
+.hebrew #top-nav li a:hover {background: url(/images/bg-top-nav-h.png) no-repeat;}
 .popup {
 	position: absolute;
 	top:-9px;
@@ -219,7 +227,7 @@ p{margin:0;}
 #top-nav li .popup ul li a{
 	margin: 0;
 	padding: 0;
-	background: none;
+	background: none !important;
 	width: auto;
 	height: auto;
 	position: static;
@@ -259,7 +267,7 @@ p{margin:0;}
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background: url(/images/btn-close.gif) no-repeat;
+	background: url(/images/btn-close.gif) no-repeat  !important;
 	width: 17px;
 	height: 17px;
 	text-indent: -9999px;
@@ -782,13 +790,13 @@ a.next {
 }
 .tabset-nav li a span{
 	cursor: pointer;
-	padding: 0 60px 0 67px;
+	padding: 0 40px 0 64px;
 	height: 84px;
 	display: table;
 	vertical-align: middle;
 	float: left;
 }
-.hebrew  .tabset-nav li a span { padding: 0 87px 0 60px;}
+.hebrew  .tabset-nav li a span { padding: 0 82px 0 60px;}
 .tabset-nav li.active a span{
 	background: url(/images/bg-tab-nav-item-r.gif) no-repeat 100% 0;
 }
@@ -1868,22 +1876,22 @@ ul.list li{
 }
 .nav-bar ul a {
 	display:block;
-	padding:0 20px;
+	padding:1px 20px;
 	color:#41bdcd;
 	font-size:1.2em;
-	line-height:1.5em;
+	line-height:1.3em;
 	font-weight:bold;
-	background:url(/images/arrow-blue.gif) no-repeat 0 4px;
+	background:url(/images/arrow-blue.gif) no-repeat 0 3px;
 }
 .hebrew .nav-bar ul a {
-	background:url(/images/arrow-h-blue.gif) no-repeat 100% 4px;
+	background:url(/images/arrow-h-blue.gif) no-repeat 100% 3px;
 }
 .nav-bar ul li.active a {
 	color:#523733;
-	background:url(/images/arrow-brown.gif) no-repeat 0 4px;
+	background:url(/images/arrow-brown.gif) no-repeat 0 3px;
 }
 .hebrew .nav-bar ul li.active a {
-	background:url(/images/arrow-h-brown.gif) no-repeat 100% 4px;
+	background:url(/images/arrow-h-brown.gif) no-repeat 100% 3px;
 }
 .events-holder:after {
 	clear:both;
@@ -1998,13 +2006,25 @@ ul.list li{
 	float:right;
 	position:relative;
 	z-index:10;
-	width:113px;
+	width:127px;
 	margin:8px 0 0;
+}
+.boxe .heading .edit-bg:after {
+	content:"";
+	clear:both;
+	display:block;
+}
+.boxe .heading .edit-bg {
+	width:113px;
 	padding:0 7px;
 }
-.boxe .heading .edit:hover,
-.boxe .heading .hover{
-	background:url(/images/bg-edit-hov.gif) no-repeat !important;
+.boxe .heading .edit-bg:hover,
+.boxe .heading .hover {
+	background:url(/images/bg-edit-hov.gif) no-repeat;
+}
+.boxe2 .heading .edit:hover,
+.boxe2 .heading .hover {
+	background:none !important;
 }
 .hebrew .boxe .heading .edit {
 	float:left;
@@ -2016,13 +2036,13 @@ ul.list li{
 	font-size:12px;
 	line-height:23px;
 	font-weight:bold;
-	padding:0 0 0 20px;
+	padding:0 0 0 24px;
 	background:url(/images/ico-edit.gif) no-repeat 0 50%;
 }
 .hebrew .boxe .heading .edit a {
 	float:right;
-	padding:0 20px 0 0;
-	background-position:100% 50%;
+	padding:0 22px 0 0;
+	background-position:29px 50%;
 }
 .boxe .heading .edit a:hover {
 	text-decoration:underline;
@@ -2048,39 +2068,46 @@ ul.list li{
 .boxe .heading .edit-drop .drop {
 	display:block;
 }
-.boxe .heading .edit-drop .edit-bg:hover,
-.boxe .heading .edit-drop .hover {
-	background:none;
+.boxe2 .edit-bg:hover,
+.boxe2 .heading .edit-drop .hover,
+.boxe .edit-drop .hover,
+.boxe .edit-drop .edit-bg:hover {
+	background:none !important;
 }
 .boxe .heading .drop {
 	display:none;
 	position:absolute;
-	left:-8px;
-	top:-7px;
+	left:-5px;
+	top:-12px;
 	z-index:1;
 	width:159px;
 	overflow:hidden;
+	clear:both;
+}
+.edit-drop a.open {
+	display:none !important;
 }
 .hebrew .boxe .heading .drop {
 	left:-18px;
 }
 .edit .drop ul {
 	margin:0;
-	padding:0;
 	list-style:none;
 	overflow:hidden;
 	height:1%;
-	width:127px;
-	padding:0 16px 0 16px;
+	width:131px;
+	padding:0 14px 0 14px;
 	background:url(/images/bg-drop.png) repeat-y;
 }
 .edit .drop ul li {
 	vertical-align:top;
 	height:1%;
+	width:135px;
 	border-top:1px solid #e5e5e5;
 }
-.edit .drop ul li:first-child {
-	border-top:none;
+.hebrew .edit .drop ul li {
+	width:131px;
+	overflow:hidden !important;
 }
 .boxe .heading .edit .drop ul a {
 	padding:0 0 0 17px;
@@ -2130,13 +2157,13 @@ ul.list li{
 	background:url(/images/bg-drop-top3.png) no-repeat;
 }
 .boxe .heading .drop2 a {
-	background:url(/images/ico-5.gif) no-repeat 0 50%;
+	background:url(/images/ico-5.gif) no-repeat 2px 50%;
 }
 .boxe .heading .drop2 a.i1 {
 	background:url(/images/ico-7.gif) no-repeat 0 50%;
 }
 .hebrew .boxe .heading .drop2 a.i1 {
-	background:url(/images/ico-7.gif) no-repeat 31px 50%;
+	background:url(/images/ico-7.gif) no-repeat 29px 50%;
 }
 .boxe .heading .drop2 a.open {
 	direction:rtl;
@@ -2152,13 +2179,36 @@ ul.list li{
 .boxe .heading .drop2 a.open:hover {
 	text-decoration:underline;
 }
+.boxe2 .edit-drop .edit-bg a {
+	width:112px;
+	text-decoration:none;
+	margin-right:-25px;
+}
+.hebrew .boxe2  .edit-drop .edit-bg a {
+	width:109px;
+	margin:0 0 0 -11px;
+}
+.boxe2 .edit-drop .edit-bg a:hover {
+	text-decoration:none;
+	background:#f5f1eb url(/images/ico-5.gif) no-repeat 2px 50%;
+}
+.hebrew .boxe2  .edit-drop .edit-bg a {
+	background-position:114px 50% !important;
+}
+.hebrew .boxe2  .edit-drop .edit-bg a:hover {
+	text-decoration:none;
+	background:#f5f1eb url(/images/ico-5.gif) no-repeat 114px 50%;
+}
+.hebrew .boxe2 .edit-drop .edit-bg a.i1:hover {
+	background:#f5f1eb url(/images/ico-7.gif) no-repeat 114px 50%;
+}
 .boxe .heading .drop2 .drop ul {
 	width:135px;
-	padding:0 12px 0 12px;
+	padding:5px 12px 0 12px;
 }
 .hebrew .heading .drop2 .drop ul {
 	width:131px;
-	padding:0 18px 0 10px;
+	padding:5px 14px 0 14px;
 }
 .boxe .heading .drop2 .drop ul a {
 	padding-left:24px;
@@ -2204,10 +2254,10 @@ ul.list li{
 }
 .hebrew .boxe .heading .drop2 ul li.it2 a:hover,
 .hebrew .boxe .heading .drop2 ul li.it2 a.active {
-	background:#f5f1eb url(/images/ico-7.gif) no-repeat 115px 50% !important;
+	background:#f5f1eb url(/images/ico-7.gif) no-repeat 114px 50% !important;
 }
 .hebrew .boxe .heading .drop2 .drop {
-	left:-18px;
+	left:-25px;
 }
 .hebrew .boxe .heading .drop2 .drop ul li {
 	border-top:1px solid #e5e5e5;
@@ -2330,15 +2380,15 @@ ul.list li{
 	display:block;
 	color:#41bdcd;
 	font-size:12px;
-	line-height:18px;
-	padding:0 0 0 21px;
+	line-height:16px;
+	padding:1px 0 1px 21px;
 }
 .event-menu ul li.sum,
 .event-menu ul li.say {
 	border:none;
 }
 .hebrew .event-menu ul a {
-	padding:0 21px 0 0;
+	padding:1px 21px 1px 0;
 }
 .event-menu ul li.sum a {
 	background:url(/images/ico-1.gif) no-repeat 0 50%;
@@ -2366,7 +2416,7 @@ ul.list li{
 	overflow:hidden;
 	height:1%;
 	margin:28px 0 0;
-	padding:17px 0 0;
+	padding:17px 0 2px;
 	background:url(/images/bg-page-nav.gif) repeat-x;
 }
 .hebrew .page-nav {

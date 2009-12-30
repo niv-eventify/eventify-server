@@ -1,6 +1,8 @@
 body {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : "auto");}
 #header {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : "auto");}
-#top-nav li.active a{
+#top-nav li.active a,
+#top-nav li a:hover,
+.hebrew #top-nav li a:hover{
 	background:url(../images/none.gif) fixed;
 }
 .popup-t,
@@ -22,6 +24,8 @@ body {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : 
 .h-container .t {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h-container-t.png', sizingmethod='crop');}
 .h-container .c {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h-container-c.png', sizingmethod='scale');}
 .h-container .b {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h-container-b.png', sizingmethod='crop');}
+#top-nav li a:hover{filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-top-nav-h-en.png', sizingmethod='crop');}
+.hebrew #top-nav li a:hover {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-top-nav-h.png', sizingmethod='crop');}
 
  * html .png{
 	position:relative;
@@ -62,9 +66,7 @@ body {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : 
 	background:url(../images/none.gif);
 	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop-top3.png', sizingMethod='crop');
 }
-.edit .drop ul li {
-	border-top: expression( (this===this.parentNode.childNodes[0]) ? "none" : "1px solid #e5e5e5");
-}
+
 .drop2 .drop ul li {
 	border-top: expression( (this===this.parentNode.childNodes[0]) ? "1px solid #e5e5e5" : "1px solid #e5e5e5");
 }
