@@ -36,4 +36,8 @@ class User < ActiveRecord::Base
       importer
     end
   end
+
+  def active?
+    true
+  end
 end

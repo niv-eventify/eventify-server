@@ -6,6 +6,9 @@ class Event < ActiveRecord::Base
   has_many :hosts
   accepts_nested_attributes_for :hosts, :allow_destroy => true
 
+  accepts_nested_attributes_for :user
+  validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
+
   has_attached_file :map,
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),

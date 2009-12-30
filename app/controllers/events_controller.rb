@@ -1,19 +1,28 @@
 class EventsController < InheritedResources::Base
   before_filter :set_design_and_category, :only => :new
+  actions :create, :new
 
   def create
+    if !logged_in? && params[:event] && params[:event][:user_attributes]
+      params[:event].trust(:user_attributes)
+      params[:event][:user_attributes].trust(:email)
+    end
+
     @event = Event.new(params[:event])
-    @event.user = current_user if logged_in?
+
     create! do |success, failure|
+      success.html do
+        redirect_to "/"
+        UserSession.create(@event.user)
+      end
       failure.html { render(:action => "new") }
-      success.html {
-        session[:event_id] = @event.id unless logged_in?
-      }
     end
   end
 
+
   def new
     @event = Event.new(:category => @category, :design => @design)
+    @event.build_user unless logged_in?
     new!
   end
 

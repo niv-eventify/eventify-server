@@ -1,7 +1,5 @@
 module WelcomeHelper
 
-  # TODO: cache categories
-
   def link_to_category(category)
     link_to(category.name, category_designs_path(category))
   end
