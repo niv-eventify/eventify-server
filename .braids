@@ -120,7 +120,7 @@ vendor/plugins/astrails-user-auth:
   remote: braid/vendor/plugins/astrails-user-auth
 vendor/plugins/trusted-params: 
   squashed: true
-  url: git://github.com/ryanb/trusted-params.git
+  url: git://github.com/astrails/trusted-params.git
   branch: master
   type: git
   revision: da34c4aa2188226eaddc2e3c9cb4bea585d0568e
