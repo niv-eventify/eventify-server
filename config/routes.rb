@@ -21,5 +21,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :designs
   end
 
-  map.resources :events
+  map.resources :events do |event|
+    event.resources :guests
+  end
 end

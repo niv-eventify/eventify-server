@@ -9,11 +9,13 @@ class EventsController < InheritedResources::Base
     end
 
     @event = Event.new(params[:event])
+    @event.user = current_user if logged_in?
 
     create! do |success, failure|
       success.html do
-        redirect_to "/"
-        UserSession.create(@event.user)
+        flash[:notice] = nil
+        redirect_to event_guests_path(@event)
+        UserSession.create(@event.user) unless logged_in?
       end
       failure.html { render(:action => "new") }
     end

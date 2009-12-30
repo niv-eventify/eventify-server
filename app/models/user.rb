@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  has_many :events
+
   def active?
     true
   end

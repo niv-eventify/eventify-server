@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091223191615) do
+ActiveRecord::Schema.define(:version => 20091230132328) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -116,6 +116,21 @@ ActiveRecord::Schema.define(:version => 20091223191615) do
   end
 
   add_index "global_preferences", ["name"], :name => "index_global_preferences_on_name", :unique => true
+
+  create_table "guests", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "name"
+    t.string   "email"
+    t.string   "mobile_phone"
+    t.boolean  "send_email"
+    t.boolean  "send_sms"
+    t.boolean  "allow_snow_ball"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guests", ["event_id"], :name => "index_guests_on_event_id"
 
   create_table "hosts", :force => true do |t|
     t.integer  "event_id"

@@ -1,0 +1,29 @@
+%thead
+  %tr
+    %td.t-col-1
+      .head-cell
+        %label{ :for => "name" }= _("Name")
+    %td.t-col-2
+      .head-cell
+        %span= _("Email")
+    %td.t-col-3
+      .head-cell
+        %span= _("Cellular")
+    %td.t-col-4
+      .head-cell
+        != link_to_function _("Send via"), "", :class => "info"
+        %input#email.input-check{ :type => "checkbox" }
+        %label.l-email{ :for => "email" }= _("Email")
+    %td.t-col-5
+      .head-cell
+        != link_to_function _("Send via"), "", :class => "info"
+        %input#text.input-check{ :type => "checkbox" }
+        %label.l-text{ :for => "text" }= _("Text/SMS")
+    %td.t-col-6
+      .head-cell
+        != link_to_function "&nbsp;", "", :class => "info"
+        %input#snowball.input-check{ :type => "checkbox" }
+        %label{ :for => "snowball" }= _("Snowball")
+    %td.last
+      .head-cell
+        %span= _("Delete")

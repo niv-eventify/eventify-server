@@ -1,0 +1,54 @@
+- @content_css_class = "stars-bg stage-3"
+
+- events_content_section(3, {:href => "alert('todo')"}, {:href => "alert('todo')"}) do
+  .info-area
+
+    %ul.info-area-nav
+      %li.active!= link_to_function _("Guest List"), ""
+      %li!= link_to_function _("Things to bring"), ""
+
+    .info-area-tab
+      .holder
+        .frame
+          %h3= _("Add from existing contact list:")
+          != render(:partial => "import")
+
+          %h3= _("Add manually:")
+
+          %table.info-table
+            != render(:partial => "guests_header")
+            %tbody
+              != render(:partial => "guest", :collection => collection)
+
+              %tr
+                %td.t-col-1.error
+                  .cell-bg
+                    .input-bg-uni
+                      %div
+                        %input.input-text{ :type => "text" }
+                    %p.error-msg
+                      * Required field
+                %td.t-col-2
+                  .cell-bg
+                    .input-bg-uni
+                      %div
+                        %input.input-text{ :type => "text" }
+                %td.t-col-3
+                  .cell-bg
+                    .input-bg-uni
+                      %div
+                        %input.input-text{ :type => "text" }
+                %td.t-col-4
+                  .cell-bg
+                    %input.input-check{ :type => "checkbox" }
+                %td.t-col-5
+                  .cell-bg
+                    %input.input-check{ :type => "checkbox" }
+                %td.t-col-6
+                  .cell-bg
+                    %input.input-check{ :type => "checkbox" }
+                %td.last
+                  .cell-bg
+                    \&nbsp;
+          %a.add-btn{ :href => "#" }
+            Add
