@@ -13,7 +13,7 @@
   %body{:class => body_class}
     #wrapper
       #main
-        #content
+        #content{:class => @content_css_class}
           .content-area
             != render :partial => 'layouts/flashes'
             != yield
