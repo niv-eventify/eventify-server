@@ -1,0 +1,82 @@
+body {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : "auto");}
+#header {width:expression(document.documentElement.clientWidth < 1000 ? "1000px" : "auto");}
+#top-nav li.active a,
+#top-nav li a:hover,
+.hebrew #top-nav li a:hover{
+	background:url(../images/none.gif) fixed;
+}
+.popup-t,
+.hebrew .popup-t,
+.popup-c,
+.popup-b,
+.personal-menu,
+.personal-menu-b,
+.h-container .t,
+.h-container .c,
+.h-container .b { background: none;}
+#top-nav li.active a.top{filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/top-nav-btn-h.png', sizingmethod='crop');}
+.popup-t {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-popup-t-en.png', sizingmethod='crop');}
+.hebrew .popup-t {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-popup-t.png', sizingmethod='crop');}
+.popup-c {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-popup-c.png', sizingmethod='scale');}
+.popup-b {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-popup-b.png', sizingmethod='crop');}
+.personal-menu {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-personal-menu-t.png', sizingmethod='crop');}
+.personal-menu-b {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-personal-menu-b.png', sizingmethod='crop');}
+.h-container .t {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h-container-t.png', sizingmethod='crop');}
+.h-container .c {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h-container-c.png', sizingmethod='scale');}
+.h-container .b {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h-container-b.png', sizingmethod='crop');}
+#top-nav li a:hover{filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-top-nav-h-en.png', sizingmethod='crop');}
+.hebrew #top-nav li a:hover {filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-top-nav-h.png', sizingmethod='crop');}
+
+ * html .png{
+	position:relative;
+	behavior: expression((this.runtimeStyle.behavior="none")&&(this.pngSet?this.pngSet=true:(this.nodeName == "IMG" && this.src.toLowerCase().indexOf('.png')>-1?(this.runtimeStyle.backgroundImage = "none",
+	this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.src + "', sizingMethod='image')",
+	this.src = "images/none.gif"):(this.origBg = this.origBg? this.origBg :this.currentStyle.backgroundImage.toString().replace('url("','').replace('")',''),
+	this.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + this.origBg + "', sizingMethod='crop')",
+	this.runtimeStyle.backgroundImage = "none")),this.pngSet=true)
+	);
+}
+#top-nav li .popup a.close { filter:none;}
+.tabset-nav li {background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+.hebrew  .tabset-nav li {background-image: expression( (this===this.parentNode.childNodes[0]) ? "none" : "auto");}
+
+
+
+.edit .drop ul {
+	background:url(../images/none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop.png', sizingMethod='scale');
+}
+.boxe .heading .edit .drop-btm {
+	background:url(../images/none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop-btm.png', sizingMethod='crop');
+}
+.boxe .heading .edit .drop-top {
+	background:url(../images/none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop-top.png', sizingMethod='crop');
+}
+.hebrew .boxe .heading .edit .drop-top {
+	background:url(../images/none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop-top1.png', sizingMethod='crop');
+}
+.boxe .heading .drop2 .drop-top {
+	background:url(../images/none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop-top2.png', sizingMethod='crop');
+}
+.hebrew  .boxe .heading .drop2 .drop-top {
+	background:url(../images/none.gif);
+	filter:progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-drop-top3.png', sizingMethod='crop');
+}
+
+.drop2 .drop ul li {
+	border-top: expression( (this===this.parentNode.childNodes[0]) ? "1px solid #e5e5e5" : "1px solid #e5e5e5");
+}
+.heading ul.list-nav li {
+	background: expression( (this===this.parentNode.childNodes[0]) ? "none" : "url(images/sep-list-nav.gif) no-repeat 100% 50%");
+}
+.hebrew .heading ul.list-nav li {
+	background: expression( (this===this.parentNode.childNodes[0]) ? "none" : "url(images/sep-list-nav.gif) no-repeat 0 50%");
+}
+.boxe .heading .edit .drop ul a,
+.boxe .heading .drop2 .drop ul a {
+	zoom:1;
+}
