@@ -8,4 +8,24 @@ module GuestsHelper
 
     end
   end
+
+  def link_to_remove_guest(event, guest)
+    link_to_remote "del", :url => event_guest_path(event, guest), :method => :delete, 
+      :confirm => _("Are you sure?"), :html => {:class => "bin"}, :before => "$('##{dom_id(guest)}').hide()"
+  end
+
+  def guest_remote_checkbox(attribute, event, guest)
+    form_remote_for :guest, guest, :url => event_guest_path(event, guest), :method => :put do |f|
+      haml_concat f.check_box attribute, :class => "input-check", :onchange => "jQuery(this).parents('form').get(0).onsubmit()"
+    end
+  end
+
+  def guest_column(column_id = nil)
+    css_class = column_id ? "t-col-#{column_id}" : "last"
+    haml_tag(:td, :class => css_class) do
+      haml_tag(:div, :class => "cell-bg") do
+        yield
+      end
+    end
+  end
 end

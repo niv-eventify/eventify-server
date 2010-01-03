@@ -1,11 +1,13 @@
 class GuestsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
-  actions :index, :create
-  respond_to :js, :only => :create
+  actions :index, :create, :update, :destroy
+  respond_to :js, :only => [:create, :update, :destroy]
 
   # index
   # create
+  # destroy
+  # update
 
 protected
   

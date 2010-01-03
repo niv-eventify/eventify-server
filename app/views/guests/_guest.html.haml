@@ -1,23 +1,23 @@
 %tr[guest]
-  %td.t-col-1
-    .cell-bg
-      %input#name-1.input-check{ :type => "checkbox" }
-      %label{ :for => "name-1" }= guest.name
-  %td.t-col-2
-    .cell-bg
-      != mail_to guest.email, guest.email
-  %td.t-col-3
-    .cell-bg= guest.mobile_phone
-  %td.t-col-4
-    .cell-bg
-      %input.input-check{ :type => "checkbox" }
-  %td.t-col-5
-    .cell-bg
-      %input.input-check{ :type => "checkbox" }
-  %td.t-col-6
-    .cell-bg
-      %input.input-check{ :type => "checkbox" }
-  %td.last
-    .cell-bg
-      %a.bin{ :href => "#" }
-        del
+
+  - guest_column(1) do
+    %input#name-1.input-check{ :type => "checkbox" }
+    %label{ :for => "name-1" }= guest.name
+
+  - guest_column(2) do
+    != mail_to guest.email, guest.email
+
+  - guest_column(3) do
+    = guest.mobile_phone
+
+  - guest_column(4) do
+    - guest_remote_checkbox(:send_email, @event, guest)
+
+  - guest_column(5) do
+    - guest_remote_checkbox(:send_sms, @event, guest)
+
+  - guest_column(6) do
+    - guest_remote_checkbox(:allow_snow_ball, @event, guest)
+
+  - guest_column do
+    != link_to_remove_guest(@event, guest)
