@@ -3,12 +3,23 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Admin::DesignsController do
   setup :activate_authlogic
 
-  describe "not admin" do
+  describe "logged in user not admin" do
     before(:each) do
       @user = Factory.create(:user)
       UserSession.create(@user)
     end
 
+    [:index, :show, :update, :destroy, :create].each do |action|
+      describe_action(action) do
+        before(:each) do
+          @params = {:id => 1}
+        end
+        it_should_redirect_to "/"
+      end
+    end
+  end
+
+  describe "not logged in user" do
     [:index, :show, :update, :destroy, :create].each do |action|
       describe_action(action) do
         before(:each) do
