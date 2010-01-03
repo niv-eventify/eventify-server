@@ -7,9 +7,9 @@
     != render(:partial => "layouts/html_head")
     != yield :head
     /[if IE]
-      != stylesheet_link_tag 'ie', :media => 'scren'
+      != stylesheet_link_tag 'ie', :media => 'screen'
     /[if lt IE 7]
-      != stylesheet_link_tag 'lt7', :media => 'scren'
+      != stylesheet_link_tag 'lt7', :media => 'screen'
   %body{:class => body_class}
     #wrapper
       #main
