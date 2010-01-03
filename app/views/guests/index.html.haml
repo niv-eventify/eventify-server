@@ -15,8 +15,9 @@
 
           %h3= _("Add manually:")
 
-          %table.info-table
+          %table#guests.info-table
             != render(:partial => "guests_header")
             %tbody
               != render(:partial => "guest", :collection => collection)
-              != render(:partial => "new")
+          
+          != render(:partial => "new")

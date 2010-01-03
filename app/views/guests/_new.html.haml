@@ -1,0 +1,5 @@
+- new_guest_form do |f|
+  %table.info-table
+    %tbody
+      %tr#new_guest_row
+        != render(:partial => "form", :locals => {:f => f})

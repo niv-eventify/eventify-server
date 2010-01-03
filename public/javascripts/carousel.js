@@ -81,7 +81,6 @@ var carousel = {
 
 $(document).ready(function(){
 	carousel.promoNav();
-	$('input:checkbox').customCheckbox();
 /*	$('select').customSelect();*/
 	if ($(".promo-nav").get(0)) {
 		var first_shown = false;

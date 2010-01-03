@@ -347,4 +347,5 @@ $(document).ready(function(){
 	ieHover('div.img-box,.edit-bg');
 	clearInputs();
 	initSlide();
+	$('input:checkbox').customCheckbox();
 });

@@ -1,0 +1,8 @@
+if @guest.new_record?
+  page[:new_guest].replaceWith render(:partial => "new")
+  page << "$('td.error:first input').focus()"
+else
+  page["#guests tbody"].append render(:partial => "guest", :object => @guest)
+  page << "$('#new_guest').reset();$('#guest_name').focus();jQuery('#adding_guest').attr('disabled', null);"
+  page << "$('##{dom_id(@guest)} input:checkbox').customCheckbox();"
+end

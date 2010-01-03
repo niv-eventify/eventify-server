@@ -1,0 +1,9 @@
+!= f.text_field :name, :td_class => "t-col-1"
+!= f.text_field :email, :td_class => "t-col-2"
+!= f.text_field :mobile_phone, :td_class => "t-col-3"
+!= f.check_box :send_email, :td_class => "t-col-4"
+!= f.check_box :send_sms, :td_class => "t-col-5"
+!= f.check_box :allow_snow_ball, :td_class => "t-col-6"
+%td.last
+  .cell-bg
+    != submit_tag _("Add"), :id => "adding_guest"
