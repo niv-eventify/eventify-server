@@ -1,7 +1,12 @@
 class DesignsController < InheritedResources::Base
   actions :index
-  
-  #index
+
+  def index
+    super do |format|
+      format.html
+      format.js { render :template => "designs/carousel", :layout => false }
+    end
+  end
 
 protected
 
@@ -10,6 +15,9 @@ protected
   end
 
   def collection
-    @collection ||= category.designs.paginate(:page => params[:page], :per_page => (params[:per_page] || 12))
+    respond_to do |format|
+      format.html { @collection ||= category.designs.paginate(:page => params[:page], :per_page => (params[:per_page] || 12)) }
+      format.js { @collection ||= category.designs }
+    end
   end
 end

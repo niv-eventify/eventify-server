@@ -418,11 +418,9 @@ p{margin:0;}
 	background: url(/images/bg-promo-b.gif) no-repeat 0 100%;
 }
 .promo-gallery {
-	width: 718px;
-	margin: 0 0 0 116px;
+	margin: 0 0 0 0;
 	overflow: hidden;
 }
-.hebrew .promo-gallery { margin: 0 135px 0 0;}
 .promo-gallery  img{ display: block;}
 .promo-nav {
 	background: url(/images/bg-promo-nav.jpg) no-repeat 0 100%;
@@ -430,6 +428,15 @@ p{margin:0;}
 	width: 969px;
 	margin: -3px 0 0;
 	position:relative;
+}
+#carouselWrapper {
+  direction: ltr;
+}
+#carousel .slider {
+	background-image:url(/images/slider_dark.png);
+}
+#carousel .scrollbar {
+	border-bottom:1px solid #000;
 }
 a.prev,
 a.next{

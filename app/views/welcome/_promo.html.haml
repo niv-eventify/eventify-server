@@ -1,8 +1,12 @@
+- content_for(:head) do
+  != stylesheet_link_tag 'imageflow'
+  != javascript_include_tag "imageflow", "carousel"
 .promo
   .promo-t
     .promo-b
-      .promo-gallery
-        %img.png{ :src => "images/img-gallery.png", :alt => "gallery" }
+      #carouselWrapper.promo-gallery
+        #carousel.imageflow
+
       .promo-nav
         != link_to_function _("Prev"), "", :class => "prev"
         .promo-nav-h
