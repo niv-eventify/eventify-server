@@ -21,5 +21,3 @@
     != render(:partial => "layouts/user_menu")
     - unless logged_in?
       != link_to _("Sign Up"), signup_path, :class => "signup-out"
-    - else
-      != link_to _("Sign Out"), user_session_path, :method => :delete, :class => "signup-out"

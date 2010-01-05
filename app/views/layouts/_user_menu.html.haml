@@ -6,14 +6,18 @@
       .personal-menu-c
         != link_to _("Exit"), user_session_path, :method => :delete, :class => "exit"
         %strong= _("Hello, %{user}") % {:user => current_user.name}
-        %p
-          = _("Next event")
-          != link_to_function "todo", "alert('todo')"
-        .personal-menu-h
-          .personal-menu-h-frame
-            .opener!= link_to_function _("My Page"), "jQuery('.menu-list').toggle()"
-            %ul.menu-list
-              %li!= link_to _("Contacts"), contacts_path
-              %li!= link_to_function content_tag(:strong, _("Events")), "alert('todo')"
-              %li!= link_to _("Profile"), profile_path
+
+        - if current_user.activated_at
+          %p
+            = _("Next event")
+            != link_to_function "todo", "alert('todo')"
+          .personal-menu-h
+            .personal-menu-h-frame
+              .opener!= link_to_function(_("My Page"), "jQuery('.menu-list').toggle()")
+              %ul.menu-list
+                %li!= link_to _("Contacts"), contacts_path
+                %li!= link_to_function content_tag(:strong, _("Events")), "alert('todo')"
+                %li!= link_to _("Profile"), profile_path
+        - else
+          %p &nbsp;
       .personal-menu-b &nbsp;
