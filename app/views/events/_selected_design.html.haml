@@ -2,8 +2,8 @@
   .holder
     .frame
       .image-h
-        != image_tag(@design.preview.url(:stage2))
-        .info-holder{set_text_box}
+        != image_tag(@event.design.preview.url(:stage2))
+        .info-holder{:style => stage2_design_css(@event.design)}
           %h3
             Lorem ipsum
           %ul

@@ -47,4 +47,17 @@ class Design < ActiveRecord::Base
   attr_accessible :preview
   validates_attachment_presence :preview
   validates_attachment_size :preview, :less_than => 500.kilobytes
+
+  def stage2_preview_dimentions
+    ratio =   1.6     #fullsize/preview_size
+    x_delta = 116.5   #delta between background and postcard ((900-667)/2)
+    y_delta = 50      #delta between background and postcard ((600-500)/2)
+
+    @stage2_preview_dimentions ||= {
+      :top =>    "#{(text_top_y + y_delta)/ratio}px",
+      :left =>   "#{(text_top_x + x_delta)/ratio}px",
+      :width =>  "#{(text_width/ratio)}px",
+      :height => "#{(text_height/ratio)}px"
+    }
+  end
 end

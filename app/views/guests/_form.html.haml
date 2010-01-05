@@ -4,6 +4,6 @@
 != f.check_box :send_email, :td_class => "t-col-4"
 != f.check_box :send_sms, :td_class => "t-col-5"
 != f.check_box :allow_snow_ball, :td_class => "t-col-6"
-%td.last
-  .cell-bg
-    != submit_tag _("Add"), :id => "adding_guest"
+
+- guest_column do
+  != submit_tag _("Add"), :id => "adding_guest"

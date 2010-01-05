@@ -1,6 +1,8 @@
 class EventsController < InheritedResources::Base
   before_filter :set_design_and_category, :only => :new
-  actions :create, :new
+  before_filter :require_user, :only => [:edit, :update]
+  before_filter :set_event, :only => [:edit, :update]
+  actions :create, :new, :edit, :update
 
   def create
     if !logged_in? && params[:event] && params[:event][:user_attributes]
@@ -28,7 +30,19 @@ class EventsController < InheritedResources::Base
     new!
   end
 
+  # edit
+
+  def update
+    update! do |success, failure|
+      success.html { redirect_to event_guests_path(@event) }
+    end
+  end
+
 protected
+  def set_event
+    @event = current_user.events.find(params[:id])
+  end
+
   def set_design_and_category
     @design = Design.available.find(params[:design_id])
     @category = Category.enabled.find(params[:category_id])

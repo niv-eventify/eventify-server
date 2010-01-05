@@ -67,11 +67,8 @@ module EventsHelper
     end
   end
   
-  def set_text_box
-    ratio = 1.6 #fullsize/preview_size
-    x_delta=116.5 #delta between background and postcard ((900-667)/2)
-    y_delta=50 #delta between background and postcard ((600-500)/2)
-    {:style => "top:#{(@design.text_top_y+y_delta)/ratio}px;left:#{(@design.text_top_x+x_delta)/ratio}px;width:#{@design.text_width/ratio}px;height:#{@design.text_height/ratio}px;"}
+  def stage2_design_css(design)
+    design.stage2_preview_dimentions.keys.map {|k| "#{k}:#{design.stage2_preview_dimentions[k]}"}.join(";")
   end
 
   protected

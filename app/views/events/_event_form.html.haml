@@ -1,0 +1,16 @@
+- events_content_section(2, {:href => "alert('todo')"}, {:href => "jQuery('.form').submit()"}, nil) do
+  .content-section-heading
+    %h1= _("Please fill out the events details")
+  .twocolumns
+
+    .side-area
+      - semantic_form_for(@event, :live_validations => true, :html => {:class => "form"}) do |f|
+        != f.hidden_field :design_id
+        != render(:partial => "form", :locals => {:f => f})
+
+    != render(:partial => "selected_design")
+
+:javascript
+  $(function() {
+    $(".form input:first").focus();
+  });
