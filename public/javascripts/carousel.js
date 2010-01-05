@@ -18,9 +18,6 @@ var carousel = {
       sliderCursor: 'pointer',
       xStep: 120,
       buttons: true,
-      onClick: function() {
-        window.location = "/events/new?category_id=" + $(this).attr("category_id") + "&design_id=" + $(this).attr("design_id");
-      },
       imageFocusM: 1.1
     });
 	},

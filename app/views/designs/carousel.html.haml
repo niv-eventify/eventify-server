@@ -1,2 +1,2 @@
 - for design in @collection
-  != image_tag(design.preview.url(:carousel), :alt => "", :design_id => design.id, :category_id => @category.id)
+  != image_tag(design.preview.url(:carousel), :longdesc => "/events/new?category_id=#{@category.id}&design_id=#{design.id}", :alt => "")
