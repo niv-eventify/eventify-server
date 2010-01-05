@@ -13,7 +13,7 @@ Rails::Initializer.run do |config|
   config.middleware.use 'Rack::Bug', :password => rpass
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org'
   config.gem 'will_paginate', :source => 'http://gemcutter.org'
-  config.gem 'formtastic', :source => 'http://gemcutter.org'
+  config.gem 'formtastic', :source => 'http://gemcutter.org', :version => "0.9.1"
   config.gem 'haml', :version => '>= 2.0.9'
   config.gem 'mocha', :version => '0.9.8', :library => false
   config.gem 'fast_gettext', :version => '0.4.17'
