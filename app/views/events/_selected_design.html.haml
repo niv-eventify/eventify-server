@@ -2,8 +2,8 @@
   .holder
     .frame
       .image-h
-        %img{ :src => "/images/img-ill-5.jpg", :alt => "ill-5" }
-        .info-holder
+        != image_tag(@design.preview.url(:stage2))
+        .info-holder{set_text_box}
           %h3
             Lorem ipsum
           %ul

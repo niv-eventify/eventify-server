@@ -1196,7 +1196,7 @@ span.note {
 .visual-box .frame {
 	overflow: hidden;
 	height: 1%;
-	padding: 11px 10px 20px;
+	padding: 11px 7px 20px;
 	background: url(/images/bg-visual-box-b.jpg) no-repeat 0 100%;
 	position: relative;
 }
@@ -1206,15 +1206,9 @@ span.note {
 	display: block;
 }
 .info-holder {
-	top:100px;
-	left:232px;
-	width: 170px;
+  text-align: center;
 	position: absolute;
-}
-.hebrew .info-holder {
-	top:150px;
-	left: auto;
-	right:202px;
+  overflow: hidden;
 }
 .info-holder h3{
 	margin: 0;

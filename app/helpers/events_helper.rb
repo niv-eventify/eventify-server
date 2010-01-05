@@ -66,6 +66,13 @@ module EventsHelper
       haml_concat javascript_tag(toggle_ending_at_block + ";jQuery('.ending_at_block').html('')")
     end
   end
+  
+  def set_text_box
+    ratio = 1.6 #fullsize/preview_size
+    x_delta=116.5 #delta between background and postcard ((900-667)/2)
+    y_delta=50 #delta between background and postcard ((600-500)/2)
+    {:style => "top:#{(@design.text_top_y+y_delta)/ratio}px;left:#{(@design.text_top_x+x_delta)/ratio}px;width:#{@design.text_width/ratio}px;height:#{@design.text_height/ratio}px;"}
+  end
 
   protected
   def js_add_classes(attribute)
