@@ -1,22 +1,5 @@
 module EventsHelper
 
-  def event_date_time_select(f, attribute, js_opts = {})
-    haml_tag(:li, :class => "#{attribute}_date_select") do
-      haml_tag :label, _("Date")
-      haml_concat f.date_select(attribute, :order => [:month, :day, :year], :start_year => Time.now.utc.year, :date_separator => "", :use_short_month => true)
-      haml_concat f.inline_errors_for(attribute)
-    end
-    haml_tag(:im, :class => "#{attribute}_time_select") do
-      haml_tag :label, _("Time")
-      haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true}, :class => "short")
-    end
-    haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
-    yield if block_given?
-  end
-
-#  != f.input :ending_at, :as => :string
-
-
   def event_date_time_select_combo(f, attribute, js_opts = {})
     haml_tag(:li, :class => "#{attribute}_date_select") do
       haml_tag :label, _("Date")
