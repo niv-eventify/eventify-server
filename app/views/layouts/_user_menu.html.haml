@@ -16,7 +16,7 @@
               .opener!= link_to_function(_("My Page"), "jQuery('.menu-list').toggle()")
               %ul.menu-list
                 %li!= link_to _("Contacts"), contacts_path
-                %li!= link_to_function content_tag(:strong, _("Events")), "alert('todo')"
+                %li!= link_to content_tag(:strong, _("Events")), events_path
                 %li!= link_to _("Profile"), profile_path
         - else
           %p &nbsp;

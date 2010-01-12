@@ -1,16 +1,28 @@
 module EventsHelper
-  def event_date_time_select(f, attribute, js_opts = {})
+
+  def event_date_time_select_combo(f, attribute, js_opts = {})
     haml_tag(:li, :class => "#{attribute}_date_select") do
       haml_tag :label, _("Date")
-      haml_concat f.date_select(attribute, :order => [:month, :day, :year], :start_year => Time.now.utc.year, :date_separator => "", :use_short_month => true)
-      haml_concat f.inline_errors_for(attribute)
+      haml_tag :div, :class => "input-bg-alt" do
+        hidden_date_fields(f, attribute)
+        haml_tag :input, :class => "input-text", :id => "#{attribute}_mock", :name => "#{attribute}_mock", :type => "text"
+        haml_concat f.inline_errors_for(attribute)
+      end
+      haml_tag(:im, :class => "#{attribute}_time_select") do
+        haml_tag :label, _("Time")
+        haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true}, :class => "short")
+      end
+      haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
+      yield
     end
-    haml_tag(:im, :class => "#{attribute}_time_select") do
-      haml_tag :label, _("Time")
-      haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true}, :class => "short")
+  end
+
+  def hidden_date_fields(f, attribute)
+    [:year, :month, :day].each_with_index do |key, i|
+      v = f.object.send(attribute).try(key)
+      # change text_field_tag -> hidden_field_tag
+      haml_concat text_field_tag("event[#{attribute}(#{1 + i}i)]", v, :id => "event_#{attribute}_#{key}")
     end
-    haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
-    yield if block_given?
   end
 
   def js_for_date_select(attribute, opts = {})
@@ -23,10 +35,10 @@ module EventsHelper
   end
 
   def toggle_ending_at_block
-    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle()"
+    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();jQuery('.ending_at_time_select select').customSelect();"
   end
 
-  def event_text_input(f, attribute, label)
+  def event_text_input(f, attribute, label, extra_opts = {})
     opts = {:input_html => {:class => "input-text", :maxlength => "48", :size => "40"}, :label => label,
       :surround_html => {:tag => :div, :html => {:class => "input-bg-alt"}},
       :required => nil
@@ -35,7 +47,7 @@ module EventsHelper
     if block_given?
       opts[:after_html] = capture_haml { yield }
     end
-    haml_concat f.input(attribute, opts)
+    haml_concat f.input(attribute, opts.merge(extra_opts))
   end
 
   def event_input_text(f, attribute, label, hint)
@@ -71,13 +83,16 @@ module EventsHelper
     design.stage2_preview_dimentions.keys.map {|k| "#{k}:#{design.stage2_preview_dimentions[k]}"}.join(";")
   end
 
-  protected
+  def event_sent_status(event)
+    _("(not sent)") + " - TODO"
+  end
+
+  def event_location(event)
+    [event.location_name, event.location_address].compact_blanks.join(", ")
+  end
+protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT
-      var ds = jQuery(".#{attribute}_date_select select");
-      jQuery(ds[0]).addClass("middle");
-      jQuery(ds[1]).addClass("short");
-      jQuery(ds[2]).addClass("middle-alt");
       jQuery(".#{attribute}_time_select select.short:first").addClass("marg");
     JAVASCRIPT
   end

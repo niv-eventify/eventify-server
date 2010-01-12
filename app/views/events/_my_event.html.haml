@@ -1,0 +1,11 @@
+.boxe
+  .boxe-top
+    .boxe-btm
+      .heading
+        %h4
+          != link_to h(my_event.name), event_path(my_event)
+          = event_sent_status(my_event)
+        != render(:partial => "edit_menu", :locals => {:event => my_event})
+      .boxe-wrap
+        != render(:partial => "info", :locals => {:event => my_event})
+        != render(:partial => "actions_menu", :locals => {:event => my_event})

@@ -1,0 +1,16 @@
+.pict
+  != image_tag(event.design.preview.url(:list))
+.boxe-text
+  %p
+    %strong= _("Hosts:")
+    = event.user.name
+  %p
+    %strong= _("Date:")
+    = event.starting_at.to_s(:isra_date)
+  %p
+    %strong= _("Time")
+    = event.starting_at.to_s(:isra_time)
+  %p
+    %strong= _("Place:")
+    = event_location(event)
+  %p!= link_to _("To event page"), event_path(event), :class => "more"

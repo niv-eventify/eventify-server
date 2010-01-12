@@ -31,6 +31,10 @@ class Event < ActiveRecord::Base
   validates_presence_of :category, :design, :name, :starting_at, :location_name
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
 
+  named_scope :upcoming, :conditions => ["events.starting_at > ?", Time.now.utc]
+  named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]
+  named_scope :with, lambda {|*with_associations| {:include => with_associations} }
+
   def validate
     errors.add(:starting_at, _("should be in a future")) if starting_at < Time.now.utc
   end

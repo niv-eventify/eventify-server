@@ -1,0 +1,12 @@
+.sidebar
+  .boxr
+    .boxr-top
+      .boxr-btm
+        %h3= _("Future events")
+        %ul
+          - current_user.events.upcoming.find(:all, :limit => 3, :order => "events.starting_at desc").each do |e|
+            %li
+              %strong!= link_to h(e.name), event_path(e)
+              %span= e.starting_at.to_s(:isra_date)
+  .banners
+    != link_to_function image_tag("img-banner.gif", :alt => ""), "alert('todo')"
