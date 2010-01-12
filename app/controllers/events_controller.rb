@@ -1,8 +1,13 @@
 class EventsController < InheritedResources::Base
   before_filter :set_design_and_category, :only => :new
-  before_filter :require_user, :only => [:edit, :update]
+
+  before_filter :require_user, :only => [:edit, :update, :index]
+
   before_filter :set_event, :only => [:edit, :update]
-  actions :create, :new, :edit, :update
+
+  actions :create, :new, :edit, :update, :index
+
+  # index
 
   def create
     if !logged_in? && params[:event] && params[:event][:user_attributes]
@@ -39,6 +44,12 @@ class EventsController < InheritedResources::Base
   end
 
 protected
+
+  def collection
+    period = past_events? ? :past : :upcoming
+    current_user.events.send(period).with(:user, :design).paginate(:page => params[:page], :per_page => params[:per_page])
+  end
+
   def set_event
     @event = current_user.events.find(params[:id])
   end
@@ -47,4 +58,9 @@ protected
     @design = Design.available.find(params[:design_id])
     @category = Category.enabled.find(params[:category_id])
   end
+
+  def past_events?
+    "true" == params[:past]
+  end
+  helper_method :past_events?
 end

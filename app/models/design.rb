@@ -35,7 +35,7 @@ class Design < ActiveRecord::Base
   validates_attachment_size :background, :less_than => 200.kilobytes
 
   has_attached_file :preview,
-    :styles         => {:small => "67x50>", :medium => "218x145>", :carousel => "300x200>", :stage2 => "561x374>"},
+    :styles         => {:small => "67x50>", :medium => "218x145>", :carousel => "300x200>", :stage2 => "561x374>", :list => "119x79>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
     :path =>        "designs/:id/:style/:filename",

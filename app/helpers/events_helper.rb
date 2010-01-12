@@ -83,6 +83,13 @@ module EventsHelper
     design.stage2_preview_dimentions.keys.map {|k| "#{k}:#{design.stage2_preview_dimentions[k]}"}.join(";")
   end
 
+  def event_sent_status(event)
+    _("(not sent)") + " - TODO"
+  end
+
+  def event_location(event)
+    [event.location_name, event.location_address].compact_blanks.join(", ")
+  end
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT

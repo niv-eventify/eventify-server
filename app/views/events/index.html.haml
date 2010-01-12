@@ -1,0 +1,14 @@
+.top-text
+  %h2= _("Hello %{username},") % {:username => current_user.name}
+  %p= _("In your page you can track the events you’ve created, and create new ones!")
+
+.columns-holder
+  .boxu
+    .boxu-top
+      .boxu-btm
+        - tabs_navigation(:events)
+        - events_navigation(true) do
+          != render(:partial => "my_event", :collection => collection)
+          != will_paginate(collection, :renderer => DesignsWillPaginate)
+
+  != render(:partial => "sidebar")
