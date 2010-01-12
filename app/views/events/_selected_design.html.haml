@@ -4,20 +4,6 @@
       .image-h
         != image_tag(@event.design.preview.url(:stage2))
         .info-holder{:style => stage2_design_css(@event.design)}
-          %h3
-            Lorem ipsum
-          %ul
-            %li
-              %strong
-                Lorem: dd/mm/yy
-            %li
-              %strong
-                Lorem:
-              00:00
-            %li
-              Lorem
-            %li
-              Lorem
-            %li
-              Lorem
+          #title.title
+          #free_text.free_text
       != link_to_function content_tag(:span, _("Advanced design options")), "alert('todo')", :class => "blue-btn-mdl"

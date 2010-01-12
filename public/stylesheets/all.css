@@ -1206,30 +1206,23 @@ span.note {
 	display: block;
 }
 .info-holder {
-  text-align: center;
+	border: solid green 1px;
+	text-align: center;
 	position: absolute;
-  overflow: hidden;
+	overflow: hidden;
 }
-.info-holder h3{
+.info-holder .title{
+	font-weight: bold;
 	margin: 0;
-	font-size: 1.8em;
+	font-size: 2.0em;
+	line-height: 1em;
+}
+.info-holder .free_text{
+	margin: 0;
+	font-size: 1.6em;
 	line-height: 1em;
 	font-weight: normal;
 }
-.info-holder ul{
-	margin: 0;
-	padding: 4px  0 0;
-	list-style: none;
-	font-size: 1.2em;
-}
-.info-holder ul li{
-	padding: 0 0 5px;
-}
-.info-holder ul strong{
-	font-weight: normal;
-	padding: 0 3px 0 0;
-}
-.hebrew .info-holder ul strong {padding: 0 0 0 3px;}
 .blue-btn-mdl {
 	padding: 0 32px 0 0;
 	margin: 15px 4px 0 4px;
