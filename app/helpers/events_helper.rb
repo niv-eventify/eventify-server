@@ -21,7 +21,7 @@ module EventsHelper
     [:year, :month, :day].each_with_index do |key, i|
       v = f.object.send(attribute).try(key)
       # change text_field_tag -> hidden_field_tag
-      haml_concat text_field_tag("event[#{attribute}(#{1 + i}i)]", v, :id => "event_#{attribute}_#{key}")
+      haml_concat hidden_field_tag("event[#{attribute}(#{1 + i}i)]", v, :id => "event_#{attribute}_#{key}")
     end
   end
 

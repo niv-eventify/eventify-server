@@ -65,5 +65,5 @@ jQuery(document).ready(function(){
   });
   jQuery("#event_location_name").change(stage2.setLocationInMessage);
   jQuery("#event_location_name").blur(stage2.setLocationInMessage);  
-  myCal3 = new Calendar({ event_location_address: 'd/m/Y' }, { classes: ['i-heart-ny'], direction: 1, months: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'] });
+  myCal3 = new Calendar({ starting_at_mock: 'd/m/Y' }, { classes: ['i-heart-ny'], direction: 1, months: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'] });
 });
