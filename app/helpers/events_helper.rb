@@ -49,7 +49,7 @@ module EventsHelper
   end
 
   def show_hide_ending_block_js(f)
-    haml_concat javascript_tag("$('select').customSelect();")
+    haml_concat javascript_tag("jQuery('select').customSelect();")
     remove_ending_date = <<-JAVASCRIPT
       (function(){
         var ending_at_html = jQuery(".ending_at_block").html();
