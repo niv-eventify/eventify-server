@@ -15,6 +15,6 @@ module DesignsHelper
   end
 
   def select_design_link_plus(design)
-    link_to_function "+", "alert('preview with popup')", :class => "plus"
+    link_to_function "+", "jQuery('#light_box_#{design.id}').click();", :class => "plus"
   end
 end

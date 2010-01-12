@@ -3,6 +3,8 @@
     .img-box-b
       .content-h
         .image
-          != image_tag(design.preview.url(:medium), :alt => "")
+          %a{ :href => design.preview.url(:stage2), :id => "light_box_#{design.id}", :class => "lightbox" }
+            != image_tag(design.preview.url(:medium), :alt => "")
       != select_design_link(category, design)
       != select_design_link_plus(design)
+
