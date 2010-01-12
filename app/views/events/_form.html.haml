@@ -11,13 +11,17 @@
   - event_text_input(f, :name, _("Event name"))
   != f.input :category, :label => _("Event Type"), :required => nil
 
-  - event_date_time_select(f, :starting_at) do
+  - # change the next line to :as => :hidden
+  != f.input :starting_at, :as => :string
+  - event_date_time_select_mock(:starting_at) do
     .f-row
       != link_to_function _("Add End date &amp; Time"), toggle_ending_at_block, :class => "add-link show_ending_at", :style => "display:none"
       != link_to_function _("Remove End date &amp; Time"), toggle_ending_at_block, :class => "add-link hide_ending_at"
 
 - f.inputs :class => "ending_at_block" do
-  - event_date_time_select(f, :ending_at) do
+  - # change the next line to :as => :hidden
+  != f.input :ending_at, :as => :string
+  - event_date_time_select_mock(:ending_at) do
     .f-row &nbsp;
   - show_hide_ending_block_js(f)
 
