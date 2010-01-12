@@ -1,7 +1,13 @@
-%h1= _("Account Settings")
+.top-text
+  %h2= _("Hello %{username},") % {:username => current_user.name}
+  %p= _("In your page you can track the events you’ve created, and create new ones!")
 
-- semantic_form_for(@user, :live_validations => true) do |f|
-  != render :partial => "form", :locals => { :f => f }
-  != f.submit _("Update")
+- page_with_tabs(:settings) do
 
-!= link_to _("change password"), password_edit_path
+  %h1= _("Account Settings")
+
+  - semantic_form_for(@user, :live_validations => true) do |f|
+    != render :partial => "form", :locals => { :f => f }
+    != f.submit _("Update")
+
+  != link_to _("change password"), password_edit_path

@@ -1,15 +1,21 @@
-%p
-  %strong Name:
-  =h @user.name
-%p
-  %strong Email:
-  =h @user.email
+.top-text
+  %h2= _("Hello %{username},") % {:username => current_user.name}
+  %p= _("In your page you can track the events you’ve created, and create new ones!")
 
-%p
-  != link_to "Contacts", contacts_path
+- page_with_tabs(:settings) do
 
-%p
-  != link_to "edit", edit_profile_path
+  %p
+    %strong Name:
+    =h @user.name
+  %p
+    %strong Email:
+    =h @user.email
 
-%p
-  != link_to "change password", password_edit_path
+  %p
+    != link_to "Contacts", contacts_path
+
+  %p
+    != link_to "edit", edit_profile_path
+
+  %p
+    != link_to "change password", password_edit_path

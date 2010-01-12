@@ -1,7 +1,13 @@
-%h2 Edit contact
+.top-text
+  %h2= _("Hello %{username},") % {:username => current_user.name}
+  %p= _("In your page you can track the events you’ve created, and create new ones!")
 
-- semantic_form_for(@contact, :live_validations => true) do |f|
-  = f.object.errors.on(:base)
-  != render :partial => "form", :locals => { :f => f }
-  != f.submit "Save"
-  != link_to "Cancel", contacts_path
+- page_with_tabs(:contacts) do
+
+  %h2 Edit contact
+
+  - semantic_form_for(@contact, :live_validations => true) do |f|
+    = f.object.errors.on(:base)
+    != render :partial => "form", :locals => { :f => f }
+    != f.submit "Save"
+    != link_to "Cancel", contacts_path

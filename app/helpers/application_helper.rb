@@ -50,4 +50,18 @@ module ApplicationHelper
       yield
     end
   end
+
+  def page_with_tabs(current_tab)
+    haml_tag(:div, :class => "columns-holder") do
+      haml_tag(:div, :class => "boxu") do
+        haml_tag(:div, :class => "boxu-top") do
+          haml_tag(:div, :class => "boxu-btm") do
+            tabs_navigation(current_tab)
+            yield
+          end
+        end
+      end
+      haml_concat render(:partial => "events/sidebar")
+    end
+  end
 end
