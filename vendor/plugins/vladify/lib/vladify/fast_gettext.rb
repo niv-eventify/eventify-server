@@ -4,8 +4,7 @@ namespace :remote do
     remote_task :sync do
       # only need to do it on one of the :app hosts
       break unless target_host == Rake::RemoteTask.hosts_for(:app).first
-      Rake::Task["gettext:sync:locales"].invoke
-      Rake::Task["gettext:sync:po"].invoke
+      run rake "sync_po_to_db"
     end
   end
 end
