@@ -77,6 +77,6 @@ namespace :gettext do
   task :store_yml_translations => :environment do
     require 'gettext_i18n_rails/yml_finder'
 
-    GettextI18nRails.store_yml_translations("locale/yml_import.rb", "locale/en/app.po")
+    GettextI18nRails.store_yml_translations("locale/yml_import.rb", *Dir.glob("locale/*/app.po"))
   end
 end
