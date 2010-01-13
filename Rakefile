@@ -14,3 +14,7 @@ task :cruise_control do
   Rake::Task['db:migrate'].invoke
   Rake::Task['default'].invoke
 end
+
+task :tags do
+  system "ctags -R --sort=yes --exclude=\*.js"
+end
