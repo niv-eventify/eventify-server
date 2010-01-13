@@ -40,7 +40,7 @@ module GettextI18nRails
             translation.msgstr = v if translation.msgstr.blank?
           else
             translation = Pomo::Translation.new
-            translation.comment = yml_file
+            translation.comment = ": " + yml_file
             translation.msgid = k
             translation.msgstr = v
             po << po_index[k] = translation
@@ -51,7 +51,7 @@ module GettextI18nRails
 
     end
 
-    File.open(po_filename, "w") {|f| f.write Pomo::PoFile.to_text(po)}
+    File.open(po_filename, "w") {|f| f.write Pomo::PoFile.to_text(po.sort_by{|x| [*x.msgid].first || ""})}
   end
 
 end
