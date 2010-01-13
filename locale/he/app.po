@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-01-13 04:12+0200\n"
+"POT-Creation-Date: 2010-01-13 04:30+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: Astrails Ltd. <we@astrails.com>\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,235 @@ msgstr ""
 msgid "User Settings"
 msgstr ""
 
+#: locale/yml_import.rb:77
+msgid "activerecord.errors.full_messages.format"
+msgstr ""
+
+#: locale/yml_import.rb:72
+msgid "activerecord.errors.messages.accepted"
+msgstr ""
+
+#: locale/yml_import.rb:60
+msgid "activerecord.errors.messages.blank"
+msgstr ""
+
+#: locale/yml_import.rb:59
+msgid "activerecord.errors.messages.confirmation"
+msgstr ""
+
+#: locale/yml_import.rb:64
+msgid "activerecord.errors.messages.empty"
+msgstr ""
+
+#: locale/yml_import.rb:66
+msgid "activerecord.errors.messages.equal_to"
+msgstr ""
+
+#: locale/yml_import.rb:76
+msgid "activerecord.errors.messages.even"
+msgstr ""
+
+#: locale/yml_import.rb:67
+msgid "activerecord.errors.messages.exclusion"
+msgstr ""
+
+#: locale/yml_import.rb:68
+msgid "activerecord.errors.messages.greater_than"
+msgstr ""
+
+#: locale/yml_import.rb:74
+msgid "activerecord.errors.messages.greater_than_or_equal_to"
+msgstr ""
+
+#: locale/yml_import.rb:65
+msgid "activerecord.errors.messages.inclusion"
+msgstr ""
+
+#: locale/yml_import.rb:61
+msgid "activerecord.errors.messages.invalid"
+msgstr ""
+
+#: locale/yml_import.rb:79
+msgid "activerecord.errors.messages.less_than"
+msgstr ""
+
+#: locale/yml_import.rb:63
+msgid "activerecord.errors.messages.less_than_or_equal_to"
+msgstr ""
+
+#: locale/yml_import.rb:73
+msgid "activerecord.errors.messages.not_a_number"
+msgstr ""
+
+#: locale/yml_import.rb:71
+msgid "activerecord.errors.messages.odd"
+msgstr ""
+
+#: locale/yml_import.rb:62
+msgid "activerecord.errors.messages.record_invalid"
+msgstr ""
+
+#: locale/yml_import.rb:78
+msgid "activerecord.errors.messages.taken"
+msgstr ""
+
+#: locale/yml_import.rb:69
+msgid "activerecord.errors.messages.too_long"
+msgstr ""
+
+#: locale/yml_import.rb:75
+msgid "activerecord.errors.messages.too_short"
+msgstr ""
+
+#: locale/yml_import.rb:70
+msgid "activerecord.errors.messages.wrong_length"
+msgstr ""
+
+#: locale/yml_import.rb:27
+msgid "activerecord.errors.template.body"
+msgstr ""
+
+#: locale/yml_import.rb:43
+msgid "activerecord.errors.template.header.one"
+msgstr ""
+
+#: locale/yml_import.rb:20
+msgid "activerecord.errors.template.header.other"
+msgstr ""
+
 #: app/views/pages/home.html.haml:5
 msgid "bar"
 msgid_plural "bars"
 msgstr[0] ""
 msgstr[1] ""
+
+#: locale/yml_import.rb:7
+msgid "date.formats.default"
+msgstr ""
+
+#: locale/yml_import.rb:10
+msgid "date.formats.long"
+msgstr ""
+
+#: locale/yml_import.rb:6
+msgid "date.formats.short"
+msgstr ""
+
+#: locale/yml_import.rb:40
+msgid "datetime.distance_in_words.about_x_hours.one"
+msgstr ""
+
+#: locale/yml_import.rb:36
+msgid "datetime.distance_in_words.about_x_hours.other"
+msgstr ""
+
+#: locale/yml_import.rb:35
+msgid "datetime.distance_in_words.about_x_months.one"
+msgstr ""
+
+#: locale/yml_import.rb:12
+msgid "datetime.distance_in_words.about_x_months.other"
+msgstr ""
+
+#: locale/yml_import.rb:22
+msgid "datetime.distance_in_words.about_x_years.one"
+msgstr ""
+
+#: locale/yml_import.rb:38
+msgid "datetime.distance_in_words.about_x_years.other"
+msgstr ""
+
+#: locale/yml_import.rb:31
+msgid "datetime.distance_in_words.half_a_minute"
+msgstr ""
+
+#: locale/yml_import.rb:37
+msgid "datetime.distance_in_words.less_than_x_minutes.one"
+msgstr ""
+
+#: locale/yml_import.rb:29
+msgid "datetime.distance_in_words.less_than_x_minutes.other"
+msgstr ""
+
+#: locale/yml_import.rb:55
+msgid "datetime.distance_in_words.less_than_x_seconds.one"
+msgstr ""
+
+#: locale/yml_import.rb:51
+msgid "datetime.distance_in_words.less_than_x_seconds.other"
+msgstr ""
+
+#: locale/yml_import.rb:28
+msgid "datetime.distance_in_words.over_x_years.one"
+msgstr ""
+
+#: locale/yml_import.rb:24
+msgid "datetime.distance_in_words.over_x_years.other"
+msgstr ""
+
+#: locale/yml_import.rb:17
+msgid "datetime.distance_in_words.x_days.one"
+msgstr ""
+
+#: locale/yml_import.rb:49
+msgid "datetime.distance_in_words.x_days.other"
+msgstr ""
+
+#: locale/yml_import.rb:18
+msgid "datetime.distance_in_words.x_minutes.one"
+msgstr ""
+
+#: locale/yml_import.rb:44
+msgid "datetime.distance_in_words.x_minutes.other"
+msgstr ""
+
+#: locale/yml_import.rb:30
+msgid "datetime.distance_in_words.x_months.one"
+msgstr ""
+
+#: locale/yml_import.rb:50
+msgid "datetime.distance_in_words.x_months.other"
+msgstr ""
+
+#: locale/yml_import.rb:48
+msgid "datetime.distance_in_words.x_seconds.one"
+msgstr ""
+
+#: locale/yml_import.rb:13
+msgid "datetime.distance_in_words.x_seconds.other"
+msgstr ""
+
+#: locale/yml_import.rb:58
+msgid "datetime.prompts.day"
+msgstr ""
+
+#: locale/yml_import.rb:32
+msgid "datetime.prompts.hour"
+msgstr ""
+
+#: locale/yml_import.rb:41
+msgid "datetime.prompts.minute"
+msgstr ""
+
+#: locale/yml_import.rb:45
+msgid "datetime.prompts.month"
+msgstr ""
+
+#: locale/yml_import.rb:57
+msgid "datetime.prompts.second"
+msgstr ""
+
+#: locale/yml_import.rb:52
+msgid "datetime.prompts.year"
+msgstr ""
+
+#: locale/yml_import.rb:81
+msgid "flash.user_session.create.notice"
+msgstr ""
+
+#: locale/yml_import.rb:80
+msgid "flash.user_session.destroy.notice"
+msgstr ""
 
 #: app/views/pages/home.html.haml:3
 msgid "foo"
@@ -61,6 +285,106 @@ msgstr ""
 msgid "login"
 msgstr ""
 
+#: locale/yml_import.rb:54
+msgid "number.currency.format.delimiter"
+msgstr ""
+
+#: locale/yml_import.rb:34
+msgid "number.currency.format.format"
+msgstr ""
+
+#: locale/yml_import.rb:42
+msgid "number.currency.format.separator"
+msgstr ""
+
+#: locale/yml_import.rb:26
+msgid "number.currency.format.unit"
+msgstr ""
+
+#: locale/yml_import.rb:25
+msgid "number.format.delimiter"
+msgstr ""
+
+#: locale/yml_import.rb:53
+msgid "number.format.separator"
+msgstr ""
+
+#: locale/yml_import.rb:14
+msgid "number.human.format.delimiter"
+msgstr ""
+
+#: locale/yml_import.rb:16
+msgid "number.human.storage_units.format"
+msgstr ""
+
+#: locale/yml_import.rb:19
+msgid "number.human.storage_units.units.byte.one"
+msgstr ""
+
+#: locale/yml_import.rb:46
+msgid "number.human.storage_units.units.byte.other"
+msgstr ""
+
+#: locale/yml_import.rb:47
+msgid "number.human.storage_units.units.gb"
+msgstr ""
+
+#: locale/yml_import.rb:23
+msgid "number.human.storage_units.units.kb"
+msgstr ""
+
+#: locale/yml_import.rb:15
+msgid "number.human.storage_units.units.mb"
+msgstr ""
+
+#: locale/yml_import.rb:33
+msgid "number.human.storage_units.units.tb"
+msgstr ""
+
+#: locale/yml_import.rb:56
+msgid "number.percentage.format.delimiter"
+msgstr ""
+
+#: locale/yml_import.rb:39
+msgid "number.precision.format.delimiter"
+msgstr ""
+
 #: app/views/user_session/new.html.haml:9
 msgid "register"
+msgstr ""
+
+#: locale/yml_import.rb:2
+msgid "support.array.last_word_connector"
+msgstr ""
+
+#: locale/yml_import.rb:8
+msgid "support.array.two_words_connector"
+msgstr ""
+
+#: locale/yml_import.rb:4
+msgid "support.array.words_connector"
+msgstr ""
+
+#: locale/yml_import.rb:21
+msgid "support.select.prompt"
+msgstr ""
+
+#: locale/yml_import.rb:9
+msgid "time.am"
+msgstr ""
+
+#: locale/yml_import.rb:5
+msgid "time.formats.default"
+msgstr ""
+
+#: locale/yml_import.rb:11
+msgid "time.formats.long"
+msgstr ""
+
+#: locale/yml_import.rb:3
+msgid "time.formats.short"
+msgstr ""
+
+#: locale/yml_import.rb:1
+msgid "time.pm"
 msgstr ""
