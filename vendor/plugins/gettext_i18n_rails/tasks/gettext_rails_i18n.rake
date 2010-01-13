@@ -23,8 +23,7 @@ namespace :gettext do
         Dir.glob("{app,lib,config,locale}/**/*.{rb,erb,haml}"),
         "version 0.0.1",
         :po_root => 'locale',
-        :msgmerge=>['--sort-output'],
-        :verbose => true
+        :msgmerge=>['--sort-output']
       )
     else #we are on a version < 2.0
       puts "install new GetText with gettext:install to gain more features..."
