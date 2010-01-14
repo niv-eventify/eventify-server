@@ -35,7 +35,7 @@ module EventsHelper
   end
 
   def toggle_ending_at_block
-    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();jQuery('.ending_at_time_select select').customSelect();"
+    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();"
   end
 
   def event_text_input(f, attribute, label, extra_opts = {})
@@ -63,7 +63,7 @@ module EventsHelper
   def show_hide_ending_block_js(f)
     haml_concat javascript_tag("jQuery('select').customSelect();")
     unless show_ending_at_block?(f)
-      haml_concat javascript_tag(toggle_ending_at_block + ";jQuery('.ending_at_block').hide()")
+      haml_concat javascript_tag(toggle_ending_at_block)
     end
   end
   
