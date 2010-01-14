@@ -1105,6 +1105,16 @@ span.note {
 	font-size: 1.1em;
 	float: right;
 }
+.remove-link {
+	background: url(/images/icon-minus.gif) no-repeat 0 3px;
+	padding: 0 0 0 14px;
+}
+.hebrew .remove-link {
+	background-position: 100% 3px;
+	padding: 0 14px 0 0;
+	font-size: 1.1em;
+	float: right;
+}
 .check-h {
 	overflow: hidden;
 	height: 1%;
