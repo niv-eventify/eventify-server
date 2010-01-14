@@ -6,12 +6,12 @@ module EventsHelper
       haml_tag :div, :class => "input-bg-alt" do
         hidden_date_fields(f, attribute)
         haml_tag :input, :class => "input-text", :id => "#{attribute}_mock", :name => "#{attribute}_mock", :type => "text"
-        haml_concat f.inline_errors_for(attribute)
       end
-      haml_tag(:im, :class => "#{attribute}_time_select") do
-        haml_tag :label, _("Time")
-        haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true, :minute_step => 15}, :class => "short")
-      end
+      haml_concat f.inline_errors_for(attribute)
+    end
+    haml_tag(:li, :class => "#{attribute}_time_select") do
+      haml_tag :label, _("Time")
+      haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true, :prompt => {:hour => "&nbsp;", :minute => "&nbsp;"}, :minute_step => 15}, :class => "short")
       haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
       yield
     end
