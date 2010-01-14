@@ -36,6 +36,6 @@ class Event < ActiveRecord::Base
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
 
   def validate
-    errors.add(:starting_at, _("should be in a future")) if starting_at < Time.now.utc
+    errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
   end
 end
