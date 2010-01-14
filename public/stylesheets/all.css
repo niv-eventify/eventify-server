@@ -1051,6 +1051,11 @@ span.note {
 	color:#fff;
 	background:#523733;
 }
+.selectOptions ul li.selected a{
+	text-decoration:none;
+	color:#fff;
+	background:#523733;
+}
 
 .hebrew .form select { float: right;}
 .form select.middle {
