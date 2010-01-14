@@ -10,7 +10,7 @@ module EventsHelper
       end
       haml_tag(:im, :class => "#{attribute}_time_select") do
         haml_tag :label, _("Time")
-        haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true}, :class => "short")
+        haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true, :minute_step => 15}, :class => "short")
       end
       haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
       yield
@@ -62,20 +62,8 @@ module EventsHelper
 
   def show_hide_ending_block_js(f)
     haml_concat javascript_tag("jQuery('select').customSelect();")
-    remove_ending_date = <<-JAVASCRIPT
-      (function(){
-        var ending_at_html = jQuery(".ending_at_block").html();
-        jQuery(".hide_ending_at").click(function(){
-          jQuery(".ending_at_block").html("");
-        });
-        jQuery(".show_ending_at").click(function(){
-          jQuery(".ending_at_block").html(ending_at_html);
-        });
-      })();
-    JAVASCRIPT
-    haml_concat javascript_tag(remove_ending_date)
     unless show_ending_at_block?(f)
-      haml_concat javascript_tag(toggle_ending_at_block + ";jQuery('.ending_at_block').html('')")
+      haml_concat javascript_tag(toggle_ending_at_block + ";jQuery('.ending_at_block').hide()")
     end
   end
   
