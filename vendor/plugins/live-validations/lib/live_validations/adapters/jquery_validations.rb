@@ -98,7 +98,7 @@ module LiveValidations
         
         %{
           #{custom_rules(a)}
-          $('##{dom_id}').validate(#{to_json_with_function_awareness(validator_options)})
+          jQuery('##{dom_id}').validate(#{to_json_with_function_awareness(validator_options)})
         }
       end
       
