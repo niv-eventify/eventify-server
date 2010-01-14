@@ -7,12 +7,13 @@
   max_free_text_font_size: 0,
 
   calcFontSize: function() {
-    while(jQuery(".info-holder").width() < (jQuery("#free_text").width())) {
-      stage2.change_font_size_by(-1);
-    }
-    while(jQuery(".info-holder").width() < (jQuery("#title").width())) {
-      stage2.change_font_size_by(-1);
-    }
+//TODO: fix this
+//    while(jQuery(".info-holder").width() < jQuery("#free_text").width()) {
+//      stage2.change_font_size_by(-1);
+//    }
+//    while(jQuery(".info-holder").width() < jQuery("#title").width()) {
+//      stage2.change_font_size_by(-1);
+//    }
     while(parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
       stage2.change_font_size_by(1);
     }
@@ -38,7 +39,14 @@
     stage2.setFieldValueInMessage(jQuery("#starting_at_mock").val(), "startDate");
   },
   setTimeInMessage: function() {
-    var time = jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val();
+    var time = "";
+    if(jQuery("#event_starting_at_4i").val() == "" || jQuery("#event_starting_at_5i").val() == "") {
+      if(stage2.startTime == "")
+        return;
+    } else {
+      time = jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val();
+    }
+    
     stage2.setFieldValueInMessage(time, "startTime");
   },
   setFieldValueInMessage: function(newVal, varName) {
