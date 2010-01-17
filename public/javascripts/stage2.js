@@ -7,17 +7,16 @@
   max_free_text_font_size: 0,
 
   calcFontSize: function() {
-//TODO: fix this
-//    while(jQuery(".info-holder").width() < jQuery("#free_text").width()) {
-//      stage2.change_font_size_by(-1);
-//    }
-//    while(jQuery(".info-holder").width() < jQuery("#title").width()) {
-//      stage2.change_font_size_by(-1);
-//    }
     while(parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
       stage2.change_font_size_by(1);
     }
     while(jQuery(".info-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
+      stage2.change_font_size_by(-1);
+    }
+    while(jQuery("#title").width() < jQuery("#title")[0].scrollWidth) {
+      stage2.change_font_size_by(-1);
+    }
+    while(jQuery("#free_text").width() < jQuery("#free_text")[0].scrollWidth) {
       stage2.change_font_size_by(-1);
     }
   },
