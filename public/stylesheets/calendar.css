@@ -66,13 +66,13 @@ div.i-heart-ny caption a {
   width: 23px;
   z-index: 200;
 }
-div.i-heart-ny caption a.prev {
+div.i-heart-ny caption a.prev_month {
   background-image: url(/images/i-heart-ny-prev.png);
   background-position: 0px 0px;
   left: 0;
   float: none;
 }
-div.i-heart-ny caption a.next {
+div.i-heart-ny caption a.next_month {
   background-image: url(/images/i-heart-ny-next.png);
   background-position: 0px 0px;
   right: 0;

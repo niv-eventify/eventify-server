@@ -78,6 +78,10 @@ module EventsHelper
   def event_location(event)
     [event.location_name, event.location_address].compact_blanks.join(", ")
   end
+  
+  def months_arr
+    javascript_tag("stage2.months_arr = ['" + _("en.date.month_names").join("','") + "'];")
+  end
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT

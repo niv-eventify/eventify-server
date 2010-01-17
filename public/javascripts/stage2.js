@@ -5,7 +5,7 @@
   message: "",
   max_title_font_size: 0,
   max_free_text_font_size: 0,
-
+  months_arr: [],
   calcFontSize: function() {
     while(parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
       stage2.change_font_size_by(1);
@@ -110,6 +110,6 @@ jQuery(document).ready(function(){
   jQuery("#event_location_name").blur(stage2.setLocationInMessage);
   jQuery("#event_starting_at_4i,#event_starting_at_5i").change(stage2.setTimeInMessage);
 
-  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'd.m.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny'], direction: 1, months: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'], onHideStart: stage2.setDateInMessage });
-  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'd.m.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny'], direction: 1, months: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'] });
+  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'd.m.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
+  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'd.m.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr });
 });

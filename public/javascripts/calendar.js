@@ -525,7 +525,7 @@ var Calendar = new Class({
 			td.addClass(cls);
 
 			if (valid.contains(day)) { // if it's a valid - clickable - day we add interaction
-				td.setProperty('title', this.format(date, 'D M jS Y'));
+//				td.setProperty('title', this.format(date, 'l F jS Y'));
 				
 				td.addEvents({
 					'click': function(td, day, cal) { 
@@ -574,7 +574,7 @@ var Calendar = new Class({
 		}
 		else { // input (type text) elements restrict the user to only setting the date via the calendar
 			el.readOnly = true;
-			el.addEvent('focus', function(cal) { this.toggle(cal); }.pass(cal, this));
+			el.addEvent('click', function(cal) { this.toggle(cal); }.pass(cal, this));
 		}
 
 		cal.els.push(el);
