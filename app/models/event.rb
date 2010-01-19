@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
 
   has_many :guests
+  has_many :things
 
   has_attached_file :map,
     :storage        => :s3,
