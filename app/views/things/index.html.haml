@@ -1,0 +1,23 @@
+- @content_css_class = "stars-bg stage-3"
+
+- events_content_section(3, {:href => "alert('todo')"}, {:href => "alert('todo')"}, @event) do
+  .info-area
+
+    %ul.info-area-nav
+      %li!= link_to _("Guest List"), event_guests_path(@event)
+      %li.active!= link_to _("Things to bring"), event_things_path(@event)
+
+    .info-area-tab
+      .holder
+        .frame
+          %h3
+            = _("Add things you want your guests to bring with them.")
+            %br
+            = _("Every guest would be able to pick one ore more items to bring.")
+
+          %table#thing.info-table.things
+            != render(:partial => "things_header")
+            %tbody
+              != render(:partial => "thing", :collection => collection)
+          
+          != render(:partial => "new")

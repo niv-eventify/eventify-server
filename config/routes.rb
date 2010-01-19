@@ -23,5 +23,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :events do |event|
     event.resources :guests
+    event.resources :things
   end
 end

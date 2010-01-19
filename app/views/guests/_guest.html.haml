@@ -1,23 +1,23 @@
 %tr[guest]
 
-  - guest_column(1) do
+  - info_table_column(1) do
     %input#name-1.input-check{ :type => "checkbox" }
     %label{ :for => "name-1" }= guest.name
 
-  - guest_column(2) do
+  - info_table_column(2) do
     != mail_to guest.email, guest.email
 
-  - guest_column(3) do
+  - info_table_column(3) do
     = guest.mobile_phone
 
-  - guest_column(4) do
+  - info_table_column(4) do
     - guest_remote_checkbox(:send_email, @event, guest)
 
-  - guest_column(5) do
+  - info_table_column(5) do
     - guest_remote_checkbox(:send_sms, @event, guest)
 
-  - guest_column(6) do
+  - info_table_column(6) do
     - guest_remote_checkbox(:allow_snow_ball, @event, guest)
 
-  - guest_column do
+  - info_table_column do
     != link_to_remove_guest(@event, guest)

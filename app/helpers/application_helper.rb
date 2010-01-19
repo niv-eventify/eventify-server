@@ -64,4 +64,13 @@ module ApplicationHelper
       haml_concat render(:partial => "events/sidebar")
     end
   end
+
+  def info_table_column(column_id = nil)
+    css_class = column_id ? "t-col-#{column_id}" : "last"
+    haml_tag(:td, :class => css_class) do
+      haml_tag(:div, :class => "cell-bg") do
+        yield
+      end
+    end
+  end
 end

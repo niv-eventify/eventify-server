@@ -4,8 +4,8 @@
   .info-area
 
     %ul.info-area-nav
-      %li.active!= link_to_function _("Guest List"), ""
-      %li!= link_to_function _("Things to bring"), ""
+      %li.active!= link_to _("Guest List"), event_guests_path(@event)
+      %li!= link_to _("Things to bring"), event_things_path(@event)
 
     .info-area-tab
       .holder

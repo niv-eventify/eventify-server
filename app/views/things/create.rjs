@@ -1,0 +1,8 @@
+if @thing.new_record?
+  page << "$('td.error:first input').focus()"
+else
+  page["#thing tbody"].append render(:partial => "thing", :object => @thing)
+  @thing = nil # rerender empty form
+end
+
+page[:new_thing].replaceWith render(:partial => "new")

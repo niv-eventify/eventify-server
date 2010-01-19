@@ -19,13 +19,4 @@ module GuestsHelper
       haml_concat f.check_box attribute, :class => "input-check", :onchange => "jQuery(this).parents('form').get(0).onsubmit()"
     end
   end
-
-  def guest_column(column_id = nil)
-    css_class = column_id ? "t-col-#{column_id}" : "last"
-    haml_tag(:td, :class => css_class) do
-      haml_tag(:div, :class => "cell-bg") do
-        yield
-      end
-    end
-  end
 end

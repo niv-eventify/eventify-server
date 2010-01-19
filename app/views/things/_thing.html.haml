@@ -1,0 +1,10 @@
+%tr[thing]
+
+  - info_table_column(1) do
+    = thing.name
+
+  - info_table_column(2) do
+    = thing.amount
+
+  - info_table_column do
+    != link_to_remove_thing(@event, thing)
