@@ -4,6 +4,7 @@ describe "/users/show.html.haml" do
   setup :activate_authlogic
   before(:each) do
     @user = assigns[:user] = Factory.build(:user)
+    @controller.stub!(:current_user).and_return(stub_model(User, :name => "john", :events => Event))
   end
 
   it "should render" do
