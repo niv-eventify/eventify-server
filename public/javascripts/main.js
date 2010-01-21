@@ -1,15 +1,5 @@
 /*---- clear inputs ---*/
 function clearInputs(){
-	jQuery('input:text, input:password, textarea').each(function(){
-		var _el = jQuery(this);
-		var _val = _el.val();
-		_el.bind('focus', function(){
-			if(this.value == _val) this.value = '';
-		}).bind('blur', function(){
-			if(this.value == '') this.value = _val;
-		});
-	});
-	
 	jQuery('div.input-bg-alt > input').bind('focus', function(){
 		jQuery(this).parent().addClass('input-bg-alt-active');
 	}).bind('blur', function(){

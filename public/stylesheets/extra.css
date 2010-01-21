@@ -29,3 +29,7 @@ a.signup-out {
 .info-table.things {
 	width: auto;
 }
+
+* {
+	outline:none;
+}

@@ -31,6 +31,9 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :category, :design, :name, :starting_at, :location_name
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
+  validates_format_of :map_link,
+    :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
+    :allow_nil => true, :allow_blank => true, :live_validator => /|/
 
   named_scope :upcoming, :conditions => ["events.starting_at > ?", Time.now.utc]
   named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]
@@ -38,5 +41,9 @@ class Event < ActiveRecord::Base
 
   def validate
     errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
+  end
+
+  def has_map?
+    !map_link.blank? || (map && !map.url.blank?)
   end
 end

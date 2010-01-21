@@ -4,7 +4,7 @@
   .twocolumns
 
     .side-area
-      - semantic_form_for(@event, :live_validations => true, :html => {:class => "form"}) do |f|
+      - semantic_form_for(@event, :live_validations => true, :html => {:class => "form", :multipart => true}) do |f|
         != f.hidden_field :design_id
         != render(:partial => "form", :locals => {:f => f})
 

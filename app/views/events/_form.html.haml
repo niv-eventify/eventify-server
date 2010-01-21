@@ -24,8 +24,17 @@
 - f.inputs do
   - event_text_input(f, :location_name, _("Location"))
   - event_text_input(f, :location_address, _("Address")) do
-    .f-row
-      != link_to_function _("Add Map"), "alert('todo')", :class => "add-link"
-    != form_divider
+    - unless f.object.has_map?
+      .f-row
+        != link_to_function _("Add Map"), "jQuery(this).hide();jQuery('.map-section').toggle()", :class => "add-link"
+- f.inputs :class => "map-section", :style => (f.object.has_map? ? "" : "display:none") do
+  - event_text_input(f, :map_link, _("Map Link"), :live => false) do
+    = _("or")
+  - event_text_input(f, :map, _("Map Image"), :as => :file) do
+    - unless f.object.map.url.blank?
+      .f-row!= link_to _("Current Map Image"), f.object.map.url, :target => "_blank"
+    
 
+!= form_divider
+- f.inputs do
   - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"))
