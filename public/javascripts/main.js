@@ -144,7 +144,7 @@ function initSlide(){
 	jQuery('div.edit').each(function(){
 		var _hold = jQuery(this);
 		var _t;
-		var _btn = _hold.find('a.open');
+		var _btn = _hold.find('a.open, a.open-edit');
 		var _box = _hold.find('div.drop');
 		if(_btn.length && _box.length){
 			_btn.click(function(){

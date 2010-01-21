@@ -1,6 +1,6 @@
 .edit
   .edit-bg
-    != link_to _("Edit"), edit_event_path(event)
+    != link_to_function _("Edit"), "", :class => "open-edit"
     != link_to_function _("open"), "", :class => "open"
     .drop
       .drop-top
@@ -9,5 +9,5 @@
         %li!= link_to_function s_("edit event menu|Design"), "alert('todo')"
         %li!= link_to s_("edit event menu|Guests list"), event_guests_path(event)
         %li!= link_to_function s_("edit event menu|RSVPs"), "alert('todo')"
-        %li!= link_to_function s_("edit event menu|Things to bring"), "alert('todo')"
+        %li!= link_to_function s_("edit event menu|Things to bring"), event_things_path(event)
       .drop-btm
