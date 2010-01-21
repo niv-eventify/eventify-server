@@ -30,4 +30,8 @@ module WelcomeHelper
       end
     end
   end
+
+  def select_carousel_link()
+    link_to content_tag(:span, _("SELECT")), "#", :class => "blue-btn-sml", :id => "carousel_select_link"
+  end
 end

@@ -1,11 +1,18 @@
 - content_for(:head) do
-  != stylesheet_link_tag 'imageflow'
-  != javascript_include_tag "imageflow", "carousel"
+  != stylesheet_link_tag "contentflow_src"
+  != javascript_include_tag "contentflow", "carousel"
 .promo
   .promo-t
     .promo-b
-      #carouselWrapper.promo-gallery
-        #carousel.imageflow
+      #carouselImgBox.img-box
+        #carousel-img-box-t.img-box-t
+          #carousel-img-box-b.img-box-b
+            .content-h
+              #imageHolder.image
+                %a{ :id => "carousel_active" }
+                  != image_tag('/images/emptyCarousel.png', :alt => "")
+            != select_carousel_link
+      #carouselWrapper
 
       .promo-nav
         != link_to_function _("Prev"), "", :class => "prev"
