@@ -71,8 +71,17 @@
   }
 }
 jQuery(document).ready(function(){
+  if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
+    jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
+  }
   stage2.max_title_font_size = parseInt(jQuery("#title").css("font-size"));
   stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
+  stage2.location = jQuery("#event_location_name").val();
+  stage2.startDate = jQuery("#starting_at_mock").val();
+  stage2.startTime = jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val();
+  stage2.message = jQuery("#event_guest_message").val();
+  stage2.preview_text("event_guest_message", "free_text");
+  stage2.preview_text("event_name", "title");
 
   jQuery(".hide_ending_at").click(function(){
     jQuery(".ending_at_block").hide();
@@ -109,7 +118,6 @@ jQuery(document).ready(function(){
   jQuery("#event_location_name").change(stage2.setLocationInMessage);
   jQuery("#event_location_name").blur(stage2.setLocationInMessage);
   jQuery("#event_starting_at_4i,#event_starting_at_5i").change(stage2.setTimeInMessage);
-
-  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'd.m.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
-  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'd.m.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr });
+  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
+  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr });
 });
