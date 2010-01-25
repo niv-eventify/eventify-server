@@ -78,7 +78,7 @@ jQuery(document).ready(function(){
   stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
   stage2.location = jQuery("#event_location_name").val();
   stage2.startDate = jQuery("#starting_at_mock").val();
-  stage2.startTime = jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val();
+  stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
   stage2.message = jQuery("#event_guest_message").val();
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
@@ -101,14 +101,14 @@ jQuery(document).ready(function(){
   });
 
   jQuery("#event_guest_message").keyup(function(){
-    if(jQuery(this).val().search(stage2.location) < 0) {
+    if(stage2.location.length > 0 && jQuery(this).val().search(stage2.location) < 0) {
       alert("you can't change the location from here. Please edit the \"Location\" field");
       jQuery(this).val(stage2.message);
-    } else if(jQuery(this).val().search(stage2.startDate) < 0) {
+    } else if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
       alert("you can't change the starting date from here. Please edit the \"Date\" field");
       jQuery(this).val(stage2.message);
-    } else if(jQuery(this).val().search(stage2.startTime) < 0) {
-      alert("you can't change the starting date from here. Please edit the \"Time\" field");
+    } else if(stage2.startTime.length > 0 && jQuery(this).val().search(stage2.startTime) < 0) {
+      alert("you can't change the starting time from here. Please edit the \"Time\" field");
       jQuery(this).val(stage2.message);
     } else {
       stage2.message = jQuery(this).val();
