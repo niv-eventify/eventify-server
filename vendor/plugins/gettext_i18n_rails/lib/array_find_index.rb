@@ -1,6 +1,5 @@
-
 # GetText users Array#find_index in its .po update task
-# but find_index is only available in 1.8.7 while we still have 1.86 in some places
+# but find_index is only available in 1.8.7 while we still need to support 1.8.6
 unless [].respond_to?(:find_index)
   class Array
     def find_index(arg = nil)

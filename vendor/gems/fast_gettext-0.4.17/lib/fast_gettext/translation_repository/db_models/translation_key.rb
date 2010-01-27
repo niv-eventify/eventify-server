@@ -6,17 +6,37 @@ module FastGettext::TranslationRepository
       attr_accessible :key, :key_value, :translations_attributes
       accepts_nested_attributes_for :translations
 
+      validates_uniqueness_of :key
+      validates_presence_of :key
+
+      named_scope :by_locale, proc { |loc|
+        {
+          :include => :translations,
+          :conditions => loc.blank? ? nil : ["translation_texts.locale = ?", loc],
+        }
+      }
+
+      named_scope :untranslated, {
+        :include => :translations,
+        :conditions => ["translation_texts.text LIKE ?", '%""%'],
+      }
+
       def key_value=(value)
         write_attribute(:key, ActiveSupport::JSON.encode(value))
+      end
+
+      def key_value
+        Db.decode_value(key)
       end
 
       validates_uniqueness_of :key
       validates_presence_of :key
 
+      # retrun translation for the locale or default locale
       def self.translation(keys, locale)
         return unless translation_key = find_by_key(keys.to_json)
-        return unless translation_text = translation_key.translations.find_by_locale(locale)
-        Db.decode_value(translation_text.text)
+        translation_key.translations.find_by_locale(locale).try(:text_value) ||
+          translation_key.translations.find_by_locale(FastGettext.default_locale).try(:text_value)
       end
 
       def self.available_locales
