@@ -30,10 +30,6 @@ module EventsHelper
     "(function(){#{js}})();"
   end
 
-  def show_ending_at_block?(f)
-    f.object && !f.object.ending_at.blank?
-  end
-
   def toggle_ending_at_block
     "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();"
   end
@@ -60,13 +56,6 @@ module EventsHelper
     content_tag(:div, "&nbsp;", :class => "divider")
   end
 
-  def show_hide_ending_block_js(f)
-    haml_concat javascript_tag("jQuery('select').customSelect();")
-    unless show_ending_at_block?(f)
-      haml_concat javascript_tag(toggle_ending_at_block)
-    end
-  end
-  
   def stage2_design_css(design)
     design.stage2_preview_dimentions.keys.map {|k| "#{k}:#{design.stage2_preview_dimentions[k]}"}.join(";")
   end
