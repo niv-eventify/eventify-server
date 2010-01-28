@@ -79,7 +79,7 @@ jQuery(document).ready(function(){
   if(jQuery("#event_ending_at_day").val() != "" && jQuery("#event_ending_at_month").val() != "" && jQuery("#event_ending_at_year").val() != "") {
     jQuery("#ending_at_mock").val(jQuery("#event_ending_at_day").val() + "." + jQuery("#event_ending_at_month").val() + "." + jQuery("#event_ending_at_year").val());
   }
-  if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_starting_at_4i").val() == "" && jQuery("#event_starting_at_5i").val() == "")
+  if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "")
     jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();
   stage2.max_title_font_size = parseInt(jQuery("#title").css("font-size"));
   stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
@@ -89,13 +89,6 @@ jQuery(document).ready(function(){
   stage2.message = jQuery("#event_guest_message").val();
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
-
-  jQuery(".hide_ending_at").click(function(){
-    jQuery(".ending_at_block").hide();
-  });
-  jQuery(".show_ending_at").click(function(){
-    jQuery(".ending_at_block").show();
-  });
 
   jQuery("#event_name").keyup(function(){
     stage2.preview_text("event_name", "title");
