@@ -122,11 +122,28 @@ jQuery(document).ready(function(){
       stage2.preview_text("event_guest_message", "free_text");
     }
   });
-  jQuery("#event_location_name").change(stage2.setLocationInMessage);
-  jQuery("#event_location_name").blur(stage2.setLocationInMessage);
   jQuery("#event_starting_at_4i,#event_starting_at_5i").change(stage2.setTimeInMessage);
   cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
   cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 1, months: stage2.months_arr });
+  jQuery("#event_guest_message").focus(function(){
+    jQuery("#free_text").css("border", "1px dashed red");
+  });
+  jQuery("#event_guest_message").blur(function(){
+    jQuery("#free_text").css("border", "");
+  });
+  jQuery("#event_name").focus(function(){
+    jQuery("#title").css("border", "1px dashed red");
+  });
+  jQuery("#event_name").blur(function(){
+    jQuery("#title").css("border", "");
+  });
+  jQuery("#title,#free_text").css("cursor", "pointer");
+  jQuery("#title").click(function(){
+    jQuery("#event_name").focus();
+  });
+  jQuery("#free_text").click(function(){
+    jQuery("#event_guest_message").focus();
+  });
 
   jQuery(".form input:first").focus();
 });
