@@ -6,7 +6,14 @@ RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+## uncomment 2 following lines to debug autoloading
+#require 'activesupport'
+#ActiveSupport::Dependencies.log_activity = true
+
 Rails::Initializer.run do |config|
+  if "irb" == $0
+    config.logger = Logger.new(STDOUT)
+  end
   config.gem 'authlogic', :version => '2.1.1'
   config.gem 'ruby-debug', :library => false
   rpass = (GlobalPreference.get(:rack_bug_password) || 'event123') rescue 'event123'
