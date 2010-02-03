@@ -606,7 +606,6 @@ a.next {
 	width: 244px;
 	float: left;
 	background: url(/images/bg-img-box-c.gif) repeat-y;
-	direction: ltr !important;
 }
 .img-box-t {
 	overflow: hidden;
@@ -2675,6 +2674,10 @@ ul.sub-nav li.active a{
   margin-left: -162px;
   margin-top: 20px;
   visibility: hidden;
+}
+.hebrew #carouselImgBox {
+  margin-right: -163px;
+  right: 50%
 }
 #carouselImgBox.img-box{
   z-index: 100000;
