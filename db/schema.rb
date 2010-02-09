@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100209173537) do
+ActiveRecord::Schema.define(:version => 20100209213123) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -102,9 +102,11 @@ ActiveRecord::Schema.define(:version => 20100209173537) do
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
-    t.string   "guest_message",    :limit => 345
+    t.string   "guest_message",           :limit => 345
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "stage_passed"
+    t.integer  "last_invitation_sent_at"
   end
 
   create_table "global_preferences", :force => true do |t|

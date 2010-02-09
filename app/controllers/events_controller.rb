@@ -9,7 +9,15 @@ class EventsController < InheritedResources::Base
 
   # index
 
-  # show
+  def show
+    if @event.stage_passed < 3
+      flash[:error] = _("Please add at least one guest")
+      redirect_to event_guests_path(@event)
+      return
+    end
+
+    show!
+  end
 
   def create
     if !logged_in? && params[:event] && params[:event][:user_attributes]
@@ -19,6 +27,7 @@ class EventsController < InheritedResources::Base
 
     @event = Event.new(params[:event])
     @event.user = current_user if logged_in?
+    @event.stage_passed = 2
 
     create! do |success, failure|
       success.html do

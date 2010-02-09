@@ -3,5 +3,5 @@ Factory.define :guest do |guest|
 
   guest.email {|a| "#{a.name}@example.com".downcase }
 
-  guest.event_id 12
+  guest.association :event, :factory => :event
 end

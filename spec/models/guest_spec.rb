@@ -26,7 +26,7 @@ describe Guest do
     it "should update email_invitation_sent_at and email_token" do
       @guest.email_invitation_sent_at.should be_nil
       @guest.email_token.should be_nil
-      @guest.send_email_inviation!
+      @guest.send_email_invitation!
       @guest.email_invitation_sent_at.should_not be_nil
       @guest.email_token.should_not be_nil
     end
@@ -35,7 +35,7 @@ describe Guest do
       @guest.email_token = "foobar"
       @guest.save
 
-      @guest.send_email_inviation!
+      @guest.send_email_invitation!
       @guest.email_token.should == "foobar"
     end
   end

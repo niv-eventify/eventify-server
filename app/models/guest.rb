@@ -5,15 +5,31 @@ class Guest < ActiveRecord::Base
   attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball
   validates_uniqueness_of :email, :scope => :event_id, :allow_nil => true, :allow_blank => true
 
+  after_create :increase_stage_passed
+
   def validate
     errors.add(:email, _("provide email or mobile phone")) if email.blank? && mobile_phone.blank?
   end
 
-  def send_email_inviation!
+  def increase_stage_passed
+    if 2 == event.stage_passed.to_i
+      event.stage_passed = 3
+      event.save
+    end
+  end
+
+  def send_email_invitation!
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at = Time.now.utc
+    event.update_last_invitation_sent!(email_invitation_sent_at)
     save!
     # TODO - send email
+  end
+
+  def before_destroy
+    if invited?
+      false
+    end
   end
 
   def invited?
@@ -24,9 +40,5 @@ end
 
 __END__
 
-add last_invitation_sent_at to event
-add allow_send_invitations? to event
-add stage_passed to event, verify that at least one guest is present on stage 4 - else refirect to stage 3 with flash
-disallow removing guests that got invtations
 editable names/emails - ?
 verify sms/email invitations if phone/email is present
