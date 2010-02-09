@@ -31,8 +31,8 @@ module EventsWizardHelper
           end
           
           if 4 == stage_number #last
-            haml_concat link_to_function(_("Finish"), 'alert("todo")', "finish-btn")
-            haml_concat link_to_function(_("Preview"), 'alert("todo")', "preview-btn")
+            haml_concat link_to_function(_("Finish"), 'alert("todo")', :class => "finish-btn")
+            haml_concat link_to_function(_("Preview"), 'alert("todo")', :class => "preview-btn")
           end
         end
       end

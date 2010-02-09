@@ -8,4 +8,11 @@ class Guest < ActiveRecord::Base
   def validate
     errors.add(:email, _("provide email or mobile phone")) if email.blank? && mobile_phone.blank?
   end
+
+  def send_email_inviation!
+    self.email_token ||= Astrails.generate_token
+    self.email_invitation_sent_at = Time.now.utc
+    save!
+    # TODO - send email
+  end
 end

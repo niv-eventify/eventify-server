@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100119164339) do
+ActiveRecord::Schema.define(:version => 20100209173537) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -125,9 +125,13 @@ ActiveRecord::Schema.define(:version => 20100119164339) do
     t.boolean  "send_email"
     t.boolean  "send_sms"
     t.boolean  "allow_snow_ball"
-    t.string   "token"
+    t.string   "email_token"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "email_invitation_sent_at"
+    t.datetime "sms_invitation_sent_at"
+    t.integer  "rsvp"
+    t.integer  "attendees_count"
   end
 
   add_index "guests", ["event_id"], :name => "index_guests_on_event_id"
