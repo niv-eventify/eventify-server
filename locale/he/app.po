@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-02-07 11:09+0200\n"
+"POT-Creation-Date: 2010-02-09 13:59+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -657,6 +657,70 @@ msgstr ""
 msgid "already would be brought by somebody else"
 msgstr ""
 
+#: locale/yml_import.rb:86
+msgid "authlogic.attributes.user_session.email"
+msgstr ""
+
+#: locale/yml_import.rb:94
+msgid "authlogic.attributes.user_session.login"
+msgstr ""
+
+#: locale/yml_import.rb:95
+msgid "authlogic.attributes.user_session.password"
+msgstr ""
+
+#: locale/yml_import.rb:97
+msgid "authlogic.attributes.user_session.remember_me"
+msgstr ""
+
+#: locale/yml_import.rb:96
+msgid "authlogic.error_messages.consecutive_failed_logins_limit_exceeded"
+msgstr ""
+
+#: locale/yml_import.rb:83
+msgid "authlogic.error_messages.email_invalid"
+msgstr ""
+
+#: locale/yml_import.rb:81
+msgid "authlogic.error_messages.login_blank"
+msgstr ""
+
+#: locale/yml_import.rb:84
+msgid "authlogic.error_messages.login_invalid"
+msgstr ""
+
+#: locale/yml_import.rb:90
+msgid "authlogic.error_messages.login_not_found"
+msgstr ""
+
+#: locale/yml_import.rb:93
+msgid "authlogic.error_messages.no_authentication_details"
+msgstr ""
+
+#: locale/yml_import.rb:91
+msgid "authlogic.error_messages.not_active"
+msgstr ""
+
+#: locale/yml_import.rb:82
+msgid "authlogic.error_messages.not_approved"
+msgstr ""
+
+#: locale/yml_import.rb:80
+msgid "authlogic.error_messages.not_confirmed"
+msgstr ""
+
+#: locale/yml_import.rb:87
+msgid "authlogic.error_messages.password_blank"
+msgstr ""
+
+#: locale/yml_import.rb:89
+msgid "authlogic.error_messages.password_invalid"
+msgstr ""
+
+#: locale/yml_import.rb:92
+msgid "authlogic.models.user_session"
+msgstr ""
+
 #: app/views/pages/home.html.haml:5
 msgid "bar"
 msgid_plural "bars"
@@ -819,11 +883,11 @@ msgstr ""
 msgid "en.date.month_names"
 msgstr ""
 
-#: locale/yml_import.rb:81
+#: locale/yml_import.rb:88
 msgid "flash.user_session.create.notice"
 msgstr ""
 
-#: locale/yml_import.rb:80
+#: locale/yml_import.rb:85
 msgid "flash.user_session.destroy.notice"
 msgstr ""
 
