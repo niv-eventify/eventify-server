@@ -1,4 +1,11 @@
 --- 
+vendor/plugins/gettext_i18n_rails: 
+  squashed: true
+  url: http://github.com/astrails/gettext_i18n_rails.git
+  branch: master
+  type: git
+  revision: f43bb4dbf442fff0603ba4e4c2b70c02a3ec4743
+  remote: braid/vendor/plugins/gettext-i18n-rails
 vendor/plugins/hoptoad_notifier: 
   squashed: true
   branch: master
