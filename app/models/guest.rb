@@ -15,4 +15,18 @@ class Guest < ActiveRecord::Base
     save!
     # TODO - send email
   end
+
+  def invited?
+    email_invitation_sent_at || sms_invitation_sent_at
+  end
 end
+
+
+__END__
+
+add last_invitation_sent_at to event
+add allow_send_invitations? to event
+add stage_passed to event, verify that at least one guest is present on stage 4 - else refirect to stage 3 with flash
+disallow removing guests that got invtations
+editable names/emails - ?
+verify sms/email invitations if phone/email is present
