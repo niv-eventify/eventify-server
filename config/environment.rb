@@ -29,7 +29,7 @@ Rails::Initializer.run do |config|
   config.gem 'rspec-rails', :lib => false, :version => '1.2.6'
   config.gem 'rspec', :lib => false, :version => '1.2.6'
   config.gem 'fastercsv', :lib => false, :version => '1.5.0'
-
+  config.gem 'hoptoad_notifier', :version => "2.1.3"
   config.gem 'blackbook', :lib => false
   config.gem 'contacts', :lib => false
   # Settings in config/environments/* take precedence over those specified here.
