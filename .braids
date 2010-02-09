@@ -3,7 +3,7 @@ vendor/plugins/gettext_i18n_rails:
   squashed: true
   url: git://github.com/astrails/gettext_i18n_rails.git
   type: git
-  revision: 9c5b36de0b89643549ffe46d3bd8cd8f19a9d173
+  revision: f43bb4dbf442fff0603ba4e4c2b70c02a3ec4743
   branch: master
   remote: braid/vendor/plugins/gettext-i18n-rails
 vendor/gems/fast_gettext-0.4.17: 
