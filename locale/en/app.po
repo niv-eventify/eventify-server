@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2009-12-27 14:33+0200\n"
+"POT-Creation-Date: 2010-02-09 13:59+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,29 +16,130 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
+#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:61
+msgid ""
+"        We're sorry, but we could not locate your account.\n"
+"        If you are having issues try copying and pasting the URL\n"
+"        from your email into your browser or restarting the\n"
+"        reset password process.\n"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/mailer.rb:22
+msgid "%{domain}: Account Activation Instructions"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/mailer.rb:6
+msgid "%{domain}: Password Reset Instructions"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/mailer.rb:14
+msgid "%{domain}: Password Reset Notification"
+msgstr ""
+
+#: app/views/events/_form.html.haml:44
+msgid "(345 symbols max)"
+msgstr ""
+
+#: app/views/guests/_import.html.haml:11
+msgid "(google, yahoo, etc.)"
+msgstr ""
+
+#: app/helpers/events_helper.rb:64
+msgid "(not sent)"
+msgstr ""
+
 #: app/views/layouts/_footer.html.haml:10
 msgid "About Eventify"
 msgstr ""
 
-#: app/views/users/edit.html.haml:1
+#: app/views/users/edit.html.haml:7
 msgid "Account Settings"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:18
+msgid "Activate"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:8
+msgid "Activate Account"
+msgstr ""
+
+#: app/views/guests/_form.html.haml:9 app/views/things/_form.html.haml:4
+msgid "Add"
+msgstr ""
+
+#: app/views/events/_form.html.haml:20
+msgid "Add End date &amp; Time"
+msgstr ""
+
+#: app/views/events/_form.html.haml:32
+msgid "Add Map"
+msgstr ""
+
+#: app/views/guests/index.html.haml:13
+msgid "Add from existing contact list:"
+msgstr ""
+
+#: app/views/guests/index.html.haml:16
+msgid "Add manually:"
+msgstr ""
+
+#: app/views/things/index.html.haml:14
+msgid "Add things you want your guests to bring with them."
+msgstr ""
+
+#: app/views/events/_form.html.haml:29
+msgid "Address"
+msgstr ""
+
+#: app/helpers/application_helper.rb:5
+msgid "Address Book"
+msgstr ""
+
+#: app/views/events/_selected_design.html.haml:9
+msgid "Advanced design options"
 msgstr ""
 
 #: app/views/layouts/_footer.html.haml:30
 msgid "All right resevred to Eventify ©"
 msgstr ""
 
+#: app/views/things/_things_header.html.haml:8
+msgid "Amount"
+msgstr ""
+
+#: app/helpers/guests_helper.rb:14 app/helpers/things_helper.rb:14
+#: app/views/events/_form.html.haml:40
+msgid "Are you sure?"
+msgstr ""
+
 #: app/views/contact_importers/edit.html.haml:15
 msgid "Cancel"
+msgstr ""
+
+#: app/views/events/_actions_menu.html.haml:4
+msgid "Cancel event"
 msgstr ""
 
 #: app/views/layouts/_footer.html.haml:31
 msgid "Cat&amp;Dog Studio"
 msgstr ""
 
-#: app/views/designs/index.html.haml:19 app/views/layouts/_footer.html.haml:4
+#: app/views/designs/index.html.haml:23 app/views/layouts/_footer.html.haml:4
 #: app/views/layouts/_top_categories.haml:2
 msgid "Categories"
+msgstr ""
+
+#: app/views/guests/_guests_header.html.haml:11
+msgid "Cellular"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:14
+msgid "Change"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:4
+msgid "Change Password"
 msgstr ""
 
 #: app/views/contact_importers/edit.html.haml:10
@@ -60,14 +161,36 @@ msgstr ""
 msgid "Contact Us"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:16
+#: app/views/layouts/_user_menu.html.haml:18
 msgid "Contacts"
+msgstr ""
+
+#: app/views/events/_form.html.haml:39
+msgid "Current Map Image"
+msgstr ""
+
+#: app/helpers/events_helper.rb:5
+msgid "Date"
+msgstr ""
+
+#: app/views/events/_info.html.haml:8
+msgid "Date:"
 msgstr ""
 
 #: app/views/layouts/_footer.html.haml:31
 msgid "Design and UI %{link}"
 msgstr ""
 
+#: app/helpers/events_wizard_helper.rb:3
+msgid "Design your invite"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:3
+msgid "Edit"
+msgstr ""
+
+#: app/views/guests/_guests_header.html.haml:8
+#: app/views/guests/_guests_header.html.haml:16
 #: app/views/passwords/new.html.haml:4 app/views/user_session/new.html.haml:3
 #: app/views/users/_form.html.haml:3
 msgid "Email"
@@ -81,8 +204,29 @@ msgstr ""
 msgid "Enter event details"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:17
+#: app/views/events/_form.html.haml:16
+msgid "Event Type"
+msgstr ""
+
+#: app/helpers/events_wizard_helper.rb:3
+msgid "Event details"
+msgstr ""
+
+#: app/views/events/_form.html.haml:15
+msgid "Event name"
+msgstr ""
+
+#: app/views/events/_actions_menu.html.haml:3
+msgid "Event summary"
+msgstr ""
+
+#: app/helpers/application_helper.rb:4
+#: app/views/layouts/_user_menu.html.haml:19
 msgid "Events"
+msgstr ""
+
+#: app/views/things/index.html.haml:16
+msgid "Every guest would be able to pick one ore more items to bring."
 msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:7
@@ -93,8 +237,27 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
+#: app/helpers/application_helper.rb:48
+msgid "Friend’s events"
+msgstr ""
+
 #: app/views/welcome/_container123.html.haml:12
 msgid "From our fabelous gallery or upload your own pic"
+msgstr ""
+
+#: app/helpers/application_helper.rb:37 app/helpers/application_helper.rb:45
+#: app/views/events/_sidebar.html.haml:5
+msgid "Future events"
+msgstr ""
+
+#: app/views/guests/index.html.haml:7 app/views/things/index.html.haml:7
+msgid "Guest List"
+msgstr ""
+
+#: app/views/contacts/edit.html.haml:2 app/views/contacts/index.html.haml:2
+#: app/views/contacts/new.html.haml:2 app/views/events/index.html.haml:2
+#: app/views/users/edit.html.haml:2 app/views/users/show.html.haml:2
+msgid "Hello %{username},"
 msgstr ""
 
 #: app/views/pages/home.html.haml:1
@@ -102,19 +265,74 @@ msgid "Hello World"
 msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:8
-msgid "Hello, %user"
+msgid "Hello, %{user}"
+msgstr ""
+
+#: app/views/events/_info.html.haml:5
+msgid "Hosts:"
+msgstr ""
+
+#: app/views/events/_form.html.haml:13
+msgid "I already have an account"
 msgstr ""
 
 #: app/views/contact_importers/edit.html.haml:14
 msgid "Import"
 msgstr ""
 
+#: app/views/guests/_import.html.haml:15
+msgid "Import CSV file"
+msgstr ""
+
 #: app/views/contact_importers/index.html.haml:1
 msgid "Import contracts"
 msgstr ""
 
+#: app/views/guests/_import.html.haml:19
+msgid "Import from eventify's address book"
+msgstr ""
+
+#: app/views/guests/_import.html.haml:23
+msgid "Import from facebook"
+msgstr ""
+
+#: app/views/guests/_import.html.haml:10
+msgid "Import from mail"
+msgstr ""
+
+#: app/views/guests/_import.html.haml:5
+msgid "Import from previous event"
+msgstr ""
+
+#: app/views/contacts/edit.html.haml:3 app/views/contacts/index.html.haml:3
+#: app/views/contacts/new.html.haml:3 app/views/events/index.html.haml:3
+#: app/views/users/edit.html.haml:3 app/views/users/show.html.haml:3
+msgid ""
+"In your page you can track the events you’ve created, and create new ones!"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
+msgid ""
+"Instructions to activate your account have been emailed to you. Please check "
+"your email."
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:18
+msgid ""
+"Instructions to reset your password have been emailed to you. Please check "
+"your email."
+msgstr ""
+
 #: app/views/welcome/_container123.html.haml:27
 msgid "Invite Friends!"
+msgstr ""
+
+#: app/helpers/events_wizard_helper.rb:3
+msgid "Invite guests"
+msgstr ""
+
+#: app/views/events/_form.html.haml:28
+msgid "Location"
 msgstr ""
 
 #: app/views/user_session/new.html.haml:5
@@ -125,24 +343,47 @@ msgstr ""
 msgid "MORE"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:14
+#: app/views/events/_form.html.haml:36
+msgid "Map Image"
+msgstr ""
+
+#: app/views/events/_form.html.haml:34
+msgid "Map Link"
+msgstr ""
+
+#: app/views/events/_form.html.haml:44
+msgid "Message to Guests"
+msgstr ""
+
+#: app/helpers/application_helper.rb:47
+msgid "My Events"
+msgstr ""
+
+#: app/views/layouts/_user_menu.html.haml:16
 msgid "My Page"
 msgstr ""
 
+#: app/views/guests/_guests_header.html.haml:5
+#: app/views/things/_things_header.html.haml:5
 #: app/views/users/_form.html.haml:2
 msgid "Name"
 msgstr ""
 
-#: app/views/contacts/new.html.haml:1
+#: app/views/contacts/new.html.haml:7
 msgid "New contact"
 msgstr ""
 
-#: app/views/welcome/_promo.html.haml:43
+#: app/helpers/events_wizard_helper.rb:19
+#: app/views/welcome/_promo.html.haml:24
 msgid "Next"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:10
+#: app/views/layouts/_user_menu.html.haml:12
 msgid "Next event"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:24
+msgid "No user was found with that email address"
 msgstr ""
 
 #: app/views/welcome/_container123.html.haml:3
@@ -159,22 +400,43 @@ msgid "Password Confirmation"
 msgstr ""
 
 #: app/views/passwords/new.html.haml:1
+#: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:6
 msgid "Password Reset"
+msgstr ""
+
+#: app/helpers/application_helper.rb:40 app/helpers/application_helper.rb:45
+msgid "Past events"
+msgstr ""
+
+#: app/views/events/_info.html.haml:14
+msgid "Place:"
+msgstr ""
+
+#: app/views/events/_event_form.html.haml:3
+msgid "Please fill out the events details"
 msgstr ""
 
 #: app/views/contact_importers/show.html.haml:6
 msgid "Please wait..."
 msgstr ""
 
-#: app/views/welcome/_promo.html.haml:7
+#: app/views/welcome/_promo.html.haml:18
 msgid "Prev"
+msgstr ""
+
+#: app/views/events/_info.html.haml:16
+msgid "Preview"
+msgstr ""
+
+#: app/helpers/events_wizard_helper.rb:18
+msgid "Previous"
 msgstr ""
 
 #: app/views/layouts/_footer.html.haml:12
 msgid "Pricing"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:18
+#: app/views/layouts/_user_menu.html.haml:20
 msgid "Profile"
 msgstr ""
 
@@ -182,7 +444,23 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: app/helpers/designs_helper.rb:14
+#: app/helpers/events_wizard_helper.rb:3
+msgid "Reminders &amp;<br/>RSVPs"
+msgstr ""
+
+#: app/views/events/_form.html.haml:40
+msgid "Remove"
+msgstr ""
+
+#: app/views/events/_form.html.haml:21
+msgid "Remove End date &amp; Time"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:16
+msgid "Reset"
+msgstr ""
+
+#: app/helpers/designs_helper.rb:14 app/helpers/welcome_helper.rb:35
 msgid "SELECT"
 msgstr ""
 
@@ -190,8 +468,13 @@ msgstr ""
 msgid "Send Password Reset instructions"
 msgstr ""
 
-#: app/views/layouts/_header.html.haml:25
-msgid "Sign Out"
+#: app/views/guests/_guests_header.html.haml:14
+#: app/views/guests/_guests_header.html.haml:19
+msgid "Send via"
+msgstr ""
+
+#: app/helpers/application_helper.rb:6
+msgid "Settings"
 msgstr ""
 
 #: app/views/layouts/_header.html.haml:23
@@ -210,16 +493,36 @@ msgstr ""
 msgid "Site Map"
 msgstr ""
 
+#: app/views/guests/_guests_header.html.haml:26
+msgid "Snowball"
+msgstr ""
+
 #: app/views/layouts/_footer.html.haml:16
 msgid "Terms of Use"
 msgstr ""
 
-#: app/views/users/edit.html.haml:5
+#: app/views/guests/_guests_header.html.haml:21
+msgid "Text/SMS"
+msgstr ""
+
+#: app/views/guests/index.html.haml:8 app/views/things/index.html.haml:8
+msgid "Things to bring"
+msgstr ""
+
+#: app/helpers/events_helper.rb:13 app/views/events/_info.html.haml:11
+msgid "Time"
+msgstr ""
+
+#: app/views/users/edit.html.haml:11
 msgid "Update"
 msgstr ""
 
 #: app/views/users/_form.html.haml:1
 msgid "User Settings"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/mailer.rb:30
+msgid "Welcome to %{domain}"
 msgstr ""
 
 #: app/views/welcome/_container123.html.haml:20
@@ -230,19 +533,363 @@ msgstr ""
 msgid "You can also upload a map and a personal message"
 msgstr ""
 
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:49
+msgid "You must be an admin to access this page"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:31
+msgid "You must be logged in to access this page"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:40
+msgid "You must be logged out to access this page"
+msgstr ""
+
+#: app/views/events/_form.html.haml:11
+msgid "Your Email"
+msgstr ""
+
+#: app/views/events/_form.html.haml:10
+msgid "Your Name"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/app/controllers/user_session_controller.rb:11
+msgid "Your account has been disabled, please contact support."
+msgstr ""
+
+#: locale/yml_import.rb:79
+msgid "activerecord.errors.full_messages.format"
+msgstr "{{attribute}} {{message}}"
+
+#: locale/yml_import.rb:77
+msgid "activerecord.errors.messages.accepted"
+msgstr "must be accepted"
+
+#: locale/yml_import.rb:62
+msgid "activerecord.errors.messages.blank"
+msgstr "can't be blank"
+
+#: locale/yml_import.rb:63
+msgid "activerecord.errors.messages.confirmation"
+msgstr "doesn't match confirmation"
+
+#: locale/yml_import.rb:67
+msgid "activerecord.errors.messages.empty"
+msgstr "can't be empty"
+
+#: locale/yml_import.rb:74
+msgid "activerecord.errors.messages.equal_to"
+msgstr "must be equal to {{count}}"
+
+#: locale/yml_import.rb:70
+msgid "activerecord.errors.messages.even"
+msgstr "must be even"
+
+#: locale/yml_import.rb:66
+msgid "activerecord.errors.messages.exclusion"
+msgstr "is reserved"
+
+#: locale/yml_import.rb:76
+msgid "activerecord.errors.messages.greater_than"
+msgstr "must be greater than {{count}}"
+
+#: locale/yml_import.rb:59
+msgid "activerecord.errors.messages.greater_than_or_equal_to"
+msgstr "must be greater than or equal to {{count}}"
+
+#: locale/yml_import.rb:72
+msgid "activerecord.errors.messages.inclusion"
+msgstr "is not included in the list"
+
+#: locale/yml_import.rb:61
+msgid "activerecord.errors.messages.invalid"
+msgstr "is invalid"
+
+#: locale/yml_import.rb:75
+msgid "activerecord.errors.messages.less_than"
+msgstr "must be less than {{count}}"
+
+#: locale/yml_import.rb:65
+msgid "activerecord.errors.messages.less_than_or_equal_to"
+msgstr "must be less than or equal to {{count}}"
+
+#: locale/yml_import.rb:60
+msgid "activerecord.errors.messages.not_a_number"
+msgstr "is not a number"
+
+#: locale/yml_import.rb:69
+msgid "activerecord.errors.messages.odd"
+msgstr "must be odd"
+
+#: locale/yml_import.rb:64
+msgid "activerecord.errors.messages.record_invalid"
+msgstr "Validation failed: {{errors}}"
+
+#: locale/yml_import.rb:73
+msgid "activerecord.errors.messages.taken"
+msgstr "has already been taken"
+
+#: locale/yml_import.rb:78
+msgid "activerecord.errors.messages.too_long"
+msgstr "is too long (maximum is {{count}} characters)"
+
+#: locale/yml_import.rb:71
+msgid "activerecord.errors.messages.too_short"
+msgstr "is too short (minimum is {{count}} characters)"
+
+#: locale/yml_import.rb:68
+msgid "activerecord.errors.messages.wrong_length"
+msgstr "is the wrong length (should be {{count}} characters)"
+
+#: locale/yml_import.rb:24
+msgid "activerecord.errors.template.body"
+msgstr "There were problems with the following fields:"
+
+#: locale/yml_import.rb:40
+msgid "activerecord.errors.template.header.one"
+msgstr "1 error prohibited this {{model}} from being saved"
+
+#: locale/yml_import.rb:25
+msgid "activerecord.errors.template.header.other"
+msgstr "{{count}} errors prohibited this {{model}} from being saved"
+
+#: app/models/thing.rb:11
+msgid "already would be brought by somebody else"
+msgstr ""
+
+#: locale/yml_import.rb:86
+msgid "authlogic.attributes.user_session.email"
+msgstr "email"
+
+#: locale/yml_import.rb:94
+msgid "authlogic.attributes.user_session.login"
+msgstr "login"
+
+#: locale/yml_import.rb:95
+msgid "authlogic.attributes.user_session.password"
+msgstr "password"
+
+#: locale/yml_import.rb:97
+msgid "authlogic.attributes.user_session.remember_me"
+msgstr "remember me"
+
+#: locale/yml_import.rb:96
+msgid "authlogic.error_messages.consecutive_failed_logins_limit_exceeded"
+msgstr "Consecutive failed logins limit exceeded, account is disabled."
+
+#: locale/yml_import.rb:83
+msgid "authlogic.error_messages.email_invalid"
+msgstr "should look like an email address."
+
+#: locale/yml_import.rb:81
+msgid "authlogic.error_messages.login_blank"
+msgstr "can not be blank"
+
+#: locale/yml_import.rb:84
+msgid "authlogic.error_messages.login_invalid"
+msgstr "should use only letters, numbers, spaces, and .-_@ please."
+
+#: locale/yml_import.rb:90
+msgid "authlogic.error_messages.login_not_found"
+msgstr "is not valid"
+
+#: locale/yml_import.rb:93
+msgid "authlogic.error_messages.no_authentication_details"
+msgstr "You did not provide any details for authentication."
+
+#: locale/yml_import.rb:91
+msgid "authlogic.error_messages.not_active"
+msgstr "Your account is not active"
+
+#: locale/yml_import.rb:82
+msgid "authlogic.error_messages.not_approved"
+msgstr "Your account is not approved"
+
+#: locale/yml_import.rb:80
+msgid "authlogic.error_messages.not_confirmed"
+msgstr "Your account is not confirmed"
+
+#: locale/yml_import.rb:87
+msgid "authlogic.error_messages.password_blank"
+msgstr "can not be blank"
+
+#: locale/yml_import.rb:89
+msgid "authlogic.error_messages.password_invalid"
+msgstr "is not valid"
+
+#: locale/yml_import.rb:92
+msgid "authlogic.models.user_session"
+msgstr "UserSession"
+
 #: app/views/pages/home.html.haml:5
 msgid "bar"
 msgid_plural "bars"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/users/edit.html.haml:7
+#: app/views/users/edit.html.haml:13
 msgid "change password"
 msgstr ""
 
 #: app/views/layouts/_top_categories.haml:5
 msgid "close"
 msgstr ""
+
+#: locale/yml_import.rb:9
+msgid "date.formats.default"
+msgstr "%Y-%m-%d"
+
+#: locale/yml_import.rb:7
+msgid "date.formats.long"
+msgstr "%B %d, %Y"
+
+#: locale/yml_import.rb:1
+msgid "date.formats.short"
+msgstr "%b %d"
+
+#: locale/yml_import.rb:48
+msgid "datetime.distance_in_words.about_x_hours.one"
+msgstr "about 1 hour"
+
+#: locale/yml_import.rb:43
+msgid "datetime.distance_in_words.about_x_hours.other"
+msgstr "about {{count}} hours"
+
+#: locale/yml_import.rb:28
+msgid "datetime.distance_in_words.about_x_months.one"
+msgstr "about 1 month"
+
+#: locale/yml_import.rb:12
+msgid "datetime.distance_in_words.about_x_months.other"
+msgstr "about {{count}} months"
+
+#: locale/yml_import.rb:27
+msgid "datetime.distance_in_words.about_x_years.one"
+msgstr "about 1 year"
+
+#: locale/yml_import.rb:29
+msgid "datetime.distance_in_words.about_x_years.other"
+msgstr "about {{count}} years"
+
+#: locale/yml_import.rb:35
+msgid "datetime.distance_in_words.half_a_minute"
+msgstr "half a minute"
+
+#: locale/yml_import.rb:44
+msgid "datetime.distance_in_words.less_than_x_minutes.one"
+msgstr "less than a minute"
+
+#: locale/yml_import.rb:36
+msgid "datetime.distance_in_words.less_than_x_minutes.other"
+msgstr "less than {{count}} minutes"
+
+#: locale/yml_import.rb:49
+msgid "datetime.distance_in_words.less_than_x_seconds.one"
+msgstr "less than 1 second"
+
+#: locale/yml_import.rb:47
+msgid "datetime.distance_in_words.less_than_x_seconds.other"
+msgstr "less than {{count}} seconds"
+
+#: locale/yml_import.rb:39
+msgid "datetime.distance_in_words.over_x_years.one"
+msgstr "over 1 year"
+
+#: locale/yml_import.rb:30
+msgid "datetime.distance_in_words.over_x_years.other"
+msgstr "over {{count}} years"
+
+#: locale/yml_import.rb:16
+msgid "datetime.distance_in_words.x_days.one"
+msgstr "1 day"
+
+#: locale/yml_import.rb:55
+msgid "datetime.distance_in_words.x_days.other"
+msgstr "{{count}} days"
+
+#: locale/yml_import.rb:56
+msgid "datetime.distance_in_words.x_minutes.one"
+msgstr "1 minute"
+
+#: locale/yml_import.rb:50
+msgid "datetime.distance_in_words.x_minutes.other"
+msgstr "{{count}} minutes"
+
+#: locale/yml_import.rb:38
+msgid "datetime.distance_in_words.x_months.one"
+msgstr "1 month"
+
+#: locale/yml_import.rb:37
+msgid "datetime.distance_in_words.x_months.other"
+msgstr "{{count}} months"
+
+#: locale/yml_import.rb:54
+msgid "datetime.distance_in_words.x_seconds.one"
+msgstr "1 second"
+
+#: locale/yml_import.rb:13
+msgid "datetime.distance_in_words.x_seconds.other"
+msgstr "{{count}} seconds"
+
+#: locale/yml_import.rb:15
+msgid "datetime.prompts.day"
+msgstr "Day"
+
+#: locale/yml_import.rb:19
+msgid "datetime.prompts.hour"
+msgstr "Hour"
+
+#: locale/yml_import.rb:46
+msgid "datetime.prompts.minute"
+msgstr "Minute"
+
+#: locale/yml_import.rb:42
+msgid "datetime.prompts.month"
+msgstr "Month"
+
+#: locale/yml_import.rb:53
+msgid "datetime.prompts.second"
+msgstr "Seconds"
+
+#: locale/yml_import.rb:34
+msgid "datetime.prompts.year"
+msgstr "Year"
+
+#: app/models/guest.rb:4
+msgid "does't look like an email"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:9
+msgid "edit event menu|Design"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:8
+msgid "edit event menu|Details"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:10
+msgid "edit event menu|Guests list"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:11
+msgid "edit event menu|RSVPs"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:12
+msgid "edit event menu|Things to bring"
+msgstr ""
+
+#: app/helpers/events_helper.rb:72
+msgid "en.date.month_names"
+msgstr ""
+
+#: locale/yml_import.rb:88
+msgid "flash.user_session.create.notice"
+msgstr "Logged in"
+
+#: locale/yml_import.rb:85
+msgid "flash.user_session.destroy.notice"
+msgstr "Goodbye"
 
 #: app/views/pages/home.html.haml:3
 msgid "foo"
@@ -262,6 +909,122 @@ msgstr ""
 msgid "login"
 msgstr ""
 
+#: locale/yml_import.rb:57
+msgid "number.currency.format.delimiter"
+msgstr ","
+
+#: locale/yml_import.rb:20
+msgid "number.currency.format.format"
+msgstr "%u%n"
+
+#: locale/yml_import.rb:41
+msgid "number.currency.format.separator"
+msgstr "."
+
+#: locale/yml_import.rb:31
+msgid "number.currency.format.unit"
+msgstr "$"
+
+#: locale/yml_import.rb:17
+msgid "number.format.delimiter"
+msgstr ","
+
+#: locale/yml_import.rb:58
+msgid "number.format.separator"
+msgstr "."
+
+#: locale/yml_import.rb:23
+msgid "number.human.format.delimiter"
+msgstr ""
+
+#: locale/yml_import.rb:21
+msgid "number.human.storage_units.format"
+msgstr "%n %u"
+
+#: locale/yml_import.rb:18
+msgid "number.human.storage_units.units.byte.one"
+msgstr "Byte"
+
+#: locale/yml_import.rb:45
+msgid "number.human.storage_units.units.byte.other"
+msgstr "Bytes"
+
+#: locale/yml_import.rb:32
+msgid "number.human.storage_units.units.gb"
+msgstr "GB"
+
+#: locale/yml_import.rb:14
+msgid "number.human.storage_units.units.kb"
+msgstr "KB"
+
+#: locale/yml_import.rb:52
+msgid "number.human.storage_units.units.mb"
+msgstr "MB"
+
+#: locale/yml_import.rb:22
+msgid "number.human.storage_units.units.tb"
+msgstr "TB"
+
+#: locale/yml_import.rb:51
+msgid "number.percentage.format.delimiter"
+msgstr ""
+
+#: locale/yml_import.rb:33
+msgid "number.precision.format.delimiter"
+msgstr ""
+
+#: app/views/events/_edit_menu.html.haml:4
+msgid "open"
+msgstr ""
+
+#: app/views/events/_form.html.haml:35
+msgid "or"
+msgstr ""
+
+#: app/models/guest.rb:9
+msgid "provide email or mobile phone"
+msgstr ""
+
 #: app/views/user_session/new.html.haml:9
 msgid "register"
 msgstr ""
+
+#: app/models/event.rb:43
+msgid "should be in a future"
+msgstr ""
+
+#: locale/yml_import.rb:5
+msgid "support.array.last_word_connector"
+msgstr ", and "
+
+#: locale/yml_import.rb:10
+msgid "support.array.two_words_connector"
+msgstr " and "
+
+#: locale/yml_import.rb:3
+msgid "support.array.words_connector"
+msgstr ", "
+
+#: locale/yml_import.rb:26
+msgid "support.select.prompt"
+msgstr "Please select"
+
+#: locale/yml_import.rb:11
+msgid "time.am"
+msgstr "am"
+
+#: locale/yml_import.rb:6
+msgid "time.formats.default"
+msgstr "%a, %d %b %Y %H:%M:%S %z"
+
+#: locale/yml_import.rb:8
+msgid "time.formats.long"
+msgstr "%B %d, %Y %H:%M"
+
+#: locale/yml_import.rb:2
+msgid "time.formats.short"
+msgstr "%d %b %H:%M"
+
+#: locale/yml_import.rb:4
+msgid "time.pm"
+msgstr "pm"

@@ -14,12 +14,12 @@ class Event < ActiveRecord::Base
 
   has_attached_file :map,
     :storage        => :s3,
-    :bucket         => GlobalPreference.get(:s3_bucket),
+    :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
     :path =>        "/maps/:id/:filename",
     :default_url   => "",
     :s3_credentials => {
-      :access_key_id     => GlobalPreference.get(:s3_key),
-      :secret_access_key => GlobalPreference.get(:s3_secret),
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
     }
   attr_accessible :map
   validates_attachment_size :map, :less_than => 10.megabytes
@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
 
   datetime_select_accessible :starting_at, :ending_at
 
-  validates_presence_of :category, :design, :name, :starting_at, :location_name
+  validates_presence_of :category_id, :design_id, :name, :starting_at, :location_name
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
   validates_format_of :map_link,
     :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
@@ -45,5 +45,14 @@ class Event < ActiveRecord::Base
 
   def has_map?
     !map_link.blank? || (map && !map.url.blank?)
+  end
+
+  def update_last_invitation_sent!(time_stamp)
+    self.last_invitation_sent_at = time_stamp
+    save!
+  end
+
+  def allow_send_invitations?
+    true # TODO: payments logic
   end
 end

@@ -1,13 +1,23 @@
 class EventsController < InheritedResources::Base
   before_filter :set_design_and_category, :only => :new
 
-  before_filter :require_user, :only => [:edit, :update, :index]
+  before_filter :require_user, :except => [:create, :new]
 
-  before_filter :set_event, :only => [:edit, :update]
+  before_filter :set_event, :only => [:edit, :update, :show]
 
-  actions :create, :new, :edit, :update, :index
+  actions :create, :new, :edit, :update, :index, :show
 
   # index
+
+  def show
+    if @event.stage_passed < 3
+      flash[:error] = _("Please add at least one guest")
+      redirect_to event_guests_path(@event)
+      return
+    end
+
+    show!
+  end
 
   def create
     if !logged_in? && params[:event] && params[:event][:user_attributes]
@@ -17,11 +27,12 @@ class EventsController < InheritedResources::Base
 
     @event = Event.new(params[:event])
     @event.user = current_user if logged_in?
+    @event.stage_passed = 2
 
     create! do |success, failure|
       success.html do
         flash[:notice] = nil
-        redirect_to event_guests_path(@event)
+        redirect_to event_guests_path(@event, :wizard => true)
         UserSession.create(@event.user) unless logged_in?
       end
       failure.html { render(:action => "new") }
@@ -39,7 +50,7 @@ class EventsController < InheritedResources::Base
 
   def update
     update! do |success, failure|
-      success.html { redirect_to event_guests_path(@event) }
+      success.html { redirect_to event_guests_path(@event, :wizard => params[:wizard]) }
     end
   end
 

@@ -33,3 +33,8 @@ a.signup-out {
 * {
 	outline:none;
 }
+
+a.finish-btn, a.preview-btn {
+	border:1px solid red;
+	font-size:170%;
+}

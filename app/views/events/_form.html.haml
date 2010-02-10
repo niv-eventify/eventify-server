@@ -1,6 +1,7 @@
 - content_for(:head) do
   != months_arr
 
+!= hidden_field_tag "wizard", params[:wizard]
 
 = f.object.errors.on(:base)
 
