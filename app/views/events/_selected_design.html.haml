@@ -3,7 +3,11 @@
     .frame
       .image-h
         != image_tag(@event.design.preview.url(:stage2))
-        .info-holder{:style => stage2_design_css(@event.design)}
-          #title.title
+        - if @event.design.is_seperated_title? 
+          .title-holder{:style => stage2_title_css(@event.design)}
+            #title.title
+        .info-holder{:style => stage2_message_css(@event.design)}
+          - if !@event.design.is_seperated_title? 
+            #title.title
           #free_text.free_text
       != link_to_function content_tag(:span, _("Advanced design options")), "alert('todo')", :class => "blue-btn-mdl"

@@ -84,6 +84,18 @@ ActiveRecord::Schema.define(:version => 20100209213123) do
     t.integer  "text_top_y"
     t.integer  "text_width"
     t.integer  "text_height"
+    t.integer  "title_top_x"
+    t.integer  "title_top_y"
+    t.integer  "title_width"
+    t.integer  "title_height"
+    t.string   "font"
+    t.string   "title_color"
+    t.string   "message_color"
+    t.string   "text_align"
+    t.string   "preview_with_text_file_name"
+    t.string   "preview_with_text_content_type"
+    t.integer  "preview_with_text_file_size"
+    t.datetime "preview_with_text_updated_at"
   end
 
   add_index "designs", ["category_id"], :name => "index_designs_on_category_id"

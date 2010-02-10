@@ -1,3 +1,3 @@
 - for design in @collection
   .item{:href => "/events/new?category_id=#{@category.id}&design_id=#{design.id}"}
-    != image_tag(design.preview.url(:carousel), :alt => "", :class => "content")
+    != image_tag(design.preview_with_text.url(:carousel), :alt => "", :class => "content")

@@ -1210,13 +1210,17 @@ span.note {
 	margin:0 0 0 2px;
 	display: block;
 }
-.info-holder {
-  border: solid green 1px;
+.title-holder {
   text-align: center;
   position: absolute;
   overflow-y: hidden;
 }
-.info-holder .title{
+.info-holder {
+  text-align: center;
+  position: absolute;
+  overflow-y: hidden;
+}
+.info-holder .title, .title-holder  .title{
   font-weight: bold;
   margin: 0;
   font-size: 2.0em;

@@ -56,8 +56,14 @@ module EventsHelper
     content_tag(:div, "&nbsp;", :class => "divider")
   end
 
-  def stage2_design_css(design)
-    design.stage2_preview_dimentions.keys.map {|k| "#{k}:#{design.stage2_preview_dimentions[k]}"}.join(";")
+  def stage2_message_css(design)
+    design.stage2_preview_dimensions.keys.map {|k| "#{k}:#{design.stage2_preview_dimensions[k]}"}.join(";")
+  end
+
+  def stage2_title_css(design)
+    if design.is_seperated_title?
+      design.stage2_title_dimensions.keys.map {|k| "#{k}:#{design.stage2_title_dimensions[k]}"}.join(";")
+    end
   end
 
   def event_sent_status(event)
