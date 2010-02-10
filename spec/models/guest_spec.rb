@@ -4,17 +4,21 @@ describe Guest do
   describe "validations" do
     before(:each) do
       @guest = Guest.new
+      @guest.name = "goobar"
     end
 
     it "should validate email" do
-      @guest.email = "sdfasfa"
+      @guest.email = nil
+      @guest.send_email = true
       @guest.should_not be_valid
       @guest.errors.on(:email).should_not be_blank
     end
 
-    it "should validate email or phone" do
+    it "should validate phone" do
+      @guest.mobile_phone = nil
+      @guest.send_sms = true
       @guest.should_not be_valid
-      @guest.errors.on(:email).should =~ /provide email or mobile phone/
+      @guest.errors.on(:mobile_phone).should_not be_blank
     end
   end
 

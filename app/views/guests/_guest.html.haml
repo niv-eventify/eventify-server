@@ -11,13 +11,13 @@
     = guest.mobile_phone
 
   - info_table_column(4) do
-    - guest_remote_checkbox(:send_email, @event, guest)
+    - if_not_blank_editable_property(:send_email, :email, @event, guest)
 
   - info_table_column(5) do
-    - guest_remote_checkbox(:send_sms, @event, guest)
+    - if_not_blank_editable_property(:send_sms, :mobile_phone, @event, guest)
 
   - info_table_column(6) do
-    - guest_remote_checkbox(:allow_snow_ball, @event, guest)
+    - if_not_blank_editable_property(:allow_snow_ball, :mobile_phone, @event, guest)
 
   - info_table_column do
     != link_to_remove_guest(@event, guest)

@@ -17,7 +17,15 @@ module GuestsHelper
 
   def guest_remote_checkbox(attribute, event, guest)
     form_remote_for :guest, guest, :url => event_guest_path(event, guest), :method => :put do |f|
-      haml_concat f.check_box attribute, :class => "input-check", :onchange => "jQuery(this).parents('form').get(0).onsubmit()"
+      haml_concat f.check_box(attribute, :class => "input-check", :onchange => "jQuery(this).parents('form').get(0).onsubmit()")
+    end
+  end
+
+  def if_not_blank_editable_property(attribute, non_blank_attribute, event, guest)
+    if guest.send(non_blank_attribute).blank?
+      haml_concat "&nbsp;"
+    else
+      guest_remote_checkbox(attribute, event, guest)
     end
   end
 end
