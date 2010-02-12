@@ -42,3 +42,8 @@ a.finish-btn, a.preview-btn {
 .input-bg-uni .input-text.short {
 	width:25px;
 }
+
+.scrollable {
+	max-height:500px;
+	overflow:auto;
+}

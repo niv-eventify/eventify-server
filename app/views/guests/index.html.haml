@@ -15,9 +15,10 @@
 
           %h3= _("Add manually:")
 
-          %table#guests.info-table
-            != render(:partial => "guests_header", :locals => {:check_all => true})
-            %tbody
-              != render(:partial => "guest", :collection => collection)
+          #guests_keeper.scrollable
+            %table#guests.info-table
+              != render(:partial => "guests_header", :locals => {:check_all => true})
+              %tbody
+                != render(:partial => "guest", :collection => collection)
           
           != render(:partial => "new")
