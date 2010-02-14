@@ -33,7 +33,7 @@ module GuestsHelper
     form_remote_for :guest, guest, :builder => NoLabelFormBuilder::Builder, :url => event_guest_path(event, guest), :method => :put do |f|
       haml_concat f.input(:rsvp, :as => :select, :collection => rsvp_kinds_for_select,
         :input_html => {:id => "#{dom_id(guest)}_rsvp", :class => "rspv_select",
-        :onchange => "jQuery.fn.updateColor(this);jQuery(this).parents('form').get(0).onsubmit();"}, :wrapper_html => {:class => "guest_select_rsvp", :id => ""})
+        :onchange => "jQuery.fn.rsvp_update_color(this);jQuery(this).parents('form').get(0).onsubmit();"}, :wrapper_html => {:class => "guest_select_rsvp", :id => ""})
     end    
   end
 
@@ -70,7 +70,7 @@ module GuestsHelper
     javascript_include_tag("jquery.select_skin") +
     javascript_tag(<<-JAVASCRIPT
       jQuery(document).ready(function() {
-          jQuery.fn.updateColor = function(el) {
+          jQuery.fn.rsvp_update_color = function(el) {
             var s = jQuery(el);
             var colors = ["#000", "#e82303", "#28b20a", "#c6770d"]
             var color_index = parseInt(s.val() || -1) + 1;
@@ -78,7 +78,7 @@ module GuestsHelper
           };
           jQuery(".rspv_select").select_skin();
           jQuery(".rspv_select").each(function(){
-            jQuery.fn.updateColor(this);
+            jQuery.fn.rsvp_update_color(this);
           });
       });
     JAVASCRIPT
