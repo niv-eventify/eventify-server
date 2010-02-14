@@ -25,9 +25,9 @@
                 c.children().before('<div class="cmf-skinned-text">&nbsp;</div>').each(function() {
                     if (this.selectedIndex >= 0) $(this).prev().text(this.options[this.selectedIndex].innerHTML)
                 });
-                c.width(s.outerWidth()-2);
+/*                c.width(s.outerWidth()-2);
                 c.height(s.outerHeight()-2);
-
+*/
                 // skin the container
                 c.css('background-color', s.css('background-color'));
                 c.css('color', s.css('color'));
@@ -41,7 +41,6 @@
 
                 // get and skin the text label
                 var t = c.children().prev();
-
                 t.height(c.outerHeight()-s.css('padding-top').replace(/px,*\)*/g,"")-s.css('padding-bottom').replace(/px,*\)*/g,"")-t.css('padding-top').replace(/px,*\)*/g,"")-t.css('padding-bottom').replace(/px,*\)*/g,"")-2);
                 t.width(c.innerWidth()-s.css('padding-right').replace(/px,*\)*/g,"")-s.css('padding-left').replace(/px,*\)*/g,"")-t.css('padding-right').replace(/px,*\)*/g,"")-t.css('padding-left').replace(/px,*\)*/g,"")-c.innerHeight());
                 t.css( { 'opacity': 100, 'overflow': 'hidden', 'position': 'absolute', 'text-indent': '0px', 'z-index': 1, 'top': 0, 'left': 0 } );
