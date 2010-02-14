@@ -8,4 +8,4 @@ else
 end
 
 page[:new_guest].replaceWith render(:partial => "new")
-page << "$('#new_guest input:checkbox').customCheckbox();"
+page << "$('#new_guest input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
