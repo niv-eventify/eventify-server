@@ -11,10 +11,10 @@
     = guest.mobile_phone
 
   - info_table_column("4-short") do
-    = guest.attendees_count
+    - guest_remote_rsvp(@event, guest)
 
   - info_table_column("4a-short") do
-    &nbsp;
+    = guest.attendees_count
 
   - info_table_column(5) do
     - if_not_blank_editable_property(:send_email, :email, @event, guest)

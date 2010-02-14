@@ -1,4 +1,6 @@
 - @content_css_class = "stars-bg stage-3"
+- content_for :head do
+  != guests_rsvp_javascript
 
 - events_content_section(3, nil, @event) do
   .info-area

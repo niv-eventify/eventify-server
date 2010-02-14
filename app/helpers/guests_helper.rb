@@ -21,6 +21,22 @@ module GuestsHelper
     end
   end
 
+  def rsvp_kinds_for_select
+    returning([]) do |res|
+      Guest::RSVP_TEXT.each_with_index do |name, v|
+        res << [s_(name), v]
+      end
+    end
+  end
+
+  def guest_remote_rsvp(event, guest)
+    form_remote_for :guest, guest, :builder => NoLabelFormBuilder::Builder, :url => event_guest_path(event, guest), :method => :put do |f|
+      haml_concat f.input(:rsvp, :as => :select, :collection => rsvp_kinds_for_select,
+        :input_html => {:id => "#{dom_id(guest)}_rsvp", :class => "rspv_select",
+        :onchange => "jQuery(this).parents('form').get(0).onsubmit()"}, :wrapper_html => {:class => "guest_select_rsvp", :id => ""})
+    end    
+  end
+
   def if_not_blank_editable_property(attribute, non_blank_attribute, event, guest)
     if guest.send(non_blank_attribute).blank?
       haml_concat "&nbsp;"
@@ -48,5 +64,15 @@ module GuestsHelper
         }
       });
     JAVASCRIPT
+  end
+
+  def guests_rsvp_javascript
+    javascript_include_tag("jquery.select_skin") +
+    javascript_tag(<<-JAVASCRIPT
+      jQuery(document).ready(function() {
+          jQuery(".rspv_select").select_skin();
+      });
+    JAVASCRIPT
+    )
   end
 end
