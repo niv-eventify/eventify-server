@@ -61,9 +61,7 @@ module EventsHelper
   end
 
   def stage2_title_css(design)
-    if design.is_seperated_title?
-      design.stage2_title_dimensions.keys.map {|k| "#{k}:#{design.stage2_title_dimensions[k]}"}.join(";")
-    end
+    design.stage2_title_dimensions.keys.map {|k| "#{k}:#{design.stage2_title_dimensions[k]}"}.join(";")
   end
 
   def event_sent_status(event)

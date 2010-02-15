@@ -72,7 +72,9 @@ class Design < ActiveRecord::Base
       :top =>    "#{(text_top_y + y_delta)/ratio}px",
       :left =>   "#{(text_top_x + x_delta)/ratio}px",
       :width =>  "#{(text_width/ratio)}px",
-      :height => "#{(text_height/ratio)}px"
+      :height => "#{(text_height/ratio)}px",
+      'text-align' => "#{text_align}",
+      :color => "#{message_color}"
     }
   end
 
@@ -85,11 +87,18 @@ class Design < ActiveRecord::Base
     x_delta = 116.5   #delta between background and postcard ((900-667)/2)
     y_delta = 50      #delta between background and postcard ((600-500)/2)
 
-    @stage2_title_dimensions ||= {
-      :top =>    "#{(title_top_y + y_delta)/ratio}px",
-      :left =>   "#{(title_top_x + x_delta)/ratio}px",
-      :width =>  "#{(title_width/ratio)}px",
-      :height => "#{(title_height/ratio)}px"
+    res = {
+      'text-align' => "#{text_align}",
+      :color => "#{title_color}"
     }
+    if !title_width.blank?
+      res = res.merge({
+        :top =>    "#{(title_top_y + y_delta)/ratio}px",
+        :left =>   "#{(title_top_x + x_delta)/ratio}px",
+        :width =>  "#{(title_width/ratio)}px",
+        :height => "#{(title_height/ratio)}px"
+      })
+    end
+    @stage2_title_dimensions ||= res
   end
 end
