@@ -2700,3 +2700,38 @@ ul.sub-nav li.active a{
 #carouselImgBox .plus {
 	margin-top: 2px;
 }
+#nyroModalContent  .blue-btn-mdl {
+	padding: 0 32px 0 0;
+	margin: 15px 4px 0 4px;
+	float: right;
+	font-size: 1.2em;
+	background:url(/images/btn-blue-brown-mdl-en.gif) no-repeat 100% 0;
+}
+.hebrew #nyroModalContent .blue-btn-mdl  {
+	padding: 0 0 0 32px;
+	float: left;
+	font-size: 1.1em;
+	background:url(/images/btn-blue-brown-mdl.gif) no-repeat 0 0;
+}
+#nyroModalContent  .blue-btn-mdl span{
+	padding:0 0 0 13px;
+	float: left;
+	height: 26px;
+	line-height: 25px;
+	margin: 0 0 0 -2px;
+	font-weight: bold;
+	display: inline;
+	cursor: pointer;
+	border: 0;
+	position: relative;
+	background:#f8f8f8 url(/images/btn-blue-brown-mdl-en.gif) no-repeat;
+}
+.hebrew #nyroModalContent  .blue-btn-mdl span {
+	padding:0 13px 0 0;
+	background:#f8f8f8 url(/images/btn-blue-brown-mdl.gif) no-repeat 100% 0;
+	font-size: 1.2em;
+}
+#nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 100% -26px;}
+#nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 0 -26px;}
+.hebrew #nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 0 -26px;}
+.hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 100% -26px;}

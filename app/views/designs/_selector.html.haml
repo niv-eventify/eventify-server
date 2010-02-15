@@ -3,8 +3,10 @@
     .img-box-b
       .content-h
         .image
-          %a{ :href => design.preview.url(:stage2), :id => "light_box_#{design.id}", :class => "lightbox" }
+          %a{ :href => "#light_box_#{design.id}", :class => "nyroModal" }
             != image_tag(design.preview_with_text.url(:medium), :alt => "")
       != select_design_link(category, design)
-      != select_design_link_plus(design)
-
+      %a{ :href => "#light_box_#{design.id}", :class => "plus nyroModal" } +
+  %div{ :id => "light_box_#{design.id}", :class => 'lightbox', :style => 'display:none; width:670px; height:500px'}
+    != image_tag(design.preview_with_text.url(:lightbox))
+    != select_design_link_lightbox(category, design)

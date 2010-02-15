@@ -14,7 +14,8 @@ module DesignsHelper
     link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => category), :class => "blue-btn-sml"
   end
 
-  def select_design_link_plus(design)
-    link_to_function "+", "jQuery('#light_box_#{design.id}').click();", :class => "plus"
+  def select_design_link_lightbox(category, design)
+    link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => category), :class => "blue-btn-mdl"
   end
+
 end
