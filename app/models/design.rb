@@ -21,7 +21,7 @@ class Design < ActiveRecord::Base
     }
   attr_accessible :card
   validates_attachment_presence :card
-  validates_attachment_size :card, :less_than => 10.megabytes
+  validates_attachment_size :card, :less_than => 2.megabytes
 
   has_attached_file :background,
     :storage        => :s3,
@@ -34,7 +34,7 @@ class Design < ActiveRecord::Base
     }
   attr_accessible :background
   validates_attachment_presence :background
-  validates_attachment_size :background, :less_than => 200.kilobytes
+  validates_attachment_size :background, :less_than => 2.megabytes
 
   has_attached_file :preview,
     :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "119x79>"},
@@ -48,10 +48,10 @@ class Design < ActiveRecord::Base
     }
   attr_accessible :preview
   validates_attachment_presence :preview
-  validates_attachment_size :preview, :less_than => 500.kilobytes
+  validates_attachment_size :preview, :less_than => 2.megabytes
 
   has_attached_file :preview_with_text,
-    :styles         => {:medium => "218x145>", :carousel => "300x200>"},
+    :styles         => {:medium => "218x145>", :lightbox => "666x444>", :carousel => "300x200>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
     :path =>        "designs/:id/:style/:filename",
@@ -61,7 +61,7 @@ class Design < ActiveRecord::Base
       :secret_access_key => GlobalPreference.get(:s3_secret),
     }
   attr_accessible :preview_with_text
-  validates_attachment_size :preview_with_text, :less_than => 500.kilobytes
+  validates_attachment_size :preview_with_text, :less_than => 2.megabytes
 
   def stage2_preview_dimensions
     ratio =   1.6     #fullsize/preview_size
