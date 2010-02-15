@@ -11,7 +11,7 @@ module TableFormBuilder
       td_class = options.delete(:td_class)
       clean_field do
         html = content_tag(:div, 
-          content_tag(:div, super(method, options.reverse_merge(:class => "input-text"))),
+          content_tag(:div, super(method, options.reverse_merge(:class => "input-text #{options[:input_css_class]}"))),
           :class => "input-bg-uni")
         if has_errors?(method)
           td_class << " error"

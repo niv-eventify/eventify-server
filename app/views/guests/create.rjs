@@ -1,10 +1,12 @@
 if @guest.new_record?
-  page << "$('td.error:first input').focus()"
+  page << "jQuery('td.error:first input').focus()"
 else
   page["#guests tbody"].append render(:partial => "guest", :object => @guest)
-  page << "$('##{dom_id(@guest)} input:checkbox').customCheckbox();"
+  page << "jQuery('##{dom_id(@guest)} input:checkbox').customCheckbox();"
+  page << "jQuery('##{dom_id(@guest)}_rsvp').select_skin();"
   @guest = nil # rerender empty form
+  page << "jQuery('#guests_keeper.scrollable').scrollTop(jQuery('#guests_keeper.scrollable').get(0).scrollHeight);"
+  page << "jQuery('#new_guest input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
 end
 
 page[:new_guest].replaceWith render(:partial => "new")
-page << "$('#new_guest input:checkbox').customCheckbox();"

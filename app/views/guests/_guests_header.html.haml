@@ -9,21 +9,24 @@
     %td.t-col-3
       .head-cell
         %span= _("Cellular")
-    %td.t-col-4
+    %td.t-col-4-short
       .head-cell
-        != link_to_function _("Send via"), "", :class => "info"
-        %input#email.input-check{ :type => "checkbox" }
-        %label.l-email{ :for => "email" }= _("Email")
+        %span= _("Status")
+    %td.t-col-4a-short
+      .head-cell
+        %span= _("Number of Guests")
     %td.t-col-5
       .head-cell
         != link_to_function _("Send via"), "", :class => "info"
-        %input#text.input-check{ :type => "checkbox" }
-        %label.l-text{ :for => "text" }= _("Text/SMS")
+        - if check_all
+          %input#email.input-check{ :type => "checkbox" }
+        %label.l-email{ :for => "email" }= _("Email")
     %td.t-col-6
       .head-cell
-        != link_to_function "&nbsp;", "", :class => "info"
-        %input#snowball.input-check{ :type => "checkbox" }
-        %label{ :for => "snowball" }= _("Snowball")
+        != link_to_function _("Send via"), "", :class => "info"
+        - if check_all
+          %input#text.input-check{ :type => "checkbox" }
+        %label.l-text{ :for => "text" }= _("Text/SMS")
     %td.last
       .head-cell
         %span &nbsp;

@@ -10,14 +10,17 @@
   - info_table_column(3) do
     = guest.mobile_phone
 
-  - info_table_column(4) do
-    - if_not_blank_editable_property(:send_email, :email, @event, guest)
+  - info_table_column("4-short") do
+    - guest_remote_rsvp(@event, guest)
+
+  - info_table_column("4a-short") do
+    = guest.attendees_count
 
   - info_table_column(5) do
-    - if_not_blank_editable_property(:send_sms, :mobile_phone, @event, guest)
+    - if_not_blank_editable_property(:send_email, :email, @event, guest)
 
   - info_table_column(6) do
-    - if_not_blank_editable_property(:allow_snow_ball, :mobile_phone, @event, guest)
+    - if_not_blank_editable_property(:send_sms, :mobile_phone, @event, guest)
 
   - info_table_column do
     != link_to_remove_guest(@event, guest)

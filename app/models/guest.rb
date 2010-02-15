@@ -10,9 +10,11 @@ class Guest < ActiveRecord::Base
   validates_presence_of :mobile_phone, :if => proc {|guest| guest.send_sms?}
   validates_uniqueness_of :mobile_phone, :scope => :event_id, :allow_nil => true, :allow_blank => true
 
-  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball
+  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp
 
   after_create :increase_stage_passed
+
+  RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
   def increase_stage_passed
     if 2 == event.stage_passed.to_i
@@ -35,6 +37,10 @@ class Guest < ActiveRecord::Base
 
   def invited?
     email_invitation_sent_at || sms_invitation_sent_at
+  end
+
+  def should_send_invitation?
+    !rsvp.nil?
   end
 end
 
