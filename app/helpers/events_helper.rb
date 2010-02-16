@@ -35,7 +35,7 @@ module EventsHelper
   end
 
   def event_text_input(f, attribute, label, extra_opts = {})
-    opts = {:input_html => {:class => "input-text", :maxlength => "48", :size => "40"}, :label => label,
+    opts = {:input_html => {:class => "input-text", :maxlength => "255", :size => "255"}, :label => label,
       :surround_html => {:tag => :div, :html => {:class => "input-bg-alt"}},
       :required => nil
       }
