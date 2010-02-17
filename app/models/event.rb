@@ -29,7 +29,7 @@ class Event < ActiveRecord::Base
 
   datetime_select_accessible :starting_at, :ending_at
 
-  validates_presence_of :category_id, :design_id, :name, :starting_at, :location_name
+  validates_presence_of :category_id, :design_id, :name, :starting_at
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
   validates_format_of :map_link,
     :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
