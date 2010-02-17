@@ -73,7 +73,7 @@ module EventsWizardHelper
       STAGE_NAMES.each_with_index do |name, i|
         haml_tag :li, :class => stage_tab_class(i, stage_number) do
           text = content_tag(:span, content_tag(:strong, "#{i+1}") + content_tag(:em, s_(name)))
-          link = stage_link(i+1, event) if (i+1) <= event.stage_passed.to_i
+          link = stage_link(i+1, event) if i <= event.stage_passed.to_i
           if link
             haml_concat link_to(text, link)
           else
