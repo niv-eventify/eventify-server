@@ -13,10 +13,11 @@ class Guest < ActiveRecord::Base
   attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp
 
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
-  named_scope :invite_by_email, {:conditions => {:send_sms => true}}
+  named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
   named_scope :not_invited_by_sms, {:conditions => {:sms_invitation_sent_at => nil}}
   named_scope :not_invited_by_email, {:conditions => {:email_invitation_sent_at => nil}}
+  named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
 
   after_create :increase_stage_passed
 
@@ -27,6 +28,13 @@ class Guest < ActiveRecord::Base
       event.stage_passed = 3
       event.save
     end
+  end
+
+  def send_sms_invitation!
+    self.sms_invitation_sent_at = Time.now.utc
+    event.update_last_invitation_sent!(sms_invitation_sent_at)
+    save!
+    # TODO - send sms
   end
 
   def send_email_invitation!

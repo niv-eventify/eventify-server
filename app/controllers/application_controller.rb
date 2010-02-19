@@ -11,6 +11,8 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging "password" unless Rails.env.development?
 
 protected
+  include ERB::Util # to use h() in flashes
+
   def all_enabled_categories
     @all_enabled_categories ||= Category.enabled.all
   end

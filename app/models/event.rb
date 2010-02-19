@@ -56,6 +56,15 @@ class Event < ActiveRecord::Base
     require_payment_for_guests? || require_payment_for_sms?
   end
 
+  def send_invitations(ids = :all)
+    return false if payment_required?
+
+    ids = guest_ids if :all == ids
+
+    "production" == Rails.env ? send_later(:send_sms_invitations, ids) : send_sms_invitations(ids)
+    "production" == Rails.env ? send_later(:send_email_invitations, ids) : send_email_invitations(ids)
+  end
+
   def validate
     errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
   end
@@ -78,6 +87,19 @@ class Event < ActiveRecord::Base
   end
 
   def require_payment_for_sms?
-    !guests.invite_by_sms.count.zero? && true # TODO: check sms payments in payments table
+    return false if guests.invite_by_sms.count.zero?
+    true # TODO: check sms payments in payments table
+  end
+
+  def scoped_invite(scope, method)
+    scope.find_each(:batch_size => 10) { |obj| obj.send(method) }
+  end
+
+  def send_sms_invitations(ids)
+    scoped_invite(guests.invite_by_sms.with_ids(ids), :send_sms_invitation!)
+  end
+
+  def send_email_invitations(ids)
+    scoped_invite(guests.invite_by_email.with_ids(ids), :send_email_invitation!)
   end
 end
