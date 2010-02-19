@@ -12,6 +12,12 @@ class Guest < ActiveRecord::Base
 
   attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp
 
+  named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
+  named_scope :invite_by_email, {:conditions => {:send_sms => true}}
+
+  named_scope :not_invited_by_sms, {:conditions => {:sms_invitation_sent_at => nil}}
+  named_scope :not_invited_by_email, {:conditions => {:email_invitation_sent_at => nil}}
+
   after_create :increase_stage_passed
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]

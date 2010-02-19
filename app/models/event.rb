@@ -39,6 +39,23 @@ class Event < ActiveRecord::Base
   named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
 
+  def invitations_to_send_counts
+    e, s = guests.invite_by_email.not_invited_by_email.count, guests.invite_by_sms.not_invited_by_sms.count
+    {
+      :email => e,
+      :sms => s,
+      :total => (e + s)
+    }
+  end
+
+  def payments
+    [] # TODO association with payment history
+  end
+
+  def extra_payment_required?
+    false
+  end
+
   def validate
     errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
   end

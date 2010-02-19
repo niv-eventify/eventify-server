@@ -10,7 +10,7 @@ class EventsController < InheritedResources::Base
   # index
 
   def show
-    if @event.stage_passed < 3
+    if @event.stage_passed < 3 || @event.guests.count.zero?
       flash[:error] = _("Please add at least one guest")
       redirect_to event_guests_path(@event)
       return

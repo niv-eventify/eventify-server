@@ -1,0 +1,10 @@
+- if @not_invited_counts[:total].zero?
+  All invitations have been sent.
+- else
+  Invitations to send:
+  SMS:
+  = @not_invited_counts[:sms]
+  Email:
+  = @not_invited_counts[:email]
+
+  != button_to_function "Send invitations", ""
