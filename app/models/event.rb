@@ -52,8 +52,8 @@ class Event < ActiveRecord::Base
     [] # TODO association with payment history
   end
 
-  def extra_payment_required?
-    false
+  def payment_required?
+    require_payment_for_guests? || require_payment_for_sms?
   end
 
   def validate
@@ -71,5 +71,13 @@ class Event < ActiveRecord::Base
 
   def allow_send_invitations?
     true # TODO: payments logic
+  end
+
+  def require_payment_for_guests?
+    false # TODO: check max number/program and existing payment in payments table
+  end
+
+  def require_payment_for_sms?
+    !guests.invite_by_sms.count.zero? && true # TODO: check sms payments in payments table
   end
 end

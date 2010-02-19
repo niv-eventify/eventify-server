@@ -7,7 +7,7 @@ class PaymentsController < InheritedResources::Base
   def index
     index! do |success|
       success.html do
-        if !@event.extra_payment_required? && @payments.blank?
+        if !@event.payment_required? && @payments.blank?
           redirect_to event_summary_path(@event)
           return
         end
