@@ -4,7 +4,7 @@ class Guest < ActiveRecord::Base
 
   validates_format_of   :email, :with => String::EMAIL_REGEX, :message => N_("does't look like an email"), :allow_blank => true, :allow_nil => true
   validates_presence_of :email, :if => proc {|guest| guest.send_email?}
-  validates_uniqueness_of :email, :scope => :event_id, :allow_nil => true, :allow_blank => true
+  validates_uniqueness_of :email, :scope => :event_id, :allow_nil => true, :allow_blank => true, :on => :create
 
   validates_format_of   :mobile_phone, :with => String::PHONE_REGEX, :message => N_("does't look like a mobile phone number"), :allow_blank => true, :allow_nil => true
   validates_presence_of :mobile_phone, :if => proc {|guest| guest.send_sms?}

@@ -1,11 +1,12 @@
 class InvitationsController < InheritedResources::Base
 
-  before_filter :require_user
-  belongs_to :event
+  before_filter :require_user, :only => :create
+  before_filter :set_guest, :only => :show
+  belongs_to :event, :optional => true
 
   def create
-    @event = association_chain.last
      # TODO pass array of guest_ids to send_invitations
+     @event = association_chain.last
     if @event.send_invitations
       flash[:notice] = _("Invitations to %{event} are being sent") % {:event => h(@event.name)}
       redirect_to events_path
@@ -15,10 +16,16 @@ class InvitationsController < InheritedResources::Base
     end
   end
 
+  def show
+  end
+
 protected
 
   def begin_of_association_chain
     current_user
   end
-  
+
+  def set_guest
+    @guest = Guest.find_by_email_token(params[:id]) || (raise ActiveRecord::RecordNotFound)
+  end
 end

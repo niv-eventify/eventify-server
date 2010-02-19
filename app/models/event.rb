@@ -59,8 +59,6 @@ class Event < ActiveRecord::Base
   def send_invitations(ids = :all)
     return false if payment_required?
 
-    ids = guest_ids if :all == ids
-
     "production" == Rails.env ? send_later(:send_sms_invitations, ids) : send_sms_invitations(ids)
     "production" == Rails.env ? send_later(:send_email_invitations, ids) : send_email_invitations(ids)
   end
@@ -96,10 +94,22 @@ class Event < ActiveRecord::Base
   end
 
   def send_sms_invitations(ids)
-    scoped_invite(guests.invite_by_sms.with_ids(ids), :send_sms_invitation!)
+    scope = guests.invite_by_sms
+    if :all == ids
+      ids = guest_ids
+      scope = scope.not_invited_by_sms
+    end
+
+    scoped_invite(scope.with_ids(ids), :send_sms_invitation!)
   end
 
   def send_email_invitations(ids)
-    scoped_invite(guests.invite_by_email.with_ids(ids), :send_email_invitation!)
+    scope = guests.invite_by_email
+    if :all == ids
+      ids = guest_ids
+      scope = scope.not_invited_by_email
+    end
+
+    scoped_invite(scope.with_ids(ids), :send_email_invitation!)
   end
 end

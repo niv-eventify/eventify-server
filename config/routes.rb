@@ -29,4 +29,5 @@ ActionController::Routing::Routes.draw do |map|
     event.resource :summary, :controller => :summary
     event.resources :invitations
   end
+  map.resources :invitations
 end

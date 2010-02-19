@@ -7,4 +7,4 @@
   Email:
   = @not_invited_counts[:email]
 
-  != button_to_function "Send invitations", ""
+  != button_to "Send invitations", event_invitations_path(@event), :method => :post
