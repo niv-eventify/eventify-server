@@ -1,7 +1,7 @@
 class InvitationsController < InheritedResources::Base
 
   before_filter :require_user, :only => :create
-  before_filter :set_guest, :only => :show
+  before_filter :set_guest, :only => [:show, :update]
   belongs_to :event, :optional => true
 
   def create
