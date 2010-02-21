@@ -2,9 +2,45 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe InvitationsController do
 
-  #Delete this example and add some real ones
-  it "should use InvitationsController" do
-    controller.should be_an_instance_of(InvitationsController)
+  setup :activate_authlogic
+
+  describe "create" do
+    describe "not logged in user" do
+      describe_action(:create) do
+        before(:each) do
+          @params = {:event_id => 1}
+        end
+        it_should_require_login
+      end
+    end
+
+    describe "owner" do
+      integrate_views
+
+      before(:each) do
+        @user = Factory.create(:active_user)
+        UserSession.create(@user)
+        @event = stub_model(Event)
+        controller.current_user.events.stub!(:find).and_return(@event)
+      end
+
+      it "should redirect back to payments when need to pay for event" do
+        @event.stub(:send_invitations).and_return(false)
+        post :create, :event_id => @event.id
+        response.should redirect_to("/events/#{@event.id}/payments")
+        response.flash[:error].should == "Payments are not completed yet"
+      end
+
+      it "should send inviations" do
+        @event.stub(:send_invitations).and_return(true)
+        post :create, :event_id => @event.id
+        response.should redirect_to("/events")
+        response.flash[:notice].should =~ /are being sent/
+      end
+    end
+  end
+
+  describe "show" do
   end
 
 end
