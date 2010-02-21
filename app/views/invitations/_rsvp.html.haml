@@ -1,0 +1,3 @@
+RSVP:
+- form_remote_for :guest, @guest, :builder => NoLabelFormBuilder::Builder, :url => invitation_path(@guest.email_token), :method => :put do |f|
+  != f.input(:rsvp, :as => :select, :collection => rsvp_kinds_for_select, :input_html => {:onchange => "jQuery(this).parents('form').get(0).onsubmit();"})

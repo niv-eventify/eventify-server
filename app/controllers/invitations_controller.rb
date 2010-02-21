@@ -19,6 +19,11 @@ class InvitationsController < InheritedResources::Base
   def show
   end
 
+  def update
+    @guest.rsvp = Guest.sanitize_rsvp(params[:guest][:rsvp])
+    @guest.save
+  end
+
 protected
 
   def begin_of_association_chain

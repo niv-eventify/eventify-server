@@ -61,6 +61,12 @@ class Guest < ActiveRecord::Base
   def email_recipient
     "#{name} <#{email}>"
   end
+
+  def self.sanitize_rsvp(rsvp)
+    ri = rsvp.to_i
+    return ri if 0 <= ri && ri < 3
+    2
+  end
 end
 
 
