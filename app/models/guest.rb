@@ -34,6 +34,7 @@ class Guest < ActiveRecord::Base
     self.sms_invitation_sent_at = Time.now.utc
     event.update_last_invitation_sent!(sms_invitation_sent_at)
     save!
+    # TODO = check sms bulk status / package payments
     # TODO - send sms
   end
 
@@ -42,7 +43,7 @@ class Guest < ActiveRecord::Base
     self.email_invitation_sent_at = Time.now.utc
     event.update_last_invitation_sent!(email_invitation_sent_at)
     save!
-    # TODO - send email
+    I18n.with_locale(event.language) { Notifier.deliver_invite_guest(self) }
   end
 
   def before_destroy
@@ -55,6 +56,10 @@ class Guest < ActiveRecord::Base
 
   def should_send_invitation?
     !rsvp.nil?
+  end
+
+  def email_recipient
+    "#{name} <#{email}>"
   end
 end
 
