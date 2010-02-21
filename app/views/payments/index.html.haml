@@ -1,4 +1,4 @@
 - if @event.require_payment_for_sms?
   Payment for SMS required!
   != link_to "Edit Guests", event_guests_path(@event)
-  != button_to_function "Don't send SMS invitations", ""
+  != button_to "Don't send SMS invitations", event_path(@event, :cancel_sms => true), :method => :put, :confirm => _("Are you sure?")

@@ -50,6 +50,8 @@ class EventsController < InheritedResources::Base
   # edit
 
   def update
+    return _cancel_sms if "true" == params[:cancel_sms]
+
     update! do |success, failure|
       success.html { redirect_to event_guests_path(@event, :wizard => params[:wizard]) }
     end
@@ -75,4 +77,9 @@ protected
     "true" == params[:past]
   end
   helper_method :past_events?
+
+  def _cancel_sms
+    @event.cancel_sms!
+    redirect_to event_payments_path(@event)
+  end
 end

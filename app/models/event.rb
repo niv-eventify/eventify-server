@@ -112,4 +112,19 @@ class Event < ActiveRecord::Base
 
     scoped_invite(scope.with_ids(ids), :send_email_invitation!)
   end
+
+  def cancel_sms!
+    _cancel_sms_invitations!
+    _cancel_sms_reminders!
+  end
+
+protected
+
+  def _cancel_sms_reminders!
+    # TODO
+  end
+
+  def _cancel_sms_invitations!
+    guests.update_all("send_sms = 0")
+  end
 end
