@@ -54,4 +54,14 @@ jQuery(document).ready(function() {
       jQuery("tr.guest").show();
       jQuery("#search_guests").val("");
     });
+		jQuery("input#select_all_emails").change(function(){
+			console.log(jQuery(this).attr("checked"));
+			jQuery("input.input-check.guest_send_email").attr("checked", jQuery(this).attr("checked")).redraw_customCheckbox().trigger("change");
+		});
+		jQuery("input#select_all_sms").change(function(){
+			jQuery("input.input-check.guest_send_sms").attr("checked", jQuery(this).attr("checked")).redraw_customCheckbox().trigger("change");
+		});
+		jQuery("input.remote-checkbox").change(function(){
+			jQuery(this).parents('form').get(0).onsubmit();
+		});
 });

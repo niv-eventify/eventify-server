@@ -319,6 +319,7 @@ jQuery.fn.customCheckbox = function(_options){
 				else checkbox.attr('checked', 'checked');
 				changeCheckbox(checkbox);
 				if(typeof(checkbox.get(0).onchange) == 'function') checkbox.get(0).onchange();
+				checkbox.trigger("change");
 			});
 			checkbox.click(function(){
 				changeCheckbox(checkbox);
@@ -331,6 +332,14 @@ jQuery.fn.customCheckbox = function(_options){
 		if(_this.is(':checked')) _this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked);
 		else _this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault);
 	}
+}
+
+jQuery.fn.redraw_customCheckbox = function(){
+	return this.each(function(){
+		var checkbox = jQuery(this);
+		if(checkbox.is(':checked')) checkbox.get(0)._replaced.removeClass().addClass("checkboxAreaChecked");
+		else checkbox.get(0)._replaced.removeClass().addClass("checkboxArea");
+	});
 }
 
 jQuery(document).ready(function(){

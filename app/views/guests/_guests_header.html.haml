@@ -17,15 +17,15 @@
         %span= _("Number of Guests")
     %td.t-col-5
       .head-cell
-        != link_to_function _("Send via"), "", :class => "info"
+        %span.info= _("Send via")
         - if check_all
-          %input#email.input-check{ :type => "checkbox" }
+          %input#select_all_emails.input-check{ :type => "checkbox" }
         %label.l-email{ :for => "email" }= _("Email")
     %td.t-col-6
       .head-cell
-        != link_to_function _("Send via"), "", :class => "info"
+        %span.info= _("Send via")
         - if check_all
-          %input#text.input-check{ :type => "checkbox" }
+          %input#select_all_sms.input-check{ :type => "checkbox" }
         %label.l-text{ :for => "text" }= _("Text/SMS")
     %td.last
       .head-cell
