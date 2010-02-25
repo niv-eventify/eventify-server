@@ -106,7 +106,6 @@
         height: 100%;
         top: 0px;
         left: 0px;
-        background: black;
     }
         .ContentFlow .loadIndicator .indicator {
             background: url(/images/loader.gif) center center no-repeat;
