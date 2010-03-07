@@ -16,7 +16,7 @@ vendor/plugins/astrails-user-auth:
 vendor/plugins/cellact: 
   branch: master
   remote: braid/vendor/plugins/cellact
-  revision: 3867105492feb907872fba22a8c48b4c33f3bf0b
+  revision: 56688a17e4eb86f1fa9502e59d5444b01b9bdbfa
   squashed: true
   type: git
   url: git@github.com:astrails/cellact.git
