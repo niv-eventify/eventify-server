@@ -1,5 +1,7 @@
 class Guest < ActiveRecord::Base
   belongs_to :event
+  has_many :cellact_logs, :as => :cellactable
+
   validates_presence_of :name
 
   validates_format_of   :email, :with => String::EMAIL_REGEX, :message => N_("does't look like an email"), :allow_blank => true, :allow_nil => true
@@ -44,21 +46,7 @@ class Guest < ActiveRecord::Base
   def send_sms_invitation!
     sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, SMS_SENDER)
     text = event.sms_message(self)
-    sms.send_sms(mobile_phone, text) do |request, response|
-      
-      puts "log request: #{request}" if request
-      
-      if response
-        puts "log response: #{response}"
-        if Cellact::Sender.success?(response)
-          # message sent
-          puts "success"
-        else
-          # message not sent
-          puts "failure"
-        end
-      end
-    end
+    sms.send_sms(mobile_phone, text, self)
   end
 
   def prepare_email_invitation!(timestamp)

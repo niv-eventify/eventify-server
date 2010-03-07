@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100221111300) do
+ActiveRecord::Schema.define(:version => 20100307180408) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(:version => 20100221111300) do
   end
 
   add_index "categories", ["disabled_at"], :name => "index_categories_on_disabled_at"
+
+  create_table "cellact_logs", :force => true do |t|
+    t.integer  "cellactable_id"
+    t.string   "cellactable_type"
+    t.string   "kind",             :limit => 10
+    t.string   "status",           :limit => 10
+    t.string   "wire_log",         :limit => 1024
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contact_importers", :force => true do |t|
     t.integer  "user_id"
