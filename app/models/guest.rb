@@ -20,6 +20,10 @@ class Guest < ActiveRecord::Base
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
 
   after_create :increase_stage_passed
+  SMS_FROM = "eventify"
+  SMS_USER = "eventify"
+  SMS_PASSWORD = "Croatia684"
+  SMS_SENDER = "+972500000000"
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
@@ -38,7 +42,25 @@ class Guest < ActiveRecord::Base
   end
 
   def send_sms_invitation!
-    # TODO - send sms
+    sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, SMS_SENDER)
+    message_number = "#{event_id}_#{self.id}"
+    # text = "בדיקה ראשונה"  #event.sms_message(self)
+    text = "test 123"
+    sms.send_sms(mobile_phone, text, message_number) do |request, response|
+      
+      puts "log request: #{request}" if request
+      
+      if response
+        puts "log response: #{response}"
+        if Cellact::Sender.success?(response)
+          # message sent
+          puts "success"
+        else
+          # message not sent
+          puts "failure"
+        end
+      end
+    end
   end
 
   def prepare_email_invitation!(timestamp)
