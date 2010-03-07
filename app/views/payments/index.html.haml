@@ -2,3 +2,14 @@
   Payment for SMS required!
   != link_to "Edit Guests", event_guests_path(@event)
   != button_to "Don't send SMS invitations", event_path(@event, :cancel_sms => true), :method => :put, :confirm => _("Are you sure?")
+
+- if @not_invited_counts[:total].zero?
+  All invitations have been sent.
+- else
+  Invitations to send:
+  SMS:
+  = @not_invited_counts[:sms]
+  Email:
+  = @not_invited_counts[:email]
+
+  != button_to "Send invitations", event_invitations_path(@event), :method => :post

@@ -16,9 +16,11 @@ class InvitationsController < InheritedResources::Base
     end
   end
 
+  # guest rsvp page
   def show
   end
 
+  # guest update page
   def update
     @guest.rsvp = Guest.sanitize_rsvp(params[:guest][:rsvp])
     @guest.save
