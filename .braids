@@ -13,6 +13,13 @@ vendor/plugins/astrails-user-auth:
   squashed: true
   type: git
   url: git://github.com/astrails/astrails-user-auth
+vendor/plugins/cellact: 
+  branch: master
+  remote: braid/vendor/plugins/cellact
+  revision: 3867105492feb907872fba22a8c48b4c33f3bf0b
+  squashed: true
+  type: git
+  url: git@github.com:astrails/cellact.git
 vendor/plugins/delayed_job: 
   branch: master
   remote: braid/vendor/plugins/delayed-job
