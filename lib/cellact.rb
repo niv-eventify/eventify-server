@@ -6,8 +6,8 @@ module Cellact
       @from, @user, @password, @sender = from, user, password, sender
     end
 
-    def send_sms(mobile, text, message_id, &block)
-      request = _request(mobile, text, message_id)
+    def send_sms(mobile, text, &block)
+      request = _request(mobile, text)
       block.call(request, nil)
 
       response = Sender._send_sms!(request)
@@ -16,15 +16,19 @@ module Cellact
     end
 
     def self.success?(response)
-      h = Hash.from_xml(response)
+      h = Hash.from_xml(response) rescue {}
       h["PALO"] && "true" == h["PALO"]["RESULT"].downcase
     end
 
   protected
-    def _request(mobile, text, message_id)
+    def _request(mobile, text)
       $KCODE = 'UTF8'
       res = ""
-      xml = Builder::XmlMarkup.new(:indent => 0, :target => res)
+      xml = Builder::XmlMarkup.new(:indent => 2, :target => res)
+      # use utf-8, don't escape to &#...;
+      def xml.text!(msg)
+        _text(msg)
+      end
       xml.PALO do |palo|
         palo.HEAD do |head|
           head.FROM @from
@@ -34,13 +38,9 @@ module Cellact
         end
         palo.BODY do |body|
           body.SENDER @sender
-          body.CONTENT URI.encode(text)
+          body.CONTENT text
           body.DEST_LIST do |dl|
             dl.TO mobile
-          end
-          body.OPTIONAL do |optional|
-            optional.message_id message_id
-            optional.sent_at Time.now.utc.to_s(:xml)
           end
         end
       end

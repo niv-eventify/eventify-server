@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-03-07 17:58+0200\n"
+"POT-Creation-Date: 2010-03-07 19:17+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -601,6 +601,11 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+#: app/models/event.rb:127
+msgid ""
+"You are invited to %{event_name} that takes place %{date_time} at %{place}"
+msgstr ""
+
 #: app/views/welcome/_container123.html.haml:20
 msgid "You can also upload a map and a persoanl message"
 msgstr ""
@@ -619,12 +624,6 @@ msgstr ""
 
 #: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:40
 msgid "You must be logged out to access this page"
-msgstr ""
-
-#: app/models/event.rb:126
-msgid ""
-"You've been invited to \"%{event_name}\" that takes place %{date_time} at %"
-"{place}"
 msgstr ""
 
 #: app/views/events/_form.html.haml:12

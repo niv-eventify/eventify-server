@@ -43,10 +43,8 @@ class Guest < ActiveRecord::Base
 
   def send_sms_invitation!
     sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, SMS_SENDER)
-    message_number = "#{event_id}_#{self.id}"
-    # text = "בדיקה ראשונה"  #event.sms_message(self)
-    text = "test 123"
-    sms.send_sms(mobile_phone, text, message_number) do |request, response|
+    text = event.sms_message(self)
+    sms.send_sms(mobile_phone, text) do |request, response|
       
       puts "log request: #{request}" if request
       

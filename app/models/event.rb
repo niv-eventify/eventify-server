@@ -123,11 +123,13 @@ class Event < ActiveRecord::Base
   end
 
   def sms_message(guest)
-    _("You've been invited to \"%{event_name}\" that takes place %{date_time} at %{place}") % {
-      :event_name => name,
-      :date_time => "#{starting_at.to_s(:isra_date)} #{starting_at.to_s(:isra_time)}",
-      :place => location_name
-    }
+    I18n.with_locale(language) do
+      _('You are invited to %{event_name} that takes place %{date_time} at %{place}') % {
+        :event_name => name,
+        :date_time => "#{starting_at.to_s(:isra_date)} #{starting_at.to_s(:isra_time)}",
+        :place => location_name
+      }
+    end
   end
 
 protected
