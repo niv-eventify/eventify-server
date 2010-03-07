@@ -5,16 +5,9 @@ class PaymentsController < InheritedResources::Base
   actions :index
 
   def index
-    index! do |success|
-      success.html do
-        if !@event.payment_required? && @payments.blank?
-          redirect_to event_summary_path(@event)
-          return
-        end
-      end
-    end
+    @event = association_chain.last
+    @not_invited_counts = @event.invitations_to_send_counts
   end
-
 
 protected
 
