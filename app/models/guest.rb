@@ -30,19 +30,25 @@ class Guest < ActiveRecord::Base
     end
   end
 
-  def send_sms_invitation!
-    self.sms_invitation_sent_at = Time.now.utc
-    event.update_last_invitation_sent!(sms_invitation_sent_at)
-    save!
+  def prepare_sms_invitation!(timestamp)
     # TODO = check sms bulk status / package payments
+    self.sms_invitation_sent_at = timestamp
+    save!
+    "production" == Rails.env ? self.send_later(:send_sms_invitation!) : send_sms_invitation!
+  end
+
+  def send_sms_invitation!
     # TODO - send sms
   end
 
-  def send_email_invitation!
+  def prepare_email_invitation!(timestamp)
     self.email_token ||= Astrails.generate_token
-    self.email_invitation_sent_at = Time.now.utc
-    event.update_last_invitation_sent!(email_invitation_sent_at)
+    self.email_invitation_sent_at = timestamp
     save!
+    "production" == Rails.env ? self.send_later(:send_email_invitation!) : send_email_invitation!
+  end
+
+  def send_email_invitation!
     I18n.with_locale(event.language) { Notifier.deliver_invite_guest(self) }
   end
 

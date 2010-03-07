@@ -59,8 +59,7 @@ class Event < ActiveRecord::Base
   def send_invitations(ids = :all)
     return false if payment_required?
 
-    "production" == Rails.env ? send_later(:send_sms_invitations, ids) : send_sms_invitations(ids)
-    "production" == Rails.env ? send_later(:send_email_invitations, ids) : send_email_invitations(ids)
+    "production" == Rails.env ? send_later(:delayed_send_invitations, ids) : delayed_send_invitations(ids)
   end
 
   def validate
@@ -69,11 +68,6 @@ class Event < ActiveRecord::Base
 
   def has_map?
     !map_link.blank? || (map && !map.url.blank?)
-  end
-
-  def update_last_invitation_sent!(time_stamp)
-    self.last_invitation_sent_at = time_stamp
-    save!
   end
 
   def allow_send_invitations?
@@ -89,28 +83,38 @@ class Event < ActiveRecord::Base
     true # TODO: check sms payments in payments table
   end
 
-  def scoped_invite(scope, method)
-    scope.find_each(:batch_size => 10) { |obj| obj.send(method) }
+  def scoped_invite(scope, method, timestamp)
+    scope.find_each(:batch_size => 10) { |obj| obj.send(method, timestamp) }
   end
 
-  def send_sms_invitations(ids)
+  def delayed_send_invitations(ids)
+    time_stamp = Time.now.utc
+    Event.transaction do
+      self.last_invitation_sent_at = time_stamp
+      send_sms_invitations(ids, time_stamp)
+      send_email_invitations(ids, time_stamp)
+      save!
+    end
+  end
+
+  def send_sms_invitations(ids, timestamp)
     scope = guests.invite_by_sms
     if :all == ids
       ids = guest_ids
       scope = scope.not_invited_by_sms
     end
 
-    scoped_invite(scope.with_ids(ids), :send_sms_invitation!)
+    scoped_invite(scope.with_ids(ids), :prepare_sms_invitation!, timestamp)
   end
 
-  def send_email_invitations(ids)
+  def send_email_invitations(ids, timestamp)
     scope = guests.invite_by_email
     if :all == ids
       ids = guest_ids
       scope = scope.not_invited_by_email
     end
 
-    scoped_invite(scope.with_ids(ids), :send_email_invitation!)
+    scoped_invite(scope.with_ids(ids), :prepare_email_invitation!, timestamp)
   end
 
   def cancel_sms!
