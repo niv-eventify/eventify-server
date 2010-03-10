@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100307180408) do
+ActiveRecord::Schema.define(:version => 20100310104001) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -157,6 +157,8 @@ ActiveRecord::Schema.define(:version => 20100307180408) do
     t.datetime "sms_invitation_sent_at"
     t.integer  "rsvp"
     t.integer  "attendees_count"
+    t.datetime "sms_invitation_failed_at"
+    t.datetime "email_invitation_failed_at"
   end
 
   add_index "guests", ["event_id"], :name => "index_guests_on_event_id"

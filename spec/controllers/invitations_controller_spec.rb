@@ -42,7 +42,7 @@ describe InvitationsController do
 
   describe "guests" do
     before(:each) do
-      @guest = Factory.create(:guest)
+      @guest = Factory.create(:guest_with_token)
       @guest.reload.rsvp.should be_nil
     end
 

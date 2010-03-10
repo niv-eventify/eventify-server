@@ -22,21 +22,24 @@ describe PaymentsController do
       UserSession.create(@user)
       @event = stub_model(Event)
       controller.current_user.events.stub!(:find).and_return(@event)
+      @event.stub(:payments).and_return([])
     end
 
-    it "should redirect to summary page" do
+    it "should not render cancel sms button" do
       @event.stub(:payment_required?).and_return(false)
-      @event.stub(:payments).and_return([])
-      get :index, :event_id => @event
-      response.should redirect_to("/events/#{@event.id}/summary")
-    end
-
-    it "should render required payments" do
-      @event.stub(:payment_required?).and_return(true)
-      @event.stub(:payments).and_return([])
+      @event.stub(:require_payment_for_sms?).and_return(false)
       get :index, :event_id => @event
       response.should be_success
       response.should render_template("index")
+      response.body.should_not =~ /Don't send SMS invitations/
+    end
+
+    it "should render cancel sms button" do
+      @event.stub(:require_payment_for_sms?).and_return(true)
+      get :index, :event_id => @event
+      response.should be_success
+      response.should render_template("index")
+      response.body.should =~ /Don't send SMS invitations/
     end
   end
 

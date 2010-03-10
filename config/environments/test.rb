@@ -21,6 +21,7 @@ config.action_controller.allow_forgery_protection    = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+config.action_mailer.default_url_options = {:host => "test.com"}
 
 # Use SQL instead of Active Record's schema dumper when creating the test database.
 # This is necessary if your schema can't be completely dumped by the schema dumper,
@@ -28,3 +29,8 @@ config.action_mailer.delivery_method = :test
 # config.active_record.schema_format = :sql
 config.gem 'factory_girl', :source => 'http://gemcutter.org'
 require 'ruby-debug'
+
+SMS_FROM = "eventify"
+SMS_USER = "eventify"
+SMS_PASSWORD = "junkjunk"
+SMS_SENDER = "+972500000000"

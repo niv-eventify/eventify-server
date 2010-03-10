@@ -18,3 +18,8 @@ config.action_mailer.raise_delivery_errors = false
 config.gem 'inaction_mailer', :lib => 'inaction_mailer/force_load', :source => 'http://gemcutter.org'
 config.gem 'ffmike-query_trace', :lib => 'query_trace', :source => 'http://gems.github.com'
 require 'ruby-debug'
+
+SMS_FROM = "eventify"
+SMS_USER = "eventify"
+SMS_PASSWORD = "Croatia684"
+SMS_SENDER = "+972500000000"
