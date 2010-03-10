@@ -14,7 +14,7 @@ describe InvitationsController do
       end
     end
 
-    describe "owner" do
+    describe "edit" do
       integrate_views
 
       before(:each) do
@@ -22,41 +22,50 @@ describe InvitationsController do
         UserSession.create(@user)
         @event = stub_model(Event)
         controller.current_user.events.stub!(:find).and_return(@event)
+        @event.stub(:payments).and_return([])
       end
 
-      it "should redirect back to payments when need to pay for event" do
-        @event.stub(:send_invitations).and_return(false)
-        post :create, :event_id => @event.id
-        response.should redirect_to("/events/#{@event.id}/payments")
-        response.flash[:error].should == "Payments are not completed yet"
+      it "should not render cancel sms button" do
+        @event.stub(:payment_required?).and_return(false)
+        @event.stub(:require_payment_for_sms?).and_return(false)
+        get :edit, :id => @event
+        response.should be_success
+        response.should render_template("edit")
+        response.body.should_not =~ /Don't send SMS invitations/
       end
 
-      it "should send inviations" do
-        @event.stub(:send_invitations).and_return(true)
-        post :create, :event_id => @event.id
-        response.should redirect_to("/events")
-        response.flash[:notice].should =~ /are being sent/
+      it "should render cancel sms button" do
+        @event.stub(:require_payment_for_sms?).and_return(true)
+        get :edit, :id => @event
+        response.should be_success
+        response.should render_template("edit")
+        response.body.should =~ /Don't send SMS invitations/
+      end
+    end
+    describe "update" do
+      integrate_views
+
+      before(:each) do
+        @user = Factory.create(:active_user)
+        UserSession.create(@user)
+        @event = Factory.create(:event)
+        controller.current_user.events.stub!(:find).and_return(@event)
+      end
+      
+      it "should send invitations" do
+        @event.stub!(:valid?).and_return(true)
+        @event.stub!(:save).and_return(true)
+        @event.should_receive(:send_invitations)
+        post :update, :id => @event.id, :event => {:send_invitations_now => true}
+        response.should redirect_to(invitation_path(@event))
+      end
+
+      it "should fail on validations" do
+        @event.stub!(:valid?).and_return(false)
+        @event.stub!(:errors).and_return([:error])
+        @event.should_not_receive(:send_invitations)
+        post :update, :id => @event.id, :event => {:send_invitations_now => true}
       end
     end
   end
-
-  describe "guests" do
-    before(:each) do
-      @guest = Factory.create(:guest_with_token)
-      @guest.reload.rsvp.should be_nil
-    end
-
-    it "should show event for a guest" do
-      get :show, :id => @guest.email_token
-      response.should be_success
-      response.should render_template("show")
-    end
-
-    it "should be able to change rsvp" do
-      xhr :put, :update, :id => @guest.email_token, :guest => {:rsvp => 2}
-      response.should be_success
-      @guest.reload.rsvp.should == 2
-    end
-  end
-
 end

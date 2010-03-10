@@ -14,33 +14,4 @@ describe PaymentsController do
     end
   end
 
-  describe "owner" do
-    integrate_views
-    
-    before(:each) do
-      @user = Factory.create(:active_user)
-      UserSession.create(@user)
-      @event = stub_model(Event)
-      controller.current_user.events.stub!(:find).and_return(@event)
-      @event.stub(:payments).and_return([])
-    end
-
-    it "should not render cancel sms button" do
-      @event.stub(:payment_required?).and_return(false)
-      @event.stub(:require_payment_for_sms?).and_return(false)
-      get :index, :event_id => @event
-      response.should be_success
-      response.should render_template("index")
-      response.body.should_not =~ /Don't send SMS invitations/
-    end
-
-    it "should render cancel sms button" do
-      @event.stub(:require_payment_for_sms?).and_return(true)
-      get :index, :event_id => @event
-      response.should be_success
-      response.should render_template("index")
-      response.body.should =~ /Don't send SMS invitations/
-    end
-  end
-
 end
