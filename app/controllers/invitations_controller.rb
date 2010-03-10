@@ -5,6 +5,8 @@ class InvitationsController < InheritedResources::Base
   before_filter :require_user
   actions :edit, :update, :show
 
+  before_filter :sms_message, :only => :edit
+
   # show
 
   # edit
@@ -20,5 +22,9 @@ class InvitationsController < InheritedResources::Base
 protected
   def begin_of_association_chain
     current_user
+  end
+
+  def sms_message
+    resource.sms_message ||= resource.default_sms_message
   end
 end

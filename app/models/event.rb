@@ -147,6 +147,10 @@ class Event < ActiveRecord::Base
     _cancel_sms_reminders!
   end
 
+  def default_sms_message
+    _("You've been invited to %{event_name}") % {:event_name => name}
+  end
+
 protected
 
   def _cancel_sms_reminders!
