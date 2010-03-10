@@ -2,12 +2,7 @@ class PaymentsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
 
-  actions :index
-
-  def index
-    @event = association_chain.last
-    @not_invited_counts = @event.invitations_to_send_counts
-  end
+  actions :create
 
 protected
 

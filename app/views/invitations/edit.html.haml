@@ -1,0 +1,21 @@
+- if @event.require_payment_for_sms?
+  Payment for SMS required!
+  != link_to _("Edit Guests"), event_guests_path(@event)
+  != button_to _("Don't send SMS invitations"), event_path(@event, :cancel_sms => true), :method => :put, :confirm => _("Are you sure?")
+
+- if resource.invitations_to_send_counts[:total].zero?
+  All invitations have been sent.
+- else
+  Invitations to send:
+  SMS:
+  = resource.invitations_to_send_counts[:sms]
+  Email:
+  = resource.invitations_to_send_counts[:email]
+  
+  - semantic_form_for @event, :event, :url => invitation_path(@event), :method => :post do |f|
+    != f.errors_on :base
+    != hidden_field_tag "event[send_invitations_now]", true
+    - if @event.should_send_sms?
+      != f.input :sms_message, :label => _("SMS message text")
+      != f.input :host_mobile_number, :label => _("SMS Replys mobile phone")
+    != f.submit _("Send invitations")

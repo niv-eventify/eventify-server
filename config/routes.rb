@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :things
     event.resource :event_maps
     event.resources :payments
-    event.resources :invitations
   end
   map.resources :invitations
+  map.resources :rsvp
 end

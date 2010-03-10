@@ -17,9 +17,9 @@ class Guest < ActiveRecord::Base
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
-  named_scope :not_invited_by_sms, {:conditions => {:sms_invitation_sent_at => nil}}
+  named_scope :not_invited_by_sms, {:conditions => "guests.sms_invitation_sent_at IS NULL AND guests.send_sms = 1"}
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
-  named_scope :not_invited_by_email, {:conditions => {:email_invitation_sent_at => nil}}
+  named_scope :not_invited_by_email, {:conditions => "guests.email_invitation_sent_at IS NULL AND guests.send_email = 1"}
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
 
   after_create :increase_stage_passed
@@ -42,9 +42,8 @@ class Guest < ActiveRecord::Base
   end
 
   def send_sms_invitation!
-    sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, SMS_SENDER)
-    text = event.sms_message(self)
-    unless sms.send_sms(mobile_phone, text, self)
+    sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, event.host_mobile_number)
+    unless sms.send_sms(mobile_phone, event.sms_message, self)
       self.sms_invitation_failed_at = Time.now.utc
       save!
     end

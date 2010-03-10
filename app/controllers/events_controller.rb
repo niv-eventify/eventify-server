@@ -80,6 +80,6 @@ protected
 
   def _cancel_sms
     @event.cancel_sms!
-    redirect_to event_payments_path(@event)
+    redirect_to edit_invitation_path(@event)
   end
 end

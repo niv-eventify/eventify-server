@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
     recipients  [guest.email_recipient]
     from        "noreply@#{domain}"
     sent_on     Time.now.utc
-    body        :guest => guest, :url => invitation_url(guest.email_token)
+    body        :guest => guest, :url => rsvp_url(guest.email_token)
   end
 
 protected

@@ -30,4 +30,3 @@ config.action_view.cache_template_loading            = true
 SMS_FROM = "eventify"
 SMS_USER = "eventify"
 SMS_PASSWORD = "Croatia684"
-SMS_SENDER = "+972500000000"

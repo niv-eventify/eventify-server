@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100310104001) do
+ActiveRecord::Schema.define(:version => 20100310114747) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -130,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20100310104001) do
     t.integer  "stage_passed"
     t.datetime "last_invitation_sent_at"
     t.string   "language",                :limit => 16
+    t.string   "host_mobile_number"
+    t.string   "sms_message"
   end
 
   create_table "global_preferences", :force => true do |t|

@@ -22,4 +22,3 @@ require 'ruby-debug'
 SMS_FROM = "eventify"
 SMS_USER = "eventify"
 SMS_PASSWORD = "Croatia684"
-SMS_SENDER = "+972500000000"
