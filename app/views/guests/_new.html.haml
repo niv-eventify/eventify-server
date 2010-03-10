@@ -1,3 +1,6 @@
 %tr#new_guest_row
   - new_guest_form do |f|
     != render(:partial => "form", :locals => {:f => f})
+    - info_table_column do
+      != submit_tag _("Add"), :id => "adding_guest"
+    != change_observers

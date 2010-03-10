@@ -68,10 +68,6 @@ class Guest < ActiveRecord::Base
     email_invitation_sent_at || sms_invitation_sent_at
   end
 
-  def should_send_invitation?
-    !rsvp.nil?
-  end
-
   def email_recipient
     "#{name} <#{email}>"
   end

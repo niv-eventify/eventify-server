@@ -14,6 +14,5 @@ else
   page << "jQuery('#new_guest').get(0).reset();"
   page << "jQuery('#guest_send_email').removeAttr('checked').redraw_customCheckbox();"
   page << "jQuery('#guest_send_sms').removeAttr('checked').redraw_customCheckbox();"
-  page << "jQuery('#guests_keeper.scrollable').scrollTop(jQuery('#guests_keeper.scrollable').get(0).scrollHeight);"
   page << "jQuery('#new_guest input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
 end

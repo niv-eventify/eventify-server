@@ -17,10 +17,10 @@
     = guest.attendees_count
 
   - info_table_column(5) do
-    - if_not_blank_editable_property(:send_email, :email, @event, guest)
+    - if_not_blank_editable_property(:send_email, :email, guest)
 
   - info_table_column(6) do
-    - if_not_blank_editable_property(:send_sms, :mobile_phone, @event, guest)
+    - if_not_blank_editable_property(:send_sms, :mobile_phone, guest)
 
   - info_table_column do
-    != link_to_remove_guest(@event, guest)
+    != link_to_remove_guest(guest)
