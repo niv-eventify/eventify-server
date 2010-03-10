@@ -76,12 +76,6 @@ class Guest < ActiveRecord::Base
     "#{name} <#{email}>"
   end
 
-  def self.sanitize_rsvp(rsvp)
-    ri = rsvp.to_i
-    return ri if 0 <= ri && ri < 3
-    2
-  end
-
   def check_invitation_failures
     # reset sms errors when mobile phone changed
     if send_sms? && !sms_invitation_failed_at.nil? && mobile_phone_changed?

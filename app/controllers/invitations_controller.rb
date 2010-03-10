@@ -1,6 +1,6 @@
 class InvitationsController < InheritedResources::Base
 
-  defaults :resource_class => Event, :collection_name => 'events', :instance_name => 'event'
+  defaults :resource_class => Event, :collection_name => 'events', :instance_name => 'event', :route_instance_name => "invitation"
 
   before_filter :require_user
   actions :edit, :update, :show
