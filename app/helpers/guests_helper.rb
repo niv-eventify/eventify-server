@@ -58,7 +58,7 @@ module GuestsHelper
   end
 
   def if_not_blank_editable_property(attribute, non_blank_attribute, guest)
-    return haml_concat(h(guest.send(attribute)) ? _("yes") : "") if guest.invited?
+    return haml_concat(guest.send(attribute).blank? ? "" : _("yes")) if guest.invited?
 
     if guest.send(non_blank_attribute).blank?
       haml_concat "&nbsp;"
