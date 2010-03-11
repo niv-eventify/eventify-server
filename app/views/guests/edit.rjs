@@ -1,0 +1,11 @@
+page << <<-JAVASCRIPT
+ jQuery('.inline_#{dom_id(resource)}_#{params[:attribute]}').parents('div.cell-bg').
+  html(#{render(:partial => "inline", :locals => {:resource => resource, :attribute => params[:attribute]}).to_json}).
+  find('.input-text:first').focus().keyup(function(e){
+    if (27 == e.which) {
+      jQuery.ajax({url: #{event_guest_path(resource.event_id, resource).to_json}, type:'get', dataType:'script'});
+      return false;
+    }
+  });
+
+JAVASCRIPT

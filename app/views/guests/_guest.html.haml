@@ -2,19 +2,26 @@
 
   - info_table_column(1) do
     %input#name-1.input-check{ :type => "checkbox" }
-    %label{ :for => "name-1" }= guest.name
+    %label{ :for => "name-1" }
+      - link_to_inline_edit(guest, :name)
 
   - info_table_column(2) do
-    != mail_to guest.email, guest.email
+    - if guest.invited?
+      = guest.email
+    - else
+      - link_to_inline_edit(guest, :email)
 
   - info_table_column(3) do
-    = guest.mobile_phone
+    - if guest.invited?
+      = guest.mobile_phone
+    - else
+      - link_to_inline_edit(guest, :mobile_phone)
 
   - info_table_column("4-short") do
     - guest_remote_rsvp(@event, guest)
 
   - info_table_column("4a-short") do
-    = guest.attendees_count
+    - link_to_inline_edit(guest, :attendees_count)
 
   - info_table_column(5) do
     - if_not_blank_editable_property(:send_email, :email, guest)

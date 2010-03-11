@@ -29,6 +29,23 @@ module GuestsHelper
     end
   end
 
+  def guest_remote_form(guest, attribute)
+    klass = "input-text"
+    klass << " short" if !guest.send(attribute).is_a?(String)
+
+    form_remote_for :guest, guest, :builder => NoLabelFormBuilder::Builder, :url => event_guest_path(guest.event_id, guest), :method => :put do |f|
+      haml_tag :ul do
+        haml_concat f.input(attribute, :input_html => {:class => klass})
+        haml_concat hidden_field_tag("refresh_guest", true)
+      end
+    end
+  end
+
+  def refresh_guest_row(page, guest)
+    page << "jQuery('tr##{dom_id(guest)}').replaceWith(#{render(:partial => "guest", :object => guest).to_json});"
+    page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
+  end
+
   def guest_remote_rsvp(event, guest)
     form_remote_for :guest, guest, :builder => NoLabelFormBuilder::Builder, :url => event_guest_path(event, guest), :method => :put do |f|
       haml_tag :ul do
@@ -41,6 +58,8 @@ module GuestsHelper
   end
 
   def if_not_blank_editable_property(attribute, non_blank_attribute, guest)
+    return haml_concat(h(guest.send(attribute)) ? _("yes") : "") if guest.invited?
+
     if guest.send(non_blank_attribute).blank?
       haml_concat "&nbsp;"
     else

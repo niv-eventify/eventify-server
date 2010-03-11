@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
       guests_texts = {};
       jQuery("tr.guest").each(function(){
         var t = jQuery(this);
-        var text = t.find("td.t-col-1 label[for='name-1']").html();
+        var text = t.find("td.t-col-1 label[for='name-1']").html() + t.find('td.t-col-1 a.link_to_edit').html();
         text += t.find("td.t-col-2 a").html() + " ";
         text += t.find("td.t-col-3 div.cell-bg").html();
         guests_texts[jQuery(this).attr("id")] = text;
