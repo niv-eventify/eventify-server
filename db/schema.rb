@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100310114747) do
+ActiveRecord::Schema.define(:version => 20100311110907) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -177,6 +177,28 @@ ActiveRecord::Schema.define(:version => 20100310114747) do
   add_index "hosts", ["email"], :name => "index_hosts_on_email"
   add_index "hosts", ["event_id"], :name => "index_hosts_on_event_id"
   add_index "hosts", ["user_id"], :name => "index_hosts_on_user_id"
+
+  create_table "reminders", :force => true do |t|
+    t.integer  "event_id"
+    t.boolean  "to_yes"
+    t.boolean  "to_no"
+    t.boolean  "to_may_be"
+    t.boolean  "to_not_responded"
+    t.boolean  "by_email"
+    t.boolean  "by_sms"
+    t.string   "email_subject"
+    t.string   "email_body",       :limit => 2048
+    t.string   "sms_message"
+    t.string   "before_units",                     :default => "days"
+    t.integer  "before_value"
+    t.datetime "send_reminder_at"
+    t.datetime "reminder_sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "reminders", ["event_id"], :name => "index_reminders_on_event_id"
+  add_index "reminders", ["send_reminder_at", "reminder_sent_at"], :name => "index_reminders_on_send_reminder_at_and_reminder_sent_at"
 
   create_table "things", :force => true do |t|
     t.integer  "event_id"

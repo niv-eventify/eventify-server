@@ -11,6 +11,7 @@ class Event < ActiveRecord::Base
 
   has_many :guests
   has_many :things
+  has_many :reminders
 
   has_attached_file :map,
     :storage        => :s3,
