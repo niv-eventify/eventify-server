@@ -33,7 +33,7 @@ class Reminder < ActiveRecord::Base
   end
 
   def self.send_reminders
-    log.info "\n\nsending reminders\n\n"
+    logger.info "\n\nsending reminders\n\n"
     pending.with_event.find_each(:batch_size => 1) do |reminder|
       reminder.reminder_sent_at = Time.now.utc
       reminder.save!
