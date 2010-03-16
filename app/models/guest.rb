@@ -76,6 +76,19 @@ class Guest < ActiveRecord::Base
     I18n.with_locale(event.language) { Notifier.deliver_invite_guest(self) }
   end
 
+  def send_reminder!(reminder)
+    if reminder.by_email?
+      # TODO: handle delivery errors
+      Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
+      reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success")
+    end
+
+    if reminder.by_sms?
+      sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, event.host_mobile_number)
+      status = sms.send_sms(mobile_phone, reminder.sms_message, self) ? "success" : "failure"
+    end
+  end
+
   def before_destroy
     return false if invited?
   end

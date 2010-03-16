@@ -14,8 +14,8 @@ class Reminder < ActiveRecord::Base
   named_scope :pending, :conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at > ?", Time.now.utc]
   named_scope :with_event, :include => :event
 
-  before_validation :set_send_date
-  def set_send_date
+  before_validation :set_sending_time
+  def set_sending_time
     self.before_units = BEFORE_UNITS.keys.member?(before_units) ? before_units : "days"
     self.send_reminder_at = event.starting_at - (before_value || 0).to_i.send(before_units)
   end
@@ -37,25 +37,13 @@ class Reminder < ActiveRecord::Base
     pending.with_event.find_each(:batch_size => 1) do |reminder|
       reminder.reminder_sent_at = Time.now.utc
       reminder.save!
-      reminder.send_remindersd_later(:deliver!)
+      reminder.send_later(:deliver!)
     end
   end
 
   def deliver!
-    _deliver_by_email! if by_email?
-    _deliver_by_sms!   if by_sms?
-  end
-protected
-
-  def _deliver_by_email!
     event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
-       # TODO: deliver email, create reminder log
-    end
-  end
-
-  def _deliver_by_sms!
-    event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
-       # TODO: deliver sms, create reminder log
+      guest.send_later(:send_reminder!, self)
     end
   end
 end
