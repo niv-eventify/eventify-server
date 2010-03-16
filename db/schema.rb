@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100316140622) do
+ActiveRecord::Schema.define(:version => 20100316162807) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(:version => 20100316140622) do
     t.datetime "ending_at"
     t.string   "location_name"
     t.string   "location_address"
-    t.string   "map_link"
+    t.string   "map_link",                :limit => 2048
     t.string   "map_file_name"
     t.string   "map_content_type"
     t.integer  "map_file_size"
