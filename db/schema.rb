@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100311110907) do
+ActiveRecord::Schema.define(:version => 20100316140622) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -177,6 +177,16 @@ ActiveRecord::Schema.define(:version => 20100311110907) do
   add_index "hosts", ["email"], :name => "index_hosts_on_email"
   add_index "hosts", ["event_id"], :name => "index_hosts_on_event_id"
   add_index "hosts", ["user_id"], :name => "index_hosts_on_user_id"
+
+  create_table "reminder_logs", :force => true do |t|
+    t.integer  "reminder_id"
+    t.integer  "guest_id"
+    t.string   "destination"
+    t.string   "message"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "reminders", :force => true do |t|
     t.integer  "event_id"

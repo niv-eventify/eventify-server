@@ -1,5 +1,6 @@
 class Reminder < ActiveRecord::Base
   belongs_to :event
+  has_many :reminder_logs
 
   BEFORE_UNITS  = ActiveSupport::OrderedHash.new do |h|
     h["hours"]  = N_("Hours")
@@ -31,16 +32,30 @@ class Reminder < ActiveRecord::Base
     errors.add(:to_yes, s_("can't be blank")) if !to_yes? && !to_no? && !to_may_be? && !to_not_responded?
   end
 
-  def deliver!
-    # TODO send a reminder
-    # fill reminder log
-  end
-
   def self.send_reminders
+    log.info "\n\nsending reminders\n\n"
     pending.with_event.find_each(:batch_size => 1) do |reminder|
       reminder.reminder_sent_at = Time.now.utc
       reminder.save!
-      reminder.send_later(:deliver!)
+      reminder.send_remindersd_later(:deliver!)
+    end
+  end
+
+  def deliver!
+    _deliver_by_email! if by_email?
+    _deliver_by_sms!   if by_sms?
+  end
+protected
+
+  def _deliver_by_email!
+    event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
+       # TODO: deliver email, create reminder log
+    end
+  end
+
+  def _deliver_by_sms!
+    event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
+       # TODO: deliver sms, create reminder log
     end
   end
 end

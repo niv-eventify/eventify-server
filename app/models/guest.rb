@@ -21,6 +21,22 @@ class Guest < ActiveRecord::Base
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
   named_scope :not_invited_by_email, {:conditions => "guests.email_invitation_sent_at IS NULL AND guests.send_email = 1"}
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
+  named_scope :to_be_reminded_by, lambda { |reminder|
+    rsvps = []
+    rsvps << 0 if reminder.to_no?
+    rsvps << 1 if reminder.to_yes?
+    rsvps << 2 if reminder.to_may_be?
+
+    res = reminder.to_not_responded? ? "guests.rsvp is NULL" : ""
+
+    unless rsvps.blank?
+      # use newer merge_conditions when patch will be part of rails
+      # https://rails.lighthouseapp.com/projects/8994/tickets/3122-patch-for-support-of-or-as-condition-connector-in-merge_conditions
+      res = merge_conditions(res, ["guests.rsvp in (?)", rsvps]).gsub(") AND (", ") OR (")
+    end
+
+    {:conditions => res}
+  }
 
   after_create :increase_stage_passed
   after_update :check_invitation_failures
