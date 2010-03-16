@@ -7,7 +7,24 @@ class GuestsController < InheritedResources::Base
   # index
   # create
   # destroy
-  # update
+  def update
+    update! do |success, failure|
+      success.js do
+        if params[:attribute]
+          render(:update) {|page| refresh_guest_row(page, resource) }
+        else
+          render(:nothing => true)
+        end
+      end
+      failure.js do
+        if params[:attribute]
+          render(:update) {|page| render_edit_form(page, resource, params[:attribute])}
+        else
+          render(:nothing => true)
+        end
+      end
+    end
+  end
   # edit
   # show
 

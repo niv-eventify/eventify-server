@@ -1,3 +1,0 @@
-if "true" == params[:refresh_guest]
-  refresh_guest_row(page, resource)
-end

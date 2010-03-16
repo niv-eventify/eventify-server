@@ -65,7 +65,7 @@ module EventsHelper
   end
 
   def event_sent_status(event)
-    _("(not sent)") + " - TODO"
+    event.last_invitation_sent_at ? _("(sent)") : _("(not sent)")
   end
 
   def event_location(event)
