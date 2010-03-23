@@ -19,13 +19,13 @@
       .head-cell
         %span.info= _("Send via")
         - if check_all
-          %input#select_all_emails.input-check{ :type => "checkbox" }
+          %input.select_all_emails.input-check{ :type => "checkbox" }
         %label.l-email{ :for => "email" }= _("Email")
     %td.t-col-6
       .head-cell
         %span.info= _("Send via")
         - if check_all
-          %input#select_all_sms.input-check{ :type => "checkbox" }
+          %input.select_all_sms.input-check{ :type => "checkbox" }
         %label.l-text{ :for => "text" }= _("Text/SMS")
     %td.last
       .head-cell

@@ -1,6 +1,10 @@
 - @content_css_class = "stars-bg stage-3"
 - content_for :head do
-  != javascript_include_tag("jquery.select_skin")
+  != javascript_include_tag("jquery.select_skin", "jquery.floatheader.min")
+  :javascript
+    jQuery(function(){
+      jQuery("table#guests").floatHeader();
+    });
   != javascript_include_tag("guests")
 
 - events_content_section(3, nil, @event) do

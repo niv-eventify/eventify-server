@@ -1,4 +1,5 @@
 != stylesheet_link_tag 'all', 'extra', :media => 'all', :cache => "main"
 
 != render(:partial => "layouts/javascripts")
+!= yield :head
 != javascript_include_tag "jrails", "jquery.validate.min.js", "application", "main", :cache => "alljs"
