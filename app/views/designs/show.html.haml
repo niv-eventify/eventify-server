@@ -1,0 +1,14 @@
+- events_content_section(1, nil, @event) do
+  .content-section-heading
+    %h1= _("Invitation Design")
+  .twocolumns
+
+    .side-area
+      .side-area-h
+        %h3
+          Lorem ipsum:
+        .btns-h
+          %a.btn-right{ :href => "#" }
+            Ipsum
+
+    != render(:partial => "events/selected_design")

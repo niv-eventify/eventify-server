@@ -54,10 +54,17 @@ module EventsWizardHelper
   def stage_link(stage_number, event)
     case stage_number
     when 1
-      # TODO link back to choose design
-      nil
+      unless event.new_record?
+        event_design_path(event, :wizard => params[:wizard])
+      else
+        event_design_path(0, :wizard => params[:wizard], :design_id => params[:design_id], :category_id => params[:category_id])
+      end
     when 2
-      edit_event_path(event, :wizard => params[:wizard])
+      unless event.new_record?
+        edit_event_path(event, :wizard => params[:wizard])
+      else
+        new_event_path(:design_id => params[:design_id], :category_id => params[:category_id], :wizard => params[:wizard])
+      end
     when 3
       event_guests_path(event, :wizard => params[:wizard])
     when 4
