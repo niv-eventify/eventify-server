@@ -1,3 +1,7 @@
+- content_for(:head) do
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag "jquery.nyroModal"
+
 - events_content_section(1, @event) do
   .content-section-heading
     %h1= _("Invitation Design")
@@ -6,9 +10,11 @@
     .side-area
       .side-area-h
         %h3
-          Lorem ipsum:
+          = _("You can always:")
         .btns-h
-          %a.btn-right{ :href => "#" }
-            Ipsum
+          %a.btn-left.nyroModal{:href => "#change_design"}= _("Change design")
 
     != render(:partial => "events/selected_design")
+
+#change_design
+  != render(:partial => "designs/change_design")

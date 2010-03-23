@@ -200,3 +200,15 @@ div.cmf-skinned-text {
 	font-size: 1.2em;
 	background:url(/images/btn-blue-mdl-en.gif) no-repeat 100% 0;
 }
+
+#change_design {
+	display:none; 
+	width:900px; 
+	height:500px;
+}
+
+#nyroModalContent .content-wrapper {
+	margin:0;
+	width:auto;
+	float:none;
+}

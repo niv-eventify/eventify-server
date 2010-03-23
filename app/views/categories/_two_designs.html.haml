@@ -6,7 +6,7 @@
 
   .img-box
     - if category
-      != render(:partial => "designs/selector", :locals => {:category => category, :design => category.designs.popular(0)})
+      != render(:partial => "designs/selector", :locals => {:event => nil, :design => category.designs.popular(0)})
   .img-box.img-box-1
     - if category
-      != render(:partial => "designs/selector", :locals => {:category => category, :design => category.designs.popular(1)})
+      != render(:partial => "designs/selector", :locals => {:event => nil, :design => category.designs.popular(1)})

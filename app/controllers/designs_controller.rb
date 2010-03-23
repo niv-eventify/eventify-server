@@ -11,14 +11,15 @@ class DesignsController < InheritedResources::Base
     end
   end
 
-  # events/designs
+  # events/0,1,2,.../designs
   def show
     if params[:event_id].to_i > 0
       @event = current_user.events.find(params[:event_id])
+      @category = @event.category
     else
       design = Design.find(params[:design_id])
-      category = Category.find(params[:category_id])
-      @event = Event.new(:category => category, :design => design)
+      @category = Category.find(params[:category_id])
+      @event = Event.new(:category => @category, :design => design)
     end
   end
 
@@ -29,9 +30,11 @@ protected
   end
 
   def collection
-    respond_to do |format|
-      format.html { @collection ||= category.designs.paginate(:page => params[:page], :per_page => (params[:per_page] || 12)) }
-      format.js { @collection ||= category.designs }
-    end
+    @collection ||= category.designs.paginate(:page => params[:page], :per_page => (params[:per_page] || 12))
   end
+
+  def carusel_collection
+    @carusel_collection ||= category.designs
+  end
+  helper_method :carusel_collection
 end

@@ -10,12 +10,12 @@ module DesignsHelper
     link_to content_tag(:span, _("MORE")), category_designs_path(category), :class => "btn-brown"
   end
 
-  def select_design_link(category, design)
-    link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => category), :class => "blue-btn-sml"
+  def select_design_link(design, css_class = "blue-btn-sml")
+    link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => design.category_id), :class => css_class
   end
 
-  def select_design_link_lightbox(category, design)
-    link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => category), :class => "blue-btn-mdl"
+  def update_design_link(event, design, css_class = "blue-btn-sml")
+    return select_design_link(design, css_class) if !event || event.new_record?
+    # TODO - link to update category goes here
   end
-
 end

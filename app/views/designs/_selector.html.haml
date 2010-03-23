@@ -5,8 +5,8 @@
         .image
           %a{ :href => "#light_box_#{design.id}", :class => "nyroModal" }
             != image_tag(design.preview_with_text.url(:medium), :alt => "")
-      != select_design_link(category, design)
-      %a{ :href => "#light_box_#{design.id}", :class => "plus nyroModal" } +
-  %div{ :id => "light_box_#{design.id}", :class => 'lightbox', :style => 'display:none; width:670px; height:500px'}
+      != update_design_link(event, design)
+      %a.plus.nyroModal{ :href => "#light_box_#{design.id}" } +
+  %div.lightbox{ :id => "light_box_#{design.id}", :style => 'display:none; width:670px; height:500px'}
     != image_tag(design.preview_with_text.url(:lightbox))
-    != select_design_link_lightbox(category, design)
+    != update_design_link(event, design, "blue-btn-mdl")
