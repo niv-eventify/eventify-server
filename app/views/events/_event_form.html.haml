@@ -1,4 +1,4 @@
-- events_content_section(2, {:func => "jQuery('.form').submit()"}, @event) do
+- events_content_section(2, @event, :next => {:func => "jQuery('.form').submit()"}) do
   .content-section-heading
     %h1= _("Please fill out the events details")
   .twocolumns

@@ -10,7 +10,18 @@ module EventsWizardHelper
     end
   end
 
-  def events_content_section(stage_number, next_link_opts, event)
+  def wizard_prev_link(opts)
+    if opts[:func]
+      link_to_function(_("Previous"), opts[:func], :class => "previous-btn")
+    else
+      link_to(_("Previous"), opts[:href], :class => "previous-btn")
+    end
+  end
+
+  def events_content_section(stage_number, event, prev_next_opts = {})
+    next_link_opts = prev_next_opts[:next]
+    prev_link_opts = prev_next_opts[:prev]
+
     haml_tag(:div, :class => "h-container") do
       haml_tag(:div, "&nbsp;", :class => "t")
       haml_tag(:div, :class => "c") do
@@ -23,9 +34,10 @@ module EventsWizardHelper
       end
       haml_tag(:div, :class => "b") do
         haml_tag(:div, :class => "btns") do
-          if prev_lnk = stage_link(stage_number - 1, event)
-            haml_concat link_to(_("Previous"), prev_lnk, :class => "previous-btn")
+          if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
+            haml_concat wizard_prev_link(prev_lnk)
           end
+
           if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
             haml_concat wizard_next_link(next_link)
           end
