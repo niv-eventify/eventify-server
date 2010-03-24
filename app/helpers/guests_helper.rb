@@ -32,8 +32,11 @@ module GuestsHelper
   def guest_remote_form(guest, attribute)
     klass = ""
     klass << " short" if !guest.send(attribute).is_a?(String)
+    fields_opts = {:input_css_class => klass, 
+      :container_class => "inline_#{dom_id(guest)}_#{attribute}",
+      :onblur => "jQuery(this).parents('form').get(0).onsubmit()"}
     form_remote_for :guest, guest, :builder => TableCellFormBuilder::Builder, :url => event_guest_path(guest.event_id, guest), :method => :put do |f|
-      haml_concat f.text_field(attribute, :input_css_class => klass, :container_class => "inline_#{dom_id(guest)}_#{attribute}")
+      haml_concat f.text_field(attribute, fields_opts)
       haml_concat hidden_field_tag("attribute", attribute)
     end
   end

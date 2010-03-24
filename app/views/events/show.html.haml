@@ -1,6 +1,10 @@
+- content_for(:head) do
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag "jquery.nyroModal"
+
 - @content_css_class = "stars-bg stage-3"
 
-- events_content_section(4, nil, @event) do
+- events_content_section(4, @event) do
   .content-section-heading
     %h1= _("Set event reminders for you and your guests")
 
@@ -9,7 +13,8 @@
     .holder
       .frame
         %h3= _("Reminders")
-        todo
+        .event-reminders
+          != render(:partial => "reminders/index")
   %br
   .info-area-tab
     .holder

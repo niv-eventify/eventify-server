@@ -5,6 +5,7 @@ describe Reminder do
     before(:each) do
       @event = Factory.create(:event)
       @reminder = @event.reminders.build
+      @reminder.before_value = @reminder.before_units = nil # skip defaults for new form
     end
 
     it "should validate presense of before_units/before_value" do

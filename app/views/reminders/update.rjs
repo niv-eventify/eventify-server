@@ -1,0 +1,6 @@
+if resource.errors.blank?
+  page << "jQuery.nyroModalRemove()"
+  page << "jQuery('.event-reminders').html(#{render(:partial => "index").to_json})"
+else
+  page << "jQuery('.edit_reminder').html(#{render(:partial => 'edit').to_json})"
+end

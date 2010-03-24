@@ -1,0 +1,5 @@
+%h4= _("New reminder")
+- semantic_form_remote_for :reminder, resource, :live_validations => true, :url => event_reminders_path(@event) do |f|
+  != render(:partial => "reminders/form", :locals => {:f => f})
+  != f.submit _("Save")
+  != link_to_function _("Cancel"), "jQuery.nyroModalRemove();"
