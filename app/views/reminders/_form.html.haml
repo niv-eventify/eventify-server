@@ -1,0 +1,26 @@
+%h5= _("Send To")
+- f.inputs do
+  != f.input :to_yes, :label => s_(Reminder::SEND_TO_TITLES[:to_yes])
+  != f.input :to_no, :label => s_(Reminder::SEND_TO_TITLES[:to_no])
+  != f.input :to_may_be, :label => s_(Reminder::SEND_TO_TITLES[:to_may_be])
+  != f.input :to_not_responded, :label => s_(Reminder::SEND_TO_TITLES[:to_not_responded])
+
+%h5= _("Send By")
+- f.inputs do
+  != f.input :by_email, :label => _("Email")
+  != f.input :by_sms, :label => _("SMS")
+
+%h5= _("Send At")
+- f.inputs do
+  != f.input :before_value, :label => ""
+  != f.input :before_units, :as => :select, :collection => before_units_for_select, :label => ""
+  = _("before the event")
+
+%h5= _("Email")
+- f.inputs do
+  != f.input :email_subject, :label => "Email subject"
+  != f.input :email_body, :label => "Email body", :as => :text
+
+%h5= _("SMS")
+- f.inputs do
+  != f.input :sms_message, :label => "SMS Message"

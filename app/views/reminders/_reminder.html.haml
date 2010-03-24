@@ -1,0 +1,4 @@
+%div[reminder]
+  != reminder_info(reminder)
+  != link_to_remote _("remove"), :url => event_reminder_path(@event, reminder), :method => :delete, :confirm => _("Are you sure?")
+  != link_to _("edit"), edit_event_reminder_path(@event, reminder), :class => "nyroModal"
