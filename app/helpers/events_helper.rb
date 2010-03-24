@@ -73,7 +73,7 @@ module EventsHelper
   end
   
   def months_arr
-    javascript_tag("stage2.months_arr = ['" + _("en.date.month_names").join("','") + "'];")
+    javascript_tag("stage2.months_arr = ['" + _("en.date.abbr_month_names").join("','") + "'];")
   end
 protected
   def js_add_classes(attribute)

@@ -338,6 +338,8 @@ var Calendar = new Class({
 			caption.adopt(new Element('span').addClass(this.classes.month).appendText(this.options.months[cal.month]));
 			
 			caption.adopt(new Element('span').addClass(this.classes.year).appendText(cal.year));
+			//the next line is for the caption elements to be shown in IEx
+			caption.adopt(new Element('span').addClass('dummy').appendText(''));
 			
 			if (navigation.next.month && this.options.navigation) { next.clone().addEvent('click', function(cal) { this.navigate(cal, 'm', 1); }.pass(cal, this)).injectInside(caption); }
 

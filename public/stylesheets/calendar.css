@@ -7,7 +7,7 @@ select.i-heart-ny {
 }
 
 button.i-heart-ny {
-  visibility: hidden;
+	visibility: hidden;
 	background: url(/images/i-heart-ny-icon.gif);
 	border: 0;
 	cursor: pointer;
@@ -32,7 +32,7 @@ div.i-heart-ny * {
 	padding: 0;
 }
 div.i-heart-ny div {
-	background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-position: 8px 8px;
   cursor: move;
   height: 278px;
@@ -42,6 +42,16 @@ div.i-heart-ny div {
 }
 div.i-heart-ny.month0 div { background-image: url(/images/tyul1_small.gif); }
 div.i-heart-ny.month1 div { background-image: url(/images/charaty1_small.gif); }
+div.i-heart-ny.month2 div { background-image: url(/images/tyul1_small.gif); }
+div.i-heart-ny.month3 div { background-image: url(/images/charaty1_small.gif); }
+div.i-heart-ny.month4 div { background-image: url(/images/tyul1_small.gif); }
+div.i-heart-ny.month5 div { background-image: url(/images/charaty1_small.gif); }
+div.i-heart-ny.month6 div { background-image: url(/images/tyul1_small.gif); }
+div.i-heart-ny.month7 div { background-image: url(/images/charaty1_small.gif); }
+div.i-heart-ny.month8 div { background-image: url(/images/tyul1_small.gif); }
+div.i-heart-ny.month9 div { background-image: url(/images/charaty1_small.gif); }
+div.i-heart-ny.month10 div { background-image: url(/images/tyul1_small.gif); }
+div.i-heart-ny.month11 div { background-image: url(/images/charaty1_small.gif); }
 
 /*
 We won't be using the caption element traditionally
@@ -51,43 +61,63 @@ IEX only responds to line-height
 */
 
 div.i-heart-ny caption {
-  color: #808080;
+  color: #523733;
   height: 0%;
   line-height: 0;
 }
 div.i-heart-ny caption a {
   cursor: pointer;
   display: block;
-  height: 25px;
+  height: 18px;
   overflow: hidden;
   position: absolute;
   text-indent: -100px;
-  top: 0;
-  width: 23px;
+  bottom: 10px;
+  width: 11px;
   z-index: 200;
 }
 div.i-heart-ny caption a.prev_month {
-  background-image: url(/images/i-heart-ny-prev.png);
+  background-image: url(/images/cal_left.gif);
   background-position: 0px 0px;
-  left: 0;
+  left: 52px;
   float: none;
+}
+.hebrew div.i-heart-ny caption a.prev_month {
+  background-image: url(/images/cal_right.gif);
+  left: 143px;
 }
 div.i-heart-ny caption a.next_month {
-  background-image: url(/images/i-heart-ny-next.png);
+  background-image: url(/images/cal_right.gif);
   background-position: 0px 0px;
-  right: 0;
+  right: 10px;
   float: none;
 }
-div.i-heart-ny caption a:hover {
-  background-position: 0 25px;
-  background-repeat: repeat;
+.hebrew div.i-heart-ny caption a.next_month {
+  background-image: url(/images/cal_left.gif);
+  right: 101px;
 }
 div.i-heart-ny caption span.month {
   bottom: 8px;
   font: normal 11px Arial, Helvetica, sans-serif;
   position: absolute;
-  right: 10px;
+  right: 70px;
   z-index: 100;
+}
+
+.hebrew div.i-heart-ny caption span.month {
+  right: 25px;
+}
+
+div.i-heart-ny caption span.year {
+  bottom: 8px;
+  font: normal 11px Arial, Helvetica, sans-serif;
+  position: absolute;
+  right: 35px;
+  z-index: 100;
+}
+
+.hebrew div.i-heart-ny caption span.year {
+  right: 70px;
 }
 
 /*
@@ -95,13 +125,8 @@ IEX won't work if all the children of the caption element are absolutely positio
 Since we can't just leave the year un-positioned, we will have to hide it
 (Remarkably this actually works in IEX)
 */
-
-div.i-heart-ny caption span.year {
-  bottom: 8px;
-  font: normal 11px Arial, Helvetica, sans-serif;
-  position: absolute;
-  right: 55px;
-  z-index: 100;
+div.i-heart-ny caption span.dummy {
+  display: none;
 }
 
 div.i-heart-ny table {
