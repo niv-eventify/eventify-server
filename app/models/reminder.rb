@@ -2,10 +2,15 @@ class Reminder < ActiveRecord::Base
   belongs_to :event
   has_many :reminder_logs
 
-  BEFORE_UNITS  = ActiveSupport::OrderedHash.new do |h|
-    h["hours"]  = N_("Hours")
-    h["days"]   = N_("Days")
-    h["months"] = N_("Months")
+  def self.default_before_units
+    return @default_before_units if @default_before_units
+
+    @default_before_units ||= ActiveSupport::OrderedHash.new
+    @default_before_units["hours"]  = N_("Hours")
+    @default_before_units["days"]   = N_("Days")
+    @default_before_units["months"] = N_("Months")
+
+    @default_before_units
   end
 
   attr_accessible :to_yes, :to_no, :to_may_be, :to_not_responded, :by_email, :by_sms, 
@@ -16,7 +21,7 @@ class Reminder < ActiveRecord::Base
 
   before_validation :set_sending_time
   def set_sending_time
-    self.before_units = BEFORE_UNITS.keys.member?(before_units) ? before_units : "days"
+    self.before_units = self.class.default_before_units.keys.member?(before_units) ? before_units : "days"
     self.send_reminder_at = event.starting_at - (before_value || 0).to_i.send(before_units)
   end
 
