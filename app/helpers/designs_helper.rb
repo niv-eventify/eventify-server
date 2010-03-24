@@ -16,6 +16,7 @@ module DesignsHelper
 
   def update_design_link(event, design, css_class = "blue-btn-sml")
     return select_design_link(design, css_class) if !event || event.new_record?
-    # TODO - link to update category goes here
+
+    render(:partial => "designs/change_design_form", :locals => {:event => event, :design => design, :css_class => css_class})
   end
 end

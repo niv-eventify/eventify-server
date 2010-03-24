@@ -53,7 +53,11 @@ class EventsController < InheritedResources::Base
     return _cancel_sms if "true" == params[:cancel_sms]
 
     update! do |success, failure|
-      success.html { redirect_to event_guests_path(@event, :wizard => params[:wizard]) }
+      success.html do
+        return redirect_to(edit_event_path(@event, :wizard => params[:wizard])) if "true" == params[:update_design]
+
+        redirect_to event_guests_path(@event, :wizard => params[:wizard])
+      end
     end
   end
 
