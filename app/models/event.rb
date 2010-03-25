@@ -54,6 +54,13 @@ class Event < ActiveRecord::Base
     send_invitations if send_invitations_now
   end
 
+  after_update :adjust_reminders
+  def adjust_reminders
+    return if reminders.future_not_sent.count.zero?
+    reminders.future_not_sent.collect(&:adjust!)
+  end
+
+
   named_scope :upcoming, :conditions => ["events.starting_at > ?", Time.now.utc]
   named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
