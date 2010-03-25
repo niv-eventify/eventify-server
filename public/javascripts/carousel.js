@@ -119,4 +119,11 @@ $(document).ready(function(){
       rebind_category($(".promo-nav li:first a"));
     });
   }
+  $("#carouselImgBox").mousewheel(function(e, delta){
+    // ff
+	e.preventDefault();
+	// ie
+	e.returnValue = false;
+	$("#carousel").trigger(e, delta);
+  });
 });
