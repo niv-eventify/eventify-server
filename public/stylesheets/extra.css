@@ -137,10 +137,13 @@ div.cmf-skinned-text {
 .hebrew #nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 0 -26px;}
 .hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 100% -26px;}
 
-.promo-gallery, .hebrew .promo-gallery {
-	margin:0 0 0 0;
+.promo-gallery {
+	margin: 0 0 0 125px;
 }
 
+.hebrew .promo-gallery {
+	margin: 0 126px 0 0; 	
+}
 .img-box {
 	direction:inherit !important;
 }
