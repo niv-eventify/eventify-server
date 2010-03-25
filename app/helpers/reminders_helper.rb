@@ -10,7 +10,7 @@ module RemindersHelper
 
   def reminder_info(reminder)
     res = "#{reminder.before_in_words}, #{reminder.whom_to_in_words} #{reminder.by_in_words}"
-    res << " "  << s_("reminder|sent") unless reminder.reminder_sent_at.nil?
+    res << " "  << s_("reminder|(sent)") unless reminder.reminder_sent_at.nil?
     res
   end
 end
