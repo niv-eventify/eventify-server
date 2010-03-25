@@ -82,11 +82,13 @@ class Reminder < ActiveRecord::Base
     pending.with_event.find_each(:batch_size => 1) do |reminder|
       reminder.reminder_sent_at = Time.now.utc
       reminder.save!
+      logger.info "\n\nsend_later(:deliver!) reminder_id=#{reminder.id}\n\n"
       reminder.send_later(:deliver!)
     end
   end
 
   def deliver!
+    logger.info "\n\ndeliver! reminder_id=#{self.id}\n\n"
     event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
       guest.send_later(:send_reminder!, self)
     end
