@@ -24,7 +24,7 @@ class Reminder < ActiveRecord::Base
   attr_accessible :to_yes, :to_no, :to_may_be, :to_not_responded, :by_email, :by_sms, 
     :email_subject, :email_body, :sms_message, :before_units, :before_value
 
-  named_scope :pending, :conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at > ?", Time.now.utc]
+  named_scope :pending, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}}
   named_scope :with_event, :include => :event
 
   before_validation :set_sending_time

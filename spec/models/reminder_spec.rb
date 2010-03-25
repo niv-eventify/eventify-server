@@ -1,6 +1,21 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Reminder do
+
+  describe "scope" do
+    it "should generate future scope" do
+      t = Time.now.utc
+      t.stub!(:utc).and_return(t)
+      Time.stub!(:now).and_return(t)
+      Reminder.pending.proxy_options.should == {:conditions=>["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", t]}
+
+      t = 10.minutes.from_now
+      t.stub!(:utc).and_return(t)
+      Time.stub!(:now).and_return(t)
+      Reminder.pending.proxy_options.should == {:conditions=>["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", t]}
+    end
+  end
+
   describe "validations" do
     before(:each) do
       @event = Factory.create(:event)
