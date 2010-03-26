@@ -56,10 +56,13 @@ class Event < ActiveRecord::Base
 
   after_update :adjust_reminders
   def adjust_reminders
-    return if reminders.future_not_sent.count.zero?
-    reminders.future_not_sent.collect(&:adjust!)
+    disabled = reminders.not_sent.collect(&:adjust!)
+    @reminders_disabled = disabled.any?
   end
 
+  def reminders_disabled?
+    @reminders_disabled
+  end
 
   named_scope :upcoming, :conditions => ["events.starting_at > ?", Time.now.utc]
   named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]

@@ -65,6 +65,37 @@ describe Reminder do
     end
   end
 
+  describe "rescheduing events" do
+    before(:each) do
+      @event = Factory.build(:event)
+      @original_start = 11.days.from_now.utc
+      @event.starting_at = @original_start
+      @event.save!
+      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :to_yes => true, :by_sms => true, :sms_message => "some")
+    end
+
+    it "should be active reminder" do
+      @reminder.should be_is_active
+    end
+
+    it "should have reminder_send_at date" do
+      @reminder.send_reminder_at.to_i.should == (@original_start - 1.hour).to_i
+    end
+
+    it "should reschedule reminder" do
+      @event.starting_at = @original_start - 2.hours
+      @event.save!
+      @reminder.reload.send_reminder_at.to_i.should == (@original_start - 3.hours).to_i
+      @reminder.should be_is_active
+    end
+
+    it "should deactivate reminder" do
+      @event.starting_at = 1.minute.from_now
+      @event.save!
+      @reminder.reload.should_not be_is_active
+    end
+  end
+
   describe "should create healthy reminders" do
     before(:each) do
       @event = Factory.create(:event)

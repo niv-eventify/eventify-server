@@ -1,5 +1,5 @@
 .edit_reminder
-  - if reminder_sent_at.nil?
+  - unless resource.reminder_sent_at.nil?
     %h4= _("Reminder has already been sent")
   - else
     != render(:partial => "reminders/edit")

@@ -10,9 +10,11 @@ Factory.define :user do |user|
 end
 
 Factory.define :active_user, :parent => :user do |user|
+  user.sequence(:email) {|a| "#{a}@example1.com".downcase }
   user.activated_at 1.month.ago.utc
 end
 
 Factory.define :admin, :parent => :active_user do |user|
+  user.sequence(:email) {|a| "#{a}@example2.com".downcase }
   user.is_admin true
 end

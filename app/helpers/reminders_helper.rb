@@ -13,4 +13,15 @@ module RemindersHelper
     res << " "  << s_("reminder|(sent)") unless reminder.reminder_sent_at.nil?
     res
   end
+
+  def reminder_remote_is_active(reminder)
+    form_remote_for :reminder, reminder, :url => event_reminder_path(reminder.event_id, reminder), :method => :put do |f|
+      haml_concat f.check_box(:is_active, :onchange => "jQuery(this).parents('form').get(0).onsubmit()", :id => "#{dom_id(reminder)}_is_active", :disabled => !reminder.reminder_sent_at.nil?)
+    end
+  end
+
+  def rerender_reminders(page)
+    page << "jQuery('.event-reminders').html(#{render(:partial => "index").to_json})"
+  end
+
 end
