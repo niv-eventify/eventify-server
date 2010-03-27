@@ -65,6 +65,25 @@ describe Reminder do
     end
   end
 
+  describe "remove reminders" do
+    before(:each) do
+      @event = Factory.create(:event)
+      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :to_yes => true, :by_sms => true, :sms_message => "some")
+    end
+
+    it "should destroy not sent reminder" do
+      @reminder.destroy.should be_true
+      @reminder.errors.should be_blank
+    end
+
+    it "should not destroy sent reminder" do
+      @reminder.reminder_sent_at = Time.now.utc
+      @reminder.save
+      @reminder.destroy.should_not be_true
+      @reminder.errors.should_not be_blank      
+    end
+  end
+
   describe "rescheduing events" do
     before(:each) do
       @event = Factory.build(:event)

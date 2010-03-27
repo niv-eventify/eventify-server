@@ -66,6 +66,13 @@ class Reminder < ActiveRecord::Base
     errors.add(:to_yes, s_("can't be blank")) if !to_yes? && !to_no? && !to_may_be? && !to_not_responded?
   end
 
+  def before_destroy
+    unless reminder_sent_at.nil?
+      errors.add(:base, "already sent")
+      return false
+    end
+  end
+
   def active_not_yet_sent?
     reminder_sent_at.nil? && is_active?
   end

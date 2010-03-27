@@ -15,6 +15,7 @@ class RemindersController < InheritedResources::Base
     update!
   end
   # edit
+
   # destroy
 
 protected

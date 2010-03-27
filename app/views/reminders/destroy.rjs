@@ -1,1 +1,5 @@
-page[dom_id(resource)].remove
+if resource.frozen?
+  page[dom_id(resource)].remove
+else
+  page[dom_id(resource)].append _("Reminder has already been sent")
+end
