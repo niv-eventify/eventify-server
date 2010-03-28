@@ -16,21 +16,42 @@ class Reminder < ActiveRecord::Base
     @default_before_units ||= ActiveSupport::OrderedHash.new
     @default_before_units["hours"]  = N_("Hours")
     @default_before_units["days"]   = N_("Days")
+    @default_before_units["weeks"] =  N_("Weeks")
     @default_before_units["months"] = N_("Months")
 
     @default_before_units
   end
 
   attr_accessible :to_yes, :to_no, :to_may_be, :to_not_responded, :by_email, :by_sms, 
-    :email_subject, :email_body, :sms_message, :before_units, :before_value
+    :email_subject, :email_body, :sms_message, :before_units, :before_value, :is_active
 
-  named_scope :pending, :conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at > ?", Time.now.utc]
+  named_scope :pending, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}}
+  named_scope :active, :conditions => {:is_active => true}
+  named_scope :not_sent, {:conditions => "reminders.reminder_sent_at IS NULL"}
   named_scope :with_event, :include => :event
 
+  before_validation :set_before_units
+  def set_before_units
+    self.before_units = self.class.default_before_units.keys.member?(before_units) ? before_units : "days"
+  end
   before_validation :set_sending_time
   def set_sending_time
-    self.before_units = self.class.default_before_units.keys.member?(before_units) ? before_units : "days"
     self.send_reminder_at = event.starting_at - (before_value || 0).to_i.send(before_units)
+  end
+
+  def adjust!
+    res = false
+
+    set_sending_time
+    begin
+      save!
+    rescue ActiveRecord::RecordInvalid
+      self.is_active = false
+      res = self.is_active_changed?
+      save!
+    end
+
+    res
   end
 
   validates_presence_of :before_units, :before_value
@@ -40,9 +61,24 @@ class Reminder < ActiveRecord::Base
   validates_presence_of :sms_message, :if => :by_sms
 
   def validate
-    errors.add(:before_value, _("should be in a future")) if reminder_sent_at.nil?  && (!send_reminder_at || send_reminder_at >= event.starting_at)
+    errors.add(:before_value, _("should be in a future")) if active_not_yet_sent? && (send_reminder_at.blank? || in_past?)
     errors.add(:by_email, s_("...mail or sms|choose a delivery method")) if !by_email? && !by_sms?
     errors.add(:to_yes, s_("can't be blank")) if !to_yes? && !to_no? && !to_may_be? && !to_not_responded?
+  end
+
+  def before_destroy
+    unless reminder_sent_at.nil?
+      errors.add(:base, "already sent")
+      return false
+    end
+  end
+
+  def active_not_yet_sent?
+    reminder_sent_at.nil? && is_active?
+  end
+
+  def in_past?
+    send_reminder_at >= event.starting_at || Time.now.utc > send_reminder_at
   end
 
   def initialize(params = nil)
@@ -52,9 +88,16 @@ class Reminder < ActiveRecord::Base
   end
 
   def before_in_words
-    s_("reminder text|%{count} %{units} before the event") % {
-      :count => before_value, :units => s_(self.class.default_before_units[before_units])
-    }
+    case before_units
+    when "hours"
+      n_("One hour before the event", "%d hours before the event", before_value) % before_value
+    when "days"
+      n_("One day before the event", "%d days before the event", before_value) % before_value
+    when "weeks"
+      n_("One week before the event", "%d weeks before the event", before_value) % before_value
+    when "months"
+      n_("One month before the event", "%d months before the event", before_value) % before_value
+    end
   end
 
   def whom_to_in_words
@@ -79,14 +122,17 @@ class Reminder < ActiveRecord::Base
 
   def self.send_reminders
     logger.info "\n\nsending reminders\n\n"
-    pending.with_event.find_each(:batch_size => 1) do |reminder|
-      reminder.reminder_sent_at = Time.now.utc
-      reminder.save!
-      reminder.send_later(:deliver!)
+    active.pending.with_event.find_in_batches(:batch_size => 100) do |reminders|
+      reminders.update_all(["reminder_sent_at = ?", Time.now.utc])
+      reminders.each do |reminder|
+        logger.info "\n\nsend_later(:deliver!) reminder_id=#{reminder.id}\n\n"
+        reminder.send_later(:deliver!)
+      end
     end
   end
 
   def deliver!
+    logger.info "\n\ndeliver! reminder_id=#{self.id}\n\n"
     event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
       guest.send_later(:send_reminder!, self)
     end

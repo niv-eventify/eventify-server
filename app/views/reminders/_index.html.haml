@@ -3,4 +3,6 @@
 - else
   != render(:partial => "reminders/reminder", :collection => @event.reminders)
 
-!= link_to _("Add reminder"), new_event_reminder_path(@event), :class => "nyroModal"
+!= link_to _("Add reminder"), new_event_reminder_path(@event), :class => "link_to_add_reminder"
+:javascript
+  jQuery(function(){jQuery('a.link_to_add_reminder').nyroModal();});

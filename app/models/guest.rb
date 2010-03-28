@@ -80,12 +80,13 @@ class Guest < ActiveRecord::Base
     if reminder.by_email?
       # TODO: handle delivery errors
       Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
-      reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success")
+      reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success", :kind => "email")
     end
 
     if reminder.by_sms?
       sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, event.host_mobile_number)
       status = sms.send_sms(mobile_phone, reminder.sms_message, self) ? "success" : "failure"
+      reminder.reminder_logs.create(:guest_id => self.id, :destination => mobile_phone, :message => reminder.sms_message, :status => status, :kind => "sms")
     end
   end
 

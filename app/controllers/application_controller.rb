@@ -27,4 +27,7 @@ protected
 
   alias :authenticate_translations_admin :require_admin
 
+  def remove_flash
+    flash[:notice] = nil
+  end
 end
