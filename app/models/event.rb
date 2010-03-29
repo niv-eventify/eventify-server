@@ -68,6 +68,11 @@ class Event < ActiveRecord::Base
   named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
 
+  before_create :set_stage_passed
+  def set_stage_passed
+    self.stage_passed = 2
+  end
+
   def invitations_to_send_counts
     return @invitations_to_send_counts if @invitations_to_send_counts
 
