@@ -64,8 +64,8 @@ class Event < ActiveRecord::Base
     @reminders_disabled
   end
 
-  named_scope :upcoming, :conditions => ["events.starting_at > ?", Time.now.utc]
-  named_scope :past, :conditions => ["events.starting_at < ?", Time.now.utc]
+  named_scope :upcoming, lambda{{:conditions => ["events.starting_at > ?", Time.now.utc]}}
+  named_scope :past, lambda{{:conditions => ["events.starting_at < ?", Time.now.utc]}}
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
 
   before_create :set_stage_passed
@@ -170,7 +170,8 @@ class Event < ActiveRecord::Base
 protected
 
   def _cancel_sms_reminders!
-    # TODO
+    reminders.update_all("by_sms = 0")
+    reminders.update_all("is_active = 0", "by_sms = 0 AND by_email = 0")
   end
 
   def _cancel_sms_invitations!
