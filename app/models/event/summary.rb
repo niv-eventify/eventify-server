@@ -1,0 +1,52 @@
+module Event::Summary
+
+  SUMMARY_DEFAULTS = {
+    0 => N_("Don't send"),
+    1 => N_("When a guest updates RSVP"),
+    2 => N_("Once a day"),
+    3 => N_("Once a week")
+  }
+
+  def self.included(base)
+    base.extend(ClassMethods)
+    base.class_eval do
+      named_scope :overdue_summary, lambda {{:conditions => ["events.rsvp_summary_send_at < ?", Time.now.utc]}}
+      named_scope :delayed_summary, :conditions => "events.rsvp_summary_send_every in (2, 3)" # others - send on demand
+    end
+  end
+
+  module ClassMethods
+    def summary_cron_job
+      upcoming.overdue_summary.find_each(:batch_size => 1) do |event|
+        event.update_next_summary_send!
+        event.send_later(:send_summary_email)
+      end
+    end
+  end
+
+  def update_next_summary_send!
+    self.rsvp_summary_send_at = Time.now.utc + (2 == rsvp_summary_send_every ? 1.day : 1.week)
+    if rsvp_summary_send_at > starting_at
+      self.rsvp_summary_send_at = starting_at - 1.hour
+    end
+
+    if rsvp_summary_send_at < Time.now.utc
+      # just skip
+      self.rsvp_summary_send_at = starting_at + 1.second
+    end
+    save!
+  end
+
+  def send_summary_email
+    rsvps = { 0 => [], 1 => [], 2 => []}
+
+    # gather guests
+    guests.summary_email_not_sent.find_each(:batch_size => 1) do |guest|
+      guest.reset_summary_status!      
+      rsvps[guest.rsvp] << {:name => guest.name, :email => guest.email, :mobile_phone => guest.mobile_phone} if guest.rsvp
+    end
+
+    # sending email
+    Notifier.send_later(:deliver_guests_summary, self, rsvps)
+  end
+end

@@ -13,6 +13,8 @@ class Event < ActiveRecord::Base
   has_many :things
   has_many :reminders
 
+  include Event::Summary
+
   has_attached_file :map,
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket) || "junk",

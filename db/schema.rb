@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326150950) do
+ActiveRecord::Schema.define(:version => 20100331121030) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -132,7 +132,11 @@ ActiveRecord::Schema.define(:version => 20100326150950) do
     t.string   "language",                :limit => 16
     t.string   "host_mobile_number"
     t.string   "sms_message"
+    t.datetime "rsvp_summary_send_at"
+    t.integer  "rsvp_summary_send_every",                 :default => 0
   end
+
+  add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"
 
   create_table "global_preferences", :force => true do |t|
     t.string   "name"
@@ -161,6 +165,7 @@ ActiveRecord::Schema.define(:version => 20100326150950) do
     t.integer  "attendees_count"
     t.datetime "sms_invitation_failed_at"
     t.datetime "email_invitation_failed_at"
+    t.datetime "summary_email_sent_at"
   end
 
   add_index "guests", ["event_id"], :name => "index_guests_on_event_id"

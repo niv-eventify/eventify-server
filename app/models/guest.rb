@@ -21,6 +21,7 @@ class Guest < ActiveRecord::Base
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
   named_scope :not_invited_by_email, {:conditions => "guests.email_invitation_sent_at IS NULL AND guests.send_email = 1"}
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
+  named_scope :summary_email_not_sent, :conditions => "guests.summary_email_sent_at IS NULL"
   named_scope :to_be_reminded_by, lambda { |reminder|
     rsvps = []
     rsvps << 0 if reminder.to_no?
@@ -40,6 +41,7 @@ class Guest < ActiveRecord::Base
 
   after_create :increase_stage_passed
   after_update :check_invitation_failures
+  before_update :update_summary_status
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
@@ -54,6 +56,11 @@ class Guest < ActiveRecord::Base
     if rsvp_changed?
       self.summary_email_sent_at = nil
     end
+  end
+
+  def reset_summary_status!
+    self.summary_email_sent_at = Time.now.utc
+    save!
   end
 
   def prepare_sms_invitation!(timestamp)

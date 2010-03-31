@@ -16,6 +16,10 @@ class Notifier < ActionMailer::Base
     body        :guest => guest, :message => message, :url => rsvp_url(guest.email_token)
   end
 
+  def guests_summary(event, guests_groups)
+    
+  end
+
 protected
 
   def domain
