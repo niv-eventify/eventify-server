@@ -50,6 +50,12 @@ class Guest < ActiveRecord::Base
     end
   end
 
+  def update_summary_status
+    if rsvp_changed?
+      self.summary_email_sent_at = nil
+    end
+  end
+
   def prepare_sms_invitation!(timestamp)
     # TODO = check sms bulk status / package payments
     self.sms_invitation_sent_at = timestamp

@@ -4,6 +4,7 @@ Factory.define :guest do |guest|
   guest.email {|a| "#{a.name}@example.com".downcase }
 
   guest.association :event, :factory => :event
+  guest.summary_email_sent_at 10.minutes.ago
 end
 
 Factory.define :guest_with_token, :parent => :guest do |guest|

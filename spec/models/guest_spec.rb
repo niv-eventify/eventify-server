@@ -104,6 +104,25 @@ describe Guest do
     end
   end
 
+  describe "summary status" do
+    before(:each) do
+      @guest = Factory.create(:guest)
+      @summary_email_sent_at = @guest.summary_email_sent_at
+    end
+
+    it "should not change summary_email_sent_at when rsvp is not changed" do
+      @guest.name = "foo bar"
+      @guest.save!
+      @guest.summary_email_sent_at.should == @summary_email_sent_at
+    end
+
+    it "should change summary_email_sent_at when rsvp is changed" do
+      @guest.rsvp = 2
+      @guest.save!
+      @guest.summary_email_sent_at.should be_nil      
+    end
+  end
+
   describe "send email invitation" do
     before(:each) do
       @guest = Factory.create(:guest)
