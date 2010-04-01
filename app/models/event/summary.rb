@@ -19,7 +19,7 @@ module Event::Summary
     def summary_cron_job
       upcoming.overdue_summary.find_each(:batch_size => 1) do |event|
         event.update_next_summary_send!
-        event.send_later(:send_summary_email)
+        event.send_later(:send_summary_email!)
       end
     end
   end
@@ -37,16 +37,26 @@ module Event::Summary
     save!
   end
 
-  def send_summary_email
+  def send_summary_email!
     rsvps = { 0 => [], 1 => [], 2 => []}
 
     # gather guests
+    guests_count = 0
     guests.summary_email_not_sent.find_each(:batch_size => 1) do |guest|
       guest.reset_summary_status!      
-      rsvps[guest.rsvp] << {:name => guest.name, :email => guest.email, :mobile_phone => guest.mobile_phone} if guest.rsvp
+      if guest.rsvp
+        rsvps[guest.rsvp] << {:name => guest.name, :email => guest.email, :mobile_phone => guest.mobile_phone}
+        guests_count += 1
+      end
     end
 
+    return if guests_count.zero?
+
     # sending email
-    Notifier.send_later(:deliver_guests_summary, self, rsvps)
+    summary_since = last_summary_sent_at || created_at
+    self.last_summary_sent_at = Time.now.utc
+    save!
+
+    Notifier.send_later(:deliver_guests_summary, self, rsvps, summary_since)
   end
 end
