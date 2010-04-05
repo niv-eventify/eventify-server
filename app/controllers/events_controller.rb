@@ -58,6 +58,7 @@ class EventsController < InheritedResources::Base
 
         redirect_to event_guests_path(@event, :wizard => params[:wizard])
       end
+      success.js { render(:nothing => true) }
     end
   end
 

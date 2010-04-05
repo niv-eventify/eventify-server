@@ -20,4 +20,5 @@
     .holder
       .frame
         %h3= _("Message Confirmations")
-        todo
+        != _("Send RSVPs summary email")
+        - event_rsvp_summary_select(@event)

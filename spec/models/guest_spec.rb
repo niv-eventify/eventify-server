@@ -104,6 +104,34 @@ describe Guest do
     end
   end
 
+  describe "summary status" do
+    before(:each) do
+      @guest = Factory.create(:guest)
+      @summary_email_sent_at = @guest.summary_email_sent_at
+    end
+
+    it "should not change summary_email_sent_at when rsvp is not changed" do
+      @guest.name = "foo bar"
+      @guest.save!
+      @guest.summary_email_sent_at.should == @summary_email_sent_at
+    end
+
+    it "should change summary_email_sent_at when rsvp is changed" do
+      @guest.rsvp = 2
+      Notifier.should_not_receive :send_later
+      @guest.save!
+      @guest.summary_email_sent_at.should be_nil      
+    end
+
+    it "should not reset when need to send rsvp immediately" do
+      @guest.event.stub!(:immediately_send_rsvp?).and_return(true)
+      @guest.rsvp = 2
+      Notifier.should_receive(:send_later).with(:deliver_guests_summary, @guest.event, {2 => [@guest.to_rsvp_email_params]}, nil)
+      @guest.save!
+      @guest.summary_email_sent_at.should_not be_nil
+    end
+  end
+
   describe "send email invitation" do
     before(:each) do
       @guest = Factory.create(:guest)
