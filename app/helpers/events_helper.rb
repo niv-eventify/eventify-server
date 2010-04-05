@@ -25,6 +25,19 @@ module EventsHelper
     end
   end
 
+  def summary_kinds_for_select
+    Event::SUMMARY_DEFAULTS.keys.map{|k| [s_(Event::SUMMARY_DEFAULTS[k]), k]}
+  end
+
+  def event_rsvp_summary_select(event)
+    form_remote_for :event, event, :builder => NoLabelFormBuilder::Builder, :url => event_path(event), :method => :put do |f|
+      haml_tag :ul do
+        haml_concat f.input(:rsvp_summary_send_every, :as => :select, :collection => summary_kinds_for_select)
+      end
+    end
+  end
+
+
   def js_for_date_select(attribute, opts = {})
     js = js_add_classes(attribute)
     "(function(){#{js}})();"

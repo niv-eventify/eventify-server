@@ -1,10 +1,10 @@
 module Event::Summary
 
   SUMMARY_DEFAULTS = {
-    0 => N_("Don't send"),
-    1 => N_("When a guest updates RSVP"),
-    2 => N_("Once a day"),
-    3 => N_("Once a week")
+    0 => N_("RSVP summary|Don't send"),
+    1 => N_("RSVP summary|When a guest updates RSVP"),
+    2 => N_("RSVP summary|Once a day"),
+    3 => N_("RSVP summary|Once a week")
   }
 
   def self.included(base)
@@ -13,6 +13,7 @@ module Event::Summary
       named_scope :overdue_summary, lambda {{:conditions => ["events.rsvp_summary_send_at < ?", Time.now.utc]}}
       named_scope :delayed_summary, :conditions => "events.rsvp_summary_send_every in (2, 3)" # others - send on demand
       before_update :update_summary
+      attr_accessible :rsvp_summary_send_every
     end
   end
 
