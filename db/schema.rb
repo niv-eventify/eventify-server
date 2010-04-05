@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100331121030) do
+ActiveRecord::Schema.define(:version => 20100401070922) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20100331121030) do
     t.string   "sms_message"
     t.datetime "rsvp_summary_send_at"
     t.integer  "rsvp_summary_send_every",                 :default => 0
+    t.datetime "last_summary_sent_at"
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"

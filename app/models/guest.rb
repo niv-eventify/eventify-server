@@ -122,8 +122,3 @@ class Guest < ActiveRecord::Base
     end
   end
 end
-
-
-__END__
-
-editable names/emails - ?

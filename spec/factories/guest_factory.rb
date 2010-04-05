@@ -21,3 +21,11 @@ Factory.define :guest_with_sms, :parent => :guest_with_mobile do |guest|
   guest.sms_invitation_sent_at 10.minutes.ago.utc
   guest.sms_invitation_failed_at 9.minutes.ago.utc
 end
+
+Factory.define :guest_summary_not_sent, :parent => :guest do |guest|
+  guest.name "New Guest"
+  guest.email "new@guest.com"
+  guest.mobile_phone "012345678"
+  guest.summary_email_sent_at nil
+  guest.rsvp  1
+end
