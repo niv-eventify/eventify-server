@@ -118,6 +118,7 @@ describe Guest do
 
     it "should change summary_email_sent_at when rsvp is changed" do
       @guest.rsvp = 2
+      Notifier.should_not_receive :send_later
       @guest.save!
       @guest.summary_email_sent_at.should be_nil      
     end
@@ -125,6 +126,7 @@ describe Guest do
     it "should not reset when need to send rsvp immediately" do
       @guest.event.stub!(:immediately_send_rsvp?).and_return(true)
       @guest.rsvp = 2
+      Notifier.should_receive(:send_later).with(:deliver_guests_summary, @guest.event, {2 => [@guest.to_rsvp_email_params]}, nil)
       @guest.save!
       @guest.summary_email_sent_at.should_not be_nil
     end
