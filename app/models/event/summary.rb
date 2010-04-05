@@ -25,6 +25,10 @@ module Event::Summary
     end
   end
 
+  def immediately_send_rsvp?
+    1 == rsvp_summary_send_every
+  end
+
   def update_summary
     return unless rsvp_summary_send_every_changed?
     return unless rsvp_summary_send_at.nil?
@@ -67,7 +71,7 @@ module Event::Summary
     guests.summary_email_not_sent.find_each(:batch_size => 1) do |guest|
       guest.reset_summary_status!      
       if guest.rsvp
-        rsvps[guest.rsvp] << {:name => guest.name, :email => guest.email, :mobile_phone => guest.mobile_phone}
+        rsvps[guest.rsvp] << guest.to_rsvp_email_params
         guests_count += 1
       end
     end

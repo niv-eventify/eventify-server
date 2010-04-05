@@ -40,8 +40,9 @@ class Guest < ActiveRecord::Base
   }
 
   after_create :increase_stage_passed
-  after_update :check_invitation_failures
+  after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
+  after_update :send_summary_status
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
@@ -54,8 +55,20 @@ class Guest < ActiveRecord::Base
 
   def update_summary_status
     if rsvp_changed?
-      self.summary_email_sent_at = nil
+      self.summary_email_sent_at = event.immediately_send_rsvp? ? Time.now.utc : nil
     end
+  end
+
+  def send_summary_status
+    if rsvp_changed? && event.immediately_send_rsvp?
+      rsvps = {}
+      rsvps[rsvp] = [to_rsvp_email_params]
+      Notifier.send_later(:deliver_guests_summary, event, rsvps, nil)
+    end
+  end
+
+  def to_rsvp_email_params
+    {:name => name, :email => email, :mobile_phone => mobile_phone}
   end
 
   def reset_summary_status!

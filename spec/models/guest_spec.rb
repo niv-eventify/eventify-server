@@ -121,6 +121,13 @@ describe Guest do
       @guest.save!
       @guest.summary_email_sent_at.should be_nil      
     end
+
+    it "should not reset when need to send rsvp immediately" do
+      @guest.event.stub!(:immediately_send_rsvp?).and_return(true)
+      @guest.rsvp = 2
+      @guest.save!
+      @guest.summary_email_sent_at.should_not be_nil
+    end
   end
 
   describe "send email invitation" do
