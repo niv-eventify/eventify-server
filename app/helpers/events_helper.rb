@@ -32,7 +32,8 @@ module EventsHelper
   def event_rsvp_summary_select(event)
     form_remote_for :event, event, :builder => NoLabelFormBuilder::Builder, :url => event_path(event), :method => :put do |f|
       haml_tag :ul do
-        haml_concat f.input(:rsvp_summary_send_every, :as => :select, :collection => summary_kinds_for_select)
+        haml_concat f.input(:rsvp_summary_send_every, :as => :select, :collection => summary_kinds_for_select, :prompt => false,
+          :input_html => {:onchange => "jQuery(this).parents('form').get(0).onsubmit();"})
       end
     end
   end
