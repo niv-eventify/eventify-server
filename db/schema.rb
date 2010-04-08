@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100401070922) do
+ActiveRecord::Schema.define(:version => 20100401130519) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -106,6 +106,8 @@ ActiveRecord::Schema.define(:version => 20100401070922) do
     t.string   "preview_with_text_content_type"
     t.integer  "preview_with_text_file_size"
     t.datetime "preview_with_text_updated_at"
+    t.boolean  "no_repeat_background"
+    t.string   "background_color"
   end
 
   add_index "designs", ["category_id"], :name => "index_designs_on_category_id"

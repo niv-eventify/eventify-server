@@ -1,0 +1,36 @@
+body {
+	text-align:center;
+}
+#postcard {
+	margin:0 auto;
+	width:667px;
+	height:500px;
+	text-align:left;
+}
+#background_holder {
+	margin:0 auto;
+	width:900px;
+	height:600px;
+}
+.title_holder {
+	font-size: 32px;
+}
+.info_holder {
+	font-size: 30px;
+}
+.title_holder, .info_holder {
+	position:relative;
+}
+.title_holder:hover, .info_holder:hover {
+	border:1px solid blue;
+}
+
+#toolbar {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	margin:0;
+}
+#toolbar a {
+	margin: 0 auto;	
+}

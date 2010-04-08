@@ -4,7 +4,13 @@ class RsvpsController < InheritedResources::Base
   respond_to :js, :only => :update
   after_filter :clear_flash, :only => :update
 
-  # show
+  def show
+  	if resource.event.design.no_repeat_background
+  	  render :show_no_repeat_background, :layout => false
+  	else
+  	  render :show, :layout => false
+  	end
+  end
 
   # update
 

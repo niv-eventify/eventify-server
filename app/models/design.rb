@@ -6,7 +6,7 @@ class Design < ActiveRecord::Base
   validates_numericality_of :text_top_x, :text_top_y, :text_width, :text_height
   validates_numericality_of :title_top_x, :title_top_y, :title_width, :title_height, :allow_nil => true
   
-  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align
+  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align, :no_repeat_background, :background_color
 
   named_scope :available, {:conditions => "designs.disabled_at IS NULL"}
 
