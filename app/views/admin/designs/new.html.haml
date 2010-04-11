@@ -3,30 +3,7 @@
 - semantic_form_for(@design, :live_validations => false, :url => admin_designs_path, :html => {:multipart => true}) do |f|
   = f.object.errors.on(:base)
 
-  - f.inputs do
-    != f.input :category, :allow_blank => false
-    != f.input :text_top_x, :label => "Text X (upper left)"
-    != f.input :text_top_y, :label => "Text Y (upper left)"
-    != f.input :text_width
-    != f.input :text_height
-    
-    != f.input :title_top_x, :label => "Title X (upper left) - optional"
-    != f.input :title_top_y, :label => "Title Y (upper left) - optional"
-    != f.input :title_width, :label => "Title width - optional"
-    != f.input :title_height, :label => "Title height - optional"
-    
-    != f.input :font, :label => "Default font name"
-    != f.input :title_color, :label => "Default title color: r,g,b"
-    != f.input :message_color, :label => "Default message color: r,g,b"
-    != f.input :text_align, :label => "Default text alignment"
-    != f.input :no_repeat_background, :label => "Check to make background not repeatable"
-    != f.input :background_color, :label => "Color of Background when not repeatable: r,g,b"
-
-  - f.inputs do
-    != f.input :card, :as => :file, :label => "Card (transparent png)"
-    != f.input :background, :as => :file, :label => "Background"
-    != f.input :preview, :as => :file, :label => "Preview"
-    != f.input :preview_with_text, :as => :file, :label => "Preview with text"
+  != render :partial => "form", :locals => { :f => f }
 
   != f.submit "Save"
   != link_to "Cancel", admin_designs_path

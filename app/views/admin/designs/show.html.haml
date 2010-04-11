@@ -11,8 +11,34 @@ Width:
 = @design.text_width
 Height:
 = @design.text_height
+font color:
+= @design.message_color
 
+%h4 Title Area
+- if @design.is_seperated_title?
+  Topx:
+  = @design.title_top_x
+  TopY:
+  = @design.title_top_y
+  Width:
+  = @design.title_width
+  Height:
+  = @design.title_height
+font color:
+= @design.title_color
 
+%h4 general info
+font: 
+= @design.font
+text align: 
+= @design.text_align
+- if @design.no_repeat_background?
+  background is not repeatable!
+  background color:
+  = @design.background_color
+- else
+  background is repeatable
+  
 %h4 Preview
 != image_tag(@design.preview.url(:medium))
 

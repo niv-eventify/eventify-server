@@ -74,7 +74,7 @@ class Design < ActiveRecord::Base
       :width =>  "#{(text_width/ratio)}px",
       :height => "#{(text_height/ratio)}px",
       'text-align' => "#{text_align}",
-      :color => "#{message_color}"
+      :color => "rgb(#{message_color})"
     }
   end
 
@@ -89,7 +89,7 @@ class Design < ActiveRecord::Base
 
     res = {
       'text-align' => "#{text_align}",
-      :color => "#{title_color}"
+      :color => "rgb(#{title_color})"
     }
     if !title_width.blank?
       res = res.merge({
