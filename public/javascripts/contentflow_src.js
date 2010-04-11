@@ -95,15 +95,13 @@ var ContentFlowGlobal = {
 
         this.BaseDir = this.getScriptPath(this.scriptElement, this.scriptName) ;
         if (!this.AddOnBaseDir) this.AddOnBaseDir = this.BaseDir;
-        if (!this.CSSBaseDir) this.CSSBaseDir = this.BaseDir;
+        if (!this.CSSBaseDir) this.CSSBaseDir = '/stylesheets/';
     },
 
     init: function () {
         /* add default stylesheets */
         this.addStylesheet(this.CSSBaseDir+'contentflow.css');
-        this.addStylesheet(this.CSSBaseDir+'mycontentflow.css');    // FF2: without adding a css-file FF2 hangs on a reload.
-                                                                    //      I don't have the slidest idea why
-                                                                    //      Could be timing problem
+
         /* add AddOns scripts */
         if (this.scriptElement.getAttribute('load')) {
             var AddOns = this.scriptElement.getAttribute('load').replace(/\ +/g,' ').split(' ');
