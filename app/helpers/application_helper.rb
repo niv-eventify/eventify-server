@@ -80,4 +80,8 @@ module ApplicationHelper
       :url => send("edit_event_#{object.class.name.downcase}_path", object.event_id, object, :attribute => attribute),
       :method => :get, :html => {:class => "link_to_edit"})
   end
+
+  def login_register_button(text)
+    link_to_function(content_tag(:span, text) + "<em></em>", :class => "opener")
+  end
 end

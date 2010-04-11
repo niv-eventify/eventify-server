@@ -1,0 +1,7 @@
+- form_remote_for :user, @user ||= User.new, :builder => LoginFormBuilder::Builder, :url => users_path, :method => :post, :html => {:class => "form"} do |f|
+  = f.object.errors.on(:base)
+  != f.text_field :name, :value => @user.name || _("Name"), :label => _("Name")
+  != f.text_field :email, :value => @user.email || _("Email"), :label => _("Email")
+  .form-area
+    %span.sbmt
+      != f.submit _("Register")

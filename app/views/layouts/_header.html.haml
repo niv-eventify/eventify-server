@@ -3,21 +3,20 @@
     %strong.logo
       %a{ :href => "/" }
         Eventify
-    .search-form{ :style => "visibility:hidden;"}
+    .search-form
       %form{ :action => "#" }
         %fieldset
           %input.search-btn{ :src => "/images/ico-search-en.gif", :type => "image" }
           .input-bg
-            %input.text{ :value => "lorem", :type => "text" }
+            %input.text{ :value => s_("default search text|search"), :type => "text" }
     %ul#top-nav
       != render(:partial => "layouts/top_categories")
       %li
         %a.top{ :href => "#" }= _("FAQ")
-      - (FastGettext.available_locales - ["ru"]).each do |locale|
-        - if current_locale != locale
-          %li
-            != link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale), :class => "top"
-
+      %li
+        %a.top{ :href => "#" }= _("Plans")
     != render(:partial => "layouts/user_menu")
-    - unless logged_in?
-      != link_to _("Sign Up"), signup_path, :class => "signup-out"
+    %div
+      %ul.lang
+        - (FastGettext.available_locales - ["ru"]).each do |locale|
+          %li!= link_to(AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale))
