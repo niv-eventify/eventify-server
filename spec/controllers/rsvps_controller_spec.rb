@@ -12,9 +12,9 @@ describe RsvpsController do
     end
 
     it "should show event for a guest" do
-      get :show, :id => @guest.email_token
+      get :show, :id => @guest.email_token, :more => "true"
       response.should be_success
-      response.should render_template("show")
+      response.should render_template("show_more")
     end
 
     it "should be able to change rsvp" do
