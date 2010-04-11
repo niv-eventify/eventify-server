@@ -12,7 +12,10 @@
         %h3
           = _("You can always:")
         .btns-h
-          %a.btn-left.nyroModal{:href => "#change_design"}= _("Change design")
+          - if current_locale == "he"
+            %a.btn-right.nyroModal{:href => "#change_design"}= _("Change design")
+          - else
+            %a.btn-left.nyroModal{:href => "#change_design"}= _("Change design")
 
     != render(:partial => "events/selected_design")
 
