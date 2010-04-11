@@ -37,7 +37,7 @@ class UserSessionController < InheritedResources::Base
 
   def destroy
     destroy! do |wants|
-      wants.html {redirect_to login_path}
+      wants.html {redirect_to "/"}
     end
   end
 
