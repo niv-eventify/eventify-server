@@ -10,9 +10,23 @@ class UsersController < InheritedResources::Base
     if user.save_without_session_maintenance
       user.deliver_activation_instructions!
       flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
-      redirect_to "/"
+      respond_to do |wants|
+        wants.html do
+          redirect_to "/"
+        end
+        wants.js do
+          render(:update) {|page| page.redirect_to "/"}
+        end
+      end
     else
-      render :action => :new
+      respond_to do |wants|
+        wants.html { render :action => :new }
+        wants.js do
+          render(:update) do |page|
+            page << "jQuery('#register_form.bg-m').html(#{render(:partial => "users/new").to_json});"
+          end
+        end
+      end    
     end
   end
 

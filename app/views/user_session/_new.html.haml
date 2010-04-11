@@ -1,0 +1,14 @@
+- form_remote_for :user_session, @user_session ||= UserSession.new, :builder => LoginFormBuilder::Builder, :url => user_session_path, :html => {:class => "form"} do |f|
+  = f.object.errors.on(:base)
+  != f.text_field :email, :label => _("Email")
+  != f.password_field :password, :label => _("Password")
+  .form-area
+    %span.sbmt
+      != f.submit _("Login")
+    .block
+      .form-row
+        != f.check_box :remember_me, :id => "check-remember"
+        %label{ :for => "check-remember" }
+          Remember me
+      .form-row
+        != link_to _("Forgot password?"), new_password_path, :class => "link"

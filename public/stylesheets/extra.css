@@ -215,3 +215,7 @@ div.cmf-skinned-text {
 	width:auto;
 	float:none;
 }
+
+#login_form p.error-msg, #register_form p.error-msg {
+	padding:0;
+}

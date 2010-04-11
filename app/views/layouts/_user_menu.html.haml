@@ -1,5 +1,29 @@
 - unless logged_in?
-  != link_to content_tag(:span, _("Sign in")), login_path, :class => "blue-btn"
+  %ul.subnav
+    %li.btn-1
+      != login_register_button(_("Register"))
+      .menu-list
+        .top
+        .mid
+          .inner
+            .inner-box
+              .bg-t
+              #register_form.bg-m
+                != render(:partial => "users/new")
+              .bg-b
+        .btm
+    %li.btn-2
+      != login_register_button(_("Login"))
+      .menu-list
+        .top
+        .mid
+          .inner
+            .inner-box
+              .bg-t
+              #login_form.bg-m
+                != render(:partial => "user_session/new")
+              .bg-b
+        .btm
 - else
   .personal-menu-w
     .personal-menu
