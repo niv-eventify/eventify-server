@@ -3,6 +3,7 @@ class RsvpsController < InheritedResources::Base
   actions :show, :update
   respond_to :js, :only => :update
   after_filter :clear_flash, :only => :update
+  before_filter :iphone_request?
 
   def show
     if "true" == params[:more]

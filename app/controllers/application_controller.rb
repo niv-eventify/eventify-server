@@ -9,7 +9,6 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   filter_parameter_logging "password" unless Rails.env.development?
-  before_filter :adjust_format_for_iphone
 
 protected
   include ERB::Util # to use h() in flashes
