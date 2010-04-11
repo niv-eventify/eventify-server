@@ -1,5 +1,5 @@
 class DesignsController < InheritedResources::Base
-  before_filter :require_user, :only => :show
+   # before_filter :require_user, :only => :show
 
   actions :index, :show
   belongs_to :event, :optional => true
