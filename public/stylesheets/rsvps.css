@@ -34,3 +34,6 @@ body {
 #toolbar a {
 	margin: 0 auto;	
 }
+#toolbar img {
+	border: 0;
+}
