@@ -1,9 +1,9 @@
 #postcard{ :style => "#{postcard_image_css}" }
   - if resource.event.design.is_seperated_title? 
     .title_holder{:style => "#{title_position_css}"}
-      #{resource.event.name}
+      != resource.event.name
   .info_holder{:style => "#{message_position_css}"}
     - if !resource.event.design.is_seperated_title? 
       .title{:style => "#{title_position_css}"}
-        #{resource.event.name}
-    #{resource.event.guest_message}
+        != resource.event.name
+    != resource.event.guest_message
