@@ -1,4 +1,2 @@
 #toolbar
-  %a{ :href => "#{request.request_uri}&more=true"}
-    %img{ :src => "/images/rsvp-toolbar.png", :alt => "Click to RSVP", :border => "0" }
- 
+  != link_to image_tag("rsvp-toolbar.png", :alt => _("Click to RSVP"), :border => "0"), rsvp_path(resource.email_token, :more => true)

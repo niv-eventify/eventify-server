@@ -5,10 +5,10 @@ class RsvpsController < InheritedResources::Base
   after_filter :clear_flash, :only => :update
 
   def show
-  	if resource.event.design.no_repeat_background
-  	  render :show_no_repeat_background, :layout => false
-  	else
-  	  render :show, :layout => false
+    if "true" == params[:more]
+      render :action => "show_more"
+    else
+  	  render :action => (resource.event.design.no_repeat_background? : "show_no_repeat_background" : "show"), :layout => false
   	end
   end
 
