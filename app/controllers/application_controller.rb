@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   filter_parameter_logging "password" unless Rails.env.development?
+  before_filter :adjust_format_for_iphone
 
 protected
   include ERB::Util # to use h() in flashes
@@ -30,4 +31,17 @@ protected
   def remove_flash
     flash[:notice] = nil
   end
+
+  def adjust_format_for_iphone
+    request.format = :iphone if iphone_request?
+  end
+
+  def iphone_request?
+    if request.accept =~ /(html)/
+      return request.user_agent =~ /(iPhone|iPod)/
+    end
+
+    false
+  end
+  helper_method :iphone_request?
 end
