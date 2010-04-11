@@ -4,18 +4,11 @@
 
 - page_with_tabs(:settings) do
 
-  %p
-    %strong Name:
-    =h @user.name
-  %p
-    %strong Email:
-    =h @user.email
+  .settings-box
+    - setting_row(_("Name:"), current_user.name, "jQuery('#edit_user').toggle()")
+    - setting_row(_("Email:"), current_user.email, "jQuery('#edit_user').toggle()")
+    - setting_row(_("Password:"), "********", "jQuery('#change_password').toggle()")
 
-  %p
-    != link_to "Contacts", contacts_path
+    != render(:partial => "passwords/edit")
 
-  %p
-    != link_to "edit", edit_profile_path
-
-  %p
-    != link_to "change password", password_edit_path
+    != render(:partial => "users/edit")

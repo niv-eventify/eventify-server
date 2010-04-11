@@ -1,0 +1,12 @@
+- middle_box_section("edit_user") do
+  - form_for @user, :builder => MiddleBoxFormBuilder::Builder do |f|
+    != f.text_field :name, :label => _("Name")
+    != f.text_field :email, :disabled => true, :label => _("Email")
+    - when_admin do
+      = _("Is Admin?")
+      != f.check_box :is_admin
+    .settings-form-btns
+      != link_to_function content_tag(:span, _("Save")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"
+      %span.cancel-btn
+        = _("or")
+        != link_to_function _("Cancel"), "jQuery('#edit_user').hide()"

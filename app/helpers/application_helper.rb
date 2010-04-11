@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+  include MiddleBoxHelper
+
   USER_NAVIGATION = [
     {:title => N_("Events"), :id => :events, :url => "/events"},
     {:title => N_("Address Book"), :id => :contacts, :url => "/contacts"},
