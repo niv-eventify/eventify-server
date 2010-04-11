@@ -1,0 +1,8 @@
+%br
+= _("Send Password Reset Instructions:")
+
+- form_remote_for(@user, :url => passwords_path, :builder => LoginFormBuilder::Builder, :html => {:class => "form"}) do |f|
+  != f.text_field :email, :label => _("Email")
+  .form-area
+    %span.sbmt
+      != f.submit _("Send")

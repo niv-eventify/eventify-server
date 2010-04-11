@@ -19,10 +19,17 @@ class PasswordsController < InheritedResources::Base
       else
         flash[:notice] = _("Instructions to activate your account have been emailed to you. Please check your email.")
       end
-      redirect_to "/"
+      respond_to do |wants|
+        wants.html {redirect_to "/"}
+        wants.js {render(:update){|page| page.redirect_to("/")}}
+      end
+      
     else
       flash[:error] = _("No user was found with that email address")
-      render :action => :new
+      respond_to do |wants|
+        wants.html {render :action => :new}
+        wants.js {render(:update){|page| page.redirect_to("/")}}
+      end
     end
   end
 

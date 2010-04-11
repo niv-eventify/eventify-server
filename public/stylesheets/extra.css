@@ -219,3 +219,7 @@ div.cmf-skinned-text {
 #login_form p.error-msg, #register_form p.error-msg {
 	padding:0;
 }
+
+#login_form .password-reset {
+	display:none;
+}

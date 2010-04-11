@@ -11,4 +11,4 @@
         %label{ :for => "check-remember" }
           Remember me
       .form-row
-        != link_to _("Forgot password?"), new_password_path, :class => "link"
+        != link_to_function _("Forgot password?"), "jQuery('#login_form .password-reset').toggle()", :class => "link"

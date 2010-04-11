@@ -22,6 +22,8 @@
               .bg-t
               #login_form.bg-m
                 != render(:partial => "user_session/new")
+                .password-reset
+                  != render(:partial => "passwords/new")
               .bg-b
         .btm
 - else
