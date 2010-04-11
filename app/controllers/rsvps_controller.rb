@@ -8,7 +8,7 @@ class RsvpsController < InheritedResources::Base
     if "true" == params[:more]
       render :action => "show_more"
     else
-  	  render :action => (resource.event.design.no_repeat_background? : "show_no_repeat_background" : "show"), :layout => false
+  	  render :action => (resource.event.design.no_repeat_background ?  "show_no_repeat_background" : "show"), :layout => false
   	end
   end
 
