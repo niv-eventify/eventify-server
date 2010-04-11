@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 describe "/users/show.html.haml" do
   setup :activate_authlogic
   before(:each) do
-    @user = assigns[:user] = Factory.build(:user)
+    @user = assigns[:user] = Factory.create(:user)
     @controller.stub!(:current_user).and_return(stub_model(User, :name => "john", :events => Event))
   end
 
