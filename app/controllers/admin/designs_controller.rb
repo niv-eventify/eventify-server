@@ -1,6 +1,6 @@
 class Admin::DesignsController < InheritedResources::Base
   before_filter :require_admin
-  actions :new, :create, :destroy, :show, :index
+  actions :new, :edit, :create, :update, :index, :destroy, :show
 
   def create
     @design = Design.new(params[:design])
