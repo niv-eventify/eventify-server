@@ -35,7 +35,6 @@ a.signup-out {
 }
 
 a.finish-btn, a.preview-btn {
-	border:1px solid red;
 	font-size:170%;
 }
 
@@ -230,4 +229,13 @@ div.cmf-skinned-text {
 
 .settings-info strong {
 	width: 65px;
+}
+
+.form-col.form-col-variable, .hebrew .form-col.form-col-variable {
+	width:380px;
+	height:auto;
+}
+.clear {
+	height:1px;
+	clear:both;
 }

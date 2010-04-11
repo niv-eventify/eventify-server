@@ -18,4 +18,14 @@ module MiddleBoxHelper
       end
     end
   end
+
+  def middle_box_container(section_dom_id = nil, &block)
+    haml_tag(:div, :class => "stage-container", :id => section_dom_id) do
+      haml_tag(:div, :class => "holder") do
+        haml_tag(:div, :class => "frame") do
+          yield
+        end
+      end
+    end
+  end
 end

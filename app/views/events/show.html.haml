@@ -8,17 +8,15 @@
   .content-section-heading
     %h1= _("Set event reminders for you and your guests")
 
+  .twocolumns.twocolumns-decor
+    .form
+      .stage-containers
+        - middle_box_container("reminders-list") do
+          %h2= _("Reminders")
+          .event-reminders
+            != render(:partial => "reminders/index")
 
-  .info-area-tab
-    .holder
-      .frame
-        %h3= _("Reminders")
-        .event-reminders
-          != render(:partial => "reminders/index")
-  %br
-  .info-area-tab
-    .holder
-      .frame
-        %h3= _("Message Confirmations")
-        != _("Send RSVPs summary email")
-        - event_rsvp_summary_select(@event)
+        - middle_box_container("reminders-list") do
+          %h2= _("Message Confirmations")
+          != _("Send RSVPs summary email")
+          - event_rsvp_summary_select(@event)
