@@ -37,7 +37,9 @@ protected
 
   def iphone_request?
     if request.accept =~ /(html)/
-      return request.user_agent =~ /(iPhone|iPod)/
+      logger.debug(request.user_agent)
+      logger.debug(request.user_agent =~ /(iPhone|iPod|SonyEricssonW705)/)
+      return request.user_agent =~ /(iPhone|iPod|SonyEricssonW705)/
     end
 
     false
