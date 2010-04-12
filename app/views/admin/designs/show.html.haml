@@ -1,4 +1,5 @@
 != link_to "Back to designs", admin_designs_path
+!= link_to "Edit", edit_admin_design_path(@design)
 
 %h3= "#{@design.category.name_en} / #{@design.category.name_he}"
 
@@ -39,8 +40,12 @@ text align:
 - else
   background is repeatable
   
-%h4 Preview
-!= image_tag(@design.preview.url(:medium))
-
 %h4 Post card
-- full_postcard(@design)
+#background_holder{ :style => "width:900px;height:600px;background-image:url(#{@design.background.url});border:1px solid #666" }
+  #postcard{ :style => "margin:0 auto;width:667px;height:500px;text-align:left;background-image:url('#{@design.card.url}');" }
+    - if @design.is_seperated_title? 
+      - title_holder(@design)
+    .info_holder{:style => "position:relative;left:#{@design.text_top_x}px; top:#{@design.text_top_y}px; width:#{@design.text_width}px; height:#{@design.text_height}px; color:rgb(#{@design.message_color}); text-align: #{@design.text_align}; border: 1px dashed blue; font-size: 30px"}
+      - unless @design.is_seperated_title? 
+        - title_holder(@design)
+      Invitation message goes here
