@@ -255,3 +255,8 @@ span.flash.notice {
 div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 	background-color: #fff;
 }
+
+.lb-popup {
+	position: static;
+	padding: 16px 38px 20px;
+}
