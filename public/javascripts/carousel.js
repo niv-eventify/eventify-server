@@ -9,26 +9,22 @@ var carousel = {
       $("#carouselWrapper").html("<div id='carousel' class='ContentFlow promo-gallery'><div class='loadIndicator'><div class='indicator'></div></div><div class='flow'>"+data+"</div>");
       carousel.start = false;
       var fl = new ContentFlow('carousel',{
-        reflectionType: 'none',
+        reflectionHeight: 0,
         maxItemHeight:300,
         visibleItems: 4,
         flowSpeedFactor: 0.8,
-        calcSize: function ( relativePosition, relativePositionNormed, side) {
-          var h = this.maxHeight/(Math.abs(relativePosition*0.2)+1);
+        calcSize: function ( item ) {
+          var rP = item.relativePosition;
+          var h = 1/(Math.abs(rP)*0.2+1);
           var w = h;
           return {width: w, height: h};
         },
-        calcRelativeItemPosition: function(relativePosition, side, size) {
-            if(relativePosition == 0) {
-              $("#carouselImgBox").css('visibility','visible');
-              carousel.start = true;
-            }
-            var rP = relativePosition;
-            var vI = this._visibleItems;
-            var maxHeight = this.maxHeight;
-            var x = -size.width/2;
-            var y = -size.height-70-(Math.abs(relativePosition*20));
-            return {x: x, y: y};
+        calcRelativeItemPosition: function(item) {
+          if(item.relativePosition == 0) {
+            $("#carouselImgBox").css('visibility','visible');
+            carousel.start = true;
+          }
+          return {x: 0, y: 0};
         },
         onMakeActive: function(item) {
           $("#carousel_select_link").attr('href',$(item.item).attr('href'));
@@ -121,9 +117,9 @@ $(document).ready(function(){
   }
   $("#carouselImgBox").mousewheel(function(e, delta){
     // ff
-	e.preventDefault();
-	// ie
-	e.returnValue = false;
-	$("#carousel").trigger(e, delta);
+    e.preventDefault();
+    // ie
+    e.returnValue = false;
+    $("#carousel").trigger(e, delta);
   });
 });

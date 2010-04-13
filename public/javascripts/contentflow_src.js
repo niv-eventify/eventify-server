@@ -1,5 +1,5 @@
-/*  ContentFlow, version 0.7.2 
- *  (c) 2007 - 2009 Sebastian Kutsch
+/*  ContentFlow, version 1.0.2 
+ *  (c) 2007 - 2010 Sebastian Kutsch
  *  <http://www.jacksasylum.eu/ContentFlow/>
  *
  *  ContentFlow is distributed under the terms of the MIT license.
@@ -31,6 +31,17 @@ var ContentFlowGlobal = {
         this.Gecko = !this.WebKit && navigator.product == "Gecko" ? true : false;
         this.Gecko19 = this.Gecko && Array.reduce ? true : false;
     })(),
+
+    getAddOnConf: function(name) {
+        if(this.AddOns[name])
+            return this.AddOns[name].conf;
+        else
+            return {};
+    },
+
+    setAddOnConf: function (name, conf) {
+        this.AddOns[name].setConfig(conf);
+    },
 
     getScriptElement:function (scriptName) {
         var regex = new RegExp(scriptName);
@@ -68,14 +79,13 @@ var ContentFlowGlobal = {
         if (this.Browser.Gecko19) {
             var link = document.createElement('link');
             link.setAttribute('rel', 'stylesheet');
-            link.setAttribute('titel', 'Standard');
             link.setAttribute('href', path);
             link.setAttribute('type', 'text/css');
             link.setAttribute('media', 'screen');
             document.getElementsByTagName('head')[0].appendChild(link);
         }
         else {
-            document.write('<link rel="stylesheet" title="Standard" href="'+path+'" type="text/css" media="screen" />');
+            document.write('<link rel="stylesheet" href="'+path+'" type="text/css" media="screen" />');
         }
 
     },
@@ -101,10 +111,13 @@ var ContentFlowGlobal = {
     init: function () {
         /* add default stylesheets */
         this.addStylesheet(this.CSSBaseDir+'contentflow.css');
-
+        this.addStylesheet(this.CSSBaseDir+'mycontentflow.css');    // FF2: without adding a css-file FF2 hangs on a reload.
+                                                                    //      I don't have the slidest idea why
+                                                                    //      Could be timing problem
+        this.loadAddOns = new Array();
         /* add AddOns scripts */
         if (this.scriptElement.getAttribute('load')) {
-            var AddOns = this.scriptElement.getAttribute('load').replace(/\ +/g,' ').split(' ');
+            var AddOns = this.loadAddOns = this.scriptElement.getAttribute('load').replace(/\ +/g,' ').split(' ');
             for (var i=0; i<AddOns.length; i++) {
                 if (AddOns[i] == '') continue;
                 //if (AddOns[i] == 'myStyle') {
@@ -124,7 +137,7 @@ var ContentFlowGlobal = {
         /* for Mozilla, Opera 9, Safari */
         if (document.addEventListener) {
             /* for Safari */
-            if (/WebKit/i.test(navigator.userAgent)) { // sniff
+            if (this.Browser.WebKit) {
                 var _timer = setInterval(function() {
                     if (/loaded|complete/.test(document.readyState)) {
                         clearInterval(_timer);
@@ -136,21 +149,19 @@ var ContentFlowGlobal = {
               document.addEventListener("DOMContentLoaded", CFG.onloadInit, false);
             }
         }
-
-        /* for Internet Explorer */
-        /*@cc_on @*/
-        /*@if (@_win32)
-        document.write("<script id=__ie_cf_onload defer src=javascript:void(0)><\/script>");
-        var script = document.getElementById("__ie_cf_onload");
-        script.onreadystatechange = function() {
-            if (this.readyState == "complete") {
-                CFG.onloadInit(); // call the onload handler
-            }
-        };
-        /*@end @*/
+        else if (this.Browser.IE) {
+            document.write("<script id=__ie_cf_onload defer src=javascript:void(0)><\/script>");
+            var script = document.getElementById("__ie_cf_onload");
+            script.onreadystatechange = function() {
+                if (this.readyState == "complete") {
+                    CFG.onloadInit(); // call the onload handler
+                }
+            };
+        }
 
         /* for all other browsers */
         window.addEvent('load', CFG.onloadInit, false);
+
         /* ================================================================== */
 
     },
@@ -158,6 +169,14 @@ var ContentFlowGlobal = {
     onloadInit: function () {
         // quit if this function has already been called
         if (arguments.callee.done) return;
+        for (var i=0; i< ContentFlowGlobal.loadAddOns.length; i++) {
+            var a = ContentFlowGlobal.loadAddOns[i];
+            if (!ContentFlowGlobal.AddOns[a]) {
+                var CFG = ContentFlowGlobal;
+                window.setTimeout( CFG.onloadInit, 10);
+                return;
+            }
+        }
         // flag this function so we don't do the same thing twice
         arguments.callee.done = true;
         
@@ -182,7 +201,7 @@ var ContentFlowGlobal = {
         DIVS: for (var i = 0; i < divs.length; i++) {
             if (divs[i].className.match(/\bContentFlow\b/)) {
                 for (var j=0; j<ContentFlowGlobal.Flows.length; j++) {
-                    if (divs[i] == ContentFlowGlobal.Flows[j].container) continue DIVS;
+                    if (divs[i] == ContentFlowGlobal.Flows[j].Container) continue DIVS;
                 }
                 var CF = new ContentFlow(divs[i],{}, false);
                 CF.init();
@@ -203,12 +222,18 @@ ContentFlowGlobal.initPath();
 var ContentFlowAddOn = function (name, methods, register) {
     if (typeof register == "undefined" || register != false)
         ContentFlowGlobal.AddOns[name] = this;
-
+        
     this.name = name;
     if (!methods) methods = {};
     this.methods = methods;
+    this.conf = {};
+    if (this.methods.conf) {
+       this.setConfig(this.methods.conf);
+       delete this.methods.conf;
+    }
 
-    this.scriptpath = ContentFlowGlobal.AddOnBaseDir;;
+
+    this.scriptpath = ContentFlowGlobal.AddOnBaseDir;
     if (methods.init) {
         var init = methods.init.bind(this);
         init(this);
@@ -228,11 +253,18 @@ ContentFlowAddOn.prototype = {
     },
     addStylesheets: ContentFlowGlobal.addStylesheets,
 
+    setConfig: function (conf) {
+        for (var c in conf) {
+            this.conf[c] = conf[c];
+        }
+    },
+
     _init: function (flow) {
         if (this.methods.ContentFlowConf) {
             flow.setConfig(this.methods.ContentFlowConf);
         }
     }
+
 
 };
 
@@ -260,30 +292,68 @@ var ContentFlowGUIElement = function (CFobj, element) {
 
         this.stopDrag = function(event) {
             if (!event) var event = window.event;
-            window.removeEvent('mousemove', onDrag, false);
+            if (this.Browser.iPhone)  {
+                window.removeEvent('touchemove', onDrag, false);
+                if (!this.ontochmove) {
+                    var t = event.target;
+                    if (t.firstChild) t = t.firstChild;
+                    var e = document.createEvent('MouseEvents');
+                    e.initEvent('click', true, true);
+                    t.dispatchEvent(e);
+                }
+            }
+            else {
+                window.removeEvent('mousemove', onDrag, false);
+            }
             afterDrag(event); 
+        }.bind(this);
+
+        this.initDrag = function (event) {
+            if (!event) var event = window.event;
+            var e = event;
+            if (event.touches) e = event.touches[0];
+
+            this.mouseX = e.clientX; 
+            this.mouseY = e.clientY; 
+
+            beforeDrag(event);
+
         }.bind(this);
 
         this.startDrag = function (event) {
             if (!event) var event = window.event;
-            this.mouseX = event.clientX; 
-            this.mouseY = event.clientY; 
 
-            beforeDrag(event);
-            window.addEvent('mousemove', onDrag, false);
             var stopDrag = this.stopDrag;
-            window.addEvent('mouseup', stopDrag, false);
+
+            if (this.Browser.iPhone)  {
+                var s = this;
+                s.ontouchmove = false
+                window.addEvent('touchmove', function (e) {
+                        s.ontouchmove = true; 
+                        onDrag(e);
+                }, false);
+                event.preventDefault();
+                window.addEvent('touchend', stopDrag, false);
+            }
+            else {
+                window.addEvent('mousemove', onDrag, false);
+                window.addEvent('mouseup', stopDrag, false);
+            }
+            if(event.preventDefault) { event.preventDefault() }
 
         }.bind(this);
 
         var startDrag = this.startDrag;
-        //if (this.Browser.iPhone)  
-            //this.ontouchstart = startDrag;
-        //else
+        if (this.Browser.iPhone)  {
+            this.addEventListener('touchstart', startDrag, false);
+        }
+        else {
             this.addEvent('mousedown', startDrag, false); 
+        }
         
     };
 
+    element.Browser = ContentFlowGlobal.Browser;
     $CF(element).setDimensions();
     return element;
 };
@@ -296,7 +366,9 @@ var ContentFlowGUIElement = function (CFobj, element) {
  */
 var ContentFlowItem  = function (CFobj, element, index) {
     this.CFobj = CFobj;
-    this._activeElement = CFobj._activeElement;
+    this._activeElement = CFobj.conf.activeElement;
+    this.pre = null;
+    this.next = null;
     /*
      * ==================== item click events ====================
      * handles the click event on an active and none active item
@@ -308,11 +380,10 @@ var ContentFlowItem  = function (CFobj, element, index) {
         var index = el.itemIndex ? el.itemIndex : el.parentNode.itemIndex;
         var item = this.items[index];
         if (this._activeItem == item) {
-            this._onclickActiveItem(item);
+            this.conf.onclickActiveItem(item);
         }
         else {
-            this.moveToIndex(index);
-            this._onclickInactiveItem(item);
+            if (this.conf.onclickInactiveItem(item) != false ) this.moveToIndex(index);
         }
     }.bind(CFobj),
 
@@ -324,6 +395,24 @@ var ContentFlowItem  = function (CFobj, element, index) {
         return this.index;
     };
 
+
+    /* generate deault HTML structure if item is an image */
+    if ($CF(element).nodeName == "IMG") {
+        var el = document.createElement('div');
+        el.className = "item";
+
+        var cont = element.parentNode.replaceChild( el, element);
+        cont.className = "content";
+        el.appendChild(cont);
+
+        if (element.title) {
+            var cap = document.createElement('div');
+            cap.className = "caption";
+            cap.innerHTML = element.title;
+            el.appendChild(cap);
+        }
+        element = el;
+    }
 
     /* create item object */
     this.element = $CF(element);
@@ -341,23 +430,30 @@ var ContentFlowItem  = function (CFobj, element, index) {
             CFobj._imagesToLoad--;
             this.image = this.content;
             this.setImageFormat(this.image);
-            if (CFobj._reflectionType != "none") {
+            if ( CFobj.conf.reflectionHeight > 0) {
                 this.addReflection();
             }
-            else {
-                var size = CFobj._calcSize(0,0);
-                this.positionContent(size);
-            }
             this.initClick();
+            CFobj._addItemCueProcess(true);
         }.bind(this);
 
         if (this.content.complete && this.content.width > 0)
-            foobar();
+            window.setTimeout(foobar, 100);
+        else if (this.Browser.IE && !this.content.onload) {
+            var self = this;
+            var t = window.setInterval( function () {
+                if (self.content.complete && self.content.width > 0) {
+                    window.clearInterval(t);
+                    foobar();
+                }
+            }, 10);
+        }
         else
-            this.content.onload = foobar;
+            this.content.onload = window.setTimeout(foobar, 100);
     }
     else {
         this.initClick();
+        CFobj._addItemCueProcess(true);
     }
 
 };
@@ -368,17 +464,30 @@ ContentFlowItem.prototype = {
 
     makeActive: function () {
         this.element.addClassName('active');
-        this.CFobj._onMakeActive(this);
+        this.CFobj.conf.onMakeActive(this);
     },
     
     makeInactive: function () {
         this.element.removeClassName('active');
-        this.CFobj._onMakeInactive(this);
+        this.CFobj.conf.onMakeInactive(this);
     },
 
     initClick: function () {
         var cItem = this.clickItem;
         this[this._activeElement].addEvent('click', cItem, false);
+    },
+    
+    setImageFormat: function (img) {
+        if (this.Browser.IE6 || this.Browser.IE7) img.style.width = "auto";
+        img.origProportion =  img.width / img.height;
+        img.setAttribute('origProportion', img.width / img.height);
+        if (this.Browser.IE6 || this.Browser.IE7) img.style.width = "";
+        //img.origWidth = img.width;
+        //img.origHeight = img.height;
+        if (img.origProportion <= 1)
+            img.addClassName('portray');
+        else
+            img.addClassName('landscape');
     },
 
     /*
@@ -389,153 +498,149 @@ ContentFlowItem.prototype = {
         var reflection;
         var image = this.content;
 
-        if (CFobj._reflectionType == "serverside") {
-            var mFILE = CFobj._fileRegEx.exec(image.src);
-            var sURLTO = image.src.replace(new RegExp(mFILE[1]+'$'), '');
 
-            var src = CFobj._reflectionServerSrc;
-            src = src.replace(/\{URLTO\}/, sURLTO);
-            src = src.replace(/\{FILE\}/, mFILE[1]);
-            src = src.replace(/\{FILENAME\}/, mFILE[2]);
-            src = src.replace(/\{EXT\}/, mFILE[3]);
-
-            reflection = this.reflection = document.createElement('img');
-            reflection.src = src;
-
-        } else {
-
-            if (this.Browser.IE) {
-                var filterString = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)';
-                if (CFobj._reflectionColorRGB) {
-                    // transparent gradient
-                    if (CFobj._reflectionColor == "transparent") {
-                        var RefImg = reflection = this.reflection = document.createElement('img');
-                        reflection.src = image.src;
-                    }
-                    // color gradient
-                    else {
-                        reflection = this.reflection = document.createElement('div');
-                        var RefImg = document.createElement('img');
-                        RefImg.src = image.src;
-                        reflection.width = RefImg.width;
-                        reflection.height = RefImg.height;
-                        RefImg.style.width = '100%';
-                        RefImg.style.height = '100%';
-                        var color = CFobj._reflectionColorRGB;
-                        reflection.style.backgroundColor = '#'+color.hR+color.hG+color.hB;
-                        reflection.appendChild(RefImg);
-                    }
-                    filterString += ' progid:DXImageTransform.Microsoft.Alpha(opacity=0, finishOpacity=50, style=1, finishX=0, startY='+CFobj._reflectionHeight*100+' finishY=0)';
-                } else {
+        if (this.Browser.IE) {
+            var filterString = 'progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)';
+            if (CFobj._reflectionColorRGB) {
+                // transparent gradient
+                if (CFobj.conf.reflectionColor == "transparent") {
                     var RefImg = reflection = this.reflection = document.createElement('img');
                     reflection.src = image.src;
                 }
-                // crop image (streches and crops (clip on default dimensions), original proportions will be restored through CSS)
-                filterString += ' progid:DXImageTransform.Microsoft.Matrix(M11=1, M12=0, M21=0, M22='+1/CFobj._reflectionHeight+')';
-
-                RefImg.style.filter = filterString;
-
+                // color gradient
+                else {
+                    reflection = this.reflection = document.createElement('div');
+                    var RefImg = document.createElement('img');
+                    RefImg.src = image.src;
+                    reflection.width = RefImg.width;
+                    reflection.height = RefImg.height;
+                    RefImg.style.width = '100%';
+                    RefImg.style.height = '100%';
+                    var color = CFobj._reflectionColorRGB;
+                    reflection.style.backgroundColor = '#'+color.hR+color.hG+color.hB;
+                    reflection.appendChild(RefImg);
+                }
+                filterString += ' progid:DXImageTransform.Microsoft.Alpha(opacity=0, finishOpacity=50, style=1, finishX=0, startY='+CFobj.conf.reflectionHeight*100+' finishY=0)';
             } else {
-                if (CFobj._reflectionWithinImage)
-                    var canvas = this.canvas = $CF(document.createElement('canvas'));
-                else 
-                    var canvas = reflection = this.reflection = document.createElement('canvas');
+                var RefImg = reflection = this.reflection = document.createElement('img');
+                reflection.src = image.src;
+            }
+            // crop image (streches and crops (clip on default dimensions), original proportions will be restored through CSS)
+            filterString += ' progid:DXImageTransform.Microsoft.Matrix(M11=1, M12=0, M21=0, M22='+1/CFobj.conf.reflectionHeight+')';
 
-                if (canvas.getContext) {
-                    if (CFobj._reflectionWithinImage) {
-                        for (var i=0; i <image.attributes.length; i++) {
-                            canvas.setAttributeNode(image.attributes[i].cloneNode(true));
-                        }
+            if (ContentFlowGlobal.Browser.IE6) {
+                if (image.src.match(/\.png$/) ) {
+                    image.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+image.src+"', sizingMethod=scale )";
+                    image.filterString = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+image.src+"', sizingMethod=scale )";
+                    filterString += " progid:DXImageTransform.Microsoft.AlphaImageLoader(src='"+image.src+"', sizingMethod=scale )";
+                    image.origSrc = image.src;
+                    image.src='img/blank.gif';
+                    RefImg.src="img/blank.gif";
+                }
+            }
+
+            reflection.filterString = filterString;
+            RefImg.style.filter = filterString;
+
+        } else {
+            if (CFobj._reflectionWithinImage)
+                var canvas = this.canvas = $CF(document.createElement('canvas'));
+            else 
+                var canvas = reflection = this.reflection = document.createElement('canvas');
+
+            if (canvas.getContext) {
+                if (CFobj._reflectionWithinImage) {
+                    for (var i=0; i <image.attributes.length; i++) {
+                        canvas.setAttributeNode(image.attributes[i].cloneNode(true));
                     }
-
-                    var context = canvas.getContext("2d");
-                        
-                    // overwrite default height and width
-                    if (CFobj._reflectionWithinImage) {
-                        if (image.height > CFobj.maxHeight) {
-                            var height = CFobj.maxHeight;
-                            var width = CFobj.maxHeight / image.origProportion;
-                        }
-                        else {
-                            var height = image.height;
-                            var width = image.width;
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height; 
-                        this.setImageFormat(canvas);
-                        canvas.height = height * (1 + CFobj._reflectionHeight);
-
-                    }
-                    else {
-                        canvas.width = width;
-                        canvas.height = height * CFobj._reflectionHeight;
-                    }
-                        
-                    context.save(); /* save default context */
-
-                    /* draw image into canvas */
-                    if (CFobj._reflectionWithinImage) {
-                        context.drawImage(image, 0, 0, width, height);
-                    }
-
-                    /* mirror image by transformation of context and image drawing */
-                    if (CFobj._reflectionWithinImage) { // -1 for FF 1.5
-                        var contextHeight = height * 2 - 1;
-                    }
-                    else {
-                        var contextHeight = image.height - 1;
-                    }
-                    
-                    context.translate(0, contextHeight);
-                    context.scale(1, -1);
-                    /* draw reflection image into canvas */
-                    context.drawImage(image, 0, 0, width, height);
-
-                    /* restore default context for simpler further canvas manupulation */
-                    context.restore();
-                        
-                    if (CFobj._reflectionColorRGB) {
-                        var gradient = context.createLinearGradient(0, 0, 0, canvas.height);
-
-                        var alpha = [0, 0.5, 1];
-                        if (CFobj._reflectionColor == "transparent") {
-                            context.globalCompositeOperation = "destination-in";
-                            alpha = [1, 0.5, 0];
-                        }
-
-                        var red = CFobj._reflectionColorRGB.iR;
-                        var green = CFobj._reflectionColorRGB.iG;
-                        var blue = CFobj._reflectionColorRGB.iB;
-                        if (CFobj._reflectionWithinImage) {
-                            gradient.addColorStop(0, 'rgba('+red+','+green+','+blue+','+alpha[0]+')');
-                            gradient.addColorStop(height/canvas.height, 'rgba('+red+','+green+','+blue+','+alpha[0]+')');
-                            gradient.addColorStop(height/canvas.height, 'rgba('+red+','+green+','+blue+','+alpha[1]+')');
-                        }
-                        else {
-                            gradient.addColorStop(0, 'rgba('+red+','+green+','+blue+','+alpha[1]+')');
-                        }
-                        gradient.addColorStop(1, 'rgba('+red+','+green+','+blue+','+alpha[2]+')');
-
-                        context.fillStyle = gradient;
-                        context.fillRect(0, 0, canvas.width, canvas.height);
-                        
-                    }
-
-                    if (CFobj._reflectionWithinImage) {
-                        image.parentNode.replaceChild(canvas, image);
-                        this.content = canvas;
-                        this.origContent = canvas;
-                        delete this.image;// = true;
-
-                    }
-                    
-                } else {
-                    CFobj._reflectionWithinImage = false;
-                    delete this.reflection;
                 }
 
+                var context = canvas.getContext("2d");
+
+                /* calc image size */
+                var max = CFobj.maxHeight;
+                var size = CFobj._scaleImageSize(this, {width: max, height: max }, max)
+                var width = size.width;
+                var height = size.height;
+
+                // overwrite default height and width
+                if (CFobj._reflectionWithinImage) {
+                    canvas.width = width;
+                    canvas.height = height; 
+                    this.setImageFormat(canvas);
+                    canvas.height = height * (1 + CFobj.conf.reflectionHeight + CFobj.conf.reflectionGap);
+
+                }
+                else {
+                    canvas.width = width;
+                    canvas.height = height * CFobj.conf.reflectionHeight;
+                }
+                    
+                context.save(); /* save default context */
+
+                /* draw image into canvas */
+                if (CFobj._reflectionWithinImage) {
+                    context.drawImage(image, 0, 0, width, height);
+                }
+
+                /* mirror image by transformation of context and image drawing */
+                if (CFobj._reflectionWithinImage) {
+                    var contextHeight = height * ( 1 + CFobj.conf.reflectionGap/2) * 2;
+                }
+                else {
+                    var contextHeight = image.height;
+                }
+                // -1 for FF 1.5
+                contextHeight -= 1;
+                
+                context.translate(0, contextHeight);
+                context.scale(1, -1);
+                /* draw reflection image into canvas */
+                context.drawImage(image, 0, 0, width, height);
+
+                /* restore default context for simpler further canvas manupulation */
+                context.restore();
+                    
+                if (CFobj._reflectionColorRGB) {
+                    var gradient = context.createLinearGradient(0, 0, 0, canvas.height);
+
+                    var alpha = [0, 0.5, 1];
+                    if (CFobj._reflectionColor == "transparent") {
+                        context.globalCompositeOperation = "destination-in";
+                        alpha = [1, 0.5, 0];
+                    }
+
+                    var red = CFobj._reflectionColorRGB.iR;
+                    var green = CFobj._reflectionColorRGB.iG;
+                    var blue = CFobj._reflectionColorRGB.iB;
+                    if (CFobj._reflectionWithinImage) {
+                        gradient.addColorStop(0, 'rgba('+red+','+green+','+blue+','+alpha[0]+')');
+                        gradient.addColorStop(height/canvas.height, 'rgba('+red+','+green+','+blue+','+alpha[0]+')');
+                        gradient.addColorStop(height/canvas.height, 'rgba('+red+','+green+','+blue+','+alpha[1]+')');
+                    }
+                    else {
+                        gradient.addColorStop(0, 'rgba('+red+','+green+','+blue+','+alpha[1]+')');
+                    }
+                    gradient.addColorStop(1, 'rgba('+red+','+green+','+blue+','+alpha[2]+')');
+
+                    context.fillStyle = gradient;
+                    context.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                }
+
+                if (CFobj._reflectionWithinImage) {
+                    image.parentNode.replaceChild(canvas, image);
+                    this.content = canvas;
+                    this.origContent = canvas;
+                    delete this.image;// = true;
+
+                }
+                
+            } else {
+                CFobj._reflectionWithinImage = false;
+                delete this.reflection;
             }
+
         }
         if (reflection) {
             reflection.className = "reflection";
@@ -544,152 +649,10 @@ ContentFlowItem.prototype = {
             /* be shure that caption is last child */
             if (this.caption) this.element.appendChild(this.caption);
         } 
-        var size = CFobj._calcSize(0,0);
-        this.positionContent(size);
 
-    },
-
-    
-    setImageFormat: function (img) {
-        img.origProportion = img.height / img.width;
-        img.setAttribute('origProportion', img.height / img.width);
-        //img.origWidth = img.width;
-        //img.origHeight = img.height;
-        if (img.origProportion >= 1)
-            img.addClassName('portray');
-        else
-            img.addClassName('landscape');
-    },
-
-
-    /*
-     * calculate content dimensions
-     */
-    calcContentDim: function (size) {
-        var CFobj = this.CFobj;
-        var Item = this;
-        var content = this.content;
-        var proportion = content.origProportion;
-        var width, height;
-        
-        /* calc size and position of content */
-        if (proportion >= 1) {
-            if (CFobj._verticalFlow) {
-                if (CFobj._scaleFactorLandscape == "max")
-                    var width = size.width;
-                else
-                    var width = size.height / proportion * CFobj._scaleFactorLandscape;
-
-                width = width > CFobj.maxHeight ? CFobj.maxHeight : width;
-                height = width * proportion;
-            }
-            else {
-                height = size.height;
-                width = size.height / proportion; 
-            }
-        } else {
-            if (CFobj._verticalFlow) {
-                height = size.width * proportion;
-                width = size.width;
-            } else {
-                if (CFobj._scaleFactorLandscape == "max")
-                    height = size.height;
-                else 
-                    height = size.width * proportion * CFobj._scaleFactorLandscape;
-
-                height = height > CFobj.maxHeight ? CFobj.maxHeight : height;
-                width = height / proportion;
-            }
-        }
-        var contentDim = {
-            height: height,
-            width: width
-        };
-        return contentDim;
-    },
-
-    /*
-     * position content
-     */
-    positionContent: function (size, absPos) {
-        var CFobj = this.CFobj;
-        var Item = this;
-        var content = this.content;
-        var proportion = content.origProportion;
-
-        var contentDim = this.calcContentDim(size);
-        if (isNaN(contentDim.height) || isNaN(contentDim.width)) return;
-
-        var contentPos = {};
-
-        /* center vertical / horizontal */
-        if (CFobj._verticalFlow)
-            contentPos.top = (size.height - contentDim.height )/2;
-        else {
-            contentPos.left = this.Browser.IE6 ? 0 : (size.width - contentDim.width )/2;
-        }
-
-        switch (CFobj._contentPosition) {
-            case "top":
-                if (CFobj._verticalFlow)
-                    contentPos.left = 0; 
-                else
-                    contentPos.top = 0; 
-                break;
-            case "center":
-            case "middle":
-                if (CFobj._verticalFlow)
-                    contentPos.left = (size.width - contentDim.width) /2;
-                else
-                    contentPos.top = (size.height - contentDim.height) /2;
-                break;
-            case "bottom":
-            default:
-                if (CFobj._verticalFlow)
-                    contentPos.left = size.width - contentDim.width;
-                else
-                    contentPos.top = size.height - contentDim.height;
-        }
-
-        if (absPos) {
-            if (CFobj._reflectionType != "none" && CFobj._reflectionWithinImage && !this.Browser.IE) {
-                content.style.height = (contentDim.height * (1 + CFobj._reflectionHeight)) + "px";
-            } else {
-                content.style.height = contentDim.height + "px";
-            }
-
-            content.style.width = contentDim.width + "px";
-            content.style.marginLeft = contentPos.left + "px";
-            content.style.marginTop = contentPos.top + "px";
-        }
-        else {
-            /* set dimensions and position of content */
-            if (CFobj._reflectionType != "none" && CFobj._reflectionWithinImage && !this.Browser.IE) {
-                content.style.height = (contentDim.height * (1 + CFobj._reflectionHeight)/size.height*100) + "%";
-            } else {
-                if (CFobj.Browser.IE)
-                    content.style.height = (contentDim.height/ (size.height*(1 + CFobj._reflectionHeight))*100) + "%";
-                else
-                    content.style.height = (contentDim.height/size.height*100) + "%";
-            }
-
-            content.style.width = (contentDim.width/size.width * 100) + "%";
-            content.style.marginLeft = (contentPos.left/size.width*100) + "%";
-            content.style.marginTop = (contentPos.top/size.height*100) + "%";
-        }
-
-
-        if (this.reflection) {
-            /* set dimensions and position of reflection */
-            var reflection = this.reflection;
-            if (absPos)
-                reflection.style.height = (contentDim.height*CFobj._reflectionHeight) +"px";
-            else
-                reflection.style.height = (contentDim.height*CFobj._reflectionHeight/(size.height*(1 + CFobj._reflectionHeight))*100)+"%";
-            reflection.style.width = content.style.width;
-            reflection.style.marginLeft = content.style.marginLeft;
-        }
     }
+
+
  };
 
 /*
@@ -701,8 +664,10 @@ var ContentFlow = function (container, config) {
 
     if (container) {
         ContentFlowGlobal.Flows.push(this);
-        this.container = container;
+        this.Container = container;
         this._userConf = config?config:{};
+        this.conf = {};
+        this._loadedAddOns = new Array();
     } else {
         throw ('ContentFlow ERROR: No flow container node or id given');
     }
@@ -715,8 +680,8 @@ ContentFlow.prototype = {
     _currentPosition: 0,
     _targetPosition: 0,
     _stepLock: false,
-    _millisecondsPerStep: 50, 
-    _fileRegEx: /(([^\/?=&]+)\.(\w+)){1}$/,
+    _millisecondsPerStep: 40, 
+    _reflectionWithinImage: true,
     Browser: ContentFlowGlobal.Browser,
     
     _defaultConf: { 
@@ -729,15 +694,15 @@ ContentFlow.prototype = {
 
         maxItemHeight: 0,
         scaleFactor: 1,
-        scaleFactorLandscape: 1,
+        scaleFactorLandscape: 1.33,
+        scaleFactorPortrait: 1.0,
+        fixItemSize: false,
         relativeItemPosition: "top center", // align top/above, bottom/below, left, right, center of position coordinate
-        contentPosition: "bottom", // align at the top, center/middle or bottom of the item
 
         circularFlow: true,
         verticalFlow: false,
-        verticalScrollbar: false,
-        endOpacity: 1,
         visibleItems: -1,
+        endOpacity: 1,
         startItem:  "center",
         scrollInFrom: "pre",
 
@@ -745,25 +710,22 @@ ContentFlow.prototype = {
         flowDragFriction: 1.0,
         scrollWheelSpeed: 1.0,
         keys: {
-            13: function () { this._onclickActiveItem(this._activeItem) },
+            13: function () { this.conf.onclickActiveItem(this._activeItem) },
             37: function () { this.moveTo('pre') }, 
             38: function () { this.moveTo('visibleNext') },
             39: function () { this.moveTo('next') },
             40: function () { this.moveTo('visiblePre') }
         },
 
-        reflectionType: "clientside",   // client-side, server-side, none
-        reflectionWithinImage: true,
         reflectionColor: "transparent", // none, transparent or hex RGB CSS style #RRGGBB
         reflectionHeight: 0.5,          // float (relative to original image height)
-        negativeMarginOnFloat: "auto",  // auto, none or float (relative to reflectionHeight)
-        reflectionServerSrc: "{URLTO}{FILENAME}_reflection.{EXT}",  // {URLTO}, {FILE}, {FILENAME}, {EXT}
+        reflectionGap: 0.0,
 
         /* ==================== actions ==================== */
 
         onInit: function () {},
 
-        onclickInactiveItem : function (item) {},
+        onclickInactiveItem: function (item) {},
 
         onclickActiveItem: function (item) {
             var url, target;
@@ -793,6 +755,9 @@ ContentFlow.prototype = {
         onReachTarget: function(item) {},
 
         onMoveTo: function(item) {},
+
+        //onDrawItem: function(item, relativePosition, relativePositionNormed, side, size) {},
+        onDrawItem: function(item) {},
         
         onclickPreButton: function (event) {
             this.moveToIndex('pre');
@@ -806,18 +771,21 @@ ContentFlow.prototype = {
 
         /* ==================== calculations ==================== */
 
-        calcStepWidth: function(diff, absDiff) {
-            if (absDiff > this._visibleItems) {
+        calcStepWidth: function(diff) {
+            var vI = this.conf.visibleItems;
+            var items = this.items.length;
+            items = items == 0 ? 1 : items;
+            if (Math.abs(diff) > vI) {
                 if (diff > 0) {
-                    var stepwidth = diff - this._visibleItems;
+                    var stepwidth = diff - vI;
                 } else {
-                    var stepwidth = diff + this._visibleItems;
+                    var stepwidth = diff + vI;
                 }
-            } else if (this._visibleItems >= this.items.length) {
-                var stepwidth = diff / this.items.length;
+            } else if (vI >= this.items.length) {
+                var stepwidth = diff / items;
             } else {
-                var stepwidth = diff * ( this._visibleItems / this.items.length);
-                //var stepwidth = diff/absDiff * Math.max(diff * diff,Math.min(absDiff,0.3)) * ( this._visibleItems / this.items.length);
+                var stepwidth = diff * ( vI / items);
+                //var stepwidth = diff/absDiff * Math.max(diff * diff,Math.min(absDiff,0.3)) * ( vI / this.items.length);
                 //var stepwidth = this.flowSpeedFactor * diff / this.visibleItems;
                 //var stepwidth = this.flowSpeedFactor * diff * ( this.visibleItems / this.items.length)
                 //var stepwidth = this.flowSpeedFactor * diff / this._millisecondsPerStep * 2; // const. speed
@@ -825,360 +793,52 @@ ContentFlow.prototype = {
             return stepwidth;
         },
         
-        calcSize: function (relativePosition, side) {
-            var rP = relativePosition;
-            var vI = this._visibleItems;
-            var maxHeight = this.maxHeight;
+        calcSize: function (item) {
+            var rP = item.relativePosition;
+            //var rPN = relativePositionNormed;
+            //var vI = this.conf.visibleItems; 
 
-            var h = maxHeight/(Math.abs(rP)+1);
+            var h = 1/(Math.abs(rP)+1);
             var w = h;
             return {width: w, height: h};
         },
 
-        calcCoordinates: function (relativePosition, side) {
-            var rP = relativePosition;
-            var vI = this._visibleItems;
-            var maxHeight = this.maxHeight;
+        calcCoordinates: function (item) {
+            var rP = item.relativePosition;
+            //var rPN = item.relativePositionNormed;
+            var vI = this.conf.visibleItems; 
 
             var f = 1 - 1/Math.exp( Math.abs(rP)*0.75);
-            var x =  this.Flow.center.x * (1 + side *vI/(vI+1)* f); 
-            var y = this.maxHeight;
+            var x =  item.side * vI/(vI+1)* f; 
+            var y = 1;
 
             return {x: x, y: y};
         },
-        /*
-        calcRelativeItemPosition: function(relativePosition, side, size) {
-            var rP = relativePosition;
-            var vI = this._visibleItems;
-            var maxHeight = this.maxHeight;
 
-            var x = -size.width/2;
-            var y = -size.height;
+        /*
+        calcRelativeItemPosition: function (item) {
+            var x = 0;
+            var y = -1;
             return {x: x, y: y};
         },
         */
 
-        calcZIndex: function (x, f, I) {
-            return -Math.abs(I);
+        calcZIndex: function (item) {
+            return -Math.abs(item.relativePositionNormed);
         },
 
-        calcFontSize: function (x, f, size) {
-            return size.height / this.maxHeight;
+        calcFontSize: function (item) {
+            return item.size.height;
         },
    
-        calcOpacity: function (relativePosition, side) {
-            return 1 - ((1 - this._endOpacity ) * Math.sqrt(Math.abs(relativePosition)/this._visibleItems));
+        calcOpacity: function (item) {
+            return Math.max(1 - ((1 - this.conf.endOpacity ) * Math.sqrt(Math.abs(item.relativePositionNormed))), this.conf.endOpacity);
         }
     },
 
     /* ---------- end of defaultConf ---------- */
 
-
-    /*
-     * ==================== public methods ==================== 
-     */
-
-
-    /*
-     * calls _init() if ContentFlow has not been initialized before
-     * needed if ContentFlow is not automatically initialized on window.load
-     */
-    init: function () {
-        if(this.isInit) return;
-        this._init();
-    },
-
-    /*
-     * parses configuration object and initializes configuration values
-     */
-    setConfig: function(config) {
-        if (!config) return;
-        var dC = this._defaultConf;
-        for (var option in config) {
-            if (dC[option] == "undefined" ) continue;
-            switch (option) {
-                case "scrollInFrom":
-                case "startItem":
-                case "negativeMarginOnFloat":
-                    if (typeof(config[option]) == "number"  || typeof(config[option]) == "string") {
-                        this["_"+option] = config[option];
-                    }
-                    break;
-                default:
-                    if (typeof(dC[option] == config[option])) {
-                        this["_"+option] = config[option];
-                    }
-            }
-        }
-        switch (this._reflectionColor) {
-            case "overlay":
-                break;
-            case this._reflectionColor.search(/#[0-9a-fA-F]{6}/)>= 0?this._reflectionColor:this._reflectionColor+"x":
-                this._reflectionColorRGB = {
-                    hR: this._reflectionColor.slice(1,3),
-                    hG: this._reflectionColor.slice(3,5),
-                    hB: this._reflectionColor.slice(5,7),
-                    iR: parseInt(this._reflectionColor.slice(1,3), 16),
-                    iG: parseInt(this._reflectionColor.slice(3,5), 16),
-                    iB: parseInt(this._reflectionColor.slice(5,7), 16)
-                };
-                break;
-            case "none":
-            case "transparent":
-            default:
-                this._reflectionColor = "transparent"; 
-                this._reflectionColorRGB = {
-                    hR: 0, hG: 0, hB:0,
-                    iR: 0, iG: 0, iB:0
-                };
-                break;
-        }
-        if (this._negativeMarginOnFloat == "none") this._negativeMarginOnFloat = 0;
-        if (this.items) {
-            if (this._visibleItems <  0)
-                this._visibleItems = Math.round(Math.sqrt(this.items.length));
-            this._visibleItems = Math.min(this._visibleItems, this.items.length - 1);
-        }
-
-        if (this._relativeItemPosition) {
-            var calcRP = {
-                x: {
-                    left: function(size) { return -size.width },
-                    center: function(size) { return -size.width/2 },
-                    right: function(size) { return 0 }
-                },
-                y: {
-                    top: function(size) { return -size.height },
-                    center: function(size) { return -size.height/2 },
-                    bottom: function(size) { return 0 }
-                }
-            };
-
-            var iP = this._relativeItemPosition;
-            iP = iP.replace(/above/,"top").replace(/below/,"bottom");
-            var x, y = null;
-            x = iP.match(/left|right/);
-            y = iP.match(/top|bottom/);
-            c = iP.match(/center/);
-            if (!x) {
-                if (c) x = "center";
-                else x = "center";
-            }
-            if (!y) {
-                if (c) y = "center";
-                else y = "bottom";
-            }
-            var calcX = calcRP.x[x];
-            var calcY = calcRP.y[y];
-            this._calcRelativeItemPosition = function (rP, side, size) {
-                var x = calcX(size);
-                var y = calcY(size);
-                return {x: x, y: y};
-            };
-            this._relativeItemPosition = null;
-        }
-
-    },
-
-    getItem: function (index) {
-        return this.items[this._checkIndex(Math.round(index))]; 
-    },
-
-    /*
-     * returns the index number of the active item
-     */
-    getActiveItem: function() {
-        return this._activeItem;
-    },
-
-    /*
-     * returns the number of items the flow contains
-     */
-    getNumberOfItems: function () {
-        return this.items.length;
-    },
-
-    /*
-     * reinitializes sizes.
-     * called on window.resize
-     */
-    resize: function () {
-        this._initSizes();
-        this._initStep();
-    }, 
-
-    /*
-     * scrolls flow to item i
-     */
-    moveToPosition: function (p) {
-        if (!this._circularFlow) p = this._checkIndex(p);
-        this._targetPosition = p;
-        this._onMoveTo(this._getItemByPosition(p));
-        this._initStep();
-    },
-    moveToIndex: function (index) {
-        this._targetPosition = Math.round(this._getPositionByIndex(this._getIndexByKeyWord(index, this._activeItem.index, !this._circularFlow)));
-        this._onMoveTo(this._getItemByPosition(this._targetPosition));
-        this._initStep();
-    },
-    moveToItem: function (item) {
-        var i;
-        if (item.itemIndex) i = item.itemIndex;
-        else i = item.index;
-        this.moveToIndex(i);
-    },
-    moveTo: function (i) {
-        if (typeof i == "object") this.moveToItem(i);
-        else if (isNaN(i) || i == Math.floor(i)) this.moveToIndex(i);
-        else this.moveToPosition(i);
-    }, 
-
-    /*
-     * initializes item and adds it at index position
-     */
-    addItem: function(el, index) {
-        if (typeof index == "string") {
-            switch (index) {
-                case "first":
-                case "start":
-                    index = 0;
-                    break;
-                case "last":
-                case "end":
-                    index = this.itemsLastIndex + 1;
-                    break;
-                default:
-                    index = this._getIndexByKeyWord(index);
-                    if (this._activeItem &&  index < this._activeItem.index) index++;
-            }
-        }
-
-        index = Math.max(index, 0);
-        index = Math.min(index, this.itemsLastIndex + 1);
-        
-        /* insert item at index position into flow */ 
-        //if (index > this.itemsLastIndex || !this.items[index])
-            //this.Flow.appendChild(el);
-        //else
-            //this.Flow.insertBefore(el, this.items[index].element);
-        this.Flow.appendChild(el);
-
-        /* init item after insertion. that way it's part of the document and all styles are applied */
-        item = new ContentFlowItem(this, el, i);
-        this.items.splice(index,0, item);
-
-        /* adjust item indices */
-        for (var i = index; i < this.items.length; i++) {
-            this.items[i].setIndex(i);
-        }
-        this._setLastIndex();
-
-        /* adjust targetItem, currentPos so that current view does not change*/
-        if (Math.round(this._getPositionByIndex(index)) <= Math.round(this._targetPosition)) {
-            this._targetPosition++;
-            if (!this._circularFlow)
-                this._targetPosition = Math.min(this._targetPosition, this.itemsLastIndex);
-        } 
-        if (this._getPositionByIndex(index) <= this._currentPosition) {
-            this._currentPosition++;
-            if (!this._circularFlow)
-                this._currentPosition = Math.min(this._currentPosition, this.itemsLastIndex);
-        }
-        
-        // avoid display errors (wrong sizing)
-        var CF = this;
-        window.setTimeout(function () { CF._initStep() }, 10);
-
-        return index;
-        
-    },
-        
-    /*
-     * removes item at index position, cleans it up and returns it
-     */
-    rmItem: function(index) {
-        if  (index == "undefined") index = this._activeItem.index;
-        index = this._getIndexByKeyWord(index);
-        if (!this.items[index]) return null;
-
-        var Item = this.items[index];
-        var item = Item.element;
-        var content = Item.content;
-
-        /* remove event listeners */
-        //var ciItem = this._ciItem
-        //var caItem = this._caItem;
-        //Item[this._activeElement].removeEvent('click', ciItem, false);
-        //if (window.removeEventListener)
-            //Item[this._activeElement].removeEvent('click', caItem, false);
-        //else
-            //Item[this._activeElement].onclick = function () {};
-
-        //item.style.height = "";
-        //item.style.width = "";
-        //item.style.margin = "";
-        //item.style.top = "";
-        //item.style.left = "";
-        //item.style.fontSize = "";
-        //item.style.zIndex = "";
-        //item.style.display = "";
-
-        /* remove classes */
-        //item.removeClassName('active');
-        //item.removeClassName('withReflection');
-        //if (Item.image) {
-            //content.removeClassName('portray');
-            //content.removeClassName('landscape');
-        //}
-            
-        /* cleanup arrays and remove generated content */
-        //if (Item.image) {
-            //this.itemsContent[index].width = this.itemsContent[index].origWidth;
-            //this.itemsContent[index].height = this.itemsContent[index].origHeight;
-            //content.removeAttribute('width');
-            //content.removeAttribute('height');
-            //content.style.width = "";
-            //content.style.height = "";
-            //content.style.margin = "";
-
-            //if (Item.reflection) {
-                //item.removeChild(Item.reflection);
-            //}
-            //if (Item.overlay) item.removeChild(Item.overlay);
-        //}
-
-        this.items.splice(index,1);
-
-        /* adjust item indices */
-        for (var i = index ; i < this.items.length; i++) {
-            this.items[i].setIndex(i);
-        }
-
-        this._setLastIndex();
-        
-        /* adjust targetItem, currentPos and activeItem so that current view does not change*/
-        if (Math.round(this._getPositionByIndex(index)) < Math.round(this._targetPosition)) {
-            this._targetPosition--;
-            if (!this._circularFlow)
-                this._targetPosition = this._checkIndex(this._targetPosition);
-        }
-        if (this._getPositionByIndex(index) < this._currentPosition) {
-            this._currentPosition--;
-            if (!this._circularFlow)
-                this._currentPosition = this._checkIndex(this._currentPosition);
-        }
-        this._activeItem = this._getItemByPosition(this._currentPosition);
-
-        /* remove item from DOM tree, take the next step and return removed item  */
-        var removedItem = item.parentNode.removeChild(item);
-        // avoid display errors (wrong sizing)
-        var CF = this;
-        window.setTimeout(function () { CF._initStep() }, 10);
-        return removedItem;
-
-    },
-
-
+    
     /*
      * ==================== index helper methods ====================
      */
@@ -1212,11 +872,11 @@ ContentFlow.prototype = {
 
     /* returns the position of an item-index relative to current position */
     _getPositionByIndex: function(index) {
-        if (!this._circularFlow) return this._checkIndex(index);
+        if (!this.conf.circularFlow) return this._checkIndex(index);
         var cI = this._getIndexByPosition(this._currentPosition);
         var dI = index - cI;
         if (Math.abs(dI) > dI+this.items.length)
-            dI+= this.items.length;
+            dI += this.items.length;
         else if (Math.abs(dI) > (Math.abs(dI-this.items.length)))
             dI -= this.items.length;
 
@@ -1272,11 +932,11 @@ ContentFlow.prototype = {
                 case 'visible':
                 case 'visiblePre':
                 case 'visibleLeft':
-                    index -= this._visibleItems;
+                    index -= this.conf.visibleItems;
                     break;
                 case 'visibleNext':
                 case 'visibleRight':
-                    index += this._visibleItems;
+                    index += this.conf.visibleItems;
                     break;
                 default:
                     index = index;
@@ -1292,6 +952,336 @@ ContentFlow.prototype = {
     },
 
 
+    _setCaptionLabel: function (index) {
+        if(this.Position && !this.Slider.locked)
+            this.Position.setLabel(index);
+        this._setGlobalCaption();
+    },
+
+
+    /*
+     * ==================== public methods ==================== 
+     */
+    getAddOnConf: function(name) {
+          return ContentFlowGlobal.getAddOnConf(name);
+    },
+
+    setAddOnConf: function(name, conf) {
+          ContentFlowGlobal.setAddOnConf(name, conf);
+    },
+
+
+    /*
+     * calls _init() if ContentFlow has not been initialized before
+     * needed if ContentFlow is not automatically initialized on window.load
+     */
+    init: function () {
+        if(this.isInit) return;
+        this._init();
+    },
+
+    /*
+     * parses configuration object and initializes configuration values
+     */
+    setConfig: function(config) {
+        if (!config) return;
+        var dC = this._defaultConf;
+        for (var option in config) {
+            if (dC[option] == "undefined" ) continue;
+            switch (option) {
+                case "scrollInFrom":
+                case "startItem":
+                    if (typeof(config[option]) == "number"  || typeof(config[option]) == "string") {
+                        //this["_"+option] = config[option];
+                        this.conf[option] = config[option];
+                    }
+                    break;
+                default:
+                    if (typeof(dC[option] == config[option])) {
+                        //this["_"+option] = config[option];
+                        if (typeof config[option] == "function") {
+                            this.conf[option] = config[option].bind(this);
+                        }
+                        else {
+                            this.conf[option] = config[option];
+                        }
+                    }
+            }
+        }
+        switch (this.conf.reflectionColor) {
+            case this.conf.reflectionColor.search(/#[0-9a-fA-F]{6}/)>= 0?this.conf.reflectionColor:this.conf.reflectionColor+"x":
+                this._reflectionColorRGB = {
+                    hR: this.conf.reflectionColor.slice(1,3),
+                    hG: this.conf.reflectionColor.slice(3,5),
+                    hB: this.conf.reflectionColor.slice(5,7),
+                    iR: parseInt(this.conf.reflectionColor.slice(1,3), 16),
+                    iG: parseInt(this.conf.reflectionColor.slice(3,5), 16),
+                    iB: parseInt(this.conf.reflectionColor.slice(5,7), 16)
+                };
+                break;
+            case "none":
+            case "transparent":
+            default:
+                this._reflectionColor = "transparent"; 
+                this._reflectionColorRGB = {
+                    hR: 0, hG: 0, hB:0,
+                    iR: 0, iG: 0, iB:0
+                };
+                break;
+        }
+        if (this.items) {
+            if (this.conf.visibleItems <  0)
+                this.conf.visibleItems = Math.round(Math.sqrt(this.items.length));
+            this.conf.visibleItems = Math.min(this.conf.visibleItems, this.items.length - 1);
+        }
+
+        if (this.conf.relativeItemPosition) {
+            var calcRP = {
+                x: {
+                    left: function(size) { return -1 },
+                    center: function(size) { return 0 },
+                    right: function(size) { return 1 }
+                },
+                y: {
+                    top: function(size) { return -1 },
+                    center: function(size) { return 0 },
+                    bottom: function(size) { return 1 }
+                }
+            };
+
+            var iP = this.conf.relativeItemPosition;
+            iP = iP.replace(/above/,"top").replace(/below/,"bottom");
+            var x, y = null;
+            x = iP.match(/left|right/);
+            y = iP.match(/top|bottom/);
+            c = iP.match(/center/);
+            if (!x) {
+                if (c) x = "center";
+                else x = "center";
+            }
+            if (!y) {
+                if (c) y = "center";
+                else y = "top";
+            }
+            var calcX = calcRP.x[x];
+            var calcY = calcRP.y[y];
+            this.conf.calcRelativeItemPosition = function (item) {
+                var x = calcX(item.size);
+                var y = calcY(item.size);
+                return {x: x, y: y};
+            };
+            this.conf.relativeItemPosition = null;
+        }
+
+        if (this._reflectionType && this._reflectionType != "clientside") {
+            this.conf.reflectionHeight = 0;
+        }
+
+    },
+
+    getItem: function (index) {
+        return this.items[this._checkIndex(Math.round(index))]; 
+    },
+
+    /*
+     * returns the index number of the active item
+     */
+    getActiveItem: function() {
+        return this._activeItem;
+    },
+
+    /*
+     * returns the number of items the flow contains
+     */
+    getNumberOfItems: function () {
+        return this.items.length;
+    },
+
+    /*
+     * reinitializes sizes.
+     * called on window.resize
+     */
+    resize: function () {
+        this._initSizes();
+        this._initStep();
+    }, 
+
+    /*
+     * scrolls flow to item i
+     */
+    moveToPosition: function (p, holdPos) {
+        if (!this.conf.circularFlow) p = this._checkIndex(p);
+        this._targetPosition = p;
+        this.conf.onMoveTo(this._getItemByPosition(p));
+        this._initStep(false, holdPos);
+    },
+    moveToIndex: function (index) {
+        this._targetPosition = Math.round(this._getPositionByIndex(this._getIndexByKeyWord(index, this._activeItem.index, !this.conf.circularFlow)));
+        this.conf.onMoveTo(this._getItemByPosition(this._targetPosition));
+        this._initStep();
+    },
+    moveToItem: function (item) {
+        var i;
+        if (item.itemIndex) i = item.itemIndex;
+        else i = item.index;
+        this.moveToIndex(i);
+    },
+    moveTo: function (i) {
+        if (typeof i == "object") this.moveToItem(i);
+        else if (isNaN(i) || (i == Math.floor(i) && i < this.items.length) ) this.moveToIndex(i);
+        else this.moveToPosition(i);
+    }, 
+
+    /*
+     * initializes item and adds it at index position
+     */
+    _addItemCue: [],
+    _addItemCueProcess: function (deleteFirst) {
+        var c = this._addItemCue;
+        if (deleteFirst == true) 
+            c.shift();
+        if (c.length > 0 && ! c[0].p) {
+            c[0].p = true;
+            var self = this;
+            var t = c.length > 5 ? 1 : 40;
+            window.setTimeout(function () { self._addItem(c[0].el, c[0].i)}, t) ;
+        }
+    },
+    addItem: function(el, index) {
+        this._addItemCue.push({ el: el, i: index, p: false});
+        if (this._addItemCue.length == 1) 
+            this._addItemCueProcess();
+    },
+
+    _addItem: function(el, index) {
+        if (typeof index == "string") {
+            switch (index) {
+                case "first":
+                case "start":
+                    index = 0;
+                    break;
+                case "last":
+                case "end":
+                    index = isNaN(this.itemsLastIndex) ? 0 : this.itemsLastIndex;
+                    index += 1;
+                    break;
+                default:
+                    index = this._getIndexByKeyWord(index);
+            }
+        }
+
+        index = Math.max(index, 0);
+        index = Math.min(index, this.itemsLastIndex + 1);
+        index = isNaN(index) ? 0 : index;
+        
+        this.Flow.appendChild(el);
+
+        /* init item after insertion. that way it's part of the document and all styles are applied */
+        var item = new ContentFlowItem(this, el, index);
+        if (this.items.length == 0 ) {
+            this.resize();
+            if (this.conf.circularFlow) {
+                item.pre = item;
+                item.next = item;
+            }
+        }
+        else {
+            if (index == this.itemsLastIndex + 1) {
+                item.pre = this.items[this.itemsLastIndex];
+                item.next = item.pre.next;
+            }
+            else {
+                item.next = this.items[index];
+                item.pre = item.next.pre;
+            }
+            if (item.pre) item.pre.next = item;
+            if (item.next) item.next.pre = item;
+        }
+        this.items.splice(index,0, item);
+
+        /* adjust item indices */
+        for (var i = index; i < this.items.length; i++) {
+            this.items[i].setIndex(i);
+        }
+        this._setLastIndex();
+
+        if (this.conf.origVisibleItems < 0) {
+            this.conf.visibleItems = Math.round(Math.sqrt(this.items.length));
+        }
+        this.conf.visibleItems = Math.min(this.conf.visibleItems, this.items.length - 1);
+
+        /* adjust targetItem, currentPos so that current view does not change*/
+        if (Math.round(this._getPositionByIndex(index)) <= Math.round(this._targetPosition)) {
+            this._targetPosition++;
+            if (!this.conf.circularFlow)
+                this._targetPosition = Math.min(this._targetPosition, this.itemsLastIndex);
+        } 
+        if (this._getPositionByIndex(index) <= this._currentPosition) {
+            this._currentPosition++;
+            if (!this.conf.circularFlow)
+                this._currentPosition = Math.min(this._currentPosition, this.itemsLastIndex);
+        }
+        
+        // avoid display errors (wrong sizing)
+        var CF = this;
+        window.setTimeout(function () {
+            if(CF.items.length == 1 ) {
+                CF._currentPosition = -0.01;
+                CF._targetPosition = 0;
+                CF.resize(); 
+            }
+            else {
+                CF._initStep();
+            }
+        }, 100);
+
+        return index;
+        
+    },
+        
+    /*
+     * removes item at index position, cleans it up and returns it
+     */
+    rmItem: function(index) {
+        if  (index == "undefined") index = this._activeItem.index;
+        index = this._getIndexByKeyWord(index);
+        if (!this.items[index]) return null;
+
+        var item = this.items[index];
+
+        if (item.pre) item.pre.next = item.next;
+        if (item.next) item.next.pre = item.pre;
+        this.items.splice(index,1);
+
+        /* adjust item indices */
+        for (var i = index ; i < this.items.length; i++) {
+            this.items[i].setIndex(i);
+        }
+        this._setLastIndex();
+        
+        /* adjust targetItem, currentPos and activeItem so that current view does not change*/
+        if (Math.round(this._getPositionByIndex(index)) < Math.round(this._targetPosition)) {
+            this._targetPosition--;
+            if (!this.conf.circularFlow)
+                this._targetPosition = this._checkIndex(this._targetPosition);
+        }
+        if (this._getPositionByIndex(index) < this._currentPosition) {
+            this._currentPosition--;
+            if (!this.conf.circularFlow)
+                this._currentPosition = this._checkIndex(this._currentPosition);
+        }
+        this._activeItem = this._getItemByPosition(this._currentPosition);
+
+        /* remove item from DOM tree, take the next step and return removed item  */
+        var removedItem = item.element.parentNode.removeChild(item.element);
+        // avoid display errors (wrong sizing)
+        var CF = this;
+        window.setTimeout(function () { CF._initStep() }, 10);
+        return removedItem;
+
+    },
+
+
     /*
      * ==================== initialization ====================
      */
@@ -1300,28 +1290,29 @@ ContentFlow.prototype = {
     /* -------------------- main init -------------------- */
     _init: function () {
 
-        if (typeof(this.container) == 'string') { // no node
-            var container = document.getElementById(this.container);
+        if (typeof(this.Container) == 'string') { // no node
+            var container = document.getElementById(this.Container);
             if (container) {
-                this.container = container;
+                this.Container = container;
             } else {
-                throw ('ContentFlow ERROR: No element with id \''+this.container+'\' found!');
+                throw ('ContentFlow ERROR: No element with id \''+this.Container+'\' found!');
                 return;
             }
         }
         
-        /* reserve CSS namespace */
+        /* ----------  reserve CSS namespace */
 
-        $CF(this.container).addClassName('ContentFlow');
+        $CF(this.Container).addClassName('ContentFlow');
 
-        var flow = $CF(this.container).getChildrenByClassName('flow')[0];
+        /* ---------- detect GUI elements */
+        var flow = $CF(this.Container).getChildrenByClassName('flow')[0];
         if (!flow) {
             throw ('ContentFlow ERROR: No element with class\'flow\' found!');
             return;
         }
         this.Flow = new ContentFlowGUIElement(this, flow);
 
-        var scrollbar = this.container.getChildrenByClassName('scrollbar')[0];
+        var scrollbar = this.Container.getChildrenByClassName('scrollbar')[0];
         if (scrollbar) {
             this.Scrollbar = new ContentFlowGUIElement(this, scrollbar);
             var slider = this.Scrollbar.getChildrenByClassName('slider')[0];
@@ -1335,68 +1326,89 @@ ContentFlow.prototype = {
 
         }
 
+        /* ----------  init configuration */ 
         this.setConfig(this._defaultConf);
-        /* init AddOns */
-        this._initAddOns();
+        this._initAddOns(); /* init AddOns */
         this.setConfig(this._userConf);
         
         this._initSizes(); // ......
 
+
         /* ---------- init item lists ---------- */
         var items = this.Flow.getChildrenByClassName('item');
+
         this.items = new Array();
         for (var i=0; i<items.length; i++) {
-            this.items[i] = new ContentFlowItem(this, items[i], i);
-        }
-        if (this.items.length > 0) {
-            this.items[0].makeActive();
-            this._activeItem = this.items[0];
+            var item = this.items[i] = new ContentFlowItem(this, items[i], i);
+            if (i > 0) { 
+                item.pre = this.items[i-1];
+                item.pre.next = item;
+            }
         }
         this._setLastIndex();
+        if (this.conf.circularFlow && this.items.length > 0) {
+            var s = this.items[0];
+            s.pre = this.items[this.items.length-1];
+            s.pre.next = s;
+        }
 
+        /* ----------  init GUI */
         this._initGUI();
+
         /* ---------- init start parameters ---------- */
         if (this._activeElement != "content")
             this._activeElement = "element";
 
-        if (this._visibleItems < 0)
-            this._visibleItems = Math.round(Math.sqrt(this.items.length));
-        this._visibleItems = Math.min(this._visibleItems, this.items.length - 1);
+        this.conf.origVisibleItems = this.conf.visibleItems;
+        if (this.conf.visibleItems < 0) {
+            this.conf.visibleItems = Math.round(Math.sqrt(this.items.length));
+        }
+        this.conf.visibleItems = Math.min(this.conf.visibleItems, this.items.length - 1);
 
-        this._targetPosition = this._getIndexByKeyWord(this._startItem);
+        this._targetPosition = this._getIndexByKeyWord(this.conf.startItem, 0);
 
-        var index = this._getIndexByKeyWord(this._scrollInFrom, this._targetPosition);
-        switch (this._scrollInFrom) {
+        var index = this._getIndexByKeyWord(this.conf.scrollInFrom, this._targetPosition);
+        switch (this.conf.scrollInFrom) {
             case "next":
+            case "right":
                 index -= 0.5;
                 break;
             case "pre":
+            case "previous":
+            case "left":
                 index += 0.5;
                 break;
         } 
         this._currentPosition = index;
-        this._activeItem = this.getItem(index);
-        if (this._activeItem) this._activeItem.makeActive();
-
         
-        // wait till all images are loaded or grace time is up to show all and take the first step 
+
+        /* ---------- wait till all images are loaded or 
+         * grace time is up to show all and take the first step  
+        */
         var now = new Date();
         var cf = this;
         var timer = window.setInterval (
             function() {
                 if ( cf._imagesToLoad == 0 || new Date() - now > cf._loadingTimeout ) {
                     clearInterval(timer);
+
+                    cf._activeItem = cf.getItem(cf._currentPosition);
+                    if (cf._activeItem) {
+                        cf._activeItem.makeActive();
+                        cf._setCaptionLabel(cf._activeItem.index);
+                    }
                     
                     cf.Flow.style.visibility = "visible"; // show flow after images are loaded
                     if (cf.loadIndicator) cf.loadIndicator.style.display = "none";
                     if (cf.Scrollbar) cf.Scrollbar.style.visibility = "visible";
 
-                    if (cf.Browser.WebKit)
-                        cf.resize();  // ugly fix for scrollbar position bug
-                    else
-                        cf._initStep();
-
-                    cf._onInit();
+                    cf.resize();
+                    for (var i=0; i < cf._loadedAddOns.length; i++) {
+                        var a = ContentFlowGlobal.AddOns[cf._loadedAddOns[i]];
+                        if (a.methods.afterContentFlowInit)
+                            a.methods.afterContentFlowInit(cf);
+                    }
+                    cf.conf.onInit();
                 }
             }, 10
         );
@@ -1418,12 +1430,13 @@ ContentFlow.prototype = {
                 loadAddOns = this._userConf.useAddOns;
             }
         }
-        else if (this.container.getAttribute("useAddOns")) {
-            loadAddOns = this.container.getAttribute("useAddOns").split(" ");
+        else if (this.Container.getAttribute("useAddOns")) {
+            loadAddOns = this.Container.getAttribute("useAddOns").split(" ");
         }
         else {
-            loadAddOns = this._useAddOns.split(' ');
+            loadAddOns = this.conf.useAddOns.split(' ');
         }
+
 
         // check the names for keywords
         for (var i=0; i<loadAddOns.length; i++) {
@@ -1443,8 +1456,9 @@ ContentFlow.prototype = {
         for (var i=0; i<loadAddOns.length; i++) {
             var AddOn = ContentFlowGlobal.AddOns[loadAddOns[i]];
             if (AddOn) {
+                this._loadedAddOns.push(loadAddOns[i]);
                 AddOn._init(this);
-                this.container.addClassName('ContentFlowAddOn_'+AddOn.name);
+                this.Container.addClassName('ContentFlowAddOn_'+AddOn.name);
                 if (AddOn.methods.onloadInit)
                     AddOn.methods.onloadInit(this);
             }
@@ -1456,42 +1470,49 @@ ContentFlow.prototype = {
     _initGUI: function () {
         
         // resize
-        if (!this.Browser.iPhone) {
+        //if (!this.Browser.iPhone) {
             var resize = this.resize.bind(this);
             window.addEvent('resize', resize, false);
-        }
+        //}
+        //else {
+            //var g = this;
+            //window.addEvent('resize', function () {
+                //g._initSizes();
+                //g._initStep();
+            //} , false);
+        //}
         
         // pre and next buttons
-        var divs = this.container.getElementsByTagName('div');
+        var divs = this.Container.getElementsByTagName('div');
         for (var i = 0; i < divs.length; i++) {
             if ($CF(divs[i]).hasClassName('preButton')) {
                 var pre = divs[i];
-                var mt = this._onclickPreButton.bind(this);
+                var mt = this.conf.onclickPreButton;
                 pre.addEvent('click', mt, false);
             }
             else if (divs[i].hasClassName('nextButton')) {
                 var next = divs[i];
-                var mt = this._onclickNextButton.bind(this);
+                var mt = this.conf.onclickNextButton;
                 next.addEvent('click', mt, false);
             }
         }
 
         // Container object
         // mousewheel
-        if (this._scrollWheelSpeed != 0) {
+        if (this.conf.scrollWheelSpeed != 0) {
             var wheel = this._wheel.bind(this);
-            if(window.addEventListener) this.container.addEventListener('DOMMouseScroll', wheel, false);
-            this.container.onmousewheel = wheel;
+            if(window.addEventListener) this.Container.addEventListener('DOMMouseScroll', wheel, false);
+            this.Container.onmousewheel = wheel;
         }
 
         // key strokes
         var key = this._keyStroke.bind(this);
-        if (this._keys && !this.Browser.iPhone) {
+        if (this.conf.keys && !this.Browser.iPhone) {
             if (document.addEventListener) {
                 if (!this.Browser.Opera) {
                     var mouseoverCheck = document.createElement('div');
                     mouseoverCheck.addClassName('mouseoverCheckElement');
-                    this.container.appendChild(mouseoverCheck);
+                    this.Container.appendChild(mouseoverCheck);
 
                     if (this.Browser.WebKit) {
                         document.body.addEvent('keydown',  function (event) {
@@ -1504,23 +1525,24 @@ ContentFlow.prototype = {
                     }
                 } 
                 else {
-                    //this.container.addEvent('keydown', key);
-                    this.container.addEvent('keydown', key);
+                    this.Container.addEvent('keydown', key);
                 }
             }
             else {
-               this.container.onkeydown = key;
+               this.Container.onkeydown = key;
             }
         }
 
 
         // Flow object
-        if (this._flowDragFriction > 0) {
+        if (this.conf.flowDragFriction > 0) {
             var onDrag = function (event) {
-                var mouseX = event.clientX;
-                var mouseY = event.clientY;
+                var e = event;
+                if (event.touches) e = event.touches[0];
+                var mouseX = e.clientX;
+                var mouseY = e.clientY;
                 
-                if (this._verticalFlow) {
+                if (this.conf.verticalFlow) {
                     var dist = mouseY - this.Flow.mouseY; // px / or px per sec because _dragFlow wil be called in shorter intervalls if draged fast
                     var dim = this.Flow.dimensions.height;
                 }
@@ -1528,13 +1550,13 @@ ContentFlow.prototype = {
                     var dist = mouseX - this.Flow.mouseX; // px / or px per sec because _dragFlow wil be called in shorter intervalls if draged fast
                     var dim = this.Flow.dimensions.width;
                 }
-                var itemDist = (dist / dim )* (2*this._visibleItems +1); // items
-                var target = this._currentPosition - itemDist * 2*this._visibleItems / this._flowDragFriction ;
+                var itemDist = (dist / dim )* (2*this.conf.visibleItems +1); // items
+                var target = this._currentPosition - itemDist * 2*this.conf.visibleItems / this.conf.flowDragFriction ;
 
                 this.Flow.mouseX = mouseX; 
                 this.Flow.mouseY = mouseY; 
 
-                this.moveToPosition(target);
+                this.moveToPosition(target, true);
             }.bind(this);
 
             var beforeDrag = function () {};
@@ -1568,6 +1590,13 @@ ContentFlow.prototype = {
 
         // Slider Object
         if (this.Slider) {
+
+            if (this.Browser.IE6) {
+                var virtualSlider = document.createElement('div');
+                virtualSlider.className = 'virtualSlider';
+                this.Slider.appendChild(virtualSlider);
+            }
+
             // position slider on scrollbar
             this.Slider.setPosition = function (relPos) {
                 relPos = relPos - Math.floor(relPos) + this._getIndexByPosition(Math.floor(relPos));
@@ -1597,17 +1626,18 @@ ContentFlow.prototype = {
             }.bind(this);
 
             var onDrag = function (event) {
-                var selectedIndex = this._checkIndex((event.clientX - this.Scrollbar.position.left) / this.Scrollbar.dimensions.width * this.itemsLastIndex);
+                var e = event;
+                if (event.touches) e = event.touches[0];
+                var selectedIndex = this._checkIndex((e.clientX - this.Scrollbar.position.left) / this.Scrollbar.dimensions.width * this.itemsLastIndex);
                 this._targetPosition = this._getPositionByIndex(selectedIndex);
-
                 this.Slider.setPosition(selectedIndex);
                 if (this.Position) this.Position.setLabel(selectedIndex);
-                this._initStep(true);
+                this._initStep(true, true);
             }.bind(this);
 
             var afterDrag = function (event) {
                 this._targetPosition = Math.round(this._targetPosition);
-                this._onMoveTo(this._getItemByPosition(this._targetPosition));
+                this.conf.onMoveTo(this._getItemByPosition(this._targetPosition));
                 this._initStep(true);
             }.bind(this);
 
@@ -1618,141 +1648,256 @@ ContentFlow.prototype = {
         // Position object
         if (this.Position) {
             this.Position.setLabel = function (index) {
-                index = this._checkIndex(Math.round(index))
+                index = this._checkIndex(Math.round(index));
                 if (this.items && this.items[index].label)
                     this.Position.innerHTML = this.items[index].label.innerHTML;
                 else
                     this.Position.innerHTML = index + 1;
-                this.Position.style.left = (this.Slider.dimensions.width - this.Position.clientWidth)/2 + "px";
             }.bind(this);
         }
 
 
-        this.globalCaption = this.container.getChildrenByClassName('globalCaption')[0];
-        this.loadIndicator = this.container.getChildrenByClassName('loadIndicator')[0];
+        this.globalCaption = this.Container.getChildrenByClassName('globalCaption')[0];
+        this.loadIndicator = this.Container.getChildrenByClassName('loadIndicator')[0];
     },
-
 
     /* ---------- init element sizes ---------- */ 
     _initSizes: function (x) {
+        //if (this.Browser.Konqueror4 && x != true) {
+            //var t = this;
+            //window.setTimeout( function () { t._initSizes(true) }, 0);
+            //return;
+        //}
 
-        if (this.Browser.Konqueror4 && x != true) {
-            var t = this;
-            window.setTimeout( function () { t._initSizes(true) }, 0);
-            return;
-        }
+        // sets this.maxHeight
+        this._initMaxHeight();
 
-        // set height of container and flow
-        if (this._verticalFlow) {
-            if (this.containerOldHeight) this.container.style.width = this.containerOldHeight;
-            if (this.FlowOldHeight) this.Flow.style.width = this.FlowOldHeight;
+        var scrollbarHeight = this._initScrollbarSize();
+
+        // reduce maxHeit if container has a fixed height
+        if (!this.conf.verticalFlow && this.Container.style.height && this.Container.style.height != "auto")
+            this.maxHeight -= scrollbarHeight; 
+
+        if (!this._activeItem) return;
+
+        var mFS = this._findBiggestItem();
+
+        var pF = this.Flow.findPos();
+
+        /* set height / width of flow */
+        if (this.conf.verticalFlow) {
+            this.Flow.style.width = mFS.width.width+"px";
+            this.Flow.style.height =3* mFS.width.width * (1 + this.conf.reflectionHeight + this.conf.reflectionGap) + "px";
         } else {
-            if (this.containerOldHeight) this.container.style.height = this.containerOldHeight;
-            if (this.FlowOldHeight) this.Flow.style.height = this.FlowOldHeight;
+            this.Flow.style.height = mFS.height.height +(mFS.height.top - pF.top)+"px";
         }
-        this.containerOldHeight = "auto";
-        this.FlowOldHeight = "auto";
-        
-        if (this._maxItemHeight <= 0) {
-            if (this._verticalFlow) {
-                this.maxHeight = this.Flow.clientHeight / 3 * screen.width/screen.height * this._scaleFactor;  // divided by 3 because of left/center/right, yes it's a magic number
-                if (this.maxHeight == 0 || this.maxHeight > this.Flow.clientWidth)
-                    this.maxHeight = this.Flow.clientWidth;
 
-                if (this.container.style.width && this.container.style.width != "auto") {
-                    this.maxHeight = this.container.clientWidth / this._scaleFactor; 
-                    this.containerOldHeight = this.container.style.width;
-                }
-                if (this.Flow.style.width && this.Flow.style.width != "auto") {
-                    this.maxHeight = this.Flow.clientWidth / this._scaleFactor;
-                    this.FlowOldHeight = this.Flow.style.width;
-                }
-            } else {
-                this.maxHeight = this.Flow.clientWidth / 3 * screen.height/screen.width * this._scaleFactor;  // divided by 3 because of left/center/right, yes it's a magic number
+        /* remove gap */
+        var s = this.conf.verticalFlow ? mFS.width.width : mFS.height.height;
+        var cH = s /(1 + this.conf.reflectionHeight + this.conf.reflectionGap);
+        this.Flow.style.marginBottom = - (s - cH)+ "px";
 
-                if (this.container.style.height && this.container.style.height != "auto") {
-                    this.maxHeight = this.container.clientHeight / (this._scaleFactor* (this._reflectionType != "none" ? 1 + this._reflectionHeight : 1)); 
-                    this.containerOldHeight = this.container.style.height;
-                }
-                else if (this.Flow.style.height && this.Flow.style.height != "auto") {
-                    this.maxHeight = this.Flow.clientHeight / (this._scaleFactor* (this._reflectionType != "none" ? 1 + this._reflectionHeight : 1));
-                    this.FlowOldHeight = this.Flow.style.height;
+        this.Flow.dimensions = this.Flow.getDimensions();
+
+        if (!this.Browser.IE6) {
+            if (this.conf.verticalFlow && this.Container.clientWidth < this.Flow.dimensions.width) {
+                //this.Container.style.width = this.Flow.dimensions.width+"px";
+            }
+            else if (this.Container.clientHeight < this.Flow.dimensions.height) {
+                this.Container.style.height = this.Flow.dimensions.height+"px";
+            }
+        }
+
+        if (this.conf.verticalFlow) {
+           this.Flow.center = {x: this.Flow.dimensions.height/2, y:mFS.width.width/2};
+        } else {
+           this.Flow.center = {x: this.Flow.dimensions.width/2, y:mFS.height.height/2};
+        }
+
+    },
+
+    /* -------------------------------------------------------------------------------- */
+
+    _initScrollbarSize: function () {
+        var SB;
+        var SL;
+        var PO;
+        if (SB = this.Scrollbar) {
+            SB.setDimensions();
+            var scrollbarHeight = SB.dimensions.height;
+
+            if (SL = this.Slider) {
+                SL.setDimensions();
+                scrollbarHeight += SL.dimensions.height;
+
+                if (PO = this.Position) {
+                    
+                    var oldLabel = PO.innerHTML;
+                    var maxH = maxW = 0;
+                    PO.style.width = "auto";
+
+                    if (this.items) {
+                        for (var i=0; i < this.items.length; i++) {
+                            var item = this.items[i];
+                            if (item.label) {
+                                PO.innerHTML = item.label.innerHTML;
+                            }
+                            else {
+                                PO.innerHTML = item.index;
+                            }
+                            var h = PO.clientHeight;
+                            var w = PO.clientWidth;
+                            if ( h >  maxH) maxH = h;
+                            if ( w >  maxW) maxW = w;
+                        }
+                    }
+                    else {
+                        PO.innerHTML = "&nbsp;";
+                        maxH = PO.clientHeight;
+                        maxW = PO.clientWidth;
+                    }
+
+                    PO.innerHTML = oldLabel;
+
+                    PO.setDimensions();
+
+                    PO.style.width = maxW +"px";
+                    PO.style.left = (SL.dimensions.width - maxW)/2 + "px";
+
+                    var extraSpace = PO.position.top - SL.position.top;
+                    if (extraSpace > 0) {
+                        extraSpace += -SB.dimensions.height + maxH;
+                        SB.style.marginBottom = extraSpace + "px";
+                    }
+                    else {
+                        extraSpace *= -1;
+                        SB.style.marginTop = extraSpace + "px";
+                    }
+                    scrollbarHeight += extraSpace;
                 }
             }
         }
         else {
-            this.maxHeight = this._maxItemHeight;
+            scrollbarHeight = 0;
         }
 
-        // correct height of container by space needed by scrollbar
-        if (this.Scrollbar) {
-            this.Scrollbar.setDimensions();
-            var maxHeightCorrection = this.Scrollbar.dimensions.height;
+        return scrollbarHeight;
 
-            if (this.Slider) {
-                this.Slider.setDimensions();
-                maxHeightCorrection += this.Slider.dimensions.height;
+    },
 
-                if (this.Position) {
-                    if (this.Position.innerHTML == "")
-                        this.Position.innerHTML="&nbsp;";
-                    this.Position.setDimensions();
-                    var extraSpace = this.Position.position.top - this.Slider.position.top;
-                    if (extraSpace > 0) {
-                        extraSpace += -this.Scrollbar.dimensions.height + this.Position.dimensions.height;
-                        this.Scrollbar.style.marginBottom = extraSpace + "px";
-                    }
-                    else {
-                        extraSpace *= -1;
-                        this.Scrollbar.style.marginTop = extraSpace + "px";
-                    }
-                    maxHeightCorrection += extraSpace;
-                }
-            }
-            if (this.container.style.height && this.container.style.height != "auto")
-                this.maxHeight -= maxHeightCorrection; 
-        }
-        var maxItemSize = this._calcSize(this._biggestItemPos, 0);
+    /* -------------------------------------------------------------------------------- */
 
+    _initMaxHeight: function () {
 
-        // set negative margin on flow
-        if (this._reflectionType != "none") {
-
-            if (this._verticalFlow) {
-                this.Flow.style.width = maxItemSize.width + "px";
-                this.Flow.style.height = 3* maxItemSize.width * (1 + this._reflectionHeight) + "px";
-            } else {
-                this.Flow.style.height = maxItemSize.height * (1 + this._reflectionHeight) + "px";
-            }
-
-            if (typeof(this._negativeMarginOnFloat) == "number") {
-                this.Flow.style.marginBottom = -maxItemSize.height * (this._reflectionHeight * this._negativeMarginOnFloat)+ "px";
-            } else {
-                this.Flow.style.marginBottom = -maxItemSize.height * this._reflectionHeight+ "px";
-            }
-
-            this.Flow.dimensions = this.Flow.getDimensions();
-            if (this.container.clientHeight < this.Flow.dimensions.height) {
-                this.container.style.height = this.Flow.dimensions.height+"px";
-            }
-
+        if (this.conf.verticalFlow) {
+            var proportion = screen.width/screen.height;
+            var Csd = this.Container.style.width;
+            var Cdim = this.Container.clientWidth;
+            var Fsd = this.Flow.style.width;
+            var Fdim = this.Flow.clientWidth;
+            var Fdim_o = this.Flow.clientHeight;
         } else {
+            var proportion = screen.height/screen.width;
+            var Csd = this.Container.style.height;
+            var Cdim = this.Container.clientHeight;
+            var Fsd = this.Flow.style.height;
+            var Fdim = this.Flow.clientHeight;
+            var Fdim_o = this.Flow.clientWidth;
+        }
 
-            if (this._verticalFlow) {
-                this.Flow.style.width = maxItemSize.width + "px";
-                this.Flow.style.height = 3* maxItemSize.width + "px";
-            } else {
-                this.Flow.style.height = maxItemSize.height + "px";
+        // set height of container and flow
+        if (this.ContainerOldDim) 
+            Csd = this.ContainerOldDim;
+        if (this.FlowOldDim) 
+            Fsd = this.FlowOldDim;
+
+        this.ContainerOldDim = "auto";
+        this.FlowOldDim = "auto";
+        
+
+        /* calc maxHeight */
+        if (this.conf.maxItemHeight <= 0) {
+
+            this.maxHeight = Fdim_o / 3 * proportion/1 * this.conf.scaleFactor;  // divided by 3 because of left/center/right, yes it's a magic number
+
+            if (this.conf.verticalFlow && (this.maxHeight == 0 || this.maxHeight > Fdim)) {
+                this.maxHeight = Fdim;
             }
-            this.Flow.style.marginBottom = "0";
+
+            if (Csd && Csd != "auto") {
+                var gap = this.conf.verticalFlow  ? 0 : this.conf.reflectionGap;
+                var rH = this.conf.verticalFlow  ? 0 : this.conf.reflectionHeight;
+                this.maxHeight = Cdim/ (this.conf.scaleFactor* (1 + rH + gap)); 
+                this.ContainerOldDim = Csd;
+            }
+            else if (Fsd && Fsd != "auto") {
+                var gap = this.conf.verticalFlow  ? 0 : this.conf.reflectionGap;
+                this.maxHeight = Fdim / (this.conf.scaleFactor* (1 + this.conf.reflectionHeight + gap));
+                this.FlowOldDim = Fsd;
+            }
+        }
+        else {
+            this.maxHeight = this.conf.maxItemHeight;
+        }
+    },
+
+    /* -------------------------------------------------------------------------------- */
+
+    _findBiggestItem: function () {
+
+        var currentItem = this._activeItem;
+
+        var itemP = currentItem.pre;
+        var itemN = currentItem.next;
+        var mFS = maxFlowSize = {
+            width: { width: 0, left: 0, height:0, top: 0, item: null, rI: 0 },
+            height: { width: 0, left: 0, height:0, top: 0, item: null, rI: 0 }
         }
 
-        this.Flow.dimensions = this.Flow.getDimensions();
-        if (this._verticalFlow) {
-            this.Flow.center = {x: this.Flow.dimensions.height/2, y:maxItemSize.width/2};
-        } else {
-            this.Flow.center = {x: this.Flow.dimensions.width/2, y:maxItemSize.height/2};
+
+        var checkMax = function (item, rI) {
+            var el = item.element;
+            el.style.display = "block";
+            var p = el.findPos();
+            var h =  el.clientHeight;
+            var w = el.clientWidth;
+            if (h + p.top >= mFS.height.height + mFS.height.top) {
+                mFS.height.height = h;
+                mFS.height.top = p.top;
+                mFS.height.item = item;
+                mFS.height.rI = rI;
+            }
+            if (w + p.left >= mFS.width.width + mFS.width.left) {
+                mFS.width.width = w;
+                mFS.width.left = p.left;
+                mFS.width.item = item;
+                mFS.width.rI = rI;
+            }
+            el.style.display = "none";
         }
+
+        var ocp = this._currentPosition;
+        this._currentPosition = this.conf.visibleItems+1;
+
+        // find the position with highest y-value
+        for (var i=-this.conf.visibleItems; i <= this.conf.visibleItems; i++) {
+            currentItem.element.style.display = "none";
+            this._positionItem(currentItem, i);
+            checkMax(currentItem, i);
+        }
+
+        // find the biggest item
+        var index = mFS.height.rI;
+        for (var i=0; i < this.items.length; i++) {
+            var item = this.items[i];
+            item.element.style.display = "none";
+            this._positionItem(item, index);
+            checkMax(item, index);
+        }
+
+        this._currentPosition = ocp;
+
+        return mFS
     },
 
 
@@ -1773,8 +1918,8 @@ ContentFlow.prototype = {
             var keyCode = event.keyCode;
         }
 
-        if (this._keys[keyCode]) {
-            this._keys[keyCode].bind(this)();
+        if (this.conf.keys[keyCode]) {
+            this.conf.keys[keyCode].bind(this)();
             return Event.stop(event);
         }
         else {
@@ -1801,9 +1946,9 @@ ContentFlow.prototype = {
         if (delta) {
             var target = this._targetPosition ;
             if (delta < 0 ) {
-                target += (1 * this._scrollWheelSpeed);
+                target += (1 * this.conf.scrollWheelSpeed);
             } else {
-                target -= (1 * this._scrollWheelSpeed);
+                target -= (1 * this.conf.scrollWheelSpeed);
             } 
             this.moveToPosition(Math.round(target));
         }
@@ -1830,7 +1975,7 @@ ContentFlow.prototype = {
     /*
      * intend to make a step 
      */
-    _initStep: function (holdSlider) {
+    _initStep: function (holdSlider, holdPos) {
         if (this.Slider) {
             if(holdSlider) {
                 this.Slider.locked = true;
@@ -1838,6 +1983,7 @@ ContentFlow.prototype = {
                 this.Slider.locked = false;
             }
         }
+        this._holdPos = holdPos == true ? true : false;
         if (!this._stepLock) {
             this._stepLock = true;
             this._step();
@@ -1853,38 +1999,33 @@ ContentFlow.prototype = {
         var absDiff = Math.abs(diff);
         if ( absDiff > 0.001) { // till activeItem is nearly at position 0
 
-            this._currentPosition += this._flowSpeedFactor * this._calcStepWidth(diff, absDiff);
+            this._currentPosition += this.conf.flowSpeedFactor * this.conf.calcStepWidth(diff, absDiff, this.items.length, this.conf.visibleItems);
 
             var AI = this.items[(this._getIndexByPosition(this._currentPosition))];
 
             if (AI && AI != this._activeItem) {
-
                 if (this._activeItem) this._activeItem.makeInactive();
                 this._activeItem = AI;
                 this._activeItem.makeActive();
-
-                if(this.Position && !this.Slider.locked) {
-                    this.Position.setLabel(this._activeItem.index);
-                }
-
-                this._setGlobalCaption();
+                this._setCaptionLabel(this._activeItem.index);
+                if (Math.abs(this._targetPosition - this._currentPosition) <= 0.5 ) this.conf.onReachTarget(this._activeItem);
             }
             
             this._positionItems();
 
             var st = this._step.bind(this);
-            setTimeout(st,this._millisecondsPerStep);
+            window.setTimeout(st,this._millisecondsPerStep);
 
-        } else {
+        } else if (!this._holdPos) {
             if (this.Slider) this.Slider.locked = false;
             this._currentPosition = Math.round(this._currentPosition);
             if(this.Position && !this.Slider.locked && this._activeItem) {
-                this.Position.setLabel(this._activeItem.index);
+                this._setCaptionLabel(this._activeItem.index);
             }
-            this._setGlobalCaption();
             this._positionItems();
             this._stepLock = false;
-            if (this._activeItem) this._onReachTarget(this._activeItem);
+        } else {
+            this._stepLock = false;
         }
 
         if (this.Slider && !this.Slider.locked) {
@@ -1892,80 +2033,267 @@ ContentFlow.prototype = {
         }
     },
     
+
+
+/* ------------------------------------------------------------------------------------------------------ */
+    
     /*
      * position items
      */
     _positionItems: function () {
+
+        if (this._lastStart) {
+            var item = this._lastStart;
+            while (item) {
+                item.element.style.display="none";
+                item = item.next;
+                if (item == this._lastStart) break;
+                if (item && item.pre == this._lastEnd) break;
+            }
+        }
+        else {
+            this._lastStart = this._activeItem;
+        }
+
+        if (!this._activeItem) return;
+        var currentItem = this._activeItem;
+        var itemP = currentItem.pre;
+        var itemN = currentItem.next;
+
+        this._positionItem(currentItem, 0);
+        for (var i=1; i <= this.conf.visibleItems && 2*i < this.items.length ; i++) {
+            if (itemP) {
+                this._positionItem(itemP, -i);
+                this._lastStart = itemP;
+                itemP = itemP.pre;
+            }
+            if (itemN) {
+                this._positionItem(itemN, i);
+                this._lastEnd = itemN;
+                itemN = itemN.next;
+            }
+        }
+
+    },
+
+    _positionItem: function (item, relativeIndex) {
+
+        var conf = this.conf;
+        var vF = conf.verticalFlow;
+
+        var els = item.element.style;
+        //els.display =" none";
+        //if (els.display != "none") return;
+
+        /* Index and position relative to activeItem */
+        var p = item.position = this._currentPosition + relativeIndex;
+        var relativePosition = item.relativePosition = Math.round(p) - this._currentPosition;
+        var relativePositionNormed = item.relativePositionNormed = conf.visibleItems > 0 ? relativePosition/conf.visibleItems : 0;
+        var side = relativePosition < 0 ? -1 : 1;
+        side *= relativePosition == 0 ? 0 : 1;
+        item.side = side;
+
+        var size = conf.calcSize(item);
+        size.height = Math.max(size.height, 0);
+        size.width = Math.max(size.width, 0);
+        if (item.content.origProportion) size = this._scaleImageSize(item, size);
+        item.size = size;
+
+        var coords = item.coordinates = conf.calcCoordinates (item);
+        var relItemPos = item.relativeItemPosition = conf.calcRelativeItemPosition(item);
+        var zIndex = item.zIndex = conf.calcZIndex (item);
+        var fontSize = item.fontSize = conf.calcFontSize (item);
+        var opacity = item.opacity = conf.calcOpacity(item);
+
+        size.height *= this.maxHeight;
+        size.width *= this.maxHeight;
+
+        /* set position */
+        var sA = vF ? size.height : size.width;
+        var sB = vF ? size.width : size.height;
+        var pX = this.Flow.center.x * ( 1 + coords.x )  + (relItemPos.x - 1)  * sA/2;
+        var pY = this.maxHeight/2 * ( 1 + coords.y ) + (relItemPos.y - 1 )* sB/2;
+        els.left = (vF ? pY : pX)+"px";
+        els.top = (vF ? pX : pY)+"px";
         
-        var start = this._currentPosition - this._visibleItems;
-        var end = this._currentPosition + this._visibleItems;
-        if (!this._circularFlow) {
-            start = this._checkIndex(start);
-            end = this._checkIndex(end);
+        this._setItemSize(item, size);
+
+        /* set opacity */
+        if (conf.endOpacity != 1) {
+            this._setItemOpacity(item);
         }
 
-        for (var i=0; i<this.items.length; i++) {
-            var p = this._getPositionByIndex(i);
-            
-            var item = this.items[i];
-            var itemEl = this.items[i].element;
-            itemEl.style.display = "none"; // don't show item, till all manipulations are done
+        /* set font size */
+        if (!this.Browser.IE) els.fontSize = (fontSize * 100) +"%";
 
-            if (p < start || p > end) continue;
+        /* set z-index */
+        els.zIndex = 32768 + Math.round(zIndex * this.items.length); // just for FF
 
-            /* Index and position relative to activeItem */
-            var relativeIndex = Math.round(p - this._currentPosition);
-            var relativePosition = Math.round(p) - this._currentPosition;
-            var side = relativePosition < 0 ? -1 : 1;
-            side *= relativePosition == 0 ? 0 : 1;
+        conf.onDrawItem(item);
 
-            var size = this._calcSize ( relativePosition, side );
-            var coords = this._calcCoordinates ( relativePosition, side );
-            var relItemPos = this._calcRelativeItemPosition( relativePosition, side, size );
-            var zIndex = this._calcZIndex ( relativePosition, side, relativeIndex );
-            var fontSize = this._calcFontSize ( relativePosition, side, size );
-            //var opacity = this._calcOpacity(relativePosition, side);
+        els.visibility = "visible";
+        els.display = "block";
+    },
 
-            var mod = 0;
-            /* set position */
-            if (this._verticalFlow) {
-                itemEl.style.left = coords.y + relItemPos.y * size.width/size.height + "px";
-                itemEl.style.top = coords.x + relItemPos.x *size.height/size.width + "px";
-            }
-            else {
-                if (this.Browser.IE6 && this._scaleFactorLandscape != 1 && item.content.origProportion < 1) {
-                     mod = size.width/this._scaleFactorLandscape*0.5*item.content.origProportion ;
+    _scaleImageSize: function (item, size, max) {
+        var sFL = this.conf.scaleFactorLandscape;
+        var sFP = this.conf.scaleFactorPortrait;
+        var vF = this.conf.verticalFlow;
+        var prop = item.content.origProportion;
+        var width = size.width;
+        var height = size.height;
+        var c = item.content;
+
+        if (vF) {
+            if (prop <= 1) {
+                if (sFL != "max" && sFL != 1) {
+                    height *= sFL;
+                    width = Math.min(height * prop, max ? max : 1 );
                 }
-                itemEl.style.left = coords.x + relItemPos.x - mod + "px";
-                itemEl.style.top = coords.y + relItemPos.y + "px";
+                height = width / prop;
             }
-            
-            /* set size */
-            if (this.Browser.IE) {
-                itemEl.style.height = size.height*(1+this._reflectionHeight) +"px";
+            else if (prop > 1) {
+                if (sFP == "max") {
+                    height = max ? max : 1;
+                }
+                else if (sFP != 1) {
+                    width *= sFP;
+                    height = Math.min(width/prop, max ? max : 1) 
+                }
+                else {
+                    height = width / prop;
+                }
+                width = height * prop;
+            }
+        }
+        else {
+            if (prop > 1) {
+                if (sFL != "max" && sFL != 1) {
+                    width *= sFL;
+                    height = Math.min(width / prop, max ? max : 1);
+                }
+                width = height * prop;
+            }
+            else if (prop <= 1) {
+                if (sFP == "max") {
+                    width = max ? max : 1;
+                } 
+                else if (sFP != 1) {
+                    height *= sFP;
+                    width = Math.min(height*prop, max ? max : 1);
+                }
+                else {
+                    width = height * prop;
+                }
+                height = width / prop;
+            }
+        }
+
+        height = isNaN(height) ? 0 : height;
+        width = isNaN(width) ? 0 : width;
+
+        if (!max && this.conf.fixItemSize) {
+
+            var propS = size.width / size.height;
+
+            var max = Math.max(size.width, size.height);
+            var s = this._scaleImageSize(item, {width: max, height: max}, max);
+
+            if (propS < 1) {
+                height = s.height/size.height;
+                width = height * prop / propS;
             }
             else {
-                itemEl.style.height = size.height +"px";
-            }
-            itemEl.style.width = size.width +"px";
-
-            if (( this.Browser.iPhone || this.Browser.IE6 || this.Browser.Konqueror4) && (this.items[i].image || this._reflectionWithinImage)) {
-                item.positionContent(size, this.Browser.IE6);
+                width = s.width/size.width;
+                height = width / prop * propS;
             }
 
-            //if (this.Browser.IE) {
-                //item.element.style.filter = "alpha(opacity="+(Math.floor(opacity * 100))+")";
-            //}
-            //else
-                //item.element.style.opacity = opacity;
+            var h = height * 100;
+            var w = width * 100;
+            var mL= (1 - width)/2 * 100;
+            var mT= ( 1 - height ) / propS * 100 * (vF ? 0.5 : 1 );
+            c.style.height = h+"%";
+            if (item.reflection) item.reflection.style.height = h*this.conf.reflectionHeight+"%";
+            c.style.width = w+"%";
+            if (item.reflection) item.reflection.style.width = w+"%";
+            c.style.marginLeft = mL+"%";
+            if (item.reflection) item.reflection.style.marginLeft = mL+"%";
+            c.style.marginTop = mT+"%";
 
-            itemEl.style.zIndex = 32768 + zIndex; // just for FF
-            itemEl.style.visibility = "visible";
-            itemEl.style.display = "block";
+            item.element.style.overflow = "hidden";
 
-
+            return size;
         }
-    }
+        else {
+            return {width: width, height: height};
+        }
+
+    },
+
+    _setItemSize: (function () {
+        if (ContentFlowGlobal.Browser.IE) {
+            var _setItemSize = function (item, size) {
+                if (!this.conf.fixItemSize) {
+                    item.content.style.height = size.height+"px";
+                }
+                else if (ContentFlowGlobal.Browser.IE6) {
+                    var h = parseInt(item.content.style.height)/100;
+                    item.content.style.height = size.height*h+"px"; 
+                    var mT = parseInt(item.content.style.marginTop)/100;
+                    item.content.style.marginTop = size.height*mT+"px";
+                }
+                if (item.reflection) {
+                    var h = parseInt(item.content.style.height);
+                    item.reflection.style.height = h*this.conf.reflectionHeight+"px";
+                    item.reflection.style.marginTop = h * this.conf.reflectionGap + "px";
+                }
+                item.element.style.width = size.width +"px";
+                item.element.style.height = size.height*(1+this.conf.reflectionHeight+this.conf.reflectionGap)+"px";
+            }
+        }
+        else {
+            var _setItemSize = function (item, size) {
+                if (item.reflection) {
+                    item.element.style.height = size.height*(1+this.conf.reflectionHeight + this.conf.reflectionGap) +"px";
+                    item.reflection.style.marginTop = size.height * this.conf.reflectionGap + "px";
+                }
+                else if (this._reflectionWithinImage) {
+                    item.element.style.height = size.height*(1+this.conf.reflectionHeight + this.conf.reflectionGap) +"px";
+                }
+                else {
+                    item.element.style.height = size.height +"px";
+                }
+                item.element.style.width = size.width +"px";
+            }
+        }
+        return _setItemSize;
+
+    })(),
+
+    _setItemOpacity: (function () {
+            if (ContentFlowGlobal.Browser.IE6) {
+                var _setItemOpacity = function (item) { 
+                    if (item.content.origSrc && item.content.origSrc.match(/\.png$/) ) {
+                        var s = item.content.src;
+                        item.content.src = item.content.origSrc;
+                        item.content.style.filter = item.content.filterString+" progid:DXImageTransform.Microsoft.BasicImage(opacity="+item.opacity+")";
+                        item.content.src = s;
+                    }
+                    else {
+                        item.content.style.filter = "progid:DXImageTransform.Microsoft.BasicImage(opacity="+item.opacity+")";
+                    }
+                    if (item.reflection) item.reflection.style.filter = item.reflection.filterString+"progid:DXImageTransform.Microsoft.BasicImage(opacity="+item.opacity+")"; 
+                }
+            }
+            else if (ContentFlowGlobal.Browser.IE) {
+                var _setItemOpacity = function (item) { item.element.style.filter = "progid:DXImageTransform.Microsoft.BasicImage(opacity="+item.opacity+")"; }
+            }
+            else {
+                var _setItemOpacity = function (item) { item.element.style.opacity = item.opacity; }
+            }
+            return  _setItemOpacity;
+    })()
+
 
 };
 
@@ -2111,14 +2439,17 @@ if (!CFElement.findPos) {
     CFElement.prototype.findPos = function() {
         var obj = this;
         var curleft = curtop = 0;
-        if (obj.offsetParent) {
-            curleft = obj.offsetLeft;
-            curtop = obj.offsetTop;
-            while (obj = obj.offsetParent) {
-                curleft += obj.offsetLeft;
-                curtop += obj.offsetTop;
+        try {
+            if (obj.offsetParent) {
+                curleft = obj.offsetLeft;
+                curtop = obj.offsetTop;
+                while (obj = obj.offsetParent) {
+                    curleft += obj.offsetLeft;
+                    curtop += obj.offsetTop;
+                }
             }
         }
+        catch (ex) {}
         return {left:curleft, top:curtop};
     };
 }
@@ -2246,7 +2577,7 @@ if (!window.removeEvent) {
                 this.detachEvent('on'+eventName, method);
         }
     };
-};
+}
 
 /* ==================== start it all up ==================== */
 ContentFlowGlobal.init();
