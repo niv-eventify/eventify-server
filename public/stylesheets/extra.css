@@ -236,3 +236,24 @@ div.cmf-skinned-text {
 	height:1px;
 	clear:both;
 }
+
+span.flash.error {
+	color:red;
+}
+
+span.flash.warning {
+	color:#000;
+}
+
+span.flash.notice {
+	color:#523733;
+}
+
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
+	background-color: #fff;
+}
+
+.lb-popup {
+	position: static;
+	padding: 16px 38px 20px;
+}

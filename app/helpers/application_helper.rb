@@ -86,4 +86,10 @@ module ApplicationHelper
   def login_register_button(text)
     link_to_function(content_tag(:span, text) + "<em></em>", :class => "opener")
   end
+
+  def popup_title(text)
+    haml_tag(:div, :class => "popup-heading popup-heading-alt") do
+      haml_tag(:strong, text)
+    end
+  end
 end

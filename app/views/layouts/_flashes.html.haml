@@ -1,3 +1,6 @@
 #flash
   - flash.each do |key, value|
-    %div{:id => "flash_#{key}", :class => key}= value
+    :javascript
+      jQuery(function(){
+        jQuery.jGrowl('<span class="flash #{key}">#{value}</span>', {life:5000});
+      });

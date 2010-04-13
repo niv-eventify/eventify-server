@@ -1,1 +1,8 @@
-this is #show_no_repeat_background
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
+    != stylesheet_link_tag 'rsvps', 'rsvps_iphone', :media => 'all', :cache => "main"
+  %body{ :style => "#{background_color_css}" }
+    #background_holder{ :style => "background-image:url('#{resource.event.design.preview_with_text.url(:carousel)}');" }
+    != render(:partial => "toolbar")

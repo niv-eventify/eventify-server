@@ -1,4 +1,5 @@
-%h4= _("Edit reminder")
+- popup_title(_("Edit reminder"))
+
 - semantic_form_remote_for :reminder, resource, :live_validations => true, :url => event_reminder_path(@event, resource), :html => {:method => :put} do |f|
   != render(:partial => "reminders/form", :locals => {:f => f})
   != f.submit _("Update")
