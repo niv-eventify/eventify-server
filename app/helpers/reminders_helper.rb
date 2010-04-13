@@ -9,7 +9,7 @@ module RemindersHelper
   end
 
   def reminder_info(reminder)
-    res = "#{reminder.before_in_words}, #{reminder.by_in_words}"
+    res = "#{reminder.before_in_words}"
     res << " "  << s_("reminder|(sent)") unless reminder.reminder_sent_at.nil?
     res
   end
@@ -21,7 +21,8 @@ module RemindersHelper
   end
 
   def rerender_reminders(page)
-    page << "jQuery('.event-reminders').html(#{render(:partial => "index").to_json})"
+    page << "jQuery('.event-reminders').html(#{render(:partial => "index").to_json});"
+    page << "jQuery('.event-reminders input:checkbox').customCheckbox();"
   end
 
 end

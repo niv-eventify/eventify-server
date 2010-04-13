@@ -1,12 +1,20 @@
 %div.tools[reminder]
-  - if reminder.reminder_sent_at.nil?
-    .form-col.form-col-edit
-      != link_to _("Edit"), edit_event_reminder_path(@event, reminder), :class => "link_to_edit_#{dom_id(reminder)} edit"
-      :javascript
-        jQuery(function(){jQuery('a.link_to_edit_#{dom_id(reminder)}').nyroModal();});
-  .form-col.form-col-variable
-    - reminder_remote_is_active(reminder)
-    %label= reminder_info(reminder)
-  - if reminder.reminder_sent_at.nil?
-    != link_to_remote _("remove"), :url => event_reminder_path(@event, reminder), :method => :delete, :confirm => _("Are you sure?")
-  .clear
+  .tools-b
+    - if reminder.reminder_sent_at.nil?
+      .form-col.form-col-edit
+        != link_to _("Edit"), edit_event_reminder_path(@event, reminder), :class => "link_to_edit_#{dom_id(reminder)} edit"
+        :javascript
+          jQuery(function(){jQuery('a.link_to_edit_#{dom_id(reminder)}').nyroModal();});
+    .form-col.form-col-alt
+      - reminder_remote_is_active(reminder)
+      %strong
+        = reminder_info(reminder)
+        - if reminder.reminder_sent_at.nil?
+          != link_to_remote "(#{_("remove")})", :url => event_reminder_path(@event, reminder), :method => :delete, :confirm => _("Are you sure?")
+    - if reminder.by_email?
+      .form-col
+        %label.l-mail= _("By Email")
+    - if reminder.by_sms?
+      .form-col
+        %label.l-mobile= _("By SMS")
+    .clear

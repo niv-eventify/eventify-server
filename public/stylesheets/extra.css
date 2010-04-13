@@ -231,10 +231,6 @@ div.cmf-skinned-text {
 	width: 65px;
 }
 
-.form-col.form-col-variable, .hebrew .form-col.form-col-variable {
-	width:380px;
-	height:auto;
-}
 .clear {
 	height:1px;
 	clear:both;
@@ -259,4 +255,8 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 .lb-popup {
 	position: static;
 	padding: 16px 38px 20px;
+}
+
+.tools {
+	margin-bottom:5px;
 }
