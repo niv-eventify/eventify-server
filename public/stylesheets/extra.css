@@ -245,5 +245,13 @@ span.flash.error {
 }
 
 span.flash.warning {
-	color:yellow;
+	color:#000;
+}
+
+span.flash.notice {
+	color:#523733;
+}
+
+div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
+	background-color: #fff;
 }
