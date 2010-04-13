@@ -239,3 +239,11 @@ div.cmf-skinned-text {
 	height:1px;
 	clear:both;
 }
+
+span.flash.error {
+	color:red;
+}
+
+span.flash.warning {
+	color:yellow;
+}
