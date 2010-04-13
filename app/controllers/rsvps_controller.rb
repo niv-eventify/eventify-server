@@ -2,9 +2,9 @@ class RsvpsController < InheritedResources::Base
   defaults :resource_class => Guest, :collection_name => 'guests', :instance_name => 'guest', :route_instance_name => "rsvp"
   actions :show, :update
   respond_to :js, :only => :update
+  respond_to :iphone, :only => :show
   after_filter :clear_flash, :only => :update
-  before_filter :iphone_request?
-
+  before_filter :adjust_format_for_iphone
   def show
     if "true" == params[:more]
       render :action => "show_more"
