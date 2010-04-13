@@ -35,11 +35,6 @@ describe Reminder do
       @reminder.errors.on(:by_email).should_not be_blank      
     end
 
-    it "should validate presence of rsvp conditions" do
-      @reminder.should_not be_valid
-      @reminder.errors.on(:to_yes).should_not be_blank      
-    end
-
     it "should validate presence of send_reminder_at" do
       @reminder.before_units = "days"
       @reminder.before_value = -2
@@ -68,7 +63,7 @@ describe Reminder do
   describe "remove reminders" do
     before(:each) do
       @event = Factory.create(:event)
-      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :to_yes => true, :by_sms => true, :sms_message => "some")
+      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
     end
 
     it "should destroy not sent reminder" do
@@ -90,7 +85,7 @@ describe Reminder do
       @original_start = 11.days.from_now.utc
       @event.starting_at = @original_start
       @event.save!
-      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :to_yes => true, :by_sms => true, :sms_message => "some")
+      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
     end
 
     it "should be active reminder" do
@@ -120,24 +115,21 @@ describe Reminder do
       @event = Factory.create(:event)
     end
   
-    [:to_yes, :to_no, :to_may_be, :to_not_responded].each do |whom_to|
-      [:by_email, :by_sms].each do |by|
-        it "should create when sending #{whom_to} #{by}" do
-          opts = {
-            :before_units => "days", :before_value => 2,
-          }
-          if :by_sms == by
-            opts[:sms_message] = "body body body"
-          else
-            opts[:email_body] = "body body body"
-            opts[:email_subject] = "subject subject subject"
-          end
-          opts[by] = true
-          opts[whom_to] = true
-
-          @reminder = @event.reminders.create(opts)
-          @reminder.should_not be_new_record
+    [:by_email, :by_sms].each do |by|
+      it "should create when sending #{by}" do
+        opts = {
+          :before_units => "days", :before_value => 2,
+        }
+        if :by_sms == by
+          opts[:sms_message] = "body body body"
+        else
+          opts[:email_body] = "body body body"
+          opts[:email_subject] = "subject subject subject"
         end
+        opts[by] = true
+
+        @reminder = @event.reminders.create(opts)
+        @reminder.should_not be_new_record
       end
     end
   end

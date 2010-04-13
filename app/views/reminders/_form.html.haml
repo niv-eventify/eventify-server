@@ -1,15 +1,8 @@
 .f-row
-  %h3= _("Send To")
-  - f.inputs :class => "check-list" do
-    != f.input :to_yes, :label => s_(Reminder::SEND_TO_TITLES[:to_yes])
-    != f.input :to_no, :label => s_(Reminder::SEND_TO_TITLES[:to_no])
-    != f.input :to_may_be, :label => s_(Reminder::SEND_TO_TITLES[:to_may_be])
-    != f.input :to_not_responded, :label => s_(Reminder::SEND_TO_TITLES[:to_not_responded])
-
-%h5= _("Send By")
-- f.inputs do
-  != f.input :by_email, :label => _("Email")
-  != f.input :by_sms, :label => _("SMS")
+  %h3= _("Send By")
+  - f.inputs do
+    != f.input :by_email, :label => _("Email")
+    != f.input :by_sms, :label => _("SMS")
 
 %h5= _("Send At")
 - f.inputs do

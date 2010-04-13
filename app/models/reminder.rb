@@ -2,14 +2,6 @@ class Reminder < ActiveRecord::Base
   belongs_to :event
   has_many :reminder_logs
 
-  SEND_TO_TITLES = {
-    :to_yes => N_("reminder send to|those who asnwered Yes"),
-    :to_no => N_("reminder send to|those who asnwered No"),
-    :to_may_be => N_("reminder send to|those who asnwered May Be"),
-    :to_not_responded => N_("reminder send to|those who not responded yet"),
-    :to_all => N_("reminder send to|everyone"),
-  }
-
   def self.default_before_units
     return @default_before_units if @default_before_units
 
@@ -22,8 +14,7 @@ class Reminder < ActiveRecord::Base
     @default_before_units
   end
 
-  attr_accessible :to_yes, :to_no, :to_may_be, :to_not_responded, :by_email, :by_sms, 
-    :email_subject, :email_body, :sms_message, :before_units, :before_value, :is_active
+  attr_accessible :by_email, :by_sms, :email_subject, :email_body, :sms_message, :before_units, :before_value, :is_active
 
   named_scope :pending, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}}
   named_scope :active, :conditions => {:is_active => true}
@@ -63,7 +54,6 @@ class Reminder < ActiveRecord::Base
   def validate
     errors.add(:before_value, _("should be in a future")) if active_not_yet_sent? && (send_reminder_at.blank? || in_past?)
     errors.add(:by_email, s_("...mail or sms|choose a delivery method")) if !by_email? && !by_sms?
-    errors.add(:to_yes, s_("can't be blank")) if !to_yes? && !to_no? && !to_may_be? && !to_not_responded?
   end
 
   def before_destroy
@@ -100,19 +90,6 @@ class Reminder < ActiveRecord::Base
     end
   end
 
-  def whom_to_in_words
-    list = returning([]) do |res|
-      [:to_yes, :to_no, :to_may_be, :to_not_responded].each do |key|
-        res << s_(SEND_TO_TITLES[key]) if send(key)
-      end
-    end
-    if 4 == list.size # all
-      list = [s_(SEND_TO_TITLES[:to_all])]
-    end
-
-    s_("reminder text - send to|send to %{users_list}") % {:users_list => list.join(", ")}
-  end
-
   def by_in_words
     returning([]) do |res|
       res << s_("reminder send by|by Email") if by_email?
@@ -133,7 +110,7 @@ class Reminder < ActiveRecord::Base
 
   def deliver!
     logger.info "\n\ndeliver! reminder_id=#{self.id}\n\n"
-    event.guests.to_be_reminded_by(self).find_each(:batch_size => 1) do |guest|
+    event.guests.find_each(:batch_size => 1) do |guest|
       guest.send_later(:send_reminder!, self)
     end
   end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100401130519) do
+ActiveRecord::Schema.define(:version => 20100413140807) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -209,10 +209,6 @@ ActiveRecord::Schema.define(:version => 20100401130519) do
 
   create_table "reminders", :force => true do |t|
     t.integer  "event_id"
-    t.boolean  "to_yes"
-    t.boolean  "to_no"
-    t.boolean  "to_may_be"
-    t.boolean  "to_not_responded"
     t.boolean  "by_email"
     t.boolean  "by_sms"
     t.string   "email_subject"

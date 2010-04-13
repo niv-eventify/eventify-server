@@ -1,41 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Guest do
-  describe "reminder scopes" do
-    before(:each) do
-      @reminder = Reminder.new
-    end
-
-    it "should build with yes" do
-      @reminder.to_yes = 1
-      Guest.to_be_reminded_by(@reminder).proxy_options.should == {
-        :conditions => "(guests.rsvp in (1))"
-      }
-    end
-
-    it "should build with no" do
-      @reminder.to_no = 1
-      Guest.to_be_reminded_by(@reminder).proxy_options.should == {
-        :conditions => "(guests.rsvp in (0))"
-      }
-    end
-
-    it "should build with not responded" do
-      @reminder.to_not_responded = 1
-      Guest.to_be_reminded_by(@reminder).proxy_options.should == {
-        :conditions => "guests.rsvp is NULL"
-      }
-    end
-
-    it "should build with not responded and yes" do
-      @reminder.to_not_responded = 1
-      @reminder.to_yes = 1
-      Guest.to_be_reminded_by(@reminder).proxy_options.should == {
-        :conditions => "(guests.rsvp is NULL) OR (guests.rsvp in (1))"
-      }
-    end
-  end
-
   describe "validations" do
     before(:each) do
       @guest = Guest.new
