@@ -1,9 +1,14 @@
-- semantic_form_for(@user_session, :url => user_session_path) do |f|
-  = f.object.errors.on(:base)
-  != f.input :email, :label => _("Email")
-  != f.input :password, :label => _("Password")
-  != f.submit _("Login")
-
-!= link_to _("forgot password"), new_password_path, :class => "forgot_password"
-
-!= link_to _("register"), signup_path, :class => "register"
+.settings-box.login
+  - middle_box_section("") do
+    - form_for(@user_session, :url => user_session_path, :builder => MiddleBoxFormBuilder::Builder) do |f|
+      = f.object.errors.on(:base)
+      != f.text_field :email, :label => _("Email")
+      != f.password_field :password, :label => _("Password")
+      .settings-form-row
+        %label &nbsp;
+        = _("Remember me")
+        != f.check_box :remember_me, :id => "check-remember"
+      .settings-form-btns
+        != link_to_function content_tag(:span, _("Save")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"
+        %span.cancel-btn
+          != link_to _("Forgot password?"), new_password_path, :class => "forgot_password"

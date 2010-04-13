@@ -257,3 +257,8 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 .tools {
 	margin-bottom:5px;
 }
+
+.settings-box.login {
+	padding:0;
+	margin:100px auto;
+}

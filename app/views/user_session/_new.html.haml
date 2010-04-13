@@ -8,7 +8,6 @@
     .block
       .form-row
         != f.check_box :remember_me, :id => "check-remember"
-        %label{ :for => "check-remember" }
-          Remember me
+        %label{ :for => "check-remember" }= _("Remember me")
       .form-row
         != link_to_function _("Forgot password?"), "jQuery('#login_form .password-reset').toggle()", :class => "link"

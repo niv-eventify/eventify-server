@@ -14,7 +14,7 @@ module MiddleBoxFormBuilder
               content_tag(:div, super(method, options), :class => "input-bg-contact") +
               (has_errors?(method) ? @template.content_tag(:p, merge_errors(method), :class => "error-msg") : "")
               
-            @template.content_tag(:div, html, :class => "settings-form-row")            
+            @template.content_tag(:div, html, :class => "settings-form-row")
           end
         end
       RUBY
