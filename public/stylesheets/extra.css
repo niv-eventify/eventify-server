@@ -75,8 +75,8 @@ div.cmf-skinned-text {
 #carouselImgBox {
   position: absolute;
   left: 50%;
-  margin-left: -162px;
-  margin-top: 20px;
+  margin-left: -208px;
+  margin-top: 10px;
   visibility: hidden;
 }
 .hebrew #carouselImgBox {
@@ -85,20 +85,17 @@ div.cmf-skinned-text {
 }
 #carouselImgBox.img-box{
   z-index: 100000;
-	background: url(/images/carousel-bg-img-box-c.png) no-repeat;
-  width: 326px;
-}#carousel-img-box-b{
-  width: 300px;
+  background: url(/images/carousel-bg-img-box-c.png) no-repeat;
+  width: 416px;
+}
+#carousel-img-box-b{
+  padding-bottom: 87px;
+  width: 416px;
   background-image: url(/images/carousel-bg-img-box-b.png);
 }
 #carousel-img-box-t{
+	margin-top: -5px;
 	background-image: url(/images/carousel-bg-img-box-t.png);
-}
-#carouselImgBox .blue-btn-sml {
-	margin-top: 7px;
-}
-#carouselImgBox .plus {
-	margin-top: 2px;
 }
 #nyroModalContent  .blue-btn-mdl {
 	padding: 0 32px 0 0;
@@ -137,7 +134,7 @@ div.cmf-skinned-text {
 .hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 100% -26px;}
 
 .promo-gallery {
-	margin: 0 0 0 125px;
+	margin: -145px 0px 40px 125px;
 }
 
 .hebrew .promo-gallery {

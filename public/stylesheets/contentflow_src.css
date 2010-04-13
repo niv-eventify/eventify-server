@@ -6,10 +6,28 @@
 
 .ContentFlow {
 }
+    .ContentFlow .flow {
+        /*border: 1px solid green;*/
+    }
+    .ContentFlow .flow * {
+    }
 
     .ContentFlow .flow .item {
-        /*border: 1px solid red;*/
+            /*border: 1px solid red;*/
     }
+        .ContentFlow .flow .item canvas.content {
+            height: 100%;
+            width: 100%;
+            /*border: 1px solid yellow;*/
+        }
+        .ContentFlow .flow .item img.content {
+            /*border: 1px solid yellow;*/
+            width: 100%;
+        }
+        .ContentFlow .flow .item img.reflection, 
+        .ContentFlow .flow .item canvas.reflection {
+            width: 100%;
+        }
     /* ----- styling of items ----- */
     .ContentFlow .flow .item.active {
         cursor: pointer;
@@ -53,6 +71,7 @@
         height: 16px;
         background: url(/images/scrollbar_white.png) left center repeat-x;
         position: relative;
+        overflow: visible;
     }
 
         .ContentFlow .scrollbar .slider {
@@ -63,9 +82,9 @@
         }
         
         /* only for IE <= 6 and a alphatransparent slider image */
-        * html .ContentFlow .scrollbar .slider {
-            background-image: none;
-            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src='/images/slider_white.png');
+        * html .ContentFlow .scrollbar .slider { background-image: none; }
+        * html .ContentFlow .scrollbar .slider .virtualSlider {
+            filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, sizingMethod=crop, src='img/slider_white.png');
         }
             .ContentFlow .scrollbar .slider .position {
                 top: 120%;
@@ -106,6 +125,7 @@
         height: 100%;
         top: 0px;
         left: 0px;
+        background: black;
     }
         .ContentFlow .loadIndicator .indicator {
             background: url(/images/loader.gif) center center no-repeat;
@@ -136,6 +156,10 @@
     padding: 0px;
     /*border: none;*/
 }
+.ContentFlow img {
+    -ms-interpolation-mode: bicubic;
+}
+
 .ContentFlow .mouseoverCheckElement {
     position: absolute;
     width: 0px;
@@ -164,18 +188,8 @@
 .ContentFlow .flow .item {
     position: absolute; /* needed */
     visibility: hidden;
-}
-.ContentFlow .flow .item .overlay { /* needed for FF because of image DnD */
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0px;
-    right: 0px;
     top: 0px;
-    bottom: 0px;
-}
-.ContentFlow .flow .item.withReflection .overlay {
-    height: 100%;
+    left: 0px;
 }
 .ContentFlow .flow .item.active {
 }
@@ -194,10 +208,6 @@
 }
 .ContentFlow .flow .item canvas.reflection {
     margin-top: -1px; /* for FF */
-}
-.ContentFlow .flow .item .refoverlay {
-    position: relative;
-    display: block;
 }
 .ContentFlow .flow .item .caption {
     position: absolute; /* needed */
@@ -223,6 +233,7 @@
 }
 .ContentFlow .scrollbar .slider .position {
     position: absolute; /* needed */
+    text-align: center;
 }
 
 /* ----- global caption ----- */

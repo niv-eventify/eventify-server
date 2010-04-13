@@ -7,6 +7,8 @@
   max_free_text_font_size: 0,
   months_arr: [],
   seperated_title: false,
+  prev_text: "",
+  preview_process_id: "",
   
   calcFontSize: function() {
     if(stage2.seperated_title) {
@@ -44,7 +46,10 @@
       jQuery("#" + id).css("font-size", ((parseInt(font_size)+delta) + "px"));
   },
   preview_text: function(sourceId, targetId) {
-    var text = jQuery("#" + sourceId).val().replace(/\n/g,"<BR/>");
+  	var text = jQuery("#" + sourceId).val();
+  	if(stage2.prev_text == text) return;
+  	stage2.prev_text = text;
+    var text = text.replace(/\n/g,"<BR/>");
     jQuery("#" + targetId).html(text);
     stage2.calcFontSize();
   },
@@ -107,14 +112,26 @@ jQuery(document).ready(function(){
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
 
-  jQuery("#event_name").keyup(function(){
-    stage2.preview_text("event_name", "title");
+  jQuery("#event_name").focus(function(){
+    stage2.preview_process_id = setInterval(function(){stage2.preview_text("event_name", "title")},200);
+  });
+  jQuery("#event_name").blur(function(){
+    clearInterval(stage2.preview_process_id);
+    stage2.preview_process_id = '';
   });
 
   jQuery("#event_guest_message").click(function(){
     stage2.selectAllSafeValue(stage2.location);
     stage2.selectAllSafeValue(stage2.startDate);
     stage2.selectAllSafeValue(stage2.startTime);
+  });
+
+  jQuery("#event_guest_message").focus(function(){
+    stage2.preview_process_id = setInterval(function(){stage2.preview_text("event_guest_message", "free_text")},200);
+  });
+  jQuery("#event_guest_message").blur(function(){
+    clearInterval(stage2.preview_process_id);
+    stage2.preview_process_id = '';
   });
 
   jQuery("#event_guest_message").keyup(function(){
@@ -129,7 +146,6 @@ jQuery(document).ready(function(){
       jQuery(this).val(stage2.message);
     } else {
       stage2.message = jQuery(this).val();
-      stage2.preview_text("event_guest_message", "free_text");
     }
   });
   stage2.months_arr = stage2.months_arr.splice(1,13);
