@@ -1,8 +1,2 @@
 .new_reminder.lb-popup
   != render(:partial => "reminders/new")
-:javascript
-  setTimeout(function(){
-    jQuery(".new_reminder.lb-popup input:checkbox").customCheckbox();
-    jQuery(".new_reminder.lb-popup select").customSelect();
-  }, 0);
-  

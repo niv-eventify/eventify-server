@@ -1,6 +1,7 @@
 #flash
   - flash.each do |key, value|
-    :javascript
-      jQuery(function(){
-        jQuery.jGrowl('<span class="flash #{key}">#{value}</span>', {life:5000});
-      });
+    - unless value.blank?
+      :javascript
+        jQuery(function(){
+          jQuery.jGrowl('<span class="flash #{key}">#{value}</span>', {life:5000});
+        });

@@ -3,4 +3,6 @@ if resource.errors.blank?
   rerender_reminders(page)
 else
   page << "jQuery('.edit_reminder').html(#{render(:partial => 'edit').to_json})"
+  page << "jQuery('#nyroModalContent select').customSelect();"
+  page << "jQuery('#nyroModalContent input:checkbox').customCheckbox();"
 end

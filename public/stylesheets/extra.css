@@ -254,7 +254,10 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 	padding: 16px 38px 20px;
 }
 
-.new_reminder.lb-popup, .edit_reminder.lp-popup {
+.new_reminder.lb-popup {
+	width:385px;
+}
+.edit_reminder.lb-popup {
 	width:385px;
 }
 

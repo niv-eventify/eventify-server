@@ -1,5 +1,7 @@
 if resource.new_record?
   page << "jQuery('.new_reminder').html(#{render(:partial => 'new').to_json})"
+  page << "jQuery('#nyroModalContent select').customSelect();"
+  page << "jQuery('#nyroModalContent input:checkbox').customCheckbox();"
 else
   page << "jQuery.nyroModalRemove()"
   rerender_reminders(page)

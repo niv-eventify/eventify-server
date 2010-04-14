@@ -2,5 +2,7 @@
 
 - form_remote_for :reminder, resource, :builder => InlineErrorFormBuilder::Builder, :html => {:class => "download-form upload-form form"}, :url => event_reminders_path(@event) do |f|
   != render(:partial => "reminders/form", :locals => {:f => f})
-  != f.submit _("Save")
-  != link_to_function _("Cancel"), "jQuery.nyroModalRemove();"
+
+  .popup-btns.popup-btns-alt
+    != link_to_function _("Save"), "jQuery(this).parents('form').get(0).onsubmit();", :class => "btn"
+    != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"

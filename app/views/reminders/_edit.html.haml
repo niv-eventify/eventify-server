@@ -1,6 +1,7 @@
-- popup_title(_("New Reminder to Guests"))
+- popup_title(_("Edit Reminder to Guests"))
 
-- form_remote_for :reminder, resource, :builder => InlineErrorFormBuilder::Builder, :url => event_reminder_path(@event, resource), :html => {:method => :put} do |f|
+- form_remote_for :reminder, resource, :builder => InlineErrorFormBuilder::Builder, :html => {:class => "download-form upload-form form", :method => :put}, :url => event_reminder_path(@event, resource) do |f|
   != render(:partial => "reminders/form", :locals => {:f => f})
-  != f.submit _("Update")
-  != link_to_function _("Cancel"), "jQuery.nyroModalRemove();"
+  .popup-btns.popup-btns-alt
+    != link_to_function _("Update"), "jQuery(this).parents('form').get(0).onsubmit();", :class => "btn"
+    != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"

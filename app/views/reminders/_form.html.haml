@@ -18,3 +18,26 @@
         != f.text_field :before_value, :class => "input-text"
       != f.select :before_units, before_units_for_select
       != f.label :before_value, _("before the event")
+      != f.inline_errors_for :before_units
+      != f.inline_errors_for :before_value
+
+.f-row.f-row-alt
+  .f-row-1
+    != f.label :email_subject, _("Email subject")
+    .input-bg-alt.input-alt-2
+      != f.text_field :email_subject, :class => "input-text"
+  != f.inline_errors_for :email_subject
+  .f-row-1
+    != f.label :email_body, _("Email body")
+    .taxtarea-h
+      .texarea-bg
+        != f.text_area :email_body
+      .span= _("(text 140)")
+  != f.inline_errors_for :email_body
+
+.f-row.f-row-alt
+  .f-row-1
+    != f.label :sms_message, _("SMS Message")
+    .input-bg-alt.input-alt-2
+      != f.text_field :sms_message, :class => "input-text"
+  != f.inline_errors_for :sms_message

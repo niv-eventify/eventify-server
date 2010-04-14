@@ -2,12 +2,13 @@
   != stylesheet_link_tag "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal"
   :javascript
-    jQuery.fn.nyroModal.settings = {
-      endShowContent: function(a, b) {
-        alert(a);
-        alert(b);
-      }
-    }
+    jQuery(function(){      
+      jQuery.fn.nyroModal.settings.endShowContent = function(obj){
+        jQuery(obj.content.selector + " select").customSelect();
+        jQuery(obj.content.selector + " input:checkbox").customCheckbox();
+        jQuery("#reminder_email_subject").focus();
+      };
+    })
 
 - @content_css_class = "stars-bg stage-3"
 
