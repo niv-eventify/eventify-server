@@ -309,3 +309,7 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 .hebrew #startNow a em{
 	background:url("/images/bg-start-r-rtl.png") no-repeat;
 }
+
+.arrival-container select {
+	width:210px;
+}

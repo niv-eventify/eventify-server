@@ -24,7 +24,8 @@
           .event-reminders
             != render(:partial => "reminders/index")
 
-        - middle_box_container("reminders-list") do
+        - middle_box_container("summaries-list") do
           %h2= _("Message Confirmations")
-          != _("Send RSVPs summary email")
-          - event_rsvp_summary_select(@event)
+          .arrival-container
+            .arr-row
+              - event_rsvp_summary_select(@event)
