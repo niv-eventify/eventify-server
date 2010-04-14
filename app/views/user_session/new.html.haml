@@ -9,6 +9,6 @@
         = _("Remember me")
         != f.check_box :remember_me, :id => "check-remember"
       .settings-form-btns
-        != link_to_function content_tag(:span, _("Save")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"
+        != link_to_function content_tag(:span, _("Login")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"
         %span.cancel-btn
           != link_to _("Forgot password?"), new_password_path, :class => "forgot_password"

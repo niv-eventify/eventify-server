@@ -3,3 +3,6 @@
     %h4= _("Reminder has already been sent")
   - else
     != render(:partial => "reminders/edit")
+:javascript
+  jQuery(".edit_reminder.lb-popup select").customSelect({force:true});
+  jQuery(".edit_reminder.lb-popup input:checkbox").customCheckbox();

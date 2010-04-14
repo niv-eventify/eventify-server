@@ -1,6 +1,13 @@
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal"
+  :javascript
+    jQuery.fn.nyroModal.settings = {
+      endShowContent: function(a, b) {
+        alert(a);
+        alert(b);
+      }
+    }
 
 - @content_css_class = "stars-bg stage-3"
 

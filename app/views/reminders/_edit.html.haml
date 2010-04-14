@@ -1,6 +1,6 @@
-- popup_title(_("Edit reminder"))
+- popup_title(_("New Reminder to Guests"))
 
-- semantic_form_remote_for :reminder, resource, :live_validations => true, :url => event_reminder_path(@event, resource), :html => {:method => :put} do |f|
+- form_remote_for :reminder, resource, :builder => InlineErrorFormBuilder::Builder, :url => event_reminder_path(@event, resource), :html => {:method => :put} do |f|
   != render(:partial => "reminders/form", :locals => {:f => f})
   != f.submit _("Update")
   != link_to_function _("Cancel"), "jQuery.nyroModalRemove();"

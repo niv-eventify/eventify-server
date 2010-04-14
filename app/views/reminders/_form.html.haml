@@ -1,20 +1,20 @@
 .f-row
-  %h3= _("Send By")
-  - f.inputs do
-    != f.input :by_email, :label => _("Email")
-    != f.input :by_sms, :label => _("SMS")
+  %strong.title= _("Send By")
+  %ul.hosts-container
+    %li
+      != f.check_box :by_email, :class => "input-check"
+      != f.label :by_email, _("Email"), :class => "mail"
+      != f.inline_errors_for :by_email
+    %li
+      != f.check_box :by_sms, :class => "input-check"
+      != f.label :by_sms, _("SMS"), :class => "phone"
+      != f.inline_errors_for :by_sms
 
-%h5= _("Send At")
-- f.inputs do
-  != f.input :before_value, :label => ""
-  != f.input :before_units, :as => :select, :collection => before_units_for_select, :label => ""
-  = _("before the event")
-
-%h5= _("Email")
-- f.inputs do
-  != f.input :email_subject, :label => "Email subject"
-  != f.input :email_body, :label => "Email body", :as => :text
-
-%h5= _("SMS")
-- f.inputs do
-  != f.input :sms_message, :label => "SMS Message"
+.f-row
+  %strong.title= _("Send At")
+  .f-col
+    .f-row-1
+      .input-bg-alt.input-sml-1
+        != f.text_field :before_value, :class => "input-text"
+      != f.select :before_units, before_units_for_select
+      != f.label :before_value, _("before the event")
