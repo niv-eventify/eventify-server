@@ -76,11 +76,11 @@ div.cmf-skinned-text {
   position: absolute;
   left: 50%;
   margin-left: -208px;
-  margin-top: 10px;
+  margin-top: -17px;
   visibility: hidden;
 }
 .hebrew #carouselImgBox {
-  margin-right: -163px;
+  margin-right: -208px;
   right: 50%
 }
 #carouselImgBox.img-box{
@@ -92,6 +92,9 @@ div.cmf-skinned-text {
   padding-bottom: 87px;
   width: 416px;
   background-image: url(/images/carousel-bg-img-box-b.png);
+}
+.hebrew #carousel-img-box-b{
+  padding: 14px 0 87px;
 }
 #carousel-img-box-t{
 	margin-top: -5px;
@@ -134,11 +137,11 @@ div.cmf-skinned-text {
 .hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 100% -26px;}
 
 .promo-gallery {
-	margin: -145px 0px 40px 125px;
+	margin: -172px 0px 40px 125px;
 }
 
 .hebrew .promo-gallery {
-	margin: 0 126px 0 0; 	
+	margin: -172px 126px 40px 125px;
 }
 .img-box {
 	direction:inherit !important;
@@ -268,4 +271,41 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 .settings-box.login {
 	padding:0;
 	margin:100px auto;
+}
+
+#startNow {
+	margin:-14px 0 0 75px;
+}
+#startNow a{
+	float:left;
+	padding-bottom:4px;
+	width:auto;
+	color:#fff;
+	font-size:3em;
+	line-height:46px;
+	font-weight:bold;
+	height:45px;
+	cursor:pointer;
+	position:relative;
+	z-index:2;
+}
+#startNow a span{
+	float:left;
+	padding: 2px 15px 0px 20px;
+	margin-left:30px;
+	background:url("/images/bg-start-l-rtl.png") no-repeat scroll 0 0 transparent;
+}
+.hebrew #startNow a span{
+	background:url("/images/bg-start-l-rtl.png") no-repeat scroll 0 0 transparent;
+}
+#startNow a em{
+	display: inline;
+	float:left;
+	width:12px;
+	height:56px;
+	overflow:hidden;
+	position:relative;	background:url("/images/bg-start-r-rtl.png") no-repeat;
+}
+.hebrew #startNow a em{
+	background:url("/images/bg-start-r-rtl.png") no-repeat;
 }
