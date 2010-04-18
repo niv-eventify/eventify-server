@@ -1,21 +1,23 @@
-- if @contact_importer.completed_at.blank?
-  %p
-    Importing from
-    = @contact_importer.name
-    %br
-    = _("Please wait...")
-  != javascript_tag(check_for_importer_status_js)
-- else
-  %p
-    != link_to @contact_importer.contacts_imported.to_i.to_s, contacts_path
-    new contact(s) imported
-    %br
-    TODO: pluralize after gettext
-  - unless @contact_importer.last_error.blank?
-    %p
-      An error occured during importing contacts from
-      = @contact_importer.name
-      \:
-      = @contact_importer.last_error
-    %p
-      != link_to "Try Again", edit_contact_importer_path(:id => @contact_importer)
+.top-text
+  %h2= _("Hello %{username},") % {:username => h(current_user.name)}
+  %p= _("Here your can manage contracts, and import them from your email!")
+
+- page_with_tabs(:contacts) do
+  - contacts_navigation(:import)
+  .events-holder
+    %h3= _("Importing Contacts from %{name}") % {:name => @contact_importer.name}
+    .import-result
+      - if @contact_importer.completed_at.blank?
+        = _("Please wait...")
+        != javascript_tag(check_for_importer_status_js)
+      - else
+        != link_to contacts_imported, contacts_path
+      - unless @contact_importer.last_error.blank?
+        %p
+          %h4= _("An error occured during importing contacts from %{name}") % {:name => @contact_importer.name}
+          %span.error= @contact_importer.last_error
+        .contact-btns
+          %br
+          %br
+          %br
+          != link_to s_("import|Try Again"), contact_importers_path(:id => @contact_importer), :class => "btn"

@@ -330,3 +330,17 @@ ul.contact-tabset li.active a,
 }
 ul.contact-tabset li.csv { padding-left: 5px;}
 .hebrew ul.contact-tabset li.csv { padding-right: 5px;}
+
+
+.import-result {
+	padding-top:1em;
+	font-size:12px;
+}
+
+.import-result h4 {
+	margin-bottom:0;
+}
+
+.import-result span.error {
+	color:#e30022;;
+}

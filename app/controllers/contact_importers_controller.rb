@@ -3,6 +3,7 @@ class ContactImportersController < ApplicationController
   before_filter :set_importer, :only => [:edit, :update]
 
   def index
+    @contact_importer = current_user.contact_importers.find_by_contact_source(params[:id]) if params[:id]
   end
 
   def show
