@@ -1,13 +1,14 @@
 .top-text
-  %h2= _("Hello %{username},") % {:username => current_user.name}
-  %p= _("In your page you can track the events you’ve created, and create new ones!")
+  %h2= _("Hello %{username},") % {:username => h(current_user.name)}
+  %p= _("You can change your name and password here.")
 
 - page_with_tabs(:settings) do
 
-  %h1= _("Account Settings")
+  .settings-box
+    - setting_row(_("Name:"), current_user.name, "jQuery('#edit_user').toggle()")
+    - setting_row(_("Email:"), current_user.email, "jQuery('#edit_user').toggle()")
+    - setting_row(_("Password:"), "********", "jQuery('#change_password').toggle()")
 
-  - semantic_form_for(@user, :live_validations => true) do |f|
-    != render :partial => "form", :locals => { :f => f }
-    != f.submit _("Update")
+    != render(:partial => "passwords/edit")
 
-  != link_to _("change password"), password_edit_path
+    != render(:partial => "users/edit")
