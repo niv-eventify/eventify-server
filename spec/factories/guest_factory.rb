@@ -1,3 +1,9 @@
+Factory.define :guest_without_email_and_phone, :class => Guest do |guest|
+  guest.sequence(:name) {|n| "Name#{n}"}
+  guest.association :event, :factory => :event
+  guest.summary_email_sent_at 10.minutes.ago
+end
+
 Factory.define :guest do |guest|
   guest.sequence(:name) {|n| "Name#{n}"}
 
@@ -6,6 +12,8 @@ Factory.define :guest do |guest|
   guest.association :event, :factory => :event
   guest.summary_email_sent_at 10.minutes.ago
 end
+
+
 
 Factory.define :guest_with_token, :parent => :guest do |guest|
   guest.email_token "token"

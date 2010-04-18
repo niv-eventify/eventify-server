@@ -22,6 +22,26 @@ describe Guest do
     end
   end
 
+  describe "updates" do
+    before(:each) do
+      @guest = Factory.create(:guest_without_email_and_phone)
+      @guest.send_sms.should be_nil
+      @guest.send_email.should be_nil
+    end
+
+    it "should change send_sms when mobile added" do
+      @guest.mobile_phone = "0123456789"
+      @guest.save.should be_true
+      @guest.send_sms.should be_true
+    end
+
+    it "should change send_email when email added" do
+      @guest.email = "email@email.com"
+      @guest.save.should be_true
+      @guest.send_email.should be_true
+    end
+  end
+
   describe "failures handling" do
     describe "sms" do
       describe "reset failures" do
