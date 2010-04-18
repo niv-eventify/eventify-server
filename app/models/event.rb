@@ -78,7 +78,7 @@ class Event < ActiveRecord::Base
   def invitations_to_send_counts
     return @invitations_to_send_counts if @invitations_to_send_counts
 
-    e, s = guests.not_invited_by_email.count, guests.not_invited_by_sms.count
+    e, s = guests.invite_by_email.not_invited_by_email.count, guests.invite_by_sms.not_invited_by_sms.count
     @invitations_to_send_counts = {
       :email => e,
       :sms => s,
@@ -94,8 +94,8 @@ class Event < ActiveRecord::Base
     require_payment_for_guests? || require_payment_for_sms?
   end
 
-  def send_invitations(ids = :all)
-    "production" == Rails.env ? send_later(:delayed_send_invitations, ids) : delayed_send_invitations(ids)
+  def send_invitations
+    "production" == Rails.env ? send_later(:delayed_send_invitations) : delayed_send_invitations
   end
 
   def validate
@@ -129,35 +129,23 @@ class Event < ActiveRecord::Base
     scope.find_each(:batch_size => 10) { |obj| obj.send(method, timestamp) }
   end
 
-  def delayed_send_invitations(ids)
+  def delayed_send_invitations
     time_stamp = Time.now.utc
     Event.transaction do
       self.last_invitation_sent_at = time_stamp
-      send_sms_invitations(ids, time_stamp)
-      send_email_invitations(ids, time_stamp)
+      send_sms_invitations(time_stamp)
+      send_email_invitations(time_stamp)
       self.send_invitations_now = nil
       save!
     end
   end
 
-  def send_sms_invitations(ids, timestamp)
-    scope = guests.invite_by_sms
-    if :all == ids
-      ids = guest_ids
-      scope = scope.not_invited_by_sms
-    end
-
-    scoped_invite(scope.with_ids(ids), :prepare_sms_invitation!, timestamp)
+  def send_sms_invitations(timestamp)
+    scoped_invite(guests.not_invited_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
   end
 
-  def send_email_invitations(ids, timestamp)
-    scope = guests.invite_by_email
-    if :all == ids
-      ids = guest_ids
-      scope = scope.not_invited_by_email
-    end
-
-    scoped_invite(scope.with_ids(ids), :prepare_email_invitation!, timestamp)
+  def send_email_invitations(timestamp)
+    scoped_invite(guests.not_invited_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
   end
 
   def cancel_sms!

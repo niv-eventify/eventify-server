@@ -26,6 +26,7 @@ class Guest < ActiveRecord::Base
   after_create :increase_stage_passed
   after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
+  before_update :update_invitation_methods
   after_update :send_summary_status
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
@@ -35,6 +36,11 @@ class Guest < ActiveRecord::Base
       event.stage_passed = 3
       event.save
     end
+  end
+
+  def update_invitation_methods
+    self.send_email = true if !email.blank? && email_changed? && 1 == changes.keys.size
+    self.send_sms =   true if !mobile_phone.blank? && mobile_phone_changed? && 1 == changes.keys.size
   end
 
   def update_summary_status
@@ -86,6 +92,8 @@ class Guest < ActiveRecord::Base
   end
 
   def send_reminder!(reminder)
+    return unless invited?
+
     if reminder.by_email?
       # TODO: handle delivery errors
       Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)

@@ -7,7 +7,14 @@ class RemindersController < InheritedResources::Base
   actions :new, :create, :update, :destroy, :edit
   respond_to :js, :except => [:new, :edit]
 
-  # new
+  def new
+    new! do |success|
+      resource.by_sms = 1
+      resource.by_email = 1
+      success.html
+    end
+  end
+
   # create
   def update
     return _update_activity if params[:reminder][:is_active]
