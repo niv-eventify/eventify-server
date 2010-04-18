@@ -52,15 +52,6 @@ describe ContactImportersController do
       end
     end
 
-    describe "edit" do
-      it "should render success" do
-        @importer = stub_model(ContactImporter, :contact_source => "gmail")
-        @controller.current_user.contact_importers.stub!(:reset_source!).and_return(@importer)
-        get :edit, :id => "gmail"
-        response.should be_success
-      end
-    end
-
     describe "update" do
       ["gmail", "csv"].each do |s|
         it "should render errors on #{s}" do

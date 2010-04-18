@@ -1,7 +1,6 @@
-%tr
-  %td!= link_to h(contact.name), edit_contact_path(contact)
+%tr[contact]
+  %td= contact.name
   %td= contact.email
   %td= contact.mobile
-  %td= [contact.company, contact.title].compact_blanks.join(", ")
-  %td= [contact.street, contact.city, contact.country, contact.zip].compact_blanks.join(", ")
-  %td!= link_to "Remove", contact_path(contact), :method => :delete, :confirm => "Are you sure?"
+  %td.edit!= link_to _("edit"), edit_contact_path(contact), :class => "edit-icon"
+  %td.remove!= link_to_remote(_("remove"), :url => contact_path(contact), :method => :delete, :confirm => "Are you sure?", :html => {:class => "del-icon"}, :before => "jQuery('##{dom_id(contact)}').remove()")

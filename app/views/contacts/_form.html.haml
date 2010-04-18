@@ -1,14 +1,8 @@
-- f.inputs :name => "General" do
-  != f.input :name, :required => true
-  != f.input :email, :required => true
-  != f.input :mobile
-
-- f.inputs :name => "Address" do
-  != f.input :country, :as => :country
-  != f.input :city
-  != f.input :street
-  != f.input :zip
-
-- f.inputs :name => "Business" do
-  != f.input :company
-  != f.input :title
+.form-cols
+  .form-col-1
+    .form-row
+      != f.text_field :name, :label => _("Name:")
+      != f.text_field :email, :label => _("Email:")
+  .form-col-2
+    .form-row
+      != f.text_field :mobile, :label => _("Mobile:")

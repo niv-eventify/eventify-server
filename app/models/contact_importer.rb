@@ -2,13 +2,13 @@ class ContactImporter < ActiveRecord::Base
   belongs_to :user
   validates_presence_of :contact_source
 
-  SOURCES = {
-    "gmail" => "GMail",
-    "yahoo" => "Yahoo!",
-    "hotmail" => "Hotmail",
-    "aol" => "AOL",
-    "csv" => "CSV file"
-  }
+  SOURCES = returning(ActiveSupport::OrderedHash.new) do |h|
+    h["aol"] = "AOL"
+    h["gmail"] = "GMail"
+    # h["yahoo"] = "Yahoo!"
+    h["hotmail"] = "Hotmail"
+    h["csv"] = "CSV file"
+  end
   validates_inclusion_of :contact_source, :in => SOURCES.keys, :message => "not included in the list"
   attr_accessible :contact_source
   

@@ -3,6 +3,7 @@ class ContactImportersController < ApplicationController
   before_filter :set_importer, :only => [:edit, :update]
 
   def index
+    @contact_importer = current_user.contact_importers.find_by_contact_source(params[:id]) if params[:id]
   end
 
   def show
@@ -21,14 +22,11 @@ class ContactImportersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     @contact_importer.attributes = (params[:contact_importer] || {}).merge(:validate_importing => true)
 
     unless @contact_importer.valid?
-      render :action => :edit
+      render :action => :index
       return
     end
 

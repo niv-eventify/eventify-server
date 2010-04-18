@@ -18,8 +18,13 @@ class ContactsController < InheritedResources::Base
     @contact = end_of_association_chain.find(params[:id])
     @contact.removed_at = Time.now.utc
     @contact.save!
-    flash[:notice] = "Contact removed!"
-    redirect_to contacts_path
+    respond_to do |wants|
+      wants.html do
+        flash[:notice] = "Contact removed!"
+        redirect_to contacts_path
+      end
+      wants.js {render :nothing => true}
+    end
   end
 
 protected
