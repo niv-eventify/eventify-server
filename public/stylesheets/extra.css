@@ -317,3 +317,7 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 .invitation-sent {
 	color:#3A9925
 }
+
+.boxe .heading .drop {
+	left:-18px;
+}
