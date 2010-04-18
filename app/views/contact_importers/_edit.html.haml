@@ -1,0 +1,13 @@
+- contact_importer = @contact_importer && contact_source == @contact_importer.contact_source ? @contact_importer : ContactImporter.new; contact_importer.contact_source = contact_source
+
+- form_for(contact_importer, :builder => MiddleBoxFormBuilder::Builder, :url => contact_importer_path(contact_importer), :html => { :method => :put, :multipart => true, :class => "contact-form" }) do |f|
+  != f.hidden_field :contact_source
+  - if contact_importer.csv?
+    != f.file_field :csv, :label => _("Choose CSV file (name, email)")
+  - else
+    != f.text_field :username, :label => _("Email or Username"), :outerdiv_class => "form-row"
+    != f.password_field :password, :label => _("Password"), :outerdiv_class => "form-row"
+  .contact-btns
+    %br
+    != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+    != link_to "Cancel", contacts_path, :class => "btn"

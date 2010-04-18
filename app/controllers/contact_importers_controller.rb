@@ -21,14 +21,11 @@ class ContactImportersController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
     @contact_importer.attributes = (params[:contact_importer] || {}).merge(:validate_importing => true)
 
     unless @contact_importer.valid?
-      render :action => :edit
+      render :action => :index
       return
     end
 

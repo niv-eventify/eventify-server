@@ -1,5 +1,5 @@
 .top-text
-  %h2= _("Hello %{username},") % {:username => current_user.name}
+  %h2= _("Hello %{username},") % {:username => h(current_user.name)}
   %p= _("In your page you can track the events you’ve created, and create new ones!")
 
 - page_with_tabs(:events) do

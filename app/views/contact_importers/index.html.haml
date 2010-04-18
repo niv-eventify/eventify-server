@@ -1,5 +1,24 @@
-%h3= _("Import contracts")
+.top-text
+  %h2= _("Hello %{username},") % {:username => h(current_user.name)}
+  %p= _("Here your can manage contracts, and import them from your email!")
 
-Import contacts using:
-- ContactImporter::SOURCES.each do |key, value|
-  != link_to value, edit_contact_importer_path(key)
+- page_with_tabs(:contacts) do
+  - contacts_navigation(:import)
+  .events-holder
+    %h3= _("Import Contacts")
+    .table-box.table-box-alt
+      .table-box-t
+        .holder
+          .contact-box
+            %h4= _("Choose the source to import contacts from:")
+            %ul.contact-tabset
+              - ContactImporter::SOURCES.each do |key, value|
+                %li.source_select{:class => key}!= link_to_function value, "jQuery('li.source_select').removeClass('active');jQuery(this).parents('li').addClass('active');jQuery('.source-form').hide();jQuery('.#{key}_form').show()"
+            - ContactImporter::SOURCES.each do |key, value|
+              .contact-tab.source-form{:style => "display:none", :class => "#{key}_form"}
+                .contact-tab-t
+                  .contact-tab-b
+                    != render(:partial => "edit", :locals => {:contact_source => key})
+:javascript
+  jQuery('li.#{@contact_importer.try(:contact_source) || 'gmail'}').addClass('active');
+  jQuery('div.#{@contact_importer.try(:contact_source) || 'gmail'}_form').show()

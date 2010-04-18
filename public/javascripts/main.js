@@ -426,7 +426,6 @@ function initSlideEffect(){
 jQuery(document).ready(function(){
 	initSlideEffect();
 	ieHover('.img-box, .edit-bg, .subnav li');
-	clearInputs();
 	initSlide();
 	promoNav();
 	jQuery('select').customSelect();
