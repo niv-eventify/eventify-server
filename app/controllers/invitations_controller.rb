@@ -6,6 +6,8 @@ class InvitationsController < InheritedResources::Base
   actions :edit, :update, :show
 
   before_filter :sms_message, :only => :edit
+  before_filter :set_invitations, :only => [:edit, :update]
+  before_filter :check_invitations, :only => :edit
 
   # show
 
@@ -26,5 +28,16 @@ protected
 
   def sms_message
     resource.sms_message ||= resource.default_sms_message
+  end
+
+  def set_invitations
+    @invitations_to_send = resource.invitations_to_send_counts
+  end
+
+  def check_invitations
+    if @invitations_to_send[:total].zero?
+      redirect_to summary_path(resource)
+      return false
+    end
   end
 end

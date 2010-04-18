@@ -1,21 +1,27 @@
-- if @event.require_payment_for_sms?
+- if false # @event.require_payment_for_sms?
   Payment for SMS required!
   != link_to _("Edit Guests"), event_guests_path(@event)
   != button_to _("Don't send SMS invitations"), event_path(@event, :cancel_sms => true), :method => :put, :confirm => _("Are you sure?")
 
-- if resource.invitations_to_send_counts[:total].zero?
-  All invitations have been sent.
-- else
-  Invitations to send:
-  SMS:
-  = resource.invitations_to_send_counts[:sms]
-  Email:
-  = resource.invitations_to_send_counts[:email]
-  
-  - semantic_form_for @event, :event, :url => invitation_path(@event), :method => :post do |f|
-    != f.errors_on :base
-    != hidden_field_tag "event[send_invitations_now]", true
-    - if @event.should_send_sms?
-      != f.input :sms_message, :label => _("SMS message text")
-      != f.input :host_mobile_number, :label => _("SMS Replys mobile phone")
-    != f.submit _("Send invitations")
+.h-container
+  .t &nbsp;
+  .c
+    .h-container-content
+      .confirmed-box.send-invitations
+
+        .table-box
+          .table-box-t
+            .holder
+              .forms-block
+                %h3= _("Invitations to send: %{email_count} by email and %{sms_count} by SMS") % { :email_count => @invitations_to_send[:email], :sms_count => @invitations_to_send[:sms]}
+                - form_for @event, :event, :url => invitation_path(@event), :builder => MiddleBoxFormBuilder::Builder, :method => :post do |f|
+                  = f.object.errors.on(:base)
+                  != f.hidden_field :send_invitations_now, :value => true
+                  - if @event.should_send_sms?
+                    .form-cols.send-invitations
+                      != f.text_field :sms_message, :label => _("SMS message text")
+                      != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")
+                  .forms-block-btns
+                    != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+                    != link_to _("Edit Guests"), event_guests_path(@event), :class => "cancel"
+  .b-alt &nbsp;
