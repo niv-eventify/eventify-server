@@ -3,18 +3,22 @@
   %p= _("In your page you can track the events you’ve created, and create new ones!")
 
 - page_with_tabs(:contacts) do
-
-  != link_to "New", new_contact_path
-  != link_to "Import", contact_importers_path
-
-  %table
-    %tr
-      %th Name
-      %th Email
-      %th Mobile
-      %th Business Info
-      %th Address
-      %th &nbsp;
-    != render(:partial => @contacts)
-
-  != will_paginate(@contacts)
+  - contacts_navigation(:index)
+  .events-holder
+    %h3= _("All Contacts")
+    .table-box
+      .holder
+        %table
+          %thead
+            %tr
+              %td= _("Name")
+              %td= _("Email")
+              %td= _("Mobile")
+              %td.edit= _("Edit")
+              %td.del= _("Delete")
+          %tbody
+            != render(:partial => @contacts)
+        - if @contacts.total_pages > 1
+          != will_paginate(@contacts, :renderer => DesignsWillPaginate)
+        - else
+          .page-nav &nbsp;
