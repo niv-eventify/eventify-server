@@ -78,7 +78,7 @@ class Event < ActiveRecord::Base
   def invitations_to_send_counts
     return @invitations_to_send_counts if @invitations_to_send_counts
 
-    e, s = guests.not_invited_by_email.count, guests.not_invited_by_sms.count
+    e, s = guests.invite_by_email.not_invited_by_email.count, guests.invite_by_sms.not_invited_by_sms.count
     @invitations_to_send_counts = {
       :email => e,
       :sms => s,
@@ -141,11 +141,11 @@ class Event < ActiveRecord::Base
   end
 
   def send_sms_invitations(timestamp)
-    scoped_invite(guests.invite_by_sms.not_invited_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
+    scoped_invite(guests.not_invited_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
   end
 
   def send_email_invitations(timestamp)
-    scoped_invite(guests.invite_by_email.not_invited_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
+    scoped_invite(guests.not_invited_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
   end
 
   def cancel_sms!

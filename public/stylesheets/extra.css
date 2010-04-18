@@ -313,3 +313,7 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 .arrival-container select {
 	width:210px;
 }
+
+.invitation-sent {
+	color:#3A9925
+}

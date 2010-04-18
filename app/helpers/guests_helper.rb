@@ -70,8 +70,8 @@ module GuestsHelper
     end    
   end
 
-  def if_not_blank_editable_property(attribute, non_blank_attribute, guest)
-    return haml_concat(guest.send(attribute).blank? ? "" : _("yes")) if guest.invited?
+  def if_not_blank_editable_property(attribute, non_blank_attribute, guest, condition)
+    return haml_concat(guest.send(attribute).blank? ? "" : content_tag(:span, _("yes"), :class =>"invitation-sent")) if condition
 
     if guest.send(non_blank_attribute).blank?
       haml_concat "&nbsp;"
