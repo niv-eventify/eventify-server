@@ -1,1 +1,14 @@
-!= _("Invitations to %{event} are being sent") % {:event => h(resource.name)}
+- @content_css_class = "stars-bg"; @content_area_css_class = "content-area-alt"
+
+.h-container
+  .t &nbsp;
+  .c
+    .h-container-content
+      .confirmed-box
+        %h2= _("Invitations are being sent!")
+        .confirmed-btns
+          %span= _("Check out")
+          != link_to content_tag(:em, _("Event Page")), event_path(resource), :class => "btn-4"
+          %span= _("or")
+          != link_to content_tag(:em, _("Create New Event")), event_design_path(:event_id => 0, :category_id => resource.category_id, :design_id => resource.design_id), :class => "btn-4"
+  .b-alt &nbsp;
