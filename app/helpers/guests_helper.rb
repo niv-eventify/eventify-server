@@ -74,7 +74,7 @@ module GuestsHelper
     return haml_concat(guest.send(attribute).blank? ? "" : content_tag(:span, _("yes"), :class =>"invitation-sent")) if condition
 
     if guest.send(non_blank_attribute).blank?
-      haml_concat "&nbsp;"
+      haml_concat check_box_tag("", false, false, :class => "input-check", :onchange => "jQuery('##{dom_id(guest)} .inline_#{dom_id(guest)}_#{non_blank_attribute}').next('a.link_to_edit').click()")
     else
       guest_remote_checkbox(attribute, guest)
     end
