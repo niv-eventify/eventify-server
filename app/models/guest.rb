@@ -86,6 +86,8 @@ class Guest < ActiveRecord::Base
   end
 
   def send_reminder!(reminder)
+    return unless invited?
+
     if reminder.by_email?
       # TODO: handle delivery errors
       Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
