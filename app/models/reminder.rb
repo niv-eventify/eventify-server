@@ -75,8 +75,6 @@ class Reminder < ActiveRecord::Base
     super
     self.before_value ||= 7
     self.before_units ||= "days"
-    self.by_sms ||= true
-    self.by_email ||= true
   end
 
   def before_in_words
