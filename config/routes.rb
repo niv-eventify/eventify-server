@@ -29,6 +29,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :reminders
     event.resource :design
   end
+  map.resources :summary, :controller => "Summaries"
   map.resources :invitations
   map.resources :rsvps
 end

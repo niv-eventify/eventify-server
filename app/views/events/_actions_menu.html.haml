@@ -1,4 +1,4 @@
 .event-menu
   %ul
-    %li.sum!= link_to_function _("Event summary"), "alert('todo')"
+    %li.sum!= link_to _("Event summary"), summary_path(event)
     %li.cancel!= link_to_function _("Cancel event"), "alert('todo')"
