@@ -2,7 +2,7 @@
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
-    != stylesheet_link_tag 'rsvps', :media => 'all', :cache => "main"
+    != stylesheet_link_tag 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
     != javascript_include_tag "rsvps"
   %body{ :style => "#{background_image_css}"}
