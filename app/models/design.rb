@@ -51,7 +51,7 @@ class Design < ActiveRecord::Base
   validates_attachment_size :preview, :less_than => 2.megabytes
 
   has_attached_file :preview_with_text,
-    :styles         => {:medium => "218x145>", :lightbox => "666x444>", :carousel => "300x200>"},
+    :styles         => {:medium => "218x145>", :lightbox => "666x444>", :carousel => "400x267>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
     :path =>        "designs/:id/:style/:filename",

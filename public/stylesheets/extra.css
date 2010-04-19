@@ -342,7 +342,7 @@ ul.contact-tabset li.csv { padding-left: 5px;}
 }
 
 .import-result span.error {
-	color:#e30022;;
+	color:#e30022;
 }
 
 .confirmed-box.send-invitations {
@@ -361,3 +361,8 @@ ul.contact-tabset li.csv { padding-left: 5px;}
 .confirmed-box.send-invitations .forms-block-btns a.cancel {
 	padding-top:12px;
 }
+
+.boxe .heading .drop {
+	left:-18px;
+}
+
