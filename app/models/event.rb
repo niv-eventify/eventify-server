@@ -78,7 +78,8 @@ class Event < ActiveRecord::Base
   def invitations_to_send_counts
     return @invitations_to_send_counts if @invitations_to_send_counts
 
-    e, s = guests.invite_by_email.not_invited_by_email.count, guests.invite_by_sms.not_invited_by_sms.count
+    e, s = guests.not_invited_by_email.count, guests.not_invited_by_sms.count
+
     @invitations_to_send_counts = {
       :email => e,
       :sms => s,

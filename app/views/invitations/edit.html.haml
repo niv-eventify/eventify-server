@@ -17,7 +17,7 @@
                 - form_for @event, :event, :url => invitation_path(@event), :builder => MiddleBoxFormBuilder::Builder, :method => :post do |f|
                   = f.object.errors.on(:base)
                   != f.hidden_field :send_invitations_now, :value => true
-                  - if @event.should_send_sms?
+                  - if @invitations_to_send[:sms] > 0
                     .form-cols.send-invitations
                       != f.text_field :sms_message, :label => _("SMS message text")
                       != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")
