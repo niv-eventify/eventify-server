@@ -24,6 +24,9 @@ body {
 .title_holder:hover, .info_holder:hover {
 	border:1px solid blue;
 }
+.hebrew .title_holder, .hebrew .info_holder {
+	direction: rtl;
+}
 
 #toolbar {
 	position: fixed;

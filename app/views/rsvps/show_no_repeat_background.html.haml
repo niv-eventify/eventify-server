@@ -5,7 +5,7 @@
     != stylesheet_link_tag 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
     != javascript_include_tag "rsvps"
-  %body{ :style => "#{background_color_css}" }
+  %body{ :class => body_class, :style => "#{background_color_css}" }
     #background_holder{ :style => "#{background_image_css}" }
       != render(:partial => "postcard")
     != render(:partial => "toolbar")
