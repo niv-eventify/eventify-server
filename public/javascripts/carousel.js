@@ -1,5 +1,7 @@
 var carousel = {
   start: false,
+  content_flow: null,
+
   show: function(category_id) {
     $("#carouselImgBox").css('visibility','hidden');
     $(".promo-nav li").removeClass("active");
@@ -8,7 +10,7 @@ var carousel = {
     $.get("categories/" + category_id + "/designs",function(data){
       $("#carouselWrapper").html("<div id='carousel' class='ContentFlow promo-gallery'><div class='loadIndicator'><div class='indicator'></div></div><div class='flow'>"+data+"</div>");
       carousel.start = false;
-      var fl = new ContentFlow('carousel',{
+      carousel.content_flow = new ContentFlow('carousel',{
         reflectionHeight: 0,
         maxItemHeight:300,
         visibleItems: 4,
@@ -35,7 +37,7 @@ var carousel = {
             $("#carouselImgBox").css('visibility','hidden');
         }
       });
-      fl.init();
+      carousel.content_flow.init();
     });
   },
 /*--- promo navigation ---*/
@@ -121,5 +123,11 @@ $(document).ready(function(){
     // ie
     e.returnValue = false;
     $("#carousel").trigger(e, delta);
+  });
+  $(".gallery-arrow-prev").click(function(){
+    carousel.content_flow.moveTo('previous');
+  });
+  $(".gallery-arrow-next").click(function(){
+    carousel.content_flow.moveTo('next');
   });
 });
