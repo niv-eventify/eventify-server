@@ -11,34 +11,43 @@
   preview_process_id: "",
   
   calcFontSize: function() {
-    if(stage2.seperated_title) {
-      while(parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+    var loop_protection = 0;
+    if(!stage2.seperated_title) {
+      while(loop_protection < 100 && parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+        loop_protection++;
         stage2.change_font_size_by(1, "free_text");
         stage2.change_font_size_by(1, "title");
       }
-      while(jQuery(".info-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
+      while(loop_protection < 100 && jQuery(".info-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
+        loop_protection++;
         stage2.change_font_size_by(-1, "free_text");
         stage2.change_font_size_by(-1, "title");
       }
     } else {
-      while(parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+      while(loop_protection < 100 && parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+        loop_protection++;
         stage2.change_font_size_by(1, "free_text");
       }
-      while(parseInt(jQuery("#title").css("font-size")) < stage2.max_title_font_size && (jQuery(".title-holder").height() > (jQuery("#title").height() + parseInt(jQuery("#title").css("line-height"))))) {
+      while(loop_protection < 100 && parseInt(jQuery("#title").css("font-size")) < stage2.max_title_font_size && (jQuery(".title-holder").height() > (jQuery("#title").height() + parseInt(jQuery("#title").css("line-height"))))) {
+        loop_protection++;
         stage2.change_font_size_by(1, "title");
       }
-      while(jQuery(".info-holder").height() < jQuery("#free_text").height()) {
+      while(loop_protection < 100 && jQuery(".info-holder").height() < jQuery("#free_text").height()) {
+        loop_protection++;
         stage2.change_font_size_by(-1, "free_text");
       }
-      while(jQuery(".title-holder").height() < jQuery("#title").height()) {
+      while(loop_protection < 100 && jQuery(".title-holder").height() < jQuery("#title").height()) {
+        loop_protection++;
         stage2.change_font_size_by(-1, "title");
       }
     }
-    while(jQuery("#title").width() < jQuery("#title")[0].scrollWidth) {
-      stage2.change_font_size_by(-1);
+    while(loop_protection < 100 && jQuery("#title").width() < jQuery("#title")[0].scrollWidth) {
+      loop_protection++;
+      stage2.change_font_size_by(-1,"title");
     }
-    while(jQuery("#free_text").width() < jQuery("#free_text")[0].scrollWidth) {
-      stage2.change_font_size_by(-1);
+    while(loop_protection < 100 && jQuery("#free_text").width() < jQuery("#free_text")[0].scrollWidth) {
+      loop_protection++;
+      stage2.change_font_size_by(-1, "free_text");
     }
   },
   change_font_size_by: function(delta, id) {
@@ -46,10 +55,10 @@
       jQuery("#" + id).css("font-size", ((parseInt(font_size)+delta) + "px"));
   },
   preview_text: function(sourceId, targetId) {
-  	var text = jQuery("#" + sourceId).val();
-  	if(stage2.prev_text == text) return;
-  	stage2.prev_text = text;
-    var text = text.replace(/\n/g,"<BR/>");
+    var text = jQuery("#" + sourceId).val();
+    if(stage2.prev_text == text) return;
+    stage2.prev_text = text;
+    text = text.replace(/\n/g,"<BR/>");
     jQuery("#" + targetId).html(text);
     stage2.calcFontSize();
   },
@@ -94,7 +103,7 @@
 }
 jQuery(document).ready(function(){
   jQuery('select').customSelect();
-  stage2.seperated_title = (jQuery(".title-holder").length == 0);
+  stage2.seperated_title = (jQuery(".title-holder").length == 1);
   if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
     jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
   }
@@ -154,27 +163,27 @@ jQuery(document).ready(function(){
   cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0, months: stage2.months_arr });
   jQuery("#event_guest_message").focus(function(){
     if(stage2.seperated_title)
-      jQuery("#free_text").css("border", "1px dashed red");
-    else
       jQuery(".info-holder").css("border", "1px dashed red");
+    else
+      jQuery("#free_text").css("border", "1px dashed red");
   });
   jQuery("#event_guest_message").blur(function(){
     if(stage2.seperated_title)
-      jQuery("#free_text").css("border", "");
-    else
       jQuery(".info-holder").css("border", "");
+    else
+      jQuery("#free_text").css("border", "");
   });
   jQuery("#event_name").focus(function(){
     if(stage2.seperated_title)
-      jQuery("#title").css("border", "1px dashed red");
-    else
       jQuery(".title-holder").css("border", "1px dashed red");
+    else
+      jQuery("#title").css("border", "1px dashed red");
   });
   jQuery("#event_name").blur(function(){
     if(stage2.seperated_title)
-      jQuery("#title").css("border", "");
-    else
       jQuery(".title-holder").css("border", "");
+    else
+      jQuery("#title").css("border", "");
   });
   jQuery("#title,#free_text").css("cursor", "pointer");
   jQuery("#title").click(function(){
