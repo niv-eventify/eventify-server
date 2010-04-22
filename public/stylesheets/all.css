@@ -4937,27 +4937,22 @@ ul.contact-tabset li.active a ,
 	overflow:hidden;
 	position:relative;
 }
-.subnav li.hover .opener span,
-.subnav li:hover .opener span{
+.subnav li.hover2 .opener span{
 	padding-top:36px;
 	margin:-36px 0 0;
 	height:53px;
 }
-.subnav li.hover .opener em,
-.subnav li:hover .opener em{
+.subnav li.hover2 .opener em{
 	padding-top:36px;
 	margin:-36px 0 0;
 	height:53px;
 }
-.subnav li.hover .opener,
-.subnav li:hover .opener{
+.subnav li.hover2 .opener{
 	height:53px;
 	margin:0 0 -17px;
 }
-.subnav li.hover,
-.subnav li:hover{position:relative;}
-.subnav li.hover .menu-list,
-.subnav li:hover .menu-list{top:44px;}
+.subnav li.hover2{position:relative;}
+.subnav li.hover2 .menu-list{top:44px;}
 .subnav li .menu-list{
 	position:absolute;
 	right:1px;
