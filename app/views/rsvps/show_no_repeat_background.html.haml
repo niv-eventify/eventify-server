@@ -6,6 +6,6 @@
     != render(:partial => "layouts/javascripts")
     != javascript_include_tag "rsvps"
   %body{ :class => body_class, :style => "#{background_color_css}" }
-    #background_holder{ :style => "#{background_image_css}" }
-      != render(:partial => "postcard")
+    #background_holder{ :style => "#{background_image_css(resource.event)}" }
+      != render(:partial => "postcard", :locals => {:event => resource.event})
     != render(:partial => "toolbar")

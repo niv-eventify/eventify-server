@@ -1,6 +1,6 @@
 - content_for(:head) do
-  != stylesheet_link_tag "nyroModal.full"
-  != javascript_include_tag "jquery.nyroModal"
+  != stylesheet_link_tag "nyroModal.full", "rsvps"
+  != javascript_include_tag "jquery.nyroModal", "rsvps"
   :javascript
     jQuery(function(){      
       jQuery.fn.nyroModal.settings.endShowContent = function(obj){
@@ -29,3 +29,6 @@
           .arrival-container
             .arr-row
               - event_rsvp_summary_select(@event)
+#invitation{:style => "display:none;"}
+  #background_holder{ :style => "#{background_image_css(@event)}", :strech => @event.design.no_repeat_background ? "false" : "true" }
+    != render(:partial => "rsvps/postcard", :locals => {:event => @event})
