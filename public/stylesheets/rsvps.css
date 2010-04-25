@@ -49,6 +49,9 @@ body {
 #toolbar img {
 	border: 0;
 }
+#envelope {
+	margin-top: 10%;
+}
 .envelope img {
 	border: 0;
 }

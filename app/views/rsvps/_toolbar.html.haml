@@ -1,3 +1,2 @@
 #toolbar
-  #toolbar-center
-    != link_to image_tag("rsvp-toolbar.png", :alt => _("Click to RSVP")), rsvp_path(resource.email_token, :more => true)
+  != link_to image_tag("/images/rsvp-toolbar.png", :class => "png", :alt => _("Click to RSVP")), rsvp_path(resource.email_token, :more => true)

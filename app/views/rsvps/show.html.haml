@@ -6,8 +6,13 @@
     != stylesheet_link_tag 'nyroModal.full', 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
     != javascript_include_tag 'jquery.nyroModal', 'rsvps'
+    /[if IE]
+      != stylesheet_link_tag 'ie', :media => 'screen'
+    /[if lt IE 7]
+      != stylesheet_link_tag 'lt7', :media => 'screen'
   %body{ :class => body_class }
-    != link_to image_tag("/images/envelope.jpg"), '#invitation', :class => "nyroModal envelope"
+    #envelope
+      != link_to image_tag("/images/envelope.jpg"), '#invitation', :class => "nyroModal envelope"
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}

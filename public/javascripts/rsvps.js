@@ -28,11 +28,11 @@ $(document).ready(function(){
 	rsvps.win_height = $(window).height();
 	rsvps.win_width = $(window).width();
 	rsvps.adjust_dialog_size();
+});
+$(window).load(function () {
 	if($(".envelope").length > 0) {
-		$("a.nyroModal").nyroModal({closeButton:''});
-		setTimeout(function(){
-			$(".envelope").click();
-			$("#toolbar").show();
-		},1000);
+		$("a.nyroModal").nyroModal({closeButton:'', modal: true});
+		$(".envelope").click();
+		$("#toolbar").show();
 	}
 });
