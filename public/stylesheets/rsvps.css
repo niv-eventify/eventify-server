@@ -4,7 +4,6 @@ body {
 	margin:0;
 	padding-bottom: 33px;
 	width: 100%;
-	text-align: center;
 }
 .postcard {
 	margin:0 auto;
@@ -41,6 +40,7 @@ body {
 	z-index: 300;
 	margin:0 auto;
 	left: 0;
+	text-align: center;
 }}
 #toolbar a{
 	width: 688px;
@@ -50,6 +50,7 @@ body {
 	border: 0;
 }
 #envelope {
+	text-align: center;
 	margin-top: 10%;
 }
 .envelope img {
