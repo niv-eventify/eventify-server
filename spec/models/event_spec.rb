@@ -29,6 +29,15 @@ describe Event do
       end
     end
 
+    describe "creating new event" do
+      it "should create a default email reminder" do
+        @event = Factory.create(:event)
+        @event.reminders.count.should == 1
+        @event.reminders.first.by_email.should be_true
+        @event.reminders.first.by_sms.should_not be_true
+      end
+    end
+
     describe "sending email" do
       before(:each) do
         @event = Factory.create(:event)

@@ -2,6 +2,14 @@ class Reminder < ActiveRecord::Base
   belongs_to :event
   has_many :reminder_logs
 
+  DEFAULT_REMINDER = {
+    :before_units => "days",
+    :before_value => 1,
+    :by_email => true,
+    :email_subject => N_("This is default reminder subject text - change me"),
+    :email_body => N_("This is default reminder body text - change me"),
+  }
+
   def self.default_before_units
     return @default_before_units if @default_before_units
 
