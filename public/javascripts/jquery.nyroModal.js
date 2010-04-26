@@ -290,7 +290,7 @@ jQuery(function($) {
 			manual: '<div class="wrapper"></div>'
 		},
 
-		closeButton: '<a href="#" class="nyroModalClose" id="closeBut" title="close">Close</a>', // Adding automaticly as the first child of #nyroModalWrapper
+		closeButton: '<a href="#" class="nyroModalClose png" id="closeBut" title="close">Close</a>', // Adding automaticly as the first child of #nyroModalWrapper
 
 		title: null, // Modal title
 		titleFromIframe: true, // When using iframe in the same domain, try to get the title from it
