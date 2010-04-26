@@ -1,25 +1,38 @@
 ﻿var rsvps = {
 	win_height: 0,
 	win_width: 0,
-	
-	set_no_repeat_bg_size: function() {
-		if(rsvps.win_height > 600 && rsvps.win_width > 900) return;
-		var ratio = rsvps.win_width / rsvps.win_height;
-		if(ratio < 1.5) {
-			$("#background_holder").css("width", rsvps.win_width + "px");	
-			$("#background_holder").css("height", (rsvps.win_width / 1.5) + "px");	
-		}else{
-			$("#background_holder").css("height", rsvps.win_height + "px");	
-			$("#background_holder").css("width", (rsvps.win_height * 1.5) + "px");	
+
+	adjust_dialog_size: function() {
+		var width = rsvps.win_width - 62;
+		var height = rsvps.win_height - 63;
+
+		if($("#background_holder").attr("strech") == "true") {
+			$("#background_holder, #invitation").css("width",(width - 60) + "px");
+			$("#background_holder, #invitation").css("height",(height - 30) + "px");
+		} else {
+			var ratio = width / height;
+			if(ratio < 1.5) {
+				if(width > 900) width = 900;
+				$("#background_holder, #invitation").css("width", width + "px");
+				$("#background_holder, #invitation").css("height", (width / 1.5) + "px");
+			}else{
+				if(height > 600) height = 600;
+				$("#background_holder, #invitation").css("height", height + "px");
+				$("#background_holder, #invitation").css("width", (height * 1.5) + "px");
+			}
 		}
-	}	
+	}
 }
 
 $(document).ready(function(){
 	rsvps.win_height = $(window).height();
 	rsvps.win_width = $(window).width();
-	if($("#background_holder").length > 0) {
-		$(window).bind('resize', rsvps.set_no_repeat_bg_size);
-		rsvps.set_no_repeat_bg_size();
+	rsvps.adjust_dialog_size();
+});
+$(window).load(function () {
+	if($(".envelope").length > 0) {
+		$("a.nyroModal").nyroModal({closeButton:'', modal: true});
+		$(".envelope").click();
+		$("#toolbar").show();
 	}
 });

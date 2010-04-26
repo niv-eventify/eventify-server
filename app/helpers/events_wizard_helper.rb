@@ -43,7 +43,7 @@ module EventsWizardHelper
           end
           
           if 4 == stage_number #last
-            haml_concat link_to_function(_("Preview"), 'alert("todo")', :class => "preview-btn")
+            haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn nyroModal")
             haml_concat link_to(_("Finish"), edit_invitation_path(event), :class => "finish-btn")
           end
         end

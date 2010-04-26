@@ -423,11 +423,40 @@ function initSlideEffect(){
 		return false;
     });
 }
+
+function initDrop() {
+	$('.subnav').each(function(){
+		var _drop = $('.subnav > li > .menu-list');
+		var links_opener = $('.subnav > li > a.opener');
+		links_opener.click(function(){
+			var this_item = $(this).parent('li');
+			var _items = links_opener.parent('li');
+			if(this_item.hasClass('hover2')){
+				_items.removeClass('hover2');
+			}else{
+				_items.removeClass('hover2');
+				this_item.addClass('hover2');
+			}
+			return false;
+		});
+		$(document).bind('mousedown', function(e){
+			if(_drop && _drop.is(':visible')){
+				e = e || event;
+				var t = e.target || e.srcElement;
+				t = $(t);
+				if(t.parents('.subnav').length == 0){
+				_drop.parent().removeClass('hover2');
+			}}
+		});
+	})
+}
+
 jQuery(document).ready(function(){
 	initSlideEffect();
-	ieHover('.img-box, .edit-bg, .subnav li');
+	ieHover('.img-box, .edit-bg');
 	initSlide();
 	promoNav();
 	jQuery('select').customSelect();
 	jQuery('input:checkbox').customCheckbox();
+	initDrop();
 });

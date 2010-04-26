@@ -1,5 +1,10 @@
 body {
-	text-align:center;
+	font:64% Arial, Helvetica, sans-serif;
+	background:#fff;
+	margin:0;
+	padding-bottom: 33px;
+	width: 100%;
+	text-align: center;
 }
 #postcard {
 	margin:0 auto;
@@ -29,14 +34,24 @@ body {
 }
 
 #toolbar {
-	position: fixed;
+	position: absolute;
 	bottom: 0px;
 	width: 100%;
-	margin:0;
-}
-#toolbar a {
-	margin: 0 auto;	
+	display: none;
+	z-index: 300;
+	margin:0 auto;
+	left: 0;
+}}
+#toolbar a{
+	width: 688px;
+	margin:0 auto;
 }
 #toolbar img {
+	border: 0;
+}
+#envelope {
+	margin-top: 10%;
+}
+.envelope img {
 	border: 0;
 }
