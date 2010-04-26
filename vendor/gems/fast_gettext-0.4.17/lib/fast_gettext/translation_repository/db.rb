@@ -49,7 +49,11 @@ module FastGettext
 
       def self.decode_value(value)
         return unless value
-        value = ActiveSupport::JSON.decode(value)
+        begin
+          value = ActiveSupport::JSON.decode(value)
+        rescue
+          value = ""
+        end
         return if value.blank?
 
         # replace "" with nil
