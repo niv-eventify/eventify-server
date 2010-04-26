@@ -1,4 +1,11 @@
 module EventsHelper
+  def invitation_preview(event)
+    haml_tag(:div, :id => "invitation#{event.id}", :style => "display:none;") do
+      haml_tag(:div, :class => "background_holder", :style => "#{background_image_css(event)}", :strech => event.design.no_repeat_background ? "false" : "true") do
+        yield
+      end
+    end
+  end
 
   def event_date_time_select_combo(f, attribute, js_opts = {})
     haml_tag(:li, :class => "#{attribute}_date_select") do

@@ -6,13 +6,13 @@ body {
 	width: 100%;
 	text-align: center;
 }
-#postcard {
+.postcard {
 	margin:0 auto;
 	width:667px;
 	height:500px;
 	text-align:left;
 }
-#background_holder {
+.background_holder {
 	margin:0 auto;
 	width:900px;
 	height:600px;

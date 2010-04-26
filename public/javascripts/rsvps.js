@@ -1,33 +1,34 @@
 ﻿var rsvps = {
-	win_height: 0,
-	win_width: 0,
+	dialog_height: 0,
+	dialog_width: 0,
 
-	adjust_dialog_size: function() {
-		var width = rsvps.win_width - 62;
-		var height = rsvps.win_height - 63;
+	adjust_dialog_size: function(invitation_id) {
+		var width = $(window).width() - 62;
+		var height = $(window).height() - 63;
 
-		if($("#background_holder").attr("strech") == "true") {
-			$("#background_holder, #invitation").css("width",(width - 60) + "px");
-			$("#background_holder, #invitation").css("height",(height - 30) + "px");
+		if($("#" + invitation_id + " .background_holder").attr("strech") == "true") {
+			rsvps.dialog_width = width - 60;
+			rsvps.dialog_height = height - 30;
 		} else {
 			var ratio = width / height;
 			if(ratio < 1.5) {
 				if(width > 900) width = 900;
-				$("#background_holder, #invitation").css("width", width + "px");
-				$("#background_holder, #invitation").css("height", (width / 1.5) + "px");
+				rsvps.dialog_width = width;
+				rsvps.dialog_height  = width / 1.5;
 			}else{
 				if(height > 600) height = 600;
-				$("#background_holder, #invitation").css("height", height + "px");
-				$("#background_holder, #invitation").css("width", (height * 1.5) + "px");
+				rsvps.dialog_height = height;
+				rsvps.dialog_width = height * 1.5;
 			}
 		}
+		$("#" + invitation_id + " .background_holder, #" + invitation_id).css("width",rsvps.dialog_width + "px");
+		$("#" + invitation_id + " .background_holder, #" + invitation_id).css("height",rsvps.dialog_height + "px");
 	}
 }
-
 $(document).ready(function(){
-	rsvps.win_height = $(window).height();
-	rsvps.win_width = $(window).width();
-	rsvps.adjust_dialog_size();
+	$("div[id ^= 'invitation']").each(function(){
+		rsvps.adjust_dialog_size($(this).attr("id"));
+	})
 });
 $(window).load(function () {
 	if($(".envelope").length > 0) {

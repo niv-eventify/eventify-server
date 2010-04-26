@@ -1,3 +1,7 @@
+- content_for(:head) do
+  != stylesheet_link_tag "nyroModal.full", "rsvps"
+  != javascript_include_tag "jquery.nyroModal", "rsvps"
+
 .top-text
   %h2= _("Hello %{username},") % {:username => h(current_user.name)}
   %p= _("In your page you can track the events you’ve created, and create new ones!")
