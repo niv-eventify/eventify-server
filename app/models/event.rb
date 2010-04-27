@@ -77,6 +77,7 @@ class Event < ActiveRecord::Base
   named_scope :upcoming, lambda{{:conditions => ["events.starting_at > ?", Time.now.utc]}}
   named_scope :past, lambda{{:conditions => ["events.starting_at < ?", Time.now.utc]}}
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
+  named_scope :by_starting_at, :order => "events.starting_at ASC"
 
   before_create :set_stage_passed
   def set_stage_passed

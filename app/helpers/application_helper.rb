@@ -92,4 +92,11 @@ module ApplicationHelper
       haml_tag(:strong, text)
     end
   end
+
+  def link_to_next_event
+    @next_event ||= current_user.events.upcoming.by_starting_at.first
+    return haml_concat("&nbsp;") unless @next_event
+    haml_concat _("Next event:")
+    haml_concat link_to(truncate(h(@next_event.name), 12), summary_path(@next_event))
+  end
 end

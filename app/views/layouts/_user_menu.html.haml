@@ -34,8 +34,7 @@
 
         - if current_user.activated_at
           %p
-            = _("Next event")
-            != link_to_function "todo", "alert('todo')"
+            - link_to_next_event
           .personal-menu-h
             .personal-menu-h-frame
               .opener!= link_to_function(_("My Page"), "jQuery('.menu-list').toggle()")
