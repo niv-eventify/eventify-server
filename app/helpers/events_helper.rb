@@ -84,7 +84,8 @@ module EventsHelper
   end
 
   def event_sent_status(event)
-    event.last_invitation_sent_at ? _("(sent)") : _("(not sent)")
+    return _("(sent)") if event.invitations_to_send_counts[:total].zero? && event.last_invitation_sent_at
+    link_to _("(not sent)"), edit_invitation_path(event), :class => "not-sent"
   end
 
   def event_location(event)

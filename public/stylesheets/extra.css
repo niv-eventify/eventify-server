@@ -375,3 +375,9 @@ ul.contact-tabset li.active a:hover,
 .boxe .heading h4 {
 	width: 400px;
 }
+
+
+.boxe .heading h4 a.not-sent {
+	color:#41BDCD;
+	font-size:10px;
+}

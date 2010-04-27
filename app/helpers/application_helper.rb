@@ -46,8 +46,8 @@ module ApplicationHelper
     haml_tag(:div, :class => "events-holder") do
       haml_tag(:h3, past_events? ? _("Past events") : _("Future events"))
       haml_tag(:ul, :class => "choice") do
-        haml_tag :li, link_to(_("My Events"), events_path(:past => params[:past])), :class => (only_my_events ? "active" : "")
-        haml_tag :li, link_to_function(_("Friend’s events"), "alert('todo')"), :class => (only_my_events ? "" : "active")
+        # haml_tag :li, link_to(_("My Events"), events_path(:past => params[:past])), :class => (only_my_events ? "active" : "")
+        # haml_tag :li, link_to_function(_("Friend’s events"), "alert('todo')"), :class => (only_my_events ? "" : "active")
       end
       yield
     end
