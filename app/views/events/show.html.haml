@@ -1,6 +1,6 @@
 - content_for(:head) do
-  != stylesheet_link_tag "nyroModal.full"
-  != javascript_include_tag "jquery.nyroModal"
+  != stylesheet_link_tag "nyroModal.full", "rsvps"
+  != javascript_include_tag "jquery.nyroModal", "rsvps"
   :javascript
     jQuery(function(){      
       jQuery.fn.nyroModal.settings.endShowContent = function(obj){
