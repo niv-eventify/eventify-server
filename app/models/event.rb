@@ -56,6 +56,14 @@ class Event < ActiveRecord::Base
     send_invitations if send_invitations_now
   end
 
+  after_create :create_default_reminder
+  def create_default_reminder
+    opts = Reminder::DEFAULT_REMINDER.clone
+    opts[:email_subject] = s_(opts[:email_subject])
+    opts[:email_body] = s_(opts[:email_body])
+    reminders.create(opts)
+  end
+
   after_update :adjust_reminders
   def adjust_reminders
     disabled = reminders.not_sent.collect(&:adjust!)

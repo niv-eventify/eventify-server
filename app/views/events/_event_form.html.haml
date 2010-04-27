@@ -1,10 +1,10 @@
-- events_content_section(2, @event, :next => {:func => "jQuery('.form').submit()"}) do
+- events_content_section(2, @event, :next => {:func => "jQuery('.form.new-event').submit()"}) do
   .content-section-heading
     %h1= _("Please fill out the events details")
   .twocolumns
 
     .side-area
-      - semantic_form_for(@event, :live_validations => true, :html => {:class => "form", :multipart => true}) do |f|
+      - semantic_form_for(@event, :live_validations => true, :html => {:class => "form new-event", :multipart => true}) do |f|
         != f.hidden_field :design_id
         != render(:partial => "form", :locals => {:f => f})
 

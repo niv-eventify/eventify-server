@@ -425,11 +425,11 @@ function initSlideEffect(){
 }
 
 function initDrop() {
-	$('.subnav').each(function(){
-		var _drop = $('.subnav > li > .menu-list');
-		var links_opener = $('.subnav > li > a.opener');
+	jQuery('.subnav').each(function(){
+		var _drop = jQuery('.subnav > li > .menu-list');
+		var links_opener = jQuery('.subnav > li > a.opener');
 		links_opener.click(function(){
-			var this_item = $(this).parent('li');
+			var this_item = jQuery(this).parent('li');
 			var _items = links_opener.parent('li');
 			if(this_item.hasClass('hover2')){
 				_items.removeClass('hover2');
@@ -439,11 +439,11 @@ function initDrop() {
 			}
 			return false;
 		});
-		$(document).bind('mousedown', function(e){
+		jQuery(document).bind('mousedown', function(e){
 			if(_drop && _drop.is(':visible')){
 				e = e || event;
 				var t = e.target || e.srcElement;
-				t = $(t);
+				t = jQuery(t);
 				if(t.parents('.subnav').length == 0){
 				_drop.parent().removeClass('hover2');
 			}}
