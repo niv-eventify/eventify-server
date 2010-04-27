@@ -1,5 +1,7 @@
 - if @event.reminders.blank?
+  %br
   = _("No reminders defined yet")
+  %br
 - else
   != render(:partial => "reminders/reminder", :collection => @event.reminders)
 

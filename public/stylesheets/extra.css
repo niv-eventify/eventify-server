@@ -321,8 +321,6 @@ div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
 ul.contact-tabset li.hotmail a {background: url(/images/bg-tab-hotmail.gif) no-repeat;}
 ul.contact-tabset li.csv a {background: url(/images/bg-tab-csv.gif) no-repeat;}
 .hebrew ul.contact-tabset li.csv a {background: url(/images/bg-tab-csv-he.gif) no-repeat;}
-ul.contact-tabset li a:hover,
-.hebrew ul.contact-tabset li a:hover,
 ul.contact-tabset li.active a,
 .hebrew ul.contact-tabset li.active a{
 	background-position: 0 -88px;
@@ -330,6 +328,14 @@ ul.contact-tabset li.active a,
 }
 ul.contact-tabset li.csv { padding-left: 5px;}
 .hebrew ul.contact-tabset li.csv { padding-right: 5px;}
+ul.contact-tabset li a:hover,
+.hebrew ul.contact-tabset li a:hover {
+	background-position: 0 0;
+}
+ul.contact-tabset li.active a:hover,
+.hebrew ul.contact-tabset li.active a:hover {
+	background-position: 0 -88px;
+}
 
 
 .import-result {

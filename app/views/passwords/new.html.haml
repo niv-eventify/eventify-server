@@ -1,7 +1,10 @@
-%h1= page_title _("Password Reset")
+.top-text
+  %h2= _("Send Password Reset Instructions")
 
-- semantic_form_for(@user, :url => passwords_path) do |f|
-  != f.input :email, :label => _("Email")
-  != f.submit _("Send Password Reset instructions")
-
-!= link_to _("login"), login_path, :class => "login"
+.settings-box.login
+  - middle_box_section("") do
+    - form_for(@user ||= User.new, :url => passwords_path, :builder => MiddleBoxFormBuilder::Builder) do |f|
+      = f.object.errors.on(:base)
+      != f.text_field :email, :label => _("Email")
+      .settings-form-btns
+        != link_to_function content_tag(:span, _("Send")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"
