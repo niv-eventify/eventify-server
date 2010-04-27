@@ -159,8 +159,8 @@ jQuery(document).ready(function(){
   });
   stage2.months_arr = stage2.months_arr.splice(1,13);
   jQuery("#event_starting_at_4i,#event_starting_at_5i").change(stage2.setTimeInMessage);
-  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
-  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0, months: stage2.months_arr });
+  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
+  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr });
   jQuery("#event_guest_message").focus(function(){
     if(stage2.seperated_title)
       jQuery(".info-holder").css("border", "1px dashed red");
