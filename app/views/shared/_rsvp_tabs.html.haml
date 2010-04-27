@@ -1,0 +1,6 @@
+.tabset-holder
+  %ul.tabset
+    - link_to_tab(_("RSVP yes"), event.guests.rsvp_yes.count, "tab-1")
+    - link_to_tab(_("RSVP may be"), event.guests.rsvp_maybe.count, "tab-2")
+    - link_to_tab(_("RSVP no"), event.guests.rsvp_no.count, "tab-3")
+    - link_to_tab(_("Not responded"), event.guests.rsvp_not_responded.count, "tab-4")

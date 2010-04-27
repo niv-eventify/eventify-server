@@ -381,3 +381,12 @@ ul.contact-tabset li.active a:hover,
 	color:#41BDCD;
 	font-size:10px;
 }
+
+li.thing span.name {
+	color:#523733;
+	float:left;
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:22px;
+	padding:0 4px;
+}

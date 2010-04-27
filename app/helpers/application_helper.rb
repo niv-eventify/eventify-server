@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def body_class
-    "#{current_locale == "he" ? "hebrew" : ""}"
+    "#{current_locale == "he" ? "hebrew" : ""} #{@extra_body_class}"
   end
 
   def tabs_navigation(current_tab)

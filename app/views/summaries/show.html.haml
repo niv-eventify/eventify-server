@@ -21,9 +21,7 @@
                 %dd= @event.location_address
           .info-container-row
             %strong.heading= _("Export to your calendar:")
-            %ul.logos
-              %li!= link_to_function image_tag("icon-date.gif", :height => "29", :alt => "17", :width => "31"), "alert('todo')"
-              %li!= link_to_function image_tag("logo-micro.gif", :height => "29", :alt => "microsoft", :width => "81"), "alert('todo')"
+            != render(:partial => 'shared/export_links', :locals => {:event => @event})
       .column
         %h2= _("Guests summary")
         .lists
@@ -50,7 +48,6 @@
         %h2= _("Things to bring")
         .lists
           %dl.def-list
-            != render(:partial => "thing", :collection => @event.things)
             %dt= _("Selected")
             %dd ?
             %dt= _("Not selected")
@@ -67,12 +64,7 @@
           .input-area
             != text_field_tag "guests_query", "search:todo", :class => "i-text", :id => "guests_query"
             != image_submit_tag "icon-close.gif", :class => "close-btn", :onclick => "jQuery('#guests_query').val('').focus();return false"
-    .tabset-holder
-      %ul.tabset
-        - link_to_tab(_("RSVP yes"), @event.guests.rsvp_yes.count, "tab-1")
-        - link_to_tab(_("RSVP may be"), @event.guests.rsvp_maybe.count, "tab-2")
-        - link_to_tab(_("RSVP no"), @event.guests.rsvp_no.count, "tab-3")
-        - link_to_tab(_("Not responded"), @event.guests.rsvp_not_responded.count, "tab-4")
+    != render(:partial => "shared/rsvp_tabs", :locals => {:event => @event})
     / 
       .tabs-block
         .tabs-bottom

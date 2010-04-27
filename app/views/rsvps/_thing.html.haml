@@ -1,0 +1,10 @@
+- klass = cycle("", "alt")
+%li.thing{:class => klass}
+  .sel-holder
+    %select
+      %option{ :style => "" }
+        1
+      %option{ :style => "" }
+        \&nbsp;
+    %span= _("amount:")
+  %span.name= thing.name

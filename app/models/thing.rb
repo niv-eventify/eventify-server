@@ -7,6 +7,8 @@ class Thing < ActiveRecord::Base
 
   attr_accessible :amount, :name
 
+  named_scope :left, :conditions => "(things.amount - things.amount_picked) > 0"
+
   def validate
     errors.add(:base, _("already would be brought by somebody else")) if amount.to_i < 0 && amount_picked > 0
   end

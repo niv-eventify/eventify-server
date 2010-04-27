@@ -5,6 +5,7 @@ class RsvpsController < InheritedResources::Base
   respond_to :iphone, :only => :show
   after_filter :clear_flash, :only => :update
   before_filter :adjust_format_for_iphone
+
   def show
     if "true" == params[:more]
       render :action => "show_more"
@@ -17,7 +18,7 @@ class RsvpsController < InheritedResources::Base
 
 protected
   def resource
-    get_resource_ivar || set_resource_ivar(end_of_association_chain.find_by_email_token(params[:id]))
+    @resource ||= get_resource_ivar || set_resource_ivar(end_of_association_chain.find_by_email_token(params[:id]))
   end
 
   def clear_flash
