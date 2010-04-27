@@ -31,6 +31,11 @@ class Guest < ActiveRecord::Base
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
+  named_scope :rsvp_no,             :conditions => {:rsvp => 0}
+  named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
+  named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
+  named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
+
   def increase_stage_passed
     if 2 == event.stage_passed.to_i
       event.stage_passed = 3

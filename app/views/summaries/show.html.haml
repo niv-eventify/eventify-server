@@ -1,4 +1,225 @@
-- @content_css_class = "stars-bg stage-3"
+- @content_css_class = "stars-bg"
 
-- events_content_section(5, @event) do
-  asdlkfj
+- events_content_section(5, @event, {}, :content_section_class => "content-section-alt") do
+  .content-section-heading
+    %h1= @event.name
+
+  - info_container do
+    .columns
+      .main-column
+        .info-container-image!= image_tag(@event.design.preview.url(:list))
+        .info-container-holder
+          .info-container-row
+            %dl
+              - unless @event.location_name.blank?
+                %dt= _("Where:")
+                %dd= @event.location_name
+              %dt= _("When:")
+              %dd= @event.starting_at.to_s(:isra_date_time)
+              - unless @event.location_address.blank?
+                %dt= _("Address:")
+                %dd= @event.location_address
+          .info-container-row
+            %strong.heading= _("Export to your calendar:")
+            %ul.logos
+              %li!= link_to_function image_tag("icon-date.gif", :height => "29", :alt => "17", :width => "31"), "alert('todo')"
+              %li!= link_to_function image_tag("logo-micro.gif", :height => "29", :alt => "microsoft", :width => "81"), "alert('todo')"
+      .column
+        %h2= _("Guests summary")
+        .lists
+          %dl.def-list
+            %dt
+              != link_to_function(_("Bounced emails"), "todo")
+              %span= "info"
+            %dd
+              ??
+            %dt= _("Guests")
+            %dd= @event.guests.count
+            %dt= _("RSVP yes")
+            %dd= @event.guests.rsvp_yes.count
+          %dl.def-list
+            %dt.green= _("RSVP yes")
+            %dd.green= @event.guests.rsvp_yes.count
+            %dt.orange= _("RSVP may be")
+            %dd.orange= @event.guests.rsvp_maybe.count
+            %dt.red= _("RSVP no")
+            %dd.red= @event.guests.rsvp_no.count
+            %dt= _("Not responded")
+            %dd= @event.guests.rsvp_not_responded.count
+      .column-1
+        %h2= _("Things to bring")
+        .lists
+          %dl.def-list
+            != render(:partial => "thing", :collection => @event.things)
+            %dt= _("Selected")
+            %dd ?
+            %dt= _("Not selected")
+            %dd ?
+          != link_to _("edit"), event_things_path(@event), :class => "more-link"
+
+  - info_container("info-container-alt") do
+    .top-holder
+      %ul.contact-list.tools-list
+        %li
+          != link_to_function content_tag(:strong, content_tag(:span, _("Pring Guests List"))), "alert('todo')", :class => "print"
+      %form.cancel-form{ :action => "#" }
+        %fieldset
+          .input-area
+            != text_field_tag "guests_query", "search:todo", :class => "i-text", :id => "guests_query"
+            != image_submit_tag "icon-close.gif", :class => "close-btn", :onclick => "jQuery('#guests_query').val('').focus();return false"
+    .tabset-holder
+      %ul.tabset
+        - link_to_tab(_("RSVP yes"), @event.guests.rsvp_yes.count, "tab-1")
+        - link_to_tab(_("RSVP may be"), @event.guests.rsvp_maybe.count, "tab-2")
+        - link_to_tab(_("RSVP no"), @event.guests.rsvp_no.count, "tab-3")
+        - link_to_tab(_("Not responded"), @event.guests.rsvp_not_responded.count, "tab-4")
+    / 
+      .tabs-block
+        .tabs-bottom
+          .info-cols
+            .info-col
+              .active-group
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    × ×× ×§× ×¨
+                    %em
+                      (5 ×××¨×××)
+                  .note-box
+                    ××, ×× × ××××¢! ×××× ×××£
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    ×ª×××¨ ××¨×§×
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×©×× ××¨××¡
+                  %em
+                    (2 ×××¨×××)
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×ª×××¨ ××¨×§×
+            .info-col
+              %div
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    × ×× ×§× ×¨
+                    %em
+                      (5 ×××¨×××)
+                  .note-box
+                    ××, ×× × ××××¢! ×××× ×××£
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    ×ª×××¨ ××¨×§×
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×©×× ××¨××¡
+                  %em
+                    (2 ×××¨×××)
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×ª×××¨ ××¨×§×
+            .info-col
+              %div
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    × ×× ×§× ×¨
+                    %em
+                      (5 ×××¨×××)
+                  .note-box
+                    ××, ×× × ××××¢! ×××× ×××£
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    ×ª×××¨ ××¨×§×
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×©×× ××¨××¡
+                  %em
+                    (2 ×××¨×××)
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×ª×××¨ ××¨×§×
+            .info-col
+              %div
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    × ×× ×§× ×¨
+                    %em
+                      (5 ×××¨×××)
+                  .note-box
+                    ××, ×× × ××××¢! ×××× ×××£
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    ×ª×××¨ ××¨×§×
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×©×× ××¨××¡
+                  %em
+                    (2 ×××¨×××)
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×ª×××¨ ××¨×§×
+            .info-col
+              %div
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    × ×× ×§× ×¨
+                    %em
+                      (5 ×××¨×××)
+                  .note-box
+                    ××, ×× × ××××¢! ×××× ×××£
+                .info-col-row
+                  %em.date
+                    14 ×× ×××××¨ 2010
+                  %p
+                    ×ª×××¨ ××¨×§×
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×©×× ××¨××¡
+                  %em
+                    (2 ×××¨×××)
+              .info-col-row
+                %em.date
+                  14 ×× ×××××¨ 2010
+                %p
+                  ×ª×××¨ ××¨×§×
+
+        .info-bottom
+          != link_to _("Full Guests List"), event_guests_path(@event), :class => "btn-sml"
+          %p
+            = _("If some of your guests didn't recieve the invitation")
+            != link_to_function _("click here for help"), "alert('todo')"

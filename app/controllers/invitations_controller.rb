@@ -13,8 +13,8 @@ class InvitationsController < InheritedResources::Base
 
   # edit
 
-  # TODO pass array of guest_ids to send_invitations
   def update
+    resource.stage_passed = 4
     update! do |success, failure|
       success.html {flash[:notice] = nil; redirect_to(invitation_path(resource))}
       failure.html {render(:action => "edit")}

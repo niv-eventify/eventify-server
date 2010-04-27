@@ -27,27 +27,29 @@ module EventsWizardHelper
       haml_tag(:div, :class => "c") do
         haml_tag(:div, :class => "h-container-content") do
           stages_tabs(stage_number, event)
-          haml_tag(:div, :class => "content-section #{opts[:]}") do
+          haml_tag(:div, :class => "content-section #{opts[:content_section_class]}") do
             yield
           end
         end
       end
 
-      return if 5 == stage_number
+      if 5 == stage_number
+        haml_tag(:div, :class => "b")
+      else        
+        haml_tag(:div, :class => "b") do
+          haml_tag(:div, :class => "btns #{4 == stage_number ? "three-btns" : ""}") do
+            if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
+              haml_concat wizard_prev_link(prev_lnk)
+            end
 
-      haml_tag(:div, :class => "b") do
-        haml_tag(:div, :class => "btns #{4 == stage_number ? "three-btns" : ""}") do
-          if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
-            haml_concat wizard_prev_link(prev_lnk)
-          end
-
-          if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
-            haml_concat wizard_next_link(next_link)
-          end
+            if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
+              haml_concat wizard_next_link(next_link)
+            end
           
-          if 4 == stage_number #last
-            haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn nyroModal")
-            haml_concat link_to(_("Finish"), edit_invitation_path(event), :class => "finish-btn")
+            if 4 == stage_number #last
+              haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn nyroModal")
+              haml_concat link_to(_("Finish"), edit_invitation_path(event), :class => "finish-btn")
+            end
           end
         end
       end
