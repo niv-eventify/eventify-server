@@ -7,6 +7,12 @@ module FastGettext::TranslationRepository
       validates_presence_of :locale
       validates_uniqueness_of :locale, :scope=>:translation_key_id
 
+      def validate
+        ActiveSupport::JSON.decode(text)
+      rescue
+        errors.add(:text, "Is not properly escaped JSON")
+      end
+
       def text_value=(value)
         write_attribute(:text, ActiveSupport::JSON.encode(value))
       end
