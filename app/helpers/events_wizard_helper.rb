@@ -1,6 +1,6 @@
 module EventsWizardHelper
 
-  STAGE_NAMES = [N_("Design your invite"), N_("Event details"), N_("Invite guests"), N_("Reminders &amp;<br/>RSVPs")]
+  STAGE_NAMES = [N_("Design"), N_("Event details"), N_("Invite guests"), N_("Reminders"), N_("Summary")]
 
   def wizard_next_link(opts)
     if opts[:func]
@@ -18,7 +18,7 @@ module EventsWizardHelper
     end
   end
 
-  def events_content_section(stage_number, event, prev_next_opts = {})
+  def events_content_section(stage_number, event, prev_next_opts = {}, opts = {})
     next_link_opts = prev_next_opts[:next]
     prev_link_opts = prev_next_opts[:prev]
 
@@ -27,11 +27,14 @@ module EventsWizardHelper
       haml_tag(:div, :class => "c") do
         haml_tag(:div, :class => "h-container-content") do
           stages_tabs(stage_number, event)
-          haml_tag(:div, :class => "content-section") do
+          haml_tag(:div, :class => "content-section #{opts[:]}") do
             yield
           end
         end
       end
+
+      return if 5 == stage_number
+
       haml_tag(:div, :class => "b") do
         haml_tag(:div, :class => "btns #{4 == stage_number ? "three-btns" : ""}") do
           if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
@@ -81,6 +84,8 @@ module EventsWizardHelper
       event_guests_path(event, :wizard => params[:wizard])
     when 4
       event_path(event, :wizard => params[:wizard])
+    when 5
+      summary_path(event, :wizard => params[:wizard])
     else
       nil
     end
