@@ -28,8 +28,11 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :payments
     event.resources :reminders
     event.resource :design
+    event.resources :other_guests
   end
   map.resources :summary, :controller => "Summaries"
   map.resources :invitations
-  map.resources :rsvps
+  map.resources :rsvps do |rsvp|
+    rsvp.resources :other_guests
+  end
 end

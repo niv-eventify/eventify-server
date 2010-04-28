@@ -463,3 +463,7 @@ li.thing span.name {
 .d-list dt {
 	width:60px;
 }
+
+.other-guests .page-nav {
+	background:none transparent;
+}

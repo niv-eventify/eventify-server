@@ -1,0 +1,1 @@
+page << "jQuery('.other-guests').html(#{render(:partial => "index").to_json})"
