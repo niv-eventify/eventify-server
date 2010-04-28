@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100428084851) do
+ActiveRecord::Schema.define(:version => 20100428123632) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -226,6 +226,17 @@ ActiveRecord::Schema.define(:version => 20100428084851) do
 
   add_index "reminders", ["event_id"], :name => "index_reminders_on_event_id"
   add_index "reminders", ["send_reminder_at", "reminder_sent_at", "is_active"], :name => "dates_and_activity"
+
+  create_table "takings", :force => true do |t|
+    t.integer  "guest_id"
+    t.integer  "event_id"
+    t.integer  "thing_id"
+    t.integer  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "takings", ["guest_id", "thing_id"], :name => "index_takings_on_guest_id_and_thing_id"
 
   create_table "things", :force => true do |t|
     t.integer  "event_id"

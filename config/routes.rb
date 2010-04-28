@@ -35,4 +35,5 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rsvps do |rsvp|
     rsvp.resources :other_guests
   end
+  map.resources :takings
 end

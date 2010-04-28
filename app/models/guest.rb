@@ -12,7 +12,7 @@ class Guest < ActiveRecord::Base
   validates_presence_of :mobile_phone, :if => proc {|guest| guest.send_sms?}
   validates_uniqueness_of :mobile_phone, :scope => :event_id, :allow_nil => true, :allow_blank => true
 
-  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp
+  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp, :takings_attributes
 
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
@@ -23,22 +23,63 @@ class Guest < ActiveRecord::Base
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
   named_scope :summary_email_not_sent, :conditions => "guests.summary_email_sent_at IS NULL"
 
+  named_scope :rsvp_no,             :conditions => {:rsvp => 0}
+  named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
+  named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
+  named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
+
   after_create :increase_stage_passed
   after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
   before_update :update_invitation_methods
   after_update :send_summary_status
 
+
+  has_many :takings
+  has_many :things_to_bring, :through => :takings
+
+  def possible_takings
+    @possible_takings ||= returning(takings.all(:include => :thing)) do |res|
+      taking_thing_ids = res.collect(&:thing_id)
+      event.things.left.each do |other_thing|
+        next if taking_thing_ids.member?(other_thing.id)
+        res << other_thing.to_taking
+      end
+    end
+  end
+
+  def takings_attributes=(new_takings)
+    new_takings.values.each do |t|
+      if t[:id]
+        change_existing_taking(t)
+      elsif !t[:amount].to_i.zero?
+        create_new_taking(t)
+      end
+    end
+  end
+
+  def create_new_taking(t)
+    taking = takings.build(t)
+    taking.guest = self
+    taking.event_id = event_id
+    taking.save
+  end
+
+  def change_existing_taking(t)
+    taking = takings.find(t[:id])
+    if !t[:amount].to_i.zero?
+      taking.amount = t[:amount]
+      taking.save
+    else
+      taking.destroy
+    end
+  end
+
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
   def rsvp_text
     s_(RSVP_TEXT[rsvp])
   end
-
-  named_scope :rsvp_no,             :conditions => {:rsvp => 0}
-  named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
-  named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
-  named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
 
   def increase_stage_passed
     if 2 == event.stage_passed.to_i

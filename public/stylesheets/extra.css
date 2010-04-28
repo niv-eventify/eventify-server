@@ -391,6 +391,10 @@ li.thing span.name {
 	padding:0 4px;
 }
 
+li.thing.active span.name {
+	color:#888;
+}
+
 .btns-hold.update-rsvp {
 	padding:0 35px;
 }
@@ -466,4 +470,8 @@ li.thing span.name {
 
 .other-guests .page-nav {
 	background:none transparent;
+}
+
+.main-column dt {
+	width:55px;
 }

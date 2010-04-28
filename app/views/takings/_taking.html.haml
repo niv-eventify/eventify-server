@@ -1,0 +1,9 @@
+- klass = cycle("", "alt")
+%li.thing{:class => klass}
+  != tf.hidden_field :thing_id, :index => index
+  - unless tf.object.new_record?
+    != tf.hidden_field :id, :index => index
+  .sel-holder
+    - # rails bug, f.select doesn't accept index
+    != select_tag "guest[takings_attributes][#{index}][amount]", options_for_select((0..max(tf.object.thing.left_to_bring, tf.object.amount.to_i)).to_a, tf.object.amount)
+  %span.name= "#{tf.object.thing.name} x %{count}" % {:count => tf.object.thing.amount}
