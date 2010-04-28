@@ -1,1 +1,1 @@
-# do nothing
+page << "jQuery('.rsvp-form').html(#{render(:partial => "edit").to_json})"

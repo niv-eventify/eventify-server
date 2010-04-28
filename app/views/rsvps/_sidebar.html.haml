@@ -4,7 +4,11 @@
       .side-box-heading
         %h2= _("Hello %{username}") % {:username => h(resource.name)}
       .side-box-content
-        != render(:partial => 'edit')
+        .rsvp-form
+          - unless resource.rsvp
+            != render(:partial => 'new')
+          - else
+            != render(:partial => 'edit')
         .side-box-row.side-box-row-alt
           %h3= _("Export to your calendar:")
           != render(:partial => 'shared/export_links', :locals => {:event => resource.event})

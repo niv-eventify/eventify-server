@@ -443,3 +443,11 @@ li.thing span.name {
 .hebrew .side-box-row span.rsvp.rsvp-maybe {
 	background: url(/images/ico-6.gif) no-repeat right 6px;
 }
+
+.side-box-row .cell-bg{
+	overflow: hidden;
+	height: 1%;
+	font-size: 1.2em;
+	padding: 9px 5px 9px;
+	background: url(/images/bg-cell.gif) repeat-x;
+}

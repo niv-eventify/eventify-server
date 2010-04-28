@@ -1,0 +1,7 @@
+.side-box-row
+  %h3= _("RSVP")
+  %ul.link-box
+    %li.item-1!= link_to_rsvp_update(_("Yes"), 1)
+    %li.item-2!= link_to_rsvp_update(_("May Be"), 2)
+    %li.item-3!= link_to_rsvp_update(_("No"), 0)
+  %span#updating_rsvp_status{:style => "display:none"}= _("Updating RSVP status, please wait...")

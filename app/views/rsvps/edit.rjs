@@ -1,0 +1,1 @@
+page << "jQuery('.rsvp-form').html(#{render(:partial => "new").to_json})"
