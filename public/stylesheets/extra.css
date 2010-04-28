@@ -451,3 +451,11 @@ li.thing span.name {
 	padding: 9px 5px 9px;
 	background: url(/images/bg-cell.gif) repeat-x;
 }
+
+.hebrew .side-box-row .input-bg-uni {
+	float:right;
+}
+
+.side-box-row h3 {
+	clear:both;
+}
