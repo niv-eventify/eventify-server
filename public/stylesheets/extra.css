@@ -459,3 +459,7 @@ li.thing span.name {
 .side-box-row h3 {
 	clear:both;
 }
+
+.d-list dt {
+	width:60px;
+}

@@ -16,7 +16,7 @@
             - unless resource.event.guest_message.blank?
               %p= resource.event.guest_message
         
-        %h3= resource.name
+        %h3= resource.event.name
         %dl.d-list
           - unless resource.event.location_name.blank?
             %dt= _("Where:")
