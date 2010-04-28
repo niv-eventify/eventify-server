@@ -4,3 +4,17 @@
     %li.item-1!= link_to_function _("Yes"), "alert('todo')"
     %li.item-2!= link_to_function _("May Be"), "alert('todo')"
     %li.item-3!= link_to_function _("No"), "alert('todo')"
+
+.side-box-row
+  %span.rsvp{:class => rsvp_status_class(0)}
+    != link_to _("edit"), "#"
+    = "No" # resource.rsvp_text
+
+.side-box-row
+  %h3= _("Send a message to the host:")
+  .textarea-bg
+    != text_area_tag "asdfasdf"
+  = _("Note: your message is public")
+  .btns-hold.update-rsvp
+    %a{ :href => "#" } Save
+    %a{ :href => "#" } Cancel

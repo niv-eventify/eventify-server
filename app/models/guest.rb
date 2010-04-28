@@ -31,6 +31,10 @@ class Guest < ActiveRecord::Base
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
+  def rsvp_text
+    s_(RSVP_TEXT[rsvp])
+  end
+
   named_scope :rsvp_no,             :conditions => {:rsvp => 0}
   named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}

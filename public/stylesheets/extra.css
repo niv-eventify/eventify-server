@@ -390,3 +390,56 @@ li.thing span.name {
 	line-height:22px;
 	padding:0 4px;
 }
+
+.btns-hold.update-rsvp {
+	padding:0 35px;
+}
+
+.side-box-row span.rsvp {
+	height:23px;
+	line-height:23px;
+	display:block;
+	font-size:12px;
+	font-weight:bold;
+	padding:0 0 0 16px;
+}
+
+.hebrew .side-box-row span.rsvp {padding:0 16px 0 0;}
+
+.side-box-row span.rsvp a {
+	color:#41BDCD;
+	padding:0 10px;
+	font-weight:normal;
+	font-size:11px;
+	text-decoration:underline;
+	display:block;
+	float:right;
+}
+
+.hebrew .side-box-row span.rsvp a {
+	float:left;
+}
+
+.side-box-row span.rsvp.rsvp-no {
+	background: url(/images/ico-7.gif) no-repeat left 6px;
+}
+
+.hebrew .side-box-row span.rsvp.rsvp-no {
+	background: url(/images/ico-7.gif) no-repeat right 6px;
+}
+
+.side-box-row span.rsvp.rsvp-yes {
+	background: url(/images/ico-5.gif) no-repeat left 6px;
+}
+
+.hebrew .side-box-row span.rsvp.rsvp-yes {
+	background: url(/images/ico-5.gif) no-repeat right 6px;
+}
+
+.side-box-row span.rsvp.rsvp-maybe {
+	background: url(/images/ico-6.gif) no-repeat left 6px;
+}
+
+.hebrew .side-box-row span.rsvp.rsvp-maybe {
+	background: url(/images/ico-6.gif) no-repeat right 6px;
+}

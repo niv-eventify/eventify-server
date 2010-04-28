@@ -21,4 +21,15 @@ module RsvpsHelper
   def background_color_css
     "background-color:rgb(#{resource.event.design.background_color});"
   end
+
+  def rsvp_status_class(rsvp)
+    case rsvp
+    when 0 # no
+      "rsvp-no"
+    when 1 # yes
+      "rsvp-yes"
+    when 2 # maybe
+      "rsvp-maybe"
+    end
+  end
 end
