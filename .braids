@@ -125,6 +125,13 @@ vendor/plugins/restart_controller:
   squashed: true
   type: git
   url: git://github.com/astrails/restart_controller.git
+vendor/plugins/time_travel: 
+  branch: master
+  remote: braid/vendor/plugins/time-travel
+  revision: 153fbf4d4847e1493fbafa82b93fbbcf2da7cb7f
+  squashed: true
+  type: git
+  url: http://github.com/notahat/time_travel.git
 vendor/plugins/translation_db_engine: 
   branch: master
   remote: braid/vendor/plugins/translation-db-engine
