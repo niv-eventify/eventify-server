@@ -31,6 +31,8 @@ Rails::Initializer.run do |config|
   config.gem 'blackbook', :lib => false
   config.gem 'contacts', :lib => false
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
+  config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
+  config.gem 'rspec', :lib => false, :version => '1.3.0'
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

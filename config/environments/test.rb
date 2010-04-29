@@ -29,8 +29,6 @@ config.action_mailer.default_url_options = {:host => "test.com"}
 # config.active_record.schema_format = :sql
 config.gem 'factory_girl', :source => 'http://gemcutter.org'
 require 'ruby-debug'
-config.gem 'rspec', :lib => false, :version => '1.3.0'
-config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
 
 SMS_FROM = "eventify"
 SMS_USER = "eventify"
