@@ -5,6 +5,11 @@ class Taking < ActiveRecord::Base
 
   attr_accessible :thing, :thing_id, :amount
 
+  before_validation_on_create :set_event_id
+  def set_event_id
+    self.event_id = thing.event_id
+  end
+
   after_save    :update_thing_amounts
   after_destroy :update_thing_amounts
   def update_thing_amounts

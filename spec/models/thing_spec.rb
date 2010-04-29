@@ -76,10 +76,7 @@ describe Thing do
 
     describe "update taking" do
       before(:each) do
-        @taking = Taking.new(:thing_id => @thing.id, :amount => 2)
-        @taking.event_id = @guest.event_id
-        @taking.guest_id = @guest.id
-        @taking.save
+        @taking = @guest.takings.create(:thing_id => @thing.id, :amount => 2)
       end
 
       it "should change amount of existing" do

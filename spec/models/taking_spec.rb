@@ -14,9 +14,7 @@ describe Taking do
 
     describe "changes" do
       before(:each) do
-        @taking = @guest.takings.build(:amount => 2, :thing_id => @thing.id)
-        @taking.event_id = @guest.event_id
-        @taking.save
+        @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)
       end
 
       it "shoud decrement amount_picked when new taking is created" do

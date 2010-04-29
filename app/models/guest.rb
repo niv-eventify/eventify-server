@@ -53,16 +53,9 @@ class Guest < ActiveRecord::Base
       if t[:id]
         change_existing_taking(t)
       elsif !t[:amount].to_i.zero?
-        create_new_taking(t)
+        takings.create(t)
       end
     end
-  end
-
-  def create_new_taking(t)
-    taking = takings.build(t)
-    taking.guest = self
-    taking.event_id = event_id
-    taking.save
   end
 
   def change_existing_taking(t)
