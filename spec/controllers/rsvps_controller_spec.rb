@@ -9,6 +9,11 @@ describe RsvpsController do
     before(:each) do
       @guest = Factory.create(:guest_with_token)
       @guest.reload.rsvp.should be_nil
+      @guest.event.stub!(:design).and_return(stub_model(Design))
+      preview = mock("preview")
+      preview.stub!(:url).and_return("foobar")
+      @guest.event.design.stub!(:preview).and_return(preview)
+      Guest.stub!(:find_by_email_token).and_return(@guest)
     end
 
     it "should show event for a guest" do
