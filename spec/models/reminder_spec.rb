@@ -4,16 +4,12 @@ describe Reminder do
 
   describe "scope" do
     it "should generate future scope" do
-      debugger
-      t = Time.now.utc
-      t.stub!(:utc).and_return(t)
-      Time.stub!(:now).and_return(t)
-      Reminder.pending.proxy_options.should == {:conditions=>["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", t]}
+      at_time(Time.now) do
+        Reminder.pending.proxy_options.should == {:conditions=>["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}
 
-      t = 10.minutes.from_now
-      t.stub!(:utc).and_return(t)
-      Time.stub!(:now).and_return(t)
-      Reminder.pending.proxy_options.should == {:conditions=>["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", t]}
+        Time.now = 10.minutes.from_now
+        Reminder.pending.proxy_options.should == {:conditions=>["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}
+      end
     end
   end
 
