@@ -10,10 +10,10 @@
   %p
     %strong= _("Time")
     = event.starting_at.to_s(:isra_time)
-  - unless event_location(event).blank?
+  - unless event.location.blank?
     %p
       %strong= _("Place:")
-      = event_location(event)
+      = event.location
   %p!= link_to _("Preview"), "#invitation#{event.id}", :class => "more nyroModal"
 - invitation_preview(event) do
   != render(:partial => "rsvps/postcard", :locals => {:event => event})

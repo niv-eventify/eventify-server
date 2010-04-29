@@ -29,11 +29,13 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :reminders
     event.resource :design
     event.resources :other_guests
+    event.resource  :ical, :controller => "ical"
   end
-  map.resources :summary, :controller => "Summaries"
+  map.resources :summary, :controller => "summaries"
   map.resources :invitations
   map.resources :rsvps do |rsvp|
     rsvp.resources :other_guests
+    rsvp.resource   :ical, :controller => "ical"
   end
   map.resources :takings
 end

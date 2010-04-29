@@ -167,6 +167,29 @@ class Event < ActiveRecord::Base
     _("You've been invited to %{event_name}") % {:event_name => name}
   end
 
+  def location
+    [location_name, location_address].compact_blanks.join(", ")
+  end
+
+  def to_ical
+    ie = returning(Icalendar::Event.new) do |e|
+      e.dtstart = starting_at.to_datetime
+      e.summary = name
+      e.dtend = ending_at.to_datetime if ending_at
+      e.description = guest_message unless guest_message.blank?
+      e.uid = "eventify-#{id}"
+      e.location = location unless location.blank?
+    end
+    c = Icalendar::Calendar.new
+    c.prodid = "eventify-0.0.1"
+    c.add_event(ie)
+    c.to_ical
+  end
+
+  def ical_filename
+    "eventify-#{id}.ics"
+  end
+
 protected
 
   def _cancel_sms_reminders!

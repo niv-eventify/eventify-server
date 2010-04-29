@@ -88,10 +88,6 @@ module EventsHelper
     link_to _("(not sent)"), edit_invitation_path(event), :class => "not-sent"
   end
 
-  def event_location(event)
-    [event.location_name, event.location_address].compact_blanks.join(", ")
-  end
-  
   def months_arr
     javascript_tag("stage2.months_arr = ['" + _("en.date.abbr_month_names").join("','") + "'];")
   end
