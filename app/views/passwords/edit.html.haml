@@ -1,6 +1,12 @@
-%h1= page_title password_edit_title
+.top-text
+  %h2= _("Change Password")
 
-- semantic_form_for(@user, :url => password_path(@user.perishable_token), :method => :put, :live_validations => true) do |f|
-  != f.input :password, :label => _("Password")
-  != f.input :password_confirmation, :label => _("Password Confirmation")
-  != f.submit password_edit_submit
+.settings-box.login
+  - middle_box_section("") do
+    - form_for(@user ||= User.new, :url => password_path(@user.perishable_token), :method => :put, :builder => MiddleBoxFormBuilder::Builder) do |f|
+      = f.object.errors.on(:base)
+
+      != f.password_field :password, :label => _("Password")
+      != f.password_field :password_confirmation, :label => _("Password Confirmation")
+      .settings-form-btns
+        != link_to_function content_tag(:span, _("Change")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"

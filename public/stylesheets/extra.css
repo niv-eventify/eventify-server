@@ -475,3 +475,7 @@ li.thing.active span.name {
 .main-column dt {
 	width:55px;
 }
+
+.edit_user p.error-msg {
+	clear:both;
+}

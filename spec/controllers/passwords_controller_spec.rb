@@ -88,6 +88,7 @@ describe PasswordsController do
             eval_request
             assigns[:user].should == @user
           end
+
           it_should_render_template "edit"
         end
 
