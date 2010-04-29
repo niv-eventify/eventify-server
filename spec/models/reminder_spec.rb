@@ -4,6 +4,7 @@ describe Reminder do
 
   describe "scope" do
     it "should generate future scope" do
+      debugger
       t = Time.now.utc
       t.stub!(:utc).and_return(t)
       Time.stub!(:now).and_return(t)
