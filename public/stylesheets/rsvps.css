@@ -25,23 +25,6 @@
 	direction: rtl;
 }
 
-#toolbar {
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	display: none;
-	z-index: 300;
-	margin:0 auto;
-	left: 0;
-	text-align: center;
-}}
-#toolbar a{
-	width: 688px;
-	margin:0 auto;
-}
-#toolbar img {
-	border: 0;
-}
 #envelope {
 	text-align: center;
 	margin-top: 10%;
@@ -49,3 +32,108 @@
 .envelope img {
 	border: 0;
 }
+.toolbar {
+	position: absolute;
+	bottom: 0;
+	left:50%;
+	margin: 0 0 0 -344px;
+	width:688px;
+	height:64px;
+	z-index: 300;
+}
+.toolbar a{
+	color:#523733;
+	text-decoration:none;
+}
+.hebrew .toolbar{ direction: rtl;}
+.toolbar-bg {
+	overflow: hidden;
+	background: url(/images/bg-toolbar.png) no-repeat;
+	width:688px;
+	height:64px;
+}
+.toolbar-logo {
+	margin: 17px 34px 0 21px;
+	display: inline;
+	text-indent: -9999px;
+	width: 104px;
+	height: 29px;
+	float: right;
+	position: relative;
+	background: url(/images/logo-toolbar.gif) no-repeat;
+}
+.hebrew .toolbar-logo {
+	margin: 17px 21px 0 34px;
+	float: left;
+}
+.toolbar-logo  a{
+	display: block;
+	height: 100%;
+}
+.t-b-btn {
+	position: relative;
+	text-align: center;
+	font-weight: bold;
+	color: #2f261f;
+	font-size: 12px;
+	line-height: 12px;
+	float: right;
+	margin: 0 17px;
+	display: inline;
+}
+.hebrew .t-b-btn{float: left;}
+.t-b-btn span{
+	cursor: pointer;
+	display: block;
+	height: 1%;
+	overflow: hidden;
+	padding: 0 5px;
+}
+.t-b-btn-1 {
+	margin-top:16px; 
+	padding: 7px 0 0;
+	width: 94px;
+	background: url(/images/t-b-btn-1-en.gif) no-repeat;
+}
+.t-b-btn-1 span {
+	padding-bottom: 14px;
+	background: url(/images/t-b-btn-1-en.gif) no-repeat 0 100%;
+}
+.t-b-btn-2 {
+	margin-top:17px; 
+	padding: 7px 0 0;
+	width: 89px;
+	background: url(/images/t-b-btn-2-en.gif) no-repeat;
+}
+.t-b-btn-2 span {
+	padding-bottom: 8px;
+	background: url(/images/t-b-btn-2-en.gif) no-repeat 0 100%;
+}
+.t-b-btn-3 {
+	margin-top:14px; 
+	padding: 10px 0 0;
+	width: 59px;
+	background: url(/images/t-b-btn-3-en.gif) no-repeat;
+}
+.t-b-btn-3 span {
+	padding-bottom: 7px;
+	background: url(/images/t-b-btn-3-en.gif) no-repeat 0 100%;
+}
+.t-b-btn-4 {
+	margin-top:14px; 
+	padding: 8px 0 0;
+	width:143px;
+	background: url(/images/t-b-btn-4-en.gif) no-repeat;
+}
+.t-b-btn-4 span {
+	padding-bottom: 13px;
+	background: url(/images/t-b-btn-4-en.gif) no-repeat 0 100%;
+}
+.hebrew .t-b-btn-1 {background: url(/images/t-b-btn-1.gif) no-repeat;}
+.hebrew .t-b-btn-1 span {background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-2 {background: url(/images/t-b-btn-2.gif) no-repeat;}
+.hebrew .t-b-btn-2 span {background: url(/images/t-b-btn-2.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-3 {background: url(/images/t-b-btn-3.gif) no-repeat;}
+.hebrew .t-b-btn-3 span {background: url(/images/t-b-btn-3.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-4 {background: url(/images/t-b-btn-4.gif) no-repeat;}
+.hebrew .t-b-btn-4 span {background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;}

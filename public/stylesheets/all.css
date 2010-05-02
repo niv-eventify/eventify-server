@@ -3877,31 +3877,31 @@ ul.tabset li a.active{background-position: 0 -30px;}
 }
 #tab-1{
 	display: block;
-	background: url(../images/bg-tabset-green-en.gif) no-repeat 100% 0;
+	background: url(/images/bg-tabset-green-en.gif) no-repeat 100% 0;
 }
-#tab-2 {background: url(../images/bg-tabset-orange-en.gif) no-repeat 100% 0;}
-#tab-3 {background: url(../images/bg-tabset-red-en.gif) no-repeat 100% 0;}
-#tab-4 {background: url(../images/bg-tabset-blue-en.gif) no-repeat 100% 0;}
-#tab-5 {background: url(../images/bg-tabset-brown-en.gif) no-repeat 100% 0;}
-#tab-6 {background: url(../images/bg-tabset-gray-en.gif) no-repeat 100% 0;}
-.tabs-container #tab-1{background: url(../images/bg-tabset-green-en.gif) no-repeat 0 0;}
-.tabs-container #tab-2 {background: url(../images/bg-tabset-orange-en.gif) no-repeat 0 0;}
-.tabs-container #tab-3 {background: url(../images/bg-tabset-red-en.gif) no-repeat 0 0;}
-.tabs-container #tab-4 {background: url(../images/bg-tabset-blue-en.gif) no-repeat 0 0;}
-.tabs-container #tab-5 {background: url(../images/bg-tabset-brown-en.gif) no-repeat 0 0;}
-.tabs-container #tab-6 {background: url(../images/bg-tabset-gray-en.gif) no-repeat 0 0;}
-.hebrew #tab-1 {background: url(../images/bg-tabset-green.gif) no-repeat 0 0;}
-.hebrew #tab-2 {background: url(../images/bg-tabset-orange.gif) no-repeat 0 0;}
-.hebrew #tab-3 {background: url(../images/bg-tabset-red.gif) no-repeat 0 0;}
-.hebrew #tab-4 {background: url(../images/bg-tabset-blue.gif) no-repeat 0 0;}
-.hebrew #tab-5 {background: url(../images/bg-tabset-brown.gif) no-repeat 0 0;}
-.hebrew #tab-6 {background: url(../images/bg-tabset-gray.gif) no-repeat 0 0;}
-.hebrew .tabs-container #tab-1 {background: url(../images/bg-tabset-green.gif) no-repeat 100% 0;}
-.hebrew .tabs-container #tab-2 {background: url(../images/bg-tabset-orange.gif) no-repeat 100% 0;}
-.hebrew .tabs-container #tab-3 {background: url(../images/bg-tabset-red.gif) no-repeat 100% 0;}
-.hebrew .tabs-container #tab-4 {background: url(../images/bg-tabset-blue.gif) no-repeat 100% 0;}
-.hebrew .tabs-container #tab-5 {background: url(../images/bg-tabset-brown.gif) no-repeat 100% 0;}
-.hebrew .tabs-container #tab-6 {background: url(../images/bg-tabset-gray.gif) no-repeat 100% 0;}
+#tab-2 {background: url(/images/bg-tabset-orange-en.gif) no-repeat 100% 0;}
+#tab-3 {background: url(/images/bg-tabset-red-en.gif) no-repeat 100% 0;}
+#tab-4 {background: url(/images/bg-tabset-blue-en.gif) no-repeat 100% 0;}
+#tab-5 {background: url(/images/bg-tabset-brown-en.gif) no-repeat 100% 0;}
+#tab-6 {background: url(/images/bg-tabset-gray-en.gif) no-repeat 100% 0;}
+.tabs-container #tab-1{background: url(/images/bg-tabset-green-en.gif) no-repeat 0 0;}
+.tabs-container #tab-2 {background: url(/images/bg-tabset-orange-en.gif) no-repeat 0 0;}
+.tabs-container #tab-3 {background: url(/images/bg-tabset-red-en.gif) no-repeat 0 0;}
+.tabs-container #tab-4 {background: url(/images/bg-tabset-blue-en.gif) no-repeat 0 0;}
+.tabs-container #tab-5 {background: url(/images/bg-tabset-brown-en.gif) no-repeat 0 0;}
+.tabs-container #tab-6 {background: url(/images/bg-tabset-gray-en.gif) no-repeat 0 0;}
+.hebrew #tab-1 {background: url(/images/bg-tabset-green.gif) no-repeat 0 0;}
+.hebrew #tab-2 {background: url(/images/bg-tabset-orange.gif) no-repeat 0 0;}
+.hebrew #tab-3 {background: url(/images/bg-tabset-red.gif) no-repeat 0 0;}
+.hebrew #tab-4 {background: url(/images/bg-tabset-blue.gif) no-repeat 0 0;}
+.hebrew #tab-5 {background: url(/images/bg-tabset-brown.gif) no-repeat 0 0;}
+.hebrew #tab-6 {background: url(/images/bg-tabset-gray.gif) no-repeat 0 0;}
+.hebrew .tabs-container #tab-1 {background: url(/images/bg-tabset-green.gif) no-repeat 100% 0;}
+.hebrew .tabs-container #tab-2 {background: url(/images/bg-tabset-orange.gif) no-repeat 100% 0;}
+.hebrew .tabs-container #tab-3 {background: url(/images/bg-tabset-red.gif) no-repeat 100% 0;}
+.hebrew .tabs-container #tab-4 {background: url(/images/bg-tabset-blue.gif) no-repeat 100% 0;}
+.hebrew .tabs-container #tab-5 {background: url(/images/bg-tabset-brown.gif) no-repeat 100% 0;}
+.hebrew .tabs-container #tab-6 {background: url(/images/bg-tabset-gray.gif) no-repeat 100% 0;}
 .info-cols {
 	overflow: hidden;
 	width: 915px;
@@ -5240,7 +5240,7 @@ ul.contact-tabset li.active a ,
 .hebrew .toolbar{ direction: rtl;}
 .toolbar-bg {
 	overflow: hidden;
-	background: url(../images/bg-toolbar.png) no-repeat;
+	background: url(/images/bg-toolbar.png) no-repeat;
 	width:688px;
 	height:64px;
 }
@@ -5252,7 +5252,7 @@ ul.contact-tabset li.active a ,
 	height: 29px;
 	float: right;
 	position: relative;
-	background: url(../images/logo-toolbar.gif) no-repeat;
+	background: url(/images/logo-toolbar.gif) no-repeat;
 }
 .hebrew .toolbar-logo {
 	margin: 17px 21px 0 34px;
@@ -5285,54 +5285,54 @@ ul.contact-tabset li.active a ,
 	margin-top:16px; 
 	padding: 7px 0 0;
 	width: 94px;
-	background: url(../images/t-b-btn-1-en.gif) no-repeat;
+	background: url(/images/t-b-btn-1-en.gif) no-repeat;
 }
 .t-b-btn-1 span {
 	padding-bottom: 14px;
-	background: url(../images/t-b-btn-1-en.gif) no-repeat 0 100%;
+	background: url(/images/t-b-btn-1-en.gif) no-repeat 0 100%;
 }
 .t-b-btn-2 {
 	margin-top:17px; 
 	padding: 7px 0 0;
 	width: 89px;
-	background: url(../images/t-b-btn-2-en.gif) no-repeat;
+	background: url(/images/t-b-btn-2-en.gif) no-repeat;
 }
 .t-b-btn-2 span {
 	padding-bottom: 8px;
-	background: url(../images/t-b-btn-2-en.gif) no-repeat 0 100%;
+	background: url(/images/t-b-btn-2-en.gif) no-repeat 0 100%;
 }
 .t-b-btn-3 {
 	margin-top:14px; 
 	padding: 10px 0 0;
 	width: 59px;
-	background: url(../images/t-b-btn-3-en.gif) no-repeat;
+	background: url(/images/t-b-btn-3-en.gif) no-repeat;
 }
 .t-b-btn-3 span {
 	padding-bottom: 7px;
-	background: url(../images/t-b-btn-3-en.gif) no-repeat 0 100%;
+	background: url(/images/t-b-btn-3-en.gif) no-repeat 0 100%;
 }
 .t-b-btn-4 {
 	margin-top:14px; 
 	padding: 8px 0 0;
 	width:143px;
-	background: url(../images/t-b-btn-4-en.gif) no-repeat;
+	background: url(/images/t-b-btn-4-en.gif) no-repeat;
 }
 .t-b-btn-4 span {
 	padding-bottom: 13px;
-	background: url(../images/t-b-btn-4-en.gif) no-repeat 0 100%;
+	background: url(/images/t-b-btn-4-en.gif) no-repeat 0 100%;
 }
-.hebrew .t-b-btn-1 {background: url(../images/t-b-btn-1.gif) no-repeat;}
-.hebrew .t-b-btn-1 span {background: url(../images/t-b-btn-1.gif) no-repeat 0 100%;}
-.hebrew .t-b-btn-2 {background: url(../images/t-b-btn-2.gif) no-repeat;}
-.hebrew .t-b-btn-2 span {background: url(../images/t-b-btn-2.gif) no-repeat 0 100%;}
-.hebrew .t-b-btn-3 {background: url(../images/t-b-btn-3.gif) no-repeat;}
-.hebrew .t-b-btn-3 span {background: url(../images/t-b-btn-3.gif) no-repeat 0 100%;}
-.hebrew .t-b-btn-4 {background: url(../images/t-b-btn-4.gif) no-repeat;}
-.hebrew .t-b-btn-4 span {background: url(../images/t-b-btn-4.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-1 {background: url(/images/t-b-btn-1.gif) no-repeat;}
+.hebrew .t-b-btn-1 span {background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-2 {background: url(/images/t-b-btn-2.gif) no-repeat;}
+.hebrew .t-b-btn-2 span {background: url(/images/t-b-btn-2.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-3 {background: url(/images/t-b-btn-3.gif) no-repeat;}
+.hebrew .t-b-btn-3 span {background: url(/images/t-b-btn-3.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-4 {background: url(/images/t-b-btn-4.gif) no-repeat;}
+.hebrew .t-b-btn-4 span {background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;}
 .tools-bar {
 	margin: 0 0 0 1px;
 	padding:0 0 0 9px;
-	background: url(../images/bg-tools-bar.gif) no-repeat;
+	background: url(/images/bg-tools-bar.gif) no-repeat;
 	position: absolute;
 	top:100px;
 	left:100px;
@@ -5348,7 +5348,7 @@ ul.contact-tabset li.active a ,
 	display: inline;
 	margin: 0 -1px 0 0;
 	padding: 2px 9px 2px 0;
-	background: url(../images/bg-tools-bar.gif) no-repeat 100% 0; 
+	background: url(/images/bg-tools-bar.gif) no-repeat 100% 0; 
 	float: left;
 	height: 18px;
 	position: relative;
@@ -5389,7 +5389,7 @@ ul.contact-tabset li.active a ,
 	float: left;
 	font-size: 0;
 	line-height: 0;
-	background: url(../images/bg-tools-bar-sep.gif) no-repeat;
+	background: url(/images/bg-tools-bar-sep.gif) no-repeat;
 }
 .hebrew .sep { float: right;}
 .tools-bar form .selectArea {
@@ -5402,29 +5402,29 @@ ul.contact-tabset li.active a ,
 	top:0;
 	width:10px;
 	height:100%;
-	background:url(../images/bg-select1-l-sml.gif) no-repeat;
+	background:url(/images/bg-select1-l-sml.gif) no-repeat;
 	z-index:1;
 }
 .hebrew .tools-bar form .selectArea .left{
 	float:left;
 	left: auto;
 	right:0;
-	background:url(../images/bg-select2-r-sml.gif) no-repeat;
+	background:url(/images/bg-select2-r-sml.gif) no-repeat;
 }
 .tools-bar form .selectArea .center{
 	height:16px;
 	line-height:16px;
 	font-size:11px;
 	color:#523733;
-	background:url(../images/bg-select-m-sml.gif) repeat-x;
+	background:url(/images/bg-select-m-sml.gif) repeat-x;
 }
 .hebrew .tools-bar form .selectArea .center{
 	margin:0 5px 0 20px;
 	padding:0 3px 0 5px;
 	direction: rtl;
 }
-.tools-bar form .selectArea .selectButton{background:url(../images/bg-select1-r-sml.gif) no-repeat 100% 0;}
-.hebrew .tools-bar form .selectArea .selectButton{ background:url(../images/bg-select2-l-sml.gif) no-repeat;}
+.tools-bar form .selectArea .selectButton{background:url(/images/bg-select1-r-sml.gif) no-repeat 100% 0;}
+.hebrew .tools-bar form .selectArea .selectButton{ background:url(/images/bg-select2-l-sml.gif) no-repeat;}
 ul.text-align {
 	float: left;
 	margin: 0;
@@ -5442,13 +5442,13 @@ ul.text-align li a{
 	height: 12px;
 	display: block;
 }
-ul.text-align li.a-l a {background: url(../images/ico-align-left.gif) no-repeat;}
-ul.text-align li.a-c a {background: url(../images/ico-align-center.gif) no-repeat;}
-ul.text-align li.a-r a {background: url(../images/ico-align-right.gif) no-repeat;}
+ul.text-align li.a-l a {background: url(/images/ico-align-left.gif) no-repeat;}
+ul.text-align li.a-c a {background: url(/images/ico-align-center.gif) no-repeat;}
+ul.text-align li.a-r a {background: url(/images/ico-align-right.gif) no-repeat;}
 .pallet {
 	float: left;
 	display: inline;
-	background: url(../images/ico-pallet.gif) no-repeat;
+	background: url(/images/ico-pallet.gif) no-repeat;
 	width: 14px;
 	height: 14px;
 	text-indent: -9999px;
@@ -5482,5 +5482,5 @@ ul.text-align li.a-r a {background: url(../images/ico-align-right.gif) no-repeat
 	display: inline;
 }
 .hebrew  .font-sel .tt { float: right;}
-.font-plus {background: url(../images/btn-plus.gif) no-repeat;}
-.font-minus {background: url(../images/btn-minus.gif) no-repeat;}
+.font-plus {background: url(/images/btn-plus.gif) no-repeat;}
+.font-minus {background: url(/images/btn-minus.gif) no-repeat;}
