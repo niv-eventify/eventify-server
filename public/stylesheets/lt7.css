@@ -29,7 +29,8 @@ a.lb-popup-btn-close,
 #main .subnav .inner-box .bg-t,
 #main .subnav .inner-box .bg-b,
 a.gallery-arrow-prev,
-a.gallery-arrow-next { background: none;}
+a.gallery-arrow-next,
+.toolbar-bg { background: none;}
 #top-nav li.active a.top{filter:progid:dximagetransform.microsoft.alphaimageloader(src='/images/top-nav-btn-h.png', sizingmethod='crop');}
 .popup-t {filter:progid:dximagetransform.microsoft.alphaimageloader(src='/images/bg-popup-t-en.png', sizingmethod='crop');}
 .hebrew .popup-t {filter:progid:dximagetransform.microsoft.alphaimageloader(src='/images/bg-popup-t.png', sizingmethod='crop');}
@@ -107,6 +108,7 @@ a.gallery-arrow-next {filter:progid:dximagetransform.microsoft.alphaimageloader(
 	background:url(/images/none.gif);
 	filter:progid:dximagetransform.microsoft.alphaimageloader(src='/images/bg-drop-top3.png', sizingMethod='crop');
 }
+.toolbar-bg {filter:progid:dximagetransform.microsoft.alphaimageloader(src='/images/bg-toolbar.png', sizingMethod='crop');}
 .drop2 .drop ul li {
 	border-top: expression( (this===this.parentNode.childNodes[0]) ? "1px solid #e5e5e5" : "1px solid #e5e5e5");
 }
