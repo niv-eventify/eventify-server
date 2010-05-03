@@ -479,3 +479,6 @@ li.thing.active span.name {
 .edit_user p.error-msg {
 	clear:both;
 }
+.twocolumns-decor {
+	background-image: url(/images/bg-decor-h.gif)
+}
