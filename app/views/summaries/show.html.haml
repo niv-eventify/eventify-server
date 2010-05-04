@@ -49,9 +49,9 @@
         .lists
           %dl.def-list
             %dt= _("Selected")
-            %dd ?
+            %dd= @event.things.total_amount
             %dt= _("Not selected")
-            %dd ?
+            %dd= @event.things.total_amount_picked
           != link_to _("edit"), event_things_path(@event), :class => "more-link"
 
   - info_container("info-container-alt") do

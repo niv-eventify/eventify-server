@@ -10,7 +10,15 @@ class Event < ActiveRecord::Base
   validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
 
   has_many :guests
-  has_many :things
+  has_many :things do
+    def total_amount
+      calculate(:sum, :amount)
+    end
+
+    def total_amount_picked
+      calculate(:sum, :amount_picked)
+    end
+  end
   has_many :reminders
 
   include Event::Summary
