@@ -236,20 +236,25 @@ div.cmf-skinned-text {
 	clear:both;
 }
 
-span.flash.error {
-	color:red;
+div.flash {
+	height:;
+	font-size:1.2em;
+	padding:11px 15px;
+	background:#f1f3c6;
+	margin-top:1em;
+	font-weight:bold;
 }
 
-span.flash.warning {
+div.flash.error {
+	color:#E11335;
+}
+
+div.flash.warning {
 	color:#000;
 }
 
-span.flash.notice {
+div.flash.notice {
 	color:#523733;
-}
-
-div.jGrowl div.jGrowl-notification, div.jGrowl div.jGrowl-closer {
-	background-color: #fff;
 }
 
 .lb-popup {
