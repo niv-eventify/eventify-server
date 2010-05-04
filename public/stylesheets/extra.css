@@ -482,3 +482,8 @@ li.thing.active span.name {
 .twocolumns-decor {
 	background-image: url(/images/bg-decor-h.gif)
 }
+
+
+.tab {
+	display: block;
+}
