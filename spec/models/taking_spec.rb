@@ -12,6 +12,18 @@ describe Taking do
       @thing.amount_picked.should == 0
     end
 
+    describe "overtake" do
+      before(:each) do
+        @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)
+        @another_guest = Factory.create(:guest_without_email_and_phone)
+      end
+
+      it "should auto reduce the takings amount" do
+        @new_taking = @another_guest.takings.create(:amount => 5, :thing_id => @thing.id)
+        @new_taking.amount.should == 3
+      end
+    end
+
     describe "changes" do
       before(:each) do
         @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)

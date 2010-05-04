@@ -3,6 +3,8 @@ class TakingsController < InheritedResources::Base
 
   actions :update
 
+  after_filter :clear_flash
+
   # update
 
 protected

@@ -45,4 +45,8 @@ protected
     false
   end
   helper_method :iphone_request?
+
+  def clear_flash
+    flash[:notice] = nil
+  end
 end

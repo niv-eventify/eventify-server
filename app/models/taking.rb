@@ -10,6 +10,13 @@ class Taking < ActiveRecord::Base
     self.event_id = thing.event_id
   end
 
+  before_save :check_thing_amounts
+  def check_thing_amounts
+    if amount_changed? && self.thing.amount_picked + (changes["amount"].last.to_i - changes["amount"].first.to_i) > self.thing.amount
+      self.amount = self.thing.amount - self.thing.amount_picked
+    end
+  end
+
   after_save    :update_thing_amounts
   after_destroy :update_thing_amounts
   def update_thing_amounts
