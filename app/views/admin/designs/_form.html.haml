@@ -14,11 +14,7 @@
   != f.input :title_color, :label => "Default title color: r,g,b"
   != f.input :message_color, :label => "Default message color: r,g,b"
   != f.input :text_align, :label => "Default text alignment"
-  != f.input :no_repeat_background, :label => "Check to make background not repeatable"
-  != f.input :background_color, :label => "Color of Background when not repeatable: r,g,b"
 
 - f.inputs do
-  != f.input :card, :as => :file, :label => "Postcard (usually named 'something_post.png')"
-  != f.input :background, :as => :file, :label => "Background (usually named 'something_back.png')"
-  != f.input :preview, :as => :file, :label => "Preview (usually named 'something_small.png')"
-  != f.input :preview_with_text, :as => :file, :label => "Preview with text (usually named 'something_small_text.png')"
+  != f.input :card, :as => :file, :label => "Invitation (usually named 'something_small.png')"
+  != f.input :preview, :as => :file, :label => "Preview with text(usually named 'something_small_text.png')"

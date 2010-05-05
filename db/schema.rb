@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100428123632) do
+ActiveRecord::Schema.define(:version => 20100505063715) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -80,10 +80,6 @@ ActiveRecord::Schema.define(:version => 20100428123632) do
     t.string   "card_content_type"
     t.integer  "card_file_size"
     t.datetime "card_updated_at"
-    t.string   "background_file_name"
-    t.string   "background_content_type"
-    t.integer  "background_file_size"
-    t.datetime "background_updated_at"
     t.string   "preview_file_name"
     t.string   "preview_content_type"
     t.integer  "preview_file_size"
@@ -102,12 +98,6 @@ ActiveRecord::Schema.define(:version => 20100428123632) do
     t.string   "title_color"
     t.string   "message_color"
     t.string   "text_align"
-    t.string   "preview_with_text_file_name"
-    t.string   "preview_with_text_content_type"
-    t.integer  "preview_with_text_file_size"
-    t.datetime "preview_with_text_updated_at"
-    t.boolean  "no_repeat_background"
-    t.string   "background_color"
   end
 
   add_index "designs", ["category_id"], :name => "index_designs_on_category_id"
@@ -266,6 +256,15 @@ ActiveRecord::Schema.define(:version => 20100428123632) do
   end
 
   add_index "translation_texts", ["translation_key_id", "locale"], :name => "index_translation_texts_on_translation_key_id_and_locale", :unique => true
+
+  create_table "uploaded_pictures", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.datetime "updated_at"
+    t.datetime "created_at"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name",                :limit => 48
