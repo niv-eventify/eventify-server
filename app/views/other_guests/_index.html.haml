@@ -2,7 +2,7 @@
 - items_per_column = collection.size / @columns_count; items_per_column += 1 unless (collection.size % @columns_count).zero?
 
 != render(:partial => "shared/rsvp_tabs", :locals => {:event => parent})
-.tab{:id => tab_dom_id}
+.tab{:id => "tab-#{active_tab_index}"}
   .tabs-block
     .tabs-bottom
       .info-cols

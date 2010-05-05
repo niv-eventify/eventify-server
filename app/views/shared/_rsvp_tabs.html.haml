@@ -1,6 +1,6 @@
 .tabset-holder
   %ul.tabset
-    - link_to_guests_filter(_("RSVP yes"), "yes", parent.guests.rsvp_yes.count, "tab-1")
-    - link_to_guests_filter(_("RSVP may be"), "maybe", parent.guests.rsvp_maybe.count, "tab-2")
-    - link_to_guests_filter(_("RSVP no"), "no", parent.guests.rsvp_no.count, "tab-3")
-    - link_to_guests_filter(_("Not responded"), "not_responded", parent.guests.rsvp_not_responded.count, "tab-4")
+    - link_to_guests_filter(_("RSVP yes"), "yes", parent.guests.rsvp_yes.count, 1)
+    - link_to_guests_filter(_("RSVP may be"), "maybe", parent.guests.rsvp_maybe.count, 2)
+    - link_to_guests_filter(_("RSVP no"), "no", parent.guests.rsvp_no.count, 3)
+    - link_to_guests_filter(_("Not responded"), "not_responded", parent.guests.rsvp_not_responded.count, 4)
