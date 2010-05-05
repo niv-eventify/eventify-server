@@ -5,6 +5,11 @@
 
   - info_table_column(2) do
     = thing.amount
+    - unless thing.amount_picked.to_i.zero?
+      = "(#{thing.amount_picked})"
+
+  - info_table_column(3) do
+    != render(:partial => "things/taking", :collection => thing.takings)
 
   - info_table_column do
     != link_to_remove_thing(@event, thing)

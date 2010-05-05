@@ -4,6 +4,8 @@ class ThingsController < InheritedResources::Base
   actions :index, :create, :update, :destroy
   respond_to :js, :only => [:create, :update, :destroy]
 
+  after_filter :remove_flash
+
   # index
   # create
   # destroy

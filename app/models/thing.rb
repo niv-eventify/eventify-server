@@ -7,6 +7,8 @@ class Thing < ActiveRecord::Base
 
   attr_accessible :amount, :name
 
+  has_many :takings
+
   named_scope :left, :conditions => "(things.amount - things.amount_picked) > 0"
   named_scope :taken, :conditions => "(things.amount - things.amount_picked) < 1"
 

@@ -19,6 +19,8 @@ class Event < ActiveRecord::Base
       calculate(:sum, :amount_picked)
     end
   end
+  has_many :takings
+
   has_many :reminders
 
   include Event::Summary

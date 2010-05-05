@@ -30,6 +30,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resource :design
     event.resources :other_guests
     event.resource  :ical, :controller => "ical"
+    event.resources :takings
   end
   map.resources :summary, :controller => "summaries"
   map.resources :invitations
