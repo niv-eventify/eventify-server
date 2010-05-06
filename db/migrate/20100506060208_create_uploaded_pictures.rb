@@ -1,7 +1,7 @@
 class CreateUploadedPictures < ActiveRecord::Migration
   def self.up
     create_table :uploaded_pictures do |t|
-      t.integer   :user_id
+      t.integer   :event_id
       t.string    :file_name
       t.string    :content_type
       t.integer   :file_size

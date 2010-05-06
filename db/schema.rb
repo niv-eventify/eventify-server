@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100505063715) do
+ActiveRecord::Schema.define(:version => 20100506060208) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -258,7 +258,7 @@ ActiveRecord::Schema.define(:version => 20100505063715) do
   add_index "translation_texts", ["translation_key_id", "locale"], :name => "index_translation_texts_on_translation_key_id_and_locale", :unique => true
 
   create_table "uploaded_pictures", :force => true do |t|
-    t.integer  "user_id"
+    t.integer  "event_id"
     t.string   "file_name"
     t.string   "content_type"
     t.integer  "file_size"
