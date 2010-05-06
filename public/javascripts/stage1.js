@@ -1,43 +1,38 @@
-var stage1 = {}
+var stage1 = {
+	curr_cropped_width: 0,
+	curr_cropped_height: 0,
+	showPreview: function(coords){
+		if (parseInt(coords.w) > 0){
+			var rx = 100 / coords.w;
+			var ry = 100 / coords.h;
+
+			jQuery('#preview').css({
+				width: Math.round(rx * stage1.curr_cropped_width) + 'px',
+				height: Math.round(ry * stage1.curr_cropped_height) + 'px',
+				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+				marginTop: '-' + Math.round(ry * coords.y) + 'px'
+			});
+		}
+	}
+}
 
 $(document).ready(function(){
 	$("a.blue-btn-mdl").hide();
-	var cropzoom = $('#crop_container').cropzoom({
-		width:275,
-		height:206,
-		bgColor: '#CCC',
-		enableRotation:true,
-		enableZoom:true,
-		zoomSteps:10,
-		rotationSteps:10,
-		selector:{
-			x:0,
-			y:0,
-			w:200,
-			h:100,
-			aspcetRatio:false,
-			centered:true,
-			borderColor:'blue',
-			borderColorHover:'yellow',
-			bgInfoLayer: '#FFF',
-			infoFontSize: 10,
-			infoFontColor: 'blue',
-			showPositionsOnDrag: false,
-			showDimetionsOnDrag: false,
-			maxHeight: null,
-			maxWidth: null
-		},
-		image:{
-			source:'/images/chicas512.jpg',
-			width:256,
-			height:192,
-			minZoom:10,
-			maxZoom:150
-		}
+	$("a.nyroModal.uploadLink").nyroModal({
+		minHeight: 270
 	});
-	$("#crop").click(function(){
-		cropzoom.send('process.php','POST',{id:1},function(r){
-			alert(r);
-		});
+//    $.get("/uploaded_pictures",function(data){
+//    	alert(data);
+//	});
+//stage1.curr_cropped_width = $("img#cropbox").width();
+//stage1.curr_cropped_height = $("img#cropbox").height();
+//$(".crop_preview").append("<img src=" + $("img#cropbox").attr("src") + " id='preview' />")
+});
+$(window).load(function(){
+	$('#cropbox').Jcrop({
+		onChange: stage1.showPreview,
+		onSelect: stage1.showPreview,
+		aspectRatio: 1
 	});
 });
+

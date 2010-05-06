@@ -91,6 +91,16 @@ module EventsHelper
   def months_arr
     javascript_tag("stage2.months_arr = ['" + _("en.date.abbr_month_names").join("','") + "'];")
   end
+  
+  def crop_preview_css
+  	x_ratio = (900 / 561)
+  	y_ratio = (600 / 374)
+  	top = (37)
+  	left = 195 / x_ratio
+  	width = 186 / x_ratio
+  	height = 182 / y_ratio
+    "top:#{top}px;left:#{left}px;width:#{width}px;height:#{height}px;"
+  end
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT

@@ -21,7 +21,6 @@ class Design < ActiveRecord::Base
       :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
     }
   attr_accessible :card
-  validates_attachment_presence :card
   validates_attachment_size :card, :less_than => 2.megabytes
 
   has_attached_file :preview,

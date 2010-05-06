@@ -33,13 +33,19 @@ font:
 = @design.font
 text align: 
 = @design.text_align
+- if @design.no_repeat_background?
+  background is not repeatable!
+  background color:
+  = @design.background_color
+- else
+  background is repeatable
   
 %h4 Post card
-.background_holder{:style => "position:relative;width:900px;height:600px;border:1px solid #666" }
-  %img.back{:src => "#{@design.card.url}"}
-  - if @design.is_seperated_title?
-    - title_holder(@design, 'absolute')
-  .msg_holder{:style => "position:absolute;left:#{@design.text_top_x}px; top:#{@design.text_top_y}px; width:#{@design.text_width}px; height:#{@design.text_height}px; color:rgb(#{@design.message_color}); text-align: #{@design.text_align}; border: 1px dashed blue; font-size: 30px"}
-    - unless @design.is_seperated_title?
-      - title_holder(@design, 'relative')
-    Invitation message goes here
+#background_holder{ :style => "width:900px;height:600px;background-image:url(#{@design.background.url});border:1px solid #666" }
+  #postcard{ :style => "margin:0 auto;width:667px;height:500px;text-align:left;background-image:url('#{@design.card.url}');" }
+    - if @design.is_seperated_title? 
+      - title_holder(@design)
+    .info_holder{:style => "position:relative;left:#{@design.text_top_x}px; top:#{@design.text_top_y}px; width:#{@design.text_width}px; height:#{@design.text_height}px; color:rgb(#{@design.message_color}); text-align: #{@design.text_align}; border: 1px dashed blue; font-size: 30px"}
+      - unless @design.is_seperated_title? 
+        - title_holder(@design)
+      Invitation message goes here

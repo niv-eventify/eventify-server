@@ -1,0 +1,24 @@
+#upload_file.lb-popup.lb-popup-1
+  .c
+    .popup-heading
+      %strong= _("Upload Picture")
+    - form_for(@uploaded_picture, :url => uploaded_pictures_path, :html => {:multipart => true, :class => "download-form"}) do |f|
+      = f.object.errors.on(:base)
+      %fieldset
+        .brown-box
+          .brown-box-holder
+            .f-row
+              %label{:for => "file"}
+                = _("Select File")
+              %input#file.file{:type => "file", :size => "38"}
+            %p
+              = _("File should be less than 3MB")
+        .f-row
+          %input#certify.input-check{:type => "checkbox"}
+          %label{:for => "certify"}
+            = _("The picture I uploaded does not violate any copyright laws")
+    .popup-btns
+      %a.btn{:href => "#"}
+        = _("Upload")
+      %a.btn{:href => "#"}
+        = _("Cancel")

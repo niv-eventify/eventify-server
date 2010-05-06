@@ -18,4 +18,6 @@
     #invitation{:style => "display:none;"}
       .background_holder
         %img.back{:src => "#{resource.event.design.card.url}"}
+        .window{:style => "height:182px;width:186px;position:absolute;top:69px;left:195px;z-index:1"}
+          %img{:src => "/images/chicas_head.jpg", :style => "width:100%;height:100%;z-index:1"}
         != render(:partial => "postcard", :locals => {:event => resource.event})

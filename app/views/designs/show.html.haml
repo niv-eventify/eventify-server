@@ -1,8 +1,8 @@
 - @content_css_class = "stars-bg stage-3"
 
 - content_for(:head) do
-  != stylesheet_link_tag "nyroModal.full"
-  != javascript_include_tag "jquery.nyroModal"
+  != stylesheet_link_tag "nyroModal.full", "jquery.Jcrop"
+  != javascript_include_tag "jquery.nyroModal", "jquery.Jcrop", "stage1"
 
 - events_content_section(1, @event) do
   .content-section-heading
@@ -18,8 +18,33 @@
             %a.btn-right.nyroModal{:href => "#change_design"}= _("Change design")
           - else
             %a.btn-left.nyroModal{:href => "#change_design"}= _("Change design")
+        .divider &nbsp;
+      .side-area-h
+        %h3
+          = _("Upload your own pictures and insert them into the invitation")
+          %a{:class => "link", :href => "#"}
+            = _("Watch example")
+          .sml-gallery
+            %a{:class => "next-g-btn", :href => "#"}
+              = _("Next")
+            .holder
+              %ul
+                != render(:partial => "uploaded_pictures/uploaded_pictures")
+                != render(:partial => "uploaded_pictures/uploaded_pictures")
+                != render(:partial => "uploaded_pictures/uploaded_pictures")
+            %a{:class => "prev-g-btn", :href => "#"}
+              = _("Prev")
+          %p
+            = _("Drag your uploaded pictures into the invitation. In order to remove a picture all you have to do is drag it back out of the invitation")
+          %img#cropbox{:src => '/images/chicas296.jpg'}
+          .btns-h
+            - if current_locale == "he"
+              %a#crop.btn-right{:href => "#crop"}= _("Crop")
+            - else
+              %a#crop.btn-left{:href => "#crop"}= _("Crop")
 
     != render(:partial => "events/selected_design")
 
 #change_design
   != render(:partial => "designs/change_design")
+

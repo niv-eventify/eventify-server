@@ -1,0 +1,1 @@
+page << "jQuery('.holder ul').html(#{render(:partial => "uploaded_pictures")})"

@@ -377,6 +377,11 @@ ul.contact-tabset li.active a:hover,
 	left:-18px;
 }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Stashed changes
 .boxe .heading h4 {
 	width: 400px;
 }
@@ -493,13 +498,16 @@ li.thing.active span.name {
 .lb-popup {
 	padding: 0;
 }
+
 .lb-popup-1 {
 	margin: 0;
 }
+
 .lb-popup-1 .c {
 	background: none;
 	padding-bottom: 0;
 }
+
 .info-container-image {
 	padding: 5px 6px 8px 9px;
 }
