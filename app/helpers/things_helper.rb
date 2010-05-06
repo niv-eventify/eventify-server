@@ -13,4 +13,13 @@ module ThingsHelper
     link_to_remote "del", :url => event_thing_path(event, thing), :method => :delete, 
       :confirm => _("Are you sure?"), :html => {:class => "bin"}, :before => "$('##{dom_id(thing)}').hide()"
   end
+
+  def taking_bar(taking)
+    content_tag(:strong, h(taking.guest.name)) + "&nbsp;" + "x&nbsp;#{taking.amount}&nbsp;" + remove_taking_link(taking)
+  end
+
+  def remove_taking_link(taking)
+    link_to_remote "x", :url => event_taking_path(taking.event_id, taking), :method => :delete, :html => {:class => "taking-remove"},
+      :before => "jQuery('##{dom_id(taking)}').remove()"
+  end
 end

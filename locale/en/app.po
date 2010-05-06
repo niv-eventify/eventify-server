@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-04-29 12:29+0300\n"
+"POT-Creation-Date: 2010-05-05 16:59+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:68
+#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:69
 msgid ""
 "        We're sorry, but we could not locate your account.\n"
 "        If you are having issues try copying and pasting the URL\n"
@@ -207,10 +207,12 @@ msgstr ""
 msgid "Cellular"
 msgstr ""
 
+#: app/views/passwords/edit.html.haml:12
 #: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:14
 msgid "Change"
 msgstr ""
 
+#: app/views/passwords/edit.html.haml:2
 #: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:4
 msgid "Change Password"
 msgstr ""
@@ -242,7 +244,7 @@ msgstr ""
 msgid "Choose the source to import contacts from:"
 msgstr ""
 
-#: app/views/rsvps/_toolbar.html.haml:2 app/views/rsvps/_toolbar.iphone.haml:2
+#: app/views/rsvps/_toolbar.iphone.haml:2
 msgid "Click to RSVP"
 msgstr ""
 
@@ -347,6 +349,10 @@ msgstr ""
 
 #: app/views/welcome/_container123.html.haml:19
 msgid "Enter event details"
+msgstr ""
+
+#: app/views/rsvps/_toolbar.html.haml:5
+msgid "Event Details"
 msgstr ""
 
 #: app/views/invitations/show.html.haml:11
@@ -586,6 +592,10 @@ msgstr ""
 msgid "MORE"
 msgstr ""
 
+#: app/views/rsvps/_toolbar.html.haml:7
+msgid "Map"
+msgstr ""
+
 #: app/views/events/_form.html.haml:37
 msgid "Map Image"
 msgstr ""
@@ -654,7 +664,7 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: app/views/other_guests/_index.html.haml:9
+#: app/views/other_guests/_index.html.haml:10
 msgid "No guests"
 msgstr ""
 
@@ -713,13 +723,13 @@ msgid "Our site allows you to manage your events easily and have fun"
 msgstr ""
 
 #: app/views/contact_importers/_edit.html.haml:9
-#: app/views/passwords/_edit.html.haml:3 app/views/passwords/edit.html.haml:4
+#: app/views/passwords/_edit.html.haml:3 app/views/passwords/edit.html.haml:9
 #: app/views/user_session/_new.html.haml:4
 #: app/views/user_session/new.html.haml:6
 msgid "Password"
 msgstr ""
 
-#: app/views/passwords/_edit.html.haml:4 app/views/passwords/edit.html.haml:5
+#: app/views/passwords/_edit.html.haml:4 app/views/passwords/edit.html.haml:10
 msgid "Password Confirmation"
 msgstr ""
 
@@ -735,7 +745,7 @@ msgstr ""
 msgid "Past events"
 msgstr ""
 
-#: app/models/event.rb:113
+#: app/models/event.rb:123
 msgid "Payments are not completed yet"
 msgstr ""
 
@@ -821,6 +831,10 @@ msgstr ""
 #: app/views/shared/_rsvp_tabs.html.haml:3
 #: app/views/summaries/show.html.haml:36 app/views/summaries/show.html.haml:39
 msgid "RSVP yes"
+msgstr ""
+
+#: app/views/rsvps/_toolbar.html.haml:8
+msgid "RSVPS"
 msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:4 app/views/users/_new.html.haml:7
@@ -1002,6 +1016,10 @@ msgstr ""
 msgid "Where:"
 msgstr ""
 
+#: app/views/things/_things_header.html.haml:11
+msgid "Who brings"
+msgstr ""
+
 #: app/views/guests/index.html.haml:32
 msgid "X"
 msgstr ""
@@ -1039,7 +1057,7 @@ msgstr ""
 msgid "You must be logged out to access this page"
 msgstr ""
 
-#: app/models/event.rb:167
+#: app/models/event.rb:177
 msgid "You've been invited to %{event_name}"
 msgstr ""
 
@@ -1152,7 +1170,7 @@ msgstr "1 error prohibited this {{model}} from being saved"
 msgid "activerecord.errors.template.header.other"
 msgstr "{{count}} errors prohibited this {{model}} from being saved"
 
-#: app/models/thing.rb:22
+#: app/models/thing.rb:24
 msgid "already would be brought by somebody else"
 msgstr ""
 
@@ -1416,7 +1434,7 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/helpers/events_helper.rb:96
+#: app/helpers/events_helper.rb:92
 msgid "en.date.abbr_month_names"
 msgstr ""
 
@@ -1556,7 +1574,7 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/models/event.rb:112 app/models/reminder.rb:63
+#: app/models/event.rb:122 app/models/reminder.rb:63
 msgid "should be in a future"
 msgstr ""
 
@@ -1599,6 +1617,10 @@ msgstr "%d %b %H:%M"
 #: locale/yml_import.rb:4
 msgid "time.pm"
 msgstr "pm"
+
+#: app/views/rsvps/_toolbar.html.haml:6
+msgid "to Calendar"
+msgstr ""
 
 #: app/helpers/guests_helper.rb:74
 msgid "yes"

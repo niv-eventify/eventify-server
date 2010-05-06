@@ -9,10 +9,10 @@ module SummariesHelper
     end
   end
 
-  def link_to_guests_filter(title, filter, count, css_class)
+  def link_to_guests_filter(title, filter, count, tab_index)
     txt = content_tag(:strong, title + content_tag(:span, "(#{count})"))
-    haml_tag(:li, :class => css_class) do
-      haml_concat link_to_remote(txt, :url => other_guests_path(filter), :method => :get)
+    haml_tag(:li, :class => "tab-#{tab_index}") do
+      haml_concat link_to_remote(txt, :url => other_guests_path(filter), :method => :get, :html => {:class => (tab_index == active_tab_index ? "active" : "")})
     end
   end
 
@@ -21,6 +21,19 @@ module SummariesHelper
       rsvp_other_guests_path(params[:rsvp_id], :columns_count => @columns_count, :filter => filter)
     else
       event_other_guests_path(params[:event_id], :columns_count => @columns_count, :filter => filter)
+    end
+  end
+
+  def active_tab_index
+    @active_tab_index ||= case params[:filter]
+    when "not_responded"
+      4
+    when "no"
+      3
+    when "maybe"
+      2
+    else
+      1
     end
   end
 end
