@@ -13,12 +13,12 @@ class Design < ActiveRecord::Base
   has_attached_file :card,
     :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "119x79>"},
     :storage        => :s3,
-    :bucket         => GlobalPreference.get(:s3_bucket),
+    :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
     :path =>        "designs/:id/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
-      :access_key_id     => GlobalPreference.get(:s3_key),
-      :secret_access_key => GlobalPreference.get(:s3_secret),
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
     }
   attr_accessible :card
   validates_attachment_presence :card
@@ -27,14 +27,15 @@ class Design < ActiveRecord::Base
   has_attached_file :preview,
     :styles         => {:medium => "218x145>", :lightbox => "666x444>", :carousel => "400x267>"},
     :storage        => :s3,
-    :bucket         => GlobalPreference.get(:s3_bucket),
+    :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
     :path =>        "designs/:id/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
-      :access_key_id     => GlobalPreference.get(:s3_key),
-      :secret_access_key => GlobalPreference.get(:s3_secret),
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
     }
   attr_accessible :preview
+  validates_attachment_presence :card
   validates_attachment_size :preview, :less_than => 2.megabytes
 
   def stage2_preview_dimensions
