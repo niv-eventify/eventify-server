@@ -1,5 +1,5 @@
 .pict
-  != image_tag(event.design.preview.url(:list))
+  != image_tag(event.design.card.url(:list))
 .boxe-text
   %p
     %strong= _("Hosts:")
@@ -16,5 +16,6 @@
       = event.location
   %p!= link_to _("Preview"), "#invitation#{event.id}", :class => "more nyroModal"
 - invitation_preview(event) do
+  %img.back{:src => "#{event.design.card.url}"}
   != render(:partial => "rsvps/postcard", :locals => {:event => event})
 

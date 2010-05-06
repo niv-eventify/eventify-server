@@ -16,5 +16,6 @@
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}
-      .background_holder{ :style => "#{background_image_css(resource.event)}", :strech =>         resource.event.design.no_repeat_background ? "false" : "true" }
+      .background_holder
+        %img.back{:src => "#{resource.event.design.card.url}"}
         != render(:partial => "postcard", :locals => {:event => resource.event})

@@ -6,23 +6,26 @@
 		var width = $(window).width() - 62;
 		var height = $(window).height() - 63;
 
-		if($("#" + invitation_id + " .background_holder").attr("strech") == "true") {
-			rsvps.dialog_width = width - 60;
-			rsvps.dialog_height = height - 30;
-		} else {
-			var ratio = width / height;
-			if(ratio < 1.5) {
-				if(width > 900) width = 900;
-				rsvps.dialog_width = width;
-				rsvps.dialog_height  = width / 1.5;
-			}else{
-				if(height > 600) height = 600;
-				rsvps.dialog_height = height;
-				rsvps.dialog_width = height * 1.5;
-			}
+		var ratio = width / height;
+		if(ratio < 1.5) {
+			if(width > 900) width = 900;
+			rsvps.dialog_width = width;
+			rsvps.dialog_height  = width / 1.5;
+		}else{
+			if(height > 600) height = 600;
+			rsvps.dialog_height = height;
+			rsvps.dialog_width = height * 1.5;
 		}
 		$("#" + invitation_id + " .background_holder, #" + invitation_id).css("width",rsvps.dialog_width + "px");
 		$("#" + invitation_id + " .background_holder, #" + invitation_id).css("height",rsvps.dialog_height + "px");
+
+		$("#" + invitation_id + ".title_holder, #" + invitation_id + ".msg_holder").each(function(){
+			var minimized_by = 900 / rsvps.dialog_width;
+			$(this).css("width", (parseInt($(this).css("width")) / minimized_by) + "px");
+			$(this).css("height", (parseInt($(this).css("height")) / minimized_by) + "px");
+			$(this).css("top", (parseInt($(this).css("top")) / minimized_by) + "px");
+			$(this).css("left", (parseInt($(this).css("left")) / minimized_by) + "px");
+		});
 	}
 }
 $(document).ready(function(){

@@ -13,18 +13,18 @@
   calcFontSize: function() {
     var loop_protection = 0;
     if(!stage2.seperated_title) {
-      while(loop_protection < 100 && parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+      while(loop_protection < 100 && parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
         loop_protection++;
         stage2.change_font_size_by(1, "free_text");
         stage2.change_font_size_by(1, "title");
       }
-      while(loop_protection < 100 && jQuery(".info-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
+      while(loop_protection < 100 && jQuery(".msg-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
         loop_protection++;
         stage2.change_font_size_by(-1, "free_text");
         stage2.change_font_size_by(-1, "title");
       }
     } else {
-      while(loop_protection < 100 && parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".info-holder").height() > (jQuery("#free_text").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+      while(loop_protection < 100 && parseInt(jQuery("#free_text").css("font-size")) < stage2.max_free_text_font_size && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
         loop_protection++;
         stage2.change_font_size_by(1, "free_text");
       }
@@ -32,7 +32,7 @@
         loop_protection++;
         stage2.change_font_size_by(1, "title");
       }
-      while(loop_protection < 100 && jQuery(".info-holder").height() < jQuery("#free_text").height()) {
+      while(loop_protection < 100 && jQuery(".msg-holder").height() < jQuery("#free_text").height()) {
         loop_protection++;
         stage2.change_font_size_by(-1, "free_text");
       }
@@ -163,13 +163,13 @@ jQuery(document).ready(function(){
   cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr });
   jQuery("#event_guest_message").focus(function(){
     if(stage2.seperated_title)
-      jQuery(".info-holder").css("border", "1px dashed red");
+      jQuery(".msg-holder").css("border", "1px dashed red");
     else
       jQuery("#free_text").css("border", "1px dashed red");
   });
   jQuery("#event_guest_message").blur(function(){
     if(stage2.seperated_title)
-      jQuery(".info-holder").css("border", "");
+      jQuery(".msg-holder").css("border", "");
     else
       jQuery("#free_text").css("border", "");
   });

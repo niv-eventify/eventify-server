@@ -1,9 +1,8 @@
-.postcard{ :class => "png", :style => "#{postcard_image_css(event)}" }
-  - if event.design.is_seperated_title?
-    .title_holder{:style => "#{title_position_css(event)}"}
+- if event.design.is_seperated_title?
+  .title_holder{:style => "#{title_position_css(event)}"}
+    != event.name
+.msg_holder{:style => "#{message_position_css(event)}"}
+  - if !event.design.is_seperated_title?
+    .title{:style => "#{title_position_css(event)}"}
       != event.name
-  .info_holder{:style => "#{message_position_css(event)}"}
-    - if !event.design.is_seperated_title?
-      .title{:style => "#{title_position_css(event)}"}
-        != event.name
-    != event.guest_message
+  != event.guest_message

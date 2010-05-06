@@ -30,5 +30,6 @@
             .arr-row
               - event_rsvp_summary_select(@event)
 #invitation{:style => "display:none;"}
-  .background_holder{ :style => "#{background_image_css(@event)}", :strech => @event.design.no_repeat_background ? "false" : "true" }
+  .background_holder
+    %img.back{:src => "#{@event.design.card.url}"}
     != render(:partial => "rsvps/postcard", :locals => {:event => @event})

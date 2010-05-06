@@ -4,9 +4,9 @@
       .content-h
         .image
           %a{ :href => "#light_box_#{design.id}", :class => "nyroModal" }
-            != image_tag(design.preview_with_text.url(:medium), :alt => "")
+            != image_tag(design.preview.url(:medium), :alt => "")
       != update_design_link(event, design)
       %a.plus.nyroModal{ :href => "#light_box_#{design.id}" } +
   %div.lightbox{ :id => "light_box_#{design.id}", :style => 'display:none; width:670px; height:500px'}
-    != image_tag(design.preview_with_text.url(:lightbox))
+    != image_tag(design.preview.url(:lightbox))
     != update_design_link(event, design, "blue-btn-mdl")

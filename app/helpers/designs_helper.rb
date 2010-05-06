@@ -1,6 +1,6 @@
 module DesignsHelper
-  def title_holder(design)
-    haml_tag(:div, "Title goes here", :style => "position:relative;left:#{design.title_top_x}px; top:#{design.title_top_y}px; width:#{design.title_width}px; height:#{design.title_height}px; color:rgb(#{design.title_color}); text-align: #{design.text_align};border: 1px dashed green; font-size:30px")
+  def title_holder(design, pos)
+    haml_tag(:div, "Title goes here", :style => "position:#{pos};left:#{design.title_top_x}px; top:#{design.title_top_y}px; width:#{design.title_width}px; height:#{design.title_height}px; color:rgb(#{design.title_color}); text-align: #{design.text_align};border: 1px dashed green; font-size:30px")
   end
 
   def more_designs_link(category)

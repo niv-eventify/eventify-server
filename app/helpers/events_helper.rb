@@ -1,7 +1,7 @@
 module EventsHelper
   def invitation_preview(event)
     haml_tag(:div, :id => "invitation#{event.id}", :style => "display:none;") do
-      haml_tag(:div, :class => "background_holder", :style => "#{background_image_css(event)}", :strech => event.design.no_repeat_background ? "false" : "true") do
+      haml_tag(:div, :class => "background_holder") do
         yield
       end
     end
