@@ -16,6 +16,7 @@ class DesignsController < InheritedResources::Base
     if params[:event_id].to_i > 0
       @event = current_user.events.find(params[:event_id])
       @category = @event.category
+      @uploaded_pictures = UploadedPicture.find_all_by_event_id(@event.id)
     else
       design = Design.find(params[:design_id])
       @category = Category.find(params[:category_id])

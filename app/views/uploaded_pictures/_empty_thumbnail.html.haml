@@ -1,5 +1,5 @@
 %li
-  != link_to new_uploaded_picture_path, :class => "nyroModal uploadLink"  do
+  != link_to new_uploaded_picture_path(:event => @event), :class => "nyroModal uploadLink"  do
     %img{:src => "/images/img-sml-galllery-1.gif", :width => "75", :height => "76", :alt => "gallery-image"}
     %span
       = _("Upload Picture")

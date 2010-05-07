@@ -2,23 +2,23 @@
   .c
     .popup-heading
       %strong= _("Upload Picture")
-    - form_for(@uploaded_picture, :url => uploaded_pictures_path, :html => {:multipart => true, :class => "download-form"}) do |f|
+    - form_for(@uploaded_picture, :url => uploaded_pictures_path(:format => 'js'), :html => {:multipart => true, :target => 'upload_frame', :class => "download-form"}) do |f|
       = f.object.errors.on(:base)
+      != f.hidden_field :event_id, :value => "#{@event}"
       %fieldset
         .brown-box
           .brown-box-holder
             .f-row
               %label{:for => "file"}
                 = _("Select File")
-              %input#file.file{:type => "file", :size => "38"}
+              %input#file.file{:type => "file", :size => "38", :name => "uploaded_picture[pic]"}
             %p
               = _("File should be less than 3MB")
         .f-row
           %input#certify.input-check{:type => "checkbox"}
           %label{:for => "certify"}
             = _("The picture I uploaded does not violate any copyright laws")
-    .popup-btns
-      %a.btn{:href => "#"}
-        = _("Upload")
-      %a.btn{:href => "#"}
-        = _("Cancel")
+      .popup-btns
+        != link_to_function _("Upload"), "jQuery(this).parents('form').get(0).submit();", :class => "btn"
+        != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
+%iframe#upload_frame{:name => "upload_frame", :style => "width:1px;height:1px;border:0px", :src => "about:blank"}

@@ -39,4 +39,5 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resource   :ical, :controller => "ical"
   end
   map.resources :takings
+  map.resources :uploaded_pictures
 end
