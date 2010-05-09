@@ -1,0 +1,6 @@
+.side-box-heading
+  %h2= _("You bring")
+.side-box-content.takings
+  .scroll-container
+    %ul!= render(:partial => "takings/readonly_taking", :collection => resource.takings)
+  != link_to_remote _("change"), :url => rsvp_takings_path(resource.email_token), :method => :get, :html => {:class => "change-taking"}

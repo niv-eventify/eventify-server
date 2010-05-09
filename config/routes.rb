@@ -37,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :rsvps do |rsvp|
     rsvp.resources :other_guests
     rsvp.resource   :ical, :controller => "ical"
+    rsvp.resources :takings
   end
   map.resources :takings
 end

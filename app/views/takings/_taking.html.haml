@@ -6,4 +6,4 @@
   .sel-holder
     - # rails bug, f.select doesn't accept index
     != select_tag "guest[takings_attributes][#{index}][amount]", options_for_select((0..(tf.object.thing.left_to_bring + tf.object.amount.to_i)).to_a, tf.object.amount)
-  %span.name= "#{tf.object.thing.name} x %{count}" % {:count => tf.object.thing.amount}
+  %span.name.short= "#{tf.object.thing.name} x %{count}" % {:count => tf.object.thing.amount}

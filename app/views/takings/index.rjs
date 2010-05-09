@@ -1,0 +1,2 @@
+page << "jQuery('.holder.takings-content').html(#{render(:partial => "takings/index").to_json});"
+page << "jQuery('.side-box-content.takings select').customSelect();"

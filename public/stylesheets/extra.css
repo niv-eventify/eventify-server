@@ -395,6 +395,12 @@ li.thing span.name {
 	padding:0 4px;
 }
 
+li.thing span.name.short {width:200px;}
+
+.hebrew li.thing span.name {
+	float:right;
+}
+
 li.thing.active span.name {
 	color:#888;
 }
@@ -417,11 +423,11 @@ li.thing.active span.name {
 .side-box-row span.rsvp a {
 	color:#41BDCD;
 	padding:0 10px;
-	font-weight:normal;
 	font-size:11px;
 	text-decoration:underline;
 	display:block;
 	float:right;
+	font-weight:bold;
 }
 
 .hebrew .side-box-row span.rsvp a {
@@ -566,4 +572,15 @@ li.thing.active span.name {
 
 .stage-3 .form label {
 	width:auto;
+}
+
+li.thing {clear:both;list-style: none;}
+
+.change-taking {
+	color:#41BDCD;
+	font-weight:bold;
+}
+
+li.thing .sel-holder {
+	width:60px;
 }

@@ -1,12 +1,18 @@
 class TakingsController < InheritedResources::Base
   defaults :resource_class => Guest, :collection_name => 'guests', :instance_name => 'guest', :route_instance_name => "taking"
 
-  actions :update, :destroy
+  actions :index, :update, :destroy
   after_filter :clear_flash
   before_filter :require_user, :only => :destroy
-  belongs_to :event, :optional => true
+  belongs_to :event, :rsvp, :optional => true
 
   # update
+
+  def index
+    respond_to do |wants|
+      wants.js
+    end
+  end
 
   def destroy
     resource.destroy
@@ -19,7 +25,7 @@ protected
       e = current_user.events.find(params[:event_id])
       @resource = e.takings.find(params[:id])
     else
-      @resource = Guest.find_by_email_token(params[:id])
+      @resource = Guest.find_by_email_token(params[:id] || params[:rsvp_id])
     end
   end
 end

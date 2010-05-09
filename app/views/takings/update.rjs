@@ -1,2 +1,1 @@
-page << "jQuery('.side-box-content.takings').html(#{render(:partial => "takings/form").to_json})"
-page << "jQuery('.side-box-content.takings select').customSelect();"
+page << "jQuery('.holder.takings-content').html(#{render(:partial => "takings/status").to_json});"
