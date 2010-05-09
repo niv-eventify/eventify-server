@@ -1,1 +1,1 @@
-page << "jQuery('.rsvp-form').html(#{render(:partial => "edit").to_json})"
+page << "window.location.href = window.location.href"
