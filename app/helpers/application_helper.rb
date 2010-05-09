@@ -99,4 +99,11 @@ module ApplicationHelper
     haml_concat _("Next event:")
     haml_concat link_to(truncate(h(@next_event.name), 12), summary_path(@next_event))
   end
+
+  def show_errors_for(page, errors, selector_prefix)
+    return if errors.blank?
+    errors = [errors] unless errors.is_a?(Array)
+    page << "jQuery('#{selector_prefix}').addClass('error');"
+    page << "jQuery('#{selector_prefix} div.input-bg-uni').after(#{content_tag(:p, errors.join(", "), :class => "error-msg").to_json});"
+  end
 end

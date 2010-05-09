@@ -1,8 +1,12 @@
+page << "jQuery('td.error p.error-msg').remove();"
+page << "jQuery('td.error').removeClass('error');"
+page << "jQuery('#adding_thing').removeAttr('disabled');"
+
 if @thing.new_record?
+  show_errors_for(page, @thing.errors.on(:name), "tr#new_thing_row td.t-col-1")
+  show_errors_for(page, @thing.errors.on(:amount), "tr#new_thing_row td.t-col-2")
   page << "$('td.error:first input').focus()"
 else
-  page["#thing tbody"].append render(:partial => "thing", :object => @thing)
-  @thing = nil # rerender empty form
+  page << "jQuery('#new_thing_row').before(#{render(:partial => "thing", :object => @thing).to_json})"
+  page << "jQuery('#new_thing').get(0).reset();"
 end
-
-page[:new_thing].replaceWith render(:partial => "new")

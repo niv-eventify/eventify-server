@@ -3,9 +3,9 @@ page << "jQuery('td.error').removeClass('error');"
 page << "jQuery('#adding_guest').removeAttr('disabled');"
 
 if @guest.new_record?
-  show_errors_for(page, :name, "t-col-1")
-  show_errors_for(page, :email, "t-col-2")
-  show_errors_for(page, :mobile_phone, "t-col-3")
+  show_errors_for(page, @guest.errors.on(:name), "tr#new_guest_row td.t-col-1")
+  show_errors_for(page, @guest.errors.on(:email), "tr#new_guest_row td.t-col-2")
+  show_errors_for(page, @guest.errors.on(:mobile_phone), "tr#new_guest_row td.t-col-3")
   page << "jQuery('td.error:first input').focus();"
 else
   page << "jQuery('#new_guest_row').before(#{render(:partial => "guest", :object => @guest).to_json})"

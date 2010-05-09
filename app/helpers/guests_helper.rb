@@ -100,12 +100,4 @@ module GuestsHelper
       });
     JAVASCRIPT
   end
-
-  def show_errors_for(page, attribute, td_class)
-    errors = @guest.errors.on(attribute)
-    return if errors.blank?
-    errors = [errors] unless errors.is_a?(Array)
-    page << "jQuery('tr#new_guest_row td.#{td_class}').addClass('error');"
-    page << "jQuery('tr#new_guest_row td.#{td_class} div.input-bg-uni').after(#{content_tag(:p, errors.join(", "), :class => "error-msg").to_json});"
-  end
 end
