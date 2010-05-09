@@ -29,6 +29,7 @@
           .arrival-container
             .arr-row
               - event_rsvp_summary_select(@event)
+!= render(:partial => "toolbar_preview")
 #invitation{:style => "display:none;"}
   .background_holder
     %img.back{:src => "#{@event.design.card.url}"}

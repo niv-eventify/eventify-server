@@ -32,6 +32,15 @@ $(document).ready(function(){
 	$("div[id ^= 'invitation']").each(function(){
 		rsvps.adjust_dialog_size($(this).attr("id"));
 	})
+	$('.toolbar_preview').appendTo('body');
+    $('a.preview.nyroModal').nyroModal({
+		endShowContent: function(elts, settings){
+			jQuery('.toolbar').show();
+		},
+		endRemove: function(elts, settings){
+			jQuery('.toolbar').hide();
+		}
+	});
 });
 $(window).load(function () {
 	if($(".envelope").length > 0) {

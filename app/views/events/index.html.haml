@@ -10,3 +10,4 @@
   - events_navigation(true) do
     != render(:partial => "my_event", :collection => collection)
     != will_paginate(collection, :renderer => DesignsWillPaginate)
+!= render(:partial => "toolbar_preview")

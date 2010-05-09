@@ -14,7 +14,7 @@
     %p
       %strong= _("Place:")
       = event.location
-  %p!= link_to _("Preview"), "#invitation#{event.id}", :class => "more nyroModal"
+  %p!= link_to _("Preview"), "#invitation#{event.id}", :class => "more preview nyroModal"
 - invitation_preview(event) do
   %img.back{:src => "#{event.design.card.url}"}
   != render(:partial => "rsvps/postcard", :locals => {:event => event})

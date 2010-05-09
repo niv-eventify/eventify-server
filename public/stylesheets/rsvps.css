@@ -45,6 +45,10 @@
 	height:64px;
 	z-index: 300;
 }
+.toolbar_preview{
+	position: fixed;
+	display: none;
+}
 .toolbar a{
 	color:#523733;
 	text-decoration:none;
