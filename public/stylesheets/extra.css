@@ -27,7 +27,7 @@ a.signup-out {
 .form ol li.error .input-bg-alt { background-position: 0 -24px !important;}
 
 .info-table.things {
-	width: auto;
+	width: 650px;
 }
 
 * {
@@ -542,3 +542,15 @@ li.thing.active span.name {
 
 .things td.t-col-3 {width: auto !important;}
 
+.emails-phones {
+	background: url("/images/coctails.gif") no-repeat scroll 723px 1px transparent;
+	min-height:200px;
+}
+
+* html .emails-phones {
+	height:200px;
+}
+
+.hebrew .emails-phones {
+	background: url("/images/coctails.gif") no-repeat scroll 48px 1px transparent;
+}
