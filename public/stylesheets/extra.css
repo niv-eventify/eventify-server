@@ -564,3 +564,6 @@ li.thing.active span.name {
 	background: url("/images/coctails.gif") no-repeat scroll 48px 1px transparent;
 }
 
+.stage-3 .form label {
+	width:auto;
+}

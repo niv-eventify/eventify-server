@@ -33,6 +33,18 @@ describe RsvpsController do
       get :show, :id => @guest.email_token
       response.should redirect_to("/rsvps/#{@guest.email_token}?locale=he")
     end
+
+    it "should render guests" do
+      @guest.event.stub!(:allow_seeing_other_guests).and_return(true)
+      get :show, :id => @guest.email_token, :more => "true"
+      response.body.should =~ /Guests/
+    end
+
+    it "should not render guest" do
+      @guest.event.stub!(:allow_seeing_other_guests).and_return(false)
+      get :show, :id => @guest.email_token, :more => "true"
+      response.body.should !~ /Guests/
+    end
   end
 
 end

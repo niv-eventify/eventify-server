@@ -5,6 +5,7 @@ Factory.define :event do |event|
   event.location_name "foobar"
   event.association :user, :factory => :active_user
   event.starting_at 10.days.from_now
+  event.language "en"
 end
 
 Factory.define :event_with_daily_summary, :parent => :event do |event|

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100505063715) do
+ActiveRecord::Schema.define(:version => 20100509150020) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -111,22 +111,23 @@ ActiveRecord::Schema.define(:version => 20100505063715) do
     t.datetime "ending_at"
     t.string   "location_name"
     t.string   "location_address"
-    t.string   "map_link",                :limit => 2048
+    t.string   "map_link",                  :limit => 2048
     t.string   "map_file_name"
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
-    t.string   "guest_message",           :limit => 345
+    t.string   "guest_message",             :limit => 345
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stage_passed"
     t.datetime "last_invitation_sent_at"
-    t.string   "language",                :limit => 16
+    t.string   "language",                  :limit => 16
     t.string   "host_mobile_number"
     t.string   "sms_message"
     t.datetime "rsvp_summary_send_at"
-    t.integer  "rsvp_summary_send_every",                 :default => 0
+    t.integer  "rsvp_summary_send_every",                   :default => 0
     t.datetime "last_summary_sent_at"
+    t.boolean  "allow_seeing_other_guests",                 :default => true
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"
@@ -256,15 +257,6 @@ ActiveRecord::Schema.define(:version => 20100505063715) do
   end
 
   add_index "translation_texts", ["translation_key_id", "locale"], :name => "index_translation_texts_on_translation_key_id_and_locale", :unique => true
-
-  create_table "uploaded_pictures", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "file_name"
-    t.string   "content_type"
-    t.integer  "file_size"
-    t.datetime "updated_at"
-    t.datetime "created_at"
-  end
 
   create_table "users", :force => true do |t|
     t.string   "name",                :limit => 48
