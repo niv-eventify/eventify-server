@@ -1,1 +1,1 @@
-# do nothing
+refresh_thing_row(page, resource.thing)

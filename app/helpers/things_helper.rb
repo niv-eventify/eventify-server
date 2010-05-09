@@ -9,8 +9,8 @@ module ThingsHelper
     end
   end
 
-  def link_to_remove_thing(event, thing)
-    link_to_remote "del", :url => event_thing_path(event, thing), :method => :delete, 
+  def link_to_remove_thing(thing)
+    link_to_remote "del", :url => event_thing_path(thing.event_id, thing), :method => :delete, 
       :confirm => _("Are you sure?"), :html => {:class => "bin"}, :before => "$('##{dom_id(thing)}').hide()"
   end
 
@@ -24,6 +24,6 @@ module ThingsHelper
   end
 
   def refresh_thing_row(page, thing)
-    page << "jQuery('tr##{dom_id(thing)}').replaceWith(#{render(:partial => "thing", :object => thing).to_json});"
+    page << "jQuery('tr##{dom_id(thing)}').replaceWith(#{render(:partial => "things/thing", :object => thing).to_json});"
   end
 end

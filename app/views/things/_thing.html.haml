@@ -1,7 +1,10 @@
 %tr[thing]
 
   - info_table_column(1) do
-    = thing.name
+    - if thing.amount_picked > 0
+      != link_to_function h(thing.name), "alert('#{_("Some guests already selected this item to bring, please remove them from the list before changing the name")}')"
+    - else
+      - link_to_inline_edit(thing, :name)
 
   - info_table_column(2) do
     - link_to_inline_edit(thing, :amount)
@@ -12,4 +15,4 @@
     != render(:partial => "things/taking", :collection => thing.takings)
 
   - info_table_column do
-    != link_to_remove_thing(@event, thing)
+    != link_to_remove_thing(thing)
