@@ -46,7 +46,7 @@ module GuestsHelper
     page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
   end
 
-  def render_edit_form(page, guest, attribute)
+  def guest_edit_form(page, guest, attribute)
     page << <<-JAVASCRIPT
      jQuery('.inline_#{dom_id(guest)}_#{attribute}').parents('div.cell-bg').
       html(#{render(:partial => "inline", :locals => {:resource => guest, :attribute => attribute}).to_json}).

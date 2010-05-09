@@ -1,0 +1,1 @@
+thing_edit_form(page, resource, params[:attribute])

@@ -22,5 +22,9 @@ class Thing < ActiveRecord::Base
 
   def validate
     errors.add(:base, _("already would be brought by somebody else")) if amount.to_i < 0 && amount_picked > 0
+    if left_to_bring < 0
+      self.amount = amount_picked
+      errors.add(:amount, _("some guests already selected this item to bring, please remove them from the list before changing the amounts"))
+    end
   end
 end

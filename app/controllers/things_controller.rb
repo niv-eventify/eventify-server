@@ -1,8 +1,8 @@
 class ThingsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
-  actions :index, :create, :update, :destroy
-  respond_to :js, :only => [:create, :update, :destroy]
+  actions :index, :create, :update, :destroy, :edit, :update
+  respond_to :js, :only => [:create, :update, :destroy, :edit]
 
   after_filter :remove_flash
 
@@ -10,6 +10,30 @@ class ThingsController < InheritedResources::Base
   # create
   # destroy
   # update
+
+  def edit
+    raise unless resource.has_attribute?(params[:attribute])
+    edit!
+  end
+
+  def update
+    update! do |success, failure|
+      success.js do
+        if params[:attribute]
+          render(:update) {|page| refresh_thing_row(page, resource) }
+        else
+          render(:nothing => true)
+        end
+      end
+      failure.js do
+        if params[:attribute]
+          render(:update) {|page| thing_edit_form(page, resource, params[:attribute])}
+        else
+          render(:nothing => true)
+        end
+      end
+    end
+  end
 
 protected
   

@@ -4,7 +4,7 @@
     = thing.name
 
   - info_table_column(2) do
-    = thing.amount
+    - link_to_inline_edit(thing, :amount)
     - unless thing.amount_picked.to_i.zero?
       = "(#{thing.amount_picked})"
 
