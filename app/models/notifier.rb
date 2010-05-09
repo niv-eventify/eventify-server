@@ -24,6 +24,14 @@ class Notifier < ActionMailer::Base
     body        :event => event, :guests_groups => guests_groups, :summary_since => summary_since, :url => event_url(event)
   end
 
+  def taking_removed(guest, thing)
+    subject     guest.event.name
+    recipients  [guest.email_recipient]
+    from        "noreply@#{domain}"
+    sent_on     Time.now.utc
+    body        :guest => guest, :thing => thing, :url => rsvp_url(guest.email_token, :more => true)
+  end
+
 protected
 
   def domain

@@ -522,6 +522,11 @@ li.thing.active span.name {
 	margin:0 0 5px 5px;
 	float:left;
 	border-radius:5px;
+	-moz-border-radius:5px;
+}
+
+.hebrew .rounded {
+	float:right;
 }
 
 .taking-remove {
@@ -532,6 +537,7 @@ li.thing.active span.name {
 	display:inline-block;
 	vertical-align:middle;
 	margin: -2px 0px 0px 7px;
+	text-decoration:none;
 }
 
 .hebrew .taking-remove {
@@ -540,10 +546,12 @@ li.thing.active span.name {
 
 .taking-remove:hover {
 	background-position:0 -7px;
+	text-decoration:none;
 }
 
 .taking-remove:active {
 	background-position:0 -14px;
+	text-decoration:none;
 }
 
 .things td.t-col-3 {width: auto !important;}

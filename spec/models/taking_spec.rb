@@ -53,6 +53,16 @@ describe Taking do
         @thing.reload.amount_picked.should == 0
         @thing.left_to_bring.should == 5
       end
+
+      it "should send email to guest when taking is removed" do
+        Notifier.should_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        @taking.destroy
+      end
+
+      it "should send email to guest when whole thing is removed" do
+        Notifier.should_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        @thing.destroy
+      end
     end
   end
 end

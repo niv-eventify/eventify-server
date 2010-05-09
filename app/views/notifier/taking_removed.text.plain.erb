@@ -1,0 +1,13 @@
+<%= s_("taking removed|Hello %{username},") % {:username => @guest.name} %>
+
+<%= _("You no longed need to bring %{thing} to %{event} because host removed it from the list.") % {:thing => @thing.name, :event => @guest.event.name} %>
+
+<%= _("You can pick some other things to bring by following this URL:") %>
+<%= @url %>
+
+
+<%= _("Do not reply to this email.
+
+Thank you,
+Eventify Team.
+") %>

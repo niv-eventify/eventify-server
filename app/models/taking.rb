@@ -27,4 +27,9 @@ class Taking < ActiveRecord::Base
     end
     self.thing.save if self.thing.changed?
   end
+
+  after_destroy :notifiy_guest
+  def notifiy_guest
+    Notifier.send_later(:deliver_taking_removed, guest, thing)
+  end
 end

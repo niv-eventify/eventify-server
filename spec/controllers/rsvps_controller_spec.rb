@@ -24,7 +24,7 @@ describe RsvpsController do
 
     it "should be able to change rsvp" do
       xhr :put, :update, :id => @guest.email_token, :guest => {:rsvp => 2}
-      response.should be_success
+      response.should redirect_to("/rsvps/#{@guest.email_token}?more=true")
       @guest.reload.rsvp.should == 2
     end
 
