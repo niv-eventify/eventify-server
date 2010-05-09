@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-05-05 16:59+0300\n"
+"POT-Creation-Date: 2010-05-09 20:31+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -99,7 +99,7 @@ msgid "Activate Account"
 msgstr ""
 
 #: app/views/contacts/new.html.haml:17 app/views/guests/_new.html.haml:5
-#: app/views/things/_form.html.haml:4
+#: app/views/things/_form.html.haml:5
 msgid "Add"
 msgstr ""
 
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Add reminder"
 msgstr ""
 
-#: app/views/things/index.html.haml:14
+#: app/views/things/index.html.haml:15
 msgid "Add things you want your guests to bring with them."
 msgstr ""
 
@@ -139,12 +139,8 @@ msgstr ""
 msgid "Address Book"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:29 app/views/summaries/show.html.haml:20
+#: app/views/rsvps/_info.html.haml:19 app/views/summaries/show.html.haml:20
 msgid "Address:"
-msgstr ""
-
-#: app/views/events/_selected_design.html.haml:13
-msgid "Advanced design options"
 msgstr ""
 
 #: app/views/guests/index.html.haml:26
@@ -289,6 +285,7 @@ msgid "Design and UI %{link}"
 msgstr ""
 
 #: app/views/notifier/guests_summary.text.plain.erb:22
+#: app/views/notifier/taking_removed.text.plain.erb:9
 msgid ""
 "Do not reply to this email.\n"
 "\n"
@@ -351,6 +348,7 @@ msgstr ""
 msgid "Enter event details"
 msgstr ""
 
+#: app/views/events/_toolbar_preview.html.haml:5
 #: app/views/rsvps/_toolbar.html.haml:5
 msgid "Event Details"
 msgstr ""
@@ -388,7 +386,7 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: app/views/things/index.html.haml:16
+#: app/views/things/index.html.haml:17
 msgid "Every guest would be able to pick one ore more items to bring."
 msgstr ""
 
@@ -408,7 +406,7 @@ msgstr ""
 msgid "Filter by RSVP:"
 msgstr ""
 
-#: app/helpers/events_wizard_helper.rb:51
+#: app/helpers/events_wizard_helper.rb:47
 msgid "Finish"
 msgstr ""
 
@@ -434,9 +432,13 @@ msgstr ""
 msgid "Guest List"
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:11
+#: app/views/rsvps/show_more.html.haml:12
 #: app/views/summaries/show.html.haml:34
 msgid "Guests"
+msgstr ""
+
+#: app/views/events/_form.html.haml:46
+msgid "Guests can see other attendees"
 msgstr ""
 
 #: app/views/summaries/show.html.haml:26
@@ -574,7 +576,7 @@ msgstr ""
 msgid "Is Admin?"
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:13
+#: app/views/rsvps/show_more.html.haml:14
 msgid "Loading guests..."
 msgstr ""
 
@@ -592,6 +594,7 @@ msgstr ""
 msgid "MORE"
 msgstr ""
 
+#: app/views/events/_toolbar_preview.html.haml:7
 #: app/views/rsvps/_toolbar.html.haml:7
 msgid "Map"
 msgstr ""
@@ -745,7 +748,7 @@ msgstr ""
 msgid "Past events"
 msgstr ""
 
-#: app/models/event.rb:123
+#: app/models/event.rb:124
 msgid "Payments are not completed yet"
 msgstr ""
 
@@ -777,7 +780,8 @@ msgstr ""
 msgid "Prev"
 msgstr ""
 
-#: app/helpers/events_wizard_helper.rb:50 app/views/events/_info.html.haml:17
+#: app/helpers/events_wizard_helper.rb:46
+#: app/helpers/events_wizard_helper.rb:54 app/views/events/_info.html.haml:17
 msgid "Preview"
 msgstr ""
 
@@ -833,6 +837,7 @@ msgstr ""
 msgid "RSVP yes"
 msgstr ""
 
+#: app/views/events/_toolbar_preview.html.haml:8
 #: app/views/rsvps/_toolbar.html.haml:8
 msgid "RSVPS"
 msgstr ""
@@ -951,6 +956,12 @@ msgstr ""
 msgid "Site Map"
 msgstr ""
 
+#: app/views/things/_thing.html.haml:5
+msgid ""
+"Some guests already selected this item to bring, please remove them from the "
+"list before changing the name"
+msgstr ""
+
 #: app/views/welcome/_promo.html.haml:16
 msgid "Start Now"
 msgstr ""
@@ -972,7 +983,7 @@ msgid "Text/SMS"
 msgstr ""
 
 #: app/views/guests/index.html.haml:15 app/views/summaries/show.html.haml:48
-#: app/views/takings/_edit.html.haml:4 app/views/things/index.html.haml:8
+#: app/views/takings/_index.html.haml:2 app/views/things/index.html.haml:8
 msgid "Things to bring"
 msgstr ""
 
@@ -1008,11 +1019,11 @@ msgstr ""
 msgid "Welcome to %{domain}"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:25 app/views/summaries/show.html.haml:17
+#: app/views/rsvps/_info.html.haml:15 app/views/summaries/show.html.haml:17
 msgid "When:"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:22 app/views/summaries/show.html.haml:15
+#: app/views/rsvps/_info.html.haml:12 app/views/summaries/show.html.haml:15
 msgid "Where:"
 msgstr ""
 
@@ -1027,6 +1038,10 @@ msgstr ""
 #: app/models/guest.rb:71 app/views/guests/index.html.haml:27
 #: app/views/rsvps/_new.html.haml:4
 msgid "Yes"
+msgstr ""
+
+#: app/views/takings/_status.html.haml:2
+msgid "You bring"
 msgstr ""
 
 #: app/views/welcome/_container123.html.haml:20
@@ -1045,6 +1060,10 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
+#: app/views/notifier/taking_removed.text.plain.erb:5
+msgid "You can pick some other things to bring by following this URL:"
+msgstr ""
+
 #: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:49
 msgid "You must be an admin to access this page"
 msgstr ""
@@ -1057,7 +1076,13 @@ msgstr ""
 msgid "You must be logged out to access this page"
 msgstr ""
 
-#: app/models/event.rb:177
+#: app/views/notifier/taking_removed.text.plain.erb:3
+msgid ""
+"You no longed need to bring %{thing} to %{event} because host removed it "
+"from the list."
+msgstr ""
+
+#: app/models/event.rb:178
 msgid "You've been invited to %{event_name}"
 msgstr ""
 
@@ -1250,6 +1275,10 @@ msgstr ""
 
 #: app/views/rsvps/_edit.html.haml:16 app/views/takings/_form.html.haml:11
 msgid "cancel"
+msgstr ""
+
+#: app/views/takings/_status.html.haml:6
+msgid "change"
 msgstr ""
 
 #: app/views/rsvps/_edit.html.haml:3
@@ -1574,12 +1603,18 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/models/event.rb:122 app/models/reminder.rb:63
+#: app/models/event.rb:123 app/models/reminder.rb:63
 msgid "should be in a future"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:32
+#: app/views/rsvps/_info.html.haml:22
 msgid "show map"
+msgstr ""
+
+#: app/models/thing.rb:27
+msgid ""
+"some guests already selected this item to bring, please remove them from the "
+"list before changing the amounts"
 msgstr ""
 
 #: locale/yml_import.rb:5
@@ -1596,6 +1631,10 @@ msgstr ""
 
 #: locale/yml_import.rb:26
 msgid "support.select.prompt"
+msgstr ""
+
+#: app/views/notifier/taking_removed.text.plain.erb:1
+msgid "taking removed|Hello %{username},"
 msgstr ""
 
 #: locale/yml_import.rb:11
@@ -1618,10 +1657,11 @@ msgstr ""
 msgid "time.pm"
 msgstr ""
 
+#: app/views/events/_toolbar_preview.html.haml:6
 #: app/views/rsvps/_toolbar.html.haml:6
 msgid "to Calendar"
 msgstr ""
 
-#: app/helpers/guests_helper.rb:74
+#: app/helpers/guests_helper.rb:49
 msgid "yes"
 msgstr ""
