@@ -542,3 +542,11 @@ li.thing.active span.name {
 
 .things td.t-col-3 {width: auto !important;}
 
+.content-box-holder {
+	width: 561px;
+	padding: 15px 0px 13px 30px;
+}
+
+.hebrew .content-box-holder {
+	padding: 15px 28px 13px 0px;
+}

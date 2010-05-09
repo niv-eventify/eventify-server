@@ -50,6 +50,9 @@ module EventsWizardHelper
               haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")
               haml_concat link_to(_("Finish"), edit_invitation_path(event), :class => "finish-btn")
             end
+            if 2 == stage_number
+              haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")
+            end
           end
         end
       end

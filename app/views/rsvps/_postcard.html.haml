@@ -5,4 +5,5 @@
   - if !event.design.is_seperated_title?
     .title{:style => "#{title_position_css(event)}"}
       != event.name
-  != event.guest_message
+  .msg
+    != event.guest_message
