@@ -41,14 +41,14 @@ module EventsWizardHelper
             if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
               haml_concat wizard_prev_link(prev_lnk)
             end
-
-            if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
-              haml_concat wizard_next_link(next_link)
-            end
           
             if 4 == stage_number #last
               haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")
               haml_concat link_to(_("Finish"), edit_invitation_path(event), :class => "finish-btn")
+            else
+              if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
+                haml_concat wizard_next_link(next_link)
+              end
             end
             if 2 == stage_number
               haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")

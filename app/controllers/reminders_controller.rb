@@ -1,6 +1,6 @@
 class RemindersController < InheritedResources::Base
   before_filter :require_user
-  after_filter :remove_flash
+  after_filter :clear_flash
   belongs_to :event
   layout nil
 

@@ -27,10 +27,6 @@ protected
 
   alias :authenticate_translations_admin :require_admin
 
-  def remove_flash
-    flash[:notice] = nil
-  end
-
   def adjust_format_for_iphone
     request.format = :iphone if iphone_request?
   end

@@ -17,8 +17,8 @@ class Design < ActiveRecord::Base
     :path =>        "designs/:id/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
-      :access_key_id     => GlobalPreference.get(:s3_key),
-      :secret_access_key => GlobalPreference.get(:s3_secret),
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
     }
   attr_accessible :card
   validates_attachment_presence :card

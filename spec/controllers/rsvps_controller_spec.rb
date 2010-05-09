@@ -9,7 +9,7 @@ describe RsvpsController do
     before(:each) do
       @guest = Factory.create(:guest_with_token)
       @guest.reload.rsvp.should be_nil
-      @guest.event.stub!(:design).and_return(stub_model(Design))
+      @guest.event.stub!(:design).and_return(stub_model(Design, :text_top_y => 1, :text_top_x => 1, :text_width => 100, :text_height => 100))
       preview = mock("preview")
       preview.stub!(:url).and_return("foobar")
       @guest.event.design.stub!(:preview).and_return(preview)

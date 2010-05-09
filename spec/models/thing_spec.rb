@@ -30,6 +30,13 @@ describe Thing do
       @thing.should be_valid
     end
 
+    it "should not allow reducing amounts" do
+      @thing.amount_picked = 12
+      @thing.amount = 8
+      @thing.should_not be_valid
+      @thing.amount.should == 12
+    end
+
     it "amount taken validations" do
       @thing.name = "some name"
     

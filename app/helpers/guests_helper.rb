@@ -29,34 +29,9 @@ module GuestsHelper
     end
   end
 
-  def guest_remote_form(guest, attribute)
-    klass = ""
-    klass << " short" if !guest.send(attribute).is_a?(String)
-    fields_opts = {:input_css_class => klass, 
-      :container_class => "inline_#{dom_id(guest)}_#{attribute}",
-      :onblur => "jQuery(this).parents('form').get(0).onsubmit()"}
-    form_remote_for :guest, guest, :builder => TableCellFormBuilder::Builder, :url => event_guest_path(guest.event_id, guest), :method => :put do |f|
-      haml_concat f.text_field(attribute, fields_opts)
-      haml_concat hidden_field_tag("attribute", attribute)
-    end
-  end
-
   def refresh_guest_row(page, guest)
     page << "jQuery('tr##{dom_id(guest)}').replaceWith(#{render(:partial => "guest", :object => guest).to_json});"
     page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
-  end
-
-  def render_edit_form(page, guest, attribute)
-    page << <<-JAVASCRIPT
-     jQuery('.inline_#{dom_id(guest)}_#{attribute}').parents('div.cell-bg').
-      html(#{render(:partial => "inline", :locals => {:resource => guest, :attribute => attribute}).to_json}).
-      find('.input-text:first').focus().keyup(function(e){
-        if (27 == e.which) {
-          jQuery.ajax({url: #{event_guest_path(guest.event_id, guest).to_json}, type:'get', dataType:'script'});
-          return false;
-        }
-      });
-    JAVASCRIPT
   end
 
   def guest_remote_rsvp(event, guest)
@@ -82,30 +57,26 @@ module GuestsHelper
 
   def change_observers
     javascript_tag <<-JAVASCRIPT
-      jQuery("#guest_email").keyup(function(){
-        if ("" != jQuery(this).val()) {
-          jQuery("#guest_send_email").attr("checked", "checked").redraw_customCheckbox();;
+      jQuery(function(){
+        var ef = function() {
+          if ("" != jQuery(this).val()) {
+            jQuery("#guest_send_email").attr("checked", "checked").redraw_customCheckbox();;
+          }
+          else {
+            jQuery("#guest_send_email").removeAttr("checked").redraw_customCheckbox();
+          }
         }
-        else {
-          jQuery("#guest_send_email").removeAttr("checked").redraw_customCheckbox();
-        }
-      });
-      jQuery("#guest_mobile_phone").keyup(function(){
-        if ("" != jQuery(this).val()) {
-          jQuery("#guest_send_sms").attr("checked", "checked").redraw_customCheckbox();
-        }
-        else {
-          jQuery("#guest_send_sms").removeAttr("checked").redraw_customCheckbox();
-        }
+        jQuery("#guest_email").keyup(ef).blur(ef).change(ef);
+        var sf = function(){
+          if ("" != jQuery(this).val()) {
+            jQuery("#guest_send_sms").attr("checked", "checked").redraw_customCheckbox();
+          }
+          else {
+            jQuery("#guest_send_sms").removeAttr("checked").redraw_customCheckbox();
+          }
+        };
+        jQuery("#guest_mobile_phone").keyup(sf).blur(sf).change(sf);
       });
     JAVASCRIPT
-  end
-
-  def show_errors_for(page, attribute, td_class)
-    errors = @guest.errors.on(attribute)
-    return if errors.blank?
-    errors = [errors] unless errors.is_a?(Array)
-    page << "jQuery('tr#new_guest_row td.#{td_class}').addClass('error');"
-    page << "jQuery('tr#new_guest_row td.#{td_class} div.input-bg-uni').after(#{content_tag(:p, errors.join(", "), :class => "error-msg").to_json});"
   end
 end
