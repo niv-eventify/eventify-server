@@ -57,21 +57,25 @@ module GuestsHelper
 
   def change_observers
     javascript_tag <<-JAVASCRIPT
-      jQuery("#guest_email").keyup(function(){
-        if ("" != jQuery(this).val()) {
-          jQuery("#guest_send_email").attr("checked", "checked").redraw_customCheckbox();;
+      jQuery(function(){
+        var ef = function() {
+          if ("" != jQuery(this).val()) {
+            jQuery("#guest_send_email").attr("checked", "checked").redraw_customCheckbox();;
+          }
+          else {
+            jQuery("#guest_send_email").removeAttr("checked").redraw_customCheckbox();
+          }
         }
-        else {
-          jQuery("#guest_send_email").removeAttr("checked").redraw_customCheckbox();
-        }
-      });
-      jQuery("#guest_mobile_phone").keyup(function(){
-        if ("" != jQuery(this).val()) {
-          jQuery("#guest_send_sms").attr("checked", "checked").redraw_customCheckbox();
-        }
-        else {
-          jQuery("#guest_send_sms").removeAttr("checked").redraw_customCheckbox();
-        }
+        jQuery("#guest_email").keyup(ef).blur(ef).change(ef);
+        var sf = function(){
+          if ("" != jQuery(this).val()) {
+            jQuery("#guest_send_sms").attr("checked", "checked").redraw_customCheckbox();
+          }
+          else {
+            jQuery("#guest_send_sms").removeAttr("checked").redraw_customCheckbox();
+          }
+        };
+        jQuery("#guest_mobile_phone").keyup(sf).blur(sf).change(sf);
       });
     JAVASCRIPT
   end
