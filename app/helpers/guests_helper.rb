@@ -29,34 +29,9 @@ module GuestsHelper
     end
   end
 
-  def guest_remote_form(guest, attribute)
-    klass = ""
-    klass << " short" if !guest.send(attribute).is_a?(String)
-    fields_opts = {:input_css_class => klass, 
-      :container_class => "inline_#{dom_id(guest)}_#{attribute}",
-      :onblur => "jQuery(this).parents('form').get(0).onsubmit()"}
-    form_remote_for :guest, guest, :builder => TableCellFormBuilder::Builder, :url => event_guest_path(guest.event_id, guest), :method => :put do |f|
-      haml_concat f.text_field(attribute, fields_opts)
-      haml_concat hidden_field_tag("attribute", attribute)
-    end
-  end
-
   def refresh_guest_row(page, guest)
     page << "jQuery('tr##{dom_id(guest)}').replaceWith(#{render(:partial => "guest", :object => guest).to_json});"
     page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
-  end
-
-  def guest_edit_form(page, guest, attribute)
-    page << <<-JAVASCRIPT
-     jQuery('.inline_#{dom_id(guest)}_#{attribute}').parents('div.cell-bg').
-      html(#{render(:partial => "inline", :locals => {:resource => guest, :attribute => attribute}).to_json}).
-      find('.input-text:first').focus().keyup(function(e){
-        if (27 == e.which) {
-          jQuery.ajax({url: #{event_guest_path(guest.event_id, guest).to_json}, type:'get', dataType:'script'});
-          return false;
-        }
-      });
-    JAVASCRIPT
   end
 
   def guest_remote_rsvp(event, guest)

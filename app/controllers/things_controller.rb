@@ -4,7 +4,7 @@ class ThingsController < InheritedResources::Base
   actions :index, :create, :update, :destroy, :edit, :update
   respond_to :js, :only => [:create, :update, :destroy, :edit]
 
-  after_filter :remove_flash
+  after_filter :clear_flash
 
   # index
   # create
@@ -27,7 +27,7 @@ class ThingsController < InheritedResources::Base
       end
       failure.js do
         if params[:attribute]
-          render(:update) {|page| thing_edit_form(page, resource, params[:attribute])}
+          render(:update) {|page| resource_edit_form(page, resource, params[:attribute])}
         else
           render(:nothing => true)
         end

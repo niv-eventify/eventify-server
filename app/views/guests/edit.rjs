@@ -1,1 +1,1 @@
-guest_edit_form(page, resource, params[:attribute])
+resource_edit_form(page, resource, params[:attribute])
