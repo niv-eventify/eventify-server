@@ -12,6 +12,7 @@ class RsvpsController < InheritedResources::Base
     resource.message_to_host = params[:guest][:message_to_host] if params[:guest][:message_to_host]
     resource.attendees_count = params[:guest][:attendees_count] if params[:guest][:attendees_count]
     resource.save!
+    redirect_to :action => "show", :id => resource.email_token, :more => "true"
   end
 
   def show
