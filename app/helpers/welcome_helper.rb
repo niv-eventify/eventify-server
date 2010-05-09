@@ -24,7 +24,9 @@ module WelcomeHelper
   end
 
   def categories_footer
-    all_enabled_categories.in_groups_of(5).each do |group|
+    groups = all_enabled_categories.count / 7
+    groups += 1 unless (all_enabled_categories.count % 7).zero?
+    all_enabled_categories.in_groups_of(groups).each do |group|
       haml_tag(:ul, :class => "list") do
         categories_links(group)
       end
