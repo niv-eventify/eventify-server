@@ -44,7 +44,7 @@ jQuery(document).ready(function(jQuery){
 				jQuery('#invitation .msg_holder .title').html(jQuery('#title').html());
 				change = true;
 			}
-			if(jQuery('#free_text').text() != jQuery('#invitation .msg_holder .msg').text()) {
+			if(jQuery('#free_text').length > 0 && jQuery('#free_text').text() != jQuery('#invitation .msg_holder .msg').text()) {
 				jQuery('#invitation .msg_holder .msg').html(jQuery('#free_text').html());
 				change = true;
 			}
