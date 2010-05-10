@@ -592,3 +592,7 @@ li.thing {clear:both;list-style: none;}
 li.thing .sel-holder {
 	width:60px;
 }
+
+.boxe-btm {
+	min-height: 160px;
+}
