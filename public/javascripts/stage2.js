@@ -8,7 +8,6 @@
   months_arr: [],
   seperated_title: false,
   prev_text: "",
-  preview_process_id: "",
   
   calcFontSize: function() {
     var loop_protection = 0;
@@ -99,11 +98,82 @@
     var textEnd = textStart >= 0 ? (textStart + safeVal.length) : -1;
     if(jQuery("#event_guest_message").getSelection().start > textStart && jQuery("#event_guest_message").getSelection().start < textEnd)
       jQuery("#event_guest_message").setSelection(textStart, textEnd);
+  },
+  setToolbarsPosition: function() {
+    var toolbarHeight = 22;
+    if(stage2.seperated_title){
+      var hebrewOffsetTitle = jQuery('#toolbar_title').width() + 10 - jQuery('.title-holder').width();
+      var hebrewOffsetMsg = jQuery('#toolbar_msg').width() + 10 - jQuery('.msg-holder').width();
+      jQuery("#toolbar_title").css("top",jQuery(".title-holder").offset().top - toolbarHeight + "px");
+      jQuery("#toolbar_msg").css("top",jQuery(".msg-holder").offset().top - toolbarHeight + "px");
+      if(jQuery('.hebrew').length > 0) {
+        jQuery("#toolbar_title").css("left",jQuery(".title-holder").offset().left - hebrewOffsetTitle + "px");
+        jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left - hebrewOffsetMsg + "px");
+      } else {
+        jQuery("#toolbar_title").css("left",jQuery(".title-holder").offset().left + "px");
+        jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left + "px");
+      }
+    }else{
+      var hebrewOffset = jQuery('#toolbar_title').width() + 10 - jQuery('.msg-holder').width();
+      jQuery("#toolbar_title").css("top",jQuery(".msg-holder").offset().top - toolbarHeight + "px");
+      jQuery("#toolbar_msg").css("top",jQuery(".msg-holder").offset().top + jQuery("#title").height() - toolbarHeight + "px");
+      if(jQuery('.hebrew').length > 0) {
+        jQuery("#toolbar_title").css("left",jQuery(".msg-holder").offset().left - hebrewOffset + "px");
+        jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left - hebrewOffset + "px");
+      } else {
+        jQuery("#toolbar_title").css("left",jQuery(".msg-holder").offset().left + "px");
+        jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left + "px");
+      }
+    }
+  },
+
+  initToolbars: function() {
+    jQuery('#toolbar_title li.a-l a').click(function(){
+        jQuery('#title').css("text-align","left");
+        return false;
+    });
+    jQuery('#toolbar_title li.a-c a').click(function(){
+        jQuery('#title').css("text-align","center");
+        return false;
+    });
+    jQuery('#toolbar_title li.a-r a').click(function(){
+        jQuery('#title').css("text-align","right");
+        return false;
+    });
+    jQuery('#toolbar_msg li.a-l a').click(function(){
+        jQuery('#free_text').css("text-align","left");
+        return false;
+    });
+    jQuery('#toolbar_msg li.a-c a').click(function(){
+        jQuery('#free_text').css("text-align","center");
+        return false;
+    });
+    jQuery('#toolbar_msg li.a-r a').click(function(){
+        jQuery('#free_text').css("text-align","right");
+        return false;
+    });
+    jQuery('#toolbar_title a.font-plus').click(function(){
+        stage2.change_font_size_by(1, "title");
+        return false;
+    });
+    jQuery('#toolbar_title a.font-minus').click(function(){
+        stage2.change_font_size_by(-1, "title");
+        return false;
+    });
+    jQuery('#toolbar_msg a.font-plus').click(function(){
+        stage2.change_font_size_by(1, "free_text");
+        return false;
+    });
+    jQuery('#toolbar_msg a.font-minus').click(function(){
+        stage2.change_font_size_by(-1, "free_text");
+        return false;
+    });
   }
 }
 jQuery(document).ready(function(){
   jQuery('select').customSelect();
   stage2.seperated_title = (jQuery(".title-holder").length == 1);
+  stage2.initToolbars();
   if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
     jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
   }
@@ -121,26 +191,10 @@ jQuery(document).ready(function(){
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
 
-  jQuery("#event_name").focus(function(){
-    stage2.preview_process_id = setInterval(function(){stage2.preview_text("event_name", "title")},200);
-  });
-  jQuery("#event_name").blur(function(){
-    clearInterval(stage2.preview_process_id);
-    stage2.preview_process_id = '';
-  });
-
   jQuery("#event_guest_message").click(function(){
     stage2.selectAllSafeValue(stage2.location);
     stage2.selectAllSafeValue(stage2.startDate);
     stage2.selectAllSafeValue(stage2.startTime);
-  });
-
-  jQuery("#event_guest_message").focus(function(){
-    stage2.preview_process_id = setInterval(function(){stage2.preview_text("event_guest_message", "free_text")},200);
-  });
-  jQuery("#event_guest_message").blur(function(){
-    clearInterval(stage2.preview_process_id);
-    stage2.preview_process_id = '';
   });
 
   jQuery("#event_guest_message").keyup(function(){
@@ -166,6 +220,8 @@ jQuery(document).ready(function(){
       jQuery(".msg-holder").css("border", "1px dashed red");
     else
       jQuery("#free_text").css("border", "1px dashed red");
+    stage2.setToolbarsPosition();
+    jQuery('#toolbar_msg').css("visibility", "visible");
   });
   jQuery("#event_guest_message").blur(function(){
     if(stage2.seperated_title)
@@ -178,6 +234,8 @@ jQuery(document).ready(function(){
       jQuery(".title-holder").css("border", "1px dashed red");
     else
       jQuery("#title").css("border", "1px dashed red");
+    stage2.setToolbarsPosition();
+    jQuery('#toolbar_title').css("visibility", "visible");
   });
   jQuery("#event_name").blur(function(){
     if(stage2.seperated_title)
@@ -192,6 +250,26 @@ jQuery(document).ready(function(){
   jQuery("#free_text").click(function(){
     jQuery("#event_guest_message").focus();
   });
+  jQuery(document).bind('mousedown', function(e){
+    e = e || event;
+    var t = e.target || e.srcElement;
+    t = jQuery(t);
 
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'free_text']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #free_text').length == 0;
+    if(clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "visible"){
+      jQuery('#toolbar_msg').css("visibility", "hidden");
+    }else if(!clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "hidden"){
+        stage2.setToolbarsPosition();
+        jQuery('#toolbar_msg').css("visibility", "visible");
+    }
+
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title').length == 0;;
+    if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
+      jQuery('#toolbar_title').css("visibility", "hidden");
+    }else if (!clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "hidden"){
+        stage2.setToolbarsPosition();
+        jQuery('#toolbar_title').css("visibility", "visible");
+    }
+  });
   jQuery(".form input:first").focus();
 });

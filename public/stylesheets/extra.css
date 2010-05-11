@@ -182,17 +182,17 @@ div.cmf-skinned-text {
 .msg-holder .title, .title-holder  .title{
   font-weight: bold;
   margin: 0;
-  font-size: 2.0em;
+  font-size: 22px;
   line-height: 1.2em;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
 }
 .msg-holder .free_text{
   margin: 0;
-  font-size: 1.6em;
+  font-size: 20px;
   line-height: 1.1em;
   font-weight: normal;
-  overflow-x: auto;
+  overflow-x: hidden;
   overflow-y: hidden;
 }
 .blue-btn-mdl {
@@ -595,4 +595,15 @@ li.thing .sel-holder {
 
 .boxe-btm {
 	min-height: 160px;
+}
+
+.tools-bar {
+	width: 308px;
+	visibility: hidden;
+}
+.hebrew .tools-bar {
+	direction: ltr;
+}
+.tools-bar a {
+	text-decoration: none;
 }
