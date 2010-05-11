@@ -38,7 +38,7 @@ class Event < ActiveRecord::Base
   validates_attachment_size :map, :less_than => 10.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
-    :location_name, :location_address, :map_link, :guest_message, :category, :design,
+    :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
     :allow_seeing_other_guests
     
 

@@ -9,14 +9,8 @@
 	z-index: 50;
 	position:relative;
 }
-.title_holder {
-	font-size: 32px;
-}
 .title {
 	position: relative;
-}
-.msg_holder {
-	font-size: 30px;
 }
 .title_holder, .msg_holder {
 	position: absolute;

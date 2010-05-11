@@ -41,10 +41,10 @@ class Design < ActiveRecord::Base
     ratio =   1.6     #fullsize/preview_size
 
     @stage2_preview_dimensions ||= {
-      :top =>    "#{text_top_y/ratio}px",
-      :left =>   "#{text_top_x/ratio}px",
-      :width =>  "#{text_width/ratio}px",
-      :height => "#{text_height/ratio}px",
+      :top =>    "#{(text_top_y/ratio).to_int}px",
+      :left =>   "#{(text_top_x/ratio).to_int}px",
+      :width =>  "#{(text_width/ratio).to_int}px",
+      :height => "#{(text_height/ratio).to_int}px",
       'text-align' => "#{text_align}",
       :color => "rgb(#{message_color})"
     }
@@ -63,10 +63,10 @@ class Design < ActiveRecord::Base
     }
     if !title_width.blank?
       res = res.merge({
-        :top =>    "#{title_top_y/ratio}px",
-        :left =>   "#{title_top_x/ratio}px",
-        :width =>  "#{title_width/ratio}px",
-        :height => "#{title_height/ratio}px"
+        :top =>    "#{(title_top_y/ratio).to_int}px",
+        :left =>   "#{(title_top_x/ratio).to_int}px",
+        :width =>  "#{(title_width/ratio).to_int}px",
+        :height => "#{(title_height/ratio).to_int}px"
       })
     end
     @stage2_title_dimensions ||= res

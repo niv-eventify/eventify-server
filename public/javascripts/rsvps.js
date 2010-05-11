@@ -25,6 +25,7 @@
 			jQuery(this).css("height", (parseInt(jQuery(this).css("height")) / minimized_by) + "px");
 			jQuery(this).css("top", (parseInt(jQuery(this).css("top")) / minimized_by) + "px");
 			jQuery(this).css("left", (parseInt(jQuery(this).css("left")) / minimized_by) + "px");
+			jQuery(this).css("font-size", (parseInt(jQuery(this).css("font-size")) / minimized_by) + "px");
 		});
 	}
 }

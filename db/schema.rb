@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100509150020) do
+ActiveRecord::Schema.define(:version => 20100511173607) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -128,6 +128,10 @@ ActiveRecord::Schema.define(:version => 20100509150020) do
     t.integer  "rsvp_summary_send_every",                   :default => 0
     t.datetime "last_summary_sent_at"
     t.boolean  "allow_seeing_other_guests",                 :default => true
+    t.integer  "title_font_size",                           :default => 35
+    t.integer  "msg_font_size",                             :default => 32
+    t.string   "title_text_align"
+    t.string   "msg_text_align"
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"

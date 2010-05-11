@@ -50,8 +50,15 @@
     }
   },
   change_font_size_by: function(delta, id) {
-      var font_size = jQuery("#" + id).css("font-size");
-      jQuery("#" + id).css("font-size", ((parseInt(font_size)+delta) + "px"));
+    var new_font_size = parseInt(jQuery("#" + id).css("font-size")) + delta;
+    jQuery("#" + id).css("font-size", new_font_size + "px");
+    if(id == "title") {
+      jQuery("#event_title_font_size").val(Math.floor(new_font_size * 1.6));
+      jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", Math.floor(new_font_size * 1.6) + "px");
+    } else {
+      jQuery("#event_msg_font_size").val(Math.floor(new_font_size * 1.6));
+      jQuery(".background_holder .msg").css("font-size", Math.floor(new_font_size * 1.6) + "px");
+    }
   },
   preview_text: function(sourceId, targetId) {
     var text = jQuery("#" + sourceId).val();
@@ -129,27 +136,39 @@
 
   initToolbars: function() {
     jQuery('#toolbar_title li.a-l a').click(function(){
-        jQuery('#title').css("text-align","left");
+        jQuery('#title').css('text-align','left');
+        jQuery('#event_title_text_align').val('left');
+        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","left");
         return false;
     });
     jQuery('#toolbar_title li.a-c a').click(function(){
         jQuery('#title').css("text-align","center");
+        jQuery('#event_title_text_align').val('center');
+        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","center");
         return false;
     });
     jQuery('#toolbar_title li.a-r a').click(function(){
         jQuery('#title').css("text-align","right");
+        jQuery('#event_title_text_align').val('right');
+        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","right");
         return false;
     });
     jQuery('#toolbar_msg li.a-l a').click(function(){
         jQuery('#free_text').css("text-align","left");
+        jQuery('#event_msg_text_align').val('left');
+        jQuery(".msg").css("text-align","left");
         return false;
     });
     jQuery('#toolbar_msg li.a-c a').click(function(){
         jQuery('#free_text').css("text-align","center");
+        jQuery('#event_msg_text_align').val('center');
+        jQuery(".msg").css("text-align","center");
         return false;
     });
     jQuery('#toolbar_msg li.a-r a').click(function(){
         jQuery('#free_text').css("text-align","right");
+        jQuery('#event_msg_text_align').val('right');
+        jQuery(".msg").css("text-align","right");
         return false;
     });
     jQuery('#toolbar_title a.font-plus').click(function(){
@@ -174,6 +193,7 @@ jQuery(document).ready(function(){
   jQuery('select').customSelect();
   stage2.seperated_title = (jQuery(".title-holder").length == 1);
   stage2.initToolbars();
+
   if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
     jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
   }
@@ -182,15 +202,19 @@ jQuery(document).ready(function(){
   }
   if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "")
     jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();
-  stage2.max_title_font_size = parseInt(jQuery("#title").css("font-size"));
-  stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
+  stage2.max_title_font_size = Math.floor(jQuery("#event_title_font_size").val()/1.6);
+  stage2.max_free_text_font_size = Math.floor(jQuery("#event_msg_font_size").val()/1.6);
+  jQuery("#title").css("font-size", stage2.max_title_font_size + "px");
+  jQuery("#free_text").css("font-size", stage2.max_free_text_font_size + "px");
   stage2.location = jQuery("#event_location_name").val();
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
   stage2.message = jQuery("#event_guest_message").val();
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
-
+  jQuery("#event_name").keyup(function(){
+    stage2.preview_text("event_name", "title");
+  });
   jQuery("#event_guest_message").click(function(){
     stage2.selectAllSafeValue(stage2.location);
     stage2.selectAllSafeValue(stage2.startDate);
@@ -209,6 +233,7 @@ jQuery(document).ready(function(){
       jQuery(this).val(stage2.message);
     } else {
       stage2.message = jQuery(this).val();
+      stage2.preview_text("event_guest_message", "free_text");
     }
   });
   stage2.months_arr = stage2.months_arr.splice(1,13);
