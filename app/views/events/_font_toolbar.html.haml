@@ -5,14 +5,7 @@
         %label{:for => "select_#{toolbar_id}"}
           = _("font:")
         %select{:id => "select_#{toolbar_id}"}
-          %option{:selected => "selected"}
-            = _("arial")
-          %option
-            = _("speedman")
-          %option
-            = _("kartiv")
-          %option
-            = _("stam")
+          != add_fonts
     .sep
       &nbsp
     %ul.text-align

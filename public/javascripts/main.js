@@ -289,6 +289,7 @@ return this.each(function(){
 			var selectBtn = replaced.find(_options.selectBtn);
 			var selectDisabled = replaced.find(_options.selectDisabled).hide();
 			var optHolder = jQuery(_options.optStructure);
+			optHolder.addClass(select.attr("id"));
 			var optList = optHolder.find(_options.optList);
 			if(select.attr('disabled')) selectDisabled.show();
 			select.find('option').each(function(){
