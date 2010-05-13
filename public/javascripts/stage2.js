@@ -187,6 +187,54 @@
         stage2.change_font_size_by(-1, "free_text");
         return false;
     });
+    jQuery('.selectOptions.select_title a, .selectOptions.select_msg a, #toolbar_title .selectArea .center, #toolbar_msg .selectArea .center').each(function(){
+        jQuery(this).css("font-family", jQuery(this).html());
+    });
+    jQuery("#select_title").change(function(){
+        var currSelected = jQuery("#toolbar_title .selectArea .center");
+        currSelected.css("font-family",currSelected.html());
+        jQuery('#free_text, .msg, .background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
+        jQuery("#event_font").val(currSelected.html());
+        jQuery('.selectOptions.select_msg a').each(function(){
+            if(jQuery(this).html() == jQuery("#toolbar_title .selectArea .center").html()){
+                if(jQuery(this).parent("li").hasClass("selected"))
+                    return;
+                jQuery('.selectOptions').hide();
+                jQuery(this).click();
+                return;
+            }
+        });
+    });
+    jQuery("#select_msg").change(function(){
+        var currSelected = jQuery("#toolbar_msg .selectArea .center");
+        currSelected.css("font-family",currSelected.html());
+        jQuery('#free_text, .msg, .background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
+        jQuery("#event_font").val(currSelected.html());
+        jQuery('.selectOptions.select_title a').each(function(){
+            if(jQuery(this).html() == jQuery("#toolbar_msg .selectArea .center").html()){
+                if(jQuery(this).parent("li").hasClass("selected"))
+                    return;
+                jQuery('.selectOptions').hide();
+                jQuery(this).click();
+                return;
+            }
+        });
+    });
+    jQuery("#pallete_title").change(function(){
+        jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
+        jQuery("#event_title_color").val(jQuery(this).val());
+    });
+    jQuery("#pallete_title").colorPicker();
+    if(jQuery("#event_title_color").val().length > 0)
+        jQuery("#pallete_title").val(jQuery("#event_title_color").val()).change();
+
+    jQuery("#pallete_msg").change(function(){
+        jQuery('#free_text, .msg').css("color",jQuery(this).val());
+        jQuery("#event_msg_color").val(jQuery(this).val());
+    });
+    jQuery("#pallete_msg").colorPicker();
+    if(jQuery("#event_msg_color").val().length > 0)
+        jQuery("#pallete_msg").val(jQuery("#event_msg_color").val()).change();
   }
 }
 jQuery(document).ready(function(){
@@ -279,21 +327,24 @@ jQuery(document).ready(function(){
     e = e || event;
     var t = e.target || e.srcElement;
     t = jQuery(t);
-
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'free_text']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #free_text').length == 0;
-    if(clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "visible"){
-      jQuery('#toolbar_msg').css("visibility", "hidden");
-    }else if(!clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "hidden"){
-        stage2.setToolbarsPosition();
-        jQuery('#toolbar_msg').css("visibility", "visible");
+    var clickedColorPallete = t.parents("#color_selector").length > 0;
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'free_text']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #free_text, .selectOptions.select_msg').length == 0;
+    if(!clickedColorPallete) {
+        if(clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "visible"){
+            jQuery('#toolbar_msg').css("visibility", "hidden");
+        }else if(!clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "hidden"){
+            stage2.setToolbarsPosition();
+            jQuery('#toolbar_msg').css("visibility", "visible");
+        }
     }
-
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title').length == 0;;
-    if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
-      jQuery('#toolbar_title').css("visibility", "hidden");
-    }else if (!clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "hidden"){
-        stage2.setToolbarsPosition();
-        jQuery('#toolbar_title').css("visibility", "visible");
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title, .selectOptions.select_title').length == 0;;
+    if(!clickedColorPallete) {
+        if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
+            jQuery('#toolbar_title').css("visibility", "hidden");
+        }else if (!clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "hidden"){
+            stage2.setToolbarsPosition();
+            jQuery('#toolbar_title').css("visibility", "visible");
+        }
     }
   });
   jQuery(".form input:first").focus();

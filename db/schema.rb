@@ -123,6 +123,9 @@ ActiveRecord::Schema.define(:version => 20100513091814) do
     t.string   "title_text_align"
     t.string   "msg_text_align"
     t.integer  "sms_messages_count",                        :default => 0
+    t.string   "font"
+    t.string   "title_color"
+    t.string   "msg_color"
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"

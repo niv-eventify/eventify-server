@@ -91,7 +91,14 @@ module EventsHelper
   def months_arr
     javascript_tag("stage2.months_arr = ['" + _("en.date.abbr_month_names").join("','") + "'];")
   end
-  
+
+  def add_fonts()
+    if current_locale == "he"
+      options_for_select(["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל"])
+    elsif current_locale == "en"
+      options_for_select(["Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
+    end
+  end
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT

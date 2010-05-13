@@ -598,11 +598,13 @@ li.thing .sel-holder {
 }
 
 .tools-bar {
-	width: 308px;
+	width: 310px;
 	visibility: hidden;
+	position:absolute;
 }
 .hebrew .tools-bar {
 	direction: ltr;
+	float: right;
 }
 .tools-bar a {
 	text-decoration: none;

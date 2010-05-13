@@ -5,14 +5,7 @@
         %label{:for => "select_#{toolbar_id}"}
           = _("font:")
         %select{:id => "select_#{toolbar_id}"}
-          %option{:selected => "selected"}
-            = _("arial")
-          %option
-            = _("speedman")
-          %option
-            = _("kartiv")
-          %option
-            = _("stam")
+          != add_fonts
     .sep
       &nbsp
     %ul.text-align
@@ -24,8 +17,7 @@
         %a{:href => "#"}
     .sep
       &nbsp
-    %a.pallet{:href => "#"}
-      pallet
+    %input{:id => "pallete_#{toolbar_id}", :type => "text", :size => "1", :style => "display:none;"}
     .sep
       &nbsp
     .font-sel

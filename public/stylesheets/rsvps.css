@@ -1,3 +1,34 @@
+@font-face {
+    font-family: "כוס חלב";
+    src: url("/fonts/AGlassofMilkRegular.eot");
+    src: local("Kos Chalav"),
+      url("/fonts/AGlassofMilkRegular.otf") format("opentype");
+}
+@font-face {
+    font-family: "בלנדר";
+    src: url("/fonts/BlenderBold.eot");
+    src: local("Blender"),
+      url("/fonts/BlenderBold.otf") format("opentype");
+}
+@font-face {
+    font-family: "אינפרא";
+    src: url("/fonts/InfraRegular.eot");
+    src: local("Infra"),local("InfraRegular"),
+      url("/fonts/InfraRegular.otf") format("opentype");
+}
+@font-face {
+    font-family: "סימן קריאה";
+    src: url("/fonts/ExclamReg.eot");
+    src: local("exclam"),local("exclamregular"),
+      url("/fonts/ExclamReg.TTF") format("truetype");
+}
+@font-face {
+    font-family: "קריסטייל";
+    src: url("/fonts/Cristyle.eot");
+    src: local("crystyle"),local("Crystyle"),
+      url("/fonts/Cristyle.TTF") format("truetype");
+}
+
 .background_holder {
 	margin:0 auto;
 	width:900px;
