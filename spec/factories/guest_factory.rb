@@ -39,3 +39,8 @@ Factory.define :guest_summary_not_sent, :parent => :guest do |guest|
   guest.summary_email_sent_at nil
   guest.rsvp  1
 end
+
+Factory.define :guest_with_sent_inviations, :parent => :guest_summary_not_sent do |guest|
+  guest.email_invitation_sent_at Time.now.utc
+  guest.sms_invitation_sent_at Time.now.utc
+end

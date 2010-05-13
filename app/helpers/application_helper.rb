@@ -76,11 +76,11 @@ module ApplicationHelper
     end
   end
 
-  def link_to_inline_edit(object, attribute)
+  def link_to_inline_edit(object, attribute, extra_class = "")
     haml_tag(:div, :class => "inline_#{dom_id(object)}_#{attribute}", :style => "display:none")
     haml_concat link_to_remote(h(object.send(attribute).blank? ? _("edit") : object.send(attribute)), 
       :url => send("edit_event_#{object.class.name.downcase}_path", object.event_id, object, :attribute => attribute),
-      :method => :get, :html => {:class => "link_to_edit"})
+      :method => :get, :html => {:class => "link_to_edit #{extra_class}"})
   end
 
   def login_register_button(text)

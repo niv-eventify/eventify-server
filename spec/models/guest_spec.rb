@@ -40,6 +40,39 @@ describe Guest do
       @guest.save.should be_true
       @guest.send_email.should be_true
     end
+
+  end
+
+  describe "invitation sent statuses" do
+    before(:each) do
+      @guest = Factory.create(:guest_with_sent_inviations)
+      @guest.email_invitation_sent_at.should_not be_nil
+      @guest.sms_invitation_sent_at.should_not be_nil
+    end
+
+    it "should reset email_invitation_sent_at when email is changed" do
+      @guest.email = "changed@email.com"
+      @guest.save.should be_true
+      @guest.email_invitation_sent_at.should be_nil
+    end
+
+    it "should reset sms_invitation_sent_at when mobile_phone is changed" do
+      @guest.mobile_phone = "02222222222"
+      @guest.save.should be_true
+      @guest.sms_invitation_sent_at.should be_nil
+    end
+
+    it "should not reset email_invitation_sent_at when phone number is changed" do
+      @guest.mobile_phone = "02222222222"
+      @guest.save.should be_true
+      @guest.email_invitation_sent_at.should_not be_nil
+    end
+
+    it "should reset sms_invitation_sent_at when email is changed" do
+      @guest.email = "changed@email.com"
+      @guest.save.should be_true
+      @guest.sms_invitation_sent_at.should_not be_nil
+    end
   end
 
   describe "failures handling" do

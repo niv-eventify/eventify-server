@@ -83,6 +83,8 @@ class Guest < ActiveRecord::Base
   def update_invitation_methods
     self.send_email = true if !email.blank? && email_changed? && 1 == changes.keys.size
     self.send_sms =   true if !mobile_phone.blank? && mobile_phone_changed? && 1 == changes.keys.size
+    self.email_invitation_sent_at = nil if email_changed?
+    self.sms_invitation_sent_at   = nil if mobile_phone_changed?
   end
 
   def update_summary_status
