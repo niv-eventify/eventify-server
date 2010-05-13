@@ -220,6 +220,21 @@
             }
         });
     });
+    jQuery("#pallete_title").change(function(){
+        jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
+        jQuery("#event_title_color").val(jQuery(this).val());
+    });
+    jQuery("#pallete_title").colorPicker();
+    if(jQuery("#event_title_color").val().length > 0)
+        jQuery("#pallete_title").val(jQuery("#event_title_color").val()).change();
+
+    jQuery("#pallete_msg").change(function(){
+        jQuery('#free_text, .msg').css("color",jQuery(this).val());
+        jQuery("#event_msg_color").val(jQuery(this).val());
+    });
+    jQuery("#pallete_msg").colorPicker();
+    if(jQuery("#event_msg_color").val().length > 0)
+        jQuery("#pallete_msg").val(jQuery("#event_msg_color").val()).change();
   }
 }
 jQuery(document).ready(function(){
