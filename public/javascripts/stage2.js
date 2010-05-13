@@ -327,21 +327,24 @@ jQuery(document).ready(function(){
     e = e || event;
     var t = e.target || e.srcElement;
     t = jQuery(t);
-
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'free_text']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #free_text').length == 0;
-    if(clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "visible"){
-      jQuery('#toolbar_msg').css("visibility", "hidden");
-    }else if(!clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "hidden"){
-        stage2.setToolbarsPosition();
-        jQuery('#toolbar_msg').css("visibility", "visible");
+    var clickedColorPallete = t.parents("#color_selector").length > 0;
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'free_text']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #free_text, .selectOptions.select_msg').length == 0;
+    if(!clickedColorPallete) {
+        if(clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "visible"){
+            jQuery('#toolbar_msg').css("visibility", "hidden");
+        }else if(!clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "hidden"){
+            stage2.setToolbarsPosition();
+            jQuery('#toolbar_msg').css("visibility", "visible");
+        }
     }
-
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title').length == 0;;
-    if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
-      jQuery('#toolbar_title').css("visibility", "hidden");
-    }else if (!clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "hidden"){
-        stage2.setToolbarsPosition();
-        jQuery('#toolbar_title').css("visibility", "visible");
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title, .selectOptions.select_title').length == 0;;
+    if(!clickedColorPallete) {
+        if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
+            jQuery('#toolbar_title').css("visibility", "hidden");
+        }else if (!clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "hidden"){
+            stage2.setToolbarsPosition();
+            jQuery('#toolbar_title').css("visibility", "visible");
+        }
     }
   });
   jQuery(".form input:first").focus();
