@@ -13,13 +13,15 @@ Factory.define :guest do |guest|
   guest.summary_email_sent_at 10.minutes.ago
 end
 
-
+Factory.define :guest_from_event_with_mobile, :parent => :guest do |guest|
+  guest.association :event, :factory => :event_with_mobile
+end
 
 Factory.define :guest_with_token, :parent => :guest do |guest|
   guest.email_token "token"
 end
 
-Factory.define :guest_with_mobile, :parent => :guest do |guest|
+Factory.define :guest_with_mobile, :parent => :guest_from_event_with_mobile do |guest|
   guest.mobile_phone "0500000000"
 end
 

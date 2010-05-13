@@ -1,7 +1,5 @@
 class Guest < ActiveRecord::Base
   belongs_to :event
-  has_many :cellact_logs, :as => :cellactable
-
   validates_presence_of :name
 
   validates_format_of   :email, :with => String::EMAIL_REGEX, :message => N_("does't look like an email"), :allow_blank => true, :allow_nil => true
@@ -34,6 +32,7 @@ class Guest < ActiveRecord::Base
   before_update :update_invitation_methods
   after_update :send_summary_status
 
+  has_many :sms_messages
 
   has_many :takings
   has_many :things_to_bring, :through => :takings
@@ -116,8 +115,11 @@ class Guest < ActiveRecord::Base
   end
 
   def send_sms_invitation!
-    sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, event.host_mobile_number)
-    unless sms.send_sms(mobile_phone, event.sms_message, self)
+    sms = sms_messages.create!(:kind => "invitation", :message => event.sms_message)
+
+    sms.send_sms!
+
+    unless sms.success?
       self.sms_invitation_failed_at = Time.now.utc
       save!
     end
@@ -144,9 +146,10 @@ class Guest < ActiveRecord::Base
     end
 
     if reminder.by_sms?
-      sms = Cellact::Sender.new(SMS_FROM, SMS_USER, SMS_PASSWORD, event.host_mobile_number)
-      status = sms.send_sms(mobile_phone, reminder.sms_message, self) ? "success" : "failure"
-      reminder.reminder_logs.create(:guest_id => self.id, :destination => mobile_phone, :message => reminder.sms_message, :status => status, :kind => "sms")
+      sms = sms_messages.create!(:kind => "reminder", :message => reminder.sms_message)
+
+      sms.send_sms!
+      reminder.reminder_logs.create(:guest_id => self.id, :destination => mobile_phone, :message => reminder.sms_message, :status => (sms.success? ? "success" : "failure"), :kind => "sms")
     end
   end
 
