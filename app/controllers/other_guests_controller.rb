@@ -11,7 +11,11 @@ class OtherGuestsController < InheritedResources::Base
 protected
 
   def collection
-    @collection ||= parent.guests.send(rsvp_filter).paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
+    @collection ||= unless params[:query].blank?
+      Guest.search(params[:query], :with => {:event_id => parent.id})
+    else
+      parent.guests.send(rsvp_filter)
+    end.paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
   end
 
   def parent

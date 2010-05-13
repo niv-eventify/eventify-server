@@ -2,6 +2,11 @@ class Guest < ActiveRecord::Base
   belongs_to :event
   validates_presence_of :name
 
+  define_index do
+    indexes name
+    has :event_id
+  end
+
   validates_format_of   :email, :with => String::EMAIL_REGEX, :message => N_("does't look like an email"), :allow_blank => true, :allow_nil => true
   validates_presence_of :email, :if => proc {|guest| guest.send_email?}
   validates_uniqueness_of :email, :scope => :event_id, :allow_nil => true, :allow_blank => true, :on => :create
@@ -70,6 +75,7 @@ class Guest < ActiveRecord::Base
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
   def rsvp_text
+    return _("not yet responded") unless rsvp
     s_(RSVP_TEXT[rsvp])
   end
 

@@ -12,7 +12,11 @@ module SummariesHelper
   def link_to_guests_filter(title, filter, count, tab_index)
     txt = content_tag(:strong, title + content_tag(:span, "(#{count})"))
     haml_tag(:li, :class => "tab-#{tab_index}") do
-      haml_concat link_to_remote(txt, :url => other_guests_path(filter), :method => :get, :html => {:class => (tab_index == active_tab_index ? "active" : "")})
+      if 5 == tab_index
+        haml_concat link_to_function(txt, "", :class => (tab_index == active_tab_index ? "active" : ""))
+      else
+        haml_concat link_to_remote(txt, :url => other_guests_path(filter), :method => :get, :html => {:class => (tab_index == active_tab_index ? "active" : "")})
+      end
     end
   end
 
@@ -33,7 +37,7 @@ module SummariesHelper
     when "maybe"
       2
     else
-      1
+      params[:query].blank? ? 1 : 5
     end
   end
 end

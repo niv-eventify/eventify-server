@@ -1,6 +1,9 @@
 .info-col-row
   %p
     = guest.name
+    - unless params[:query].blank?
+      \-
+      %span{:class => rsvp_status_class(guest.rsvp)}= guest.rsvp_text
     - if guest.attendees_count
       %em= n_("(%d guest)", "(%d guests)", guest.attendees_count) % guest.attendees_count
   - unless guest.message_to_host.blank?

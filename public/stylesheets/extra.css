@@ -58,9 +58,10 @@ div.cmf-skinned-select {
 	width:98px;
 	height:22px;
 }
-div.cmf-skinned-select:hover {
+/*div.cmf-skinned-select:hover {
 	background: url('/custom-images/dropdownmenu.png') top left no-repeat;
 }
+*/
 div.cmf-skinned-text {
     padding: 0 0 0 27px;
 		line-height:22px;
@@ -457,6 +458,10 @@ li.thing.active span.name {
 .hebrew .side-box-row span.rsvp.rsvp-maybe {
 	background: url(/images/ico-6.gif) no-repeat right 6px;
 }
+
+.tabs-bottom span.rsvp-no {color:#BB3131;}
+.tabs-bottom span.rsvp-yes {color:#3A9925;}
+.tabs-bottom span.rsvp-maybe {color:#DD6829;}
 
 .side-box-row .cell-bg{
 	overflow: hidden;
