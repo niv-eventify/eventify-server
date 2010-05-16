@@ -3,7 +3,7 @@ module Astrails
     class Mailer < ActionMailer::Base
 
       def password_reset_instructions(user)
-        subject       (_("%{domain}: Password Reset Instructions <name>") % {:domain => domain})
+        subject       (_("%{domain}: Password Reset Instructions") % {:domain => domain})
         from          "Password Reset <noreply@#{domain}>"
         recipients    user.email
         _set_receipient_header(user)
@@ -47,7 +47,6 @@ module Astrails
       def _set_receipient_header(obj)
         hdr = SmtpApiHeader.new
         hdr.addTo([obj.email])
-        hdr.addSubVal('<name>', ["test123"])
         @headers["X-SMTPAPI"] = hdr.asJSON
       end
 
