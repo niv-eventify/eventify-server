@@ -10,7 +10,7 @@
   != f.input :title_width, :label => "Title width - optional"
   != f.input :title_height, :label => "Title height - optional"
   
-  != f.input :font, :label => "Default font name"
+  != f.input :font, :as => :select, :label => "Default font name", :collection => ["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן"]
   != f.input :title_color, :label => "Default title color: r,g,b"
   != f.input :message_color, :label => "Default message color: r,g,b"
   != f.input :text_align, :label => "Default text alignment"

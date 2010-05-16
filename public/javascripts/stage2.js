@@ -40,11 +40,11 @@
         stage2.change_font_size_by(-1, "title");
       }
     }
-    while(loop_protection < 100 && jQuery("#title").width() < jQuery("#title")[0].scrollWidth) {
+    while(loop_protection < 100 && jQuery("#title").width() < (jQuery("#title")[0].scrollWidth - 8)) {//subtract -8: the right-padding.
       loop_protection++;
       stage2.change_font_size_by(-1,"title");
     }
-    while(loop_protection < 100 && jQuery("#free_text").width() < jQuery("#free_text")[0].scrollWidth) {
+    while(loop_protection < 100 && jQuery("#free_text").width() < (jQuery("#free_text")[0].scrollWidth - 8)) {//subtract -8: the right-padding.
       loop_protection++;
       stage2.change_font_size_by(-1, "free_text");
     }
@@ -220,6 +220,11 @@
             }
         });
     });
+    var currFont = jQuery("#free_text").css("font-family");
+    jQuery('.selectOptions.select_msg a').each(function(){
+        if(jQuery(this).html() == currFont)
+            jQuery(this).click();
+    });
     jQuery("#pallete_title").change(function(){
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
         jQuery("#event_title_color").val(jQuery(this).val());
@@ -270,10 +275,7 @@ jQuery(document).ready(function(){
   });
 
   jQuery("#event_guest_message").keyup(function(){
-    if(stage2.location.length > 0 && jQuery(this).val().search(stage2.location) < 0) {
-      alert("you can't change the location from here. Please edit the \"Location\" field");
-      jQuery(this).val(stage2.message);
-    } else if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
+	if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
       alert("you can't change the starting date from here. Please edit the \"Date\" field");
       jQuery(this).val(stage2.message);
     } else if(stage2.startTime.length > 0 && jQuery(this).val().search(stage2.startTime) < 0) {

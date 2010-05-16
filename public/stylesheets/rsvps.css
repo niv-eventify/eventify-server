@@ -1,32 +1,81 @@
-@font-face {
-    font-family: "כוס חלב";
-    src: url("/fonts/AGlassofMilkRegular.eot");
-    src: local("Kos Chalav"),
-      url("/fonts/AGlassofMilkRegular.otf") format("opentype");
-}
-@font-face {
-    font-family: "בלנדר";
-    src: url("/fonts/BlenderBold.eot");
-    src: local("Blender"),
-      url("/fonts/BlenderBold.otf") format("opentype");
-}
-@font-face {
-    font-family: "אינפרא";
-    src: url("/fonts/InfraRegular.eot");
-    src: local("Infra"),local("InfraRegular"),
-      url("/fonts/InfraRegular.otf") format("opentype");
-}
+
 @font-face {
     font-family: "סימן קריאה";
     src: url("/fonts/ExclamReg.eot");
     src: local("exclam"),local("exclamregular"),
       url("/fonts/ExclamReg.TTF") format("truetype");
 }
+
 @font-face {
-    font-family: "קריסטייל";
-    src: url("/fonts/Cristyle.eot");
-    src: local("crystyle"),local("Crystyle"),
-      url("/fonts/Cristyle.TTF") format("truetype");
+	font-family: 'אינפרא';
+	src: url('/fonts/infra_regular-webfont.eot');
+	src: local('Infra'), local('Infra-Regular'), url('/fonts/infra_regular-webfont.woff') format('woff'), url('/fonts/infra_regular-webfont.ttf') format('truetype'), url('/fonts/infra_regular-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'כוס חלב';
+	src: url('/fonts/aglassofmilkreg-webfont.eot');
+	src: local('AGlassOfMilkReg'), local('AGlassOfMilkReg'), url('/fonts/aglassofmilkreg-webfont.woff') format('woff'), url('/fonts/aglassofmilkreg-webfont.ttf') format('truetype'), url('/fonts/aglassofmilkreg-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'בלנדר';
+	src: url('/fonts/blenderbold-webfont.eot');
+	src: local('Blender'), local('Blender-Bold'), url('/fonts/blenderbold-webfont.woff') format('woff'), url('/fonts/blenderbold-webfont.ttf') format('truetype'), url('/fonts/blenderbold-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'קריסטייל';
+	src: url('/fonts/cristyle-webfont.eot');
+	src: local('Cristyle'), local('Cristyle'), url('/fonts/cristyle-webfont.woff') format('woff'), url('/fonts/cristyle-webfont.ttf') format('truetype'), url('/fonts/cristyle-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ספידמן';
+	src: url('/fonts/speedmanbold-webfont.eot');
+	src: local('SpeedMan'), local('SpeedMan-Bold'), url('/fonts/speedmanbold-webfont.woff') format('woff'), url('/fonts/speedmanbold-webfont.ttf') format('truetype'), url('/fonts/speedmanbold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'קרטיב קרח';
+	src: url('/fonts/kartivkerah-webfont.eot');
+	src: local('Kartiv'), local('Kartiv-Kerah'), url('/fonts/kartivkerah-webfont.woff') format('woff'), url('/fonts/kartivkerah-webfont.ttf') format('truetype'), url('/fonts/kartivkerah-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'מכבי בלוק';
+	src: url('/fonts/maccabiblockbold-webfont.eot');
+	src: local('MaccabiBlock'), local('MaccabiBlock-Bold'), url('/fonts/maccabiblockbold-webfont.woff') format('woff'), url('/fonts/maccabiblockbold-webfont.ttf') format('truetype'), url('/fonts/maccabiblockbold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'פלסטיק';
+	src: url('/fonts/plastic_bold-webfont.eot');
+	src: local('Plastic'), local('Plastic-Bold'), url('/fonts/plastic_bold-webfont.woff') format('woff'), url('/fonts/plastic_bold-webfont.ttf') format('truetype'), url('/fonts/plastic_bold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'רענן';
+	src: url('/fonts/raananbold-webfont.eot');
+	src: local('RaananBold'), local('RananBold'), url('/fonts/raananbold-webfont.woff') format('woff'), url('/fonts/raananbold-webfont.ttf') format('truetype'), url('/fonts/raananbold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: normal;
+	font-style: normal;
 }
 
 .background_holder {

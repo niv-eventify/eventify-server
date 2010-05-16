@@ -140,7 +140,9 @@ div.cmf-skinned-text {
 .promo-gallery {
 	margin: -172px 0px 40px 125px;
 }
-
+.promo-b{
+	padding: 0 0 8px 0;
+}
 .hebrew .promo-gallery {
 	margin: -172px 126px 40px 125px;
 }
@@ -187,14 +189,16 @@ div.cmf-skinned-text {
   line-height: 1.2em;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-right: 8px;
 }
 .msg-holder .free_text{
   margin: 0;
   font-size: 20px;
-  line-height: 1.1em;
+  line-height: 1em;
   font-weight: normal;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-right: 8px;
 }
 .blue-btn-mdl {
 	padding: 0 32px 0 0;
@@ -280,7 +284,10 @@ div.flash.notice {
 }
 
 #startNow {
-	margin:-14px 0 0 75px;
+	margin:-9px auto;
+	width: 240px;
+	text-align: center;
+	position: relative;
 }
 #startNow a{
 	float:left;
@@ -294,6 +301,7 @@ div.flash.notice {
 	cursor:pointer;
 	position:relative;
 	z-index:2;
+	text-decoration: none;
 }
 #startNow a span{
 	float:left;
