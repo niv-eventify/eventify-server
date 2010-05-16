@@ -40,7 +40,7 @@ protected
 
   def _set_receipient_header(obj)
     hdr = SmtpApiHeader.new
-    hdr.addTo(obj.email)
+    hdr.addTo([obj.email])
     @headers["X-SMTPAPI"] = hdr.asJSON
   end
 
