@@ -140,7 +140,9 @@ div.cmf-skinned-text {
 .promo-gallery {
 	margin: -172px 0px 40px 125px;
 }
-
+.promo-b{
+	padding: 0 0 8px 0;
+}
 .hebrew .promo-gallery {
 	margin: -172px 126px 40px 125px;
 }

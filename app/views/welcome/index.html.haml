@@ -1,6 +1,28 @@
 - content_for(:head) do
   != stylesheet_link_tag "contentflow_src", "nyroModal.full"
-  != javascript_include_tag "contentflow", "jquery.mousewheel.min", "carousel", "jquery.nyroModal"
+  != javascript_include_tag "contentflow", "jquery.mousewheel.min", "swfobject", "jquery.nyroModal"
+  :javascript
+    // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection.
+    var swfVersionStr = "10.0.0";
+    //To use express install, set to playerProductInstall.swf, otherwise the empty string.
+    var xiSwfUrlStr = "/bin/playerProductInstall.swf";
+    var flashvars = {};
+    var params = {};
+    params.quality = "high";
+    params.bgcolor = "#000000";
+    params.allowscriptaccess = "sameDomain";
+    params.allowfullscreen = "true";
+    var attributes = {};
+    attributes.id = "SebCoverFlowApp";
+    attributes.name = "SebCoverFlowApp";
+    attributes.align = "left";
+    swfobject.embedSWF(
+        "/bin/SebCoverFlowApp.swf", "flashContent",
+        "969", "315",
+        swfVersionStr, xiSwfUrlStr,
+        flashvars, params, attributes);
+    //JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+    swfobject.createCSS("#flashContent", "display:block;text-align:left;");
 
 != render(:partial => 'promo')
 != render(:partial => 'container123')
