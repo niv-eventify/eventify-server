@@ -18,7 +18,7 @@
           %a{ :href => "#" }= _("Site Map")
 
         - if current_user.try(:is_admin?)
-          %li!= link_to "i18n", translation_keys_path
+          %li!= link_to "i18n", translation_keys_path(:per_page => 10000)
           %li!= link_to "conf", global_preferences_path
           %li!= link_to "restart", restart_path, :method => :post, :confirm => "Really RESTART the server??!"
           - FastGettext.available_locales.each do |locale|
