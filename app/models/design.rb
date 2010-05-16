@@ -46,7 +46,8 @@ class Design < ActiveRecord::Base
       :width =>  "#{(text_width/ratio).to_int}px",
       :height => "#{(text_height/ratio).to_int}px",
       'text-align' => "#{text_align}",
-      :color => "rgb(#{message_color})"
+      :color => "rgb(#{message_color})",
+      "font-family" => "#{font}"
     }
   end
 
@@ -59,7 +60,8 @@ class Design < ActiveRecord::Base
 
     res = {
       'text-align' => "#{text_align}",
-      :color => "rgb(#{title_color})"
+      :color => "rgb(#{title_color})",
+      "font-family" => "#{font}"
     }
     if !title_width.blank?
       res = res.merge({

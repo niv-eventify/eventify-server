@@ -187,14 +187,16 @@ div.cmf-skinned-text {
   line-height: 1.2em;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-right: 8px;
 }
 .msg-holder .free_text{
   margin: 0;
   font-size: 20px;
-  line-height: 1.1em;
+  line-height: 1em;
   font-weight: normal;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-right: 8px;
 }
 .blue-btn-mdl {
 	padding: 0 32px 0 0;
