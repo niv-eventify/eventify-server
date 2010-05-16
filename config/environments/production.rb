@@ -33,12 +33,3 @@ SMS_PASSWORD = "Croatia684"
 
 
 config.action_mailer.delivery_method = :smtp
-
-config.action_mailer.smtp_settings = {
-  :address => "smtp.sendgrid.net",
-  :port => '25',
-  :domain => "eventify.astrails.com",
-  :authentication => :plain,
-  :user_name => "dev@eventify.co.il",
-  :password => "dev123456"
-}
