@@ -284,7 +284,10 @@ div.flash.notice {
 }
 
 #startNow {
-	margin:-14px 0 0 75px;
+	margin:-9px auto;
+	width: 240px;
+	text-align: center;
+	position: relative;
 }
 #startNow a{
 	float:left;
@@ -298,6 +301,7 @@ div.flash.notice {
 	cursor:pointer;
 	position:relative;
 	z-index:2;
+	text-decoration: none;
 }
 #startNow a span{
 	float:left;
