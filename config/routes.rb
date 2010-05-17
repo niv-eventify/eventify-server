@@ -40,4 +40,5 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resources :takings
   end
   map.resources :takings
+  map.lobby "/lobby", :controller => "lobby", :action => "index"
 end
