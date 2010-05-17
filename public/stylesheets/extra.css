@@ -622,3 +622,17 @@ li.thing .sel-holder {
 .tools-bar a {
 	text-decoration: none;
 }
+
+.lists-h ul.list {
+	margin: 0 0 0 5px;
+}
+
+.lists-h ul.list li{
+	padding: 4px 0 6px 20px;
+	background: url(/images/ico-arrow-en.gif) no-repeat 3px 5px;
+}
+
+.hebrew  .lists-h ul.list li {
+	padding: 4px 20px 6px 0;
+	background: url(/images/ico-arrow.gif) no-repeat 98% 5px;
+}
