@@ -87,6 +87,7 @@
   },
   setFieldValueInMessage: function(newVal, varName) {
     if(newVal != stage2[varName]) {
+      var newVal = " " + newVal;
       var message = jQuery("#event_guest_message").val();
       if(stage2[varName].length > 0) {
         jQuery("#event_guest_message").val(message.replace(stage2[varName], newVal));
@@ -269,7 +270,6 @@ jQuery(document).ready(function(){
     stage2.preview_text("event_name", "title");
   });
   jQuery("#event_guest_message").click(function(){
-    stage2.selectAllSafeValue(stage2.location);
     stage2.selectAllSafeValue(stage2.startDate);
     stage2.selectAllSafeValue(stage2.startTime);
   });
