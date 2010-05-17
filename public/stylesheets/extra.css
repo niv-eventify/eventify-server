@@ -623,10 +623,23 @@ li.thing .sel-holder {
 	text-decoration: none;
 }
 
-.lists-h ul.list {
-	margin: 0 0 0 5px;
+.lists-h {
+	padding-left: 0;
 }
 
+.hebrew .lists-h {
+	padding-right: 0;
+}
+
+.lists-h ul.list {
+	margin: 0 0 0 5px;
+	border-bottom: 0px;
+	padding: 10px 8px 0 7px;
+	width: 115px;
+}
+.hebrew .lists-h ul.list {
+	padding: 10px 7px 0 8px
+}
 .lists-h ul.list li{
 	padding: 4px 0 6px 20px;
 	background: url(/images/ico-arrow-en.gif) no-repeat 3px 5px;
@@ -635,4 +648,7 @@ li.thing .sel-holder {
 .hebrew  .lists-h ul.list li {
 	padding: 4px 20px 6px 0;
 	background: url(/images/ico-arrow.gif) no-repeat 98% 5px;
+}
+.lists-h ul.list li.last{
+	border-bottom: 1px solid #d8d7d5;
 }

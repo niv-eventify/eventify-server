@@ -6,7 +6,7 @@ module WelcomeHelper
 
   def categories_links(group)
     group.compact.each do |c|
-      haml_tag :li, link_to_category(c)
+      haml_tag :li, link_to_category(c), {:class => "#{'last' if c == group.compact.last}"}
     end
   end
 
