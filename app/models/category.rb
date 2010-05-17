@@ -5,7 +5,11 @@ class Category < ActiveRecord::Base
 
   has_many :designs, :conditions => "designs.disabled_at IS NULL" do
     def popular(offset)
-      find(:first, :offset => offset)
+      if offset >= 0
+        find(:first, :offset => offset)
+      else
+        find(:first, :offset => rand(self.count() - 1) + 1)
+      end
     end
   end
 
@@ -27,4 +31,5 @@ class Category < ActiveRecord::Base
   def self.popular(limit)
     find(:all, :limit => limit)
   end
+
 end
