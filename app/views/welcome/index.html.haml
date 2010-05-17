@@ -1,6 +1,6 @@
 - content_for(:head) do
-  != stylesheet_link_tag "contentflow_src", "nyroModal.full"
-  != javascript_include_tag "contentflow", "jquery.mousewheel.min", "AC_OETags.js", "jquery.nyroModal"
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag "jquery.mousewheel.min", "AC_OETags.js", "jquery.nyroModal"
   :javascript
     // -----------------------------------------------------------------------------
     // Globals
@@ -11,6 +11,11 @@
     // Minor version of Flash required
     var requiredRevision = 124;
     // -----------------------------------------------------------------------------
+    jQuery(function(){
+      jQuery.fn.nyroModal.settings.endRemove = function(elts, settings){
+        jQuery(".promo-b").css("visibility","visible");
+      };
+    })
 
 != render(:partial => 'promo')
 #startNow
@@ -23,3 +28,7 @@
 .popular
   != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories.first, :surround => "col-1"})
   != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories.last, :surround => "col-2"})
+:javascript
+  jQuery(".nyroModal").click(function(){
+    jQuery(".promo-b").css("visibility","hidden");
+  });
