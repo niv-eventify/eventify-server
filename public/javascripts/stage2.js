@@ -68,9 +68,6 @@
     jQuery("#" + targetId).html(text);
     stage2.calcFontSize();
   },
-  setLocationInMessage: function() {
-    stage2.setFieldValueInMessage(jQuery("#event_location_name").val(), "location");
-  },
   setDateInMessage: function() {
     stage2.setFieldValueInMessage(jQuery("#starting_at_mock").val(), "startDate");
   },
