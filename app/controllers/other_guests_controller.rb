@@ -12,7 +12,7 @@ protected
 
   def collection
     @collection ||= unless params[:query].blank?
-      Guest.search(params[:query], :with => {:event_id => parent.id})
+      Guest.search("#{params[:query]}*", :with => {:event_id => parent.id})
     else
       parent.guests.send(rsvp_filter)
     end.paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
