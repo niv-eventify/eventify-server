@@ -347,7 +347,8 @@ return this.each(function(){
 						left: replaced.offset().left,
 						display: 'block'
 					});
-					//if(optHolder.children('ul').height() > 100) optHolder.children('ul').css({height:100, overflow:'auto'});
+					if (optHolder.children('ul').height() > 200) optHolder.children('ul').css({height:200, overflow:'auto'});
+					else optHolder.children('ul').css({height:'auto', overflow:'hidden'});
 				}
 				return false;
 			});

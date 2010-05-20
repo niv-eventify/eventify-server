@@ -23,3 +23,10 @@
 	display: block;
 	margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");
 }
+.selectOptions ul{
+	zoom:1;
+}
+.selectOptions ul li{
+	width:auto;
+	zoom:1;
+}
