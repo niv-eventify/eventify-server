@@ -7,4 +7,4 @@
     - if guest.attendees_count
       %em= n_("(%d guest)", "(%d guests)", guest.attendees_count) % guest.attendees_count
   - unless guest.message_to_host.blank?
-    .note-box= guest.message_to_host
+    .note-box{:title => h(guest.message_to_host)}= guest.message_to_host
