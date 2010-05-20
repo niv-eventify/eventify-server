@@ -201,6 +201,10 @@ class Event < ActiveRecord::Base
     "eventify-#{id}.ics"
   end
 
+  def invitation_email_subject
+    _("%{host_name}'s %{event_name} event") % {:host_name => user.name, :event_name => name}
+  end
+
 protected
 
   def _cancel_sms_reminders!

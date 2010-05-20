@@ -1,7 +1,7 @@
 class Notifier < ActionMailer::Base
 
   def invite_guest(guest)
-    subject     guest.event.name
+    subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]
     _set_receipient_header(guest)
     from        "noreply@#{domain}"

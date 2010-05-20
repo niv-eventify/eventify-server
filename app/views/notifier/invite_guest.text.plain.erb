@@ -1,13 +1,13 @@
-<%= _("Hello %{user_name},
+<%= _("Dear %{user_name},
 
-You've been invited to %{event_name} by %{owner_name}.
+You were invited to %{event_subject}.
 
-Please follow this url to confirm
+Use the following link to see the invitation and RSVP for the event.
 %{url}
 
-Do not reply to this email.
+If clicking the link does not bring you to the invitation page, copy the link and paste it in your browser.
 
-Thank you,
-Eventify Team.
-") % {:user_name => @guest.name, :event_name => @guest.event.name, :owner_name => @guest.event.user.name, :url => @url }
+Best regards,
+The eventify Team.
+") % {:user_name => @guest.name, :event_subject => @guest.event.invitation_email_subject, :url => @url }
 %>
