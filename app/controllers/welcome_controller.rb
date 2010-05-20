@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
   def index
-    @popular_categories = Category.popular(2)
+    @popular_categories = Category.enabled.popular(2)
   end
 end
