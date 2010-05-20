@@ -77,6 +77,7 @@ class Event < ActiveRecord::Base
 
   after_update :adjust_reminders
   def adjust_reminders
+    return unless starting_at_changed?
     disabled = reminders.not_sent.collect(&:adjust!)
     @reminders_disabled = disabled.any?
   end
