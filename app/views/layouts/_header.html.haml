@@ -12,10 +12,8 @@
               %input.text{ :value => s_("default search text|search"), :type => "text" }
       %ul#top-nav
         != render(:partial => "layouts/top_categories")
-        %li
-          %a.top{ :href => "#" }= _("FAQ")
-        %li
-          %a.top{ :href => "#" }= _("Plans")
+        %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
+        %li!= link_to _("Pricing"), page_path("pricing"), :class => "top"
       != render(:partial => "layouts/user_menu")
     %div
       %ul.lang

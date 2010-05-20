@@ -6,16 +6,10 @@
       - categories_footer
     .foot-box
       %ul
-        %li
-          %a{ :href => "#" }= _("About Eventify")
-        %li
-          %a{ :href => "#" }= _("Pricing")
-        %li
-          %a{ :href => "#" }= _("Contact Us")
-        %li
-          %a{ :href => "#" }= _("Terms of Use")
-        %li
-          %a{ :href => "#" }= _("Site Map")
+        %li!= link_to _("About Eventify"), page_path("about")
+        %li!= link_to _("Pricing"), page_path("pricing")
+        %li!= link_to _("Contact Us"), page_path("contact")
+        %li!= link_to _("Terms of Use"), page_path("terms")
 
         - if current_user.try(:is_admin?)
           %li!= link_to "i18n", translation_keys_path(:per_page => 10000)
