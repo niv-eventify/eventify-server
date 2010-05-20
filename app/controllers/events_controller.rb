@@ -33,7 +33,10 @@ class EventsController < InheritedResources::Base
       success.html do
         flash[:notice] = nil
         redirect_to event_guests_path(@event, :wizard => true)
-        UserSession.create(@event.user) unless logged_in?
+        unless logged_in?
+          UserSession.create(@event.user)
+          @event.user.deliver_activation_instructions!
+        end
       end
       failure.html { render(:action => "new") }
     end

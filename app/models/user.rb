@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
 
   has_many :events
 
+  # allow not activated users to access just created events
   def active?
     true
   end

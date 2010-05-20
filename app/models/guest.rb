@@ -82,7 +82,7 @@ class Guest < ActiveRecord::Base
   def increase_stage_passed
     if 2 == event.stage_passed.to_i
       event.stage_passed = 3
-      event.save
+      event.save(false)
     end
   end
 

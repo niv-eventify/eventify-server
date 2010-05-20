@@ -48,7 +48,13 @@ class PasswordsController < InheritedResources::Base
         resource.activated_at = nil if @activated # need to revert so that the password_edit_title will set right title
       end
 
-      success.html {redirect_to profile_path}
+      success.html do
+        if @activated && !resource.events.count.zero?
+          redirect_to edit_invitation_path(resource.events.first)
+        else
+          redirect_to profile_path
+        end
+      end
       failure.html {render(:action => "edit")}
     end
 

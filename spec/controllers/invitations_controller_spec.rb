@@ -40,7 +40,7 @@ describe InvitationsController do
     before(:each) do
       @user = Factory.create(:active_user)
       UserSession.create(@user)
-      @event = stub_model(Event)
+      @event = stub_model(Event, :user => @user)
       controller.current_user.events.stub!(:find).and_return(@event)
       @event.stub(:payments).and_return([])
     end
