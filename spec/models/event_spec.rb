@@ -2,7 +2,6 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
   context "summary" do
-
     describe "summary timer reset" do
       before(:each) do
         @event = Factory.create(:event_with_daily_summary_never_sent)
@@ -78,32 +77,100 @@ describe Event do
       end
 
       it "should set 24hrs delay for sending next summary email" do
-        t = stub_time
-        @event.update_next_summary_send!
-        @event.rsvp_summary_send_at.should == 24.hours.from_now.utc
+        at_time(Time.now.utc) do
+          @event.update_next_summary_send!
+          @event.rsvp_summary_send_at.should == 24.hours.from_now.utc
+        end
       end
 
       it "should set 7 days delay for sending next summary email" do
-        t = stub_time
-        @event.rsvp_summary_send_every = 3
-        @event.update_next_summary_send!
-        @event.rsvp_summary_send_at.should == 7.days.from_now.utc
+        at_time(Time.now.utc) do
+          @event.rsvp_summary_send_every = 3
+          @event.update_next_summary_send!
+          @event.rsvp_summary_send_at.should == 7.days.from_now.utc
+        end
       end
 
       describe "close event" do
         it "should disable rsvps by setting next sent after the event datetime" do
-          t = stub_time
-          @event.starting_at = 20.minutes.from_now
-          @event.update_next_summary_send!
-          @event.rsvp_summary_send_at.should == (20*60 + 1).seconds.from_now
+          at_time(Time.now.utc) do
+            @event.starting_at = 20.minutes.from_now
+            @event.update_next_summary_send!
+            @event.rsvp_summary_send_at.should == (20*60 + 1).seconds.from_now
+          end
         end
 
         it "should set 1 minute delay for sending rsvps" do
-          t = stub_time
-          @event.starting_at = 61.minutes.from_now
-          @event.update_next_summary_send!
-          @event.rsvp_summary_send_at.should == 1.minute.from_now.utc
+          at_time(Time.now.utc) do
+            @event.starting_at = 61.minutes.from_now
+            @event.update_next_summary_send!
+            @event.rsvp_summary_send_at.should == 1.minute.from_now.utc
+          end
         end
+      end
+    end
+  end
+
+  describe "activated user event checks" do
+    describe "invitations" do
+      it "should send if event is active" do
+        event = Factory.create(:event)
+        event.should_receive(:send_later).with(:delayed_send_invitations)
+        event.send_invitations
+      end
+
+      it "should not send if event is inactive" do
+        event = Factory.create(:inactive_event)
+        event.should_not_receive(:send_later).with(:delayed_send_invitations)
+        event.send_invitations        
+      end
+    end
+
+    describe "reminders" do
+      it "should send if event is active" do
+        @event = Factory.build(:event)
+        @original_start = 2.days.from_now.utc
+        @event.starting_at = @original_start
+        @event.save!
+        @reminder = @event.reminders.create!(:before_units => "days", :before_value => 1, :by_sms => true, :sms_message => "some")        
+        @reminder.reminder_sent_at.should be_nil
+        at_time(Time.now) do
+          Time.now = 1.day.from_now + 12.hours
+          Reminder.send_reminders
+          @reminder.reload.reminder_sent_at.should_not be_nil
+        end
+      end
+
+      it "should not send if event is inactive" do
+        @event = Factory.build(:inactive_event)
+        @original_start = 2.days.from_now.utc
+        @event.starting_at = @original_start
+        @event.save!
+        @reminder = @event.reminders.create!(:before_units => "days", :before_value => 1, :by_sms => true, :sms_message => "some")        
+        @reminder.reminder_sent_at.should be_nil
+        at_time(Time.now) do
+          Time.now = 1.day.from_now + 12.hours
+          Reminder.send_reminders
+          @reminder.reload.reminder_sent_at.should be_nil
+        end        
+      end
+    end
+
+    describe "summary emails" do
+      it "should send summary email if event is active" do
+        @event = Factory.create(:event)
+        @event.rsvp_summary_send_every = 2
+        @event.rsvp_summary_send_at = 1.day.ago
+        @event.save(false)
+        Event.next_event_to_send_summary.id.should == @event.id
+      end
+      
+      it "should not send summary email if event is inactive" do
+        @event = Factory.create(:inactive_event)
+        @event.rsvp_summary_send_every = 2
+        @event.rsvp_summary_send_at = 1.day.ago
+        @event.save!
+        Event.next_event_to_send_summary.should be_nil
       end
     end
   end

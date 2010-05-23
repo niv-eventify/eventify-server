@@ -26,7 +26,10 @@ class EventsController < InheritedResources::Base
     end
 
     @event = Event.new(params[:event])
-    @event.user = current_user if logged_in?
+    if logged_in?
+      @event.user = current_user
+      @event.user_is_activated = !current_user.activated_at.nil?
+    end
     @event.language = current_locale
 
     create! do |success, failure|
