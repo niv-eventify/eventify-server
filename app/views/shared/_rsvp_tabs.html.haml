@@ -6,3 +6,5 @@
     - link_to_guests_filter(_("Not responded"), "not_responded", parent.guests.rsvp_not_responded.count, 4)
     - unless params[:query].blank?
       - link_to_guests_filter(_("Search Results"), "", collection.total_entries, 5)
+    - if !params[:previous_query_entries_count].blank? && params[:query].blank?
+      - link_to_guests_filter(_("Search Results"), "", params[:previous_query_entries_count].to_i, 5)

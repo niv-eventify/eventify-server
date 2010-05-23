@@ -9,22 +9,35 @@ module SummariesHelper
     end
   end
 
+  def html_tabs_options(tab_index, active_tab_index)
+    {:class => (tab_index == active_tab_index ? "active" : "")}
+  end
+
   def link_to_guests_filter(title, filter, count, tab_index)
     txt = content_tag(:strong, title + content_tag(:span, "(#{count})"))
     haml_tag(:li, :class => "tab-#{tab_index}") do
       if 5 == tab_index
-        haml_concat link_to_function(txt, "", :class => (tab_index == active_tab_index ? "active" : ""))
+        query = params[:query] || params[:previous_query]
+        haml_concat link_to_remote(txt, :url => other_guests_path(:query => query), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
       else
-        haml_concat link_to_remote(txt, :url => other_guests_path(filter), :method => :get, :html => {:class => (tab_index == active_tab_index ? "active" : "")})
+        haml_concat link_to_remote(txt, :url => other_guests_path(:filter => filter), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
       end
     end
   end
 
-  def other_guests_path(filter)
+  def other_guests_path(opts)
+    if !params[:query].blank?
+      opts[:previous_query_entries_count] = collection.total_entries
+      opts[:previous_query] = params[:query]
+    elsif !params[:previous_query].blank?
+      opts[:previous_query_entries_count] = params[:previous_query_entries_count]
+      opts[:previous_query] = params[:previous_query]
+    end
+
     if params[:rsvp_id]
-      rsvp_other_guests_path(params[:rsvp_id], :columns_count => @columns_count, :filter => filter)
+      rsvp_other_guests_path(params[:rsvp_id], opts.merge(:columns_count => @columns_count))
     else
-      event_other_guests_path(params[:event_id], :columns_count => @columns_count, :filter => filter)
+      event_other_guests_path(params[:event_id], opts.merge(:columns_count => @columns_count))
     end
   end
 

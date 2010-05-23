@@ -66,7 +66,14 @@
       - form_remote_tag :url => event_other_guests_path(@event) , :method => :get, :html => {:method => :get, :class => "cancel-form"} do
         .input-area
           != text_field_tag "query", _("search"), :class => "i-text", :id => "guests_query", :onclick => "if (jQuery(this).val() == '#{_('search')}'){jQuery(this).val('');}"
-          != link_to_function image_tag("icon-close.gif"), "jQuery('#guests_query').val('').focus();return false", :class => "close-btn"
+          != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn"
+          :javascript
+            jQuery(function(){
+              jQuery("a.close-btn").click(function(){
+                jQuery('#guests_query').val('').focus();
+                jQuery.ajax({dataType:'script', type:'get', url:#{event_other_guests_path(@event, :columns_count => @columns_count).to_json}});
+              });
+            });
 
     .other-guests
     :javascript
