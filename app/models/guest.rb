@@ -78,6 +78,10 @@ class Guest < ActiveRecord::Base
     rsvp != 0 # not "no"
   end
 
+  def can_choose_things_to_bring?
+    1 == rsvp # yes
+  end
+
   def rsvp_text
     return _("not yet responded") unless rsvp
     s_(RSVP_TEXT[rsvp])

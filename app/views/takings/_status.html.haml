@@ -2,5 +2,11 @@
   %h2= _("You bring")
 .side-box-content.takings
   .scroll-container{:class => takings_height(resource.takings.size)}
-    %ul!= render(:partial => "takings/readonly_taking", :collection => resource.takings)
-  != link_to_remote _("change"), :url => rsvp_takings_path(resource.email_token), :method => :get, :html => {:class => "change-taking"}
+    - if resource.can_choose_things_to_bring?
+      %ul!= render(:partial => "takings/readonly_taking", :collection => resource.takings)
+    - else
+      %ul
+        %li.thing
+          %span.name= _("You're not allowed to select things you bring until your RSVP is Yes")
+  - if resource.can_choose_things_to_bring?
+    != link_to_remote _("change"), :url => rsvp_takings_path(resource.email_token), :method => :get, :html => {:class => "change-taking"}
