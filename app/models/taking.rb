@@ -32,4 +32,8 @@ class Taking < ActiveRecord::Base
   def notifiy_guest
     Notifier.send_later(:deliver_taking_removed, guest, thing)
   end
+
+  def max_amount
+    thing.left_to_bring + amount.to_i
+  end
 end
