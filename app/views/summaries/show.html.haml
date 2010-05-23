@@ -89,5 +89,5 @@
       != link_to _("Full Guests List"), event_guests_path(@event), :class => "btn-sml"
       %p
         = _("If some of your guests didn't recieve the invitation")
-        != link_to_function _("click here for help"), "alert('todo')"
+        != link_to _("click here for help"), page_path("no_invitation")
     %br
