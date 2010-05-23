@@ -52,10 +52,12 @@
         %h2= _("Things to bring")
         .lists
           %dl.def-list
-            %dt= _("Selected")
-            %dd= @event.things.total_amount
-            %dt= _("Not selected")
-            %dd= @event.things.total_amount_picked
+            - if @event.things.total_amount.to_i > 0
+              %dt= _("Selected")
+              %dd= _("%{percent} %") % {:percent => (@event.things.total_amount_picked.to_f * 100 / @event.things.total_amount).to_i}
+            - else
+              %dt= _("No things to bring")
+              %dd &nbsp;
           != link_to _("edit"), event_things_path(@event), :class => "more-link"
 
   - info_container("info-container-alt") do
