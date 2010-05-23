@@ -6,13 +6,22 @@ class RsvpsController < InheritedResources::Base
   after_filter :clear_flash, :only => :update
   before_filter :adjust_format_for_iphone
 
+  # edit
+
   def update
     # only attendees_count, rsvp and message_to_host are changable here
     resource.rsvp = params[:guest][:rsvp] if params[:guest][:rsvp]
     resource.message_to_host = params[:guest][:message_to_host] if params[:guest][:message_to_host]
     resource.attendees_count = params[:guest][:attendees_count] if params[:guest][:attendees_count]
     resource.save!
-    redirect_to :action => "show", :id => resource.email_token, :more => "true"
+
+    redirect_opts = {:action => "show", :id => resource.email_token, :more => "true"}
+    respond_to do |wants|
+      wants.html {redirect_to(redirect_opts) }
+      wants.js do
+        render(:update) { |page| page.redirect_to(redirect_opts) }
+      end
+    end
   end
 
   def show
