@@ -24,6 +24,29 @@ describe Taking do
       end
     end
 
+    describe "rsvp changes" do
+      before(:each) do
+        @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)
+        @thing.reload.amount_picked.should == 2
+      end
+
+      [0, 2].each do |rsvp|
+        it "should return things to stock when rsvp is #{rsvp}" do
+          @guest.rsvp = rsvp
+          @guest.save
+          @thing.reload.amount_picked.should == 0
+          @guest.takings.count.should be_zero
+        end
+      end
+
+      it "should not change things if rsvp is YES" do
+        @guest.rsvp = 1
+        @guest.save
+        @thing.reload.amount_picked.should == 2
+        @guest.takings.count.should == 1    
+      end
+    end
+
     describe "changes" do
       before(:each) do
         @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)

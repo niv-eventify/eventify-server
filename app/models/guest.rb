@@ -36,6 +36,7 @@ class Guest < ActiveRecord::Base
   before_update :update_summary_status
   before_update :update_invitation_methods
   after_update :send_summary_status
+  after_update :check_takings_status
 
   has_many :sms_messages
 
@@ -75,7 +76,7 @@ class Guest < ActiveRecord::Base
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
   def can_change_number_of_guests?
-    rsvp != 0 # not "no"
+    1 == rsvp # yes
   end
 
   def can_choose_things_to_bring?
@@ -186,5 +187,9 @@ class Guest < ActiveRecord::Base
     if send_sms? && !sms_invitation_failed_at.nil? && mobile_phone_changed?
       self.sms_invitation_sent_at = self.sms_invitation_failed_at = nil
     end
+  end
+
+  def check_takings_status
+    self.takings.collect(&:destroy) if rsvp_changed? && 1 != rsvp # not YES
   end
 end

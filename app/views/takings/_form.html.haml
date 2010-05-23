@@ -1,11 +1,14 @@
-%h3= _("Please select from the list")
-
-- form_remote_for :guest, resource, :url => taking_path(resource.email_token), :html => {:method => :put, :class => "form bring-form"} do |f|
+- if resource.can_choose_things_to_bring?
+  %h3= _("Please select from the list")
+  - form_remote_for :guest, resource, :url => taking_path(resource.email_token), :html => {:method => :put, :class => "form bring-form"} do |f|
+    .scroll-container{:class => takings_height(resource.possible_takings.size)}
+      %ul
+        - resource.possible_takings.each_with_index do |taking, index|
+          - fields_for "guest[takings_attributes][]", taking do |tf|
+            != render(:partial => 'takings/taking', :locals => {:tf => tf, :index => index}) # li, li.alt, li.active
+    .btns-hold
+      != link_to_function _("save"), "jQuery(this).parents('form').get(0).onsubmit()"
+      != link_to _("cancel"), rsvp_path(resource.email_token, :more => true)
+- else
   .scroll-container{:class => takings_height(resource.possible_takings.size)}
-    %ul
-      - resource.possible_takings.each_with_index do |taking, index|
-        - fields_for "guest[takings_attributes][]", taking do |tf|
-          != render(:partial => 'takings/taking', :locals => {:tf => tf, :index => index}) # li, li.alt, li.active
-  .btns-hold
-    != link_to_function _("save"), "jQuery(this).parents('form').get(0).onsubmit()"
-    != link_to _("cancel"), rsvp_path(resource.email_token, :more => true)
+    != render(:partial => "takings/not_allowed")
