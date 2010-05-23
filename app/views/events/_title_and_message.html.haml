@@ -6,5 +6,5 @@
   - if !event.design.is_seperated_title? 
     #title.title{:style => stage2_title_css(event)}
       != event.name
-  #free_text.free_text
-    != event.guest_message
+  #free_text.free_text{:style => stage2_free_text_css(event)}
+    != (event.guest_message || "").gsub("\n", "<BR/>")
