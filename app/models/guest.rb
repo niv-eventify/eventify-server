@@ -54,13 +54,20 @@ class Guest < ActiveRecord::Base
   end
 
   def takings_attributes=(new_takings)
+    @things_amounts_adjusted = false
+
     new_takings.values.each do |t|
-      if t[:id]
+      taking = if t[:id]
         change_existing_taking(t)
       elsif !t[:amount].to_i.zero?
         takings.create(t)
       end
+      @things_amounts_adjusted = @things_amounts_adjusted || taking.overtaken? if taking
     end
+  end
+
+  def things_amounts_adjusted?
+    @things_amounts_adjusted
   end
 
   def change_existing_taking(t)
@@ -68,9 +75,12 @@ class Guest < ActiveRecord::Base
     if !t[:amount].to_i.zero?
       taking.amount = t[:amount]
       taking.save
+      taking.destroy if taking.amount.zero?
     else
       taking.destroy
     end
+
+    taking
   end
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]

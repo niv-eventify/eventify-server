@@ -8,3 +8,5 @@
       != render(:partial => "takings/not_allowed")
   - if resource.can_choose_things_to_bring?
     != link_to_remote _("change"), :url => rsvp_takings_path(resource.email_token), :method => :get, :html => {:class => "change-taking"}
+    - if resource.things_amounts_adjusted?
+      = _("some amounts where changed because other guests already selected same thing to bring")
