@@ -1,1 +1,15 @@
 page << "jQuery('.other-guests').html(#{render(:partial => "index").to_json})"
+page << <<-JAVASCRIPT
+  jQuery(".show-guest-message").click(function(){
+    var domid = jQuery(this).attr("href");
+    console.log(domid);
+    var content = jQuery(domid).html();
+    console.log(content);
+    jQuery.nyroModalManual({
+      content: "<div class='guest-message'>" + content + "</div>",
+      width:200,
+      height:70
+    });
+    return false;
+  })
+JAVASCRIPT
