@@ -43,4 +43,11 @@ class User < ActiveRecord::Base
   def active?
     true
   end
+
+  after_update :activate_events
+  def activate_events
+    if activated_at_changed? && !activated_at.nil?
+      events.update_all "user_is_activated = 1"
+    end
+  end
 end

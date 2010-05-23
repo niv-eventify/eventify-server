@@ -27,7 +27,7 @@ class Reminder < ActiveRecord::Base
   named_scope :pending, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}}
   named_scope :active, :conditions => {:is_active => true}
   named_scope :not_sent, {:conditions => "reminders.reminder_sent_at IS NULL"}
-  named_scope :with_event, :include => :event
+  named_scope :with_activated_event, :include => :event, :conditions => "events.user_is_activated = 1"
 
   before_validation :set_before_units
   def set_before_units
@@ -107,12 +107,16 @@ class Reminder < ActiveRecord::Base
 
   def self.send_reminders
     logger.info "\n\nsending reminders\n\n"
-    active.pending.with_event.find_in_batches(:batch_size => 100) do |reminders|
-      reminders.update_all(["reminder_sent_at = ?", Time.now.utc])
+
+    loop do
+      reminders = active.pending.with_activated_event.find(:all, :limit => 100)
+      break if reminders.blank?
+
+      Reminder.update_all(["reminder_sent_at = ?", Time.now.utc], ["reminders.id in (?)", reminders.collect(&:id)])
       reminders.each do |reminder|
         logger.info "\n\nsend_later(:deliver!) reminder_id=#{reminder.id}\n\n"
         reminder.send_later(:deliver!)
-      end
+      end      
     end
   end
 

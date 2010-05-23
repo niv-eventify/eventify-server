@@ -117,7 +117,9 @@ class Event < ActiveRecord::Base
   end
 
   def send_invitations
-    "production" == Rails.env ? send_later(:delayed_send_invitations) : delayed_send_invitations
+    return unless user_is_activated?
+
+    send_later(:delayed_send_invitations)
   end
 
   def validate
