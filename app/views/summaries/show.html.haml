@@ -65,10 +65,15 @@
           != link_to content_tag(:strong, content_tag(:span, _("Pring Guests List"))), event_other_guests_path(@event, :print => true), :class => "print", :target => "_blank"
       - form_remote_tag :url => event_other_guests_path(@event) , :method => :get, :html => {:method => :get, :class => "cancel-form"} do
         .input-area
-          != text_field_tag "query", _("search"), :class => "i-text", :id => "guests_query", :onclick => "if (jQuery(this).val() == '#{_('search')}'){jQuery(this).val('');}"
+          != text_field_tag "query", _("search"), :class => "i-text", :id => "guests_query"
           != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn"
           :javascript
             jQuery(function(){
+              jQuery("#guests_query").click(function(){
+                if (jQuery(this).val() == '#{_('search')}'){jQuery(this).val('');}
+              }).blur(function(){
+                if (jQuery(this).val() == ''){jQuery(this).val('#{_('search')}');}
+              })
               jQuery("a.close-btn").click(function(){
                 jQuery('#guests_query').val('').focus();
                 jQuery.ajax({dataType:'script', type:'get', url:#{event_other_guests_path(@event, :columns_count => @columns_count).to_json}});
