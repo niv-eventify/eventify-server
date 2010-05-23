@@ -656,3 +656,7 @@ li.thing .sel-holder {
 .guest-message {
 	padding:2em;
 }
+
+.scroll-container.short-container {
+	height:190px;
+}

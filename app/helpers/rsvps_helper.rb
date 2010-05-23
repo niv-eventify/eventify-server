@@ -30,4 +30,8 @@ module RsvpsHelper
   def link_to_rsvp_update(text, value)
     link_to_remote text, :url => rsvp_path(resource.email_token, :guest => {:rsvp => value}), :method => :put, :before => "jQuery(this).parents('ul.link-box').hide();jQuery('#updating_rsvp_status').show()"
   end
+
+  def takings_height(count)
+    count > 5 ? "" : "short-container"
+  end
 end
