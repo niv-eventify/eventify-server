@@ -3,7 +3,7 @@ class Guest < ActiveRecord::Base
   validates_presence_of :name
 
   define_index do
-    indexes name
+    indexes name, email
     has :event_id
   end
 
