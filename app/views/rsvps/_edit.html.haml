@@ -4,9 +4,11 @@
     = resource.rsvp_text
 
 .side-box-row
-  %h3= _("Number of Guests")
+  - if resource.can_change_number_of_guests?
+    %h3= _("Number of Guests")
   - form_for :guest, resource, :builder => TableCellFormBuilder::Builder, :url => rsvp_path(resource.email_token), :html => {:method => :put} do |f|
-    != f.text_field :attendees_count, :class => "input-text short", :id => "rsvp_attendees_count"
+    - if resource.can_change_number_of_guests?
+      != f.text_field :attendees_count, :class => "input-text short", :id => "rsvp_attendees_count"
     %h3= _("Send a message to the host:")
     .textarea-bg
       != text_area_tag "guest[message_to_host]", resource.message_to_host, :id => "guest_message_to_host"
@@ -26,5 +28,6 @@
     }
   };
   jQuery(function(){
-    jQuery(".side-box-row input, .side-box-row textarea").focus(function(){jQuery(".btns-hold.update-rsvp").show()})
+    var show_buttons = function(){ jQuery(".btns-hold.update-rsvp").show(); };
+    jQuery(".side-box-row input, .side-box-row textarea").focus(show_buttons).click(show_buttons).keyup(show_buttons);
   });

@@ -4,7 +4,7 @@
     - unless params[:query].blank?
       \-
       %span{:class => rsvp_status_class(guest.rsvp)}= guest.rsvp_text
-    - if guest.attendees_count
+    - if guest.attendees_count.to_i > 0
       %em= n_("(%d guest)", "(%d guests)", guest.attendees_count) % guest.attendees_count
   - unless guest.message_to_host.blank?
     .note-box{:title => h(guest.message_to_host)}
@@ -18,7 +18,7 @@
     = guest.name
     \-
     %span{:class => rsvp_status_class(guest.rsvp)}= guest.rsvp_text
-  - if guest.attendees_count
+  - if guest.attendees_count.to_i > 0
     %em= n_("(%d guest)", "(%d guests)", guest.attendees_count) % guest.attendees_count
     %br
     %br

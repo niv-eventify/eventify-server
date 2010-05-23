@@ -1,3 +1,7 @@
+- content_for(:head) do
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag "jquery.nyroModal"
+
 - @skip_header = @skip_footer = true; @extra_body_class = "alt-page"
 
 .content-area

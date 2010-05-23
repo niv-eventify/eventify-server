@@ -74,6 +74,10 @@ class Guest < ActiveRecord::Base
 
   RSVP_TEXT = [N_("No"), N_("Yes"), N_("May Be")]
 
+  def can_change_number_of_guests?
+    rsvp != 0 # not "no"
+  end
+
   def rsvp_text
     return _("not yet responded") unless rsvp
     s_(RSVP_TEXT[rsvp])
