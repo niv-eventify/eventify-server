@@ -1,23 +1,17 @@
 %ul.contact-list
-  %li.event
-    %a{ :href => "#" }
-      %strong
-        %span= _("Import from previous event")
   %li.mail
-    %a{ :href => "#" }
+    %a{ :href => event_event_contact_importers_path(@event, :source => "email"), :target => "_blank"}
       %strong
         %span
           = _("Import from mail")
           %em= _("(google, yahoo, etc.)")
+  :javascript
+    jQuery("li.mail a").nyroModal({height:250, type:'iframe'});
   %li.file
-    %a{ :href => "#" }
+    %a.nyroModal{ :href => event_event_contact_importers_path(@event, :source => "csv")}
       %strong
         %span= _("Import CSV file")
   %li.address-book
-    %a{ :href => "#" }
+    %a.nyroModal{ :href => event_event_contact_importers_path(@event, :source => "addressbook")}
       %strong
         %span= _("Import from eventify's address book")
-  %li.facebook
-    %a{ :href => "#" }
-      %strong
-        %span= _("Import from facebook")

@@ -1,0 +1,30 @@
+- form_tag event_event_contact_importers_path(@event) do
+  .events-holder
+    .table-box
+      .holder
+        %table#contacts
+          %thead
+            %tr
+              %td &nbsp;
+              %td= _("Name")
+              %td= _("Email")
+              %td= _("Mobile")
+          %tbody
+            - contacts.each_with_index do |contact, index|
+              %tr[contact]
+                %td!= check_box_tag "contact[#{index}][import]", "1", true, :class => "checkable"
+                %td
+                  = contact.name
+                  != hidden_field_tag "contact[#{index}][name]", contact.name
+                %td
+                  != h(contact.email)  || "&nbsp;"
+                  != hidden_field_tag "contact[#{index}][email]", contact.email
+                %td
+                  != h(contact.mobile) || "&nbsp;"
+                  != hidden_field_tag "contact[#{index}][mobile]", contact.mobile
+    .contact-btns
+      %br
+      != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+      != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+      != link_to_function _("Select All"), "jQuery('input.checkable').attr('checked', 'checked')"
+      != link_to_function _("Select None"), "jQuery('input.checkable').removeAttr('checked')"

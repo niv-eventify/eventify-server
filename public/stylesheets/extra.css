@@ -669,3 +669,13 @@ li.thing .sel-holder {
 	clear:both;
 	padding:0;
 }
+
+#content.import {
+	background:transparent;
+	margin:10px;
+}
+
+#content.import .table-box .holder {
+	height:200px;
+	overflow:scroll;
+}
