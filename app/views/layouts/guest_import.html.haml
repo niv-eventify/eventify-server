@@ -1,13 +1,2 @@
-!!!
-%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
-  %head
-    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
-    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
-    != render(:partial => "layouts/html_head")
-    /[if IE]
-      != stylesheet_link_tag 'ie', :media => 'screen'
-    /[if lt IE 7]
-      != stylesheet_link_tag 'lt7', :media => 'screen'
-  %body
-    #content.import
-      != yield
+.import
+  != yield

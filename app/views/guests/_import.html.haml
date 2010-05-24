@@ -1,12 +1,14 @@
 %ul.contact-list
   %li.mail
-    %a{ :href => event_event_contact_importers_path(@event, :source => "email"), :target => "_blank"}
+    %a{ :href => event_guest_importers_path(@event, :source => "email"), :target => "_blank"}
       %strong
         %span
           = _("Import from mail")
           %em= _("(google, yahoo, etc.)")
   :javascript
-    jQuery("li.mail a").nyroModal({height:250, type:'iframe'});
+    jQuery(function(){
+      jQuery("li.mail a").nyroModal({height:250, type:'iframe'});
+    })
   %li.file
     %a.nyroModal{ :href => event_guest_importers_path(@event, :source => "csv")}
       %strong

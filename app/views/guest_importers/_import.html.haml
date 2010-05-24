@@ -10,18 +10,7 @@
               %td= _("Email")
               %td= _("Mobile")
           %tbody
-            - contacts.each_with_index do |contact, index|
-              %tr[contact]
-                %td!= check_box_tag "contact[#{index}][import]", "1", true, :class => "checkable"
-                %td
-                  = contact.name
-                  != hidden_field_tag "contact[#{index}][name]", contact.name
-                %td
-                  != h(contact.email)  || "&nbsp;"
-                  != hidden_field_tag "contact[#{index}][email]", contact.email
-                %td
-                  != h(contact.mobile) || "&nbsp;"
-                  != hidden_field_tag "contact[#{index}][mobile]", contact.mobile
+            != render(:partial => "contact", :collection => contacts)
     .contact-btns
       %br
       != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
