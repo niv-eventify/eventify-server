@@ -108,9 +108,13 @@ describe Guest do
       @guest.sms_invitation_failed_at.should be_nil
     end
 
-    it "should save failure time" do
+    it "should reset sent at" do
       @guest.prepare_sms_invitation!(Time.now.utc)
       @guest.sms_invitation_sent_at.should_not be_nil
+    end
+
+    it "should save failure time" do
+      @guest.send_sms_invitation!
       @guest.sms_invitation_failed_at.should_not be_nil
     end
 

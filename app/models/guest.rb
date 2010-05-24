@@ -156,7 +156,7 @@ class Guest < ActiveRecord::Base
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at = timestamp
     save!
-    send_later(:send_email_invitation)
+    send_later(:send_email_invitation!)
   end
 
   def send_email_invitation!
