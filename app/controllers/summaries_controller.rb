@@ -8,7 +8,8 @@ protected
     current_user
   end
 
+  # don't allow access summaries until all invitations are sent
   def check_invitations
-    return redirect_to(edit_invitation_path(resource)) unless resource.invitations_to_send_counts[:total].zero?
+    return redirect_to(edit_invitation_path(resource)) if resource.stage_passed < 4
   end
 end

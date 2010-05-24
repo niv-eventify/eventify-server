@@ -22,6 +22,40 @@ describe Guest do
     end
   end
 
+  describe "stage statuses" do
+    before(:each) do
+      @event = Factory.create(:event)
+      @event.stage_passed.should == 2
+    end
+
+    it "should set stage to 3 when a guest created" do
+      guest = @event.guests.create(:name => "foobar", :email => "foo@bar.com", :send_email => true)
+      guest.should_not be_new_record
+      @event.reload.stage_passed = 3
+    end
+
+    describe "with sent invitations" do
+      before(:each) do
+        @event.stage_passed = 4
+        @event.save(false)
+      end
+
+      it "should reset stage passed when new guest added" do
+        guest = @event.guests.create(:name => "foobar", :email => "foo@bar.com", :send_email => true)
+        @event.reload.stage_passed = 3
+      end
+
+      it "should reset stage passed when guest should receive a new invitation" do
+        guest = @event.guests.create(:name => "foobar", :email => "foo@bar.com", :send_email => true)
+        @event.stage_passed = 4
+        @event.save(false)
+        guest.email = "bar@foo.com"
+        guest.save.should be_true
+        @event.reload.stage_passed.should == 3
+      end
+    end
+  end
+
   describe "updates" do
     before(:each) do
       @guest = Factory.create(:guest_without_email_and_phone)

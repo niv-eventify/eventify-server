@@ -91,8 +91,8 @@ class Event < ActiveRecord::Base
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
 
-  before_create :set_stage_passed
-  def set_stage_passed
+  before_create :set_initial_stage
+  def set_initial_stage
     self.stage_passed = 2
   end
 
