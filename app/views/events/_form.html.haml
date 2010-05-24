@@ -9,9 +9,9 @@
   - unless logged_in?
     - f.fields_for :user do |user_f|
       - event_text_input(user_f, :name, _("Your Name"))
-      - event_text_input(user_f, :email, _("Your Email")) do
-        .f-row
-          != link_to _("I already have an account"), login_path, :class => "add-link"
+      - event_text_input(user_f, :email, _("Your Email"))
+      .f-row
+        != link_to _("I already have an account"), login_path, :class => "add-link"
 
   - event_text_input(f, :name, _("Event name"))
   != f.input :category, :label => _("Event Type"), :required => nil

@@ -664,3 +664,8 @@ li.thing .sel-holder {
 .tree-buttons-preview {
 	padding: 31px 289px 0;
 }
+
+.new-event p.error-msg {
+	clear:both;
+	padding:0;
+}

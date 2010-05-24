@@ -125,6 +125,7 @@ class Event < ActiveRecord::Base
   def validate
     errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
     errors.add(:base, _("Payments are not completed yet")) if send_invitations_now && payment_required?
+    errors.add(:starting_at, _("time cannot be blank")) if @no_time_selected
   end
 
   def has_map?
@@ -217,5 +218,18 @@ protected
 
   def _cancel_sms_invitations!
     guests.update_all("send_sms = 0")
+  end
+private
+  def instantiate_time_object(name, values)
+    if "starting_at" == name && 3 == values.size
+      # no time selected
+      @no_time_selected = true
+    end
+
+    if self.class.send(:create_time_zone_conversion_attribute?, name, column_for_attribute(name))
+      Time.zone.local(*values)
+    else
+      Time.time_with_datetime_fallback(@@default_timezone, *values)
+    end
   end
 end
