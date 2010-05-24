@@ -5,11 +5,6 @@
         Eventify
     - unless @skip_header
       .search-form
-        %form{ :action => "#" }
-          %fieldset
-            %input.search-btn{ :src => "/images/ico-search-en.gif", :type => "image" }
-            .input-bg
-              %input.text{ :value => s_("default search text|search"), :type => "text" }
       %ul#top-nav
         != render(:partial => "layouts/top_categories")
         %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
