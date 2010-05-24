@@ -1,6 +1,6 @@
-class EventContactImportersController < ApplicationController
+class GuestImportersController < ApplicationController
   before_filter :require_user, :set_event
-  layout "event_contact_import"
+  layout "guest_import"
   SOURCES = ["email", "csv", "addressbook"]
 
   def index

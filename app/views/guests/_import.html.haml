@@ -8,10 +8,10 @@
   :javascript
     jQuery("li.mail a").nyroModal({height:250, type:'iframe'});
   %li.file
-    %a.nyroModal{ :href => event_event_contact_importers_path(@event, :source => "csv")}
+    %a.nyroModal{ :href => event_guest_importers_path(@event, :source => "csv")}
       %strong
         %span= _("Import CSV file")
   %li.address-book
-    %a.nyroModal{ :href => event_event_contact_importers_path(@event, :source => "addressbook")}
+    %a.nyroModal{ :href => event_guest_importers_path(@event, :source => "addressbook")}
       %strong
         %span= _("Import from eventify's address book")
