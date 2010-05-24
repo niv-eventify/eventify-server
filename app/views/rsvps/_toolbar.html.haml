@@ -1,8 +1,11 @@
 .toolbar
   .toolbar-bg
     %strong.toolbar-logo
-      != link_to "Eventify", "#"
-    != link_to content_tag(:span, _("Event Details")), "#", :class => "t-b-btn t-b-btn-1"
-    != link_to content_tag(:span, _("to Calendar")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-2"
-    != link_to content_tag(:span, _("Map")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-3"
+      != link_to "Eventify", "/", :target => "_blank"
+    != link_to content_tag(:span, _("Event Details")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-1"
+    != link_to content_tag(:span, _("to Calendar")), rsvp_ical_path(resource.email_token), :class => "t-b-btn t-b-btn-2"
+    - if resource.event.map && !resource.event.map.url.blank?
+      != link_to content_tag(:span, _("Map")), resource.event.map.url, :class => "t-b-btn t-b-btn-3", :target => "_blank"
+    - elsif !resource.event.map_link.blank?
+      != link_to content_tag(:span, _("Map")), resource.event.map_link, :class => "t-b-btn t-b-btn-3", :target => "_blank"
     != link_to content_tag(:span, _("RSVPS")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-4"

@@ -11,11 +11,10 @@
     /[if lt IE 7]
       != stylesheet_link_tag 'lt7', :media => 'screen'
   %body{ :class => body_class }
-    #envelope
-      != link_to image_tag("/images/envelope.jpg"), '#invitation', :class => "nyroModal envelope"
+    #envelope!= link_to image_tag("envelope.jpg"), '#invitation', :class => "nyroModal envelope"
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}
       .background_holder
-        %img.back{:src => "#{resource.event.design.card.url}"}
+        != image_tag(resource.event.design.card.url, :class => "back")
         != render(:partial => "postcard", :locals => {:event => resource.event})
