@@ -660,3 +660,7 @@ li.thing .sel-holder {
 .scroll-container.short-container {
 	height:190px;
 }
+
+.tree-buttons-preview {
+	padding: 31px 289px 0;
+}
