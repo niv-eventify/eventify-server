@@ -138,7 +138,7 @@ class Guest < ActiveRecord::Base
     # TODO = check sms bulk status / package payments
     self.sms_invitation_sent_at = timestamp
     save!
-    "production" == Rails.env ? self.send_later(:send_sms_invitation!) : send_sms_invitation!
+    send_later(:send_sms_invitation!)
   end
 
   def send_sms_invitation!
@@ -156,7 +156,7 @@ class Guest < ActiveRecord::Base
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at = timestamp
     save!
-    "production" == Rails.env ? self.send_later(:send_email_invitation!) : send_email_invitation!
+    send_later(:send_email_invitation)
   end
 
   def send_email_invitation!
