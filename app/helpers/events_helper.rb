@@ -108,7 +108,7 @@ module EventsHelper
 
   def add_fonts()
     if current_locale == "he"
-      options_for_select(["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן"])
+      options_for_select(["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן","Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
     elsif current_locale == "en"
       options_for_select(["Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
     end
