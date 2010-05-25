@@ -30,6 +30,7 @@
 	}
 }
 jQuery(document).ready(function(jQuery){
+	jQuery(".toolbar").hide();
 	jQuery("div[id ^= 'invitation']").each(function(){
 		rsvps.adjust_dialog_size(jQuery(this).attr("id"));
 	})
@@ -62,8 +63,9 @@ jQuery(document).ready(function(jQuery){
 });
 jQuery(window).load(function () {
 	if(jQuery(".envelope").length > 0) {
-		jQuery("a.nyroModal").nyroModal({closeButton:'', modal: true});
-		jQuery(".envelope").click();
-		jQuery("#toolbar").show();
+		setTimeout(function(){
+			jQuery(".envelope").nyroModalManual({closeButton:'', modal: true});
+			jQuery(".toolbar").show();
+		},2000);
 	}
 });
