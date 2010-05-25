@@ -10,6 +10,7 @@
   %tr
     %th English
     %th Hebrew
+    %th Popularity
     %th &nbsp;
     %th &nbsp;
 
@@ -17,6 +18,7 @@
     %tr
       %td= category.name_en
       %td= category.name_he
+      %td= category.popularity
       %td!= link_to 'Edit', edit_category_path(category)
       %td
         - if category.disabled?
