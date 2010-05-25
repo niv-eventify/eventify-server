@@ -7,4 +7,4 @@
     #title.title{:style => stage2_title_css(event)}
       != event.name
   #free_text.free_text{:style => stage2_free_text_css(event)}
-    != (event.guest_message || "").gsub("\n", "<BR/>")
+    != (h(event.guest_message) || "").gsub("\n", "<br/>")
