@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100523110807) do
+ActiveRecord::Schema.define(:version => 20100525115414) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20100523110807) do
     t.datetime "disabled_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "popularity",  :default => 0
   end
 
   add_index "categories", ["disabled_at"], :name => "index_categories_on_disabled_at"
@@ -122,10 +123,10 @@ ActiveRecord::Schema.define(:version => 20100523110807) do
     t.integer  "msg_font_size",                             :default => 32
     t.string   "title_text_align"
     t.string   "msg_text_align"
-    t.integer  "sms_messages_count",                        :default => 0
     t.string   "font"
     t.string   "title_color"
     t.string   "msg_color"
+    t.integer  "sms_messages_count",                        :default => 0
     t.boolean  "user_is_activated",                         :default => false
   end
 
