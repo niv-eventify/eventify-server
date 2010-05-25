@@ -96,9 +96,6 @@
 	position: absolute;
 	z-index: 100;
 }
-.title_holder:hover, .msg_holder:hover {
-	border:1px solid blue;
-}
 .hebrew .title_holder, .hebrew .msg_holder {
 	direction: rtl;
 }
