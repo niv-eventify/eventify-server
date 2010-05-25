@@ -39,31 +39,40 @@ class ContactImporter < ActiveRecord::Base
     SOURCES[contact_source]
   end
 
-  def import!(username = nil, password = nil)
+  def self.import_contacts(username, password, contact_source, csv)
+    error = nil
+
     contacts = case contact_source
     when 'gmail', 'hotmail', 'yahoo'
       begin
         Contacts.new(contact_source.to_sym, username, password).contacts
       rescue Contacts::StandardError, Contacts::ContactsError
-        _error!($!)
+        error = $!
       rescue
-        _error!("A problem importing your contacts occured, please try again later.")
+        error = _("A problem importing your contacts occured, please try again later.")
       end
     when 'aol'
       begin
        contacts = Blackbook.get(:username => username, :password => password)
      rescue Blackbook::BlackbookError, ArgumentError
-       _error!($!)
+       error = $!
      end
     when 'csv'
       begin
         Blackbook.get(:csv, :file => csv)
       rescue Blackbook::BlackbookError
-        _error!($!)
+        error = $!
       end
     end
+    
+    [contacts, error]
+  end
+
+  def import!(username = nil, password = nil)
+    contacts, error = ContactImporter.import_contacts(username, password, contact_source, csv)
 
     _import!(contacts) if contacts
+    _error!(error) if error
   end
 
 protected
