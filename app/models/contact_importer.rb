@@ -68,6 +68,27 @@ class ContactImporter < ActiveRecord::Base
     [contacts, error]
   end
 
+  def self.parse_name_and_email(c)
+    if c.is_a?(Array)
+      name, email = c.first, c.last
+    elsif c.is_a?(Hash)
+      name = c[:name]
+      email = c[:email]
+    end
+    [name, email]
+  end
+
+  def self.contacts_to_openstruct(contacts)
+    contacts.map do |contact|
+      returning(OpenStruct.new) do |res|
+        name, email = parse_name_and_email(contact)
+        res.name = name
+        res.email = email
+        res.mobile = nil
+      end
+    end
+  end
+
   def import!(username = nil, password = nil)
     contacts, error = ContactImporter.import_contacts(username, password, contact_source, csv)
 
@@ -79,12 +100,7 @@ protected
   def _import!(contacts)
     self.contacts_imported = 0
     contacts.each do |c|
-      if c.is_a?(Array)
-        name, email = c.first, c.last
-      elsif c.is_a?(Hash)
-        name = c[:name]
-        email = c[:email]
-      end
+      name, email = ContactImporter.parse_name_and_email(c)
       self.contacts_imported += 1 if user.contacts.add(name, email)
     end
     self.completed_at = Time.now.utc

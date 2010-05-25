@@ -4,9 +4,14 @@ class GuestImportersController < ApplicationController
   SOURCES = ["email", "csv", "addressbook"]
 
   def create
-    guests_imported = @event.guests.import(selected_contracts)
-    flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
-    redirect_to event_guests_path(@event)
+    if "true" == params[:import_csv]
+      _load_csv_file
+      render :layout => false, :partial => "preview"
+    else
+      guests_imported = @event.guests.import(selected_contracts)
+      flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
+      redirect_to event_guests_path(@event)
+    end
   end
 
   def index
@@ -23,6 +28,16 @@ protected
       params[:contact].keys.each do |k|
         res << params[:contact][k] if "1" == params[:contact][k][:import]
       end
+    end
+  end
+
+  def _load_csv_file
+    @contacts = []
+
+    unless params[:csvfile].blank?
+      contacts, error = ContactImporter.import_contacts(nil, nil, "csv", params[:csvfile])
+      @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts
+      @error = error.to_s if error
     end
   end
 end
