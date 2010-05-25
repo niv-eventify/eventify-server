@@ -1,6 +1,17 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
+
+  describe "stage passed" do
+    it "should set stage_passed to 4 when sending invitations" do
+      event = Factory.create(:event)
+      event.stage_passed.should_not == 3
+      event.should_receive(:send_later).with(:delayed_send_invitations)
+      event.send_invitations
+      event.stage_passed.should == 4
+    end
+  end
+
   context "summary" do
     describe "summary timer reset" do
       before(:each) do

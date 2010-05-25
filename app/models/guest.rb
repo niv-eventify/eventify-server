@@ -35,6 +35,7 @@ class Guest < ActiveRecord::Base
   after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
   before_update :update_invitation_methods
+  before_update :update_invitation_state
   after_update :send_summary_status
   after_update :check_takings_status
 
@@ -108,9 +109,14 @@ class Guest < ActiveRecord::Base
     self.send_sms =   true if !mobile_phone.blank? && mobile_phone_changed? && 1 == changes.keys.size
     self.email_invitation_sent_at = nil if email_changed?
     self.sms_invitation_sent_at   = nil if mobile_phone_changed?
-    # need to send invitations
-    event.stage_passed = 3
-    event.save(false)
+  end
+
+  def update_invitation_state
+    if changed_to_nil?(:email_invitation_sent_at) || changed_to_nil?(:sms_invitation_sent_at)
+      # need to send invitations
+      event.stage_passed = 3
+      event.save if event.stage_passed_changed?
+    end
   end
 
   def update_summary_status
