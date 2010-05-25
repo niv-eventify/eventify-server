@@ -31,7 +31,7 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
   named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
 
-  after_create :increase_stage_passed
+  after_create :reset_event_stage_passed
   after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
   before_update :update_invitation_methods
@@ -98,11 +98,9 @@ class Guest < ActiveRecord::Base
     s_(RSVP_TEXT[rsvp])
   end
 
-  def increase_stage_passed
-    if 2 == event.stage_passed.to_i
-      event.stage_passed = 3
-      event.save(false)
-    end
+  def reset_event_stage_passed
+    event.stage_passed = 3
+    event.save(false)
   end
 
   def update_invitation_methods
@@ -110,6 +108,9 @@ class Guest < ActiveRecord::Base
     self.send_sms =   true if !mobile_phone.blank? && mobile_phone_changed? && 1 == changes.keys.size
     self.email_invitation_sent_at = nil if email_changed?
     self.sms_invitation_sent_at   = nil if mobile_phone_changed?
+    # need to send invitations
+    event.stage_passed = 3
+    event.save(false)
   end
 
   def update_summary_status

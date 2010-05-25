@@ -1,0 +1,11 @@
+%tr[contact]
+  %td!= check_box_tag "contact[#{contact.id}][import]", "1", true, :class => "checkable"
+  %td
+    = contact.name
+    != hidden_field_tag "contact[#{contact.id}][name]", contact.name
+  %td
+    != h(contact.email)  || "&nbsp;"
+    != hidden_field_tag "contact[#{contact.id}][email]", contact.email
+  %td
+    != h(contact.mobile) || "&nbsp;"
+    != hidden_field_tag "contact[#{contact.id}][mobile]", contact.mobile

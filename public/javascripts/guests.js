@@ -10,10 +10,10 @@ jQuery(document).ready(function() {
       guests_texts = {};
       jQuery("tr.guest").each(function(){
         var t = jQuery(this);
-        var text = t.find("td.t-col-1 label[for='name-1']").html() + t.find('td.t-col-1 a.link_to_edit').html();
-        text += t.find("td.t-col-2 a").html() + " ";
-        text += t.find("td.t-col-3 div.cell-bg").html();
-        guests_texts[jQuery(this).attr("id")] = text;
+        var text = t.find("td.t-col-1 label[for='name-1'] a.link_to_edit").html() + " ";
+        text += t.find("td.t-col-2 a.link_to_edit").html() + " ";
+        text += t.find("td.t-col-3 div.cell-bg a.link_to_edit").html();
+        guests_texts[jQuery(this).attr("id")] = text.replace(" edit", "");
       });
     }
     jQuery.fn.rsvp_filter_by = function(sel_index) {
@@ -45,10 +45,12 @@ jQuery(document).ready(function() {
     });
     jQuery.fn.reload_search();
     jQuery("#search_guests").keyup(function(){
-      var pattern = jQuery("#search_guests").val();
-      jQuery.each(guests_texts, function(k, v){
-        jQuery("#" + k)[v.match(pattern) ? "show" : "hide"]();
-      });
+			setTimeout(function(){
+	      var pattern = new RegExp(jQuery("#search_guests").val(), "i");
+	      jQuery.each(guests_texts, function(k, v){
+	        jQuery("#" + k)[v.match(pattern) ? "show" : "hide"]();
+	      });
+			}, 0);
     });
     jQuery("#cancel_search").click(function(){
       jQuery("tr.guest").show();

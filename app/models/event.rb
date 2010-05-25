@@ -9,7 +9,20 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :user
   validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
 
-  has_many :guests
+  has_many :guests do
+    def import(new_guests)
+      guests_imported = 0
+
+      new_guests.each do |g|
+        guest = build(:name => g[:name], :email => g[:email], :mobile_phone => g[:mobile])
+        guest.send_email = true unless guest.email.blank?
+        guest.send_sms = true unless guest.mobile_phone.blank?
+        guests_imported += 1 if guest.save
+      end
+
+      guests_imported
+    end
+  end
   has_many :things do
     def total_amount
       calculate(:sum, :amount)
@@ -91,8 +104,8 @@ class Event < ActiveRecord::Base
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
 
-  before_create :set_stage_passed
-  def set_stage_passed
+  before_create :set_initial_stage
+  def set_initial_stage
     self.stage_passed = 2
   end
 
