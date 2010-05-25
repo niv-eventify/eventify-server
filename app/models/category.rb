@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
     end
   end
 
-  attr_accessible :name_en, :name_he, :disabled_at
+  attr_accessible :name_en, :name_he, :popularity, :disabled_at
 
   named_scope :enabled, :conditions => "categories.disabled_at IS NULL"
   named_scope :disabled, :conditions => "categories.disabled_at IS NOT NULL"
@@ -29,7 +29,7 @@ class Category < ActiveRecord::Base
   end
 
   def self.popular(limit)
-    find(:all, :limit => limit)
+    find(:all, :limit => limit, :order => "popularity DESC")
   end
 
 end

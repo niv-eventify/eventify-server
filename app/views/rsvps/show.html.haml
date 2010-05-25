@@ -11,7 +11,7 @@
     /[if lt IE 7]
       != stylesheet_link_tag 'lt7', :media => 'screen'
   %body{ :class => body_class }
-    #envelope!= link_to image_tag("envelope.jpg"), '#invitation', :class => "nyroModal envelope"
+    #envelope!= link_to image_tag("envelope.jpg"), '#invitation', :class => "envelope"
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}
