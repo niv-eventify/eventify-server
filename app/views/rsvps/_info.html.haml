@@ -18,5 +18,7 @@
           - unless resource.event.location_address.blank?
             %dt= _("Address:")
             %dd
-              %span= resource.event.location_address
-              != link_to_function _("show map"), "alert('todo')"
+              - if resource.event.map && !resource.event.map.url.blank?
+                != link_to content_tag(:span, _("show map")), resource.event.map.url, :target => "_blank"
+              - elsif !resource.event.map_link.blank?
+                != link_to content_tag(:span, _("show map")), resource.event.map_link, :target => "_blank"
