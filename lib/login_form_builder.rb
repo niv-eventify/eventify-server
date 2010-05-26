@@ -1,5 +1,3 @@
-require "haml"
-
 module LoginFormBuilder
   class Builder < ActionView::Helpers::FormBuilder
 

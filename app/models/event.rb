@@ -132,6 +132,10 @@ class Event < ActiveRecord::Base
   def send_invitations
     return unless user_is_activated?
 
+    self.send_invitations_now = nil
+    self.stage_passed = 4
+    save!
+
     send_later(:delayed_send_invitations)
   end
 
@@ -173,7 +177,6 @@ class Event < ActiveRecord::Base
       self.last_invitation_sent_at = time_stamp
       send_sms_invitations(time_stamp)
       send_email_invitations(time_stamp)
-      self.send_invitations_now = nil
       save!
     end
   end

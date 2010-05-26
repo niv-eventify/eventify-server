@@ -14,9 +14,6 @@ class InvitationsController < InheritedResources::Base
   # edit
 
   def update
-    resource.stage_passed = 4
-    resource.save!
-
     update! do |success, failure|
       success.html {flash[:notice] = nil; redirect_to(invitation_path(resource))}
       failure.html {render(:action => "edit")}

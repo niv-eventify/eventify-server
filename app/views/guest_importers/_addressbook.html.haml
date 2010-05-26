@@ -1,3 +1,1 @@
-%h3= _("Import from eventify's address book")
-
-!= render(:partial => "import", :locals => {:contacts => current_user.contacts})
+!= render(:partial => "import", :locals => {:contacts => current_user.contacts, :title => _("Import from eventify's address book")})

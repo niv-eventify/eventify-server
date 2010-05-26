@@ -40,12 +40,13 @@ describe InvitationsController do
     before(:each) do
       @user = Factory.create(:active_user)
       UserSession.create(@user)
-      @event = stub_model(Event, :user => @user)
+      @event = stub_model(Event, :user => @user, :stage_passed => 3)
       controller.current_user.events.stub!(:find).and_return(@event)
       @event.stub(:payments).and_return([])
     end
 
     it "should redirect to summary page when nothing to send" do
+      @event.stub!(:stage_passed).and_return(4)
       @event.stub!(:invitations_to_send_counts).and_return({:total => 0})
       get :edit, :id => @event
       response.should redirect_to("/summary/#{@event.id}")

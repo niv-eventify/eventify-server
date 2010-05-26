@@ -1,0 +1,14 @@
+%h3= _("Import from CSV File")
+
+- form_tag event_guest_importers_path(@event), :multipart => true, :target => "upload_frame" do
+  != file_field_tag :csvfile
+  != hidden_field_tag :import_csv, true
+  .contact-btns
+    %br
+    != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit();jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show()", :class => "btn"
+    != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+  .loading{:style => "display:none"}
+    %br
+    = _("Loading CSV file, please wait...")
+
+%iframe#upload_frame{:name => "upload_frame", :style => "display: none"}
