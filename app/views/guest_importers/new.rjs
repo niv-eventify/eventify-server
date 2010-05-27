@@ -1,16 +1,1 @@
-page << <<-JAVASCRIPT
-  jQuery.nyroModalManual({
-    content: #{render(:partial => @source).to_json},
-    endShowContent: function(){
-      // csv file
-      jQuery(".btn.csv-submit").click(function() {
-        jQuery(this).parents('.contact-btns').hide();
-        jQuery('.import .loading').show();
-        jQuery(this).parents('form').ajaxSubmit({
-          beforeSubmit: function(a,f,o) { o.dataType = 'script'; }
-        });
-        return false;
-      });
-    }
-  });
-JAVASCRIPT
+page << "jQuery.nyroModalManual({content: #{render(:partial => @source).to_json}});"

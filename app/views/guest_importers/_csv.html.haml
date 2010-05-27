@@ -2,7 +2,7 @@
   .popup-heading
     %strong= s_(GuestImportersController::TITLES["csv"])
 
-  - form_remote_tag :url => event_guest_importers_path(@event), :html => {:multipart => true} do
+  - form_tag event_guest_importers_path(@event), :multipart => true, :target => "upload_frame" do
     .download-form
       != file_field_tag :csvfile
       != hidden_field_tag :source, "csv"
@@ -10,10 +10,12 @@
       %br
       %br
       %br
-      != link_to_function _("Import"), "", :class => "btn csv-submit"
+      != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();jQuery(this).parents('form').submit()", :class => "btn csv-submit"
       != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
       %br
       %br
       %br
     .loading.popup-btns{:style => "display:none"}
       = _("Loading CSV file, please wait...")
+
+%iframe#upload_frame{:name => "upload_frame", :style => "display: none"}

@@ -10,10 +10,12 @@ class GuestImportersController < ApplicationController
   }
 
   def create
-    set_source if params[:source]
-
-    if "csv" == params[:source]
-      _load_csv_file
+    if params[:source]
+      set_source
+      if "csv" == params[:source]
+        _load_csv_file
+      end
+      render :partial => "preview", :layout => false
     else
       guests_imported = @event.guests.import(selected_contracts)
       flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported

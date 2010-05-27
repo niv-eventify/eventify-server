@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-    jQuery.fn.rsvp_update_color = function(el) {
+		jQuery.fn.rsvp_update_color = function(el) {
       var s = jQuery(el);
       var colors = ["#000", "#e82303", "#28b20a", "#c6770d"]
       var color_index = parseInt(s.val() || -1) + 1;
