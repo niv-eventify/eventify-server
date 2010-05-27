@@ -462,3 +462,13 @@ jQuery(document).ready(function(){
 	jQuery('input:checkbox').customCheckbox();
 	initDrop();
 });
+
+function show_nyro_loading(func) {
+	var opts = {
+		height:100, 
+		content: '<div id="nyroModalLoading" style="position: absolute; top: 50%; left: 50%; margin-top: -155px; margin-left: -106px; width: 210px; border:1px solid #fff; height: 308px;"><a class="nyroModalClose" href="#">Cancel</a></div>'
+	};
+	if (func)
+		opts.endShowContent = func;
+	jQuery.nyroModalManual(opts);
+}

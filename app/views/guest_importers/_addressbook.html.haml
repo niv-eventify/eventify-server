@@ -1,1 +1,1 @@
-!= render(:partial => "import", :locals => {:contacts => current_user.contacts, :title => _("Import from eventify's address book")})
+!= render(:partial => "import", :locals => {:contacts => current_user.contacts, :title => s_(GuestImportersController::TITLES[@source])})

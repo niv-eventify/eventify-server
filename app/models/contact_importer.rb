@@ -79,12 +79,16 @@ class ContactImporter < ActiveRecord::Base
   end
 
   def self.contacts_to_openstruct(contacts)
+    id = 0
+
     contacts.map do |contact|
       returning(OpenStruct.new) do |res|
         name, email = parse_name_and_email(contact)
         res.name = name
         res.email = email
         res.mobile = nil
+        res.uid = id
+        id += 1
       end
     end
   end

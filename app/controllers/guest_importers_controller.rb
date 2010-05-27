@@ -1,12 +1,19 @@
 class GuestImportersController < ApplicationController
   before_filter :require_user, :set_event
-  layout "guest_import"
+  before_filter :set_source, :only => :new
+
   SOURCES = ["email", "csv", "addressbook"]
+  TITLES = {
+    "email" => N_("sadfasf"),
+    "csv" => N_("Import from CSV File"),
+    "addressbook" => N_("Import from eventify's address book")
+  }
 
   def create
-    if "true" == params[:import_csv]
+    set_source if params[:source]
+
+    if "csv" == params[:source]
       _load_csv_file
-      render :layout => false, :partial => "preview"
     else
       guests_imported = @event.guests.import(selected_contracts)
       flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
@@ -14,11 +21,14 @@ class GuestImportersController < ApplicationController
     end
   end
 
-  def index
-    @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)
+  def new
   end
 
 protected
+  def set_source
+    @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)
+  end
+
   def set_event
     @event = current_user.events.find(params[:event_id])
   end
