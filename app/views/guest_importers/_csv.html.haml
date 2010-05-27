@@ -1,12 +1,19 @@
-%h3= s_(GuestImportersController::TITLES[@source])
+.import
+  .popup-heading
+    %strong= s_(GuestImportersController::TITLES["csv"])
 
-- form_remote_tag :url => event_guest_importers_path(@event), :html => {:multipart => true, :id => "upload_csv"} do
-  != file_field_tag :csvfile
-  != hidden_field_tag :source, "csv"
-  .contact-btns
-    %br
-    != link_to_function _("Import"), "", :class => "btn csv-submit"
-    != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
-  .loading{:style => "display:none"}
-    %br
-    = _("Loading CSV file, please wait...")
+  - form_remote_tag :url => event_guest_importers_path(@event), :html => {:multipart => true} do
+    .download-form
+      != file_field_tag :csvfile
+      != hidden_field_tag :source, "csv"
+    .contact-btns.popup-btns
+      %br
+      %br
+      %br
+      != link_to_function _("Import"), "", :class => "btn csv-submit"
+      != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+      %br
+      %br
+      %br
+    .loading.popup-btns{:style => "display:none"}
+      = _("Loading CSV file, please wait...")

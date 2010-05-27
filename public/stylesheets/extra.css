@@ -672,11 +672,23 @@ li.thing .sel-holder {
 
 .import {
 	background:transparent;
-	margin:10px;
-	font-size:80%;
+	padding:16px 38px 20px
 }
 
 .import .table-box .holder {
 	height:200px;
 	overflow:scroll;
+}
+
+#nyroModalContent .popup-heading{
+	overflow: hidden;
+	border-bottom: 1px solid #cccccb;
+	margin-bottom: 26px;
+	padding: 0 0 9px;
+}
+#nyroModalContent .popup-heading strong{
+	color: #523733;
+	font-size: 22px;
+	line-height: 23px;
+	font-weight: normal;
 }
