@@ -9,7 +9,7 @@ module EventsHelper
 
   def event_date_time_select_combo(f, attribute, js_opts = {})
     haml_tag(:li, :class => "#{attribute}_date_select") do
-      haml_tag :label, _("Date")
+      haml_tag :label, _("Date") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_tag :div, :class => "input-bg-alt" do
         hidden_date_fields(f, attribute)
         haml_tag :input, :class => "input-text", :id => "#{attribute}_mock", :name => "#{attribute}_mock", :type => "text"
@@ -17,7 +17,7 @@ module EventsHelper
       haml_concat f.inline_errors_for(attribute)
     end
     haml_tag(:li, :class => "#{attribute}_time_select") do
-      haml_tag :label, _("Time")
+      haml_tag :label, _("Time") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true, :prompt => {:hour => "&nbsp;", :minute => "&nbsp;"}, :minute_step => 15}, :class => "short")
       haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
       yield
@@ -66,7 +66,7 @@ module EventsHelper
   end
 
   def event_input_text(f, attribute, label, hint)
-    opts = {:label => label, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}},
+    opts = {:label => label, :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}},
       :required => nil, :hint => hint, :as => :text }
     haml_concat f.input(attribute, opts)
   end
