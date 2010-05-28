@@ -45,4 +45,26 @@ protected
   def clear_flash
     flash[:notice] = nil
   end
+
+  def default_locale
+    "he"
+  end
+
+  def detect_locale_from(source)
+    case source
+    when :params
+      params[:locale]
+    when :session
+      logger.debug "Session: #{session.inspect}"
+      session[:locale]
+    when :cookie
+      cookies[:locale]
+    when :domain
+      parse_host_and_port_for_locale[0]
+    when :header, :default
+      default_locale
+    else
+      raise "unknown source #{source}"
+    end
+  end
 end
