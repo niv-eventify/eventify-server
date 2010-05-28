@@ -27,7 +27,7 @@ jQuery(document).ready(function() {
         })
       }
     }
-    jQuery(".rspv_select").show().select_skin();
+    jQuery(".rspv_select").show().customSelect();
     jQuery(".rspv_select").each(function(){
       jQuery.fn.rsvp_update_color(this);
     });
