@@ -4,10 +4,11 @@ jQuery(document).ready(function() {
       guests_texts = {};
       jQuery("tr.guest").each(function(){
         var t = jQuery(this);
-        var text = t.find("td.t-col-1 label[for='name-1'] a.link_to_edit").html() + " ";
-        text += t.find("td.t-col-2 a.link_to_edit").html() + " ";
-        text += t.find("td.t-col-3 div.cell-bg a.link_to_edit").html();
-        guests_texts[jQuery(this).attr("id")] = text.replace(" edit", "");
+				var text = "";
+				for (var i=1; i<4; i++) {
+					text += t.find("td.t-col-" + i).text() + " ";
+				}
+        guests_texts[jQuery(this).attr("id")] = text;
       });
     }
     jQuery.fn.rsvp_filter_by = function(sel_index) {

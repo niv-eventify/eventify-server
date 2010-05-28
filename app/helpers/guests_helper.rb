@@ -32,6 +32,7 @@ module GuestsHelper
   def refresh_guest_row(page, guest)
     page << "jQuery('tr##{dom_id(guest)}').replaceWith(#{render(:partial => "guest", :object => guest).to_json});"
     page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
+    page << "jQuery('tr##{dom_id(guest)} select').customSelect();"
   end
 
   def guest_remote_rsvp(event, guest)
