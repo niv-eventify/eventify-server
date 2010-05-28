@@ -4,7 +4,7 @@ class GuestImportersController < ApplicationController
 
   SOURCES = ["email", "csv", "addressbook"]
   TITLES = {
-    "email" => N_("sadfasf"),
+    "email" => N_("Import ftom email"),
     "csv" => N_("Import from CSV File"),
     "addressbook" => N_("Import from eventify's address book")
   }
@@ -14,8 +14,14 @@ class GuestImportersController < ApplicationController
       set_source
       if "csv" == params[:source]
         _load_csv_file
+        render :partial => "preview", :layout => false
+      elsif "email" == params[:source]
+        _load_from_emails
+        render(:update) do |page|
+          page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
+        end
       end
-      render :partial => "preview", :layout => false
+      
     else
       guests_imported = @event.guests.import(selected_contracts)
       flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
@@ -24,6 +30,7 @@ class GuestImportersController < ApplicationController
   end
 
   def new
+    params[:contact_source] ||= "gmail"
   end
 
 protected
@@ -51,5 +58,12 @@ protected
       @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts
       @error = error.to_s if error
     end
+  end
+
+  def _load_from_emails
+    @contacts = []
+    contacts, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], nil)
+    @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts
+    @error = error.to_s if error
   end
 end
