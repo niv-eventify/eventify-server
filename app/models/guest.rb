@@ -207,6 +207,11 @@ class Guest < ActiveRecord::Base
   end
 
   def check_takings_status
-    self.takings.collect(&:destroy) if rsvp_changed? && 1 != rsvp # not YES
+    if rsvp_changed? && 1 != rsvp # not YES
+      self.takings.each do |taking|
+        taking.skip_noitfication = true
+        taking.destroy
+      end
+    end
   end
 end

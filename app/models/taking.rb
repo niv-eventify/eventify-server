@@ -33,9 +33,13 @@ class Taking < ActiveRecord::Base
     self.thing.save if self.thing.changed?
   end
 
+  def skip_noitfication=(skip_noitfication)
+    @skip_noitfication = skip_noitfication
+  end
+
   after_destroy :notifiy_guest
   def notifiy_guest
-    Notifier.send_later(:deliver_taking_removed, guest, thing)
+    Notifier.send_later(:deliver_taking_removed, guest, thing) unless @skip_noitfication
   end
 
   def max_amount

@@ -16,7 +16,9 @@ class InvitationsController < InheritedResources::Base
   def update
     update! do |success, failure|
       success.html {flash[:notice] = nil; redirect_to(invitation_path(resource))}
-      failure.html {render(:action => "edit")}
+      failure.html {
+        render(:action => "edit")
+      }
     end
   end
 

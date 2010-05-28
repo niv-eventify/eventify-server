@@ -86,6 +86,15 @@ describe Taking do
         Notifier.should_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
         @thing.destroy
       end
+
+      it "should not send email to guest if rsvp changed to no" do
+        @guest.rsvp = 1
+        @guest.save
+        @guest.rsvp = 0
+
+        Notifier.should_not_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        @guest.save
+      end
     end
   end
 end
