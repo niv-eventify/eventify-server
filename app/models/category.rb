@@ -17,6 +17,7 @@ class Category < ActiveRecord::Base
 
   named_scope :enabled, :conditions => "categories.disabled_at IS NULL"
   named_scope :disabled, :conditions => "categories.disabled_at IS NOT NULL"
+  named_scope :popular, lambda {|limit| {:limit => limit, :order => "popularity DESC"}}
 
   def disabled?
     !disabled_at.blank?
@@ -27,9 +28,4 @@ class Category < ActiveRecord::Base
     msg = "name_#{current_controller.send(:current_locale)}"
     respond_to?(msg) ? send(msg) : name_en
   end
-
-  def self.popular(limit)
-    find(:all, :limit => limit, :order => "popularity DESC")
-  end
-
 end
