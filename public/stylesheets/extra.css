@@ -711,3 +711,11 @@ p.takings-changed {
 	color:#E11335;
 	font-size:110%
 }
+
+.hebrew .outtaHere{
+	left:auto;
+}
+
+.rspv_select {
+	width:80px;
+}

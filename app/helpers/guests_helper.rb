@@ -39,7 +39,7 @@ module GuestsHelper
       haml_tag :ul do
         haml_concat f.input(:rsvp, :as => :select, :collection => rsvp_kinds_for_select,
           :input_html => {:id => "#{dom_id(guest)}_rsvp", :class => "rspv_select", :guest_id => guest.id.to_s,
-          :onchange => "jQuery.fn.rsvp_update_color(this);jQuery(this).parents('form').get(0).onsubmit();", :style => "display:none"}, 
+          :onchange => "jQuery(this).parents('form').get(0).onsubmit();"}, 
           :wrapper_html => {:class => "guest_select_rsvp", :id => ""})
       end
     end    
