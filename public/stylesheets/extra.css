@@ -706,3 +706,8 @@ p.rsvp-filter {
 .selectOptions ul a {
 	height:12px;
 }
+
+p.takings-changed {
+	color:#E11335;
+	font-size:110%
+}

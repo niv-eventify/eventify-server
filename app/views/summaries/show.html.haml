@@ -30,14 +30,15 @@
         %h2= _("Guests summary")
         .lists
           %dl.def-list
-            %dt
-              != link_to_function(_("Bounced emails"), "todo")
-              %span= "info"
-            %dd
+            /
+              %dt
+                != link_to_function(_("Bounced emails"), "todo")
+                %span= "info"
+              %dd
               ??
             %dt= _("Guests")
             %dd= @event.guests.count
-            %dt= _("total arriving guests")
+            %dt= _("Total arriving guests")
             %dd= @event.guests.rsvp_yes.count
           %dl.def-list
             %dt.green= _("RSVP yes")
