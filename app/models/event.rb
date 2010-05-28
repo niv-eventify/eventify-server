@@ -195,11 +195,12 @@ class Event < ActiveRecord::Base
   end
 
   def default_sms_message
-    _("%{event_name} on %{date} at %{time}${location}. Invite sent to your Email. %{host_name}") % {
+    _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your Email. %{host_name}") % {
       :event_name => name, 
       :host_name => user.name,
       :date => starting_at.to_s(:isra_date),
-      :time => starting_at.to_s(:isra_time)
+      :time => starting_at.to_s(:isra_time),
+      :location => location
     }
   end
 

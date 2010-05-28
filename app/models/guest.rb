@@ -11,7 +11,7 @@ class Guest < ActiveRecord::Base
   validates_presence_of :email, :if => proc {|guest| guest.send_email?}
   validates_uniqueness_of :email, :scope => :event_id, :allow_nil => true, :allow_blank => true
 
-  validates_format_of   :mobile_phone, :with => String::PHONE_REGEX, :message => N_("does't look like a mobile phone number"), :allow_blank => true, :allow_nil => true
+  validate :mobile_phone_format
   validates_presence_of :mobile_phone, :if => proc {|guest| guest.send_sms?}
   validates_uniqueness_of :mobile_phone, :scope => :event_id, :allow_nil => true, :allow_blank => true
 
@@ -213,5 +213,9 @@ class Guest < ActiveRecord::Base
         taking.destroy
       end
     end
+  end
+
+  def mobile_phone_format
+    errors.add(:mobile_phone, _("does't look like a mobile phone number")) if !mobile_phone.blank? && (mobile_phone.gsub(/\(|\)|\-|\+/, "") !~  /^[\d]+$/)
   end
 end
