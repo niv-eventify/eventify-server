@@ -698,3 +698,7 @@ li.thing .sel-holder {
 	line-height: 23px;
 	font-weight: normal;
 }
+
+p.rsvp-filter {
+	clear:both;
+}

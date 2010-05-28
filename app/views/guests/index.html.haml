@@ -20,16 +20,18 @@
           %h3= _("Add from existing contact list:")
           != render(:partial => "import")
 
+          .cancel-form
+            .input-area
+              != text_field_tag "search_guests", "", :id => "search_guests", :class => "i-text"
+              != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn", :id => "cancel_search"
+
           %h3= _("Add manually:")
-          %p
-            = _("Filter by RSVP:")
+          %p.rsvp-filter
+            %strong= _("Filter by RSVP:")
             != link_to_function _("All"), "", :id => "filter_all"
             != link_to_function _("Yes"), "", :id => "filter_yes"
             != link_to_function _("No"), "", :id => "filter_no"
             != link_to_function _("May Be"), "", :id => "filter_maybe"
-            = _("Search:")
-            != text_field_tag "search_guests", "", :id => "search_guests"
-            != link_to_function _("X"), "", :id => "cancel_search"
 
           %table#guests.info-table
             != render(:partial => "guests_header", :locals => {:check_all => true})
