@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-05-28 20:02+0300\n"
+"POT-Creation-Date: 2010-05-28 21:44+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -121,11 +121,11 @@ msgstr ""
 
 #: app/models/event.rb:198
 msgid ""
-"%{event_name} on %{date} at %{time}${location}. Invite sent to your Email. %"
+"%{event_name} on %{date} at %{time}%{location}. Invite sent to your Email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:230
+#: app/models/event.rb:231
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -139,7 +139,7 @@ msgid ""
 "Eventify Team.\n"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:57
+#: app/views/summaries/show.html.haml:58
 msgid "%{percent} %"
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr ""
 msgid "All Contacts"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:24
+#: app/views/layouts/_footer.html.haml:25
 msgid "All right resevred to Eventify ©"
 msgstr ""
 
@@ -263,7 +263,7 @@ msgstr ""
 msgid "Are you sure?"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:34
+#: app/views/summaries/show.html.haml:35
 msgid "Bounced emails"
 msgstr ""
 
@@ -291,7 +291,7 @@ msgstr ""
 msgid "Cancel event"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:25
+#: app/views/layouts/_footer.html.haml:26
 msgid "Cat&amp;Dog Studio"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:25
+#: app/views/layouts/_footer.html.haml:26
 msgid "Design and UI %{link}"
 msgstr ""
 
@@ -528,6 +528,10 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
+#: app/views/layouts/_footer.html.haml:13
+msgid "Feedback"
+msgstr ""
+
 #: app/views/guests/index.html.haml:30
 msgid "Filter by RSVP:"
 msgstr ""
@@ -545,7 +549,7 @@ msgstr ""
 msgid "From our fabelous gallery or upload your own pic"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:93
+#: app/views/summaries/show.html.haml:94
 msgid "Full Guests List"
 msgstr ""
 
@@ -559,7 +563,7 @@ msgid "Guest List"
 msgstr ""
 
 #: app/views/rsvps/show_more.html.haml:16
-#: app/views/summaries/show.html.haml:38
+#: app/views/summaries/show.html.haml:39
 msgid "Guests"
 msgstr ""
 
@@ -608,7 +612,7 @@ msgstr ""
 
 #: app/views/pages/no_invitation.en.html.haml:1
 #: app/views/pages/no_invitation.en.html.haml:4
-#: app/views/summaries/show.html.haml:95
+#: app/views/summaries/show.html.haml:96
 msgid "If some of your guests didn't recieve the invitation"
 msgstr ""
 
@@ -793,7 +797,7 @@ msgstr ""
 msgid "No reminders defined yet"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:59
+#: app/views/summaries/show.html.haml:60
 msgid "No things to bring"
 msgstr ""
 
@@ -802,7 +806,7 @@ msgid "No user was found with that email address"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:6
-#: app/views/summaries/show.html.haml:49
+#: app/views/summaries/show.html.haml:50
 msgid "Not responded"
 msgstr ""
 
@@ -907,7 +911,7 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:67
+#: app/views/summaries/show.html.haml:68
 msgid "Pring Guests List"
 msgstr ""
 
@@ -920,12 +924,12 @@ msgid "RSVP"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:4
-#: app/views/summaries/show.html.haml:45
+#: app/views/summaries/show.html.haml:46
 msgid "RSVP may be"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:5
-#: app/views/summaries/show.html.haml:47
+#: app/views/summaries/show.html.haml:48
 msgid "RSVP no"
 msgstr ""
 
@@ -946,7 +950,7 @@ msgid "RSVP summary|When a guest updates RSVP"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:3
-#: app/views/summaries/show.html.haml:43
+#: app/views/summaries/show.html.haml:44
 msgid "RSVP yes"
 msgstr ""
 
@@ -1024,7 +1028,7 @@ msgstr ""
 msgid "Select None"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:56
+#: app/views/summaries/show.html.haml:57
 msgid "Selected"
 msgstr ""
 
@@ -1101,7 +1105,7 @@ msgstr ""
 msgid "Text/SMS"
 msgstr ""
 
-#: app/views/guests/index.html.haml:15 app/views/summaries/show.html.haml:52
+#: app/views/guests/index.html.haml:15 app/views/summaries/show.html.haml:53
 #: app/views/takings/_index.html.haml:2 app/views/things/index.html.haml:8
 msgid "Things to bring"
 msgstr ""
@@ -1116,6 +1120,10 @@ msgstr ""
 
 #: app/helpers/events_helper.rb:20 app/views/events/_info.html.haml:11
 msgid "Time"
+msgstr ""
+
+#: app/views/summaries/show.html.haml:41
+msgid "Total arriving guests"
 msgstr ""
 
 #: app/views/reminders/_edit.html.haml:6
@@ -1400,7 +1408,7 @@ msgstr ""
 msgid "change RSVP|change"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:96
+#: app/views/summaries/show.html.haml:97
 msgid "click here for help"
 msgstr ""
 
@@ -1540,7 +1548,7 @@ msgstr "Seconds"
 msgid "datetime.prompts.year"
 msgstr "Year"
 
-#: app/models/contact.rb:7 app/models/guest.rb:14
+#: app/models/contact.rb:7 app/models/guest.rb:219
 msgid "does't look like a mobile phone number"
 msgstr ""
 
@@ -1550,7 +1558,7 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:81
 #: app/views/contacts/_contact.html.haml:5
-#: app/views/summaries/show.html.haml:61
+#: app/views/summaries/show.html.haml:62
 msgid "edit"
 msgstr ""
 
@@ -1716,7 +1724,7 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:70 app/views/summaries/show.html.haml:73
+#: app/views/summaries/show.html.haml:71 app/views/summaries/show.html.haml:74
 msgid "search"
 msgstr ""
 
@@ -1789,10 +1797,6 @@ msgstr "pm"
 msgid "to Calendar"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:40
-msgid "total arriving guests"
-msgstr ""
-
-#: app/helpers/guests_helper.rb:49
+#: app/helpers/guests_helper.rb:50
 msgid "yes"
 msgstr ""
