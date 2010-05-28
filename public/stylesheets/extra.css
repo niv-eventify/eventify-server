@@ -702,3 +702,7 @@ li.thing .sel-holder {
 p.rsvp-filter {
 	clear:both;
 }
+
+.selectOptions ul a {
+	height:12px;
+}
