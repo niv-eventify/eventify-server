@@ -9,6 +9,8 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :user
   validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
 
+  DEFAULT_TIME_ZONE = "Jerusalem"
+
   has_many :guests do
     def import(new_guests)
       guests_imported = 0
@@ -52,7 +54,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
-    :msg_color, :title_color, :font, :allow_seeing_other_guests
+    :msg_color, :title_color, :font, :allow_seeing_other_guests, :tz
     
 
   datetime_select_accessible :starting_at, :ending_at
@@ -107,6 +109,11 @@ class Event < ActiveRecord::Base
   before_create :set_initial_stage
   def set_initial_stage
     self.stage_passed = 2
+  end
+
+  before_create :set_default_time_zone
+  def set_default_time_zone
+    self.tz ||= DEFAULT_TIME_ZONE
   end
 
   def invitations_to_send_counts
@@ -233,6 +240,16 @@ class Event < ActiveRecord::Base
 
   def self.default_start_time
     2.weeks.from_now.beginning_of_day + 11.hours
+  end
+
+  def with_time_zone(default_time_zone = DEFAULT_TIME_ZONE)
+    old_tz = Time.zone
+    begin
+      ::Time.zone = tz || default_time_zone || old_tz
+      yield
+    ensure
+      ::Time.zone = old_tz
+    end
   end
 
 protected
