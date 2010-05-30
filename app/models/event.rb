@@ -71,7 +71,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
   validates_format_of   :host_mobile_number, :with => String::PHONE_REGEX, :on => :update, :if => :going_to_send_sms?
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
-  validates_length_of   :sms_message, :maximum => 140, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
+  validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
 
   def going_to_send_sms?
     should_send_sms? && send_invitations_now
@@ -205,13 +205,19 @@ class Event < ActiveRecord::Base
   end
 
   def default_sms_message
-    _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your Email. %{host_name}") % {
-      :event_name => name, 
-      :host_name => user.name,
-      :date => starting_at.to_s(:isra_date),
-      :time => starting_at.to_s(:isra_time),
-      :location => location
-    }
+    with_time_zone do
+      opts = {
+        :event_name => name, 
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : location)
+      }
+      s = _("%{event_name} on %{date} at %{time}%{location}. %{host_name}") % opts
+      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+
+      _("%{event_name} on %{date} at %{time}. %{host_name}") % opts
+    end
   end
 
   def location

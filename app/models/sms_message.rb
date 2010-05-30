@@ -7,6 +7,8 @@ class SmsMessage < ActiveRecord::Base
 
   validates_presence_of :guest_id, :event_id, :receiver_mobile, :message, :sender_mobile
 
+  MAX_LENGTH = 140
+
   def set_event
     if guest
       self.event_id = guest.event_id
