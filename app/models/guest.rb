@@ -217,4 +217,8 @@ class Guest < ActiveRecord::Base
       end
     end
   end
+
+  def self.total_attendees_count
+    calculate(:sum, "if(attendees_count IS NULL, 1, attendees_count)")
+  end
 end
