@@ -63,10 +63,10 @@ describe Guest do
       @guest.send_email.should be_nil
     end
 
-    it "should change send_sms when mobile added" do
+    it "should not change send_sms when mobile added" do
       @guest.mobile_phone = "0123456789"
       @guest.save.should be_true
-      @guest.send_sms.should be_true
+      @guest.send_sms.should_not be_true
     end
 
     it "should change send_email when email added" do

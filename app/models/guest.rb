@@ -110,7 +110,6 @@ class Guest < ActiveRecord::Base
 
   def update_invitation_methods
     self.send_email = true if !email.blank? && email_changed? && 1 == changes.keys.size
-    self.send_sms =   true if !mobile_phone.blank? && mobile_phone_changed? && 1 == changes.keys.size
 
     self.email_invitation_sent_at = self.send_email_invitation_at = nil if email_changed?
     self.sms_invitation_sent_at   = self.send_sms_invitation_at = nil if mobile_phone_changed?
@@ -217,7 +216,7 @@ class Guest < ActiveRecord::Base
   def check_invitation_failures
     # reset sms errors when mobile phone changed
     if send_sms? && !sms_invitation_failed_at.nil? && mobile_phone_changed?
-      self.sms_invitation_sent_at = self.sms_invitation_failed_at = nil
+      self.send_sms_invitation_at = self.sms_invitation_sent_at = self.sms_invitation_failed_at = nil
     end
   end
 
