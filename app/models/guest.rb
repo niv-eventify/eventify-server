@@ -123,6 +123,10 @@ class Guest < ActiveRecord::Base
     false
   end
 
+  def invitation_sent_or_scheduled?(delivery_method)
+    send("#{delivery_method}_invitation_sent_at") || send("send_#{delivery_method}_invitation_at")
+  end
+
   def update_invitation_state
     return unless need_to_resend_invitation?
     # need to send invitations
@@ -203,7 +207,7 @@ class Guest < ActiveRecord::Base
   end
 
   def invited?
-    email_invitation_sent_at || sms_invitation_sent_at
+    invitation_sent_or_scheduled?(:email) || invitation_sent_or_scheduled?(:sms)
   end
 
   def email_recipient
