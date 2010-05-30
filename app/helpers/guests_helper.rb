@@ -33,6 +33,7 @@ module GuestsHelper
     page << "jQuery('tr##{dom_id(guest)}').replaceWith(#{render(:partial => "guest", :object => guest).to_json});"
     page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
     page << "jQuery('tr##{dom_id(guest)} select').customSelect();"
+    page << "jQuery('tr##{dom_id(guest)} input.remote-checkbox').change(function(){jQuery(this).parents('form').get(0).onsubmit();});"
   end
 
   def guest_remote_rsvp(event, guest)
