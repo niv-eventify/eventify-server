@@ -98,13 +98,13 @@ describe Guest do
     end
 
     it "should reset sms_invitation_sent_at when mobile_phone is changed" do
-      @guest.mobile_phone = "02222222222"
+      @guest.mobile_phone = "0541234567"
       @guest.save.should be_true
       @guest.sms_invitation_sent_at.should be_nil
     end
 
     it "should not reset email_invitation_sent_at when phone number is changed" do
-      @guest.mobile_phone = "02222222222"
+      @guest.mobile_phone = "0541234567"
       @guest.save.should be_true
       @guest.email_invitation_sent_at.should_not be_nil
     end

@@ -78,7 +78,7 @@ describe Event do
         g = Factory.create(:guest_summary_not_sent)
         guests_count, rsvps = g.event.guests_for_this_summary!
         guests_count.should == 1
-        rsvps.should == {0 => [], 1 => [{:name => "New Guest", :email => "new@guest.com", :mobile_phone => "012345678"}], 2 => []}
+        rsvps.should == {0 => [], 1 => [{:name => "New Guest", :email => "new@guest.com", :mobile_phone => "0501234567"}], 2 => []}
       end
     end
 
