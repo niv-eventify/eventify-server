@@ -47,7 +47,7 @@ class EventsController < InheritedResources::Base
 
 
   def new
-    @event = Event.new(:category => @category, :design => @design)
+    @event = Event.new(:category => @category, :design => @design, :starting_at => Event.default_start_time)
     @event.build_user unless logged_in?
     new!
   end

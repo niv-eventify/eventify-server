@@ -231,6 +231,10 @@ class Event < ActiveRecord::Base
     _("%{host_name}'s %{event_name} event") % {:host_name => user.name, :event_name => name}
   end
 
+  def self.default_start_time
+    2.weeks.from_now.beginning_of_day + 11.hours
+  end
+
 protected
 
   def _cancel_sms_reminders!
