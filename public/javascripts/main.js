@@ -378,7 +378,6 @@ jQuery.fn.customCheckbox = function(_options){
 				if(checkbox.is(':checked')) checkbox.removeAttr('checked');
 				else checkbox.attr('checked', 'checked');
 				changeCheckbox(checkbox);
-				if(typeof(checkbox.get(0).onchange) == 'function') checkbox.get(0).onchange();
 				checkbox.trigger("change");
 			});
 			checkbox.click(function(){
