@@ -21,8 +21,11 @@ class Guest < ActiveRecord::Base
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
   named_scope :not_invited_by_sms, {:conditions => "guests.sms_invitation_sent_at IS NULL AND guests.send_sms = 1"}
+  named_scope :scheduled_to_invite_by_sms, {:conditions => "guests.send_email_invitation_at IS NOT NULL AND guests.send_sms = 1"}
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
+
   named_scope :not_invited_by_email, {:conditions => "guests.email_invitation_sent_at IS NULL AND guests.send_email = 1"}
+  named_scope :scheduled_to_invite_by_email, {:conditions => "guests.send_email_invitation_at IS NOT NULL AND guests.send_sms = 1"}
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
   named_scope :summary_email_not_sent, :conditions => "guests.summary_email_sent_at IS NULL"
 
@@ -107,8 +110,8 @@ class Guest < ActiveRecord::Base
   def update_invitation_methods
     self.send_email = true if !email.blank? && email_changed? && 1 == changes.keys.size
     self.send_sms =   true if !mobile_phone.blank? && mobile_phone_changed? && 1 == changes.keys.size
-    self.email_invitation_sent_at = nil if email_changed?
-    self.sms_invitation_sent_at   = nil if mobile_phone_changed?
+    self.email_invitation_sent_at = self.send_email_invitation_at = nil if email_changed?
+    self.sms_invitation_sent_at   = self.send_sms_invitation_at = nil if mobile_phone_changed?
   end
 
   def update_invitation_state
@@ -143,7 +146,7 @@ class Guest < ActiveRecord::Base
 
   def prepare_sms_invitation!(timestamp)
     # TODO = check sms bulk status / package payments
-    self.sms_invitation_sent_at = timestamp
+    self.sms_invitation_sent_at, self.send_sms_invitation_at = timestamp, nil
     save!
     send_later(:send_sms_invitation!)
   end
@@ -161,7 +164,7 @@ class Guest < ActiveRecord::Base
 
   def prepare_email_invitation!(timestamp)
     self.email_token ||= Astrails.generate_token
-    self.email_invitation_sent_at = timestamp
+    self.email_invitation_sent_at, self.send_email_invitation_at = timestamp, nil
     save!
     send_later(:send_email_invitation!)
   end

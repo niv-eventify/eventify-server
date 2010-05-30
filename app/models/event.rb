@@ -143,6 +143,9 @@ class Event < ActiveRecord::Base
     self.stage_passed = 4
     save!
 
+    guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", Time.now.utc]
+    guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", Time.now.utc]
+
     send_later(:delayed_send_invitations)
   end
 
@@ -189,11 +192,11 @@ class Event < ActiveRecord::Base
   end
 
   def send_sms_invitations(timestamp)
-    scoped_invite(guests.not_invited_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
+    scoped_invite(guests.scheduled_to_invite_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
   end
 
   def send_email_invitations(timestamp)
-    scoped_invite(guests.not_invited_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
+    scoped_invite(guests.scheduled_to_invite_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
   end
 
   def cancel_sms!

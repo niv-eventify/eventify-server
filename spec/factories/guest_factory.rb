@@ -11,6 +11,7 @@ Factory.define :guest do |guest|
 
   guest.association :event, :factory => :event
   guest.summary_email_sent_at 10.minutes.ago
+  guest.send_email 1
 end
 
 Factory.define :guest_from_event_with_mobile, :parent => :guest do |guest|
@@ -23,6 +24,7 @@ end
 
 Factory.define :guest_with_mobile, :parent => :guest_from_event_with_mobile do |guest|
   guest.mobile_phone "0500000000"
+  guest.send_sms  1
 end
 
 

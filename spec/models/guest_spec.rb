@@ -82,6 +82,13 @@ describe Guest do
       @guest = Factory.create(:guest_with_sent_inviations)
       @guest.email_invitation_sent_at.should_not be_nil
       @guest.sms_invitation_sent_at.should_not be_nil
+      @guest.send_sms_invitation_at.should be_nil
+      @guest.send_email_invitation_at.should be_nil
+    end
+
+    after(:each) do
+      @guest.send_sms_invitation_at.should be_nil
+      @guest.send_email_invitation_at.should be_nil
     end
 
     it "should reset email_invitation_sent_at when email is changed" do
@@ -138,13 +145,16 @@ describe Guest do
   describe "send sms invitation" do
     before(:each) do
       @guest = Factory.create(:guest_with_mobile)
-      @guest.sms_invitation_sent_at.should be_nil
-      @guest.sms_invitation_failed_at.should be_nil
+      @guest.event.send_invitations
+      @guest.reload.sms_invitation_sent_at.should be_nil
+      @guest.reload.sms_invitation_failed_at.should be_nil
+      @guest.reload.send_sms_invitation_at.should_not be_nil
     end
 
     it "should reset sent at" do
       @guest.prepare_sms_invitation!(Time.now.utc)
       @guest.sms_invitation_sent_at.should_not be_nil
+      @guest.send_sms_invitation_at.should be_nil
     end
 
     it "should save failure time" do
@@ -191,6 +201,8 @@ describe Guest do
   describe "send email invitation" do
     before(:each) do
       @guest = Factory.create(:guest)
+      @guest.event.send_invitations
+      @guest.reload.send_email_invitation_at.should_not be_nil
     end
 
     it "should update email_invitation_sent_at and email_token" do
@@ -199,6 +211,7 @@ describe Guest do
       t = Time.now.utc
       @guest.prepare_email_invitation!(t)
       @guest.email_invitation_sent_at.should == t
+      @guest.send_email_invitation_at.should be_nil
       @guest.email_token.should_not be_nil
     end
 
