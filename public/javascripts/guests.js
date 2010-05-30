@@ -44,10 +44,6 @@ jQuery(document).ready(function() {
 	      });
 			}, 0);
     });
-    jQuery("#cancel_search").click(function(){
-      jQuery("tr.guest").show();
-      jQuery("#search_guests").val("");
-    });
 		jQuery("input.select_all_emails").change(function(){
 			var checked = jQuery(this).attr("checked");
 			jQuery("input.input-check.guest_send_email").attr("checked", checked).redraw_customCheckbox().trigger("change");
