@@ -142,7 +142,7 @@ class Guest < ActiveRecord::Base
   def send_summary_status
     if rsvp_changed? && event.immediately_send_rsvp?
       rsvps = {rsvp => [to_rsvp_email_params]}
-      Notifier.send_later(:deliver_guests_summary, event, rsvps, nil)
+      I18n.with_locale(event.language) {Notifier.send_later(:deliver_guests_summary, event, rsvps, nil)}
     end
   end
 

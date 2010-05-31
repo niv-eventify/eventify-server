@@ -39,7 +39,7 @@ class Taking < ActiveRecord::Base
 
   after_destroy :notifiy_guest
   def notifiy_guest
-    Notifier.send_later(:deliver_taking_removed, guest, thing) unless @skip_noitfication
+    I18n.with_locale(event.language) { Notifier.deliver_taking_removed(guest, thing) }
   end
 
   def max_amount

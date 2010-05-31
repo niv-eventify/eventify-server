@@ -4,7 +4,7 @@ describe Taking do
 
   describe "things amounts" do
     before(:each) do
-      @guest = Factory.create(:guest)
+      @guest = Factory.create(:guest_with_token)
       @thing = @guest.event.things.create(:name => "foo", :amount => 5)
     end
 
@@ -78,12 +78,12 @@ describe Taking do
       end
 
       it "should send email to guest when taking is removed" do
-        Notifier.should_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        Notifier.should_receive(:deliver_taking_removed).with(@guest, @thing)
         @taking.destroy
       end
 
       it "should send email to guest when whole thing is removed" do
-        Notifier.should_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        Notifier.should_receive(:deliver_taking_removed).with(@guest, @thing)
         @thing.destroy
       end
 

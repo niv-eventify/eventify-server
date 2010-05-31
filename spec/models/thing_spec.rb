@@ -49,7 +49,7 @@ describe Thing do
 
   context "takings" do
     before(:each) do
-      @guest = Factory.create(:guest)
+      @guest = Factory.create(:guest_with_token)
       @thing = @guest.event.things.create(:name => "foo", :amount => 5)
     end
 
