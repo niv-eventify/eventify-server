@@ -185,7 +185,12 @@ class Guest < ActiveRecord::Base
   end
 
   def send_reminder!(reminder)
-    return unless invited?
+    logger.info "#{Time.now.utc.to_s(:db)} sending reminder_id=#{reminder.id} to guest_id=#{self.id}\n"
+
+    unless invited?
+      logger.info "#{Time.now.utc.to_s(:db)} sending reminder_id=#{reminder.id} to guest_id=#{self.id} - skipped, guest is not invited\n"
+      return
+    end
 
     if reminder.by_email?
       # TODO: handle delivery errors
@@ -199,6 +204,8 @@ class Guest < ActiveRecord::Base
       sms.send_sms!
       reminder.reminder_logs.create(:guest_id => self.id, :destination => mobile_phone, :message => reminder.sms_message, :status => (sms.success? ? "success" : "failure"), :kind => "sms")
     end
+
+    logger.info "#{Time.now.utc.to_s(:db)} sending reminder_id=#{reminder.id} to guest_id=#{self.id} - reminder sent\n"
   end
 
   def before_destroy

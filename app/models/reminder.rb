@@ -106,22 +106,19 @@ class Reminder < ActiveRecord::Base
   end
 
   def self.send_reminders
-    logger.info "\n\nsending reminders\n\n"
-
     loop do
-      reminders = active.pending.with_activated_event.find(:all, :limit => 100)
+      reminders = active.pending.with_activated_event.find(:all, :limit => 10)
       break if reminders.blank?
 
+      logger.info "\n\n#{Time.now.utc.to_s(:db)} sending reminders - found reminders, ids = #{reminders.collect(&:id).inspect}"
+
       Reminder.update_all(["reminder_sent_at = ?", Time.now.utc], ["reminders.id in (?)", reminders.collect(&:id)])
-      reminders.each do |reminder|
-        logger.info "\n\nsend_later(:deliver!) reminder_id=#{reminder.id}\n\n"
-        reminder.send_later(:deliver!)
-      end      
+      reminders.each {|reminder| reminder.deliver! }
     end
   end
 
   def deliver!
-    logger.info "\n\ndeliver! reminder_id=#{self.id}\n\n"
+    logger.info "#{Time.now.utc.to_s(:db)} deliver! reminder_id=#{self.id}\n"
     event.guests.find_each(:batch_size => 1) do |guest|
       guest.send_later(:send_reminder!, self)
     end
