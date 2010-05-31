@@ -17,10 +17,16 @@
     - link_to_inline_edit(guest, :attendees_count)
 
   - info_table_column(5) do
-    - if_not_blank_editable_property(:send_email, :email, guest, guest.invitation_sent_or_scheduled?(:email))
+    - if guest.invitation_sent_or_scheduled?(:email)
+      - readonly_state(guest.email.blank? ? nil : guest.send_email?)
+    - else
+      - change_or_edit_property(:send_email, :email, guest)
 
   - info_table_column(6) do
-    - if_not_blank_editable_property(:send_sms, :mobile_phone, guest, guest.invitation_sent_or_scheduled?(:sms))
+    - if guest.invitation_sent_or_scheduled?(:sms)
+      - readonly_state(guest.mobile_phone.blank? ? nil : guest.send_sms?)
+    - else
+      - change_or_edit_property(:send_sms, :mobile_phone, guest)
 
   - info_table_column do
     != link_to_remove_guest(guest)

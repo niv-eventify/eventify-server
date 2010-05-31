@@ -1,1 +1,1 @@
-resource_edit_form(page, resource, params[:attribute])
+resource_edit_form(page, resource, params[:attribute], params[:true_attribute])

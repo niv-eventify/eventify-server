@@ -107,10 +107,16 @@ module ApplicationHelper
     page << "jQuery('#{selector_prefix} div.input-bg-uni').after(#{content_tag(:p, errors.join(", "), :class => "error-msg").to_json});"
   end
 
-  def resource_edit_form(page, resource, attribute)
+  def inline_helper(helper_name, *args)
+    render(:inline => Haml::Engine.new("- send(helper_name, *args)").render(self, :helper_name => helper_name, :args => args))
+  end
+
+  def resource_edit_form(page, resource, attribute, hidden_true_attribute = nil)
+    html = inline_helper(:resource_remote_form, resource, attribute, true, hidden_true_attribute)
+
     page << <<-JAVASCRIPT
      jQuery('.inline_#{dom_id(resource)}_#{attribute}').parents('div.cell-bg').
-      html(#{render(:partial => "inline", :locals => {:resource => resource, :attribute => attribute}).to_json}).
+      html(#{html.to_json}).
       find('.input-text:first').focus().keyup(function(e){
         if (27 == e.which) {
           jQuery.ajax({url: #{send("event_#{resource.class.name.downcase}_path", resource.event_id, resource).to_json}, type:'get', dataType:'script'});
@@ -120,7 +126,7 @@ module ApplicationHelper
     JAVASCRIPT
   end
 
-  def resource_remote_form(resource, attribute, short_css_class = true)
+  def resource_remote_form(resource, attribute, short_css_class = true, hidden_true_attribute = nil)
     klass = ""
     klass << " short" if short_css_class && !resource.send(attribute).is_a?(String)
     fields_opts = {:input_css_class => klass, 
@@ -129,6 +135,9 @@ module ApplicationHelper
     form_remote_for resource, :builder => TableCellFormBuilder::Builder, :url => send("event_#{resource.class.name.downcase}_path", resource.event_id, resource), :method => :put do |f|
       haml_concat f.text_field(attribute, fields_opts)
       haml_concat hidden_field_tag("attribute", attribute)
+      if hidden_true_attribute
+        haml_concat f.hidden_field(hidden_true_attribute, :value => true)
+      end
     end
   end
 end
