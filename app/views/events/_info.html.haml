@@ -1,21 +1,22 @@
-.pict
-  != image_tag(event.design.card.url(:list))
-.boxe-text
-  %p
-    %strong= _("Hosts:")
-    = event.user.name
-  %p
-    %strong= _("Date:")
-    = event.starting_at.to_s(:isra_date)
-  %p
-    %strong= _("Time")
-    = event.starting_at.to_s(:isra_time)
-  - unless event.location.blank?
+- event.with_time_zone do
+  .pict
+    != image_tag(event.design.card.url(:list))
+  .boxe-text
     %p
-      %strong= _("Place:")
-      = event.location
-  %p!= link_to _("Preview"), "#invitation#{event.id}", :class => "more preview nyroModal"
-- invitation_preview(event) do
-  %img.back{:src => "#{event.design.card.url}"}
-  != render(:partial => "rsvps/postcard", :locals => {:event => event})
+      %strong= _("Hosts:")
+      = event.user.name
+    %p
+      %strong= _("Date:")
+      = event.starting_at.to_s(:isra_date)
+    %p
+      %strong= _("Time")
+      = event.starting_at.to_s(:isra_time)
+    - unless event.location.blank?
+      %p
+        %strong= _("Place:")
+        = event.location
+    %p!= link_to _("Preview"), "#invitation#{event.id}", :class => "more preview nyroModal"
+  - invitation_preview(event) do
+    %img.back{:src => "#{event.design.card.url}"}
+    != render(:partial => "rsvps/postcard", :locals => {:event => event})
 

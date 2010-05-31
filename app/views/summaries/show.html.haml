@@ -39,7 +39,7 @@
             %dt= _("Guests")
             %dd= @event.guests.count
             %dt= _("Total arriving guests")
-            %dd= @event.guests.rsvp_yes.count
+            %dd= @event.guests.rsvp_yes.total_attendees_count
           %dl.def-list
             %dt.green= _("RSVP yes")
             %dd.green= @event.guests.rsvp_yes.count

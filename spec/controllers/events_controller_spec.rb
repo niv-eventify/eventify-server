@@ -7,7 +7,8 @@ describe EventsController do
   def create_event(user)
     @user = Factory.create(user)
     UserSession.create(@user)
-    post :create, :event => {:category_id => 1, :design_id => 1, :name => "some name", :starting_at => 10.days.from_now}
+    @some_time = 10.days.from_now.utc
+    post :create, :event => {:category_id => 1, :design_id => 1, :name => "some name", :starting_at => @some_time}
   end
 
   describe "activated" do
@@ -27,6 +28,15 @@ describe EventsController do
 
       it "should create activated event" do
         assigns[:event].user_is_activated.should be_true
+      end
+
+      it "should set default time zone" do
+        assigns[:event].tz.should == "Jerusalem"
+      end
+
+      it "should convert tz time" do
+        assigns[:event].starting_at.to_s(:db).should == @some_time.to_s(:db)
+        assigns[:event].starting_at.to_s.should_not == @some_time.to_s
       end
     end
   end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100525115414) do
+ActiveRecord::Schema.define(:version => 20100530113135) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -128,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20100525115414) do
     t.string   "msg_color"
     t.integer  "sms_messages_count",                        :default => 0
     t.boolean  "user_is_activated",                         :default => false
+    t.string   "tz",                        :limit => 128
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"
@@ -162,6 +163,8 @@ ActiveRecord::Schema.define(:version => 20100525115414) do
     t.datetime "summary_email_sent_at"
     t.string   "message_to_host"
     t.integer  "sms_messages_count",         :default => 0
+    t.datetime "send_email_invitation_at"
+    t.datetime "send_sms_invitation_at"
   end
 
   add_index "guests", ["event_id"], :name => "index_guests_on_event_id"

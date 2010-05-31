@@ -9,6 +9,8 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :user
   validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
 
+  DEFAULT_TIME_ZONE = "Jerusalem"
+
   has_many :guests do
     def import(new_guests)
       guests_imported = 0
@@ -52,7 +54,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
-    :msg_color, :title_color, :font, :allow_seeing_other_guests
+    :msg_color, :title_color, :font, :allow_seeing_other_guests, :tz
     
 
   datetime_select_accessible :starting_at, :ending_at
@@ -69,7 +71,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
   validates_format_of   :host_mobile_number, :with => String::PHONE_REGEX, :on => :update, :if => :going_to_send_sms?
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
-  validates_length_of   :sms_message, :maximum => 140, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
+  validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
 
   def going_to_send_sms?
     should_send_sms? && send_invitations_now
@@ -109,6 +111,11 @@ class Event < ActiveRecord::Base
     self.stage_passed = 2
   end
 
+  before_create :set_default_time_zone
+  def set_default_time_zone
+    self.tz ||= DEFAULT_TIME_ZONE
+  end
+
   def invitations_to_send_counts
     return @invitations_to_send_counts if @invitations_to_send_counts
 
@@ -135,6 +142,9 @@ class Event < ActiveRecord::Base
     self.send_invitations_now = nil
     self.stage_passed = 4
     save!
+
+    guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", Time.now.utc]
+    guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", Time.now.utc]
 
     send_later(:delayed_send_invitations)
   end
@@ -182,11 +192,11 @@ class Event < ActiveRecord::Base
   end
 
   def send_sms_invitations(timestamp)
-    scoped_invite(guests.not_invited_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
+    scoped_invite(guests.scheduled_to_invite_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
   end
 
   def send_email_invitations(timestamp)
-    scoped_invite(guests.not_invited_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
+    scoped_invite(guests.scheduled_to_invite_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
   end
 
   def cancel_sms!
@@ -195,13 +205,19 @@ class Event < ActiveRecord::Base
   end
 
   def default_sms_message
-    _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your Email. %{host_name}") % {
-      :event_name => name, 
-      :host_name => user.name,
-      :date => starting_at.to_s(:isra_date),
-      :time => starting_at.to_s(:isra_time),
-      :location => location
-    }
+    with_time_zone do
+      opts = {
+        :event_name => name, 
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : location)
+      }
+      s = _("%{event_name} on %{date} at %{time}%{location}. %{host_name}") % opts
+      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+
+      _("%{event_name} on %{date} at %{time}. %{host_name}") % opts
+    end
   end
 
   def location
@@ -229,6 +245,20 @@ class Event < ActiveRecord::Base
 
   def invitation_email_subject
     _("%{host_name}'s %{event_name} event") % {:host_name => user.name, :event_name => name}
+  end
+
+  def self.default_start_time
+    2.weeks.from_now.beginning_of_day + 11.hours
+  end
+
+  def with_time_zone(default_time_zone = DEFAULT_TIME_ZONE)
+    old_tz = Time.zone
+    begin
+      ::Time.zone = tz || default_time_zone || old_tz
+      yield
+    ensure
+      ::Time.zone = old_tz
+    end
   end
 
 protected

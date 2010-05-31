@@ -67,8 +67,7 @@ module Event::Summary
     summary_since = last_summary_sent_at || created_at
     self.last_summary_sent_at = Time.now.utc
     save!
-
-    Notifier.deliver_guests_summary(self, rsvps, summary_since)
+    I18n.with_locale(language) {Notifier.deliver_guests_summary(self, rsvps, summary_since)}
   end
 
   def guests_for_this_summary!

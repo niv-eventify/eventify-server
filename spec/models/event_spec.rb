@@ -55,6 +55,44 @@ describe Event do
       end
     end
 
+    describe "default sms message" do
+      before(:each) do
+        @event = Factory.create(:event)
+      end
+
+      it "should include location when event has location name" do
+        @event.location_name = "location_name"
+        @event.default_sms_message.should =~ /location_name/
+      end
+
+      it "should include location when event has location address" do
+        @event.location_address = "location_address"
+        @event.default_sms_message.should =~ /location_address/
+      end
+
+      it "should include location when event has location address and name" do
+        @event.location_name = "location_name"
+        @event.location_address = "location_address"
+        @event.default_sms_message.should =~ /location_address/
+        @event.default_sms_message.should =~ /location_name/
+      end
+
+      it "should not include location when no location" do
+        @event.location_name = nil
+        @event.location_address = nil
+        t = @event.with_time_zone{@event.starting_at.to_s(:isra_time)}
+        @event.default_sms_message.should =~ /#{t}\. #{@event.user.name}/
+      end
+
+      it "should not include location when location is too long" do
+        @event.location_name = "long" * 40
+        @event.location_address = nil
+        @event.location.should == "long" * 40
+        t = @event.with_time_zone{@event.starting_at.to_s(:isra_time)}
+        @event.default_sms_message.should =~ /#{t}\. #{@event.user.name}/
+      end
+    end
+
     describe "sending email" do
       before(:each) do
         @event = Factory.create(:event)
@@ -78,7 +116,7 @@ describe Event do
         g = Factory.create(:guest_summary_not_sent)
         guests_count, rsvps = g.event.guests_for_this_summary!
         guests_count.should == 1
-        rsvps.should == {0 => [], 1 => [{:name => "New Guest", :email => "new@guest.com", :mobile_phone => "012345678"}], 2 => []}
+        rsvps.should == {0 => [], 1 => [{:name => "New Guest", :email => "new@guest.com", :mobile_phone => "0501234567"}], 2 => []}
       end
     end
 

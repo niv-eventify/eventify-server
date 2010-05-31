@@ -39,6 +39,11 @@ protected
     if 4 == resource.stage_passed
       redirect_to summary_path(resource)
       return false
+    elsif 3 == resource.stage_passed && @invitations_to_send[:total].zero?
+      resource.stage = 4
+      resource.save!
+      redirect_to summary_path(resource)
+      return false
     end
   end
 end
