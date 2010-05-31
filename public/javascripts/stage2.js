@@ -5,6 +5,8 @@
   message: "",
   max_title_font_size: 0,
   max_free_text_font_size: 0,
+  curr_title_font_size: 0,
+  curr_free_text_font_size: 0,
   title_scroll_width: 0,
   free_text_scroll_width: 0,
   months_arr: [],
@@ -13,14 +15,14 @@
   
   calcFontSize: function() {
     var loop_protection = 0;
-    var free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
-    var title_font_size = parseInt(jQuery("#title").css("font-size"));
+    stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
+    stage2.curr_title_font_size = parseInt(jQuery("#title").css("font-size"));
     if(!stage2.seperated_title) {
-      while(loop_protection < 100 && (free_text_font_size < stage2.max_free_text_font_size || title_font_size < stage2.max_title_font_size) && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+      while(loop_protection < 100 && (stage2.curr_free_text_font_size < stage2.max_free_text_font_size || stage2.curr_title_font_size < stage2.max_title_font_size) && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
         loop_protection++;
-        if(free_text_font_size < stage2.max_free_text_font_size)
+        if(stage2.curr_free_text_font_size < stage2.max_free_text_font_size)
             stage2.change_font_size_by(1, "free_text");
-        if(title_font_size < stage2.max_title_font_size)
+        if(stage2.curr_title_font_size < stage2.max_title_font_size)
             stage2.change_font_size_by(1, "title");
       }
       while(loop_protection < 100 && jQuery(".msg-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
@@ -29,11 +31,11 @@
         stage2.change_font_size_by(-1, "title");
       }
     } else {
-      while(loop_protection < 100 && free_text_font_size < stage2.max_free_text_font_size && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
+      while(loop_protection < 100 && stage2.curr_free_text_font_size < stage2.max_free_text_font_size && jQuery(".msg-holder").height() > jQuery("#free_text").height()) {
         loop_protection++;
         stage2.change_font_size_by(1, "free_text");
       }
-      while(loop_protection < 100 && title_font_size < stage2.max_title_font_size && (jQuery(".title-holder").height() > (jQuery("#title").height() + parseInt(jQuery("#title").css("line-height"))))) {
+      while(loop_protection < 100 && stage2.curr_title_font_size < stage2.max_title_font_size && jQuery(".title-holder").height() > jQuery("#title").height()) {
         loop_protection++;
         stage2.change_font_size_by(1, "title");
       }
@@ -46,11 +48,11 @@
         stage2.change_font_size_by(-1, "title");
       }
     }
-    while(loop_protection < 100 && jQuery("#title")[0].scrollWidth > stage2.title_scroll_width) {
+    while(loop_protection < 100 && (stage2.curr_title_font_size > stage2.max_title_font_size || jQuery("#title")[0].scrollWidth > stage2.title_scroll_width)) {
       loop_protection++;
       stage2.change_font_size_by(-1,"title");
     }
-    while(loop_protection < 100 && jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width) {
+    while(loop_protection < 100 && (stage2.curr_free_text_font_size > stage2.max_free_text_font_size || jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width)) {
       loop_protection++;
       stage2.change_font_size_by(-1, "free_text");
     }
@@ -65,7 +67,13 @@
       jQuery("#event_msg_font_size").val(Math.floor(new_font_size * 1.6));
       jQuery(".background_holder .msg").css("font-size", Math.floor(new_font_size * 1.6) + "px");
     }
+    stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
   },
+
+  is_good_font_size: function(id) {
+    return jQuery("#" + id)[0].scrollWidth <= stage2[id + "_scroll_width"]
+  },
+
   preview_text: function(sourceId, targetId) {
     var text = jQuery("#" + sourceId).val();
     if(stage2.prev_text == text) return;
@@ -176,23 +184,29 @@
         return false;
     });
     jQuery('#toolbar_title a.font-plus').click(function(){
-        stage2.change_font_size_by(1, "title");
         stage2.max_title_font_size++;
+        var curr = stage2.curr_title_font_size;
+        stage2.calcFontSize();
+        if(curr == stage2.curr_title_font_size)
+            stage2.max_title_font_size--;
         return false;
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
-        stage2.change_font_size_by(-1, "title");
         stage2.max_title_font_size--;
+        stage2.calcFontSize();
         return false;
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
-        stage2.change_font_size_by(1, "free_text");
         stage2.max_free_text_font_size++;
+        var curr = stage2.curr_free_text_font_size;
+        stage2.calcFontSize();
+        if(curr == stage2.curr_free_text_font_size)
+            stage2.max_free_text_font_size--;
         return false;
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
-        stage2.change_font_size_by(-1, "free_text");
         stage2.max_free_text_font_size--;
+        stage2.calcFontSize();
         return false;
     });
     jQuery('.selectOptions.select_title a, .selectOptions.select_msg a, #toolbar_title .selectArea .center, #toolbar_msg .selectArea .center').each(function(){
@@ -268,6 +282,8 @@ jQuery(document).ready(function(){
   stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
   stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
   stage2.location = jQuery("#event_location_name").val();
+  stage2.setDateInMessage();
+  stage2.setTimeInMessage();
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
   stage2.message = jQuery("#event_guest_message").val();
@@ -282,7 +298,7 @@ jQuery(document).ready(function(){
   });
 
   jQuery("#event_guest_message").keyup(function(){
-	if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
+    if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
       alert("you can't change the starting date from here. Please edit the \"Date\" field");
       jQuery(this).val(stage2.message);
     } else if(stage2.startTime.length > 0 && jQuery(this).val().search(stage2.startTime) < 0) {
