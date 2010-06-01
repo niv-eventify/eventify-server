@@ -39,7 +39,7 @@ class Design < ActiveRecord::Base
   validates_attachment_size :preview, :less_than => 2.megabytes
 
   has_attached_file :carousel,
-    :path =>        ":rails_root/public/assets/:id/:filename",
+    :path =>        "/public/assets/:id/:filename",
     :default_url   => ""
   attr_accessible :carousel
   validates_attachment_size :carousel, :less_than => 2.megabytes
