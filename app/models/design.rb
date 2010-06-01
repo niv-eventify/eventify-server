@@ -9,6 +9,7 @@ class Design < ActiveRecord::Base
   attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align, :in_carousel
 
   named_scope :available, {:conditions => "designs.disabled_at IS NULL"}
+  named_scope :carousel, {:conditions => "designs.in_carousel IS true"}
 
   has_attached_file :card,
     :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "119x79>"},
