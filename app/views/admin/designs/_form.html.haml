@@ -14,7 +14,9 @@
   != f.input :title_color, :label => "Default title color: r,g,b"
   != f.input :message_color, :label => "Default message color: r,g,b"
   != f.input :text_align, :label => "Default text alignment"
+  != f.input :in_carousel, :label => "this invitation should be in the carousel"
 
 - f.inputs do
   != f.input :card, :as => :file, :label => "Invitation (usually named 'something_small.png')"
   != f.input :preview, :as => :file, :label => "Preview with text(usually named 'something_small_text.png')"
+  != f.input :carousel, :as => :file, :label => "carousel file(usually named 'something_carousel.png')"

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100530113135) do
+ActiveRecord::Schema.define(:version => 20100601115110) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -89,6 +89,11 @@ ActiveRecord::Schema.define(:version => 20100530113135) do
     t.string   "title_color"
     t.string   "message_color"
     t.string   "text_align"
+    t.boolean  "in_carousel",           :default => false
+    t.string   "carousel_file_name"
+    t.string   "carousel_content_type"
+    t.integer  "carousel_file_size"
+    t.datetime "carousel_updated_at"
   end
 
   add_index "designs", ["category_id"], :name => "index_designs_on_category_id"

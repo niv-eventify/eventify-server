@@ -6,7 +6,7 @@ class Design < ActiveRecord::Base
   validates_numericality_of :text_top_x, :text_top_y, :text_width, :text_height
   validates_numericality_of :title_top_x, :title_top_y, :title_width, :title_height, :allow_nil => true
   
-  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align, :no_repeat_background, :background_color
+  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align, :in_carousel
 
   named_scope :available, {:conditions => "designs.disabled_at IS NULL"}
 
@@ -36,6 +36,18 @@ class Design < ActiveRecord::Base
     }
   attr_accessible :preview
   validates_attachment_size :preview, :less_than => 2.megabytes
+
+  has_attached_file :carousel,
+    :storage        => :s3,
+    :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
+    :path =>        "designs/:id/:filename",
+    :default_url   => "",
+    :s3_credentials => {
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
+    }
+  attr_accessible :carousel
+  validates_attachment_size :carousel, :less_than => 2.megabytes
 
   def stage2_preview_dimensions
     ratio =   1.6     #fullsize/preview_size
