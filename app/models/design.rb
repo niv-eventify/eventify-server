@@ -41,7 +41,7 @@ class Design < ActiveRecord::Base
   has_attached_file :carousel,
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
-    :path =>        "assets/:id_:filename",
+    :path =>        "assets/:id/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
