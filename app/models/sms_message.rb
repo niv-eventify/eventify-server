@@ -12,7 +12,7 @@ class SmsMessage < ActiveRecord::Base
   def set_event
     if guest
       self.event_id = guest.event_id
-      self.receiver_mobile = guest.mobile_phone
+      self.receiver_mobile = self.class.beautify_number(guest.mobile_phone)
       self.sender_mobile = event.host_mobile_number if event
     end
   end

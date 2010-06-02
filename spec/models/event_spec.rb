@@ -244,13 +244,16 @@ describe Event do
     end
 
     describe "sending sms" do      
-      before(:each) do
-        @event.stub!(:should_send_sms?).and_return(true)
-        @event.send_invitations_now = true
+      it "should not validate host mobile" do
+        @event.host_mobile_number = "junk"
+        @event.should be_valid
+        @event.errors.on(:host_mobile_number).should be_blank
       end
 
       describe "validations" do
         before(:each) do
+          @event.stub!(:should_send_sms?).and_return(true)
+          @event.send_invitations_now = true
           @event.should_not be_valid
         end
 

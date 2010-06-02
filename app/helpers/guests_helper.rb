@@ -54,8 +54,9 @@ module GuestsHelper
   def change_or_edit_property(attribute, non_blank_attribute, guest)
     return guest_remote_checkbox(attribute, guest) unless guest.send(non_blank_attribute).blank?
 
+    haml_tag(:div, :class => "checkboxArea checkboxAreaChecked", :id => "#{dom_id(guest)}_send_stub", :style => "display:none")
     form_remote_for :guest, guest, :url => edit_event_guest_path(guest.event_id, guest, :true_attribute => attribute, :attribute => non_blank_attribute), :method => :get do |f|
-      haml_concat check_box_tag("", false, false, :class => "input-check", :onchange => "jQuery(this).parents('form').hide().get(0).onsubmit()")
+      haml_concat check_box_tag("", false, false, :class => "input-check", :onchange => "jQuery('##{dom_id(guest)}_send_stub').show();jQuery(this).parents('form').hide().get(0).onsubmit();")
     end
   end
 
@@ -71,15 +72,6 @@ module GuestsHelper
           }
         }
         jQuery("#guest_email").keyup(ef).blur(ef).change(ef);
-        var sf = function(){
-          if ("" != jQuery(this).val()) {
-            jQuery("#guest_send_sms").attr("checked", "checked").redraw_customCheckbox();
-          }
-          else {
-            jQuery("#guest_send_sms").removeAttr("checked").redraw_customCheckbox();
-          }
-        };
-        jQuery("#guest_mobile_phone").keyup(sf).blur(sf).change(sf);
       });
     JAVASCRIPT
   end

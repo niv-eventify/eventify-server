@@ -21,6 +21,10 @@
                       .form-cols.send-invitations
                         != f.text_field :sms_message, :label => _("SMS message text")
                         != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")
+                        - if !Astrails.good_time_to_send_sms?(@event.tz) && @event.allow_delayed_sms?
+                          .settings-form-row
+                            %label= _("Send SMS messages tomorrow morning")
+                            != f.check_box :delay_sms_sending
                     .forms-block-btns
                       != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
                       != link_to _("Edit Guests"), event_guests_path(@event), :class => "cancel"

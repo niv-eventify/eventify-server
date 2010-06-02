@@ -23,7 +23,7 @@ Factory.define :guest_with_token, :parent => :guest do |guest|
 end
 
 Factory.define :guest_with_mobile, :parent => :guest_from_event_with_mobile do |guest|
-  guest.mobile_phone "0501234567"
+  guest.mobile_phone "050-1234567"
   guest.send_sms  1
 end
 

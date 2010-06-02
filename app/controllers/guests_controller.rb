@@ -20,7 +20,7 @@ class GuestsController < InheritedResources::Base
       end
       failure.js do
         if params[:attribute]
-          render(:update) {|page| resource_edit_form(page, resource, params[:attribute])}
+          render(:update) {|page| resource_edit_form(page, resource, params[:attribute], params[:true_attribute])}
         else
           render(:nothing => true)
         end

@@ -67,9 +67,10 @@ class Event < ActiveRecord::Base
 
   # sms sending validations
   attr_accessor :send_invitations_now
-  attr_accessible :sms_message, :host_mobile_number
+  attr_accessor :delay_sms_sending
+  attr_accessible :sms_message, :host_mobile_number, :delay_sms_sending
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
-  validates_format_of   :host_mobile_number, :with => String::PHONE_REGEX, :on => :update, :if => :going_to_send_sms?
+  validates_phone_number :host_mobile_number, :if => :going_to_send_sms?, :on => :update
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
   validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
 
@@ -136,6 +137,14 @@ class Event < ActiveRecord::Base
     require_payment_for_guests? || require_payment_for_sms?
   end
 
+  def allow_delayed_sms?
+    Event.best_time_to_send_sms < starting_at
+  end
+
+  def self.best_time_to_send_sms
+    1.day.from_now.utc.beginning_of_day + 10.hours
+  end
+
   def send_invitations
     return unless user_is_activated?
 
@@ -144,9 +153,10 @@ class Event < ActiveRecord::Base
       self.stage_passed = 4
       save!
 
-      now = Time.now.utc
-      guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", now]
-      guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", now]
+      guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", Time.now.utc]
+
+      sms_at = (delay_sms_sending && allow_delayed_sms?) ? Event.best_time_to_send_sms : Time.now.utc
+      guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", sms_at]
 
       send_later(:send_sms_invitations)
       send_later(:send_email_invitations)
