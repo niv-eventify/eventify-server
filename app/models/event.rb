@@ -70,7 +70,7 @@ class Event < ActiveRecord::Base
   attr_accessor :delay_sms_sending
   attr_accessible :sms_message, :host_mobile_number, :delay_sms_sending
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
-  validates_format_of   :host_mobile_number, :with => String::PHONE_REGEX, :on => :update, :if => :going_to_send_sms?
+  validates_phone_number :host_mobile_number, :if => :going_to_send_sms?, :on => :update
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
   validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
 

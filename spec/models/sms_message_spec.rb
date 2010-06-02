@@ -10,7 +10,8 @@ describe SmsMessage do
   end
 
   it "should create a new instance given valid attributes" do
-    SmsMessage.create!(@valid_attributes)
+    sms = SmsMessage.create!(@valid_attributes)
+    sms.receiver_mobile.should == "0501234567"
   end
 
   [:guest_id, :event_id, :receiver_mobile, :message, :sender_mobile].each do |a|
