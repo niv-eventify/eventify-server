@@ -43,6 +43,7 @@ describe InvitationsController do
       @event = stub_model(Event, :user => @user, :stage_passed => 3, :default_sms_message => "foo bar")
       controller.current_user.events.stub!(:find).and_return(@event)
       @event.stub(:payments).and_return([])
+      Astrails.stub!(:good_time_to_send_sms?).and_return(true)
     end
 
     it "should redirect to summary page when nothing to send" do
