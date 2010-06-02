@@ -39,8 +39,14 @@ class Design < ActiveRecord::Base
   validates_attachment_size :preview, :less_than => 2.megabytes
 
   has_attached_file :carousel,
-    :path =>        ":rails_root/public/assets/:id/:filename",
-    :url   => "assets/:id/:filename"
+    :storage        => :s3,
+    :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
+    :path =>        "designs/:id/:filename",
+    :default_url   => "",
+    :s3_credentials => {
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
+    }
   attr_accessible :carousel
   validates_attachment_size :carousel, :less_than => 2.megabytes
 
