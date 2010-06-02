@@ -57,7 +57,6 @@ describe InvitationsController do
       get :edit, :id => @event
       response.should be_success
       response.body.should =~ /Invitations to send: 2 by email and 1 by SMS/
-      response.body.should =~ /event_send_invitations_now/
     end
 
     it "should not ask for sms messages when only email invitations are there" do
@@ -106,7 +105,7 @@ describe InvitationsController do
       @event.stub!(:valid?).and_return(true)
       @event.stub!(:save).and_return(true)
       @event.should_receive(:send_invitations)
-      post :update, :id => @event.id, :event => {:send_invitations_now => true}
+      post :update, :id => @event.id
       response.should redirect_to(invitation_path(@event))
     end
 
@@ -115,7 +114,7 @@ describe InvitationsController do
       @event.stub!(:errors).and_return([:error])
       @event.errors.stub!(:on)
       @event.should_not_receive(:send_invitations)
-      post :update, :id => @event.id, :event => {:send_invitations_now => true}
+      post :update, :id => @event.id
     end
   end
 end

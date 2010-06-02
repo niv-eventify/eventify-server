@@ -155,11 +155,12 @@ class Guest < ActiveRecord::Base
     save!
   end
 
-  def prepare_sms_invitation!(timestamp)
+  def prepare_sms_invitation!
     # TODO = check sms bulk status / package payments
-    self.sms_invitation_sent_at, self.send_sms_invitation_at = timestamp, nil
+    self.sms_invitation_sent_at, self.send_sms_invitation_at = send_sms_invitation_at, nil
     save!
-    send_later(:send_sms_invitation!)
+
+    send_at(sms_invitation_sent_at, :send_sms_invitation!)
   end
 
   def send_sms_invitation!
@@ -173,11 +174,12 @@ class Guest < ActiveRecord::Base
     end
   end
 
-  def prepare_email_invitation!(timestamp)
+  def prepare_email_invitation!
     self.email_token ||= Astrails.generate_token
-    self.email_invitation_sent_at, self.send_email_invitation_at = timestamp, nil
+    self.email_invitation_sent_at, self.send_email_invitation_at = send_email_invitation_at, nil
     save!
-    send_later(:send_email_invitation!)
+
+    send_at(email_invitation_sent_at, :send_email_invitation!)
   end
 
   def send_email_invitation!

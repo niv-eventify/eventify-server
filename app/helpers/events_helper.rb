@@ -98,8 +98,7 @@ module EventsHelper
   end
 
   def event_sent_status(event)
-    return _("(sent)") if event.invitations_to_send_counts[:total].zero? && event.last_invitation_sent_at
-    link_to _("(not sent)"), edit_invitation_path(event), :class => "not-sent"
+    4 == event.stage_passed ? _("(sent)") : link_to(_("(not sent)"), edit_invitation_path(event), :class => "not-sent")
   end
 
   def months_arr
