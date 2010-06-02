@@ -17,7 +17,6 @@
                   %h3= _("Invitations to send: %{email_count} by email and %{sms_count} by SMS") % { :email_count => @invitations_to_send[:email], :sms_count => @invitations_to_send[:sms]}
                   - form_for @event, :event, :url => invitation_path(@event), :builder => MiddleBoxFormBuilder::Builder, :method => :post do |f|
                     = f.object.errors.on(:base)
-                    != f.hidden_field :send_invitations_now, :value => true
                     - if @invitations_to_send[:sms] > 0
                       .form-cols.send-invitations
                         != f.text_field :sms_message, :label => _("SMS message text")
