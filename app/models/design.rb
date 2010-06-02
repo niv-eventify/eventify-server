@@ -6,9 +6,10 @@ class Design < ActiveRecord::Base
   validates_numericality_of :text_top_x, :text_top_y, :text_width, :text_height
   validates_numericality_of :title_top_x, :title_top_y, :title_width, :title_height, :allow_nil => true
   
-  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align, :no_repeat_background, :background_color
+  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height, :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color, :message_color, :text_align, :in_carousel
 
   named_scope :available, {:conditions => "designs.disabled_at IS NULL"}
+  named_scope :carousel, {:conditions => "designs.in_carousel IS true"}
 
   has_attached_file :card,
     :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "119x79>"},
@@ -36,6 +37,12 @@ class Design < ActiveRecord::Base
     }
   attr_accessible :preview
   validates_attachment_size :preview, :less_than => 2.megabytes
+
+  has_attached_file :carousel,
+    :path =>        ":rails_root/public/assets/:id/:filename",
+    :url   => "assets/:id/:filename"
+  attr_accessible :carousel
+  validates_attachment_size :carousel, :less_than => 2.megabytes
 
   def stage2_preview_dimensions
     ratio =   1.6     #fullsize/preview_size
