@@ -15,7 +15,7 @@ class Design < ActiveRecord::Base
     :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "119x79>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
-    :path =>        "assets/:id/:style/:filename",
+    :path =>        "designs/:id/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
@@ -29,7 +29,7 @@ class Design < ActiveRecord::Base
     :styles         => {:medium => "218x145>", :lightbox => "666x444>", :carousel => "400x267>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
-    :path =>        "designs/:id/:style/:filename",
+    :path =>        "assets/:id/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key),
