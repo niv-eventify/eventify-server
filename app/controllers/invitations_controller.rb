@@ -18,9 +18,7 @@ class InvitationsController < InheritedResources::Base
 
     update! do |success, failure|
       success.html {flash[:notice] = nil; redirect_to(invitation_path(resource))}
-      failure.html {
-        render(:action => "edit")
-      }
+      failure.html { render(:action => "edit") }
     end
   end
 
@@ -42,7 +40,7 @@ protected
       redirect_to summary_path(resource)
       return false
     elsif 3 == resource.stage_passed && @invitations_to_send[:total].zero?
-      resource.stage = 4
+      resource.stage_passed = 4
       resource.save!
       redirect_to summary_path(resource)
       return false
