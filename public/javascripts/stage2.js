@@ -282,8 +282,10 @@ jQuery(document).ready(function(){
   stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
   stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
   stage2.location = jQuery("#event_location_name").val();
-  stage2.setDateInMessage();
-  stage2.setTimeInMessage();
+  if(jQuery("#event_guest_message").html().length == 0){
+    stage2.setDateInMessage();
+    stage2.setTimeInMessage();
+  }
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
   stage2.message = jQuery("#event_guest_message").val();
