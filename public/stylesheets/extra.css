@@ -719,3 +719,11 @@ p.takings-changed {
 .rspv_select {
 	width:80px;
 }
+.guest_name {
+	float: left;
+	padding: 0 3px 0 0;
+}
+.hebrew .guest_name {
+	float: right;
+	padding: 0 0 0 3px;
+}

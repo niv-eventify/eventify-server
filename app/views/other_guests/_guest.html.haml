@@ -1,6 +1,7 @@
 .info-col-row
   %p
-    = guest.name
+    %span.guest_name
+      = guest.name
     - unless params[:query].blank?
       \-
       %span{:class => rsvp_status_class(guest.rsvp)}= guest.rsvp_text
