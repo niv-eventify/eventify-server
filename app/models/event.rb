@@ -16,9 +16,8 @@ class Event < ActiveRecord::Base
       guests_imported = 0
 
       new_guests.each do |g|
-        guest = build(:name => g[:name], :email => g[:email], :mobile_phone => g[:mobile])
+        guest = build(:name => g["name"], :email => g["email"], :mobile_phone => g["mobile"])
         guest.send_email = true unless guest.email.blank?
-        guest.send_sms = true unless guest.mobile_phone.blank?
         guests_imported += 1 if guest.save
       end
 

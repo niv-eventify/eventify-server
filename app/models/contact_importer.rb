@@ -85,7 +85,7 @@ class ContactImporter < ActiveRecord::Base
     contacts.map do |contact|
       returning(OpenStruct.new) do |res|
         name, email = parse_name_and_email(contact)
-        res.name = name
+        res.name = name || email
         res.email = email
         res.mobile = nil
         res.uid = id
