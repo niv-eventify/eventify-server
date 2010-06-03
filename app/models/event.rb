@@ -83,6 +83,11 @@ class Event < ActiveRecord::Base
     send_invitations if send_invitations_now
   end
 
+  # after_validation_on_update :check_resend_invitations
+  # def check_resend_invitations
+  #   if starting_at_changed? || location_name_changed? || location_address_changed?
+  # end
+
   after_create :create_default_reminder
   def create_default_reminder
     opts = Reminder::DEFAULT_REMINDER.clone
@@ -151,6 +156,7 @@ class Event < ActiveRecord::Base
     Event.transaction do
       self.send_invitations_now = nil
       self.stage_passed = 4
+      self.any_invitation_sent = true
       save!
 
       guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", Time.now.utc]

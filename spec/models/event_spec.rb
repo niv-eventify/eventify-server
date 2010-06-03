@@ -10,6 +10,7 @@ describe Event do
       event.should_receive(:send_later).with(:send_email_invitations)
       event.send_invitations
       event.stage_passed.should == 4
+      event.any_invitation_sent.should be_true
     end
   end
 
