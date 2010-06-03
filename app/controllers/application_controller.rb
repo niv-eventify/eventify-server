@@ -14,7 +14,7 @@ protected
   include ERB::Util # to use h() in flashes
 
   def all_enabled_categories
-    @all_enabled_categories ||= Category.enabled.all.sort_by(&:name)
+    @all_enabled_categories ||= Category.enabled.has_designs.all.sort_by(&:name)
   end
   helper_method :all_enabled_categories
 

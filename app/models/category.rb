@@ -18,6 +18,7 @@ class Category < ActiveRecord::Base
   named_scope :enabled, :conditions => "categories.disabled_at IS NULL"
   named_scope :disabled, :conditions => "categories.disabled_at IS NOT NULL"
   named_scope :popular, lambda {|limit| {:limit => limit, :order => "popularity DESC"}}
+  named_scope :has_designs, :conditions => "categories.id IN (SELECT DISTINCT category_id FROM designs WHERE designs.disabled_at IS NULL)"
 
   def disabled?
     !disabled_at.blank?
