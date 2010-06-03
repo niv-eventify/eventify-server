@@ -16,9 +16,8 @@ class Event < ActiveRecord::Base
       guests_imported = 0
 
       new_guests.each do |g|
-        guest = build(:name => g[:name], :email => g[:email], :mobile_phone => g[:mobile])
+        guest = build(:name => g["name"], :email => g["email"], :mobile_phone => g["mobile"])
         guest.send_email = true unless guest.email.blank?
-        guest.send_sms = true unless guest.mobile_phone.blank?
         guests_imported += 1 if guest.save
       end
 
@@ -48,7 +47,8 @@ class Event < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
       :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
-    }
+    },
+    :url => ':s3_domain_url'
   attr_accessible :map
   validates_attachment_size :map, :less_than => 10.megabytes
 

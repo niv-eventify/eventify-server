@@ -20,7 +20,8 @@ class Design < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
       :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
-    }
+    },
+    :url => ':s3_domain_url'
   attr_accessible :card
   validates_attachment_presence :card
   validates_attachment_size :card, :less_than => 2.megabytes
@@ -34,7 +35,8 @@ class Design < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key),
       :secret_access_key => GlobalPreference.get(:s3_secret),
-    }
+    },
+    :url => ':s3_domain_url'
   attr_accessible :preview
   validates_attachment_size :preview, :less_than => 2.megabytes
 
@@ -46,7 +48,8 @@ class Design < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
       :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
-    }
+    },
+    :url => ':s3_domain_url'
   attr_accessible :carousel
   validates_attachment_size :carousel, :less_than => 2.megabytes
 

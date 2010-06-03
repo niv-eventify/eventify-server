@@ -118,6 +118,13 @@ vendor/plugins/rack-bug:
   squashed: true
   type: git
   url: git://github.com/brynary/rack-bug.git
+vendor/plugins/responds_to_parent: 
+  branch: master
+  remote: braid/vendor/plugins/responds-to-parent
+  revision: 840ada34d79b7bb0c1aaae894ac3901fdccba95c
+  squashed: true
+  type: git
+  url: http://github.com/markcatley/responds_to_parent.git
 vendor/plugins/restart_controller: 
   branch: master
   remote: braid/vendor/plugins/restart-controller

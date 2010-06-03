@@ -1,1 +1,1 @@
-page << "jQuery.nyroModalManual({content: #{render(:partial => @source).to_json}});"
+render_new_guests_import_form(page)

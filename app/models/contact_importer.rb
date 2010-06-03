@@ -45,7 +45,8 @@ class ContactImporter < ActiveRecord::Base
     contacts = case contact_source
     when 'gmail', 'hotmail', 'yahoo'
       begin
-        Contacts.new(contact_source.to_sym, username, password).contacts
+        connection = Contacts.new(contact_source.to_sym, username, password)
+        connection.contacts
       rescue Contacts::StandardError, Contacts::ContactsError
         error = $!
       rescue
@@ -72,10 +73,10 @@ class ContactImporter < ActiveRecord::Base
     if c.is_a?(Array)
       name, email = c.first, c.last
     elsif c.is_a?(Hash)
-      name = c[:name]
-      email = c[:email]
+      name = c[:name] || c[:Name]
+      email = c[:email] ||c [:Email]
     end
-    [name, email]
+    [name || email, email]
   end
 
   def self.contacts_to_openstruct(contacts)
@@ -84,7 +85,7 @@ class ContactImporter < ActiveRecord::Base
     contacts.map do |contact|
       returning(OpenStruct.new) do |res|
         name, email = parse_name_and_email(contact)
-        res.name = name
+        res.name = name || email
         res.email = email
         res.mobile = nil
         res.uid = id

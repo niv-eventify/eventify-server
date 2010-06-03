@@ -26,11 +26,7 @@
               != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn", :id => "cancel_search"
               :javascript
                 jQuery(function(){
-                  jQuery("#search_guests").click(function(){
-                    if (jQuery(this).val() == '#{_('search')}'){jQuery(this).val('');}
-                  }).blur(function(){
-                    if (jQuery(this).val() == ''){jQuery(this).val('#{_('search')}');}
-                  })
+                  clearInputs("#search_guests", '#{_('search')}');
                 });
                 jQuery("#cancel_search").click(function(){
                   jQuery("tr.guest").show();

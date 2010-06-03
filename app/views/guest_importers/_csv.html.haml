@@ -3,6 +3,8 @@
     %strong= s_(GuestImportersController::TITLES["csv"])
 
   - form_tag event_guest_importers_path(@event), :multipart => true, :target => "upload_frame" do
+    - if @error
+      %p.error-msg= @error
     .download-form
       != file_field_tag :csvfile
       != hidden_field_tag :source, "csv"

@@ -678,7 +678,12 @@ li.thing .sel-holder {
 
 .import {
 	background:transparent;
-	padding:16px 38px 20px
+	padding:16px 38px 20px;
+	font-size:80%;
+}
+
+.hebrew .import {
+	direction:rtl
 }
 
 .import .table-box .holder {
@@ -734,4 +739,7 @@ p.takings-changed {
 }
 .terms p {
 	padding-bottom: 5px;	
+}
+.hebrew .import ul.contact-tabset {
+	margin:0 -12px;
 }
