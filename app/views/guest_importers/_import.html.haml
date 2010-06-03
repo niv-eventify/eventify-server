@@ -5,9 +5,9 @@
   - form_tag event_guest_importers_path(@event) do
     .events-holder.download-form
       .table-box
+        != link_to_function _("Select All"), "jQuery('input.checkable').attr('checked', 'checked')"
+        != link_to_function _("Select None"), "jQuery('input.checkable').removeAttr('checked')"
         .holder
-          != link_to_function _("Select All"), "jQuery('input.checkable').attr('checked', 'checked')"
-          != link_to_function _("Select None"), "jQuery('input.checkable').removeAttr('checked')"
           %table#contacts
             %thead
               %tr

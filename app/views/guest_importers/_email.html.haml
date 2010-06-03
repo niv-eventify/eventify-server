@@ -2,7 +2,9 @@
   .popup-heading
     %strong= s_(GuestImportersController::TITLES["email"])
 
-  - form_tag event_guest_importers_path(@event), :builder => MiddleBoxFormBuilder::Builder do
+  - form_tag event_guest_importers_path(@event), :builder => MiddleBoxFormBuilder::Builder, :target => "upload_frame" do
+    - if @error
+      %p.error-msg= @error
     .download-form
       != label_tag "GMail"
       != radio_button_tag :contact_source, "gmail", "gmail" == params[:contact_source]
@@ -25,6 +27,6 @@
       %br
       %br
     .loading.popup-btns{:style => "display:none"}
-      = _("Loading CSV file, please wait...")
+      = _("Importing, please wait...")
 
 %iframe#upload_frame{:name => "upload_frame", :style => "display: none"}
