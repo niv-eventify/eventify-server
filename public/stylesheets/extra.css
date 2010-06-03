@@ -727,3 +727,11 @@ p.takings-changed {
 	float: right;
 	padding: 0 0 0 3px;
 }
+.terms {
+	width: 80%;
+	font-size: 1.4em;
+	line-height:1.2em;
+}
+.terms p {
+	padding-bottom: 5px;	
+}
