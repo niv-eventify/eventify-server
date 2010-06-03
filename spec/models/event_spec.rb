@@ -82,7 +82,7 @@ describe Event do
         @event.location_name = nil
         @event.location_address = nil
         t = @event.with_time_zone{@event.starting_at.to_s(:isra_time)}
-        @event.default_sms_message.should =~ /#{t}\. #{@event.user.name}/
+        @event.default_sms_message.should =~ /#{t}\. Invite sent to your email\. #{@event.user.name}/
       end
 
       it "should not include location when location is too long" do

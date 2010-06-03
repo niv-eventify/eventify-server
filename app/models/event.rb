@@ -191,8 +191,8 @@ class Event < ActiveRecord::Base
     # should_send_sms? && sms_package_ok? # TODO: check sms payments in payments table
   end
 
-  def scoped_invite(scope, method, timestamp)
-    scope.find_each(:batch_size => 10) { |obj| obj.send(method, timestamp) }
+  def scoped_invite(scope, method)
+    scope.find_each(:batch_size => 10) { |obj| obj.send(method) }
   end
 
   def send_sms_invitations
@@ -215,9 +215,9 @@ class Event < ActiveRecord::Base
         :host_name => user.name,
         :date => starting_at.to_s(:isra_date),
         :time => starting_at.to_s(:isra_time),
-        :location => (location.blank? ? "" : location)
+        :location => (location.blank? ? "" : (_("at location %{location}") % {:location => location}))
       }
-      s = _("%{event_name} on %{date} at %{time}%{location}. %{host_name}") % opts
+      s = _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
       return s if s.length < SmsMessage::MAX_LENGTH # check sms length
 
       _("%{event_name} on %{date} at %{time}. %{host_name}") % opts

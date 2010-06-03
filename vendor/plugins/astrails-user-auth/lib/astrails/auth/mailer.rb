@@ -4,7 +4,7 @@ module Astrails
 
       def password_reset_instructions(user)
         subject       (_("%{domain}: Password Reset Instructions") % {:domain => domain})
-        from          "Password Reset <noreply@#{domain}>"
+        from          "Eventify - Password Reset <noreply@#{domain}>"
         recipients    user.email
         _set_receipient_header(user)
         sent_on       Time.now
@@ -13,7 +13,7 @@ module Astrails
 
       def password_reset_confirmation(user)
         subject       (_("%{domain}: Password Reset Notification") % {:domain => domain})
-        from          "Password Reset <noreply@#{domain}>"
+        from          "Eventify - Password Reset <noreply@#{domain}>"
         recipients    user.email
         _set_receipient_header(user)
         sent_on       Time.now
@@ -22,7 +22,7 @@ module Astrails
 
       def activation_instructions(user)
         subject       (_("%{domain}: Account Activation Instructions") % {:domain => domain})
-        from          "Activation <noreply@#{domain}>"
+        from          "Eventify - Activation <noreply@#{domain}>"
         recipients    user.email
         _set_receipient_header(user)
         sent_on       Time.now
@@ -31,7 +31,7 @@ module Astrails
 
       def activation_confirmation(user)
         subject       (_("Welcome to %{domain}") % {:domain => domain})
-        from          "Activation <noreply@#{domain}>"
+        from          "Eventify - Activation <noreply@#{domain}>"
         recipients    user.email
         _set_receipient_header(user)
         sent_on       Time.now
