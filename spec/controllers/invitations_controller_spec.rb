@@ -4,15 +4,30 @@ describe InvitationsController do
 
   setup :activate_authlogic
 
-  describe "create" do
-    describe "not logged in user" do
-      [:show, :edit, :update].each do |a|
-        describe_action(a) do
-          before(:each) do
-            @params = {:event_id => 1, :id => 1}
-          end
-          it_should_require_login
+  describe "not logged in user" do
+    [:show, :edit, :update].each do |a|
+      describe_action(a) do
+        before(:each) do
+          @user = Factory.create(:disabled_user)
+          @params = {:event_id => 1, :id => 1}
+          UserSession.create(@user)
         end
+        it "should redirect to profile_path" do
+          eval_request
+          response.should redirect_to(profile_path)
+          response.flash[:error].should == "Your account has been disabled"
+        end
+      end
+    end
+  end
+
+  describe "disabled user" do
+    [:show, :edit, :update].each do |a|
+      describe_action(a) do
+        before(:each) do
+          @params = {:event_id => 1, :id => 1}
+        end
+        it_should_require_login
       end
     end
   end

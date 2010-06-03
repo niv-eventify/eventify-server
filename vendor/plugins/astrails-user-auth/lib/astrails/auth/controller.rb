@@ -25,7 +25,13 @@ module Astrails
       end
 
       def require_user
-        return true if current_user
+        if current_user
+          return true unless current_user.disabled_at?
+
+          flash[:error] = _("Your account has been disabled")
+          redirect_to profile_path
+          return false
+        end
 
         store_location
         flash[:error] = _("You must be logged in to access this page")

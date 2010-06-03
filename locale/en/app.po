@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-03 11:33+0300\n"
+"POT-Creation-Date: 2010-06-03 11:49+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1195,15 +1195,15 @@ msgstr ""
 msgid "You can pick some other things to bring by following this URL:"
 msgstr ""
 
-#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:49
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:55
 msgid "You must be an admin to access this page"
 msgstr ""
 
-#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:31
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:37
 msgid "You must be logged in to access this page"
 msgstr ""
 
-#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:40
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:46
 msgid "You must be logged out to access this page"
 msgstr ""
 
@@ -1229,6 +1229,10 @@ msgstr ""
 msgid ""
 "Your account has been created. Please check your e-mail for your account "
 "activation instructions!"
+msgstr ""
+
+#: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:31
+msgid "Your account has been disabled"
 msgstr ""
 
 #: vendor/plugins/astrails-user-auth/app/controllers/user_session_controller.rb:11
