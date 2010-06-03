@@ -4,8 +4,8 @@ class GuestImportersController < ApplicationController
 
   SOURCES = ["email", "csv", "addressbook"]
   TITLES = {
-    "email" => N_("Import ftom email"),
-    "csv" => N_("Import from CSV File"),
+    "email" => N_("Import from mail"),
+    "csv" => N_("Import CSV file"),
     "addressbook" => N_("Import from eventify's address book")
   }
 
@@ -22,7 +22,7 @@ class GuestImportersController < ApplicationController
     responds_to_parent do
       render(:update) do |page|
         if @error
-          page << "jQuery.nyroModalManual({content: #{render(:partial => @source).to_json}});"
+          render_new_guests_import_form(page)
         else
           page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
         end

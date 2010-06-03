@@ -147,4 +147,11 @@ module ApplicationHelper
       end
     end
   end
+
+  def each_import_source(skip = nil)
+    ContactImporter::SOURCES.each do |key, value|
+      next if skip == key
+      yield(key, value)
+    end
+  end
 end
