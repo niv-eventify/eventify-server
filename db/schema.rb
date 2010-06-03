@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100603143903) do
+ActiveRecord::Schema.define(:version => 20100603172434) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20100603143903) do
     t.boolean  "user_is_activated",                         :default => false
     t.string   "tz",                        :limit => 128
     t.boolean  "any_invitation_sent",                       :default => false
+    t.string   "sms_resend_message"
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"
@@ -170,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20100603143903) do
     t.integer  "sms_messages_count",         :default => 0
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
+    t.boolean  "any_invitation_sent",        :default => false
   end
 
   add_index "guests", ["event_id"], :name => "index_guests_on_event_id"

@@ -29,6 +29,7 @@ protected
 
   def sms_message
     resource.sms_message = resource.default_sms_message
+    resource.sms_resend_message = resource.default_sms_message_for_resend
   end
 
   def set_invitations

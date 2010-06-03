@@ -22,6 +22,8 @@ class Guest < ActiveRecord::Base
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
   named_scope :invited, {:conditions => "(guests.sms_invitation_sent_at IS NOT NULL AND guests.send_sms = 1) OR (guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1)"}
+  named_scope :any_invitation_sent, {:conditions => "guests.any_invitation_sent = 1"}
+  named_scope :no_invitation_sent, {:conditions => "guests.any_invitation_sent = 0"}
 
   named_scope :not_invited_by_sms, {:conditions => "guests.send_sms_invitation_at IS NULL AND guests.sms_invitation_sent_at IS NULL AND guests.send_sms = 1"}
   named_scope :scheduled_to_invite_by_sms, {:conditions => "guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = 1"}
@@ -161,13 +163,14 @@ class Guest < ActiveRecord::Base
   def prepare_sms_invitation!
     # TODO = check sms bulk status / package payments
     self.sms_invitation_sent_at, self.send_sms_invitation_at = send_sms_invitation_at, nil
+    self.any_invitation_sent = true
     save!
 
     send_at(sms_invitation_sent_at, :send_sms_invitation!)
   end
 
   def send_sms_invitation!
-    sms = sms_messages.create!(:kind => "invitation", :message => event.sms_message)
+    sms = sms_messages.create!(:kind => "invitation", :message => any_invitation_sent ? event.sms_resend_message : event.sms_message)
 
     sms.send_sms!
 
@@ -180,13 +183,20 @@ class Guest < ActiveRecord::Base
   def prepare_email_invitation!
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at, self.send_email_invitation_at = send_email_invitation_at, nil
+    self.any_invitation_sent = true
     save!
 
     send_at(email_invitation_sent_at, :send_email_invitation!)
   end
 
   def send_email_invitation!
-    I18n.with_locale(event.language) { Notifier.deliver_invite_guest(self) }
+    I18n.with_locale(event.language) do
+      if any_invitation_sent?
+        Notifier.deliver_invite_resend_guest(self)
+      else
+        Notifier.deliver_invite_guest(self)
+      end
+    end
   end
 
   def send_reminder!(reminder)

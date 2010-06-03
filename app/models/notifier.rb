@@ -1,5 +1,14 @@
 class Notifier < ActionMailer::Base
 
+  def invite_resend_guest(guest)
+    subject     guest.event.invitation_email_subject
+    recipients  [guest.email_recipient]
+    _set_receipient_header(guest)
+    from        "noreply@#{domain}"
+    sent_on     Time.now.utc
+    body        :guest => guest, :url => rsvp_url(guest.email_token)
+  end
+
   def invite_guest(guest)
     subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]

@@ -67,14 +67,24 @@ class Event < ActiveRecord::Base
 
   # sms sending validations
   attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
-  attr_accessible :sms_message, :host_mobile_number, :delay_sms_sending, :resend_invitations
-  validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
-  validates_phone_number :host_mobile_number, :if => :going_to_send_sms?, :on => :update
+  attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations
+  validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_or_resend_sms?
+  validates_phone_number :host_mobile_number, :if => :going_to_send_or_resend_sms?, :on => :update
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
+  validates_presence_of :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
   validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
+  validates_length_of   :sms_resend_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_resend_sms?
+
+  def going_to_send_or_resend_sms?
+    going_to_send_sms? || going_to_resend_sms?
+  end
 
   def going_to_send_sms?
     should_send_sms? && send_invitations_now
+  end
+
+  def going_to_resend_sms?
+    should_resend_sms? && send_invitations_now
   end
 
   after_update :check_send_invitations
@@ -140,11 +150,14 @@ class Event < ActiveRecord::Base
     return @invitations_to_send_counts if @invitations_to_send_counts
 
     e, s = guests.not_invited_by_email.count, guests.not_invited_by_sms.count
+    e_resend, s_resend = guests.not_invited_by_email.any_invitation_sent.count, guests.not_invited_by_sms.any_invitation_sent.count
 
     @invitations_to_send_counts = {
-      :email => e,
-      :sms => s,
-      :total => (e + s)
+      :email => e - e_resend,
+      :sms => s - s_resend,
+      :total => (e + s),
+      :resend_email => e_resend,
+      :resend_sms => s_resend
     }
   end
 
@@ -153,7 +166,8 @@ class Event < ActiveRecord::Base
   end
 
   def payment_required?
-    require_payment_for_guests? || require_payment_for_sms?
+    false
+    # require_payment_for_guests? || require_payment_for_sms?
   end
 
   def allow_delayed_sms?
@@ -201,8 +215,12 @@ class Event < ActiveRecord::Base
     false # TODO: check max number/program and existing payment in payments table
   end
 
+  def should_resend_sms?
+    !guests.any_invitation_sent.not_invited_by_sms.count.zero?
+  end
+
   def should_send_sms?
-    !guests.not_invited_by_sms.count.zero?
+    !guests.no_invitation_sent.not_invited_by_sms.count.zero?
     # TODO: also check reminders
   end
 
@@ -228,6 +246,22 @@ class Event < ActiveRecord::Base
     _cancel_sms_reminders!
   end
 
+  def default_sms_message_for_resend
+    with_time_zone do
+      opts = {
+        :event_name => name,
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : (_(" at location %{location}") % {:location => location}))
+      }
+      s = _("Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
+      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+
+      _("Changes: %{event_name} on %{date} at %{time}. %{host_name}") % opts
+    end
+  end
+
   def default_sms_message
     with_time_zone do
       opts = {
@@ -235,7 +269,7 @@ class Event < ActiveRecord::Base
         :host_name => user.name,
         :date => starting_at.to_s(:isra_date),
         :time => starting_at.to_s(:isra_time),
-        :location => (location.blank? ? "" : (_("at location %{location}") % {:location => location}))
+        :location => (location.blank? ? "" : (_(" at location %{location}") % {:location => location}))
       }
       s = _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
       return s if s.length < SmsMessage::MAX_LENGTH # check sms length

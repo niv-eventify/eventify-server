@@ -1,0 +1,14 @@
+<%= _("Dear %{user_name},
+
+You were invited to %{event_subject}.
+Event details has been changed.
+
+Use the following link to see the invitation and RSVP for the event.
+%{url}
+
+If clicking the link does not bring you to the invitation page, copy the link and paste it in your browser.
+
+Best regards,
+The eventify Team.
+") % {:user_name => @guest.name, :event_subject => @guest.event.invitation_email_subject, :url => @url }
+%>

@@ -79,11 +79,13 @@ describe Event do
       it "should include location when event has location name" do
         @event.location_name = "location_name"
         @event.default_sms_message.should =~ /location_name/
+        @event.default_sms_message_for_resend.should =~ /location_name/
       end
 
       it "should include location when event has location address" do
         @event.location_address = "location_address"
         @event.default_sms_message.should =~ /location_address/
+        @event.default_sms_message_for_resend.should =~ /location_address/
       end
 
       it "should include location when event has location address and name" do
@@ -91,6 +93,8 @@ describe Event do
         @event.location_address = "location_address"
         @event.default_sms_message.should =~ /location_address/
         @event.default_sms_message.should =~ /location_name/
+        @event.default_sms_message_for_resend.should =~ /location_address/
+        @event.default_sms_message_for_resend.should =~ /location_name/
       end
 
       it "should not include location when no location" do
@@ -98,6 +102,7 @@ describe Event do
         @event.location_address = nil
         t = @event.with_time_zone{@event.starting_at.to_s(:isra_time)}
         @event.default_sms_message.should =~ /#{t}\. Invite sent to your email\. #{@event.user.name}/
+        @event.default_sms_message_for_resend.should =~ /#{t}\. Invite sent to your email\. #{@event.user.name}/
       end
 
       it "should not include location when location is too long" do
@@ -106,6 +111,7 @@ describe Event do
         @event.location.should == "long" * 40
         t = @event.with_time_zone{@event.starting_at.to_s(:isra_time)}
         @event.default_sms_message.should =~ /#{t}\. #{@event.user.name}/
+        @event.default_sms_message_for_resend.should =~ /#{t}\. #{@event.user.name}/
       end
     end
 
@@ -250,6 +256,7 @@ describe Event do
     describe "not sending sms" do      
       before(:each) do
         @event.stub!(:should_send_sms?).and_return(false)
+        @event.stub!(:should_resend_sms?).and_return(false)
         @event.send_invitations_now = true
       end
 
@@ -258,7 +265,32 @@ describe Event do
       end
     end
 
-    describe "sending sms" do      
+    describe "re sending sms" do
+      it "should not validate host mobile" do
+        @event.host_mobile_number = "junk"
+        @event.should be_valid
+        @event.errors.on(:host_mobile_number).should be_blank
+      end
+
+      describe "validations" do
+        before(:each) do
+          @event.stub!(:should_resend_sms?).and_return(true)
+          @event.send_invitations_now = true
+          @event.should_not be_valid
+        end
+
+        it "validate sms_message" do
+          @event.errors.on(:sms_resend_message).should_not be_blank
+          @event.errors.on(:sms_message).should be_blank
+        end
+
+        it "validate host mobile" do
+          @event.errors.on(:host_mobile_number).should_not be_blank
+        end
+      end
+    end
+
+    describe "sending sms" do
       it "should not validate host mobile" do
         @event.host_mobile_number = "junk"
         @event.should be_valid
@@ -274,6 +306,7 @@ describe Event do
 
         it "validate sms_message" do
           @event.errors.on(:sms_message).should_not be_blank
+          @event.errors.on(:sms_resend_message).should be_blank
         end
 
         it "validate host mobile" do
