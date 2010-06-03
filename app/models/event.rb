@@ -191,8 +191,8 @@ class Event < ActiveRecord::Base
     # should_send_sms? && sms_package_ok? # TODO: check sms payments in payments table
   end
 
-  def scoped_invite(scope, method, timestamp)
-    scope.find_each(:batch_size => 10) { |obj| obj.send(method, timestamp) }
+  def scoped_invite(scope, method)
+    scope.find_each(:batch_size => 10) { |obj| obj.send(method) }
   end
 
   def send_sms_invitations
