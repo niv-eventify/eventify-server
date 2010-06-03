@@ -640,11 +640,11 @@ li.thing .sel-holder {
 .lists-h ul.list {
 	margin: 0 0 0 5px;
 	border-bottom: 0px;
-	padding: 10px 8px 0 7px;
-	width: 115px;
+	padding: 10px 6px 0 7px;
+	width: 117px;
 }
 .hebrew .lists-h ul.list {
-	padding: 10px 7px 0 8px
+	padding: 10px 7px 0 6px
 }
 .lists-h ul.list li{
 	padding: 4px 0 6px 20px;
