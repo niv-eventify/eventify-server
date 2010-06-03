@@ -1,11 +1,12 @@
 /*---- clear inputs ---*/
-function clearInputs(id, label){
-	jQuery('#' + id).each(function(){
+function clearInputs(){
+	jQuery('input:text, input:password, textarea').each(function(){
 		var _el = jQuery(this);
+		var _val = _el.val();
 		_el.bind('focus', function(){
-			if(this.value == label) this.value = '';
+			if(this.value == _val) this.value = '';
 		}).bind('blur', function(){
-			if(this.value == '') this.value = label;
+			if(this.value == '') this.value = _val;
 		});
 	});
 	
@@ -454,7 +455,6 @@ function initDrop() {
 jQuery(document).ready(function(){
 	initSlideEffect();
 	ieHover('.img-box, .edit-bg');
-	clearInputs();
 	initSlide();
 	promoNav();
 	jQuery('select').customSelect();
