@@ -66,9 +66,8 @@ class Event < ActiveRecord::Base
     :allow_nil => true, :allow_blank => true, :live_validator => /|/
 
   # sms sending validations
-  attr_accessor :send_invitations_now
-  attr_accessor :delay_sms_sending
-  attr_accessible :sms_message, :host_mobile_number, :delay_sms_sending
+  attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
+  attr_accessible :sms_message, :host_mobile_number, :delay_sms_sending, :resend_invitations
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
   validates_phone_number :host_mobile_number, :if => :going_to_send_sms?, :on => :update
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
@@ -83,10 +82,25 @@ class Event < ActiveRecord::Base
     send_invitations if send_invitations_now
   end
 
-  # after_validation_on_update :check_resend_invitations
-  # def check_resend_invitations
-  #   if starting_at_changed? || location_name_changed? || location_address_changed?
-  # end
+  after_validation_on_update :check_resend_invitations
+  def check_resend_invitations
+    if resend_invitations && any_invitation_sent?
+      self.stage_passed = 3
+    end
+  end
+
+  after_update :check_reset_invitation_status
+  def check_reset_invitation_status
+    guests.invited.update_all("sms_invitation_sent_at = NULL, email_invitation_sent_at = NULL") if should_resend_invitations? 
+  end
+
+  def should_resend_invitations?
+    resend_invitations && any_invitation_sent? && details_for_resend_invitations_changed?
+  end
+
+  def details_for_resend_invitations_changed?
+    starting_at_changed? || location_address_changed? || location_name_changed?
+  end
 
   after_create :create_default_reminder
   def create_default_reminder

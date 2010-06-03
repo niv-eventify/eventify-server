@@ -44,3 +44,9 @@
 - f.inputs do
   - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"))
   != f.input :allow_seeing_other_guests, :as => :boolean, :label => _("Guests can see other attendees"), :wrapper_html => {:class => "auto_width"}
+
+- if @event.any_invitation_sent?
+  .resend_invitaions{:style => @event.resend_invitations ? "" : "display:none"}
+    != form_divider
+    != f.input :resend_invitations, :as => :boolean, :label => _("Resend invitations"), :wrapper_html => {:class => "auto_width"}, :require => false, :id => "resend_invitations"
+  != render(:partial => "monit_changes")

@@ -14,6 +14,20 @@ describe Event do
     end
   end
 
+  describe "resend invitations" do
+    before(:each) do
+      @event = Factory.create(:event)
+    end
+
+    [:starting_at, :location_address, :location_name].each do |a|
+      it "should want to resend invitations when #{a} is changed" do
+        @event.should_not be_should_resend_invitations
+        @event.send(a).is_a?(String) ? @event.send("#{a}=", "new value") : @event.send("#{a}=", 10.days.ago)
+        @event.should be_details_for_resend_invitations_changed
+      end
+    end
+  end
+
   context "summary" do
     describe "summary timer reset" do
       before(:each) do
