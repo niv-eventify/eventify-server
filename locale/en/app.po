@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-05-28 21:44+0300\n"
+"POT-Creation-Date: 2010-06-03 11:33+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,13 +119,17 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
-#: app/models/event.rb:198
+#: app/models/event.rb:220
 msgid ""
-"%{event_name} on %{date} at %{time}%{location}. Invite sent to your Email. %"
+"%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:231
+#: app/models/event.rb:223
+msgid "%{event_name} on %{date} at %{time}. %{host_name}"
+msgstr ""
+
+#: app/models/event.rb:251
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -158,7 +162,7 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:102
+#: app/helpers/events_helper.rb:101
 msgid "(not sent)"
 msgstr ""
 
@@ -213,7 +217,7 @@ msgstr ""
 msgid "Add from existing contact list:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:28
+#: app/views/guests/index.html.haml:30
 msgid "Add manually:"
 msgstr ""
 
@@ -237,7 +241,7 @@ msgstr ""
 msgid "Address:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:31
+#: app/views/guests/index.html.haml:44
 msgid "All"
 msgstr ""
 
@@ -367,7 +371,7 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: app/views/events/_info.html.haml:8
+#: app/views/events/_info.html.haml:9
 msgid "Date:"
 msgstr ""
 
@@ -427,7 +431,7 @@ msgid "Edit Contact"
 msgstr ""
 
 #: app/views/invitations/edit.html.haml:3
-#: app/views/invitations/edit.html.haml:27
+#: app/views/invitations/edit.html.haml:30
 msgid "Edit Guests"
 msgstr ""
 
@@ -494,11 +498,11 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:62
+#: app/controllers/events_controller.rb:66
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:62
+#: app/controllers/events_controller.rb:66
 msgid "Event updated, but some reminders disabled"
 msgstr ""
 
@@ -532,7 +536,7 @@ msgstr ""
 msgid "Feedback"
 msgstr ""
 
-#: app/views/guests/index.html.haml:30
+#: app/views/guests/index.html.haml:43
 msgid "Filter by RSVP:"
 msgstr ""
 
@@ -598,7 +602,7 @@ msgstr ""
 msgid "Here your can manage contracts, and import them from your email!"
 msgstr ""
 
-#: app/views/events/_info.html.haml:5
+#: app/views/events/_info.html.haml:6
 msgid "Hosts:"
 msgstr ""
 
@@ -653,7 +657,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/views/invitations/edit.html.haml:29
+#: app/views/invitations/edit.html.haml:32
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
 msgid ""
 "Instructions to activate your account have been emailed to you. Please check "
@@ -726,7 +730,7 @@ msgstr ""
 msgid "Map Link"
 msgstr ""
 
-#: app/models/guest.rb:87 app/views/guests/index.html.haml:34
+#: app/models/guest.rb:92 app/views/guests/index.html.haml:47
 #: app/views/rsvps/_new.html.haml:5
 msgid "May Be"
 msgstr ""
@@ -784,7 +788,7 @@ msgstr ""
 msgid "Next event:"
 msgstr ""
 
-#: app/models/guest.rb:87 app/views/guests/index.html.haml:33
+#: app/models/guest.rb:92 app/views/guests/index.html.haml:46
 #: app/views/rsvps/_new.html.haml:6
 msgid "No"
 msgstr ""
@@ -870,15 +874,15 @@ msgstr ""
 msgid "Past events"
 msgstr ""
 
-#: app/models/event.rb:144
+#: app/models/event.rb:168
 msgid "Payments are not completed yet"
 msgstr ""
 
-#: app/views/events/_info.html.haml:15
+#: app/views/events/_info.html.haml:16
 msgid "Place:"
 msgstr ""
 
-#: app/controllers/events_controller.rb:14
+#: app/controllers/events_controller.rb:15
 msgid "Please add at least one guest"
 msgstr ""
 
@@ -895,7 +899,7 @@ msgid "Please wait..."
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:46
-#: app/helpers/events_wizard_helper.rb:49 app/views/events/_info.html.haml:17
+#: app/helpers/events_wizard_helper.rb:49 app/views/events/_info.html.haml:18
 msgid "Preview"
 msgstr ""
 
@@ -1002,11 +1006,11 @@ msgstr ""
 msgid "SMS Message"
 msgstr ""
 
-#: app/views/invitations/edit.html.haml:24
+#: app/views/invitations/edit.html.haml:23
 msgid "SMS Replys mobile phone"
 msgstr ""
 
-#: app/views/invitations/edit.html.haml:23
+#: app/views/invitations/edit.html.haml:22
 msgid "SMS message text"
 msgstr ""
 
@@ -1032,7 +1036,7 @@ msgstr ""
 msgid "Selected"
 msgstr ""
 
-#: app/views/invitations/edit.html.haml:26
+#: app/views/invitations/edit.html.haml:29
 #: app/views/passwords/_new.html.haml:8 app/views/passwords/new.html.haml:10
 msgid "Send"
 msgstr ""
@@ -1055,6 +1059,10 @@ msgstr ""
 
 #: app/helpers/events_helper.rb:41
 msgid "Send RSVPs summary email"
+msgstr ""
+
+#: app/views/invitations/edit.html.haml:26
+msgid "Send SMS messages tomorrow morning"
 msgstr ""
 
 #: app/views/rsvps/_edit.html.haml:12
@@ -1118,7 +1126,7 @@ msgstr ""
 msgid "This is default reminder subject text - change me"
 msgstr ""
 
-#: app/helpers/events_helper.rb:20 app/views/events/_info.html.haml:11
+#: app/helpers/events_helper.rb:20 app/views/events/_info.html.haml:12
 msgid "Time"
 msgstr ""
 
@@ -1158,7 +1166,7 @@ msgstr ""
 msgid "Who brings"
 msgstr ""
 
-#: app/models/guest.rb:87 app/views/guests/index.html.haml:32
+#: app/models/guest.rb:92 app/views/guests/index.html.haml:45
 #: app/views/rsvps/_new.html.haml:4
 msgid "Yes"
 msgstr ""
@@ -1326,6 +1334,10 @@ msgstr "{{count}} errors prohibited this {{model}} from being saved"
 
 #: app/models/thing.rb:24
 msgid "already would be brought by somebody else"
+msgstr ""
+
+#: app/models/event.rb:218
+msgid "at location %{location}"
 msgstr ""
 
 #: locale/yml_import.rb:86
@@ -1548,11 +1560,11 @@ msgstr "Seconds"
 msgid "datetime.prompts.year"
 msgstr "Year"
 
-#: app/models/contact.rb:7 app/models/guest.rb:219
+#: config/initializers/phone_validator.rb:7
 msgid "does't look like a mobile phone number"
 msgstr ""
 
-#: app/models/guest.rb:10
+#: app/models/contact.rb:6 app/models/guest.rb:10
 msgid "does't look like an email"
 msgstr ""
 
@@ -1582,7 +1594,7 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/helpers/events_helper.rb:106
+#: app/helpers/events_helper.rb:105
 msgid "en.date.abbr_month_names"
 msgstr ""
 
@@ -1606,7 +1618,7 @@ msgstr ""
 msgid "login"
 msgstr ""
 
-#: app/models/guest.rb:98
+#: app/models/guest.rb:103
 msgid "not yet responded"
 msgstr ""
 
@@ -1724,11 +1736,12 @@ msgstr ""
 msgid "save"
 msgstr ""
 
+#: app/views/guests/index.html.haml:25 app/views/guests/index.html.haml:28
 #: app/views/summaries/show.html.haml:71 app/views/summaries/show.html.haml:74
 msgid "search"
 msgstr ""
 
-#: app/models/event.rb:143 app/models/reminder.rb:63
+#: app/models/event.rb:167 app/models/reminder.rb:63
 msgid "should be in a future"
 msgstr ""
 
@@ -1768,7 +1781,7 @@ msgstr "Please select"
 msgid "taking removed|Hello %{username},"
 msgstr ""
 
-#: app/models/event.rb:145
+#: app/models/event.rb:169
 msgid "time cannot be blank"
 msgstr ""
 
@@ -1797,6 +1810,6 @@ msgstr "pm"
 msgid "to Calendar"
 msgstr ""
 
-#: app/helpers/guests_helper.rb:50
+#: app/helpers/guests_helper.rb:51
 msgid "yes"
 msgstr ""
