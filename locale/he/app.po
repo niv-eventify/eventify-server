@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-04 15:48+0300\n"
+"POT-Creation-Date: 2010-06-04 23:00+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -313,7 +313,7 @@ msgid "Cat&amp;Dog Studio"
 msgstr ""
 
 #: app/views/layouts/_top_categories.haml:2
-#: app/views/layouts/_footer.html.haml:4 app/views/designs/index.html.haml:24
+#: app/views/layouts/_footer.html.haml:4 app/views/designs/index.html.haml:26
 msgid "Categories"
 msgstr ""
 
@@ -384,6 +384,16 @@ msgstr ""
 
 #: app/views/invitations/show.html.haml:14
 msgid "Create New Event"
+msgstr ""
+
+#: app/views/designs/index.html.haml:1
+msgid "Create the perfect %{category_name} online invitation"
+msgstr ""
+
+#: app/views/designs/index.html.haml:2
+msgid ""
+"Create, send & manage online invitations with templates to match any event! "
+"Online invitations made easy."
 msgstr ""
 
 #: app/views/events/_form.html.haml:40
@@ -761,7 +771,7 @@ msgstr ""
 msgid "Invitations to send: %{email_count} by email and %{sms_count} by SMS"
 msgstr ""
 
-#: app/views/designs/index.html.haml:1
+#: app/views/designs/index.html.haml:3
 msgid "Invitations | Eventify"
 msgstr ""
 
@@ -935,6 +945,16 @@ msgid "One week before the event"
 msgid_plural "%d weeks before the event"
 msgstr[0] ""
 msgstr[1] ""
+
+#: app/views/layouts/application.html.haml:6
+msgid "Online Invitations, Event Planning and Managing – Eventify"
+msgstr ""
+
+#: app/views/layouts/application.html.haml:7
+msgid ""
+"Online invitations made easy. Create & manage online invitations with "
+"templates to match any event! Plan your event in style!"
+msgstr ""
 
 #: app/views/welcome/_container123.html.haml:3
 msgid "Our site allows you to manage your events easily and have fun"
