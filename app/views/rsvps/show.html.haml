@@ -3,6 +3,9 @@
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
+    %meta{ :name => "title", :content => _("Online Invitations, Event Planning and Managing – Eventify")}
+    %meta{ :name => "description", :content => _("Online invitations made easy. Create & manage online invitations with templates to match any event! Plan your event in style!")}
+    %title=_("Invitation | Eventify")
     != stylesheet_link_tag 'nyroModal.full', 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
     != javascript_include_tag 'jquery.nyroModal', 'rsvps'
