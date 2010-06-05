@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-04 23:00+0300\n"
+"POT-Creation-Date: 2010-06-05 23:27+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -261,7 +261,7 @@ msgstr ""
 msgid "All Contacts"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:25
+#: app/views/layouts/_footer.html.haml:24
 msgid "All right resevred to Eventify ©"
 msgstr ""
 
@@ -308,7 +308,7 @@ msgstr ""
 msgid "Cancel event"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:26
+#: app/views/layouts/_footer.html.haml:25
 msgid "Cat&amp;Dog Studio"
 msgstr ""
 
@@ -453,7 +453,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:26
+#: app/views/layouts/_footer.html.haml:25
 msgid "Design and UI %{link}"
 msgstr ""
 
@@ -605,10 +605,6 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:13
-msgid "Feedback"
-msgstr ""
-
 #: app/views/guests/index.html.haml:44
 msgid "Filter by RSVP:"
 msgstr ""
@@ -639,7 +635,7 @@ msgstr ""
 msgid "Guest List"
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:16
+#: app/views/rsvps/show_more.html.haml:17
 #: app/views/summaries/show.html.haml:40
 msgid "Guests"
 msgstr ""
@@ -759,6 +755,10 @@ msgstr ""
 msgid "Invitation Design"
 msgstr ""
 
+#: app/views/rsvps/show.html.haml:8
+msgid "Invitation | Eventify"
+msgstr ""
+
 #: app/views/invitations/show.html.haml:9
 msgid "Invitations are being sent!"
 msgstr ""
@@ -795,7 +795,7 @@ msgstr ""
 msgid "Loading CSV file, please wait..."
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:18
+#: app/views/rsvps/show_more.html.haml:19
 msgid "Loading guests..."
 msgstr ""
 
@@ -946,11 +946,11 @@ msgid_plural "%d weeks before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/layouts/application.html.haml:6
+#: app/views/rsvps/show.html.haml:6 app/views/layouts/application.html.haml:6
 msgid "Online Invitations, Event Planning and Managing – Eventify"
 msgstr ""
 
-#: app/views/layouts/application.html.haml:7
+#: app/views/rsvps/show.html.haml:7 app/views/layouts/application.html.haml:7
 msgid ""
 "Online invitations made easy. Create & manage online invitations with "
 "templates to match any event! Plan your event in style!"
@@ -1074,6 +1074,10 @@ msgstr ""
 #: app/views/summaries/show.html.haml:45
 #: app/views/shared/_rsvp_tabs.html.haml:3
 msgid "RSVP yes"
+msgstr ""
+
+#: app/views/rsvps/show_more.html.haml:1
+msgid "RSVP | Eventify"
 msgstr ""
 
 #: app/views/events/_toolbar_preview.html.haml:8
