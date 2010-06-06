@@ -743,3 +743,10 @@ p.takings-changed {
 .hebrew .import ul.contact-tabset {
 	margin:0 -12px;
 }
+#guest_mobile_phone {
+	direction: ltr;
+}
+.hebrew .info-table .t-col-3 .cell-bg{
+	float: right;
+	direction: ltr;
+}
