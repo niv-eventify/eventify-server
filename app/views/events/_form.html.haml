@@ -8,8 +8,8 @@
 - f.inputs do
   - unless logged_in?
     - f.fields_for :user do |user_f|
-      - event_text_input(user_f, :name, _("Your Name"))
-      - event_text_input(user_f, :email, _("Your Email"))
+      - event_text_input(user_f, :name, _("Your Name"), {:required => true})
+      - event_text_input(user_f, :email, _("Your Email"), {:required => true})
       .f-row
         != link_to _("I already have an account"), login_path, :class => "add-link"
 
