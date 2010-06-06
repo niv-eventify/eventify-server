@@ -164,7 +164,7 @@ describe Guest do
     end
 
     it "should reset sent at" do
-      @guest.prepare_sms_invitation!
+      @guest.prepare_sms_invitation!(false)
       @guest.sms_invitation_sent_at.should_not be_nil
       @guest.send_sms_invitation_at.should be_nil
     end
@@ -176,7 +176,7 @@ describe Guest do
 
     it "should send sms" do
       Cellact::Sender.stub!(:should_succeed?).and_return(true)
-      @guest.prepare_sms_invitation!
+      @guest.prepare_sms_invitation!(false)
       @guest.sms_invitation_sent_at.should_not be_nil
       @guest.sms_invitation_failed_at.should be_nil
     end
@@ -221,7 +221,7 @@ describe Guest do
     it "should update email_invitation_sent_at and email_token" do
       @guest.email_invitation_sent_at.should be_nil
       @guest.email_token.should be_nil
-      @guest.prepare_email_invitation!
+      @guest.prepare_email_invitation!(false)
       @guest.email_invitation_sent_at.should == @send_at
       @guest.send_email_invitation_at.should be_nil
       @guest.email_token.should_not be_nil
@@ -231,7 +231,7 @@ describe Guest do
       @guest.email_token = "foobar"
       @guest.save
 
-      @guest.prepare_email_invitation!
+      @guest.prepare_email_invitation!(false)
       @guest.email_token.should == "foobar"
     end
   end

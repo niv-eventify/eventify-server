@@ -6,8 +6,7 @@ describe Event do
     it "should set stage_passed to 4 when sending invitations" do
       event = Factory.create(:event)
       event.stage_passed.should_not == 3
-      event.should_receive(:send_later).with(:send_sms_invitations)
-      event.should_receive(:send_later).with(:send_email_invitations)
+      event.should_receive(:send_later).with(:delayed_send_invitations)
       event.send_invitations
       event.stage_passed.should == 4
       event.any_invitation_sent.should be_true
@@ -186,15 +185,13 @@ describe Event do
     describe "invitations" do
       it "should send if event is active" do
         event = Factory.create(:event)
-        event.should_receive(:send_later).with(:send_sms_invitations)
-        event.should_receive(:send_later).with(:send_email_invitations)
+        event.should_receive(:send_later).with(:delayed_send_invitations)
         event.send_invitations
       end
 
       it "should not send if event is inactive" do
         event = Factory.create(:inactive_event)
-        event.should_not_receive(:send_later).with(:send_sms_invitations)
-        event.should_not_receive(:send_later).with(:send_email_invitations)
+        event.should_not_receive(:send_later).with(:delayed_send_invitations)
         event.send_invitations        
       end
     end
