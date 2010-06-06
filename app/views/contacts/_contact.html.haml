@@ -3,4 +3,4 @@
   %td= contact.email
   %td= contact.mobile
   %td.edit!= link_to _("edit"), edit_contact_path(contact), :class => "edit-icon"
-  %td.remove!= link_to_remote(_("remove"), :url => contact_path(contact), :method => :delete, :confirm => "Are you sure?", :html => {:class => "del-icon"}, :before => "jQuery('##{dom_id(contact)}').remove()")
+  %td.remove!= link_to_remote(_("remove"), :url => contact_path(contact), :method => :delete, :confirm => _("Are you sure?"), :html => {:class => "del-icon"}, :before => "jQuery('##{dom_id(contact)}').remove()")
