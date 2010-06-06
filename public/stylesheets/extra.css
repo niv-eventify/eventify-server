@@ -750,3 +750,10 @@ p.takings-changed {
 	float: right;
 	direction: ltr;
 }
+.links {
+	font-size: 1.2em;
+	color: blue;
+}
+.links a{
+	color: blue;
+}
