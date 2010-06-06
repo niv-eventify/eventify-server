@@ -237,14 +237,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-  def send_sms_invitations
-    send_invitations # backward compatability for delayed_job
-  end
-
-  def send_email_invitations
-    send_invitations # backward compatability for delayed_job
-  end
-
   def cancel_sms!
     _cancel_sms_invitations!
     _cancel_sms_reminders!
