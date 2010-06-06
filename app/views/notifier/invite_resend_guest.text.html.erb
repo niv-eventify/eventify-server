@@ -1,0 +1,17 @@
+<html>
+<body>
+  <%= _("Dear %{user_name}") % {:user_name => h(@guest.name)} %>
+  <br/><br/>
+  <%= _("You were invited to %{event_subject}.") % {:event_subject => h(@guest.event.invitation_email_subject)} %>
+  <br/><br/>
+  <%= _("Event details has been changed.") %>
+  <br/><br/>
+  <%= _("Use the following link to see the invitation and RSVP for the event.") %><br/>
+  <%= link_to(@url, @url) %>
+  <br/><br/>
+  <%= _("If clicking the link does not bring you to the invitation page, copy the link and paste it in your browser.") %>
+  <br/><br/>
+  <%= _("Best regards,") %><br/>
+  <%= _("The eventify Team.") %>
+</body>
+</html>
