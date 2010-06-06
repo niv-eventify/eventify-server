@@ -192,8 +192,7 @@ class Event < ActiveRecord::Base
       sms_at = (delay_sms_sending && allow_delayed_sms?) ? Event.best_time_to_send_sms : Time.now.utc
       guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", sms_at]
 
-      send_later(:send_sms_invitations)
-      send_later(:send_email_invitations)
+      send_later(:delayed_send_invitations)
     end
   end
 
@@ -229,16 +228,21 @@ class Event < ActiveRecord::Base
     # should_send_sms? && sms_package_ok? # TODO: check sms payments in payments table
   end
 
-  def scoped_invite(scope, method)
-    scope.find_each(:batch_size => 10) { |obj| obj.send(method) }
+  def delayed_send_invitations
+    guests.find_each(:batch_size => 10) do |g|
+      resend = g.any_invitation_sent?
+
+      g.prepare_email_invitation!(resend) if g.scheduled_to_invite_by_email?
+      g.prepare_sms_invitation!(resend)   if g.scheduled_to_invite_by_sms?
+    end
   end
 
   def send_sms_invitations
-    scoped_invite(guests.scheduled_to_invite_by_sms.with_ids(guest_ids), :prepare_sms_invitation!)
+    send_invitations # backward compatability for delayed_job
   end
 
   def send_email_invitations
-    scoped_invite(guests.scheduled_to_invite_by_email.with_ids(guest_ids), :prepare_email_invitation!)
+    send_invitations # backward compatability for delayed_job
   end
 
   def cancel_sms!

@@ -26,11 +26,9 @@ class Guest < ActiveRecord::Base
   named_scope :no_invitation_sent, {:conditions => "guests.any_invitation_sent = 0"}
 
   named_scope :not_invited_by_sms, {:conditions => "guests.send_sms_invitation_at IS NULL AND guests.sms_invitation_sent_at IS NULL AND guests.send_sms = 1"}
-  named_scope :scheduled_to_invite_by_sms, {:conditions => "guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = 1"}
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
 
   named_scope :not_invited_by_email, {:conditions => "guests.send_email_invitation_at IS NULL AND guests.email_invitation_sent_at IS NULL AND guests.send_email = 1"}
-  named_scope :scheduled_to_invite_by_email, {:conditions => "guests.send_email_invitation_at IS NOT NULL AND guests.send_email = 1"}
 
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
   named_scope :summary_email_not_sent, :conditions => "guests.summary_email_sent_at IS NULL"
@@ -115,9 +113,10 @@ class Guest < ActiveRecord::Base
 
   def update_invitation_methods
     self.send_email = true if !email.blank? && email_changed? && 1 == changes.keys.size
-
     self.email_invitation_sent_at = self.send_email_invitation_at = nil if email_changed?
     self.sms_invitation_sent_at   = self.send_sms_invitation_at = nil if mobile_phone_changed?
+    self.any_invitation_sent = false if email_changed? || mobile_phone_changed?
+    true
   end
 
   def need_to_resend_invitation?
@@ -160,13 +159,13 @@ class Guest < ActiveRecord::Base
     save!
   end
 
-  def prepare_sms_invitation!
+  def prepare_sms_invitation!(resend)
     # TODO = check sms bulk status / package payments
     self.sms_invitation_sent_at, self.send_sms_invitation_at = send_sms_invitation_at, nil
-    send_at(sms_invitation_sent_at, :send_sms_invitation!, any_invitation_sent)
     self.any_invitation_sent = true
     save!
 
+    send_at(sms_invitation_sent_at, :send_sms_invitation!, resend)
   end
 
   def send_sms_invitation!(resend = false)
@@ -181,13 +180,13 @@ class Guest < ActiveRecord::Base
     end
   end
 
-  def prepare_email_invitation!
+  def prepare_email_invitation!(resend)
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at, self.send_email_invitation_at = send_email_invitation_at, nil
-    send_at(email_invitation_sent_at, :send_email_invitation!, any_invitation_sent)
     self.any_invitation_sent = true
     save!
 
+    send_at(email_invitation_sent_at, :send_email_invitation!, resend)
   end
 
   def send_email_invitation!(resend = false)
@@ -230,6 +229,14 @@ class Guest < ActiveRecord::Base
 
   def invited?
     invitation_sent_or_scheduled?(:email) || invitation_sent_or_scheduled?(:sms)
+  end
+
+  def scheduled_to_invite_by_sms?
+    send_sms_invitation_at && send_sms?
+  end
+
+  def scheduled_to_invite_by_email?
+    send_email_invitation_at && send_email?
   end
 
   def email_recipient
