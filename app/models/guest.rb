@@ -163,14 +163,15 @@ class Guest < ActiveRecord::Base
   def prepare_sms_invitation!
     # TODO = check sms bulk status / package payments
     self.sms_invitation_sent_at, self.send_sms_invitation_at = send_sms_invitation_at, nil
+    send_at(sms_invitation_sent_at, :send_sms_invitation!, any_invitation_sent)
     self.any_invitation_sent = true
     save!
 
-    send_at(sms_invitation_sent_at, :send_sms_invitation!)
   end
 
-  def send_sms_invitation!
-    sms = sms_messages.create!(:kind => "invitation", :message => any_invitation_sent ? event.sms_resend_message : event.sms_message)
+  def send_sms_invitation!(resend = false)
+    msg = resend ? event.sms_resend_message : event.sms_message
+    sms = sms_messages.create!(:kind => "invitation", :message => msg)
 
     sms.send_sms!
 
@@ -183,15 +184,15 @@ class Guest < ActiveRecord::Base
   def prepare_email_invitation!
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at, self.send_email_invitation_at = send_email_invitation_at, nil
+    send_at(email_invitation_sent_at, :send_email_invitation!, any_invitation_sent)
     self.any_invitation_sent = true
     save!
 
-    send_at(email_invitation_sent_at, :send_email_invitation!)
   end
 
-  def send_email_invitation!
+  def send_email_invitation!(resend = false)
     I18n.with_locale(event.language) do
-      if any_invitation_sent?
+      if resend
         Notifier.deliver_invite_resend_guest(self)
       else
         Notifier.deliver_invite_guest(self)
