@@ -2,7 +2,7 @@ class RsvpsController < InheritedResources::Base
   defaults :resource_class => Guest, :collection_name => 'guests', :instance_name => 'guest', :route_instance_name => "rsvp"
   actions :show, :update, :edit
   respond_to :js, :only => [:update, :edit]
-  respond_to :iphone, :only => :show
+#  respond_to :iphone, :only => :show
   after_filter :clear_flash, :only => :update
   before_filter :adjust_format_for_iphone
 
