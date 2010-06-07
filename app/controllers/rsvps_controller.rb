@@ -4,7 +4,7 @@ class RsvpsController < InheritedResources::Base
   respond_to :js, :only => [:update, :edit]
 #  respond_to :iphone, :only => :show
   after_filter :clear_flash, :only => :update
-  before_filter :adjust_format_for_iphone
+#  before_filter :adjust_format_for_iphone
 
   # edit
 

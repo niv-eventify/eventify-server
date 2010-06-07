@@ -64,6 +64,15 @@ jQuery(document).ready(function(jQuery){
 jQuery(window).load(function () {
 	if(jQuery(".envelope").length > 0) {
 		setTimeout(function(){
+			jQuery("#envelope img").attr("src","/images/envelope2.png");
+		},500);
+		setTimeout(function(){
+			jQuery("#envelope img").attr("src","/images/envelope3.png");
+		},1000);
+		setTimeout(function(){
+			jQuery("#envelope img").attr("src","/images/envelope4.png");
+		},1500);
+		setTimeout(function(){
 			jQuery(".envelope").nyroModalManual({closeButton:'', modal: true});
 			jQuery(".toolbar").show();
 		},2000);
