@@ -1,17 +1,23 @@
 <html>
-<body>
-  <%= _("Dear %{user_name}") % {:user_name => h(@guest.name)} %>
+<body style="direction: rtl;">
+  <%= h(@guest.name)%>
+  יקר,  
   <br/><br/>
-  <%= _("You were invited to %{event_subject}.") % {:event_subject => h(@guest.event.invitation_email_subject)} %>
+  הינך מוזמן לאירוע: 
+  <%= "\"#{h(@guest.event.name)}\"" %>
+   של 
+  <%= h(@guest.event.user.name) %>
   <br/><br/>
-  <%= _("Event details has been changed.") %>
+  אנא לחץ על המעטפה על מנת לפתוח את ההזמנה ולהגיב עליה 
+  <br/>
+  <%= link_to(image_tag("http://eventify.co.il/images/envelope.jpg", :style => "border:0"), @url) %>
   <br/><br/>
-  <%= _("Use the following link to see the invitation and RSVP for the event.") %><br/>
+  אם לחיצה על המעטפה אינה פותחת את ההזמנה, העתק את שורת הקישור הבאה והדבק אותה בשורת הכתובת בדפדפן בו אתה משתמש
+  <br/>
   <%= link_to(@url, @url) %>
   <br/><br/>
-  <%= _("If clicking the link does not bring you to the invitation page, copy the link and paste it in your browser.") %>
-  <br/><br/>
-  <%= _("Best regards,") %><br/>
-  <%= _("The eventify Team.") %>
+  בברכה,
+  <br/>
+  צוות Eventify.
 </body>
 </html>
