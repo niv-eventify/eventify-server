@@ -72,7 +72,13 @@ jQuery(window).load(function () {
             { src: '/images/envelope2.png'},
             { src: '/images/envelope3.png'},
             { src: '/images/envelope4.png', href: '#invitation', onclick: function(){
-                jQuery("#envelope a").nyroModalManual({closeButton:'', modal: true});
+                jQuery("#envelope a").nyroModalManual({
+                    closeButton:'',
+                    modal: true,
+                    endShowContent: function(elts, settings){
+                        jQuery("#envelope img").hide();
+                    }
+                });
                 jQuery(".toolbar").show();
             }}
         ]);
