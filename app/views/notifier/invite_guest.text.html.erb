@@ -1,5 +1,5 @@
 <html>
-<body>
+<body style="background-image: url('/images/invitation_mail_bg.png')">
   <%= _("Dear %{user_name}") % {:user_name => h(@guest.name)} %>
   <br/><br/>
   <%= _("You were invited to %{event_subject}.") % {:event_subject => h(@guest.event.invitation_email_subject)} %>
