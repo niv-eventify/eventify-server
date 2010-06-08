@@ -2,6 +2,47 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
 
+  describe "best_time_to_send_sms" do
+    before(:each) do
+      @event = Factory.create(:event_with_tz)
+      # check daylight save time
+      t = Time.utc(2010, 6, 8, 11, 0)
+      t.in_time_zone("Jerusalem").hour.should == 14
+    end
+
+    it "should suggest to send now when delay is disabled" do
+      at_time(Time.utc(2010, 6, 8, 11, 0)) do
+        @event.best_time_to_send_sms(false).should == Time.utc(2010, 6, 8, 11, 0)
+      end
+    end
+
+    it "should suggest to send now if delay is enabled" do
+      at_time(Time.utc(2010, 6, 8, 11, 0)) do
+        @event.best_time_to_send_sms(true).should == Time.utc(2010, 6, 8, 11, 0)
+      end
+    end
+
+    it "should suggest to send later today if delay is enabled and too early" do
+      t = Time.utc(2010, 8, 6, 1, 0)
+      t.in_time_zone("Jerusalem").hour.should == 4
+      t.in_time_zone("Jerusalem").day.should == 6
+
+      at_time(t) do
+        @event.best_time_to_send_sms(true).should == Time.utc(2010, 8, 6, 7, 0)
+      end
+    end
+
+    it "should suggest to send tomorrow if delay is enabled and too late" do
+      t = Time.utc(2010, 8, 6, 19, 0)
+      t.in_time_zone("Jerusalem").hour.should == 22
+      t.in_time_zone("Jerusalem").day.should == 6
+
+      at_time(t) do
+        @event.best_time_to_send_sms(true).should == Time.utc(2010, 8, 7, 7, 0)
+      end
+    end
+  end
+
   describe "stage passed" do
     it "should set stage_passed to 4 when sending invitations" do
       event = Factory.create(:event)
