@@ -1,4 +1,4 @@
-class Notifier < ActionMailer::Base
+class Notifier < LocalizedActionMailer
 
   def invite_resend_guest(guest)
     subject     guest.event.invitation_email_subject

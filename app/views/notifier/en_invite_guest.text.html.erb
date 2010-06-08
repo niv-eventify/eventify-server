@@ -1,0 +1,15 @@
+<html>
+<body>
+  Dear <%= h(@guest.name) %>
+  <br/><br/>
+  You were invited to <%= h(@guest.event.invitation_email_subject) %>
+  <br/><br/>
+  Use the following link to see the invitation and RSVP for the event.<br/>
+  <%= link_to(@url, @url) %>
+  <br/><br/>
+  If clicking the link does not bring you to the invitation page, copy the link and paste it in your browser.
+  <br/><br/>
+  Best regards,<br/>
+  The eventify Team.
+</body>
+</html>

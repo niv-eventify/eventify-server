@@ -1,0 +1,25 @@
+Hello <%= @event.user.name %>,
+
+Event <%= @event.name %>
+<%= @url %>
+
+<%- if @summary_since -%>
+  RSVPs summary since <%= @summary_since.to_s(:isra_date) %>
+<%- end -%>
+
+<%- Guest::RSVP_TEXT.each_with_index do |rsvp, index| -%>
+  <%- unless @guests_groups[index].blank? -%>
+
+=== Guests that responded <%= s_(rsvp) %> (<%= @guests_groups[index].size %>)
+
+    <%- @guests_groups[index].each_with_index do |guest, i| -%>
+<%= i.to_s %>. <%= [guest[:name], guest[:email], guest[:mobile_phone]].compact.join(", ") %>
+    <%- end -%>
+
+  <%- end -%>
+<%- end -%>
+
+Do not reply to this email.
+
+Thank you,
+Eventify Team.
