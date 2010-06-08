@@ -1,23 +1,19 @@
 <html>
 <body style="direction: rtl;">
-  <%= h(@guest.name)%>
-  יקר,  
-  <br/><br/>
-  הינך מוזמן לאירוע: 
-  <%= "\"#{h(@guest.event.name)}\"" %>
-   של 
-  <%= h(@guest.event.user.name) %>
-  <br/><br/>
-  אנא לחץ על המעטפה על מנת לפתוח את ההזמנה ולהגיב עליה 
-  <br/>
-  <%= link_to(image_tag("http://eventify.co.il/images/envelope.jpg", :style => "border:0"), @url) %>
-  <br/><br/>
-  אם לחיצה על המעטפה אינה פותחת את ההזמנה, העתק את שורת הקישור הבאה והדבק אותה בשורת הכתובת בדפדפן בו אתה משתמש
-  <br/>
-  <%= link_to(@url, @url) %>
-  <br/><br/>
-  בברכה,
-  <br/>
-  צוות Eventify.
+שלום <%= h(@guest.name)%>,
+<br/><br/>
+קיבלת הזמנה מ<%= h(@guest.event.user.name) %> ל <%= "\"#{h(@guest.event.name)}\"" %>.
+<br/><br/>
+לפתיחת ההזמנה יש ללחוץ על המעטפה.
+<br/>
+<%= link_to(image_tag("http://eventify.co.il/images/envelope.jpg", :style => "border:0"), @url) %>
+<br/><br/>
+אם לחיצה על המעטפה אינה פותחת את ההזמנה, ניתן להעתיק את שורת הקישור הבאה ולהדביק אותה בשורת הכתובת בדפדפן:
+<br/>
+<%= link_to(@url, @url) %>
+<br/><br/>
+בברכה,
+<br/>
+צוות Eventify.
 </body>
 </html>
