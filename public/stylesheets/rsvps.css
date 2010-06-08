@@ -101,11 +101,13 @@
 }
 
 #envelope {
+	width:578px;
+	height:572px;
+	background-image: url('/images/envelope1.png');
 	text-align: center;
+	margin: 0 auto;
 }
-.envelope img {
-	border: 0;
-}
+
 .toolbar {
 	position: absolute;
 	bottom: 0;
@@ -214,7 +216,7 @@
 .hebrew .t-b-btn-1 {background: url(/images/t-b-btn-1.gif) no-repeat;}
 .hebrew .t-b-btn-1 span {
 	background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;
-	font-family: 'סימן קריאה';
+	font-family: 'רענן';
 }
 .hebrew .t-b-btn-2 {background: url(/images/t-b-btn-2.gif) no-repeat;}
 .hebrew .t-b-btn-2 span {
@@ -229,5 +231,5 @@
 .hebrew .t-b-btn-4 {background: url(/images/t-b-btn-4.gif) no-repeat;}
 .hebrew .t-b-btn-4 span {
 	background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;
-	font-family: 'ספידמן';
+	font-family: 'רענן';
 }

@@ -8,19 +8,16 @@
     %title=_("Invitation | Eventify")
     != stylesheet_link_tag 'nyroModal.full', 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
-    != javascript_include_tag 'jquery.nyroModal', 'rsvps'
+    != javascript_include_tag 'jquery.nyroModal', 'jquery.cross-slide', 'rsvps'
     /[if IE]
       != stylesheet_link_tag 'ie', :media => 'screen'
     /[if lt IE 7]
       != stylesheet_link_tag 'lt7', :media => 'screen'
   %body{ :class => body_class }
-    #envelope!= link_to image_tag("envelope1.png"), '#invitation', :class => "envelope"
+    #envelope!= link_to '', '#invitation'
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}
       .background_holder
         != image_tag(resource.event.design.card.url, :class => "back")
         != render(:partial => "postcard", :locals => {:event => resource.event})
-    != image_tag("envelope2.png", :style => "display:none")
-    != image_tag("envelope3.png", :style => "display:none")
-    != image_tag("envelope4.png", :style => "display:none")
