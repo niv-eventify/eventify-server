@@ -28,3 +28,7 @@ end
 Factory.define :event_with_daily_summary_never_sent, :parent => :event do |event|
   event.rsvp_summary_send_every 2
 end
+
+Factory.define :event_with_tz , :parent => :event do |event|
+  event.tz "Jerusalem"
+end

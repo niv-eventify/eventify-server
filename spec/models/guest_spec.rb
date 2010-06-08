@@ -145,12 +145,24 @@ describe Guest do
   describe "delayed sms" do
     before(:each) do
       @guest = Factory.create(:guest_with_mobile)
+    end
+    it "should be ready to send sms invitation next day" do
+
       @guest.event.delay_sms_sending = true
-      @guest.event.send_invitations
+      t = (Time.now.utc.beginning_of_day + 23.hours).in_time_zone("Jerusalem")
+      at_time(t) do
+        @guest.event.send_invitations
+        @guest.reload.send_sms_invitation_at.should == t.beginning_of_day + 10.hours
+      end
     end
 
-    it "should be ready to send sms invitation next day" do
-      @guest.reload.send_sms_invitation_at.should == (Time.now.utc + 1.day).beginning_of_day + 10.hours
+    it "should not send sms invitaions next day" do
+      @guest.event.delay_sms_sending = false
+      t = (Time.now.utc.beginning_of_day + 23.hours).in_time_zone("Jerusalem")
+      at_time(t) do
+        @guest.event.send_invitations
+        @guest.reload.send_sms_invitation_at.should == t
+      end
     end
   end
 

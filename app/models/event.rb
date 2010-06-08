@@ -171,11 +171,21 @@ class Event < ActiveRecord::Base
   end
 
   def allow_delayed_sms?
-    Event.best_time_to_send_sms < starting_at
+    best_time_to_send_sms(true) < starting_at
   end
 
-  def self.best_time_to_send_sms
-    1.day.from_now.utc.beginning_of_day + 10.hours
+  def best_time_to_send_sms(allow_delay)
+    return Time.now.utc unless allow_delay
+
+    hour_now = Time.now.utc.in_time_zone(tz).hour
+
+    if Astrails.too_late_to_send_sms?(hour_now)
+      ((1.day.from_now.utc.in_time_zone(tz).beginning_of_day) + 10.hours).utc
+    elsif Astrails.too_early_to_send_sms?(hour_now)
+      ((Time.now.utc.in_time_zone(tz).beginning_of_day) + 10.hours).utc
+    else
+      Time.now.utc
+    end
   end
 
   def send_invitations
@@ -189,7 +199,7 @@ class Event < ActiveRecord::Base
 
       guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", Time.now.utc]
 
-      sms_at = (delay_sms_sending && allow_delayed_sms?) ? Event.best_time_to_send_sms : Time.now.utc
+      sms_at = best_time_to_send_sms(delay_sms_sending && allow_delayed_sms?)
       guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", sms_at]
 
       send_later(:delayed_send_invitations)
