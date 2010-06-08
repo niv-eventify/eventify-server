@@ -101,12 +101,13 @@
 }
 
 #envelope {
+	width:578px;
+	height:572px;
+	background-image: url('/images/envelope1.png');
 	text-align: center;
-	margin-top: 10%;
+	margin: 0 auto;
 }
-.envelope img {
-	border: 0;
-}
+
 .toolbar {
 	position: absolute;
 	bottom: 0;
@@ -154,13 +155,17 @@
 	text-align: center;
 	font-weight: bold;
 	color: #2f261f;
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 12px;
 	float: right;
 	margin: 0 17px;
 	display: inline;
+	font-family: helvetica;
 }
-.hebrew .t-b-btn{float: left;}
+.hebrew .t-b-btn{
+	float: left;
+	font-size: 18px;
+}
 .t-b-btn span{
 	cursor: pointer;
 	display: block;
@@ -209,10 +214,22 @@
 	background: url(/images/t-b-btn-4-en.gif) no-repeat 0 100%;
 }
 .hebrew .t-b-btn-1 {background: url(/images/t-b-btn-1.gif) no-repeat;}
-.hebrew .t-b-btn-1 span {background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-1 span {
+	background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
 .hebrew .t-b-btn-2 {background: url(/images/t-b-btn-2.gif) no-repeat;}
-.hebrew .t-b-btn-2 span {background: url(/images/t-b-btn-2.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-2 span {
+	background: url(/images/t-b-btn-2.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
 .hebrew .t-b-btn-3 {background: url(/images/t-b-btn-3.gif) no-repeat;}
-.hebrew .t-b-btn-3 span {background: url(/images/t-b-btn-3.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-3 span {
+	background: url(/images/t-b-btn-3.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
 .hebrew .t-b-btn-4 {background: url(/images/t-b-btn-4.gif) no-repeat;}
-.hebrew .t-b-btn-4 span {background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-4 span {
+	background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
