@@ -30,3 +30,6 @@ config.action_view.cache_template_loading            = true
 SMS_FROM = "eventify"
 SMS_USER = "eventify"
 SMS_PASSWORD = "Croatia684"
+
+
+config.action_mailer.delivery_method = :smtp

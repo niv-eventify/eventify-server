@@ -9,4 +9,4 @@
               %strong!= link_to h(e.name), event_path(e)
               %span= e.starting_at.to_s(:isra_date)
   .banners
-    != link_to_function image_tag("img-banner.gif", :alt => ""), "alert('todo')"
+    != link_to image_tag("banner.png", :alt => ""), url_for(lobby_path)

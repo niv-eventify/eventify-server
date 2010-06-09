@@ -28,3 +28,7 @@ end
 every 1.hour do
   runner "Event.summary_cron_job"
 end
+
+every 1.minutes do
+  rake "ts:index"
+end

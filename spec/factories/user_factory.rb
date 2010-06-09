@@ -18,3 +18,8 @@ Factory.define :admin, :parent => :active_user do |user|
   user.sequence(:email) {|a| "#{a}@example2.com".downcase }
   user.is_admin true
 end
+
+
+Factory.define :disabled_user, :parent => :active_user do |user|
+  user.disabled_at 1.day.ago.utc
+end

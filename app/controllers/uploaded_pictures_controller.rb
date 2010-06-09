@@ -2,9 +2,9 @@ class UploadedPicturesController < InheritedResources::Base
   actions :index, :show, :create, :new
   respond_to :js, :only => [:index, :create]
   def new
-  	@event = params[:event]
+    @event = params[:event]
     @uploaded_picture = UploadedPicture.new()
-    render :action => "new", :layout => false  
+    render :action => "new", :layout => false
   end
 
   def create
@@ -16,13 +16,13 @@ class UploadedPicturesController < InheritedResources::Base
         format.js do
           responds_to_parent do
             render :index
-          end          
+          end
         end
       else
         format.js do
           responds_to_parent do
             render :create
-          end          
+          end
         end
       end
     end

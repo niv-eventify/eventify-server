@@ -11,7 +11,7 @@ module Event::Summary
     base.extend(ClassMethods)
     base.class_eval do
       named_scope :overdue_summary, lambda {{:conditions => ["events.rsvp_summary_send_at < ?", Time.now.utc]}}
-      named_scope :delayed_summary, :conditions => "events.rsvp_summary_send_every in (2, 3)" # others - send on demand
+      named_scope :delayed_summary, :conditions => "events.user_is_activated = 1 AND events.rsvp_summary_send_every in (2, 3)" # others - send on demand
       before_update :update_summary
       attr_accessible :rsvp_summary_send_every
     end
@@ -19,10 +19,17 @@ module Event::Summary
 
   module ClassMethods
     def summary_cron_job
-      upcoming.delayed_summary.overdue_summary.find_each(:batch_size => 1) do |event|
-        event.update_next_summary_send!
-        event.send_later(:send_summary_email!)
+      loop do
+        e = next_event_to_send_summary
+        break unless e
+
+        e.update_next_summary_send!
+        e.send_later(:send_summary_email!)
       end
+    end
+
+    def next_event_to_send_summary
+      upcoming.delayed_summary.overdue_summary.first
     end
   end
 
@@ -60,8 +67,7 @@ module Event::Summary
     summary_since = last_summary_sent_at || created_at
     self.last_summary_sent_at = Time.now.utc
     save!
-
-    Notifier.deliver_guests_summary(self, rsvps, summary_since)
+    I18n.with_locale(language) {Notifier.deliver_guests_summary(self, rsvps, summary_since)}
   end
 
   def guests_for_this_summary!

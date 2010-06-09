@@ -1,3 +1,4 @@
+- @page_title=_("Things To Bring | Eventify")
 - @content_css_class = "stars-bg stage-3"
 
 - events_content_section(3, @event) do
@@ -10,14 +11,15 @@
     .info-area-tab
       .holder
         .frame
-          %h3
-            = _("Add things you want your guests to bring with them.")
-            %br
-            = _("Every guest would be able to pick one ore more items to bring.")
+          .emails-phones
+            %h3
+              = _("Add things you want your guests to bring with them.")
+              %br
+              = _("Every guest would be able to pick one ore more items to bring.")
 
-          %table#thing.info-table.things
-            != render(:partial => "things_header")
-            %tbody
-              != render(:partial => "thing", :collection => collection)
+            %table#thing.info-table.things
+              != render(:partial => "things_header")
+              %tbody
+                != render(:partial => "thing", :collection => collection)
           
-          != render(:partial => "new")
+                != render(:partial => "new")

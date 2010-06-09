@@ -9,7 +9,21 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :user
   validates_associated :user, :if => proc { |e| e.user.activated_at.blank? }
 
-  has_many :guests
+  DEFAULT_TIME_ZONE = "Jerusalem"
+
+  has_many :guests do
+    def import(new_guests)
+      guests_imported = 0
+
+      new_guests.each do |g|
+        guest = build(:name => g["name"], :email => g["email"], :mobile_phone => g["mobile"])
+        guest.send_email = true unless guest.email.blank?
+        guests_imported += 1 if guest.save
+      end
+
+      guests_imported
+    end
+  end
   has_many :things do
     def total_amount
       calculate(:sum, :amount)
@@ -33,12 +47,14 @@ class Event < ActiveRecord::Base
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
       :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
-    }
+    },
+    :url => ':s3_domain_url'
   attr_accessible :map
   validates_attachment_size :map, :less_than => 10.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
-    :location_name, :location_address, :map_link, :guest_message, :category, :design
+    :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
+    :msg_color, :title_color, :font, :allow_seeing_other_guests, :tz
     
 
   datetime_select_accessible :starting_at, :ending_at
@@ -50,20 +66,50 @@ class Event < ActiveRecord::Base
     :allow_nil => true, :allow_blank => true, :live_validator => /|/
 
   # sms sending validations
-  attr_accessor :send_invitations_now
-  attr_accessible :send_invitations_now, :sms_message, :host_mobile_number
-  validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_sms?
-  validates_format_of   :host_mobile_number, :with => String::PHONE_REGEX, :on => :update, :if => :going_to_send_sms?
+  attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
+  attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations
+  validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_or_resend_sms?
+  validates_phone_number :host_mobile_number, :if => :going_to_send_or_resend_sms?, :on => :update
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
-  validates_length_of   :sms_message, :maximum => 140, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
+  validates_presence_of :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
+  validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
+  validates_length_of   :sms_resend_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_resend_sms?
+
+  def going_to_send_or_resend_sms?
+    going_to_send_sms? || going_to_resend_sms?
+  end
 
   def going_to_send_sms?
     should_send_sms? && send_invitations_now
   end
 
+  def going_to_resend_sms?
+    should_resend_sms? && send_invitations_now
+  end
+
   after_update :check_send_invitations
   def check_send_invitations
     send_invitations if send_invitations_now
+  end
+
+  after_validation_on_update :check_resend_invitations
+  def check_resend_invitations
+    if resend_invitations && any_invitation_sent?
+      self.stage_passed = 3
+    end
+  end
+
+  after_update :check_reset_invitation_status
+  def check_reset_invitation_status
+    guests.invited.update_all("sms_invitation_sent_at = NULL, email_invitation_sent_at = NULL") if should_resend_invitations? 
+  end
+
+  def should_resend_invitations?
+    resend_invitations && any_invitation_sent? && details_for_resend_invitations_changed?
+  end
+
+  def details_for_resend_invitations_changed?
+    starting_at_changed? || location_address_changed? || location_name_changed?
   end
 
   after_create :create_default_reminder
@@ -76,6 +122,7 @@ class Event < ActiveRecord::Base
 
   after_update :adjust_reminders
   def adjust_reminders
+    return unless starting_at_changed?
     disabled = reminders.not_sent.collect(&:adjust!)
     @reminders_disabled = disabled.any?
   end
@@ -89,20 +136,28 @@ class Event < ActiveRecord::Base
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
 
-  before_create :set_stage_passed
-  def set_stage_passed
+  before_create :set_initial_stage
+  def set_initial_stage
     self.stage_passed = 2
+  end
+
+  before_create :set_default_time_zone
+  def set_default_time_zone
+    self.tz ||= DEFAULT_TIME_ZONE
   end
 
   def invitations_to_send_counts
     return @invitations_to_send_counts if @invitations_to_send_counts
 
     e, s = guests.not_invited_by_email.count, guests.not_invited_by_sms.count
+    e_resend, s_resend = guests.not_invited_by_email.any_invitation_sent.count, guests.not_invited_by_sms.any_invitation_sent.count
 
     @invitations_to_send_counts = {
-      :email => e,
-      :sms => s,
-      :total => (e + s)
+      :email => e - e_resend,
+      :sms => s - s_resend,
+      :total => (e + s),
+      :resend_email => e_resend,
+      :resend_sms => s_resend
     }
   end
 
@@ -111,16 +166,50 @@ class Event < ActiveRecord::Base
   end
 
   def payment_required?
-    require_payment_for_guests? || require_payment_for_sms?
+    false
+    # require_payment_for_guests? || require_payment_for_sms?
+  end
+
+  def allow_delayed_sms?
+    best_time_to_send_sms(true) < starting_at
+  end
+
+  def best_time_to_send_sms(allow_delay)
+    return Time.now.utc unless allow_delay
+
+    hour_now = Time.now.utc.in_time_zone(tz).hour
+
+    if Astrails.too_late_to_send_sms?(hour_now)
+      ((1.day.from_now.utc.in_time_zone(tz).beginning_of_day) + 10.hours).utc
+    elsif Astrails.too_early_to_send_sms?(hour_now)
+      ((Time.now.utc.in_time_zone(tz).beginning_of_day) + 10.hours).utc
+    else
+      Time.now.utc
+    end
   end
 
   def send_invitations
-    "production" == Rails.env ? send_later(:delayed_send_invitations) : delayed_send_invitations
+    return unless user_is_activated?
+
+    Event.transaction do
+      self.send_invitations_now = nil
+      self.stage_passed = 4
+      self.any_invitation_sent = true
+      save!
+
+      guests.not_invited_by_email.update_all ["send_email_invitation_at = ?", Time.now.utc]
+
+      sms_at = best_time_to_send_sms(delay_sms_sending && allow_delayed_sms?)
+      guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", sms_at]
+
+      send_later(:delayed_send_invitations)
+    end
   end
 
   def validate
     errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
     errors.add(:base, _("Payments are not completed yet")) if send_invitations_now && payment_required?
+    errors.add(:starting_at, _("time cannot be blank")) if @no_time_selected
   end
 
   def has_map?
@@ -135,8 +224,12 @@ class Event < ActiveRecord::Base
     false # TODO: check max number/program and existing payment in payments table
   end
 
+  def should_resend_sms?
+    !guests.any_invitation_sent.not_invited_by_sms.count.zero?
+  end
+
   def should_send_sms?
-    !guests.not_invited_by_sms.count.zero?
+    !guests.no_invitation_sent.not_invited_by_sms.count.zero?
     # TODO: also check reminders
   end
 
@@ -145,27 +238,13 @@ class Event < ActiveRecord::Base
     # should_send_sms? && sms_package_ok? # TODO: check sms payments in payments table
   end
 
-  def scoped_invite(scope, method, timestamp)
-    scope.find_each(:batch_size => 10) { |obj| obj.send(method, timestamp) }
-  end
-
   def delayed_send_invitations
-    time_stamp = Time.now.utc
-    Event.transaction do
-      self.last_invitation_sent_at = time_stamp
-      send_sms_invitations(time_stamp)
-      send_email_invitations(time_stamp)
-      self.send_invitations_now = nil
-      save!
+    guests.find_each(:batch_size => 10) do |g|
+      resend = g.any_invitation_sent?
+
+      g.prepare_email_invitation!(resend) if g.scheduled_to_invite_by_email?
+      g.prepare_sms_invitation!(resend)   if g.scheduled_to_invite_by_sms?
     end
-  end
-
-  def send_sms_invitations(timestamp)
-    scoped_invite(guests.not_invited_by_sms.with_ids(guest_ids), :prepare_sms_invitation!, timestamp)
-  end
-
-  def send_email_invitations(timestamp)
-    scoped_invite(guests.not_invited_by_email.with_ids(guest_ids), :prepare_email_invitation!, timestamp)
   end
 
   def cancel_sms!
@@ -173,8 +252,36 @@ class Event < ActiveRecord::Base
     _cancel_sms_reminders!
   end
 
+  def default_sms_message_for_resend
+    with_time_zone do
+      opts = {
+        :event_name => name,
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : (_(" at location %{location}") % {:location => location}))
+      }
+      s = _("Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
+      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+
+      _("Changes: %{event_name} on %{date} at %{time}. %{host_name}") % opts
+    end
+  end
+
   def default_sms_message
-    _("You've been invited to %{event_name}") % {:event_name => name}
+    with_time_zone do
+      opts = {
+        :event_name => name, 
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : (_(" at location %{location}") % {:location => location}))
+      }
+      s = _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
+      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+
+      _("%{event_name} on %{date} at %{time}. %{host_name}") % opts
+    end
   end
 
   def location
@@ -200,6 +307,24 @@ class Event < ActiveRecord::Base
     "eventify-#{id}.ics"
   end
 
+  def invitation_email_subject
+    _("%{host_name}'s %{event_name} event") % {:host_name => user.name, :event_name => name}
+  end
+
+  def self.default_start_time
+    2.weeks.from_now.beginning_of_day + 11.hours
+  end
+
+  def with_time_zone(default_time_zone = DEFAULT_TIME_ZONE)
+    old_tz = Time.zone
+    begin
+      ::Time.zone = tz || default_time_zone || old_tz
+      yield
+    ensure
+      ::Time.zone = old_tz
+    end
+  end
+
 protected
 
   def _cancel_sms_reminders!
@@ -209,5 +334,18 @@ protected
 
   def _cancel_sms_invitations!
     guests.update_all("send_sms = 0")
+  end
+private
+  def instantiate_time_object(name, values)
+    if "starting_at" == name && 3 == values.size
+      # no time selected
+      @no_time_selected = true
+    end
+
+    if self.class.send(:create_time_zone_conversion_attribute?, name, column_for_attribute(name))
+      Time.zone.local(*values)
+    else
+      Time.time_with_datetime_fallback(@@default_timezone, *values)
+    end
   end
 end

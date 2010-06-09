@@ -39,43 +39,73 @@ class ContactImporter < ActiveRecord::Base
     SOURCES[contact_source]
   end
 
-  def import!(username = nil, password = nil)
+  def self.import_contacts(username, password, contact_source, csv)
+    error = nil
+
     contacts = case contact_source
     when 'gmail', 'hotmail', 'yahoo'
       begin
-        Contacts.new(contact_source.to_sym, username, password).contacts
+        connection = Contacts.new(contact_source.to_sym, username, password)
+        connection.contacts
       rescue Contacts::StandardError, Contacts::ContactsError
-        _error!($!)
+        error = $!
       rescue
-        _error!("A problem importing your contacts occured, please try again later.")
+        error = _("A problem importing your contacts occured, please try again later.")
       end
     when 'aol'
       begin
        contacts = Blackbook.get(:username => username, :password => password)
      rescue Blackbook::BlackbookError, ArgumentError
-       _error!($!)
+       error = $!
      end
     when 'csv'
       begin
         Blackbook.get(:csv, :file => csv)
       rescue Blackbook::BlackbookError
-        _error!($!)
+        error = $!
       end
     end
+    
+    [contacts, error]
+  end
+
+  def self.parse_name_and_email(c)
+    if c.is_a?(Array)
+      name, email = c.first, c.last
+    elsif c.is_a?(Hash)
+      name = c[:name] || c[:Name]
+      email = c[:email] ||c [:Email]
+    end
+    [name || email, email]
+  end
+
+  def self.contacts_to_openstruct(contacts)
+    id = 0
+
+    contacts.map do |contact|
+      returning(OpenStruct.new) do |res|
+        name, email = parse_name_and_email(contact)
+        res.name = name || email
+        res.email = email
+        res.mobile = nil
+        res.uid = id
+        id += 1
+      end
+    end
+  end
+
+  def import!(username = nil, password = nil)
+    contacts, error = ContactImporter.import_contacts(username, password, contact_source, csv)
 
     _import!(contacts) if contacts
+    _error!(error) if error
   end
 
 protected
   def _import!(contacts)
     self.contacts_imported = 0
     contacts.each do |c|
-      if c.is_a?(Array)
-        name, email = c.first, c.last
-      elsif c.is_a?(Hash)
-        name = c[:name]
-        email = c[:email]
-      end
+      name, email = ContactImporter.parse_name_and_email(c)
       self.contacts_imported += 1 if user.contacts.add(name, email)
     end
     self.completed_at = Time.now.utc

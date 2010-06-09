@@ -4,6 +4,7 @@ class EventsController < InheritedResources::Base
   before_filter :require_user, :except => [:create, :new]
 
   before_filter :set_event, :only => [:edit, :update, :show]
+  around_filter :set_event_time_zone, :only => [:edit, :update, :show]
 
   actions :create, :new, :edit, :update, :index, :show
 
@@ -25,23 +26,32 @@ class EventsController < InheritedResources::Base
       params[:event][:user_attributes].trust(:email)
     end
 
-    @event = Event.new(params[:event])
-    @event.user = current_user if logged_in?
-    @event.language = current_locale
-
-    create! do |success, failure|
-      success.html do
-        flash[:notice] = nil
-        redirect_to event_guests_path(@event, :wizard => true)
-        UserSession.create(@event.user) unless logged_in?
+    # will allow passing params[:event][:tz] in a future
+    Time.use_zone(params[:event] && params[:event][:tz] || Event::DEFAULT_TIME_ZONE) do
+      @event = Event.new(params[:event])
+      if logged_in?
+        @event.user = current_user
+        @event.user_is_activated = !current_user.activated_at.nil?
       end
-      failure.html { render(:action => "new") }
+      @event.language = current_locale
+
+      create! do |success, failure|
+        success.html do
+          flash[:notice] = nil
+          redirect_to event_guests_path(@event, :wizard => true)
+          unless logged_in?
+            UserSession.create(@event.user)
+            @event.user.deliver_activation_instructions!
+          end
+        end
+        failure.html { render(:action => "new") }
+      end
     end
   end
 
 
   def new
-    @event = Event.new(:category => @category, :design => @design)
+    @event = Event.new(:category => @category, :design => @design, :starting_at => Event.default_start_time)
     @event.build_user unless logged_in?
     new!
   end
@@ -71,6 +81,10 @@ protected
 
   def set_event
     @event = current_user.events.find(params[:id])
+  end
+
+  def set_event_time_zone
+    @event.with_time_zone { yield }
   end
 
   def set_design_and_category

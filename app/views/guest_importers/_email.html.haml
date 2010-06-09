@@ -1,0 +1,38 @@
+.import
+  .popup-heading
+    %strong= s_(GuestImportersController::TITLES["email"])
+    - if @error
+      %p.error-msg= @error
+    .holder
+      .contact-box
+        %ul.contact-tabset
+          - each_import_source("csv") do |klass, name|
+            %li.source_select{:class => klass}!= link_to_function name, "jQuery('li.source_select').removeClass('active');jQuery(this).parents('li').addClass('active');jQuery('.source-form').hide();jQuery('.#{klass}_form').show()"
+        - each_import_source("csv") do |klass, name|
+          .contact-tab.source-form{:style => "display:none", :class => "#{klass}_form"}
+            .contact-tab-t
+              .contact-tab-b
+                - form_tag event_guest_importers_path(@event), :builder => MiddleBoxFormBuilder::Builder, :target => "upload_frame", :class => "contact-form" do
+                  != hidden_field_tag :contact_source, klass
+                  != hidden_field_tag :source, "email"
+                  .form-row
+                    != label_tag _("Email or Username")
+                    .input-bg-contact
+                      != text_field_tag :username, params[:contact_source] == klass ? params[:username] : ""
+                  .form-row
+                    != label_tag _("Password")
+                    .input-bg-contact
+                      != password_field_tag :password, params[:contact_source] == klass ? params[:password] : ""
+                  .contact-btns
+                    %br
+                    %br
+                    %br
+                    != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();jQuery(this).parents('form').submit()", :class => "btn csv-submit"
+                    != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+                    %br
+                    %br
+                    %br
+                  .loading{:style => "display:none"}
+                    = _("Importing, please wait...")
+
+%iframe#upload_frame{:name => "upload_frame", :style => "display: none"}

@@ -1,0 +1,26 @@
+.import
+  .popup-heading
+    %strong= title
+
+  - form_tag event_guest_importers_path(@event) do
+    .events-holder.download-form
+      .table-box
+        .links
+          &nbsp;
+          != link_to_function _("Select All"), "jQuery('input.checkable').attr('checked', 'checked')"
+          &nbsp;|&nbsp;
+          != link_to_function _("Select None"), "jQuery('input.checkable').removeAttr('checked')"
+        .holder
+          %table#contacts
+            %thead
+              %tr
+                %td &nbsp;
+                %td= _("Name")
+                %td= _("Email")
+                %td= _("Mobile")
+            %tbody
+              != render(:partial => "contact", :collection => contacts)
+    .contact-btns.popup-btns
+      %br
+      != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+      != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"

@@ -1,6 +1,6 @@
 .side-box.side-box-blue
-  .holder
-    .side-box-heading
-      %h2= _("Things to bring")
-    .side-box-content.takings
-      != render(:partial => "takings/form")
+  .holder.takings-content
+    - if resource.takings.count.zero?
+      != render(:partial => "takings/index")
+    - else
+      != render(:partial => "takings/status")

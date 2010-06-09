@@ -34,6 +34,8 @@ Rails::Initializer.run do |config|
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
   config.gem 'rspec', :lib => false, :version => '1.3.0'
   config.gem "icalendar", :version => "1.1.4", :lib => false
+  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.15'
+  config.gem "json", :version => "1.2.0"
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.

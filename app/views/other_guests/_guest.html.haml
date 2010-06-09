@@ -1,7 +1,26 @@
 .info-col-row
   %p
-    = guest.name
-    - if guest.attendees_count
+    %span.guest_name
+      = guest.name
+    - unless params[:query].blank?
+      \-
+      %span{:class => rsvp_status_class(guest.rsvp)}= guest.rsvp_text
+    - if guest.attendees_count.to_i > 0
       %em= n_("(%d guest)", "(%d guests)", guest.attendees_count) % guest.attendees_count
   - unless guest.message_to_host.blank?
-    .note-box= guest.message_to_host
+    .note-box{:title => h(guest.message_to_host)}
+      - if guest.message_to_host.length < 11
+        = guest.message_to_host
+      - else
+        != link_to h(guest.message_to_host.utf_snippet), "", :dom_id => "##{dom_id(guest)}", :class => "show-guest-message #{rsvp_status_class(guest.rsvp)}"
+
+%div[guest]{:style => "display:none"}
+  %h3
+    = guest.name
+    \-
+    %span{:class => rsvp_status_class(guest.rsvp)}= guest.rsvp_text
+  - if guest.attendees_count.to_i > 0
+    %em= n_("(%d guest)", "(%d guests)", guest.attendees_count) % guest.attendees_count
+    %br
+    %br
+  = guest.message_to_host

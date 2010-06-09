@@ -5230,12 +5230,9 @@ ul.contact-tabset li.active a ,
 }
 .hebrew .confirmed-btns span { float: right;}
 .toolbar {
-	position: absolute;
-	bottom: 0;
-	left:50%;
-	margin: 0 0 0 -344px;
 	width:688px;
 	height:64px;
+	margin: 0 auto;
 }
 .hebrew .toolbar{ direction: rtl;}
 .toolbar-bg {
@@ -5245,7 +5242,7 @@ ul.contact-tabset li.active a ,
 	height:64px;
 }
 .toolbar-logo {
-	margin: 17px 34px 0 21px;
+	margin: 17px 34px 0 14px;
 	display: inline;
 	text-indent: -9999px;
 	width: 104px;
@@ -5255,12 +5252,25 @@ ul.contact-tabset li.active a ,
 	background: url(/images/logo-toolbar.gif) no-repeat;
 }
 .hebrew .toolbar-logo {
-	margin: 17px 21px 0 34px;
+	margin: 17px 14px 0 34px;
 	float: left;
 }
 .toolbar-logo  a{
 	display: block;
 	height: 100%;
+}
+.btns-holder {
+	width:527px;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+}
+.hebrew .btns-holder {
+	float: left;
+}
+.btns-holder td{
+	margin: 0;
+	padding: 0;
 }
 .t-b-btn {
 	position: relative;
@@ -5269,11 +5279,10 @@ ul.contact-tabset li.active a ,
 	color: #2f261f;
 	font-size: 12px;
 	line-height: 12px;
-	float: right;
 	margin: 0 17px;
-	display: inline;
+	display: block;
+	margin: 0 auto;
 }
-.hebrew .t-b-btn{float: left;}
 .t-b-btn span{
 	cursor: pointer;
 	display: block;
@@ -5333,16 +5342,8 @@ ul.contact-tabset li.active a ,
 	margin: 0 0 0 1px;
 	padding:0 0 0 9px;
 	background: url(/images/bg-tools-bar.gif) no-repeat;
-	position: absolute;
-	top:100px;
-	left:100px;
 	float: left;
 	width: 306px;
-}
-.hebrew .tools-bar {
-	left: auto;
-	right:100px;
-	float: right;
 }
 .tools-bar-h {
 	display: inline;

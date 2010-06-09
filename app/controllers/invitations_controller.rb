@@ -14,10 +14,11 @@ class InvitationsController < InheritedResources::Base
   # edit
 
   def update
-    resource.stage_passed = 4
+    resource.send_invitations_now = true
+
     update! do |success, failure|
       success.html {flash[:notice] = nil; redirect_to(invitation_path(resource))}
-      failure.html {render(:action => "edit")}
+      failure.html { render(:action => "edit") }
     end
   end
 
@@ -27,7 +28,8 @@ protected
   end
 
   def sms_message
-    resource.sms_message ||= resource.default_sms_message
+    resource.sms_message = resource.default_sms_message
+    resource.sms_resend_message = resource.default_sms_message_for_resend
   end
 
   def set_invitations
@@ -35,7 +37,12 @@ protected
   end
 
   def check_invitations
-    if @invitations_to_send[:total].zero?
+    if 4 == resource.stage_passed
+      redirect_to summary_path(resource)
+      return false
+    elsif 3 == resource.stage_passed && @invitations_to_send[:total].zero?
+      resource.stage_passed = 4
+      resource.save!
       redirect_to summary_path(resource)
       return false
     end

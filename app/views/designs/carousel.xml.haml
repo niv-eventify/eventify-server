@@ -1,0 +1,7 @@
+%data
+  - for design in @designs do
+    %result
+      %source
+        != design.carousel.url
+      %path
+        != url_for(category_designs_url(design.category_id))

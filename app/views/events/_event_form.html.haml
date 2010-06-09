@@ -6,6 +6,13 @@
     .side-area
       - semantic_form_for(@event, :live_validations => true, :html => {:class => "form new-event", :multipart => true}) do |f|
         != f.hidden_field :design_id
+        != f.hidden_field :msg_font_size
+        != f.hidden_field :title_font_size
+        != f.hidden_field :title_text_align
+        != f.hidden_field :msg_text_align
+        != f.hidden_field :msg_color
+        != f.hidden_field :title_color
+        != f.hidden_field :font
         != render(:partial => "form", :locals => {:f => f})
 
     != render(:partial => "selected_design")

@@ -39,7 +39,15 @@ class User < ActiveRecord::Base
 
   has_many :events
 
+  # allow not activated users to access just created events
   def active?
     true
+  end
+
+  after_update :activate_events
+  def activate_events
+    if activated_at_changed? && !activated_at.nil?
+      events.update_all "user_is_activated = 1"
+    end
   end
 end

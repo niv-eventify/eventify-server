@@ -1,0 +1,5 @@
+!= render(:partial => "toolbar_preview")
+#invitation{:style => "display:none;"}
+  .background_holder
+    %img.back{:src => "#{@event.design.card.url}"}
+    != render(:partial => "rsvps/postcard", :locals => {:event => @event})

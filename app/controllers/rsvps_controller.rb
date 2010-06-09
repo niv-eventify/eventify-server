@@ -2,9 +2,11 @@ class RsvpsController < InheritedResources::Base
   defaults :resource_class => Guest, :collection_name => 'guests', :instance_name => 'guest', :route_instance_name => "rsvp"
   actions :show, :update, :edit
   respond_to :js, :only => [:update, :edit]
-  respond_to :iphone, :only => :show
+#  respond_to :iphone, :only => :show
   after_filter :clear_flash, :only => :update
-  before_filter :adjust_format_for_iphone
+#  before_filter :adjust_format_for_iphone
+
+  # edit
 
   def update
     # only attendees_count, rsvp and message_to_host are changable here
@@ -12,12 +14,24 @@ class RsvpsController < InheritedResources::Base
     resource.message_to_host = params[:guest][:message_to_host] if params[:guest][:message_to_host]
     resource.attendees_count = params[:guest][:attendees_count] if params[:guest][:attendees_count]
     resource.save!
+
+    redirect_opts = {:action => "show", :id => resource.email_token, :more => "true"}
+    respond_to do |wants|
+      wants.html {redirect_to(redirect_opts) }
+      wants.js do
+        render(:update) { |page| page.redirect_to(redirect_opts) }
+      end
+    end
   end
 
   def show
     if "true" == params[:more]
       render :action => "show_more"
     else
+      if current_locale != resource.event.language
+        return redirect_to rsvp_path(:id => params[:id], :locale => resource.event.language)
+      end
+
       render :action => "show", :layout => false
     end
   end

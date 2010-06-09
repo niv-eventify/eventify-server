@@ -1,3 +1,4 @@
+- @page_title=_("Add Contact | Eventify")
 .top-text
   %h2= _("Hello %{username},") % {:username => h(current_user.name)}
   %p= _("Here your can manage contracts, and import them from your email!")
@@ -15,4 +16,4 @@
               != render :partial => "form", :locals => { :f => f }
               .forms-block-btns
                 != link_to_function _("Add"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
-                != link_to "Cancel", contacts_path, :class => "btn"
+                != link_to _("Cancel"), contacts_path, :class => "btn"

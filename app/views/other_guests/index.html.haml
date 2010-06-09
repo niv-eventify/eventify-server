@@ -1,0 +1,22 @@
+!!!
+%html{ :xmlns => "http://www.w3.org/1999/xhtml" }
+  %head
+    %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
+    %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
+
+  %body
+    %h1= parent.name
+    %table
+      %tr
+        %th= _("Name")
+        %th= _("Email")
+        %th= _("Mobile")
+        %th= _("RSVP")
+      - collection.each do |guest|
+        %tr
+          %td= guest.name
+          %td= guest.email
+          %td= guest.mobile_phone
+          %td= guest.rsvp_text
+    :javascript
+      window.print()

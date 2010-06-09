@@ -1,30 +1,29 @@
 /*---- clear inputs ---*/
-function clearInputs(){
-	jQuery('input:text, input:password, textarea').each(function(){
+function clearInputs(id, default_val){
+	jQuery('#' + id).each(function(){
 		var _el = jQuery(this);
-		var _val = _el.val();
 		_el.bind('focus', function(){
-			if(this.value == _val) this.value = '';
+			if(this.value == default_val) this.value = '';
 		}).bind('blur', function(){
-			if(this.value == '') this.value = _val;
+			if(this.value == '') this.value = default_val;
 		});
 	});
 	
-	jQuery('div.input-bg-alt > input').bind('focus', function(){
-		jQuery(this).parent().addClass('input-bg-alt-active');
-	}).bind('blur', function(){
-		jQuery(this).parent().removeClass('input-bg-alt-active');
-	});
-	jQuery('div.input-text-middle > input').bind('focus', function(){
-		jQuery(this).parent().addClass('input-text-middle-active');
-	}).bind('blur', function(){
-		jQuery(this).parent().removeClass('input-text-middle-active');
-	});
-	jQuery('div.input-bg-uni input').bind('focus', function(){
-		jQuery(this).parent().parent().addClass('input-bg-uni-active');
-	}).bind('blur', function(){
-		jQuery(this).parent().parent().removeClass('input-bg-uni-active');
-	});
+//	jQuery('div.input-bg-alt > input').bind('focus', function(){
+//		jQuery(this).parent().addClass('input-bg-alt-active');
+//	}).bind('blur', function(){
+//		jQuery(this).parent().removeClass('input-bg-alt-active');
+//	});
+//	jQuery('div.input-text-middle > input').bind('focus', function(){
+//		jQuery(this).parent().addClass('input-text-middle-active');
+//	}).bind('blur', function(){
+//		jQuery(this).parent().removeClass('input-text-middle-active');
+//	});
+//	jQuery('div.input-bg-uni input').bind('focus', function(){
+//		jQuery(this).parent().parent().addClass('input-bg-uni-active');
+//	}).bind('blur', function(){
+//		jQuery(this).parent().parent().removeClass('input-bg-uni-active');
+//	});
 }
 
 /*--- IE6 hover ---*/
@@ -289,6 +288,7 @@ return this.each(function(){
 			var selectBtn = replaced.find(_options.selectBtn);
 			var selectDisabled = replaced.find(_options.selectDisabled).hide();
 			var optHolder = jQuery(_options.optStructure);
+			optHolder.addClass(select.attr("id"));
 			var optList = optHolder.find(_options.optList);
 			if(select.attr('disabled')) selectDisabled.show();
 			select.find('option').each(function(){
@@ -346,7 +346,8 @@ return this.each(function(){
 						left: replaced.offset().left,
 						display: 'block'
 					});
-					//if(optHolder.children('ul').height() > 100) optHolder.children('ul').css({height:100, overflow:'auto'});
+					if (optHolder.children('ul').height() > 200) optHolder.children('ul').css({height:200, overflow:'auto'});
+					else optHolder.children('ul').css({height:'auto', overflow:'hidden'});
 				}
 				return false;
 			});
@@ -371,12 +372,11 @@ jQuery.fn.customCheckbox = function(_options){
 			if(checkbox.is(':disabled')) replaced.addClass(_options.checkboxDisabled);
 			else if(checkbox.is(':checked')) replaced.addClass(_options.checkboxChecked);
 			else replaced.addClass(_options.checkboxDefault);
-			
+
 			replaced.click(function(){
 				if(checkbox.is(':checked')) checkbox.removeAttr('checked');
 				else checkbox.attr('checked', 'checked');
 				changeCheckbox(checkbox);
-				if(typeof(checkbox.get(0).onchange) == 'function') checkbox.get(0).onchange();
 				checkbox.trigger("change");
 			});
 			checkbox.click(function(){
@@ -405,7 +405,7 @@ function initSlideEffect(){
     var _slideBlock = 'div.slide';
     var _openClassS = 'open-slide';
     var _durationSlide = 500;
-    
+
 	if (jQuery(_parentSlide).hasClass('open-slide')) jQuery(_slideBlock).css('display','block');
     jQuery(_parentSlide).each(function(){
 		if (!jQuery(this).is('.'+_openClassS)) {
@@ -460,3 +460,12 @@ jQuery(document).ready(function(){
 	jQuery('input:checkbox').customCheckbox();
 	initDrop();
 });
+
+function show_nyro_loading(func) {
+	var opts = {
+		content: '<div id="nyroModalLoading" style="position: absolute; top: 50%; left: 50%; margin-top: -155px; margin-left: -106px; width: 210px; border:1px solid #fff; height: 308px;"><a class="nyroModalClose" href="#">Cancel</a></div>'
+	};
+	if (func)
+		opts.endShowContent = func;
+	jQuery.nyroModalManual(opts);
+}

@@ -4,6 +4,8 @@ class GuestsController < InheritedResources::Base
   actions :index, :create, :update, :destroy, :edit, :show
   respond_to :js, :only => [:create, :update, :destroy, :edit]
 
+  after_filter :clear_flash
+
   # index
   # create
   # destroy
@@ -18,7 +20,7 @@ class GuestsController < InheritedResources::Base
       end
       failure.js do
         if params[:attribute]
-          render(:update) {|page| render_edit_form(page, resource, params[:attribute])}
+          render(:update) {|page| resource_edit_form(page, resource, params[:attribute], params[:true_attribute])}
         else
           render(:nothing => true)
         end

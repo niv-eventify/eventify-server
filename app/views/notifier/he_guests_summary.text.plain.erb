@@ -1,0 +1,25 @@
+<%= s_("rsvp summary|Hello %{username},") % {:username => @event.user.name} %>
+
+<%= s_("rsvp summary|Event %{name}") % {:name => @event.name} %>
+<%= @url %>
+
+<%- if @summary_since -%>
+<%= s_("rsvp summary|RSVPs summary since %{date_time}") % { :date_time => @summary_since.to_s(:isra_date) } %>
+<%- end -%>
+
+<%- Guest::RSVP_TEXT.each_with_index do |rsvp, index| -%>
+  <%- unless @guests_groups[index].blank? -%>
+
+=== <%= s_("rsvp summary|Guests that responded %{rsvp} (%{count})") % {:rsvp => s_(rsvp), :count => @guests_groups[index].size } %>
+
+    <%- @guests_groups[index].each_with_index do |guest, i| -%>
+<%= i.to_s %>. <%= [guest[:name], guest[:email], guest[:mobile_phone]].compact.join(", ") %>
+    <%- end -%>
+
+  <%- end -%>
+<%- end -%>
+
+אין צורך להשיב למייל זה.
+
+בברכה,
+צוות Eventify.

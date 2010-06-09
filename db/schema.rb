@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100506060208) do
+ActiveRecord::Schema.define(:version => 20100603172434) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -17,19 +17,10 @@ ActiveRecord::Schema.define(:version => 20100506060208) do
     t.datetime "disabled_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "popularity",  :default => 0
   end
 
   add_index "categories", ["disabled_at"], :name => "index_categories_on_disabled_at"
-
-  create_table "cellact_logs", :force => true do |t|
-    t.integer  "cellactable_id"
-    t.string   "cellactable_type"
-    t.string   "kind",             :limit => 10
-    t.string   "status",           :limit => 10
-    t.string   "wire_log",         :limit => 1024
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "contact_importers", :force => true do |t|
     t.integer  "user_id"
@@ -98,6 +89,11 @@ ActiveRecord::Schema.define(:version => 20100506060208) do
     t.string   "title_color"
     t.string   "message_color"
     t.string   "text_align"
+    t.boolean  "in_carousel",           :default => false
+    t.string   "carousel_file_name"
+    t.string   "carousel_content_type"
+    t.integer  "carousel_file_size"
+    t.datetime "carousel_updated_at"
   end
 
   add_index "designs", ["category_id"], :name => "index_designs_on_category_id"
@@ -111,22 +107,34 @@ ActiveRecord::Schema.define(:version => 20100506060208) do
     t.datetime "ending_at"
     t.string   "location_name"
     t.string   "location_address"
-    t.string   "map_link",                :limit => 2048
+    t.string   "map_link",                  :limit => 2048
     t.string   "map_file_name"
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
-    t.string   "guest_message",           :limit => 345
+    t.string   "guest_message",             :limit => 345
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stage_passed"
-    t.datetime "last_invitation_sent_at"
-    t.string   "language",                :limit => 16
+    t.string   "language",                  :limit => 16
     t.string   "host_mobile_number"
     t.string   "sms_message"
     t.datetime "rsvp_summary_send_at"
-    t.integer  "rsvp_summary_send_every",                 :default => 0
+    t.integer  "rsvp_summary_send_every",                   :default => 0
     t.datetime "last_summary_sent_at"
+    t.boolean  "allow_seeing_other_guests",                 :default => true
+    t.integer  "title_font_size",                           :default => 35
+    t.integer  "msg_font_size",                             :default => 32
+    t.string   "title_text_align"
+    t.string   "msg_text_align"
+    t.string   "font"
+    t.string   "title_color"
+    t.string   "msg_color"
+    t.integer  "sms_messages_count",                        :default => 0
+    t.boolean  "user_is_activated",                         :default => false
+    t.string   "tz",                        :limit => 128
+    t.boolean  "any_invitation_sent",                       :default => false
+    t.string   "sms_resend_message"
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"
@@ -160,6 +168,10 @@ ActiveRecord::Schema.define(:version => 20100506060208) do
     t.datetime "email_invitation_failed_at"
     t.datetime "summary_email_sent_at"
     t.string   "message_to_host"
+    t.integer  "sms_messages_count",         :default => 0
+    t.datetime "send_email_invitation_at"
+    t.datetime "send_sms_invitation_at"
+    t.boolean  "any_invitation_sent",        :default => false
   end
 
   add_index "guests", ["event_id"], :name => "index_guests_on_event_id"
@@ -216,6 +228,24 @@ ActiveRecord::Schema.define(:version => 20100506060208) do
 
   add_index "reminders", ["event_id"], :name => "index_reminders_on_event_id"
   add_index "reminders", ["send_reminder_at", "reminder_sent_at", "is_active"], :name => "dates_and_activity"
+
+  create_table "sms_messages", :force => true do |t|
+    t.integer  "guest_id"
+    t.integer  "event_id"
+    t.string   "kind",            :limit => 10
+    t.string   "sender_mobile"
+    t.string   "receiver_mobile"
+    t.string   "message"
+    t.string   "request_dump",    :limit => 2048
+    t.string   "response_dump",   :limit => 2048
+    t.boolean  "success"
+    t.datetime "sent_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sms_messages", ["event_id", "guest_id"], :name => "index_sms_messages_on_event_id_and_guest_id"
+  add_index "sms_messages", ["sent_at"], :name => "index_sms_messages_on_sent_at"
 
   create_table "takings", :force => true do |t|
     t.integer  "guest_id"

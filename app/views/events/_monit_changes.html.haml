@@ -1,0 +1,29 @@
+:javascript
+  jQuery(function(){    
+    var moinitor_names = [];
+    window.resend_invitations = false;
+    for (var i=1; i<6; i++) {
+      moinitor_names.push("event[starting_at(" + i + "i)]")
+    }
+    moinitor_names.push("event[location_name]");
+    moinitor_names.push("event[location_address]");
+    var old_values = {};
+    for (var i=0; i<moinitor_names.length; i++) {
+      old_values[moinitor_names[i]] = jQuery("[name=" + moinitor_names[i] + "]").val();
+    }
+    setInterval(function(){
+      for (var i=0; i<moinitor_names.length; i++) {
+        var v = jQuery("[name=" + moinitor_names[i] + "]").val();
+        if (old_values[moinitor_names[i]] != v) {
+          old_values[moinitor_names[i]] = v;
+          window.resend_invitations = jQuery("#resend_invitations").is(':checked');
+          if (!window.resend_invitations) {            
+            setTimeout(function(){
+              jQuery(".resend_invitaions").show();
+              jQuery.nyroModalManual({content:#{render(:partial => "resend_invitations_popup").to_json}});
+            }, 800);
+          }
+        }
+      }
+    }, 300);
+  });

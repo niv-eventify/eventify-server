@@ -4,7 +4,7 @@ describe Taking do
 
   describe "things amounts" do
     before(:each) do
-      @guest = Factory.create(:guest)
+      @guest = Factory.create(:guest_with_token)
       @thing = @guest.event.things.create(:name => "foo", :amount => 5)
     end
 
@@ -21,6 +21,29 @@ describe Taking do
       it "should auto reduce the takings amount" do
         @new_taking = @another_guest.takings.create(:amount => 5, :thing_id => @thing.id)
         @new_taking.amount.should == 3
+      end
+    end
+
+    describe "rsvp changes" do
+      before(:each) do
+        @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)
+        @thing.reload.amount_picked.should == 2
+      end
+
+      [0, 2].each do |rsvp|
+        it "should return things to stock when rsvp is #{rsvp}" do
+          @guest.rsvp = rsvp
+          @guest.save
+          @thing.reload.amount_picked.should == 0
+          @guest.takings.count.should be_zero
+        end
+      end
+
+      it "should not change things if rsvp is YES" do
+        @guest.rsvp = 1
+        @guest.save
+        @thing.reload.amount_picked.should == 2
+        @guest.takings.count.should == 1    
       end
     end
 
@@ -52,6 +75,25 @@ describe Taking do
         @taking.destroy
         @thing.reload.amount_picked.should == 0
         @thing.left_to_bring.should == 5
+      end
+
+      it "should send email to guest when taking is removed" do
+        Notifier.should_receive(:deliver_taking_removed).with(@guest, @thing)
+        @taking.destroy
+      end
+
+      it "should send email to guest when whole thing is removed" do
+        Notifier.should_receive(:deliver_taking_removed).with(@guest, @thing)
+        @thing.destroy
+      end
+
+      it "should not send email to guest if rsvp changed to no" do
+        @guest.rsvp = 1
+        @guest.save
+        @guest.rsvp = 0
+
+        Notifier.should_not_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        @guest.save
       end
     end
   end

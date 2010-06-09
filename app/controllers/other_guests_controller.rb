@@ -6,12 +6,29 @@ class OtherGuestsController < InheritedResources::Base
   before_filter :set_columns_count
 
   actions :index
-  respond_to :js
+  respond_to :js, :html
+
+  def index
+    index! do |success, failure|
+      success.html {render :layout => false}
+      success.js
+    end
+  end
 
 protected
 
   def collection
-    @collection ||= parent.guests.send(rsvp_filter).paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
+    return nil if params[:rsvp_id] && !parent.allow_seeing_other_guests?
+
+    return @collection if @collection
+
+    @collection = if !params[:query].blank?
+      Guest.search("#{params[:query]}*", :with => {:event_id => parent.id}).paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
+    elsif params[:print]
+      parent.guests.all
+    else
+      parent.guests.send(rsvp_filter).paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
+    end
   end
 
   def parent

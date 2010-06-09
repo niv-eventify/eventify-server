@@ -3,21 +3,21 @@
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
+    %meta{ :name => "title", :content => _("Online Invitations, Event Planning and Managing – Eventify")}
+    %meta{ :name => "description", :content => _("Online invitations made easy. Create & manage online invitations with templates to match any event! Plan your event in style!")}
+    %title=_("Invitation | Eventify")
     != stylesheet_link_tag 'nyroModal.full', 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
-    != javascript_include_tag 'jquery.nyroModal', 'rsvps'
+    != javascript_include_tag 'jquery.nyroModal', 'jquery.cross-slide', 'rsvps'
     /[if IE]
       != stylesheet_link_tag 'ie', :media => 'screen'
     /[if lt IE 7]
       != stylesheet_link_tag 'lt7', :media => 'screen'
   %body{ :class => body_class }
-    #envelope
-      != link_to image_tag("/images/envelope.jpg"), '#invitation', :class => "nyroModal envelope"
+    #envelope!= link_to '', '#invitation'
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}
       .background_holder
-        %img.back{:src => "#{resource.event.design.card.url}"}
-        .window{:style => "height:182px;width:186px;position:absolute;top:69px;left:195px;z-index:1"}
-          %img{:src => "/images/chicas_head.jpg", :style => "width:100%;height:100%;z-index:1"}
+        != image_tag(resource.event.design.card.url, :class => "back")
         != render(:partial => "postcard", :locals => {:event => resource.event})

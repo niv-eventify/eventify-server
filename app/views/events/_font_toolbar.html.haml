@@ -1,0 +1,28 @@
+.tools-bar{:id => "toolbar_#{toolbar_id}"}
+  .tools-bar-h
+    %form{:action => "#"}
+      %fieldset
+        %label{:for => "select_#{toolbar_id}"}
+          = _("font:")
+        %select{:id => "select_#{toolbar_id}"}
+          != add_fonts
+    .sep
+      &nbsp
+    %ul.text-align
+      %li.a-l
+        %a{:href => "#"}
+      %li.a-c
+        %a{:href => "#"}
+      %li.a-r
+        %a{:href => "#"}
+    .sep
+      &nbsp
+    %input{:id => "pallete_#{toolbar_id}", :type => "text", :size => "1", :style => "display:none;"}
+    .sep
+      &nbsp
+    .font-sel
+      %a.font-plus{:href => "#"}
+        +
+      %img.tt{:src => "/images/img-tt-en.gif", :width => "15", :height => "11", :alt => "font"}
+      %a.font-minus{:href => "#"}
+        -

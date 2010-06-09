@@ -14,7 +14,7 @@ protected
   include ERB::Util # to use h() in flashes
 
   def all_enabled_categories
-    @all_enabled_categories ||= Category.enabled.all
+    @all_enabled_categories ||= Category.enabled.has_designs.all.sort_by(&:name)
   end
   helper_method :all_enabled_categories
 
@@ -26,10 +26,6 @@ protected
   end
 
   alias :authenticate_translations_admin :require_admin
-
-  def remove_flash
-    flash[:notice] = nil
-  end
 
   def adjust_format_for_iphone
     request.format = :iphone if iphone_request?
@@ -48,5 +44,27 @@ protected
 
   def clear_flash
     flash[:notice] = nil
+  end
+
+  def default_locale
+    "he"
+  end
+
+  def detect_locale_from(source)
+    case source
+    when :params
+      params[:locale]
+    when :session
+      logger.debug "Session: #{session.inspect}"
+      session[:locale]
+    when :cookie
+      cookies[:locale]
+    when :domain
+      parse_host_and_port_for_locale[0]
+    when :header, :default
+      default_locale
+    else
+      raise "unknown source #{source}"
+    end
   end
 end

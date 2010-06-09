@@ -1,0 +1,12 @@
+- cid = contact.respond_to?(:uid) ? contact.uid : contact.id
+%tr[contact]
+  %td!= check_box_tag "contact[#{cid}][import]", "1", false, :class => "checkable"
+  %td
+    = contact.name
+    != hidden_field_tag "contact[#{cid}][name]", contact.name
+  %td
+    != h(contact.email)  || "&nbsp;"
+    != hidden_field_tag "contact[#{cid}][email]", contact.email
+  %td
+    != h(contact.mobile) || "&nbsp;"
+    != hidden_field_tag "contact[#{cid}][mobile]", contact.mobile

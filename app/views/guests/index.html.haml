@@ -1,11 +1,12 @@
+- @page_title=_("Invite | Eventify")
 - @content_css_class = "stars-bg stage-3"
 - content_for :head do
-  != javascript_include_tag("jquery.select_skin", "jquery.floatheader.min")
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag("jquery.floatheader.min", "guests", "jquery.nyroModal")
   :javascript
     jQuery(function(){
       jQuery("table#guests").floatHeader();
     });
-  != javascript_include_tag("guests")
 
 - events_content_section(3, @event) do
   .info-area
@@ -20,16 +21,30 @@
           %h3= _("Add from existing contact list:")
           != render(:partial => "import")
 
+          .cancel-form
+            .input-area
+              != text_field_tag "search_guests", _('search'), :id => "search_guests", :class => "i-text"
+              != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn", :id => "cancel_search"
+              :javascript
+                jQuery(function(){
+                  jQuery("#search_guests").click(function(){
+                    if (jQuery(this).val() == '#{_('search')}'){jQuery(this).val('');}
+                  }).blur(function(){
+                    if (jQuery(this).val() == ''){jQuery(this).val('#{_('search')}');}
+                  })
+                });
+                jQuery("#cancel_search").click(function(){
+                  jQuery("tr.guest").show();
+                  jQuery("#search_guests").val("#{_('search')}");
+                });
+
           %h3= _("Add manually:")
-          %p
-            = _("Filter by RSVP:")
+          %p.rsvp-filter
+            %strong= _("Filter by RSVP:")
             != link_to_function _("All"), "", :id => "filter_all"
             != link_to_function _("Yes"), "", :id => "filter_yes"
             != link_to_function _("No"), "", :id => "filter_no"
             != link_to_function _("May Be"), "", :id => "filter_maybe"
-            = _("Search:")
-            != text_field_tag "search_guests", "", :id => "search_guests"
-            != link_to_function _("X"), "", :id => "cancel_search"
 
           %table#guests.info-table
             != render(:partial => "guests_header", :locals => {:check_all => true})

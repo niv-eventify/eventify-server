@@ -1,7 +1,11 @@
-- @content_css_class = "stars-bg stage-3"
+- @page_title = _("Details | Eventify")
+- @content_css_class = "stars-bg stage-3 stage-2"
 - params[:wizard] = "true"
 
 - content_for(:head) do
-  != stylesheet_link_tag "calendar"
-  != javascript_include_tag "mootools", "calendar", "fieldSelection", "stage2"
+  != stylesheet_link_tag "calendar", "nyroModal.full", "colorPicker", "rsvps"
+  != javascript_include_tag "mootools", "calendar", "fieldSelection", "jquery.nyroModal", "jquery.colorPicker", "stage2", "rsvps"
 != render(:partial => "event_form")
+!= render(:partial => "preview")
+!= render(:partial => "font_toolbar", :locals => {:toolbar_id => "title"})
+!= render(:partial => "font_toolbar", :locals => {:toolbar_id => "msg"})

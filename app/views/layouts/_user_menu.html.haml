@@ -32,17 +32,14 @@
       .personal-menu-c
         %strong= _("Hello, %{user}") % {:user => current_user.name}
 
-        - if current_user.activated_at
-          %p
-            - link_to_next_event
-          .personal-menu-h
-            .personal-menu-h-frame
-              .opener!= link_to_function(_("My Page"), "jQuery('.menu-list').toggle()")
-              %ul.menu-list
-                %li!= link_to _("Contacts"), contacts_path
-                %li!= link_to content_tag(:strong, _("Events")), events_path
-                %li!= link_to _("Profile"), profile_path
-                %li!= link_to _("Exit"), user_session_path, :method => :delete
-        - else
-          %p &nbsp;
+        %p
+          - link_to_next_event
+        .personal-menu-h
+          .personal-menu-h-frame
+            .opener!= link_to_function(_("My Page"), "jQuery('.menu-list').toggle()")
+            %ul.menu-list
+              %li!= link_to _("Contacts"), contacts_path
+              %li!= link_to content_tag(:strong, _("Events")), events_path
+              %li!= link_to _("Profile"), profile_path
+              %li!= link_to _("Exit"), user_session_path, :method => :delete
       .personal-menu-b &nbsp;

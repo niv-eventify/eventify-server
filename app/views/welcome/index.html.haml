@@ -1,10 +1,26 @@
+- @page_title=_("Home | Eventify")
 - content_for(:head) do
-  != stylesheet_link_tag "contentflow_src", "nyroModal.full"
-  != javascript_include_tag "contentflow", "jquery.mousewheel.min", "carousel", "jquery.nyroModal"
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag "jquery.mousewheel.min", "AC_OETags.js", "jquery.nyroModal"
+  :javascript
+    // -----------------------------------------------------------------------------
+    // Globals
+    // Major version of Flash required
+    var requiredMajorVersion = 9;
+    // Minor version of Flash required
+    var requiredMinorVersion = 0;
+    // Minor version of Flash required
+    var requiredRevision = 124;
+    // -----------------------------------------------------------------------------
 
 != render(:partial => 'promo')
+#startNow
+  %a{:href => "#{url_for(lobby_path)}"}
+    %span
+      != _("Start Now")
+    %em
 != render(:partial => 'container123')
 
 .popular
-  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories.first, :surround => "col-1"})
-  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories.last, :surround => "col-2"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[0], :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[1], :surround => "col-2"})

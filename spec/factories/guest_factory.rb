@@ -11,16 +11,20 @@ Factory.define :guest do |guest|
 
   guest.association :event, :factory => :event
   guest.summary_email_sent_at 10.minutes.ago
+  guest.send_email 1
 end
 
-
+Factory.define :guest_from_event_with_mobile, :parent => :guest do |guest|
+  guest.association :event, :factory => :event_with_mobile
+end
 
 Factory.define :guest_with_token, :parent => :guest do |guest|
   guest.email_token "token"
 end
 
-Factory.define :guest_with_mobile, :parent => :guest do |guest|
-  guest.mobile_phone "0500000000"
+Factory.define :guest_with_mobile, :parent => :guest_from_event_with_mobile do |guest|
+  guest.mobile_phone "050-1234567"
+  guest.send_sms  1
 end
 
 
@@ -33,7 +37,12 @@ end
 Factory.define :guest_summary_not_sent, :parent => :guest do |guest|
   guest.name "New Guest"
   guest.email "new@guest.com"
-  guest.mobile_phone "012345678"
+  guest.mobile_phone "0501234567"
   guest.summary_email_sent_at nil
   guest.rsvp  1
+end
+
+Factory.define :guest_with_sent_inviations, :parent => :guest_summary_not_sent do |guest|
+  guest.email_invitation_sent_at Time.now.utc
+  guest.sms_invitation_sent_at Time.now.utc
 end

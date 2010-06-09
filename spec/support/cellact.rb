@@ -4,8 +4,11 @@ module Cellact
       @from, @user, @password, @sender = from, user, password, sender
     end
 
-    def send_sms(mobile, text, parent, &block)
-      return Sender.should_succeed?
+    def send_sms(mobile, text)
+      flow = FlowLogger.new
+      yield(flow)
+
+      flow.call(:response, "", nil, Sender.should_succeed?)
     end
 
     def self.should_succeed?

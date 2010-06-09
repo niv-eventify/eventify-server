@@ -1,0 +1,8 @@
+.toolbar.toolbar_preview
+  .toolbar-bg
+    %strong.toolbar-logo
+      != link_to "Eventify", "#"
+    != link_to content_tag(:span, _("Event Details")), "#", :class => "t-b-btn t-b-btn-1"
+    != link_to content_tag(:span, _("to Calendar")), "#", :class => "t-b-btn t-b-btn-2"
+    != link_to content_tag(:span, _("Map")), "#", :class => "t-b-btn t-b-btn-3"
+    != link_to content_tag(:span, _("RSVPS")), "#", :class => "t-b-btn t-b-btn-4"

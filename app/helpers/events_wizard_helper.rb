@@ -37,22 +37,36 @@ module EventsWizardHelper
         haml_tag(:div, :class => "b")
       else        
         haml_tag(:div, :class => "b") do
-          haml_tag(:div, :class => "btns #{4 == stage_number ? "three-btns" : ""}") do
+          haml_tag(:div, :class => "btns #{extra_buttons_class(stage_number)}") do
             if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
               haml_concat wizard_prev_link(prev_lnk)
             end
-
-            if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
-              haml_concat wizard_next_link(next_link)
-            end
           
+            if 2 == stage_number
+              haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")
+            end
             if 4 == stage_number #last
-              haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn nyroModal")
+              haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")
               haml_concat link_to(_("Finish"), edit_invitation_path(event), :class => "finish-btn")
+            else
+              if next_link = next_link_opts || (stage_link(stage_number + 1, event) && {:href => stage_link(stage_number + 1, event)})
+                haml_concat wizard_next_link(next_link)
+              end
             end
           end
         end
       end
+    end
+  end
+
+  def extra_buttons_class(stage_number)
+    case stage_number
+    when 4
+      "three-btns"
+    when 2
+      "tree-buttons-preview"
+    else
+      ""
     end
   end
 

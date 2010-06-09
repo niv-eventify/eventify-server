@@ -1,17 +1,23 @@
+- @page_title=_("RSVP | Eventify")
+- content_for(:head) do
+  != stylesheet_link_tag "rsvps", "nyroModal.full"
+  != javascript_include_tag "jquery.nyroModal", "jquery.numeric.min"
+
 - @skip_header = @skip_footer = true; @extra_body_class = "alt-page"
 
 .content-area
   != render(:partial => 'sidebar')
   #content-column
     != render(:partial => 'info')
-    .content-box
-      .holder
-        .frame
-          .content-box-heading
-            %h3= _("Guests")
-          .tabs-container.other-guests
-            = _("Loading guests...")
-:javascript
-  jQuery(function(){
-    jQuery.ajax({url: #{rsvp_other_guests_path(resource.email_token, :columns_count => 3).to_json}, type:'get', dataType:'script'});
-  });
+    - if resource.event.allow_seeing_other_guests?
+      .content-box
+        .holder
+          .frame
+            .content-box-heading
+              %h3= _("Guests")
+            .tabs-container.other-guests
+              = _("Loading guests...")
+      :javascript
+        jQuery(function(){
+          jQuery.ajax({url: #{rsvp_other_guests_path(resource.email_token, :columns_count => 3).to_json}, type:'get', dataType:'script'});
+        });

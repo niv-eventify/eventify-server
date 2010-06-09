@@ -1,0 +1,25 @@
+- content_for(:head) do
+  != stylesheet_link_tag "nyroModal.full"
+  != javascript_include_tag "jquery.nyroModal"
+
+.categories-box
+  .holder
+    %p
+      = _("Eventify has dozens of designs special your events")
+    .foot-lists.lists-h
+      - categories_footer
+.popular
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[0], :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[1], :surround => "col-2"})
+.popular
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[2], :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[3], :surround => "col-2"})
+.popular
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[4], :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[5], :surround => "col-2"})
+.popular
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[6], :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[7], :surround => "col-2"})
+.popular
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[8], :surround => "col-1"})
+  != render(:partial => "categories/two_designs", :locals => {:category => @popular_categories[9], :surround => "col-2"})

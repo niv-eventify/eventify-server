@@ -1,3 +1,83 @@
+
+@font-face {
+    font-family: "סימן קריאה";
+    src: url("/fonts/ExclamReg.eot");
+    src: local("exclam"),local("exclamregular"),
+      url("/fonts/ExclamReg.TTF") format("truetype");
+}
+
+@font-face {
+	font-family: 'אינפרא';
+	src: url('/fonts/infra_regular-webfont.eot');
+	src: local('Infra'), local('Infra-Regular'), url('/fonts/infra_regular-webfont.woff') format('woff'), url('/fonts/infra_regular-webfont.ttf') format('truetype'), url('/fonts/infra_regular-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'כוס חלב';
+	src: url('/fonts/aglassofmilkreg-webfont.eot');
+	src: local('AGlassOfMilkReg'), local('AGlassOfMilkReg'), url('/fonts/aglassofmilkreg-webfont.woff') format('woff'), url('/fonts/aglassofmilkreg-webfont.ttf') format('truetype'), url('/fonts/aglassofmilkreg-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'בלנדר';
+	src: url('/fonts/blenderbold-webfont.eot');
+	src: local('Blender'), local('Blender-Bold'), url('/fonts/blenderbold-webfont.woff') format('woff'), url('/fonts/blenderbold-webfont.ttf') format('truetype'), url('/fonts/blenderbold-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'קריסטייל';
+	src: url('/fonts/cristyle-webfont.eot');
+	src: local('Cristyle'), local('Cristyle'), url('/fonts/cristyle-webfont.woff') format('woff'), url('/fonts/cristyle-webfont.ttf') format('truetype'), url('/fonts/cristyle-webfont.svg#webfontos4qb89T') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'ספידמן';
+	src: url('/fonts/speedmanbold-webfont.eot');
+	src: local('SpeedMan'), local('SpeedMan-Bold'), url('/fonts/speedmanbold-webfont.woff') format('woff'), url('/fonts/speedmanbold-webfont.ttf') format('truetype'), url('/fonts/speedmanbold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'קרטיב קרח';
+	src: url('/fonts/kartivkerah-webfont.eot');
+	src: local('Kartiv'), local('Kartiv-Kerah'), url('/fonts/kartivkerah-webfont.woff') format('woff'), url('/fonts/kartivkerah-webfont.ttf') format('truetype'), url('/fonts/kartivkerah-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'מכבי בלוק';
+	src: url('/fonts/maccabiblockbold-webfont.eot');
+	src: local('MaccabiBlock'), local('MaccabiBlock-Bold'), url('/fonts/maccabiblockbold-webfont.woff') format('woff'), url('/fonts/maccabiblockbold-webfont.ttf') format('truetype'), url('/fonts/maccabiblockbold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'פלסטיק';
+	src: url('/fonts/plastic_bold-webfont.eot');
+	src: local('Plastic'), local('Plastic-Bold'), url('/fonts/plastic_bold-webfont.woff') format('woff'), url('/fonts/plastic_bold-webfont.ttf') format('truetype'), url('/fonts/plastic_bold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'רענן';
+	src: url('/fonts/raananbold-webfont.eot');
+	src: local('RaananBold'), local('RananBold'), url('/fonts/raananbold-webfont.woff') format('woff'), url('/fonts/raananbold-webfont.ttf') format('truetype'), url('/fonts/raananbold-webfont.svg#webfontFibdePUJ') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 .background_holder {
 	margin:0 auto;
 	width:900px;
@@ -9,33 +89,25 @@
 	z-index: 50;
 	position:relative;
 }
-.title_holder {
-	font-size: 32px;
-}
 .title {
 	position: relative;
-}
-.msg_holder {
-	font-size: 30px;
 }
 .title_holder, .msg_holder {
 	position: absolute;
 	z-index: 100;
-}
-.title_holder:hover, .msg_holder:hover {
-	border:1px solid blue;
 }
 .hebrew .title_holder, .hebrew .msg_holder {
 	direction: rtl;
 }
 
 #envelope {
+	width:578px;
+	height:572px;
+	background-image: url('/images/envelope1.png');
 	text-align: center;
-	margin-top: 10%;
+	margin: 0 auto;
 }
-.envelope img {
-	border: 0;
-}
+
 .toolbar {
 	position: absolute;
 	bottom: 0;
@@ -44,6 +116,10 @@
 	width:688px;
 	height:64px;
 	z-index: 300;
+}
+.toolbar_preview{
+	position: fixed;
+	display: none;
 }
 .toolbar a{
 	color:#523733;
@@ -79,13 +155,17 @@
 	text-align: center;
 	font-weight: bold;
 	color: #2f261f;
-	font-size: 12px;
+	font-size: 13px;
 	line-height: 12px;
 	float: right;
 	margin: 0 17px;
 	display: inline;
+	font-family: helvetica;
 }
-.hebrew .t-b-btn{float: left;}
+.hebrew .t-b-btn{
+	float: left;
+	font-size: 18px;
+}
 .t-b-btn span{
 	cursor: pointer;
 	display: block;
@@ -134,10 +214,22 @@
 	background: url(/images/t-b-btn-4-en.gif) no-repeat 0 100%;
 }
 .hebrew .t-b-btn-1 {background: url(/images/t-b-btn-1.gif) no-repeat;}
-.hebrew .t-b-btn-1 span {background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-1 span {
+	background: url(/images/t-b-btn-1.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
 .hebrew .t-b-btn-2 {background: url(/images/t-b-btn-2.gif) no-repeat;}
-.hebrew .t-b-btn-2 span {background: url(/images/t-b-btn-2.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-2 span {
+	background: url(/images/t-b-btn-2.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
 .hebrew .t-b-btn-3 {background: url(/images/t-b-btn-3.gif) no-repeat;}
-.hebrew .t-b-btn-3 span {background: url(/images/t-b-btn-3.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-3 span {
+	background: url(/images/t-b-btn-3.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}
 .hebrew .t-b-btn-4 {background: url(/images/t-b-btn-4.gif) no-repeat;}
-.hebrew .t-b-btn-4 span {background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;}
+.hebrew .t-b-btn-4 span {
+	background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;
+	font-family: 'רענן';
+}

@@ -31,13 +31,17 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :other_guests
     event.resource  :ical, :controller => "ical"
     event.resources :takings
+    event.resources :guest_importers
   end
   map.resources :summary, :controller => "summaries"
   map.resources :invitations
   map.resources :rsvps do |rsvp|
     rsvp.resources :other_guests
     rsvp.resource   :ical, :controller => "ical"
+    rsvp.resources :takings
   end
   map.resources :takings
   map.resources :uploaded_pictures
+  map.lobby "/lobby", :controller => "lobby", :action => "index"
+  map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
 end

@@ -9,7 +9,7 @@ module EventsHelper
 
   def event_date_time_select_combo(f, attribute, js_opts = {})
     haml_tag(:li, :class => "#{attribute}_date_select") do
-      haml_tag :label, _("Date")
+      haml_tag :label, _("Date") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_tag :div, :class => "input-bg-alt" do
         hidden_date_fields(f, attribute)
         haml_tag :input, :class => "input-text", :id => "#{attribute}_mock", :name => "#{attribute}_mock", :type => "text"
@@ -17,7 +17,7 @@ module EventsHelper
       haml_concat f.inline_errors_for(attribute)
     end
     haml_tag(:li, :class => "#{attribute}_time_select") do
-      haml_tag :label, _("Time")
+      haml_tag :label, _("Time") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true, :prompt => {:hour => "&nbsp;", :minute => "&nbsp;"}, :minute_step => 15}, :class => "short")
       haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
       yield
@@ -66,7 +66,7 @@ module EventsHelper
   end
 
   def event_input_text(f, attribute, label, hint)
-    opts = {:label => label, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}},
+    opts = {:label => label, :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}},
       :required => nil, :hint => hint, :as => :text }
     haml_concat f.input(attribute, opts)
   end
@@ -75,32 +75,54 @@ module EventsHelper
     content_tag(:div, "&nbsp;", :class => "divider")
   end
 
-  def stage2_message_css(design)
-    design.stage2_preview_dimensions.keys.map {|k| "#{k}:#{design.stage2_preview_dimensions[k]}"}.join(";")
+  def stage2_message_css(event)
+    event.design.stage2_preview_dimensions.keys.map {|k| "#{k}:#{event.design.stage2_preview_dimensions[k]}"}.join(";")
   end
 
-  def stage2_title_css(design)
-    design.stage2_title_dimensions.keys.map {|k| "#{k}:#{design.stage2_title_dimensions[k]}"}.join(";")
+  def stage2_free_text_css(event)
+    msg_params = {}
+    msg_params["font-family"] = event.font unless event.font.blank?
+    msg_params[:color] = event.msg_color unless event.msg_color.blank?
+    msg_params["font-size"] = "#{(event.msg_font_size/1.6).to_int}px" unless event.msg_font_size.blank?
+    msg_params["text-align"] = event.msg_text_align unless event.msg_text_align.blank?
+    msg_params.keys.map {|k| "#{k}:#{msg_params[k]}"}.join(";")
+  end
+
+  def stage2_title_css(event)
+    title_params = event.design.stage2_title_dimensions
+    title_params["font-family"] = event.font if not event.font.blank?
+    title_params[:color] = event.title_color if not event.title_color.blank?
+    title_params["font-size"] = "#{(event.title_font_size/1.6).to_int}px" if not event.title_font_size.blank?
+    title_params["text-align"] = event.title_text_align if not event.title_text_align.blank?
+    title_params.keys.map {|k| "#{k}:#{title_params[k]}"}.join(";")
   end
 
   def event_sent_status(event)
-    return _("(sent)") if event.invitations_to_send_counts[:total].zero? && event.last_invitation_sent_at
-    link_to _("(not sent)"), edit_invitation_path(event), :class => "not-sent"
+    4 == event.stage_passed ? _("(sent)") : link_to(_("(not sent)"), edit_invitation_path(event), :class => "not-sent")
   end
 
   def months_arr
     javascript_tag("stage2.months_arr = ['" + _("en.date.abbr_month_names").join("','") + "'];")
   end
-  
+
   def crop_preview_css
-  	x_ratio = (900 / 561)
-  	y_ratio = (600 / 374)
-  	top = (37)
-  	left = 195 / x_ratio
-  	width = 186 / x_ratio
-  	height = 182 / y_ratio
+    x_ratio = (900 / 561)
+    y_ratio = (600 / 374)
+    top = (37)
+    left = 195 / x_ratio
+    width = 186 / x_ratio
+    height = 182 / y_ratio
     "top:#{top}px;left:#{left}px;width:#{width}px;height:#{height}px;"
   end
+
+  def add_fonts()
+    if current_locale == "he"
+      options_for_select(["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן","Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
+    elsif current_locale == "en"
+      options_for_select(["Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
+    end
+  end
+
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT

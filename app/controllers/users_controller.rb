@@ -9,7 +9,7 @@ class UsersController < InheritedResources::Base
     user.is_admin = true if User.count.zero?
     if user.save_without_session_maintenance
       user.deliver_activation_instructions!
-      flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+      flash[:notice] = _("Your account has been created. Please check your e-mail for your account activation instructions!")
       respond_to do |wants|
         wants.html do
           redirect_to "/"
