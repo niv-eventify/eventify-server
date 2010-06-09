@@ -1,16 +1,16 @@
 page << "jQuery('.other-guests').html(#{render(:partial => "index").to_json})"
 page << <<-JAVASCRIPT
   jQuery(".show-guest-message").click(function(){
-    var color = $(this).hasClass('rsvp-yes') ? "#3A9925" : $(this).hasClass('rsvp-maybe') ? "#DD6829" : $(this).hasClass('rsvp-no') ? "#BB3131" : "black";
-    var domid = jQuery(this).attr("href");
+    var color = jQuery(this).hasClass('rsvp-yes') ? "#3A9925" : jQuery(this).hasClass('rsvp-maybe') ? "#DD6829" : jQuery(this).hasClass('rsvp-no') ? "#BB3131" : "black";
+    var domid = jQuery(this).attr("dom_id");
     var content = jQuery(domid).html();
     jQuery.nyroModalManual({
       content: "<div class='guest-message'>" + content + "</div>",
       minWidth:200,
       minHeight:70,
       cssOpt: {
-        'wrapper':{
-          border: '6px solid ' + color
+        wrapper:{
+          border: ('6px solid ' + color)
         }
       }
     });

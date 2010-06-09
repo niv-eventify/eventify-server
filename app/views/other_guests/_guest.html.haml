@@ -12,7 +12,7 @@
       - if guest.message_to_host.length < 11
         = guest.message_to_host
       - else
-        != link_to h(guest.message_to_host.utf_snippet), "##{dom_id(guest)}", :class => "show-guest-message #{rsvp_status_class(guest.rsvp)}"
+        != link_to h(guest.message_to_host.utf_snippet), "", :dom_id => "##{dom_id(guest)}", :class => "show-guest-message #{rsvp_status_class(guest.rsvp)}"
 
 %div[guest]{:style => "display:none"}
   %h3
