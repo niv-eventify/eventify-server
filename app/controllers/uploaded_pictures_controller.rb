@@ -13,6 +13,13 @@ class UploadedPicturesController < InheritedResources::Base
     respond_to do |format|
       if @uploaded_picture.save
         flash[:notice] = _("Picture was successfully uploaded")
+        if @uploaded_picture.event_id.to_i == 0
+          session[:uploaded_picture_ids] = session[:uploaded_picture_ids] || []
+          session[:uploaded_picture_ids] << @uploaded_picture.id
+          @uploaded_pictures = UploadedPicture.find(session[:uploaded_picture_ids])
+        else
+          @uploaded_pictures = UploadedPicture.find_all_by_event_id(@uploaded_picture.event_id)
+        end
         format.js do
           responds_to_parent do
             render :index

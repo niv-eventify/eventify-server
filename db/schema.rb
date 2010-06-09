@@ -289,11 +289,12 @@ ActiveRecord::Schema.define(:version => 20100603172434) do
 
   create_table "uploaded_pictures", :force => true do |t|
     t.integer  "event_id"
-    t.string   "file_name"
-    t.string   "content_type"
-    t.integer  "file_size"
-    t.datetime "updated_at"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

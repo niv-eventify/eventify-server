@@ -21,6 +21,7 @@ class DesignsController < InheritedResources::Base
       design = Design.find(params[:design_id])
       @category = Category.find(params[:category_id])
       @event = Event.new(:category => @category, :design => design)
+      @uploaded_pictures = UploadedPicture.find(session[:uploaded_picture_ids] || [])
     end
   end
 

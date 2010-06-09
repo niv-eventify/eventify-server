@@ -1,2 +1,2 @@
-page << "jQuery.nyroModalRemove()"
-page << "jQuery('.holder ul').html(#{render(:partial => "uploaded_pictures")})"
+page << 'jQuery.nyroModalRemove();'
+page.replace_html(".holder ul", :partial => 'uploaded_pictures')

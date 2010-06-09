@@ -765,3 +765,6 @@ p.takings-changed {
 .links a{
 	color: blue;
 }
+.next-g-btn, .prev-g-btn {
+	display: none;
+}
