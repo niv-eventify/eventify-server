@@ -9,6 +9,6 @@
   #free_text.free_text{:style => stage2_free_text_css(event)}
     != (h(event.guest_message) || "").gsub("\n", "<br/>")
 - for window in event.design.windows
-  .window{:style => "#{window_css(window, 1.6)};position:absolute;border: 1px dashed red;"}
+  .window{:style => "#{window_css(window, 1.6)};"}
 .crop_preview{:style => "#{crop_preview_css}position:absolute;overflow:hidden;direction:ltr;z-index:1"}
 

@@ -1,2 +1,3 @@
 page << 'jQuery.nyroModalRemove();'
 page.replace_html(".holder ul", :partial => 'uploaded_pictures')
+page << 'stage1.initDragAndDrop();'

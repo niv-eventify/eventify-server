@@ -771,3 +771,10 @@ p.takings-changed {
 .stage-2 .window{
 	display: none;
 }
+.window{
+	position:absolute;
+	border: 1px dashed red;
+}
+.window.green{
+	border: 1px dashed green;
+}

@@ -13,6 +13,18 @@ var stage1 = {
 				marginTop: '-' + Math.round(ry * coords.y) + 'px'
 			});
 		}
+	},
+	initDragAndDrop: function() {
+		$(".pic_thumb").draggable({
+			opacity: 0.7,
+			helper: 'clone',
+			appendTo: 'body'
+		});
+		$(".window").droppable({
+			drop: function(event, ui) {
+				$(this).addClass('green');
+			}
+		});
 	}
 }
 
@@ -21,6 +33,7 @@ $(document).ready(function(){
 	$("a.nyroModal.uploadLink").nyroModal({
 		minHeight: 270
 	});
+	stage1.initDragAndDrop();
 //    $.get("/uploaded_pictures",function(data){
 //    	alert(data);
 //	});
