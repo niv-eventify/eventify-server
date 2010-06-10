@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100603172434) do
+ActiveRecord::Schema.define(:version => 20100610055804) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -322,5 +322,15 @@ ActiveRecord::Schema.define(:version => 20100603172434) do
   add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
   add_index "users", ["single_access_token"], :name => "index_users_on_single_access_token"
+
+  create_table "windows", :force => true do |t|
+    t.integer  "design_id"
+    t.integer  "top_x"
+    t.integer  "top_y"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

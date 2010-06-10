@@ -42,6 +42,9 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :takings
   map.resources :uploaded_pictures
+  map.resources :designs do |design|
+    design.resources :windows
+  end
   map.lobby "/lobby", :controller => "lobby", :action => "index"
   map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
 end

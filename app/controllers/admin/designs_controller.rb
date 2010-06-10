@@ -2,6 +2,12 @@ class Admin::DesignsController < InheritedResources::Base
   before_filter :require_admin
   actions :new, :edit, :create, :update, :index, :destroy, :show
 
+  def show
+    @design = Design.find(params[:id])
+    @windows = @design.windows
+    super
+  end
+
   def create
     @design = Design.new(params[:design])
     @design.creator_id = current_user.id

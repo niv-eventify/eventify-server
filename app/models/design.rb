@@ -1,6 +1,7 @@
 class Design < ActiveRecord::Base
   belongs_to :category
   belongs_to :creator, :class_name => "User"
+  has_many :windows
 
   validates_presence_of :category, :text_top_x, :text_top_y, :text_width, :text_height
   validates_numericality_of :text_top_x, :text_top_y, :text_width, :text_height

@@ -33,7 +33,21 @@ font:
 = @design.font
 text align: 
 = @design.text_align
-  
+
+%h4 windows
+!= link_to "New Window", new_design_window_path(@design)
+%table
+  %tr
+    %th ID
+    %th Top X
+    %th Top Y
+    %th Width
+    %th Height
+    %th &nbsp;
+    %th &nbsp;
+  - for window in @windows
+    != render(:partial => "windows/window",:locals => {:window => window, :design => @design})
+
 %h4 Post card
 .background_holder{:style => "position:relative;width:900px;height:600px;border:1px solid #666" }
   %img.back{:src => "#{@design.card.url}"}
