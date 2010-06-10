@@ -12,8 +12,10 @@
             %dt= _("Where:")
             %dd= resource.event.location_name
 
-          %dt= _("When:")
-          %dd= resource.event.starting_at.to_s(:isra_date_time)
+          %dt= _("Date:")
+          %dd= resource.event.starting_at.to_s(:isra_date)
+          %dt= _("Time")
+          %dd= resource.event.starting_at.to_s(:isra_time)
 
           - unless resource.event.location_address.blank?
             %dt= _("Address:")

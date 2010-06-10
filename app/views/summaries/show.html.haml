@@ -19,8 +19,10 @@
               - unless @event.location_name.blank?
                 %dt= _("Where:")
                 %dd= @event.location_name
-              %dt= _("When:")
-              %dd= @event.starting_at.to_s(:isra_date_time)
+              %dt= _("Date:")
+              %dd= @event.starting_at.to_s(:isra_date)
+              %dt= _("Time")
+              %dd= @event.starting_at.to_s(:isra_time)
               - unless @event.location_address.blank?
                 %dt= _("Address:")
                 %dd= @event.location_address
