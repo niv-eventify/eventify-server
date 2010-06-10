@@ -5,6 +5,7 @@ class EventsController < InheritedResources::Base
 
   before_filter :set_event, :only => [:edit, :update, :show]
   around_filter :set_event_time_zone, :only => [:edit, :update, :show]
+  after_filter :set_uploaded_pictures, :only => :create
 
   actions :create, :new, :edit, :update, :index, :show
 
@@ -90,6 +91,12 @@ protected
   def set_design_and_category
     @design = Design.available.find(params[:design_id])
     @category = Category.enabled.find(params[:category_id])
+  end
+
+  def set_uploaded_pictures
+    UploadedPicture.find(session[:uploaded_picture_ids]).each do |pic|
+      pic.update_attribute(:event, @event)
+    end
   end
 
   def past_events?
