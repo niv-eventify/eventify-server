@@ -57,3 +57,5 @@ text align:
     - unless @design.is_seperated_title?
       - title_holder(@design, 'relative')
     Invitation message goes here
+  - for window in @windows
+    .window{:style => "#{window_css(window)};position:absolute;border: 1px dashed red;"}

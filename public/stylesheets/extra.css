@@ -768,3 +768,6 @@ p.takings-changed {
 .next-g-btn, .prev-g-btn {
 	display: none;
 }
+.stage-2 .window{
+	display: none;
+}
