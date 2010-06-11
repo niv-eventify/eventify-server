@@ -1,0 +1,8 @@
+%tr
+  %td= window.id
+  %td= window.top_x
+  %td= window.top_y
+  %td= window.width
+  %td= window.height
+  %td!= link_to "Edit", edit_design_window_path(design,window)
+  %td!= link_to "Delete", design_window_path(design,window), :method => :delete, :confirm => "Are you sure?"

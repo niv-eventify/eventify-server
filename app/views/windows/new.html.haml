@@ -1,0 +1,9 @@
+%h1 New Window
+
+- semantic_form_for(@window, :live_validations => false, :url => design_windows_path) do |f|
+  = f.object.errors.on(:base)
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Save"
+  != link_to _("Cancel"), admin_design_path(@design)

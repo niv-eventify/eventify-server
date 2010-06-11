@@ -1,0 +1,8 @@
+%h1 Edit Window
+
+- semantic_form_for(:window, :live_validations => false, :url => design_window_path(@design,@window), :html => {:method => :put}) do |f|
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Save"
+  != link_to _("Cancel"), admin_design_path(@design)
