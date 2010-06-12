@@ -2,9 +2,13 @@
 <body style="direction: rtl;">
 שלום <%= h(@guest.name)%>,
 <br/><br/>
-קיבלת הזמנה מ<%= h(@guest.event.user.name) %> ל <%= "\"#{h(@guest.event.name)}\"" %>.
-<br/><br/>
-לפתיחת ההזמנה יש ללחוץ על המעטפה.
+רצינו לעדכן אותך כי הארוע של <%= h(@guest.event.user.name) %>: <%= "\"#{h(@guest.event.name)}\"" %>
+<br/>
+יתקיים בתאריך <%= h(@guest.event.starting_at.to_s(:isra_date)) %> בשעה <%= h(@guest.event.starting_at.to_s(:isra_time)) %> ב <%= h(@guest.event.location) %>
+<br/>
+ולא כפי שנקבע קודם לכן.
+<br/>
+לצפייה בהזמנה יש ללחוץ על המעטפה.
 <br/>
 <%= link_to(image_tag("http://eventify.co.il/images/envelope.jpg", :style => "border:0"), @url) %>
 <br/><br/>
