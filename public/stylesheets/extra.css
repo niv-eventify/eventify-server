@@ -305,8 +305,8 @@ div.flash.notice {
 }
 #startNow a span{
 	float:left;
-	padding: 2px 15px 0px 20px;
-	margin-left:30px;
+	padding: 2px 10px 0px 20px;
+	margin-left:27px;
 	background:url("/images/bg-start-l-rtl.png") no-repeat scroll 0 0 transparent;
 }
 .hebrew #startNow a span{
@@ -756,4 +756,8 @@ p.takings-changed {
 }
 .links a{
 	color: blue;
+}
+.main-box h1{
+	font-size: 1.95em;
+	margin: 5px 0 0;
 }

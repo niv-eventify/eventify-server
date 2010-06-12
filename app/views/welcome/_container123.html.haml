@@ -1,7 +1,8 @@
 .container
   .main-box
     %h1= _("Our site allows you to manage your events easily and have fun")
-    %p= _("Choose a cool invite, or even upload your own photo. Add event details, with a map and a personal message, and send to all your friends through email, sms and facebook!")
+    %p
+      != main_box_text
   .box
     .image
       %img{ :src => "images/img-box-1.jpg", :alt => "ill" }
