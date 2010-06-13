@@ -9,7 +9,8 @@
         != render(:partial => "layouts/top_categories")
         %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
         %li!= link_to _("Pricing"), page_path("pricing"), :class => "top"
-      != render(:partial => "layouts/user_menu")
+      .top-user-menu
+        != render(:partial => "layouts/user_menu")
     %div
       %ul.lang
         - (FastGettext.available_locales - ["ru"]).each do |locale|
