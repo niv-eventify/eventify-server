@@ -13,7 +13,7 @@ class UserSessionController < InheritedResources::Base
           current_user_session.destroy
           redirect_to login_path
         else
-          redirect_to home_path
+          redirect_back_or_default(home_path)
         end
       end
       failure.js do
