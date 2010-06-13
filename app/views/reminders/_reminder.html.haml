@@ -15,7 +15,8 @@
       %strong
         = reminder.before_in_words
         - reminder.event.with_time_zone do
-          = reminder.send_reminder_at.to_s(:isra_date_time)
+          %span{:class => (Astrails.good_time_to_send_sms?(reminder.send_reminder_at, @event.tz) ? "" : "reminder-warning")}
+            = reminder.send_reminder_at.to_s(:isra_date_time)
 
     - if reminder.by_email?
       .form-col

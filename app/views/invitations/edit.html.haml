@@ -30,7 +30,7 @@
                           != f.text_field :sms_resend_message, :label => _("SMS message text fo resend")
                         != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")
 
-                        - if !Astrails.good_time_to_send_sms?(@event.tz) && @event.allow_delayed_sms?
+                        - if !Astrails.good_time_to_send_sms?(Time.now.utc, @event.tz) && @event.allow_delayed_sms?
                           .settings-form-row
                             %label= _("Send SMS messages tomorrow morning")
                             != f.check_box :delay_sms_sending
