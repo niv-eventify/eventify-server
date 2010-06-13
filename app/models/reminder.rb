@@ -62,7 +62,7 @@ class Reminder < ActiveRecord::Base
   validates_presence_of :before_units, :before_value
   validates_presence_of :email_subject, :email_body, :if => :by_email?
   validates_length_of   :email_subject, :within => 2..255, :if => :by_email?
-  validates_length_of   :email_body, :within => 2..255, :if => :by_email?
+  validates_length_of   :email_body, :within => 2..2048, :if => :by_email?
   validates_presence_of :sms_message, :if => :by_sms
 
   def validate
