@@ -55,7 +55,7 @@ describe InvitationsController do
     before(:each) do
       @user = Factory.create(:active_user)
       UserSession.create(@user)
-      @event = stub_model(Event, :user => @user, :stage_passed => 3, :default_sms_message => "foo bar", :default_sms_message_for_resend => "bar foo")
+      @event = stub_model(Event, :starting_at => 10.days.from_now.utc, :user => @user, :stage_passed => 3, :default_sms_message => "foo bar", :default_sms_message_for_resend => "bar foo")
       controller.current_user.events.stub!(:find).and_return(@event)
       guests = mock("guests")
       guests.stub!(:count).and_return(1)
@@ -123,9 +123,17 @@ describe InvitationsController do
       # @event.stub!(:guests).and_return(guests)
     end
 
+    it "should redirect if event in past" do
+      controller.stub!(:check_guests).and_return(true)
+      @event.stub!(:starting_at).and_return(1.day.ago)
+      post :update, :id => @event.id
+      response.should redirect_to(edit_event_path(@event))
+      response.flash[:error].should == "Event start time is passed."
+    end
+
     it "should redirect to guests path when no guests" do
       post :update, :id => @event.id
-      response.should redirect_to(event_guests_path(@event))      
+      response.should redirect_to(event_guests_path(@event))
     end
 
     it "should send invitations" do
