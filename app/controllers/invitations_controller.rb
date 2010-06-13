@@ -6,6 +6,7 @@ class InvitationsController < InheritedResources::Base
   actions :edit, :update, :show
 
   before_filter :sms_message, :only => :edit
+  before_filter :check_guests, :only => [:edit, :update]
   before_filter :set_invitations, :only => [:edit, :update]
   before_filter :check_invitations, :only => :edit
 
@@ -30,6 +31,12 @@ protected
   def sms_message
     resource.sms_message = resource.default_sms_message
     resource.sms_resend_message = resource.default_sms_message_for_resend
+  end
+
+  def check_guests
+    return true unless resource.guests.count.zero?
+    flash[:error] = _("Please add at least one guest")
+    redirect_to event_guests_path(resource)
   end
 
   def set_invitations
