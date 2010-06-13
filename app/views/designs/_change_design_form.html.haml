@@ -2,4 +2,4 @@
   != f.hidden_field :design_id, :value => design.id
   != f.hidden_field :category_id, :value => design.category_id
   != hidden_field_tag :update_design, true
-  != link_to_function content_tag(:span, _("SELECT")), "jQuery(this).parents('form').get(0).submit()", :class => css_class
+  != link_to_function select_design_html(select_text), "jQuery(this).parents('form').get(0).submit()", :class => css_class
