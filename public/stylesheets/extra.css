@@ -761,3 +761,8 @@ p.takings-changed {
 	font-size: 1.95em;
 	margin: 5px 0 0;
 }
+
+.form-col-delete, .hebrew .form-col-delete {
+	padding-right:0;
+	padding-left:0;
+}
