@@ -57,6 +57,9 @@ describe InvitationsController do
       UserSession.create(@user)
       @event = stub_model(Event, :user => @user, :stage_passed => 3, :default_sms_message => "foo bar", :default_sms_message_for_resend => "bar foo")
       controller.current_user.events.stub!(:find).and_return(@event)
+      guests = mock("guests")
+      guests.stub!(:count).and_return(1)
+      @event.stub(:guests).and_return(guests)
       @event.stub(:payments).and_return([])
       Astrails.stub!(:good_time_to_send_sms?).and_return(true)
     end
@@ -114,16 +117,22 @@ describe InvitationsController do
     integrate_views
 
     before(:each) do
-      @user = Factory.create(:active_user)
-      UserSession.create(@user)
       @event = Factory.create(:event)
+      UserSession.create(@event.user)
       controller.current_user.events.stub!(:find).and_return(@event)
+      # @event.stub!(:guests).and_return(guests)
     end
-    
+
+    it "should redirect to guests path when no guests" do
+      post :update, :id => @event.id
+      response.should redirect_to(event_guests_path(@event))      
+    end
+
     it "should send invitations" do
       @event.stub!(:valid?).and_return(true)
       @event.stub!(:save).and_return(true)
       @event.should_receive(:send_invitations)
+      controller.stub!(:check_guests).and_return(true)
       post :update, :id => @event.id
       response.should redirect_to(invitation_path(@event))
     end
@@ -133,7 +142,9 @@ describe InvitationsController do
       @event.stub!(:errors).and_return([:error])
       @event.errors.stub!(:on)
       @event.should_not_receive(:send_invitations)
+      controller.stub!(:check_guests).and_return(true)
       post :update, :id => @event.id
+      response.should be_success
     end
   end
 end
