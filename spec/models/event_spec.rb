@@ -12,13 +12,13 @@ describe Event do
 
     it "should suggest to send now when delay is disabled" do
       at_time(Time.utc(2010, 6, 8, 11, 0)) do
-        @event.best_time_to_send_sms(false).should == Time.utc(2010, 6, 8, 11, 0)
+        @event.best_time_to_send_invitation_sms(false).should == Time.utc(2010, 6, 8, 11, 0)
       end
     end
 
     it "should suggest to send now if delay is enabled" do
       at_time(Time.utc(2010, 6, 8, 11, 0)) do
-        @event.best_time_to_send_sms(true).should == Time.utc(2010, 6, 8, 11, 0)
+        @event.best_time_to_send_invitation_sms(true).should == Time.utc(2010, 6, 8, 11, 0)
       end
     end
 
@@ -28,7 +28,7 @@ describe Event do
       t.in_time_zone("Jerusalem").day.should == 6
 
       at_time(t) do
-        @event.best_time_to_send_sms(true).should == Time.utc(2010, 8, 6, 7, 0)
+        @event.best_time_to_send_invitation_sms(true).should == Time.utc(2010, 8, 6, 7, 0)
       end
     end
 
@@ -38,7 +38,7 @@ describe Event do
       t.in_time_zone("Jerusalem").day.should == 6
 
       at_time(t) do
-        @event.best_time_to_send_sms(true).should == Time.utc(2010, 8, 7, 7, 0)
+        @event.best_time_to_send_invitation_sms(true).should == Time.utc(2010, 8, 7, 7, 0)
       end
     end
   end

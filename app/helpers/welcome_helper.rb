@@ -35,4 +35,9 @@ module WelcomeHelper
       end
     end
   end
+
+  def main_box_text
+    msg = _("Choose a cool invite, or even upload your own photo. Add event details, with a map and a personal message, and send to all your friends through email, sms and facebook!")
+    msg.gsub("\n", "<BR/>")
+  end
 end

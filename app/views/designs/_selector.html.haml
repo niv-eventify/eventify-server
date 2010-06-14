@@ -3,8 +3,7 @@
     .img-box-b
       .content-h
         .image
-          %a{ :href => "#light_box_#{design.id}", :class => "nyroModal" }
-            != image_tag(design.preview.url(:medium), :alt => "")
+          != update_design_link(event, design, "", image_tag(design.preview.url(:medium), :alt => "", :size=>"218x145"))
       != update_design_link(event, design)
       %a.plus.nyroModal{ :href => "#light_box_#{design.id}" } +
   %div.lightbox{ :id => "light_box_#{design.id}", :style => 'display:none; width:670px; height:500px'}

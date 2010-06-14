@@ -3,13 +3,11 @@
   Dear
   <%= h(@guest.name)%>,
   <br/><br/>
-  You were invited to 
-  <%= h(@guest.event.user.name) %>
-  's 
-  <%= "\"#{h(@guest.event.name)}\"" %>
-   event
+  Just a quick update:
+  <br/>
+  <%= h(@guest.event.user.name) %>'s <%= "\"#{h(@guest.event.name)}\"" %> event, will take place on <%= h(@guest.event.starting_at.to_s(:isra_date)) %> at <%= h(@guest.event.starting_at.to_s(:isra_time)) %> at <%= h(@guest.event.location) %>
   <br/><br/>
-  Please click the envelope to see the invitation and RSVP to the event
+  Please click the envelope to see the updated invitation and RSVP to the event
   <br/>
   <%= link_to(image_tag("http://eventify.co.il/images/envelope.jpg", :style => "border:0"), @url) %>
   <br/><br/>

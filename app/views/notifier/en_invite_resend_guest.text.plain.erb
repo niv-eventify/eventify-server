@@ -1,8 +1,9 @@
 Dear <%= @guest.name%>,
 
-You were invited to <%= h(@guest.event.user.name) %>'s <%= "\"#{h(@guest.event.name)}\"" %> event.
+Just a quick update:
+<%= h(@guest.event.user.name) %>'s <%= "\"#{h(@guest.event.name)}\"" %> event, will take place on <%= h(@guest.event.starting_at.to_s(:isra_date)) %> at <%= h(@guest.event.starting_at.to_s(:isra_time)) %> at <%= h(@guest.event.location) %>
 
-Please click the following link to see the invitation and RSVP to the event.
+Please click the following link to see the the updated invitation and RSVP to the event.
 <%= @url %>
 
 If clicking the link does not bring you to the invitation page, copy the link and paste it in your browser.

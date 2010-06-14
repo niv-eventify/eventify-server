@@ -13,11 +13,12 @@ class UserSessionController < InheritedResources::Base
           current_user_session.destroy
           redirect_to login_path
         else
-          redirect_to home_path
+          redirect_back_or_default(home_path)
         end
       end
       failure.js do
         render(:update) do |page|
+          flash[:notice] = nil
           page << <<-JAVASCRIPT
             jQuery('#login_form.bg-m').html(#{render(:partial => "user_session/new").to_json});
             jQuery('#login_form.bg-m input:checkbox').customCheckbox();
@@ -25,12 +26,17 @@ class UserSessionController < InheritedResources::Base
         end
       end
       success.js do
+        flash[:notice] = nil
         if current_user.disabled?
           flash[:error] = _("Your account has been disabled, please contact support.")
           flash.delete(:notice)
           current_user_session.destroy
         end
-        render(:update) {|page| page.redirect_to(home_path)}
+        render(:update) do |page|
+          page << "jQuery('.top-user-menu').html(#{render(:partial => "layouts/user_menu").to_json})"
+          page << "jQuery('.not-logged-in-event-details').remove()"
+          # page.redirect_to(home_path)}
+        end
       end
     end
   end

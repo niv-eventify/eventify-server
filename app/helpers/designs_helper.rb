@@ -7,13 +7,17 @@ module DesignsHelper
     link_to content_tag(:span, _("MORE")), category_designs_path(category), :class => "btn-brown"
   end
 
-  def select_design_link(design, css_class = "blue-btn-sml")
-    link_to content_tag(:span, _("SELECT")), new_event_path(:design_id => design, :category_id => design.category_id), :class => css_class
+  def select_design_html(select_text)
+    select_text || content_tag(:span, _("SELECT"))
   end
 
-  def update_design_link(event, design, css_class = "blue-btn-sml")
-    return select_design_link(design, css_class) if !event || event.new_record?
+  def select_design_link(design, css_class = "blue-btn-sml", select_text = nil)
+    link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => design.category_id), :class => css_class
+  end
 
-    render(:partial => "designs/change_design_form", :locals => {:event => event, :design => design, :css_class => css_class})
+  def update_design_link(event, design, css_class = "blue-btn-sml", select_text = nil)
+    return select_design_link(design, css_class, select_text) if !event || event.new_record?
+
+    render(:partial => "designs/change_design_form", :locals => {:event => event, :design => design, :css_class => css_class, :select_text => select_text})
   end
 end

@@ -35,7 +35,13 @@ class Reminder < ActiveRecord::Base
   end
   before_validation :set_sending_time
   def set_sending_time
-    self.send_reminder_at = event.starting_at - (before_value || 0).to_i.send(before_units)
+    self.send_reminder_at = best_time_to_send_reminder(event.starting_at - (before_value || 1).to_i.send(before_units))
+  end
+
+  def best_time_to_send_reminder(t)
+    new_sending_time = Astrails.best_time_to_send_sms(t, event.tz)
+    new_sending_time = t if new_sending_time >= event.starting_at
+    new_sending_time
   end
 
   def adjust!
@@ -56,7 +62,7 @@ class Reminder < ActiveRecord::Base
   validates_presence_of :before_units, :before_value
   validates_presence_of :email_subject, :email_body, :if => :by_email?
   validates_length_of   :email_subject, :within => 2..255, :if => :by_email?
-  validates_length_of   :email_body, :within => 2..255, :if => :by_email?
+  validates_length_of   :email_body, :within => 2..2048, :if => :by_email?
   validates_presence_of :sms_message, :if => :by_sms
 
   def validate

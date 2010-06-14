@@ -1,8 +1,10 @@
 שלום <%= h(@guest.name)%>,
 
-קיבלת הזמנה מ<%= h(@guest.event.user.name) %> ל <%= "\"#{h(@guest.event.name)}\"" %>.
+רצינו לעדכן אותך כי הארוע של <%= h(@guest.event.user.name) %>: <%= "\"#{h(@guest.event.name)}\"" %>
+יתקיים בתאריך <%= h(@guest.event.starting_at.to_s(:isra_date)) %> בשעה <%= h(@guest.event.starting_at.to_s(:isra_time)) %> ב <%= h(@guest.event.location) %>
+ולא כפי שנקבע קודם לכן.
 
-לפתיחת ההזמנה יש ללחוץ על הקישור הבא:
+לצפייה בהזמנה יש ללחוץ על הקישור הבא:
 <%= @url %>
 
 אם לחיצה על הקישור אינה פותחת את ההזמנה, ניתן להעתיק את שורת הקישור ולהדביק אותה בשורת הכתובת בדפדפן.
