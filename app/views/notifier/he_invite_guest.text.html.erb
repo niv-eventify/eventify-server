@@ -1,5 +1,6 @@
 <html>
 <body style="direction: rtl;">
+<div style="direction: rtl;">
 שלום <%= h(@guest.name)%>,
 <br/><br/>
 קיבלת הזמנה מ<%= h(@guest.event.user.name) %> ל <%= "\"#{h(@guest.event.name)}\"" %>.
@@ -17,5 +18,6 @@
 בברכה,
 <br/>
 צוות Eventify.
+</div>
 </body>
 </html>
