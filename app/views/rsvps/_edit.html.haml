@@ -22,8 +22,8 @@
     attendees_count: #{resource.attendees_count.to_json},
     message_to_host: #{resource.message_to_host.to_json},
     cancel: function() {
-      jQuery('#rsvp_attendees_count').val(guest_rsvp.attendees_count);
-      jQuery('#guest_message_to_host').val(guest_rsvp.message_to_host);
+      jQuery('#rsvp_attendees_count').val(guest_rsvp.attendees_count || "");
+      jQuery('#guest_message_to_host').val(guest_rsvp.message_to_host || "");
       jQuery(".btns-hold.update-rsvp").hide();
     }
   };
