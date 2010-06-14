@@ -1,6 +1,6 @@
 - if not @uploaded_pictures.blank?
   - for picture in @uploaded_pictures
-    %li.pic_thumb
+    %li.pic_thumb{:crop_src => "#{picture.pic.url(:crop)}"}
       %a{:href => "#"}
         %img{:src => "#{picture.pic.url(:small)}", :width => "75", :height => "76", :alt => ""}
 != render(:partial => "uploaded_pictures/empty_thumbnail")

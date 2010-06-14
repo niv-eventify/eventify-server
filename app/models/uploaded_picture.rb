@@ -5,7 +5,7 @@ class UploadedPicture < ActiveRecord::Base
     :styles         => {:small => "75x76>", :crop => "275x275>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
-    :path =>        "uploaded_pictures/:id/:filename",
+    :path =>        "uploaded_pictures/:id/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",

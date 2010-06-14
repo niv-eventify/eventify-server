@@ -35,7 +35,7 @@
               = _("Prev")
           %p
             = _("Drag your uploaded pictures into the invitation. In order to remove a picture all you have to do is drag it back out of the invitation")
-          %img#cropbox{:src => '/images/chicas296.jpg'}
+          #cropbox
           .btns-h
             - if current_locale == "he"
               %a#crop.btn-right{:href => "#crop"}= _("Crop")

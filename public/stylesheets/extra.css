@@ -774,9 +774,25 @@ p.takings-changed {
 .window{
 	position:absolute;
 	border: 1px dashed red;
+	overflow:hidden;
+	direction:ltr;
+	z-index:1
 }
 .window.green{
 	border: 1px dashed green;
+}
+.image-h img {
+	z-index:100;
+	position: relative;
+}
+#preview {
+	z-index: 1;
+}
+.crop_preview {
+	position: absolute;
+	overflow: hidden;
+	direction: ltr;
+	z-index: 1
 }
 .main-box h1{
 	font-size: 1.95em;
