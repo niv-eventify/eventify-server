@@ -776,7 +776,7 @@ p.takings-changed {
 	border: 1px dashed red;
 	overflow:hidden;
 	direction:ltr;
-	z-index:1
+	z-index:1000;
 }
 .window.green{
 	border: 1px dashed green;
