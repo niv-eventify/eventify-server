@@ -3,7 +3,7 @@
     %strong= title
 
   - form_tag event_guest_importers_path(@event) do
-    .events-holder.download-form
+    .events-holder
       .table-box
         .links
           &nbsp;
@@ -20,7 +20,7 @@
                 %td= _("Mobile")
             %tbody
               != render(:partial => "contact", :collection => contacts)
-    .contact-btns.popup-btns
-      %br
-      != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
-      != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+  .contact-btns
+    %br
+    != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+    != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"

@@ -690,6 +690,7 @@ li.thing .sel-holder {
 .import .table-box .holder {
 	height:200px;
 	overflow:scroll;
+	width:100%;
 }
 
 #nyroModalContent .popup-heading{
@@ -787,4 +788,13 @@ p.takings-changed {
 
 #guests .input-bg-uni .input-text.short {
 	width:25px;
+}
+
+table#contacts {
+	table-layout: auto;
+  width: 100%;	
+}
+
+.import .contact-btns {
+	height:auto;
 }
