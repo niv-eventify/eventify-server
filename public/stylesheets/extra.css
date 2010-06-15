@@ -239,6 +239,7 @@ div.cmf-skinned-text {
 .clear {
 	height:1px;
 	clear:both;
+	display:none;
 }
 
 div.flash {
@@ -765,8 +766,13 @@ p.takings-changed {
 .form-col-delete, .hebrew .form-col-delete {
 	padding-right:0;
 	padding-left:0;
+	width:12px !important;
 }
 
 .reminder-warning {
 	color:#BB3131
+}
+
+.tools-b {
+	overflow:none;
 }
