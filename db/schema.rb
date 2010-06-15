@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100610055804) do
+ActiveRecord::Schema.define(:version => 20100615062909) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -49,6 +49,19 @@ ActiveRecord::Schema.define(:version => 20100610055804) do
   end
 
   add_index "contacts", ["user_id", "removed_at", "email"], :name => "user_removed_email"
+
+  create_table "cropped_pictures", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "window_id"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cropped_pictures", ["event_id", "window_id"], :name => "index_cropped_pictures_on_event_id_and_window_id", :unique => true
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
