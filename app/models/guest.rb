@@ -175,8 +175,10 @@ class Guest < ActiveRecord::Base
   end
 
   def send_sms_invitation!(resend = false)
-    msg = resend ? event.sms_resend_message : event.sms_message
-    sms = sms_messages.create!(:kind => "invitation", :message => msg)
+    event.with_time_zone do
+      msg = resend ? event.sms_resend_message : event.sms_message
+      sms = sms_messages.create!(:kind => "invitation", :message => msg)
+    end
 
     sms.send_sms!
 
@@ -197,10 +199,12 @@ class Guest < ActiveRecord::Base
 
   def send_email_invitation!(resend = false)
     I18n.with_locale(event.language) do
-      if resend
-        Notifier.deliver_invite_resend_guest(self)
-      else
-        Notifier.deliver_invite_guest(self)
+      event.with_time_zone do
+        if resend
+          Notifier.deliver_invite_resend_guest(self)
+        else
+          Notifier.deliver_invite_guest(self)
+        end
       end
     end
   end

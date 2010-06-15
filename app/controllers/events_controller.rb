@@ -56,8 +56,6 @@ class EventsController < InheritedResources::Base
     new!
   end
 
-  # edit
-
   def update
     return _cancel_sms if "true" == params[:cancel_sms]
 
