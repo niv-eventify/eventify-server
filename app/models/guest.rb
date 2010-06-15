@@ -119,8 +119,8 @@ class Guest < ActiveRecord::Base
     self.email_invitation_sent_at = self.send_email_invitation_at = nil if email_changed? || force_resend_email
     self.send_sms = true if force_resend_sms
     self.sms_invitation_sent_at   = self.send_sms_invitation_at = nil if mobile_phone_changed? || force_resend_sms
-    # when email or phone is changed - it's like a new guest, so we reset any_invitation_sent
-    self.any_invitation_sent = false if email_changed? || mobile_phone_changed?
+    # when email or phone is changed, or we wants to re-send invitation - it's like a new guest, so we reset any_invitation_sent
+    self.any_invitation_sent = false if email_changed? || mobile_phone_changed? || force_resend_sms || force_resend_email
     true
   end
 

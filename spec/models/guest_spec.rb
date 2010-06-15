@@ -95,24 +95,35 @@ describe Guest do
       @guest.email = "changed@email.com"
       @guest.save.should be_true
       @guest.email_invitation_sent_at.should be_nil
+      @guest.any_invitation_sent.should be_false
     end
 
     it "should reset sms_invitation_sent_at when mobile_phone is changed" do
       @guest.mobile_phone = "0541234567"
       @guest.save.should be_true
       @guest.sms_invitation_sent_at.should be_nil
+      @guest.any_invitation_sent.should be_false
     end
 
     it "should not reset email_invitation_sent_at when phone number is changed" do
       @guest.mobile_phone = "0541234567"
       @guest.save.should be_true
       @guest.email_invitation_sent_at.should_not be_nil
+      @guest.any_invitation_sent.should be_false
     end
 
     it "should reset sms_invitation_sent_at when email is changed" do
       @guest.email = "changed@email.com"
       @guest.save.should be_true
       @guest.sms_invitation_sent_at.should_not be_nil
+      @guest.any_invitation_sent.should be_false
+    end
+
+    it "should not reset any_invitation_sent" do
+      @guest.any_invitation_sent = true
+      @guest.name = "foo bar"
+      @guest.save.should be_true
+      @guest.any_invitation_sent.should be_true
     end
   end
 
