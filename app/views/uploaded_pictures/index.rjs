@@ -1,3 +1,4 @@
 page << 'jQuery.nyroModalRemove();'
 page.replace_html(".holder ul", :partial => 'uploaded_pictures')
+page << 'jQuery("a.nyroModal.uploadLink").nyroModal({minHeight: 270});'
 page << 'stage1.initDragAndDrop();'
