@@ -10,7 +10,7 @@ module GuestsHelper
   end
 
   def link_to_remove_guest(guest)
-    return nil if guest.invited?
+    return nil unless guest.allow_delete?
     link_to_remote "del", :url => event_guest_path(guest.event_id, guest), :method => :delete, 
       :confirm => _("Are you sure?"), :html => {:class => "bin"}, :before => "$('tr##{dom_id(guest)}').remove();jQuery.fn.reload_search();"
   end
