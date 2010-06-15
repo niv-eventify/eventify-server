@@ -776,3 +776,7 @@ p.takings-changed {
 .tools-b {
 	overflow:none;
 }
+
+.selectArea .center{
+	top:0
+}
