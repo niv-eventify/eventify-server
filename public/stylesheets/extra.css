@@ -780,3 +780,11 @@ p.takings-changed {
 .selectArea .center{
 	top:0
 }
+
+#guests .input-bg-uni .input-text  {
+	width:108px;
+}
+
+#guests .input-bg-uni .input-text.short {
+	width:25px;
+}
