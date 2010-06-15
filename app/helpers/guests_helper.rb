@@ -47,8 +47,11 @@ module GuestsHelper
     end    
   end
 
-  def readonly_state(value)
-    value && haml_concat(content_tag(:span, _("yes"), :class =>"invitation-sent"))
+  def readonly_state(value, guest, attr_prefix)
+    return unless value
+
+    haml_concat(content_tag(:span, _("sent"), :class =>"invitation-sent"))
+    haml_concat(link_to_remote(_("resend"), :method => :put, :url => event_guest_path(guest.event_id, guest, :attribute => true, :guest => {"force_resend_#{attr_prefix}" => true})))
   end
 
   def change_or_edit_property(attribute, non_blank_attribute, guest)

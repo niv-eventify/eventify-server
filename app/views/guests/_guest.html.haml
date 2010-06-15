@@ -18,13 +18,13 @@
 
   - info_table_column(5) do
     - if guest.invitation_sent_or_scheduled?(:email)
-      - readonly_state(guest.email.blank? ? nil : guest.send_email?)
+      - readonly_state(guest.email.blank? ? nil : guest.send_email?, guest, :email)
     - else
       - change_or_edit_property(:send_email, :email, guest)
 
   - info_table_column(6) do
     - if guest.invitation_sent_or_scheduled?(:sms)
-      - readonly_state(guest.mobile_phone.blank? ? nil : guest.send_sms?)
+      - readonly_state(guest.mobile_phone.blank? ? nil : guest.send_sms?, guest, :sms)
     - else
       - change_or_edit_property(:send_sms, :mobile_phone, guest)
 
