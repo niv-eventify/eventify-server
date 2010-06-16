@@ -6,6 +6,6 @@
   != hidden_field_tag 'uploaded_picture'
   .btns-h
     - if current_locale == "he"
-      != link_to_function _("Crop"), "$('body').css('cursor', 'wait');$.Jcrop('#cropbox img').destroy();$('#cropbox').html('');$('#cropper').get(0).onsubmit()", {:id => "crop", :class => "btn-right"}
+      != link_to_function _("Crop"), "$('body').css('cursor', 'wait');$.Jcrop('#cropbox img').destroy();$('#cropbox').html('');$('#crop').hide();$('#cropper').get(0).onsubmit()", {:id => "crop", :class => "btn-right"}
     - else
-      != link_to_function _("Crop"), "$('body').css('cursor', 'wait');$.Jcrop('#cropbox img').destroy();$('#cropbox').html('');$('#cropper').get(0).onsubmit()", {:id => "crop", :class => "btn-left"}
+      != link_to_function _("Crop"), "$('body').css('cursor', 'wait');$.Jcrop('#cropbox img').destroy();$('#cropbox').html('');$('#crop').hide();$('#cropper').get(0).onsubmit()", {:id => "crop", :class => "btn-left"}

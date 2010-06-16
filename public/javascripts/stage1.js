@@ -60,6 +60,7 @@ var stage1 = {
 			setSelect: [0, 0, stage1.curr_window_width, stage1.curr_window_height]
 		});
 		$('body').css("cursor", "");
+		$("#crop").show();
 	}
 }
 

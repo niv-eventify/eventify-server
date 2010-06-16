@@ -793,6 +793,9 @@ p.takings-changed {
 #preview {
 	z-index: 1;
 }
+#crop {
+	display: none;
+}
 .crop_preview {
 	position: absolute;
 	overflow: hidden;
