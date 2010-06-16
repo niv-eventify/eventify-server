@@ -1,1 +1,1 @@
-page << 'alert("create")'
+page << '$("body").css("cursor", "wait")'

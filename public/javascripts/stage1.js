@@ -30,7 +30,14 @@ var stage1 = {
 		$(".window").droppable({
 			drop: function(event, ui) {
 				$(this).addClass('green');
+				$('body').css("cursor", "wait");
 				var imgSrc = $(ui.draggable).attr("crop_src");
+				$(".crop_preview").css({
+					top: $(this).css('top'),
+					left: $(this).css('left'),
+					width: $(this).css('width'),
+					height: $(this).css('height')
+				}).html("<img src=" + imgSrc + " id='preview' />")
 				if($('#cropbox img').length > 0)
 					$.Jcrop('#cropbox img').destroy();
 				$("#cropbox").html("<img src='" + imgSrc + "' />");
@@ -39,12 +46,6 @@ var stage1 = {
 				$("#cropbox img").load(stage1.initCrop);
 				stage1.curr_window_height = $(this).height();
 				stage1.curr_window_width = $(this).width();
-				$(".crop_preview").css({
-					top: $(this).css('top'),
-					left: $(this).css('left'),
-					width: $(this).css('width'),
-					height: $(this).css('height')
-				}).html("<img src=" + imgSrc + " id='preview' />")
 			}
 		});
 	},
@@ -58,6 +59,7 @@ var stage1 = {
 			aspectRatio: ratio,
 			setSelect: [0, 0, stage1.curr_window_width, stage1.curr_window_height]
 		});
+		$('body').css("cursor", "");
 	}
 }
 

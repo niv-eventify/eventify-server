@@ -1,4 +1,3 @@
-page << '$.Jcrop("#cropbox img").destroy()'
-page << '$("#cropbox").html("")'
 page << '$(".crop_preview").html("")'
 page.replace_html(".window", :partial => 'cropped_picture')
+page << '$("body").css("cursor", "default")'
