@@ -33,9 +33,12 @@ class UserSessionController < InheritedResources::Base
           current_user_session.destroy
         end
         render(:update) do |page|
-          page << "jQuery('.top-user-menu').html(#{render(:partial => "layouts/user_menu").to_json})"
-          page << "jQuery('.not-logged-in-event-details').remove()"
-          # page.redirect_to(home_path)}
+          if params[:redirect_on_login]
+            page.redirect_to(home_path)
+          else
+            page << "jQuery('.top-user-menu').html(#{render(:partial => "layouts/user_menu").to_json})"
+            page << "jQuery('.not-logged-in-event-details').remove()"
+          end
         end
       end
     end

@@ -16,7 +16,10 @@ class Guest < ActiveRecord::Base
   validates_presence_of :mobile_phone, :if => proc {|guest| guest.send_sms?}
   validates_uniqueness_of :mobile_phone, :scope => :event_id, :allow_nil => true, :allow_blank => true
 
-  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp, :takings_attributes
+  attr_accessor :force_resend_email, :force_resend_sms
+
+  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp,
+    :takings_attributes, :force_resend_email, :force_resend_sms
 
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
@@ -112,14 +115,17 @@ class Guest < ActiveRecord::Base
   end
 
   def update_invitation_methods
-    self.send_email = true if !email.blank? && email_changed? && 1 == changes.keys.size
-    self.email_invitation_sent_at = self.send_email_invitation_at = nil if email_changed?
-    self.sms_invitation_sent_at   = self.send_sms_invitation_at = nil if mobile_phone_changed?
-    self.any_invitation_sent = false if email_changed? || mobile_phone_changed?
+    self.send_email = true if force_resend_email || (!email.blank? && email_changed? && 1 == changes.keys.size)
+    self.email_invitation_sent_at = self.send_email_invitation_at = nil if email_changed? || force_resend_email
+    self.send_sms = true if force_resend_sms
+    self.sms_invitation_sent_at   = self.send_sms_invitation_at = nil if mobile_phone_changed? || force_resend_sms
+    # when email or phone is changed, or we wants to re-send invitation - it's like a new guest, so we reset any_invitation_sent
+    self.any_invitation_sent = false if email_changed? || mobile_phone_changed? || force_resend_sms || force_resend_email
     true
   end
 
   def need_to_resend_invitation?
+    return true if force_resend_sms || force_resend_email
     return true if changed_to_nil?(:email_invitation_sent_at) || changed_to_nil?(:sms_invitation_sent_at)
     return true if send_email? && (email_changed? || send_email_changed?)
     return true if send_sms? && (mobile_phone_changed? || send_sms_changed?)
@@ -169,8 +175,10 @@ class Guest < ActiveRecord::Base
   end
 
   def send_sms_invitation!(resend = false)
-    msg = resend ? event.sms_resend_message : event.sms_message
-    sms = sms_messages.create!(:kind => "invitation", :message => msg)
+    event.with_time_zone do
+      msg = resend ? event.sms_resend_message : event.sms_message
+      sms = sms_messages.create!(:kind => "invitation", :message => msg)
+    end
 
     sms.send_sms!
 
@@ -191,10 +199,12 @@ class Guest < ActiveRecord::Base
 
   def send_email_invitation!(resend = false)
     I18n.with_locale(event.language) do
-      if resend
-        Notifier.deliver_invite_resend_guest(self)
-      else
-        Notifier.deliver_invite_guest(self)
+      event.with_time_zone do
+        if resend
+          Notifier.deliver_invite_resend_guest(self)
+        else
+          Notifier.deliver_invite_guest(self)
+        end
       end
     end
   end
@@ -224,7 +234,7 @@ class Guest < ActiveRecord::Base
   end
 
   def before_destroy
-    return false if invited?
+    return false unless allow_delete?
   end
 
   def invited?
@@ -261,5 +271,15 @@ class Guest < ActiveRecord::Base
 
   def self.total_attendees_count
     calculate(:sum, "if(attendees_count IS NULL, 1, attendees_count)")
+  end
+
+  def allow_delete?
+    # any email message ever intended to be sent
+    return false if !email_token.blank?
+    # any sms message ever sent
+    return false if !sms_messages.count.zero?
+    # just invited (or scheduled to invite)
+    return false if invited?
+    true
   end
 end

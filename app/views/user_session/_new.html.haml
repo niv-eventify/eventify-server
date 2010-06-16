@@ -2,6 +2,7 @@
   = f.object.errors.on(:base)
   != f.text_field :email, :label => _("Email")
   != f.password_field :password, :label => _("Password")
+  != hidden_field_tag(:redirect_on_login, true) if @redirect_on_login
   .form-area
     %span.sbmt
       != f.submit _("Login")

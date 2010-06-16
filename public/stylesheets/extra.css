@@ -239,6 +239,7 @@ div.cmf-skinned-text {
 .clear {
 	height:1px;
 	clear:both;
+	display:none;
 }
 
 div.flash {
@@ -697,6 +698,7 @@ li.thing .sel-holder {
 .import .table-box .holder {
 	height:200px;
 	overflow:scroll;
+	width:100%;
 }
 
 #nyroModalContent .popup-heading{
@@ -801,7 +803,33 @@ p.takings-changed {
 .form-col-delete, .hebrew .form-col-delete {
 	padding-right:0;
 	padding-left:0;
+	width:12px !important;
 }
 .reminder-warning {
 	color:#BB3131
+}
+
+.tools-b {
+	overflow:none;
+}
+
+.selectArea .center{
+	top:0
+}
+
+#guests .input-bg-uni .input-text  {
+	width:108px;
+}
+
+#guests .input-bg-uni .input-text.short {
+	width:25px;
+}
+
+table#contacts {
+	table-layout: auto;
+  width: 100%;	
+}
+
+.import .contact-btns {
+	height:auto;
 }
