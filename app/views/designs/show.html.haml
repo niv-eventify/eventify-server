@@ -2,7 +2,7 @@
 - @content_css_class = "stars-bg stage-3"
 
 - content_for(:head) do
-  != stylesheet_link_tag "nyroModal.full", "jquery.Jcrop"
+  != stylesheet_link_tag "nyroModal.full", "jquery.Jcrop", "rsvps"
   != javascript_include_tag "jquery.nyroModal", "jquery.Jcrop", "stage1"
 
 - events_content_section(1, @event) do

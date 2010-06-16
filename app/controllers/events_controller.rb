@@ -92,7 +92,10 @@ protected
   end
 
   def set_uploaded_pictures
-    UploadedPicture.find(session[:uploaded_picture_ids]).each do |pic|
+    UploadedPicture.find_all_by_id(session[:uploaded_picture_ids]).each do |pic|
+      pic.update_attribute(:event, @event)
+    end
+    CroppedPicture.find_all_by_id(session[:cropped_picture_ids]).each do |pic|
       pic.update_attribute(:event, @event)
     end
   end

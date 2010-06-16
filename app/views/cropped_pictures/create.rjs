@@ -1,1 +1,1 @@
-page << '$("body").css("cursor", "wait")'
+page << '$("body").css("cursor", "default")'

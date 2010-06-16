@@ -29,7 +29,6 @@ var stage1 = {
 		});
 		$(".window").droppable({
 			drop: function(event, ui) {
-				$(this).addClass('green');
 				$('body').css("cursor", "wait");
 				var imgSrc = $(ui.draggable).attr("crop_src");
 				$(".crop_preview").css({

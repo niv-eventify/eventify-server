@@ -27,6 +27,13 @@
             jQuery(this).css("left", (parseInt(jQuery(this).css("left")) / minimized_by) + "px");
             jQuery(this).css("font-size", (parseInt(jQuery(this).css("font-size")) / minimized_by) + "px");
         });
+        jQuery("#" + invitation_id + " .window").each(function(){
+            var minimized_by = (900 / rsvps.dialog_width / 1.6);
+            jQuery(this).css("width", (parseInt(jQuery(this).css("width")) / minimized_by) + "px");
+            jQuery(this).css("height", (parseInt(jQuery(this).css("height")) / minimized_by) + "px");
+            jQuery(this).css("top", (parseInt(jQuery(this).css("top")) / minimized_by) + "px");
+            jQuery(this).css("left", (parseInt(jQuery(this).css("left")) / minimized_by) + "px");
+        });
     }
 }
 jQuery(document).ready(function(jQuery){

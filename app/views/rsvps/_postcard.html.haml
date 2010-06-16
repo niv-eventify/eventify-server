@@ -5,3 +5,4 @@
     .title{:style => "#{title_position_css(event)}"}= event.name
   .msg
     != (event.guest_message || "").gsub("\n", "<BR/>")
+- set_windows(event)

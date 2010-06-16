@@ -105,7 +105,7 @@ module EventsHelper
             haml_tag(:img, :src => cropped_pic.pic.url(:cropped))
           end
         else
-          for cropped_pic in window.cropped_pictures.find_all_by_event_id(event_id.to_i) do
+          for cropped_pic in window.cropped_pictures.find_all_by_event_id(event.id.to_i) do
             haml_tag(:img, :src => cropped_pic.pic.url(:cropped))
           end
         end

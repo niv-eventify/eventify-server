@@ -770,38 +770,7 @@ p.takings-changed {
 .next-g-btn, .prev-g-btn {
 	display: none;
 }
-.stage-2 .window{
-	display: none;
-}
-.window{
-	position:absolute;
-	border: 1px dashed red;
-	overflow:hidden;
-	direction:ltr;
-	z-index:50;
-}
-.window.green{
-	border: 1px dashed green;
-}
-.window img {
-	width: 100%;
-}
-.image-h img {
-	z-index:100;
-	position: relative;
-}
-#preview {
-	z-index: 1;
-}
-#crop {
-	display: none;
-}
-.crop_preview {
-	position: absolute;
-	overflow: hidden;
-	direction: ltr;
-	z-index: 52
-}
+
 .main-box h1{
 	font-size: 1.95em;
 	margin: 5px 0 0;

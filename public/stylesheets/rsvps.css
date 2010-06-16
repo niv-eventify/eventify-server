@@ -233,3 +233,36 @@
 	background: url(/images/t-b-btn-4.gif) no-repeat 0 100%;
 	font-family: 'רענן';
 }
+.stage-2 .window{
+	border: 0;
+}
+.window{
+	position: absolute;
+	border: 1px dashed green;
+	overflow: hidden;
+	direction: ltr;
+	z-index: 50;
+}
+.background_holder .window {
+	border: 0;
+	z-index: 48;
+}
+.window img {
+	width: 100%;
+}
+.image-holder img, .image-h img {
+	z-index: 100;
+	position: relative;
+}
+#preview {
+	z-index: 1;
+}
+#crop {
+	display: none;
+}
+.crop_preview {
+	position: absolute;
+	overflow: hidden;
+	direction: ltr;
+	z-index: 52
+}
