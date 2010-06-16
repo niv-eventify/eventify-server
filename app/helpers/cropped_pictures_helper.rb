@@ -1,0 +1,2 @@
+module CroppedPicturesHelper
+end

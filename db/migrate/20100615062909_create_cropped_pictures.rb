@@ -9,8 +9,6 @@ class CreateCroppedPictures < ActiveRecord::Migration
       t.datetime  :pic_updated_at
       t.timestamps
     end
-    
-    add_index :cropped_pictures, [:event_id, :window_id], {:unique => true}
   end
 
   def self.down

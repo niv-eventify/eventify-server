@@ -14,4 +14,9 @@ class UploadedPicture < ActiveRecord::Base
   attr_accessible :pic
   validates_attachment_presence :pic
   validates_attachment_size :pic, :less_than => 3.megabytes
+
+  def pic_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(pic.url(style))
+  end
 end

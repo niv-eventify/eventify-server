@@ -1,0 +1,11 @@
+- form_remote_for :cropped_picture, CroppedPicture.new, :url => cropped_pictures_path, :html => {:id => "cropper"} do |f|
+  - for attribute in [:crop_x, :crop_y, :crop_w, :crop_h]
+    != f.hidden_field attribute, :id => attribute
+  != hidden_field_tag 'event', @event.id.to_i
+  != hidden_field_tag 'window'
+  != hidden_field_tag 'uploaded_picture'
+  .btns-h
+    - if current_locale == "he"
+      != link_to_function _("Crop"), "$('#cropper').get(0).onsubmit()", {:id => "crop", :class => "btn-right"}
+    - else
+      != link_to_function _("Crop"), "$('#cropper').get(0).onsubmit()", {:id => "crop", :class => "btn-left"}

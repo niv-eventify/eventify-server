@@ -14,6 +14,10 @@ var stage1 = {
 				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
 				marginTop: '-' + Math.round(ry * coords.y) + 'px'
 			});
+			$("#crop_x").val(coords.x);
+			$("#crop_y").val(coords.y);
+			$("#crop_w").val(coords.w);
+			$("#crop_h").val(coords.h);
 		}
 	},
 	initDragAndDrop: function() {
@@ -30,6 +34,8 @@ var stage1 = {
 				if($('#cropbox img').length > 0)
 					$.Jcrop('#cropbox img').destroy();
 				$("#cropbox").html("<img src='" + imgSrc + "' />");
+				$("#uploaded_picture").val($(ui.draggable).attr("pic_id"));
+				$("#window").val($(this).attr("window_id"));
 				$("#cropbox img").load(stage1.initCrop);
 				stage1.curr_window_height = $(this).height();
 				stage1.curr_window_width = $(this).width();

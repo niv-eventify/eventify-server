@@ -9,6 +9,6 @@
   #free_text.free_text{:style => stage2_free_text_css(event)}
     != (h(event.guest_message) || "").gsub("\n", "<br/>")
 - for window in event.design.windows
-  .window{:style => "#{window_css(window, 1.6)};"}
+  .window{:window_id => window.id, :style => "#{window_css(window, 1.6)};"}
 .crop_preview
 

@@ -36,14 +36,9 @@
           %p
             = _("Drag your uploaded pictures into the invitation. In order to remove a picture all you have to do is drag it back out of the invitation")
           #cropbox
-          .btns-h
-            - if current_locale == "he"
-              %a#crop.btn-right{:href => "#crop"}= _("Crop")
-            - else
-              %a#crop.btn-left{:href => "#crop"}= _("Crop")
-
+          != render(:partial => "cropped_pictures/new")
     != render(:partial => "events/selected_design")
 
 #change_design
-  != render(:partial => "designs/change_design")
+-#  != render(:partial => "designs/change_design")
 
