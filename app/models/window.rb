@@ -1,6 +1,6 @@
 class Window < ActiveRecord::Base
   belongs_to :design
-
+  has_many :cropped_pictures
   validates_presence_of :design, :top_x, :top_y, :width, :height
   validates_numericality_of :top_x, :top_y, :width, :height
 

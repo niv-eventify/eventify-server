@@ -3,13 +3,9 @@ class CroppedPicturesController < InheritedResources::Base
   respond_to :js, :only => [:create]
 
   def create
-    if params[:event].to_i > 0
-      CroppedPicture.delete_all(:conditions => "window_id = '#{params[:window]}' AND event_id = '#{params[:event]}'")
-    end
+    remove_curr_window_cropped_pics
     uploaded_pic = UploadedPicture.find(params[:uploaded_picture])
-    logger.debug(params[:cropped_picture])
     adjust_ratio(uploaded_pic)
-    logger.debug(params[:cropped_picture])
     @cropped_picture = CroppedPicture.new(params[:cropped_picture])
     @cropped_picture.pic = uploaded_pic.pic
     @cropped_picture.event_id = params[:event]
@@ -30,6 +26,15 @@ private
     ratio = uploaded_pic.pic_geometry(:original).width / uploaded_pic.pic_geometry(:crop).width
     for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] do
       params[:cropped_picture][attribute] = (params[:cropped_picture][attribute].to_i * ratio).to_i
+    end
+  end
+  def remove_curr_window_cropped_pics
+    win = Window.find(params[:window])
+    if params[:event].to_i > 0
+      CroppedPicture.destroy_all(:conditions => "window_id = '#{params[:window]}' AND event_id = '#{params[:event]}'")
+    else
+      session_cropped_pics = win.cropped_pictures.find_all_by_id(session[:cropped_picture_ids])
+      CroppedPicture.destroy(session_cropped_pics)
     end
   end
 end

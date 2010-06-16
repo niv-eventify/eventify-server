@@ -97,6 +97,22 @@ module EventsHelper
     title_params.keys.map {|k| "#{k}:#{title_params[k]}"}.join(";")
   end
 
+  def set_windows(event)
+    for window in event.design.windows
+      haml_tag(:div, :class => "window", :window_id => window.id, :style => "#{window_css(window, 1.6)};") do
+        if event.id.to_i == 0
+          for cropped_pic in window.cropped_pictures.find_all_by_id(session[:cropped_picture_ids]) do
+            haml_tag(:img, :src => cropped_pic.pic.url(:cropped))
+          end
+        else
+          for cropped_pic in window.cropped_pictures.find_all_by_event_id(event_id.to_i) do
+            haml_tag(:img, :src => cropped_pic.pic.url(:cropped))
+          end
+        end
+      end
+    end
+  end
+
   def event_sent_status(event)
     4 == event.stage_passed ? _("(sent)") : link_to(_("(not sent)"), edit_invitation_path(event), :class => "not-sent")
   end
