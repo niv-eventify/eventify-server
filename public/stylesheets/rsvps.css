@@ -238,10 +238,14 @@
 }
 .window{
 	position: absolute;
-	border: 1px dashed green;
 	overflow: hidden;
 	direction: ltr;
 	z-index: 50;
+	border: 0;
+}
+.window.empty {
+	border: 1px dashed green;
+	z-index: 101;
 }
 .background_holder .window {
 	border: 0;

@@ -97,9 +97,9 @@ module EventsHelper
     title_params.keys.map {|k| "#{k}:#{title_params[k]}"}.join(";")
   end
 
-  def set_windows(event)
+  def set_windows(event, ratio)
     for window in event.design.windows
-      haml_tag(:div, :class => "window", :window_id => window.id, :style => "#{window_css(window, 1.6)};") do
+      haml_tag(:div, :class => "window", :window_id => window.id, :style => "#{window_css(window, ratio)};") do
         if event.id.to_i == 0
           for cropped_pic in window.cropped_pictures.find_all_by_id(session[:cropped_picture_ids]) do
             haml_tag(:img, :src => cropped_pic.pic.url(:cropped))

@@ -45,6 +45,7 @@ var stage1 = {
 				$("#cropbox img").load(stage1.initCrop);
 				stage1.curr_window_height = $(this).height();
 				stage1.curr_window_width = $(this).width();
+				$(this).removeClass("empty");
 			}
 		});
 	},
@@ -69,9 +70,8 @@ $(document).ready(function(){
 		minHeight: 270
 	});
 	stage1.initDragAndDrop();
-
+	$(".window").each(function(){
+		if($(this).children('img').length == 0)
+			$(this).addClass("empty");
+	});
 });
-$(window).load(function(){
-	stage1.initCrop();
-});
-
