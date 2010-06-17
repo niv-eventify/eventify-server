@@ -169,18 +169,20 @@ div.cmf-skinned-text {
 }
 
 .visual-box .frame {
-	padding: 11px 7px 20px;
+	padding: 11px 9px 20px;
 }
 
 .title-holder {
   text-align: center;
   position: absolute;
   overflow-y: hidden;
+  z-index: 100;
 }
 .msg-holder {
   text-align: center;
   position: absolute;
   overflow-y: hidden;
+  z-index: 100;
 }
 .msg-holder .title, .title-holder  .title{
   font-weight: bold;
