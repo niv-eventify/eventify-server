@@ -15,12 +15,13 @@ class DesignsController < InheritedResources::Base
   def show
     if params[:event_id].to_i > 0
       @event = current_user.events.find(params[:event_id])
+      @design = @event.design
       @category = @event.category
       @uploaded_pictures = UploadedPicture.find_all_by_event_id(@event.id)
     else
-      design = Design.find(params[:design_id])
+      @design = Design.find(params[:design_id])
       @category = Category.find(params[:category_id])
-      @event = Event.new(:category => @category, :design => design)
+      @event = Event.new(:category => @category, :design => @design)
       @uploaded_pictures = UploadedPicture.find_all_by_id(session[:uploaded_picture_ids] || [])
     end
   end

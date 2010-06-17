@@ -20,23 +20,24 @@
           - else
             %a.btn-left.nyroModal{:href => "#change_design"}= _("Change design")
         .divider &nbsp;
-      .side-area-h
-        %h3
-          = _("Upload your own pictures and insert them into the invitation")
-          %a{:class => "link", :href => "#"}
-            = _("Watch example")
-          .sml-gallery
-            %a{:class => "next-g-btn", :href => "#"}
-              = _("Next")
-            .holder
-              %ul
-                != render(:partial => "uploaded_pictures/uploaded_pictures")
-            %a{:class => "prev-g-btn", :href => "#"}
-              = _("Prev")
-          %p
-            = _("Drag your uploaded pictures into the invitation. In order to remove a picture all you have to do is drag it back out of the invitation")
-          #cropbox
-          != render(:partial => "cropped_pictures/new")
+      - if @design.windows.length > 0
+        .side-area-h
+          %h3
+            = _("Upload your own pictures and insert them into the invitation")
+            %a{:class => "link", :href => "#"}
+              = _("Watch example")
+            .sml-gallery
+              %a{:class => "next-g-btn", :href => "#"}
+                = _("Next")
+              .holder
+                %ul
+                  != render(:partial => "uploaded_pictures/uploaded_pictures")
+              %a{:class => "prev-g-btn", :href => "#"}
+                = _("Prev")
+            %p
+              = _("Drag your uploaded pictures into the invitation. In order to remove a picture all you have to do is drag it back out of the invitation")
+            #cropbox
+            != render(:partial => "cropped_pictures/new")
     != render(:partial => "events/selected_design")
 
 #change_design
