@@ -245,7 +245,7 @@
 }
 .window.empty {
 	border: 1px dashed green;
-	z-index: 101;
+	z-index: 100;
 }
 .background_holder .window {
 	border: 0;
