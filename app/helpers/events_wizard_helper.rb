@@ -38,7 +38,7 @@ module EventsWizardHelper
       else        
         haml_tag(:div, :class => "b") do
           haml_tag(:div, :class => "btns #{extra_buttons_class(stage_number)}") do
-            if prev_lnk = prev_link_opts || {:href => stage_link(stage_number - 1, event)}
+            if prev_lnk = prev_link_opts || (stage_link(stage_number - 1, event) && {:href => stage_link(stage_number - 1, event)})
               haml_concat wizard_prev_link(prev_lnk)
             end
           
