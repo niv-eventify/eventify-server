@@ -175,9 +175,9 @@ class Guest < ActiveRecord::Base
   end
 
   def send_sms_invitation!(resend = false)
-    event.with_time_zone do
+    sms =  event.with_time_zone do
       msg = resend ? event.sms_resend_message : event.sms_message
-      sms = sms_messages.create!(:kind => "invitation", :message => msg)
+      sms_messages.create!(:kind => "invitation", :message => msg)
     end
 
     sms.send_sms!
