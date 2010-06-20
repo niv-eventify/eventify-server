@@ -280,18 +280,23 @@ class Event < ActiveRecord::Base
   end
 
   def to_ical
-    ie = returning(Icalendar::Event.new) do |e|
-      e.dtstart = starting_at.to_datetime
-      e.summary = name
-      e.dtend = ending_at.to_datetime if ending_at
-      e.description = guest_message unless guest_message.blank?
-      e.uid = "eventify-#{id}"
-      e.location = location unless location.blank?
+    ie = with_time_zone do
+      returning(Icalendar::Event.new) do |e|
+        e.dtstart = starting_at.to_datetime
+        e.summary = name
+        e.dtend = ending_at.to_datetime if ending_at
+        e.description = guest_message unless guest_message.blank?
+        e.uid = "eventify-#{id}"
+        e.location = location unless location.blank?
+        e.organizer = user.name
+        e.tzid = tz
+      end
     end
     c = Icalendar::Calendar.new
-    c.prodid = "eventify-0.0.1"
+    c.prodid = nil
+    c.version = nil
     c.add_event(ie)
-    c.to_ical
+    c.to_ical.gsub("\r", "")
   end
 
   def ical_filename
