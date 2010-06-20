@@ -24,7 +24,7 @@
         .side-area-h
           %h3
             = _("Upload your own pictures and insert them into the invitation")
-            %a{:class => "link", :href => "#"}
+            %a{:class => "link", :href => "#", :style => "display:none;"}
               = _("Watch example")
             .sml-gallery
               %a{:class => "next-g-btn", :href => "#"}
@@ -36,7 +36,7 @@
                 = _("Prev")
             %p
               = _("Drag your uploaded pictures into the invitation. In order to remove a picture all you have to do is drag it back out of the invitation")
-            #cropbox
+            #cropbox{:style => "width: 280px"}
             != render(:partial => "cropped_pictures/new")
     != render(:partial => "events/selected_design")
 

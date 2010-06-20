@@ -810,3 +810,12 @@ table#contacts {
 .import .contact-btns {
 	height:auto;
 }
+.sml-gallery .holder {
+	margin: 0 13px;
+}
+.hebrew #crop, #cancel_crop{
+	float: left;
+}
+.hebrew #cancel_crop, #crop{
+	float: right;
+}

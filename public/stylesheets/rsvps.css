@@ -261,12 +261,13 @@
 #preview {
 	z-index: 1;
 }
-#crop {
+#crop,#cancel_crop {
 	display: none;
 }
 .crop_preview {
 	position: absolute;
 	overflow: hidden;
 	direction: ltr;
-	z-index: 52
+	z-index: 52;
+	display: none;
 }

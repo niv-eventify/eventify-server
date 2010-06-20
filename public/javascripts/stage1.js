@@ -36,7 +36,7 @@ var stage1 = {
 					left: $(this).css('left'),
 					width: $(this).css('width'),
 					height: $(this).css('height')
-				}).html("<img src=" + imgSrc + " id='preview' />")
+				}).show().html("<img src=" + imgSrc + " id='preview' />")
 				if($('#cropbox img').length > 0)
 					$.Jcrop('#cropbox img').destroy();
 				$("#cropbox").html("<img src='" + imgSrc + "' />");
@@ -60,7 +60,7 @@ var stage1 = {
 			setSelect: [0, 0, stage1.curr_window_width, stage1.curr_window_height]
 		});
 		$('body').css("cursor", "");
-		$("#crop").show();
+		$("#crop,#cancel_crop").show();
 	}
 }
 

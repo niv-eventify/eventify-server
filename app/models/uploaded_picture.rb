@@ -2,7 +2,7 @@ class UploadedPicture < ActiveRecord::Base
   belongs_to :event
   attr_accessible :event_id
   has_attached_file :pic,
-    :styles         => {:small => "75x76>", :crop => "275x275>"},
+    :styles         => {:small => "75x76>", :crop => "285x285>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
     :path =>        "uploaded_pictures/:id/:style/:filename",
