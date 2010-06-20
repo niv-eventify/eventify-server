@@ -675,6 +675,10 @@ li.thing .sel-holder {
 	padding:2em;
 }
 
+.hebrew .guest-message {
+	direction:rtl;
+}
+
 .scroll-container.short-container {
 	height:190px;
 }
