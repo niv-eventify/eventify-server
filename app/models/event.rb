@@ -200,6 +200,7 @@ class Event < ActiveRecord::Base
     errors.add(:starting_at, _("should be in a future")) if starting_at && starting_at < Time.now.utc
     errors.add(:base, _("Payments are not completed yet")) if send_invitations_now && payment_required?
     errors.add(:starting_at, _("time cannot be blank")) if @no_time_selected
+    errors.add(:ending_at, _("should be in a future")) if starting_at && ending_at && ending_at < starting_at
   end
 
   def has_map?

@@ -2,6 +2,20 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
 
+  describe "validations" do
+    before(:each) do
+      @event = Event.new
+      @event.user = User.new
+    end
+
+    it "should validate starting and ending at" do
+      @event.starting_at = 2.days.from_now
+      @event.ending_at = 1.day.from_now
+      @event.should_not be_valid
+      @event.errors.on(:ending_at).should == "should be in a future"
+    end
+  end
+
   describe "best_time_to_send_sms" do
     before(:each) do
       @event = Factory.create(:event_with_tz)
