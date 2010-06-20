@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-20 14:51+0300\n"
+"POT-Creation-Date: 2010-06-20 21:23+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,10 +91,6 @@ msgid ""
 "        reset password process.\n"
 msgstr ""
 
-#: app/models/event.rb:268
-msgid " at location %{location}"
-msgstr ""
-
 #: app/helpers/contact_importers_helper.rb:10
 msgid "%d contact imported"
 msgid_plural "%d contacts imported"
@@ -123,17 +119,17 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
-#: app/models/event.rb:270
+#: app/models/event.rb:271
 msgid ""
 "%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:273
+#: app/models/event.rb:274
 msgid "%{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:301
+#: app/models/event.rb:307
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -329,13 +325,13 @@ msgstr ""
 msgid "Change design"
 msgstr ""
 
-#: app/models/event.rb:254
+#: app/models/event.rb:255
 msgid ""
 "Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your "
 "email. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:257
+#: app/models/event.rb:258
 msgid "Changes: %{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
@@ -372,7 +368,7 @@ msgstr ""
 msgid "Contact Us"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:41
+#: app/views/layouts/_user_menu.html.haml:49
 msgid "Contacts"
 msgstr ""
 
@@ -551,7 +547,7 @@ msgid "Eventify has dozens of designs special your events"
 msgstr ""
 
 #: app/helpers/application_helper.rb:6
-#: app/views/layouts/_user_menu.html.haml:42
+#: app/views/layouts/_user_menu.html.haml:50
 msgid "Events"
 msgstr ""
 
@@ -559,7 +555,7 @@ msgstr ""
 msgid "Every guest would be able to pick one ore more items to bring."
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:44
+#: app/views/layouts/_user_menu.html.haml:52
 msgid "Exit"
 msgstr ""
 
@@ -615,7 +611,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:47
+#: app/views/events/_form.html.haml:49
 msgid "Guests can see other attendees"
 msgstr ""
 
@@ -1022,7 +1018,7 @@ msgstr ""
 msgid "Pring Guests List"
 msgstr ""
 
-#: app/views/layouts/_user_menu.html.haml:43
+#: app/views/layouts/_user_menu.html.haml:51
 msgid "Profile"
 msgstr ""
 
@@ -1104,7 +1100,7 @@ msgstr ""
 msgid "Remove End date &amp; Time"
 msgstr ""
 
-#: app/views/events/_form.html.haml:52
+#: app/views/events/_form.html.haml:54
 msgid "Resend invitations"
 msgstr ""
 
@@ -1753,10 +1749,6 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/helpers/events_helper.rb:121
-msgid "en.date.abbr_month_names"
-msgstr ""
-
 #: locale/yml_import.rb:88
 msgid "flash.user_session.create.notice"
 msgstr ""
@@ -1912,7 +1904,7 @@ msgstr ""
 msgid "sent"
 msgstr ""
 
-#: app/models/event.rb:200 app/models/reminder.rb:69
+#: app/models/event.rb:200 app/models/event.rb:203 app/models/reminder.rb:69
 msgid "should be in a future"
 msgstr ""
 
