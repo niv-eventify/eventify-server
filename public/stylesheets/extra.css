@@ -71,6 +71,7 @@ div.cmf-skinned-text {
 	margin:0;
 	padding:0;
 	list-style: none;
+	height:23px;
 }
 
 #carouselImgBox {
@@ -810,12 +811,19 @@ table#contacts {
 .import .contact-btns {
 	height:auto;
 }
+
 .sml-gallery .holder {
 	margin: 0 13px;
 }
+
 .hebrew #crop, #cancel_crop{
 	float: left;
 }
+
 .hebrew #cancel_crop, #crop{
 	float: right;
+}
+
+.hebrew  #guests .input-bg-uni {
+	float:right;
 }

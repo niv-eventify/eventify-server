@@ -13,12 +13,12 @@ jQuery(document).ready(function() {
     }
     jQuery.fn.rsvp_filter_by = function(sel_index) {
       if (!sel_index) {
-        jQuery("tr.guest").show();
+        jQuery("tr.guest").show().find(".selectArea.rspv_select-replaced").hide().show();
       }
       else {
         jQuery("tr.guest").hide();
         jQuery(".rspv_select[selectedIndex=" + sel_index+ "]").each(function(){
-          jQuery(this).parents("tr.guest").show();
+          jQuery(this).parents("tr.guest").show().find(".selectArea.rspv_select-replaced").hide().show();
         })
       }
     }
@@ -40,7 +40,7 @@ jQuery(document).ready(function() {
 			setTimeout(function(){
 	      var pattern = new RegExp(jQuery("#search_guests").val(), "i");
 	      jQuery.each(guests_texts, function(k, v){
-	        jQuery("#" + k)[v.match(pattern) ? "show" : "hide"]();
+	        jQuery("#" + k)[v.match(pattern) ? "show" : "hide"]().find(".selectArea.rspv_select-replaced").hide().show();
 	      });
 			}, 0);
     });

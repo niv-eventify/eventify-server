@@ -36,7 +36,15 @@
           - link_to_next_event
         .personal-menu-h
           .personal-menu-h-frame
-            .opener!= link_to_function(_("My Page"), "jQuery('.menu-list').toggle()")
+            #mypage.opener!= link_to_function(_("My Page"), "")
+            :javascript
+              jQuery("#mypage").click(function(e){
+                jQuery('.menu-list').toggle();
+                e.stopPropagation();
+              });
+              jQuery("body").click(function(){
+                jQuery('.menu-list:visible').hide();
+              })
             %ul.menu-list
               %li!= link_to _("Contacts"), contacts_path
               %li!= link_to content_tag(:strong, _("Events")), events_path
