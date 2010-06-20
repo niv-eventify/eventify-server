@@ -5,6 +5,7 @@ class RsvpsController < InheritedResources::Base
 #  respond_to :iphone, :only => :show
   after_filter :clear_flash, :only => :update
 #  before_filter :adjust_format_for_iphone
+  around_filter :set_timezone, :only => :show
 
   # edit
 
@@ -39,5 +40,9 @@ class RsvpsController < InheritedResources::Base
 protected
   def resource
     @resource ||= get_resource_ivar || set_resource_ivar(end_of_association_chain.find_by_email_token(params[:id]))
+  end
+
+  def set_timezone
+    resource.event.with_time_zone { yield }
   end
 end
