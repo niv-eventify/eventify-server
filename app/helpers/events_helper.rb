@@ -118,7 +118,7 @@ module EventsHelper
   end
 
   def months_arr
-    javascript_tag("stage2.months_arr = ['" + _("en.date.abbr_month_names").join("','") + "'];")
+    javascript_tag("stage2.months_arr = ['#{_("en.date.abbr_month_names").join("','")}'];stage2.del_time_alert = \"#{_("you can't change the starting time from here. Please edit the \'Time\' field")}\";stage2.del_date_alert = \"#{_("you can't change the starting date from here. Please edit the \'Date\' field")}\";")
   end
 
   def add_fonts()
