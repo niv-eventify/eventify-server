@@ -2,7 +2,7 @@
   .popup-heading
     %strong= title
 
-  - form_tag event_guest_importers_path(@event) do
+  - form_tag event_guest_importers_path(@event), :id => "import_guests" do
     .events-holder
       .table-box
         .links
@@ -22,5 +22,5 @@
               != render(:partial => "contact", :collection => contacts)
   .contact-btns
     %br
-    != link_to_function _("Import"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+    != link_to_function _("Import"), "jQuery('#import_guests').get(0).submit()", :class => "btn"
     != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
