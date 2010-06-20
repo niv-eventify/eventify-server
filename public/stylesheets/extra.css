@@ -632,6 +632,7 @@ li.thing .sel-holder {
 	width: 310px;
 	visibility: hidden;
 	position:absolute;
+	z-index: 100;
 }
 .hebrew .tools-bar {
 	direction: ltr;

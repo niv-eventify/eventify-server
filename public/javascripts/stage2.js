@@ -10,6 +10,8 @@
   title_scroll_width: 0,
   free_text_scroll_width: 0,
   months_arr: [],
+  del_date_alert: "",
+  del_time_alert: "",
   seperated_title: false,
   prev_text: "",
   
@@ -301,10 +303,10 @@ jQuery(document).ready(function(){
 
   jQuery("#event_guest_message").keyup(function(){
     if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
-      alert("you can't change the starting date from here. Please edit the \"Date\" field");
+      alert(stage2.del_date_alert);
       jQuery(this).val(stage2.message);
     } else if(stage2.startTime.length > 0 && jQuery(this).val().search(stage2.startTime) < 0) {
-      alert("you can't change the starting time from here. Please edit the \"Time\" field");
+      alert(stage2.del_time_alert);
       jQuery(this).val(stage2.message);
     } else {
       stage2.message = jQuery(this).val();

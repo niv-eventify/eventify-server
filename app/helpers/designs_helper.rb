@@ -12,7 +12,11 @@ module DesignsHelper
   end
 
   def select_design_link(design, css_class = "blue-btn-sml", select_text = nil)
-    link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => design.category_id), :class => css_class
+    if design.windows.blank?
+      link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => design.category_id), :class => css_class
+    else
+      link_to select_design_html(select_text), event_design_path(0, :wizard => params[:wizard], :design_id => design, :category_id => design.category_id), :class => css_class
+    end
   end
 
   def update_design_link(event, design, css_class = "blue-btn-sml", select_text = nil)
