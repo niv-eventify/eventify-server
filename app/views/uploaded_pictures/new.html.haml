@@ -19,6 +19,6 @@
           %label{:for => "certify"}
             = _("The picture I uploaded does not violate any copyright laws")
       .popup-btns
-        != link_to_function _("Upload"), "jQuery(this).parents('form').get(0).submit();", :class => "btn"
+        != link_to_function _("Upload"), "$('body').css('cursor', 'wait');jQuery(this).parents('form').get(0).submit();", :class => "btn"
         != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
 %iframe#upload_frame{:name => "upload_frame", :style => "width:1px;height:1px;border:0px", :src => "about:blank"}

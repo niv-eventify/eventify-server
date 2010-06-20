@@ -1,1 +1,2 @@
 page << "jQuery.nyroModalRemove()"
+page << '$("body").css("cursor", "default")'
