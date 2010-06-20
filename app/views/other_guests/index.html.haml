@@ -15,8 +15,8 @@
       - collection.each do |guest|
         %tr
           %td= guest.name
-          %td= guest.email
-          %td= guest.mobile_phone
+          %td= guest.email || "&nbsp;"
+          %td= guest.mobile_phone || "&nbsp;"
           %td= guest.rsvp_text
     :javascript
       window.print()
