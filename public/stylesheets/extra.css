@@ -214,7 +214,7 @@ div.cmf-skinned-text {
 #change_design {
 	display:none; 
 	width:900px; 
-	height:500px;
+	height:550px;
 }
 
 #nyroModalContent .content-wrapper {
@@ -830,4 +830,12 @@ table#contacts {
 
 .hebrew  #guests .input-bg-uni {
 	float:right;
+}
+
+.content-wrapper .pl, .content-wrapper .pr {
+	left:0;
+}
+
+#change_design .content-wrapper-top {
+	height:auto;
 }
