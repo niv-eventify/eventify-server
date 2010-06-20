@@ -16,6 +16,7 @@ class CroppedPicture < ActiveRecord::Base
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
       :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
     },
+    :url => ':s3_domain_url',
     :processors => [:cropper]
 
   attr_accessible :pic
