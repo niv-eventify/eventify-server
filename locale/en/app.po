@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-17 10:21+0300\n"
+"POT-Creation-Date: 2010-06-20 14:51+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -156,11 +156,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:101
+#: app/helpers/events_helper.rb:117
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:101
+#: app/helpers/events_helper.rb:117
 msgid "(sent)"
 msgstr ""
 
@@ -286,12 +286,15 @@ msgstr ""
 #: app/views/guest_importers/_csv.html.haml:16
 #: app/views/guest_importers/_import.html.haml:26
 #: app/views/guest_importers/_email.html.haml:31
+#: app/views/uploaded_pictures/new.html.haml:23
 #: app/views/users/_edit.html.haml:12
 #: app/views/contact_importers/_edit.html.haml:13
 #: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
 #: app/views/passwords/_edit.html.haml:9
+#: app/views/cropped_pictures/_new.html.haml:9
 #: app/views/admin/designs/new.html.haml:9
-#: app/views/admin/designs/edit.html.haml:8
+#: app/views/admin/designs/edit.html.haml:8 app/views/windows/new.html.haml:9
+#: app/views/windows/edit.html.haml:8
 msgid "Cancel"
 msgstr ""
 
@@ -387,6 +390,10 @@ msgid ""
 "Online invitations made easy."
 msgstr ""
 
+#: app/views/cropped_pictures/_new.html.haml:8
+msgid "Crop"
+msgstr ""
+
 #: app/views/events/_form.html.haml:41
 msgid "Current Map Image"
 msgstr ""
@@ -432,6 +439,12 @@ msgstr ""
 
 #: app/views/invitations/edit.html.haml:5
 msgid "Don't send SMS invitations"
+msgstr ""
+
+#: app/views/designs/show.html.haml:38
+msgid ""
+"Drag your uploaded pictures into the invitation. In order to remove a "
+"picture all you have to do is drag it back out of the invitation"
 msgstr ""
 
 #: app/helpers/middle_box_helper.rb:4 app/views/events/_edit_menu.html.haml:3
@@ -525,11 +538,11 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:64
+#: app/controllers/events_controller.rb:65
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:64
+#: app/controllers/events_controller.rb:65
 msgid "Event updated, but some reminders disabled"
 msgstr ""
 
@@ -557,6 +570,10 @@ msgstr ""
 #: app/views/layouts/_header.html.haml:10 app/views/pages/faq_en.html.haml:1
 #: app/views/pages/faq_en.html.haml:4
 msgid "FAQ"
+msgstr ""
+
+#: app/views/uploaded_pictures/new.html.haml:16
+msgid "File should be less than 3MB"
 msgstr ""
 
 #: app/views/guests/index.html.haml:44
@@ -843,6 +860,7 @@ msgid "New Reminder to Guests"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:7 app/helpers/events_wizard_helper.rb:9
+#: app/views/designs/show.html.haml:31
 msgid "Next"
 msgstr ""
 
@@ -958,7 +976,7 @@ msgid "Place:"
 msgstr ""
 
 #: app/controllers/invitations_controller.rb:47
-#: app/controllers/events_controller.rb:15
+#: app/controllers/events_controller.rb:16
 msgid "Please add at least one guest"
 msgstr ""
 
@@ -976,6 +994,10 @@ msgstr ""
 
 #: app/views/contact_importers/show.html.haml:12
 msgid "Please wait..."
+msgstr ""
+
+#: app/views/designs/show.html.haml:36
+msgid "Prev"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:46
@@ -1128,6 +1150,10 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
+#: app/views/uploaded_pictures/new.html.haml:13
+msgid "Select File"
+msgstr ""
+
 #: app/views/guest_importers/_import.html.haml:12
 msgid "Select None"
 msgstr ""
@@ -1225,6 +1251,10 @@ msgstr ""
 msgid "Text/SMS"
 msgstr ""
 
+#: app/views/uploaded_pictures/new.html.haml:20
+msgid "The picture I uploaded does not violate any copyright laws"
+msgstr ""
+
 #: app/views/things/index.html.haml:1
 msgid "Things To Bring | Eventify"
 msgstr ""
@@ -1259,8 +1289,25 @@ msgstr ""
 msgid "Updating RSVP status, please wait..."
 msgstr ""
 
+#: app/views/uploaded_pictures/new.html.haml:22
+msgid "Upload"
+msgstr ""
+
+#: app/views/uploaded_pictures/new.html.haml:4
+#: app/views/uploaded_pictures/_empty_thumbnail.html.haml:5
+msgid "Upload Picture"
+msgstr ""
+
+#: app/views/designs/show.html.haml:26
+msgid "Upload your own pictures and insert them into the invitation"
+msgstr ""
+
 #: app/views/users/_form.html.haml:1
 msgid "User Settings"
+msgstr ""
+
+#: app/views/designs/show.html.haml:28
+msgid "Watch example"
 msgstr ""
 
 #: app/models/reminder.rb:19
@@ -1706,7 +1753,7 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/helpers/events_helper.rb:105
+#: app/helpers/events_helper.rb:121
 msgid "en.date.abbr_month_names"
 msgstr ""
 
