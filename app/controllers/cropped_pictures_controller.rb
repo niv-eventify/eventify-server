@@ -31,7 +31,7 @@ private
   def remove_curr_window_cropped_pics
     win = Window.find(params[:window])
     if params[:event].to_i > 0
-      CroppedPicture.destroy_all(:conditions => "window_id = '#{params[:window]}' AND event_id = '#{params[:event]}'")
+      CroppedPicture.destroy_all("window_id = '#{params[:window]}' AND event_id = '#{params[:event]}'")
     else
       session_cropped_pics = win.cropped_pictures.find_all_by_id(session[:cropped_picture_ids])
       CroppedPicture.destroy(session_cropped_pics)
