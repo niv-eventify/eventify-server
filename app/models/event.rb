@@ -265,7 +265,7 @@ class Event < ActiveRecord::Base
         :host_name => user.name,
         :date => starting_at.to_s(:isra_date),
         :time => starting_at.to_s(:isra_time),
-        :location => (location.blank? ? "" : (_(" at location %{location}") % {:location => location}))
+        :location => (location.blank? ? "" : " " + location)
       }
       s = _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
       return s if s.length < SmsMessage::MAX_LENGTH # check sms length
