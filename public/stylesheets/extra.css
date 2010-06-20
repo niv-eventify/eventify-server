@@ -799,3 +799,7 @@ table#contacts {
 .import .contact-btns {
 	height:auto;
 }
+
+.hebrew  #guests .input-bg-uni {
+	float:right;
+}
