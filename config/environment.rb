@@ -14,6 +14,7 @@ Rails::Initializer.run do |config|
   if "irb" == $0
     config.logger = Logger.new(STDOUT)
   end
+  config.gem 'aws-s3', :version => '0.5.1', :lib => "aws/s3"
   config.gem 'authlogic', :version => '2.1.1'
   config.gem 'ruby-debug', :library => false
   rpass = (GlobalPreference.get(:rack_bug_password) || 'event123') rescue 'event123'
