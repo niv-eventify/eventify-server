@@ -13,16 +13,18 @@ jQuery(document).ready(function() {
     }
     jQuery.fn.rsvp_filter_by = function(sel_index) {
       if (!sel_index) {
-        jQuery("tr.guest").show().find(".selectArea.rspv_select-replaced").hide().show();
+				jQuery("tr.guest").show();
+				setTimeout(function(){ jQuery("tr.guest .selectArea").hide().show(); }, 0);
       }
       else {
-        jQuery("tr.guest").hide();
+        jQuery("tr.guest").hide().find(".selectArea").hide().show();
         jQuery(".rspv_select[selectedIndex=" + sel_index+ "]").each(function(){
-          jQuery(this).parents("tr.guest").show().find(".selectArea.rspv_select-replaced").hide().show();
+					var that = jQuery(this);
+          that.parents("tr.guest").show();
+					setTimeout(function(){that.parents("tr.guest").find(".selectArea").hide().show(); }, 0);
         })
       }
     }
-    jQuery(".rspv_select").customSelect();
     jQuery("#filter_all").click(function(){
       jQuery.fn.rsvp_filter_by(null);
     });
@@ -40,9 +42,14 @@ jQuery(document).ready(function() {
 			setTimeout(function(){
 	      var pattern = new RegExp(jQuery("#search_guests").val(), "i");
 	      jQuery.each(guests_texts, function(k, v){
-	        jQuery("#" + k)[v.match(pattern) ? "show" : "hide"]().find(".selectArea.rspv_select-replaced").hide().show();
+	        jQuery("#" + k)[v.match(pattern) ? "show" : "hide"]();
+					setTimeout(function(){jQuery("#" + k + " .selectArea").hide().show();}, 0);
 	      });
 			}, 0);
+    });
+    jQuery("#cancel_search").click(function(){
+      jQuery("tr.guest").show();
+			setTimeout(function(){ jQuery("tr.guest .selectArea").hide().show(); }, 0);
     });
 		jQuery("input.select_all_emails").change(function(){
 			var checked = jQuery(this).attr("checked");
