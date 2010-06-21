@@ -840,3 +840,7 @@ table#contacts {
 #change_design .content-wrapper-top {
 	height:auto;
 }
+
+#event_map_link {
+	direction:ltr;
+}

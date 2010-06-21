@@ -377,4 +377,10 @@ jQuery(document).ready(function(){
     }
   });
   jQuery(".form input:first").focus();
+	jQuery("#event_map_link").focus(function(){
+		if ("" == jQuery(this).val()) {
+			jQuery(this).val("http://");
+		}
+		return true;
+	})
 });
