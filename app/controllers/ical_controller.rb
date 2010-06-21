@@ -6,7 +6,7 @@ class IcalController < InheritedResources::Base
   actions :show
 
   def show
-    send_data parent.to_ical, {:disposition=>'inline', :filename=> parent.ical_filename, :type => "text/calendar"}
+    send_data parent.to_ical, :disposition=>'inline', :filename=> parent.ical_filename, :type => "text/calendar; charset=UTF-8"
   end
 
 protected

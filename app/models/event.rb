@@ -296,7 +296,7 @@ class Event < ActiveRecord::Base
     c.prodid = nil
     c.version = nil
     c.add_event(ie)
-    c.to_ical.gsub("\r", "")
+    Iconv.iconv("quoted-printable", "UTF-8", c.to_ical.gsub("\r", "")).to_s
   end
 
   def ical_filename

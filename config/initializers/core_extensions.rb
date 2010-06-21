@@ -17,3 +17,9 @@ class ActiveRecord::Base
     send("#{attr_name}_changed?") && send(attr_name).nil?
   end
 end
+
+class String
+  def to_quoted_printable
+    [self].pack("M").gsub(/\n/, "\r\n")
+  end
+end
