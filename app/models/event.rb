@@ -259,6 +259,19 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def default_reminder_message
+    with_time_zone do
+      opts = {
+        :event_name => name, 
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : " " + location),
+      }
+      s = _("Reminder:\n%{event_name} on %{date} at %{time}%{location}.\n%{host_name}") % opts
+    end
+  end
+
   def default_sms_message
     with_time_zone do
       opts = {

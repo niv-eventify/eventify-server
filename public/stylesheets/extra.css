@@ -844,3 +844,7 @@ table#contacts {
 #event_map_link {
 	direction:ltr;
 }
+
+#user_session_email, #user_session_password {
+	direction: ltr;
+}
