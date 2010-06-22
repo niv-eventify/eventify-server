@@ -129,4 +129,16 @@ class Reminder < ActiveRecord::Base
       guest.send_later(:send_reminder!, self)
     end
   end
+
+  def set_default_values
+    return unless event
+
+    self.attributes = {
+      :by_sms => !event.guests.invite_by_sms.count.zero?,
+      :by_email => true,
+      :email_subject => _("Reminder: %{event_name}") % {:event_name => event.name},
+      :email_body => event.default_reminder_message,
+      :sms_message => _("Reminder: %{default_sms}") % {:default_sms => event.default_sms_message}
+    }
+  end
 end

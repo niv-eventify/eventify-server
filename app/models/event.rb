@@ -92,11 +92,13 @@ class Event < ActiveRecord::Base
     send_invitations if send_invitations_now
   end
 
+  def resend_invitations=(value)
+    @resend_invitations = ("true" == value)
+  end
+
   after_validation_on_update :check_resend_invitations
   def check_resend_invitations
-    if resend_invitations && any_invitation_sent?
-      self.stage_passed = 3
-    end
+    self.stage_passed = 3 if should_resend_invitations?
   end
 
   after_update :check_reset_invitation_status
@@ -256,6 +258,19 @@ class Event < ActiveRecord::Base
       return s if s.length < SmsMessage::MAX_LENGTH # check sms length
 
       _("Changes: %{event_name} on %{date} at %{time}. %{host_name}") % opts
+    end
+  end
+
+  def default_reminder_message
+    with_time_zone do
+      opts = {
+        :event_name => name, 
+        :host_name => user.name,
+        :date => starting_at.to_s(:isra_date),
+        :time => starting_at.to_s(:isra_time),
+        :location => (location.blank? ? "" : " " + location),
+      }
+      s = _("Reminder:\n%{event_name} on %{date} at %{time}%{location}.\n%{host_name}") % opts
     end
   end
 

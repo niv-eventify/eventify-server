@@ -9,8 +9,7 @@ class RemindersController < InheritedResources::Base
 
   def new
     new! do |success|
-      resource.by_sms = 1
-      resource.by_email = 1
+      resource.set_default_values
       success.html
     end
   end

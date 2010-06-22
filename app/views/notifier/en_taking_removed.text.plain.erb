@@ -1,9 +1,12 @@
 Hello <%= @guest.name %>,
 
-You no longed need to bring <%= @thing.name %> to <%= @guest.event.name %> because host removed it from the list.
+Just a quick update, there is no longer a need to bring <%= h(@thing.name)%> 
+to <%= h(@guest.event.user.name)%>'s <%= "\"#{h(@guest.event.name)}\"" %> event.
 
-You can pick some other things to bring by following this URL:
+<%= _("You can select other things to bring by following this URL:") %>
 <%= @url %>
+
+Thank you for your understanding.
 
 Please do not reply to this email.
 

@@ -390,11 +390,6 @@ ul.contact-tabset li.active a:hover,
 	left:-18px;
 }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
 .boxe .heading h4 {
 	width: 400px;
 }
@@ -766,7 +761,7 @@ p.takings-changed {
 }
 .hebrew .info-table .t-col-3 .cell-bg{
 	float: right;
-	direction: ltr;
+/*	direction: ltr;*/
 }
 .links {
 	font-size: 1.2em;
@@ -801,7 +796,7 @@ p.takings-changed {
 }
 
 #guests .input-bg-uni .input-text  {
-	width:108px;
+	width:128px;
 }
 
 #guests .input-bg-uni .input-text.short {
@@ -843,4 +838,38 @@ table#contacts {
 
 #event_map_link {
 	direction:ltr;
+}
+
+#user_session_email, #user_session_password {
+	direction: ltr;
+}
+
+#guests.info-table td.t-col-4-short {
+	width:110px;
+}
+
+#guests.info-table td.t-col-4a-short {
+	width:68px;
+}
+
+#guests.info-table td.t-col-1, #guests.info-table td.t-col-2, #guests.info-table td.t-col-3 {
+		width:150px;
+}
+
+#guests.info-table td.t-col-1 .cell-bg, #guests.info-table td.t-col-2 .cell-bg, #guests.info-table td.t-col-3 .cell-bg {
+	width:140px;
+	overflow:hidden;
+}
+
+#guests.info-table td.t-col-5, #guests.info-table td.t-col-6 {
+	width:90px;
+}
+
+#guests .input-bg-uni {
+	margin:-3px auto;
+}
+
+
+#color_selector{
+	z-index:100;
 }

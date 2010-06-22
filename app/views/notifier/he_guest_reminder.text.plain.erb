@@ -1,8 +1,14 @@
-<%= @message %>
+שלום <%= h(@guest.name)%>,
 
+רצינו להזכיר לך שהארוע של <%= h(@guest.event.user.name) %> <%= "\"#{h(@guest.event.name)}\"" %>
+יתקיים ב <%= h(@guest.event.starting_at(:isra_date)) %> בשעה <%= h(@guest.event.starting_at(:isra_time)) %> ב<%= h(@guest.event.location) %>
+
+לפתיחת ההזמנה יש ללחוץ על הקישור הבא:
 <%= @url %>
+
+אם לחיצה על הקישור אינה פותחת את ההזמנה, ניתן להעתיק את שורת הקישור ולהדביק אותה בשורת הכתובת בדפדפן.
 
 אין צורך להשיב למייל זה.
 
 בברכה,
-צוות Eventify.
+צוות Eventify

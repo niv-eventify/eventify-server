@@ -27,6 +27,7 @@ class RsvpsController < InheritedResources::Base
 
   def show
     if "true" == params[:more]
+      resource.attendees_count ||= 1
       render :action => "show_more"
     else
       if current_locale != resource.event.language
