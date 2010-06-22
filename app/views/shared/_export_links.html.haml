@@ -1,3 +1,3 @@
 %ul.logos
-  %li!= link_to image_tag("icon-date.gif", :height => "29", :alt => "17", :width => "31"), url
-  %li!= link_to image_tag("logo-micro.gif", :height => "29", :alt => "microsoft", :width => "81"), url
+  %li!= link_to image_tag("icon-date.gif", :height => "29", :alt => "17", :width => "31"), send(lnk, event)
+  %li!= link_to image_tag("logo-micro.gif", :height => "29", :alt => "microsoft", :width => "81"), send(lnk, event, :convert => true)

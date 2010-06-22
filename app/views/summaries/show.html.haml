@@ -28,7 +28,7 @@
                 %dd= @event.location_address
           .info-container-row
             %strong.heading= _("Export to your calendar:")
-            != render(:partial => 'shared/export_links', :locals => {:url => event_ical_path(@event)})
+            != render(:partial => 'shared/export_links', :locals => {:lnk => :event_ical_path, :event => @event})
       .column
         %h2= _("Guests summary")
         .lists

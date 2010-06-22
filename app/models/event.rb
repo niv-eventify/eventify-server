@@ -294,7 +294,7 @@ class Event < ActiveRecord::Base
     [location_name, location_address].compact_blanks.join(", ")
   end
 
-  def to_ical
+  def to_ical(convert = false)
     ie = with_time_zone do
       returning(Icalendar::Event.new) do |e|
         e.dtstart = starting_at.to_datetime
@@ -311,7 +311,9 @@ class Event < ActiveRecord::Base
     c.prodid = nil
     c.version = nil
     c.add_event(ie)
-    Iconv.iconv("quoted-printable", "UTF-8", c.to_ical.gsub("\r", "")).to_s
+    res = c.to_ical.gsub("\r", "")
+    # TODO: autodetect encoding
+    convert ? Iconv.iconv("windows-1255", "UTF-8", res).to_s : res
   end
 
   def ical_filename
