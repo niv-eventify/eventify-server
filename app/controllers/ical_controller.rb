@@ -6,7 +6,8 @@ class IcalController < InheritedResources::Base
   actions :show
 
   def show
-    send_data parent.to_ical("true" == params[:convert]), :disposition=>'inline', :filename=> parent.ical_filename, :type => "text/calendar; charset=UTF-8"
+    should_convert = "true" == params[:convert]
+    send_data parent.to_ical(should_convert), :disposition=>'inline', :filename=> parent.ical_filename(should_convert), :type => "text/calendar; charset=UTF-8"
   end
 
 protected

@@ -316,8 +316,8 @@ class Event < ActiveRecord::Base
     convert ? Iconv.iconv("windows-1255", "UTF-8", res).to_s : res
   end
 
-  def ical_filename
-    "eventify-#{id}.ics"
+  def ical_filename(convert = false)
+    "eventify-#{id}.#{convert ? "vcs" : "ics"}"
   end
 
   def invitation_email_subject
