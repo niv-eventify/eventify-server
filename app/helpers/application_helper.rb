@@ -138,7 +138,7 @@ module ApplicationHelper
     klass << " short" if short_css_class && !resource.send(attribute).is_a?(String)
     fields_opts = {:input_css_class => klass, 
       :container_class => "inline_#{dom_id(resource)}_#{attribute}"}
-    form_remote_for resource, :builder => TableCellFormBuilder::Builder, :url => send("event_#{resource.class.name.downcase}_path", resource.event_id, resource), :method => :put do |f|
+    form_remote_for resource, :builder => ShortTableCellFormBuilder::Builder, :url => send("event_#{resource.class.name.downcase}_path", resource.event_id, resource), :method => :put do |f|
       haml_concat f.text_field(attribute, fields_opts)
       haml_concat hidden_field_tag("attribute", attribute)
       if hidden_true_attribute

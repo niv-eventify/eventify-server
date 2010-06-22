@@ -848,3 +848,27 @@ table#contacts {
 #user_session_email, #user_session_password {
 	direction: ltr;
 }
+
+#guests.info-table td.t-col-4-short {
+	width:110px;
+}
+
+#guests.info-table td.t-col-4a-short {
+	width:68px;
+}
+
+#guests.info-table td.t-col-1, #guests.info-table td.t-col-2, #guests.info-table td.t-col-3 {
+		width:150px;
+}
+
+#guests.info-table td.t-col-5, #guests.info-table td.t-col-6 {
+	width:90px;
+}
+
+#guests .input-bg-uni {
+	margin:-3px -4px -4px 10px;
+}
+
+.hebrew #guests .input-bg-uni {
+	margin:-3px 10px -4px -4px;
+}
