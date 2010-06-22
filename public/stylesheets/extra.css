@@ -848,3 +848,6 @@ table#contacts {
 #user_session_email, #user_session_password {
 	direction: ltr;
 }
+#color_selector{
+	z-index:100;
+}
