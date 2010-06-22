@@ -92,11 +92,13 @@ class Event < ActiveRecord::Base
     send_invitations if send_invitations_now
   end
 
+  def resend_invitations=(value)
+    @resend_invitations = ("true" == value)
+  end
+
   after_validation_on_update :check_resend_invitations
   def check_resend_invitations
-    if resend_invitations && any_invitation_sent?
-      self.stage_passed = 3
-    end
+    self.stage_passed = 3 if should_resend_invitations?
   end
 
   after_update :check_reset_invitation_status
