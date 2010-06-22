@@ -390,11 +390,6 @@ ul.contact-tabset li.active a:hover,
 	left:-18px;
 }
 
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
 .boxe .heading h4 {
 	width: 400px;
 }
@@ -871,4 +866,8 @@ table#contacts {
 
 .hebrew #guests .input-bg-uni {
 	margin:-3px 10px -4px -4px;
+}
+
+#color_selector{
+	z-index:100;
 }
