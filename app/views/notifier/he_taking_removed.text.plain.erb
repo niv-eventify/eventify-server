@@ -1,12 +1,11 @@
-<%= s_("taking removed|Hello %{username},") % {:username => @guest.name} %>
+שלום <%= h(@guest.name)%>,
 
-<%= _("You no longed need to bring %{thing} to %{event} because host removed it from the list.") % {:thing => @thing.name, :event => @guest.event.name} %>
+אין צורך בהבאת <%= h(@thing.name)%> ל<%= "\"#{h(@guest.event.name)}\"" %> של <%= h(@guest.event.user.name)%>.
 
-<%= _("You can pick some other things to bring by following this URL:") %>
+ניתן לבחור פריטים אחרים מרשימת ה"דברים להביא" ע"י לחיצה על הקישור הבא:
 <%= @url %>
-
 
 אין צורך להשיב למייל זה.
 
 בברכה,
-צוות Eventify.
+צוות Eventify
