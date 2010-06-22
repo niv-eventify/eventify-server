@@ -761,7 +761,7 @@ p.takings-changed {
 }
 .hebrew .info-table .t-col-3 .cell-bg{
 	float: right;
-	direction: ltr;
+/*	direction: ltr;*/
 }
 .links {
 	font-size: 1.2em;
@@ -796,7 +796,7 @@ p.takings-changed {
 }
 
 #guests .input-bg-uni .input-text  {
-	width:108px;
+	width:128px;
 }
 
 #guests .input-bg-uni .input-text.short {
@@ -856,17 +856,19 @@ table#contacts {
 		width:150px;
 }
 
+#guests.info-table td.t-col-1 .cell-bg, #guests.info-table td.t-col-2 .cell-bg, #guests.info-table td.t-col-3 .cell-bg {
+	width:140px;
+	overflow:hidden;
+}
+
 #guests.info-table td.t-col-5, #guests.info-table td.t-col-6 {
 	width:90px;
 }
 
 #guests .input-bg-uni {
-	margin:-3px -4px -4px 10px;
+	margin:-3px auto;
 }
 
-.hebrew #guests .input-bg-uni {
-	margin:-3px 10px -4px -4px;
-}
 
 #color_selector{
 	z-index:100;

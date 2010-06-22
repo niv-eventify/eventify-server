@@ -32,9 +32,9 @@
                   }).blur(function(){
                     if (jQuery(this).val() == ''){jQuery(this).val('#{_('search')}');}
                   })
-                });
-                jQuery("#cancel_search").click(function(){
-                  jQuery("#search_guests").val("#{_('search')}");
+                  jQuery("#cancel_search").click(function(){
+                    jQuery("#search_guests").val("#{_('search')}");
+                  });
                 });
 
           %h3= _("Add manually:")
