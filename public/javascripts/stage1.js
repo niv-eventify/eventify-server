@@ -53,11 +53,14 @@ var stage1 = {
 		stage1.curr_cropped_width = $("#cropbox img").width();
 		stage1.curr_cropped_height = $("#cropbox img").height();
 		var ratio = stage1.curr_window_width / stage1.curr_window_height;
+		var cropX = Math.floor(($('#cropbox img').width() - stage1.curr_window_width) / 2);
+		var cropY = Math.floor(($('#cropbox img').height() - stage1.curr_window_height) / 2);
+
 		$('#cropbox img').Jcrop({
 			onChange: stage1.showPreview,
 			onSelect: stage1.showPreview,
 			aspectRatio: ratio,
-			setSelect: [0, 0, stage1.curr_window_width, stage1.curr_window_height]
+			setSelect: [cropX, cropY, cropX + stage1.curr_window_width, cropY + stage1.curr_window_height]
 		});
 		$('body').css("cursor", "");
 		$("#crop,#cancel_crop").show();
