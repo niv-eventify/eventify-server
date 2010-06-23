@@ -79,7 +79,7 @@ describe Reminder do
   describe "rescheduing events" do
     before(:each) do
       @event = Factory.build(:event)
-      @original_start = 11.days.from_now.utc
+      @original_start = 11.days.from_now.utc.beginning_of_day + 15.hours
       @event.starting_at = @original_start
       @event.save!
       @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
