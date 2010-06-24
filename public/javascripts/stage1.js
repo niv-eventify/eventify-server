@@ -3,6 +3,8 @@ var stage1 = {
 	curr_cropped_height: 0,
 	curr_window_height: 0,
 	curr_window_width: 0,
+	is_cropping: false,
+	still_cropping_msg:"Saving in progress. Please wait",
 
 	showPreview: function(coords){
 		if (parseInt(coords.w) > 0){
@@ -76,5 +78,11 @@ $(document).ready(function(){
 	$(".window").each(function(){
 		if($(this).children('img').length == 0)
 			$(this).addClass("empty");
+	});
+	$("a.next-btn").click(function(){
+		if(stage1.is_cropping) {
+			alert(stage1.still_cropping_msg);
+			return false;
+		}
 	});
 });

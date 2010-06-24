@@ -1,3 +1,4 @@
 page << '$(".crop_preview").html("")'
 page.replace_html(".window[window_id='#{@cropped_picture.window.id}']", :partial => 'cropped_picture')
 page << '$("body").css("cursor", "default")'
+page << 'stage1.is_cropping = false;'

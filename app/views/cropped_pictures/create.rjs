@@ -1,1 +1,2 @@
 page << '$("body").css("cursor", "default")'
+page << 'stage1.is_cropping = false;'

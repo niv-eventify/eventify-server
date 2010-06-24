@@ -24,4 +24,8 @@ module DesignsHelper
 
     render(:partial => "designs/change_design_form", :locals => {:event => event, :design => design, :css_class => css_class, :select_text => select_text})
   end
+
+  def set_alert
+    javascript_tag("stage1.still_cropping_msg = '#{_("Saving in progress. Please wait")}';")
+  end
 end
