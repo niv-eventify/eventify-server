@@ -102,11 +102,11 @@ module EventsHelper
       haml_tag(:div, :class => "window", :window_id => window.id, :style => "#{window_css(window, ratio)};") do
         if event.id.to_i == 0
           for cropped_pic in window.cropped_pictures.find_all_by_id(session[:cropped_picture_ids]) do
-            haml_tag(:img, :src => cropped_pic.pic.url(:cropped))
+            haml_tag(:img, :src => cropped_pic.pic.url(:original))
           end
         else
           for cropped_pic in window.cropped_pictures.find_all_by_event_id(event.id.to_i) do
-            haml_tag(:img, :src => cropped_pic.pic.url(:cropped))
+            haml_tag(:img, :src => cropped_pic.pic.url(:original))
           end
         end
       end
