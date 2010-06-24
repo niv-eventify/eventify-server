@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-23 10:30+0300\n"
+"POT-Creation-Date: 2010-06-24 13:42+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,7 +287,7 @@ msgstr ""
 #: app/views/contact_importers/_edit.html.haml:13
 #: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
 #: app/views/passwords/_edit.html.haml:9
-#: app/views/cropped_pictures/_new.html.haml:9
+#: app/views/cropped_pictures/_new.html.haml:10
 #: app/views/admin/designs/new.html.haml:9
 #: app/views/admin/designs/edit.html.haml:8 app/views/windows/new.html.haml:9
 #: app/views/windows/edit.html.haml:8
@@ -321,7 +321,7 @@ msgstr ""
 msgid "Change Password"
 msgstr ""
 
-#: app/views/designs/show.html.haml:19 app/views/designs/show.html.haml:21
+#: app/views/designs/show.html.haml:20 app/views/designs/show.html.haml:22
 msgid "Change design"
 msgstr ""
 
@@ -386,7 +386,7 @@ msgid ""
 "Online invitations made easy."
 msgstr ""
 
-#: app/views/cropped_pictures/_new.html.haml:8
+#: app/views/cropped_pictures/_new.html.haml:9
 msgid "Crop"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Don't send SMS invitations"
 msgstr ""
 
-#: app/views/designs/show.html.haml:38
+#: app/views/designs/show.html.haml:39
 msgid ""
 "Drag your uploaded pictures into the invitation. In order to remove a "
 "picture all you have to do is drag it back out of the invitation"
@@ -722,7 +722,7 @@ msgid ""
 "your email."
 msgstr ""
 
-#: app/views/designs/show.html.haml:10
+#: app/views/designs/show.html.haml:11
 msgid "Invitation Design"
 msgstr ""
 
@@ -857,7 +857,7 @@ msgid "New Reminder to Guests"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:7 app/helpers/events_wizard_helper.rb:9
-#: app/views/designs/show.html.haml:31
+#: app/views/designs/show.html.haml:32
 msgid "Next"
 msgstr ""
 
@@ -993,7 +993,7 @@ msgstr ""
 msgid "Please wait..."
 msgstr ""
 
-#: app/views/designs/show.html.haml:36
+#: app/views/designs/show.html.haml:37
 msgid "Prev"
 msgstr ""
 
@@ -1311,7 +1311,7 @@ msgstr ""
 msgid "Upload Picture"
 msgstr ""
 
-#: app/views/designs/show.html.haml:26
+#: app/views/designs/show.html.haml:27
 msgid "Upload your own pictures and insert them into the invitation"
 msgstr ""
 
@@ -1319,7 +1319,7 @@ msgstr ""
 msgid "User Settings"
 msgstr ""
 
-#: app/views/designs/show.html.haml:28
+#: app/views/designs/show.html.haml:29
 msgid "Watch example"
 msgstr ""
 
@@ -1356,7 +1356,7 @@ msgstr ""
 msgid "You can also upload a map and a personal message"
 msgstr ""
 
-#: app/views/designs/show.html.haml:16
+#: app/views/designs/show.html.haml:17
 msgid "You can always:"
 msgstr ""
 
