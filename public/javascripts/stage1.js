@@ -55,7 +55,7 @@ var stage1 = {
 		var ratio = stage1.curr_window_width / stage1.curr_window_height;
 		var cropX = Math.floor(($('#cropbox img').width() - stage1.curr_window_width) / 2);
 		var cropY = Math.floor(($('#cropbox img').height() - stage1.curr_window_height) / 2);
-
+		$('#cropper_width').val(stage1.curr_cropped_width);
 		$('#cropbox img').Jcrop({
 			onChange: stage1.showPreview,
 			onSelect: stage1.showPreview,

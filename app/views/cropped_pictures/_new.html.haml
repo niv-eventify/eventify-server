@@ -4,6 +4,7 @@
   != hidden_field_tag 'event', @event.id.to_i
   != hidden_field_tag 'window'
   != hidden_field_tag 'uploaded_picture'
+  != hidden_field_tag 'cropper_width'
   .btns-h
     != link_to_function _("Crop"), "$('body').css('cursor', 'wait');$.Jcrop('#cropbox img').destroy();$('#cropbox').html('');$('#crop, #cancel_crop').hide();$('#cropper').get(0).onsubmit()", {:id => "crop"}
     != link_to_function _("Cancel"), "$.Jcrop('#cropbox img').destroy();$('#cropbox').html('');$('#crop, #cancel_crop, .crop_preview').hide();$('#uploaded_picture,#window').val('')", {:id => "cancel_crop"}
