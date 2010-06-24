@@ -50,6 +50,38 @@ var stage1 = {
 				$(this).removeClass("empty");
 			}
 		});
+		$(".window").draggable({
+			opacity: 0.7,
+			helper: 'clone',
+			appendTo: 'body',
+			zIndex: 200
+		});
+		$('body').droppable({
+			drop: function(event, ui) {
+				ui.draggable.find('a').click();
+				ui.draggable.html("");
+			}
+		});
+		$('.visual-box').droppable({
+			greedy: true,
+			drop: function(event, ui) {
+			}
+		});
+		$('.visual-box').mousedown(function(ev){
+			ev.stopPropagation();
+			$('.window').each(function(){
+				var X = $(this).offset().left;
+				var Y = $(this).offset().top;
+				var W = $(this).width();
+				var H = $(this).height();
+				if(ev.pageX >= X && ev.pageX <= (X+W) && ev.pageY >= Y && ev.pageY <= (Y+H)){
+					$(this).trigger(ev);
+				}
+			});
+		});
+		$('.window').mousedown(function(ev){
+			ev.stopPropagation();
+		});
 	},
 	initCrop: function() {
 		stage1.curr_cropped_width = $("#cropbox img").width();

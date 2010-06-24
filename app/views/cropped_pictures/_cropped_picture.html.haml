@@ -1,1 +1,2 @@
 %img{:src => @cropped_picture.pic.url(:original)}
+!= link_to_remote "Delete", :update => "delete_updates_me", :url => cropped_picture_path(@cropped_picture), :method => :delete

@@ -1,5 +1,5 @@
 class CroppedPicturesController < InheritedResources::Base
-  actions :create
+  actions :create, :destroy
   respond_to :js, :only => [:create]
 
   def create
@@ -18,6 +18,12 @@ class CroppedPicturesController < InheritedResources::Base
       render :index
     else
       render :create
+    end
+  end
+
+  def destroy
+    destroy! do |format|
+      format.js{render :nothing => true}
     end
   end
 private
