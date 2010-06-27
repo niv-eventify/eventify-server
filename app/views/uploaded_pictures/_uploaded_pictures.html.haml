@@ -1,8 +1,9 @@
 - if not @uploaded_pictures.blank?
   - for picture in @uploaded_pictures
     %li.pic_thumb{:crop_src => "#{picture.pic.url(:crop)}", :pic_id => picture.id}
-      %a{:href => "#"}
+      %a{:href => "#", :onclick => "return false;"}
         %img{:src => "#{picture.pic.url(:small)}", :width => "75", :height => "76", :alt => ""}
+    != link_to_remote "Delete", :update => "delete_updates_me", :url => uploaded_picture_path(picture), :method => :delete, :html => {:style => "display: none;"}
 != render(:partial => "uploaded_pictures/empty_thumbnail")
 != render(:partial => "uploaded_pictures/empty_thumbnail")
 != render(:partial => "uploaded_pictures/empty_thumbnail")

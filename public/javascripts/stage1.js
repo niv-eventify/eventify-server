@@ -4,7 +4,9 @@ var stage1 = {
 	curr_window_height: 0,
 	curr_window_width: 0,
 	is_cropping: false,
-	still_cropping_msg:"Saving in progress. Please wait",
+	still_cropping_msg: "Saving in progress. Please wait",
+	delete_crop_alert: "Are you sure you want to remove this picture?",
+	delete_uploaded_pic_alert: "Are you sure you want to remove the picture you uploaded?",
 
 	showPreview: function(coords){
 		if (parseInt(coords.w) > 0){
@@ -58,13 +60,28 @@ var stage1 = {
 		});
 		$('body').droppable({
 			drop: function(event, ui) {
-				ui.draggable.find('a').click();
+				if(ui.draggable.hasClass('window')){
+					if(!confirm(stage1.delete_crop_alert)) return;
+					ui.draggable.find('a').click();
+				}else if(ui.draggable.hasClass('pic_thumb')) {
+					if(!confirm(stage1.delete_uploaded_pic_alert)) return;
+					ui.draggable.next('a').click();
+				}
 				ui.draggable.html("");
 			}
 		});
 		$('.visual-box').droppable({
 			greedy: true,
 			drop: function(event, ui) {
+			}
+		});
+		$('.sml-gallery').droppable({
+			greedy: true,
+			accept: ".window",
+			drop: function(event, ui) {
+				if(!confirm(stage1.delete_crop_alert)) return;
+				ui.draggable.find('a').click();
+				ui.draggable.html("");
 			}
 		});
 		$('.visual-box').mousedown(function(ev){

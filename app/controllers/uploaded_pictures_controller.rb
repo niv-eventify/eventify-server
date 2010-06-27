@@ -1,10 +1,16 @@
 class UploadedPicturesController < InheritedResources::Base
-  actions :index, :show, :create, :new
-  respond_to :js, :only => [:index, :create]
+  actions :index, :show, :create, :new, :destroy
+  respond_to :js, :only => [:index, :create, :destroy]
   def new
     @event = params[:event]
     @uploaded_picture = UploadedPicture.new()
     render :action => "new", :layout => false
+  end
+
+  def destroy
+    destroy! do |format|
+      format.js{render :nothing => true}
+    end
   end
 
   def create

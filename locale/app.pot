@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-24 13:42+0300\n"
+"POT-Creation-Date: 2010-06-27 10:12+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,11 +152,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:117
+#: app/helpers/events_helper.rb:119
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:117
+#: app/helpers/events_helper.rb:119
 msgid "(sent)"
 msgstr ""
 

@@ -26,6 +26,6 @@ module DesignsHelper
   end
 
   def set_alert
-    javascript_tag("stage1.still_cropping_msg = '#{_("Saving in progress. Please wait")}';")
+    javascript_tag("stage1.still_cropping_msg = '#{_("Saving in progress. Please wait")}';\nstage1.delete_crop_alert = '#{_("Are you sure you want to remove this picture?")}'\nstage1.delete_uploaded_pic_alert = '#{_("Are you sure you want to remove the picture you uploaded?")}'")
   end
 end
