@@ -270,7 +270,7 @@ class Event < ActiveRecord::Base
         :time => starting_at.to_s(:isra_time),
         :location => (location.blank? ? "" : " " + location),
       }
-      s = _("Reminder:\n%{event_name} on %{date} at %{time}%{location}.\n%{host_name}") % opts
+      s = _("Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}") % opts
     end
   end
 
