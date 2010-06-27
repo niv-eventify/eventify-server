@@ -286,6 +286,9 @@ class Event < ActiveRecord::Base
       s = _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
       return s if s.length < SmsMessage::MAX_LENGTH # check sms length
 
+      s = _("%{event_name} on %{date} at %{time}%{location}. %{host_name}") % opts
+      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+
       _("%{event_name} on %{date} at %{time}. %{host_name}") % opts
     end
   end

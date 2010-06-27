@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-27 10:12+0300\n"
+"POT-Creation-Date: 2010-06-27 22:31+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -119,17 +119,21 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
+#: app/models/event.rb:289
+msgid "%{event_name} on %{date} at %{time}%{location}. %{host_name}"
+msgstr ""
+
 #: app/models/event.rb:286
 msgid ""
 "%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:289
+#: app/models/event.rb:292
 msgid "%{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:324
+#: app/models/event.rb:327
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -1086,19 +1090,16 @@ msgstr ""
 msgid "Reminder has already been sent"
 msgstr ""
 
-#: app/models/event.rb:273
-msgid ""
-"Reminder:\n"
-"%{event_name} on %{date} at %{time}%{location}.\n"
-"%{host_name}"
-msgstr ""
-
 #: app/models/reminder.rb:141
 msgid "Reminder: %{default_sms}"
 msgstr ""
 
 #: app/models/reminder.rb:139
 msgid "Reminder: %{event_name}"
+msgstr ""
+
+#: app/models/event.rb:273
+msgid "Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:3 app/views/events/show.html.haml:24
