@@ -1,6 +1,7 @@
 class CroppedPicturesController < InheritedResources::Base
   actions :create, :destroy
   respond_to :js, :only => [:create]
+  after_filter :clear_flash
 
   def create
     remove_curr_window_cropped_pics

@@ -1,6 +1,8 @@
 class UploadedPicturesController < InheritedResources::Base
   actions :index, :show, :create, :new, :destroy
   respond_to :js, :only => [:index, :create, :destroy]
+  after_filter :clear_flash
+
   def new
     @event = params[:event]
     @uploaded_picture = UploadedPicture.new()
