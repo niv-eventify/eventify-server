@@ -1,5 +1,8 @@
 .top-text
-  %h2= _("Change Password")
+  - if @user.activated_at
+    %h2= _("Change Password")
+  - else
+    %h2= _("Choose Password")
 
 .settings-box.login
   - middle_box_section("") do
