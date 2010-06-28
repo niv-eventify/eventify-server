@@ -18,7 +18,12 @@ class TakingsController < InheritedResources::Base
     resource.destroy
   end
 
+
 protected
+  def collection
+    get_collection_ivar || set_collection_ivar(end_of_association_chain.all)
+  end
+
   def resource
     return @resource if @resource
     if params[:event_id]
