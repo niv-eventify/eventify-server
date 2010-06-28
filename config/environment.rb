@@ -30,7 +30,7 @@ Rails::Initializer.run do |config|
   config.gem 'fastercsv', :lib => false, :version => '1.5.0'
   config.gem 'hoptoad_notifier', :version => "2.1.3"
   config.gem 'blackbook', :lib => false
-  config.gem 'contacts', :lib => false
+  config.gem 'contacts', :lib => false, :version => "1.2.3"
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
   config.gem 'rspec', :lib => false, :version => '1.3.0'

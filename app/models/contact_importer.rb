@@ -5,7 +5,7 @@ class ContactImporter < ActiveRecord::Base
   SOURCES = returning(ActiveSupport::OrderedHash.new) do |h|
     h["aol"] = "AOL"
     h["gmail"] = "GMail"
-    # h["yahoo"] = "Yahoo!"
+    h["yahoo"] = "Yahoo!"
     h["hotmail"] = "Hotmail"
     h["csv"] = "CSV file"
   end
@@ -40,6 +40,7 @@ class ContactImporter < ActiveRecord::Base
   end
 
   def self.import_contacts(username, password, contact_source, csv)
+    debugger
     error = nil
 
     contacts = case contact_source
