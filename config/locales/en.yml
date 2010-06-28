@@ -5,6 +5,12 @@ en:
         notice: "Logged in"
       destroy:
         notice: "Goodbye"
+    passwords:
+      update:
+        notice: "Password changed"
+    users:
+      update:
+        notice: "User details updated"        
   authlogic:
     error_messages:
       login_blank: "can not be blank"
