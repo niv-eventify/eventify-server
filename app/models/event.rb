@@ -116,10 +116,9 @@ class Event < ActiveRecord::Base
 
   after_create :create_default_reminder
   def create_default_reminder
-    opts = Reminder::DEFAULT_REMINDER.clone
-    opts[:email_subject] = s_(opts[:email_subject])
-    opts[:email_body] = s_(opts[:email_body])
-    reminders.create(opts)
+    r = reminders.build
+    r.set_default_values
+    r.save
   end
 
   after_update :adjust_reminders

@@ -116,8 +116,10 @@ describe Event do
 
       it "should create a default email reminder" do
         @event.reminders.count.should == 1
-        @event.reminders.first.by_email.should be_true
-        @event.reminders.first.by_sms.should_not be_true
+        r = @event.reminders.first
+        r.by_email.should be_true
+        r.by_sms.should_not be_true
+        r.email_subject.should == "Reminder: #{@event.name}"
       end
 
       it "should have ical" do
