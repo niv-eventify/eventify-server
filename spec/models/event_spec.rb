@@ -3,16 +3,64 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe Event do
 
   describe "validations" do
-    before(:each) do
-      @event = Event.new
-      @event.user = User.new
+    describe "new event" do
+      before(:each) do
+        @event = Event.new
+        @event.user = User.new
+      end
+
+      it "should validate starting and ending at" do
+        @event.starting_at = 2.days.from_now
+        @event.ending_at = 1.day.from_now
+        @event.should_not be_valid
+        @event.errors.on(:ending_at).should == "should be in a future"
+      end
+
+      it "should not validate sms messages length on create" do
+        @event.sms_message = "x" * 141
+        @event.valid?
+        @event.errors.on(:sms_message).should be_blank
+      end
+
+      it "should not validate sms messages length  for resend on create" do
+        @event.sms_resend_message = "x" * 141
+        @event.valid?
+        @event.errors.on(:sms_resend_message).should be_blank
+      end
     end
 
-    it "should validate starting and ending at" do
-      @event.starting_at = 2.days.from_now
-      @event.ending_at = 1.day.from_now
-      @event.should_not be_valid
-      @event.errors.on(:ending_at).should == "should be in a future"
+    describe "existing" do
+      before(:each) do
+        @event = Factory.create(:event)
+      end
+
+      it "should not validate sms message when not going to send sms" do
+        @event.stub!(:going_to_send_sms?).and_return(false)
+        @event.sms_message = "x" * 141
+        @event.valid?
+        @event.errors.on(:sms_message).should be_blank        
+      end
+
+      it "should not validate sms message for resend when not going to send sms" do
+        @event.stub!(:going_to_resend_sms?).and_return(false)
+        @event.sms_message = "x" * 141
+        @event.valid?
+        @event.errors.on(:sms_resend_message).should be_blank        
+      end
+
+      it "should validate sms message when going to send sms" do
+        @event.stub!(:going_to_send_sms?).and_return(true)
+        @event.sms_message = "x" * 141
+        @event.valid?
+        @event.errors.on(:sms_message).should_not be_blank
+      end
+
+      it "should validate sms message for resend when going to send sms" do
+        @event.stub!(:going_to_resend_sms?).and_return(true)
+        @event.sms_message = "x" * 141
+        @event.valid?
+        @event.errors.on(:sms_resend_message).should_not be_blank        
+      end
     end
   end
 

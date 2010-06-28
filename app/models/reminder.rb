@@ -56,7 +56,7 @@ class Reminder < ActiveRecord::Base
   validates_length_of   :email_subject, :within => 2..255, :if => :by_email?
   validates_length_of   :email_body, :within => 2..2048, :if => :by_email?
   validates_presence_of :sms_message, :if => :by_sms
-  validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :by_sms
+  validates_sms_length_of :sms_message, :on => :update, :if => :by_sms
 
   def validate
     errors.add(:before_value, _("should be in a future")) if active_not_yet_sent? && (send_reminder_at.blank? || in_past?)

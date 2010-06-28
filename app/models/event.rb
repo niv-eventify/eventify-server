@@ -71,27 +71,11 @@ class Event < ActiveRecord::Base
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_or_resend_sms?
   validates_phone_number :host_mobile_number, :if => :going_to_send_or_resend_sms?, :on => :update
 
-  validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
-  validate_on_update    :sms_message_length
+  validates_presence_of   :sms_message, :on => :update, :if => :going_to_send_sms?
+  validates_sms_length_of :sms_message, :on => :update, :if => :going_to_send_sms?
 
-  validates_presence_of :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
-  validate_on_update    :sms_resend_message_length
-
-  def sms_message_length
-    return if sms_message.blank?
-    return unless going_to_send_sms?
-    if sms_message.mb_chars.length > SmsMessage::MAX_LENGTH
-      error.add(:sms_message, _("is too long, %{chars} max") % {:chars => SmsMessage::MAX_LENGTH})
-    end
-  end
-
-  def sms_resend_message_length
-    return if sms_resend_message.blank?
-    return unless going_to_resend_sms?
-    if sms_resend_message.mb_chars.length > SmsMessage::MAX_LENGTH
-      error.add(:sms_resend_message, _("is too long, %{chars} max") % {:chars => SmsMessage::MAX_LENGTH})
-    end
-  end
+  validates_presence_of   :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
+  validates_sms_length_of :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
 
   def going_to_send_or_resend_sms?
     going_to_send_sms? || going_to_resend_sms?
