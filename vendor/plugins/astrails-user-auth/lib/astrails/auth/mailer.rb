@@ -1,6 +1,6 @@
 module Astrails
   module Auth
-    class Mailer < ActionMailer::Base
+    class Mailer < LocalizedActionMailer
 
       def password_reset_instructions(user)
         subject       (_("%{domain}: Password Reset Instructions") % {:domain => domain})
@@ -36,21 +36,6 @@ module Astrails
         _set_receipient_header(user)
         sent_on       Time.now
         body          :domain => domain, :user => user, :login_url => login_url
-      end
-
-      protected
-
-      def domain
-        if domain = GlobalPreference.get(:domain)
-          default_url_options[:host] = domain
-        end
-        @domain ||= domain
-      end
-
-      def _set_receipient_header(obj)
-        hdr = SmtpApiHeader.new
-        hdr.addTo([obj.email])
-        @headers["X-SMTPAPI"] = hdr.asJSON
       end
 
     end

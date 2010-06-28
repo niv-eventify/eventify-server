@@ -1,4 +1,4 @@
-class Notifier < LocalizedActionMailer
+class Notifier < Astrails::Auth::LocalizedActionMailer
 
   def invite_resend_guest(guest)
     subject     guest.event.invitation_email_subject
@@ -43,21 +43,6 @@ class Notifier < LocalizedActionMailer
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
     body        :guest => guest, :thing => thing, :url => rsvp_url(guest.email_token, :more => true)
-  end
-
-protected
-
-  def _set_receipient_header(obj)
-    hdr = SmtpApiHeader.new
-    hdr.addTo([obj.email])
-    @headers["X-SMTPAPI"] = hdr.asJSON
-  end
-
-  def domain
-    if domain = GlobalPreference.get(:domain)
-      default_url_options[:host] = domain
-    end
-    @domain ||= domain
   end
 
 end

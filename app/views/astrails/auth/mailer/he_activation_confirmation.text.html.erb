@@ -1,0 +1,12 @@
+<%= _("
+Hello %{name},
+your account has been activated.
+
+You can login into your account at %{login_url}
+
+This email was generated automatically. Please do not reply to it.
+
+Best regards,
+eventify Team
+") % {:name => @user.name, :login_url => @login_url}
+%>
