@@ -310,7 +310,7 @@ class Event < ActiveRecord::Base
         e.description = guest_message unless guest_message.blank?
         e.uid = "eventify-#{id}"
         e.location = location unless location.blank?
-        e.organizer = user.name
+        e.organizer = "CHANGEME"
         e.tzid = tz
       end
     end
@@ -319,6 +319,7 @@ class Event < ActiveRecord::Base
     c.version = nil
     c.add_event(ie)
     res = c.to_ical.gsub("\r", "")
+    res.gsub!("ORGANIZER:CHANGEME", "ORGANIZER;CN=#{user.name}:MAILTO:#{user.email}")
     # TODO: autodetect encoding
     convert ? Iconv.iconv("windows-1255", "UTF-8", res).to_s : res
   end
