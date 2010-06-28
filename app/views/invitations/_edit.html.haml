@@ -1,0 +1,23 @@
+- invitations_to_send
+
+- invitations_to_resend
+
+- form_for @event, :event, :url => invitation_path(@event), :builder => MiddleBoxFormBuilder::Builder, :method => :post do |f|
+  = f.object.errors.on(:base)
+  - if @invitations_to_send[:sms] > 0 || @invitations_to_send[:resend_sms] > 0
+
+    .form-cols.send-invitations
+      - unless @invitations_to_send[:sms].zero?
+        != f.text_field :sms_message, :label => _("SMS message text")
+      - unless @invitations_to_send[:resend_sms].zero?
+        != f.text_field :sms_resend_message, :label => _("SMS message text fo resend")
+      != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")
+
+      - if !Astrails.good_time_to_send_sms?(Time.now.utc, @event.tz) && @event.allow_delayed_sms?
+        .settings-form-row
+          %label= _("Send SMS messages tomorrow morning")
+          != f.check_box :delay_sms_sending
+
+  .forms-block-btns
+    != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+    != link_to _("Edit Guests"), event_guests_path(@event), :class => "cancel"

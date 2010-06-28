@@ -49,6 +49,29 @@ describe InvitationsController do
     end
   end
 
+  describe "edit with inactive user" do
+    integrate_views
+    
+    before(:each) do
+      @user = Factory.create(:user)
+      UserSession.create(@user)
+      @event = stub_model(Event, :starting_at => 10.days.from_now.utc, :user => @user, :stage_passed => 3, :default_sms_message => "foo bar", :default_sms_message_for_resend => "bar foo")
+      controller.current_user.events.stub!(:find).and_return(@event)
+      guests = mock("guests")
+      guests.stub!(:count).and_return(1)
+      @event.stub(:guests).and_return(guests)
+      @event.stub(:payments).and_return([])
+      Astrails.stub!(:good_time_to_send_sms?).and_return(true)
+      @event.stub!(:invitations_to_send_counts).and_return({:total => 0})
+    end
+
+    it "should render activation email sent" do
+      get :edit, :id => @event
+      response.should be_success
+      response.body.should =~ /Instructions to activate your account have been emailed to you. Please check your email./
+    end
+  end
+
   describe "edit" do
     integrate_views
 

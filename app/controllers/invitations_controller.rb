@@ -53,6 +53,9 @@ protected
   end
 
   def check_invitations
+
+    return unless @event.user.activated_at
+
     if 4 == resource.stage_passed
       redirect_to summary_path(resource)
       return false
