@@ -70,10 +70,28 @@ class Event < ActiveRecord::Base
   attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_or_resend_sms?
   validates_phone_number :host_mobile_number, :if => :going_to_send_or_resend_sms?, :on => :update
+
   validates_presence_of :sms_message, :on => :update, :if => :going_to_send_sms?
+  validate_on_update    :sms_message_length
+
   validates_presence_of :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
-  validates_length_of   :sms_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_send_sms?
-  validates_length_of   :sms_resend_message, :maximum => SmsMessage::MAX_LENGTH, :allow_nil => true, :allow_blank => true, :on => :update, :if => :going_to_resend_sms?
+  validate_on_update    :sms_resend_message_length
+
+  def sms_message_length
+    return if sms_message.blank?
+    return unless going_to_send_sms?
+    if sms_message.mb_chars.length > SmsMessage::MAX_LENGTH
+      error.add(:sms_message, _("is too long, %{chars} max") % {:chars => SmsMessage::MAX_LENGTH})
+    end
+  end
+
+  def sms_resend_message_length
+    return if sms_resend_message.blank?
+    return unless going_to_resend_sms?
+    if sms_resend_message.mb_chars.length > SmsMessage::MAX_LENGTH
+      error.add(:sms_resend_message, _("is too long, %{chars} max") % {:chars => SmsMessage::MAX_LENGTH})
+    end
+  end
 
   def going_to_send_or_resend_sms?
     going_to_send_sms? || going_to_resend_sms?
@@ -254,7 +272,7 @@ class Event < ActiveRecord::Base
         :location => (location.blank? ? "" : " " + location)
       }
       s = _("Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
-      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+      return s if s.mb_chars.length < SmsMessage::MAX_LENGTH # check sms length
 
       _("Changes: %{event_name} on %{date} at %{time}. %{host_name}") % opts
     end
@@ -270,6 +288,9 @@ class Event < ActiveRecord::Base
         :location => (location.blank? ? "" : " " + location),
       }
       s = _("Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}") % opts
+      return s if s.mb_chars.length < SmsMessage::MAX_LENGTH # check sms length
+
+      _("Reminder:%{event_name} on %{date} at %{time}.%{host_name}") % opts
     end
   end
 
@@ -283,10 +304,10 @@ class Event < ActiveRecord::Base
         :location => (location.blank? ? "" : " " + location)
       }
       s = _("%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %{host_name}") % opts
-      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+      return s if s.mb_chars.length < SmsMessage::MAX_LENGTH # check sms length
 
       s = _("%{event_name} on %{date} at %{time}%{location}. %{host_name}") % opts
-      return s if s.length < SmsMessage::MAX_LENGTH # check sms length
+      return s if s.mb_chars.length < SmsMessage::MAX_LENGTH # check sms length
 
       _("%{event_name} on %{date} at %{time}. %{host_name}") % opts
     end
