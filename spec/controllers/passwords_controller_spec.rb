@@ -103,8 +103,14 @@ describe PasswordsController do
             eval_request
           end
 
-          it "should send confirmation email" do
+          it "should send password reset email" do
+            @user.activated_at = 1.day.ago
             @user.should_receive(:deliver_password_reset_confirmation!)
+            eval_request
+          end
+
+          it "should send confirmation email" do
+            @user.should_receive(:deliver_activation_confirmation!)
             eval_request
           end
 
