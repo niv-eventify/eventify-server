@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-28 11:01+0300\n"
+"POT-Creation-Date: 2010-06-28 16:00+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: app/views/astrails/auth/mailer/activation_instructions.erb:1
+#: app/views/astrails/auth/mailer/en_activation_instructions.text.html.erb:1
+#: app/views/astrails/auth/mailer/en_activation_instructions.text.plain.erb:1
+#: app/views/astrails/auth/mailer/he_activation_instructions.text.html.erb:1
+#: app/views/astrails/auth/mailer/he_activation_instructions.text.plain.erb:1
 msgid ""
 "\n"
 "Hello %{name},\n"
@@ -35,7 +38,10 @@ msgid ""
 "eventify Team\n"
 msgstr ""
 
-#: app/views/astrails/auth/mailer/password_reset_instructions.erb:1
+#: app/views/astrails/auth/mailer/en_password_reset_instructions.text.html.erb:1
+#: app/views/astrails/auth/mailer/en_password_reset_instructions.text.plain.erb:1
+#: app/views/astrails/auth/mailer/he_password_reset_instructions.text.html.erb:1
+#: app/views/astrails/auth/mailer/he_password_reset_instructions.text.plain.erb:1
 msgid ""
 "\n"
 "Hello %{name},\n"
@@ -55,7 +61,10 @@ msgid ""
 "eventify Team\n"
 msgstr ""
 
-#: app/views/astrails/auth/mailer/password_reset_confirmation.erb:1
+#: app/views/astrails/auth/mailer/en_password_reset_confirmation.text.html.erb:1
+#: app/views/astrails/auth/mailer/en_password_reset_confirmation.text.plain.erb:1
+#: app/views/astrails/auth/mailer/he_password_reset_confirmation.text.html.erb:1
+#: app/views/astrails/auth/mailer/he_password_reset_confirmation.text.plain.erb:1
 msgid ""
 "\n"
 "Hello %{name},\n"
@@ -69,7 +78,10 @@ msgid ""
 "eventify Team\n"
 msgstr ""
 
-#: app/views/astrails/auth/mailer/activation_confirmation.erb:1
+#: app/views/astrails/auth/mailer/en_activation_confirmation.text.html.erb:1
+#: app/views/astrails/auth/mailer/en_activation_confirmation.text.plain.erb:1
+#: app/views/astrails/auth/mailer/he_activation_confirmation.text.html.erb:1
+#: app/views/astrails/auth/mailer/he_activation_confirmation.text.plain.erb:1
 msgid ""
 "\n"
 "Hello %{name},\n"
@@ -119,21 +131,21 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
-#: app/models/event.rb:288
+#: app/models/event.rb:293
 msgid "%{event_name} on %{date} at %{time}%{location}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:285
+#: app/models/event.rb:290
 msgid ""
 "%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:291
+#: app/models/event.rb:296
 msgid "%{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:326
+#: app/models/event.rb:332
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -168,7 +180,7 @@ msgstr ""
 msgid "(text 140)"
 msgstr ""
 
-#: app/models/reminder.rb:62
+#: app/models/reminder.rb:63
 msgid "...mail or sms|choose a delivery method"
 msgstr ""
 
@@ -329,13 +341,13 @@ msgstr ""
 msgid "Change design"
 msgstr ""
 
-#: app/models/event.rb:256
+#: app/models/event.rb:258
 msgid ""
 "Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your "
 "email. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:259
+#: app/models/event.rb:261
 msgid "Changes: %{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
@@ -531,6 +543,10 @@ msgstr ""
 msgid "Event details are changed"
 msgstr ""
 
+#: app/controllers/ical_controller.rb:10
+msgid "Event details sent to your email"
+msgstr ""
+
 #: app/views/events/_form.html.haml:17
 msgid "Event name"
 msgstr ""
@@ -566,6 +582,14 @@ msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:54
 msgid "Exit"
+msgstr ""
+
+#: app/views/shared/_export_links.html.haml:3
+msgid "Export to Outlook"
+msgstr ""
+
+#: app/views/shared/_export_links.html.haml:2
+msgid "Export to iCal"
 msgstr ""
 
 #: app/views/rsvps/_sidebar.html.haml:13 app/views/summaries/show.html.haml:30
@@ -907,25 +931,25 @@ msgstr ""
 msgid "Number of Guests"
 msgstr ""
 
-#: app/models/reminder.rb:91
+#: app/models/reminder.rb:92
 msgid "One day before the event"
 msgid_plural "%d days before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:89
+#: app/models/reminder.rb:90
 msgid "One hour before the event"
 msgid_plural "%d hours before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:95
+#: app/models/reminder.rb:96
 msgid "One month before the event"
 msgid_plural "%d months before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:93
+#: app/models/reminder.rb:94
 msgid "One week before the event"
 msgid_plural "%d weeks before the event"
 msgstr[0] ""
@@ -971,7 +995,7 @@ msgstr ""
 msgid "Past events"
 msgstr ""
 
-#: app/models/event.rb:202
+#: app/models/event.rb:204
 msgid "Payments are not completed yet"
 msgstr ""
 
@@ -1093,16 +1117,20 @@ msgstr ""
 msgid "Reminder has already been sent"
 msgstr ""
 
-#: app/models/reminder.rb:135
+#: app/models/reminder.rb:136
 msgid "Reminder: %{default_sms}"
 msgstr ""
 
-#: app/models/reminder.rb:133
+#: app/models/reminder.rb:134
 msgid "Reminder: %{event_name}"
 msgstr ""
 
-#: app/models/event.rb:272
+#: app/models/event.rb:274
 msgid "Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}"
+msgstr ""
+
+#: app/models/event.rb:277
+msgid "Reminder:%{event_name} on %{date} at %{time}.%{host_name}"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:3 app/views/events/show.html.haml:24
@@ -1214,6 +1242,14 @@ msgstr ""
 
 #: app/views/rsvps/_edit.html.haml:12
 msgid "Send a message to the host:"
+msgstr ""
+
+#: app/views/shared/_export_links.html.haml:5
+msgid "Send event details to %{email}?"
+msgstr ""
+
+#: app/views/shared/_export_links.html.haml:5
+msgid "Send to My Email"
 msgstr ""
 
 #: app/views/guests/_guests_header.html.haml:20
@@ -1781,6 +1817,10 @@ msgstr ""
 msgid "import|Try Again"
 msgstr ""
 
+#: config/initializers/sms_length_validator.rb:9
+msgid "is too long, %{chars} max"
+msgstr ""
+
 #: app/views/users/new.html.haml:8
 msgid "login"
 msgstr ""
@@ -1862,11 +1902,11 @@ msgstr ""
 msgid "or"
 msgstr ""
 
-#: app/models/reminder.rb:101
+#: app/models/reminder.rb:102
 msgid "reminder send by|by Email"
 msgstr ""
 
-#: app/models/reminder.rb:102
+#: app/models/reminder.rb:103
 msgid "reminder send by|by SMS"
 msgstr ""
 
@@ -1920,7 +1960,7 @@ msgstr ""
 msgid "sent"
 msgstr ""
 
-#: app/models/event.rb:201 app/models/event.rb:204 app/models/reminder.rb:61
+#: app/models/event.rb:203 app/models/event.rb:206 app/models/reminder.rb:62
 msgid "should be in a future"
 msgstr ""
 
@@ -1956,7 +1996,7 @@ msgstr ""
 msgid "support.select.prompt"
 msgstr ""
 
-#: app/models/event.rb:203
+#: app/models/event.rb:205
 msgid "time cannot be blank"
 msgstr ""
 
