@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe IcalController do
   
   setup :activate_authlogic
+  integrate_views
 
   describe "event" do
     before(:each) do
@@ -21,6 +22,14 @@ describe IcalController do
     it "should not allow access to other user" do
       UserSession.create(Factory.create(:user))
       lambda {get :show, :event_id => @event.id}.should raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "should send ical attachment" do
+      UserSession.create(@event.user)
+      Notifier.should_receive(:deliver_ical_attachment)
+      xhr :post, :create, :event_id => @event.id
+      response.should be_success
+      response.body.should =~ /\/summary\/#{@event.id}/
     end
   end
 

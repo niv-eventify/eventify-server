@@ -3,7 +3,12 @@ class IcalController < InheritedResources::Base
   belongs_to :event, :polymorphic => true
   belongs_to :rsvp, :polymorphic => true
 
-  actions :show
+  actions :show, :create
+
+  def create
+    Notifier.deliver_ical_attachment(parent)
+    flash[:notice] = _("Event details sent to your email")
+  end
 
   def show
     should_convert = "true" == params[:convert]

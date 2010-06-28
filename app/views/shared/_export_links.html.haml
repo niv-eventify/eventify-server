@@ -1,3 +1,5 @@
 %ul.logos
-  %li!= link_to image_tag("icon-date.gif", :height => "29", :alt => "17", :width => "31"), send(lnk, event)
-  %li!= link_to image_tag("logo-micro.gif", :height => "29", :alt => "microsoft", :width => "81"), send(lnk, event, :convert => true)
+  %li!= link_to image_tag("icon-date.gif", :height => "29", :alt => "", :width => "31"), send(lnk, event), :title => _("Export to iCal")
+  %li!= link_to image_tag("logo-micro.gif", :height => "29", :alt => "", :width => "81"), send(lnk, event, :convert => true), :title => _("Export to Outlook")
+  - if email
+    %li!= link_to_remote image_tag("logo-google.gif", :height => "29", :alt => "", :width => "81"), :url => event_ical_path(event), :method => :post, :html => {:title => _("Send to My Email")}, :confirm => (_("Send event details to %{email}?") % { :email => event.user.email }), :before => "show_nyro_loading()"
