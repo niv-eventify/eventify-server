@@ -39,7 +39,7 @@
   - unless f.object.map.url.blank?
     .f-row.current_map_iamges
       != link_to _("Current Map Image"), f.object.map.url, :target => "_blank"
-      != link_to_remote _("Remove"), :url => event_event_maps_path(f.object), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_iamges').remove()"    
+      != link_to_remote _("Remove"), :url => event_event_maps_path(f.object), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_iamges').remove()", :after => "jQuery('#event_map_link').val('')"
 
 != form_divider
 - f.inputs do

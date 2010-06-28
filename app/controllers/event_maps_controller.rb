@@ -3,7 +3,9 @@ class EventMapsController < InheritedResources::Base
 
   def destroy
     event = current_user.events.find(params[:event_id])
-    event.update_attribute(:map, nil)
+    event.map = nil
+    event.map_link = nil
+    event.save
     render :nothing => true
   end
 end
