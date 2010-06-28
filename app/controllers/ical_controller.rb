@@ -8,6 +8,7 @@ class IcalController < InheritedResources::Base
   def create
     Notifier.deliver_ical_attachment(parent)
     flash[:notice] = _("Event details sent to your email")
+    redirect_to summary_path(parent)
   end
 
   def show

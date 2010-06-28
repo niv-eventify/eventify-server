@@ -19,7 +19,9 @@ describe EventMapsController do
       @event = stub_model(Event)
       @controller.stub!(:current_user).and_return(@user)
       @user.events.stub!(:find).and_return(@event)
-      @event.should_receive(:update_attribute).with(:map, nil)
+      @event.should_receive(:map=).with(nil)
+      @event.should_receive(:map_link=).with(nil)
+      @event.should_receive(:save)
       delete :destroy, :event_id => 12
       response.should be_success
     end

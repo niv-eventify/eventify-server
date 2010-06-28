@@ -28,8 +28,7 @@ describe IcalController do
       UserSession.create(@event.user)
       Notifier.should_receive(:deliver_ical_attachment)
       xhr :post, :create, :event_id => @event.id
-      response.should be_success
-      response.body.should =~ /\/summary\/#{@event.id}/
+      response.should redirect_to(summary_path(@event))
     end
   end
 
