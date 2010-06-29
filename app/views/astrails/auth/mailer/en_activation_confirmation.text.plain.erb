@@ -1,12 +1,27 @@
-<%= _("
-Hello %{name},
-your account has been activated.
+Dear <%= h(@user.name)%>,
+Your Eventify account has been verified and we’d like to personally welcome you to the web’s easiest way to create and send invitations.
 
-You can login into your account at %{login_url}
+We hope you make the best of it!
 
-This email was generated automatically. Please do not reply to it.
+As a valued member, we wanted to give you a few highlights of things you can do with Eventify.
+
+•  Sending of invitations to email or SMS
+•  Automatic reminders you can set
+•  Replies and guest confirmations
+•  Last minute event changes
+•  Thank you notes to guests
+•  Links to images from the event
+•  Choose from exclusive fonts; create unique invitations and so much more coming soon!
+
+You can log in to your account at <%= @login_url %>
+
+Should you have any questions, please feel free to contact our support team at: support@eventify.co.il
+
+Wishing you a very happy event!
 
 Best regards,
-eventify Team
-") % {:name => @user.name, :login_url => @login_url}
-%>
+The Eventify team.
+
+Please do not reply to this email.
+
+Twitter: @eventify
