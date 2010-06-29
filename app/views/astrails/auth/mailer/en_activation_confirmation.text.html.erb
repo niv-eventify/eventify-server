@@ -1,12 +1,27 @@
-<%= _("
-Hello %{name},
-your account has been activated.
-
-You can login into your account at %{login_url}
-
-This email was generated automatically. Please do not reply to it.
-
-Best regards,
-eventify Team
-") % {:name => @user.name, :login_url => @login_url}
-%>
+<html>
+<body>
+  <p>Dear
+  <%= h(@user.name)%>,</p>
+  <p>Your Eventify account has been verified and we’d like to personally welcome you to the web’s easiest way to create and send invitations.</p>
+  <p>We hope you make the best of it!</p>
+  <p>As a valued member, we wanted to give you a few highlights of things you can do with Eventify.</p>
+  <ul>
+  <li>Sending of invitations to email or SMS</li>
+  <li>Automatic reminders you can set</li>
+  <li>Replies and guest confirmations</li>
+  <li>Last minute event changes</li>
+  <li>Thank you notes to guests</li>
+  <li>Links to images from the event</li>
+  <li>Choose from exclusive fonts; create unique invitations and so much more coming soon!</li>
+  </ul>
+  <br/>
+  <p>You can log in to your account at <%= link_to(@login_url, @login_url) %>
+  <p>Should you have any questions, please feel free to contact our support team at: <a href="mailto:support@eventify.co.il">support@eventify.co.il</a></p>
+  <br/>
+  <p>Wishing you a very happy event!</p>
+  <p>Best regards,<p>
+  <p>The Eventify team.</p>
+  <p>Please do not reply to this email</p>
+  <p>Twitter: @eventify</p>
+</body>
+</html>
