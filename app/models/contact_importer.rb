@@ -3,9 +3,9 @@ class ContactImporter < ActiveRecord::Base
   validates_presence_of :contact_source
 
   SOURCES = returning(ActiveSupport::OrderedHash.new) do |h|
-    h["aol"] = "AOL"
-    h["gmail"] = "GMail"
+    # h["aol"] = "AOL"
     h["yahoo"] = "Yahoo!"
+    h["gmail"] = "GMail"
     h["hotmail"] = "Hotmail"
     h["csv"] = "CSV file"
   end

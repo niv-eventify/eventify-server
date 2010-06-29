@@ -873,3 +873,15 @@ table#contacts {
 #color_selector{
 	z-index:100;
 }
+ul.contact-tabset li.yahoo a {background: url(/images/bg-tab-yahoo.gif) no-repeat;}
+.hebrew ul.contact-tabset li.yahoo a {background: url(/images/bg-tab-yahoo-en.gif) no-repeat;}
+ul.contact-tabset li.yahoo { padding-left: 4px;}
+.hebrew ul.contact-tabset li.yahoo { padding-right: 4px;padding-left:0px;}
+.hebrew .import ul.contact-tabset li.yahoo { padding-right: 12px;padding-left:0px;}
+ul.contact-tabset li a:hover,
+.hebrew ul.contact-tabset li a:hover,
+ul.contact-tabset li.active a ,
+.hebrew ul.contact-tabset li.active a{
+	background-position: 0 -88px;
+	text-decoration: none;
+}
