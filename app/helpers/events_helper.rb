@@ -132,7 +132,7 @@ module EventsHelper
   end
 
   def categories_for_select
-    categories_for_select.map do |c|
+    all_enabled_categories.map do |c|
       n = c.root? ? s_("category|Other") : c.name
       [n, c.id]
     end
