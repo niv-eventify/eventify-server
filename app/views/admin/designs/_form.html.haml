@@ -1,5 +1,14 @@
+!= f.error_messages
+
 - f.inputs do
-  != f.input :category, :allow_blank => false
+  .categories-list
+    != render(:partial => "classification", :collection => f.object.classifications.not_root, :locals => {:f => f})
+    .clear
+    %br
+    %br
+  != link_to_add_category(f)
+
+- f.inputs do
   != f.input :text_top_x, :label => "Text X (upper left)"
   != f.input :text_top_y, :label => "Text Y (upper left)"
   != f.input :text_width

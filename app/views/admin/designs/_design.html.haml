@@ -1,6 +1,6 @@
 %tr
   %td= design.id
-  %td= "#{design.category.name_en} / #{design.category.name_he}"
+  %td!= categories_list(design)
   %td= "(#{design.text_top_x}, #{design.text_top_y}), #{design.text_width}x#{design.text_height}"
   %td!= link_to image_tag(design.card.url(:small)), admin_design_path(design)
   %td= design.in_carousel

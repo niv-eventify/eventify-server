@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100615062909) do
+ActiveRecord::Schema.define(:version => 20100629093250) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -18,9 +18,21 @@ ActiveRecord::Schema.define(:version => 20100615062909) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "popularity",  :default => 0
+    t.boolean  "root",        :default => false
   end
 
   add_index "categories", ["disabled_at"], :name => "index_categories_on_disabled_at"
+  add_index "categories", ["root"], :name => "index_categories_on_root"
+
+  create_table "classifications", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "design_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "classifications", ["category_id"], :name => "index_classifications_on_category_id"
+  add_index "classifications", ["design_id"], :name => "index_classifications_on_design_id"
 
   create_table "contact_importers", :force => true do |t|
     t.integer  "user_id"
@@ -75,7 +87,6 @@ ActiveRecord::Schema.define(:version => 20100615062909) do
   end
 
   create_table "designs", :force => true do |t|
-    t.integer  "category_id"
     t.integer  "creator_id"
     t.datetime "disabled_at"
     t.string   "card_file_name"
@@ -106,8 +117,6 @@ ActiveRecord::Schema.define(:version => 20100615062909) do
     t.integer  "carousel_file_size"
     t.datetime "carousel_updated_at"
   end
-
-  add_index "designs", ["category_id"], :name => "index_designs_on_category_id"
 
   create_table "events", :force => true do |t|
     t.integer  "user_id"

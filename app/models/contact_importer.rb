@@ -40,7 +40,6 @@ class ContactImporter < ActiveRecord::Base
   end
 
   def self.import_contacts(username, password, contact_source, csv)
-    debugger
     error = nil
 
     contacts = case contact_source

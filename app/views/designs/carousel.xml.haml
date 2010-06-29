@@ -4,4 +4,4 @@
       %source
         != design.carousel.url
       %path
-        != url_for(category_designs_url(design.category_id))
+        != url_for(category_designs_url(design.categories.first.id))

@@ -13,9 +13,9 @@ module DesignsHelper
 
   def select_design_link(design, css_class = "blue-btn-sml", select_text = nil)
     if design.windows.blank?
-      link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => design.category_id), :class => css_class
+      link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => params[:category_id]), :class => css_class
     else
-      link_to select_design_html(select_text), event_design_path(0, :wizard => params[:wizard], :design_id => design, :category_id => design.category_id), :class => css_class
+      link_to select_design_html(select_text), event_design_path(0, :wizard => params[:wizard], :design_id => design, :category_id => params[:category_id]), :class => css_class
     end
   end
 
@@ -27,5 +27,16 @@ module DesignsHelper
 
   def set_alert
     javascript_tag("stage1.still_cropping_msg = '#{_("Saving in progress. Please wait")}';\nstage1.delete_crop_alert = '#{_("Are you sure you want to remove this picture?")}'\nstage1.delete_uploaded_pic_alert = '#{_("Are you sure you want to remove the picture you uploaded?")}'")
+  end
+
+  def categories_list(design)
+    design.categories.map{|c| "#{h c.name_en} / #{h c.name_he}"}.join("<br/>")
+  end
+
+  def link_to_add_category(form)
+    link_to_function "Add a category" do |page|
+      cat = render(:partial => "classification", :object => Classification.new, :locals => {:f => form})
+      page << "jQuery('.categories-list').append(#{cat.to_json}); jQuery('.categories-list select').customSelect();"
+    end
   end
 end

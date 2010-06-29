@@ -131,6 +131,13 @@ module EventsHelper
     end
   end
 
+  def categories_for_select
+    Category.all.map do |c|
+      n = c.root? ? s_("category|Other") : c.name
+      [n, c.id]
+    end
+  end
+
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT
