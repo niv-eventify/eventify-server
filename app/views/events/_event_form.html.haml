@@ -1,4 +1,4 @@
-- events_content_section(2, @event, :next => {:func => "jQuery('.form.new-event').submit()"}) do
+- events_content_section(2, @event, :next => {:func => "clearInputsBeforeFormSubmission('event_user_attributes_name', '#{_("ex. John Doe")}');clearInputsBeforeFormSubmission('event_user_attributes_email', '#{_("ex. john.doe@gmail.com")}');clearInputsBeforeFormSubmission('event_name', '#{_("ex. My 40th birthday")}');clearInputsBeforeFormSubmission('event_location_name', '#{_("ex. The Neighberhood Bar")}');clearInputsBeforeFormSubmission('event_location_address', '#{_("ex. 5th Avenue, Manhattan")}');jQuery('.form.new-event').submit()"}) do
   .content-section-heading
     %h1= _("Please fill out the events details")
   .twocolumns

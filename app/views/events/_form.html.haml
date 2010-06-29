@@ -9,12 +9,12 @@
   - unless logged_in?
     .not-logged-in-event-details
       - f.fields_for :user do |user_f|
-        - event_text_input(user_f, :name, _("Your Name"), {:required => true}, _("ex. John Doe"))
-        - event_text_input(user_f, :email, _("Your Email"), {:required => true}, _("ex. john.doe@gmail.com"))
+        - event_text_input(user_f, :name, _("Your Name"), {:required => true})
+        - event_text_input(user_f, :email, _("Your Email"), {:required => true})
         .f-row
           != link_to_function _("I already have an account"), "jQuery('li.btn-2 a.opener').click();jQuery('#user_session_email').focus()", :class => "add-link"
 
-  - event_text_input(f, :name, _("Event name"), {:required => true}, @event.name || _("ex. My 40th birthday"))
+  - event_text_input(f, :name, _("Event name"), {:required => true})
   != f.input :category, :label => _("Event Type"), :required => nil, :collection => categories_for_select
 
   - event_date_time_select_combo(f, :starting_at) do
@@ -27,8 +27,8 @@
     .f-row &nbsp;
 
 - f.inputs do
-  - event_text_input(f, :location_name, _("Location"), {}, @event.location_name || _("ex. The Neighberhood Bar"))
-  - event_text_input(f, :location_address, _("Address"), {}, @event.location_address || _('ex. 5th Avenue, Manhattan')) do
+  - event_text_input(f, :location_name, _("Location"))
+  - event_text_input(f, :location_address, _("Address")) do
     - unless f.object.has_map?
       .f-row
         != link_to_function _("Add Map"), "jQuery(this).hide();jQuery('.map-section').toggle()", :class => "add-link"

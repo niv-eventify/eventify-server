@@ -6,7 +6,7 @@ function clearInputs(id, default_val){
 			if(this.value == default_val) this.value = '';
 		}).bind('blur', function(){
 			if(this.value == '') this.value = default_val;
-		});
+		}).blur();
 	});
 	
 //	jQuery('div.input-bg-alt > input').bind('focus', function(){
@@ -25,7 +25,10 @@ function clearInputs(id, default_val){
 //		jQuery(this).parent().parent().removeClass('input-bg-uni-active');
 //	});
 }
-
+function clearInputsBeforeFormSubmission(id, default_val){
+	if(jQuery('#' + id).val() == default_val)
+		jQuery('#' + id).val("")
+}
 /*--- IE6 hover ---*/
 function ieHover(h_list, h_class){
 	if(jQuery.browser.msie && jQuery.browser.version < 7){
