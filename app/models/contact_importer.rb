@@ -66,7 +66,7 @@ class ContactImporter < ActiveRecord::Base
       end
     end
     
-    [contacts, error]
+    [contacts.try(:uniq), error]
   end
 
   def self.parse_name_and_email(c)
