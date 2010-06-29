@@ -11,16 +11,16 @@ module DesignsHelper
     select_text || content_tag(:span, _("SELECT"))
   end
 
-  def select_design_link(design, css_class = "blue-btn-sml", select_text = nil)
+  def select_design_link(design, category, css_class = "blue-btn-sml", select_text = nil)
     if design.windows.blank?
-      link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => params[:category_id]), :class => css_class
+      link_to select_design_html(select_text), new_event_path(:design_id => design, :category_id => category.id), :class => css_class
     else
-      link_to select_design_html(select_text), event_design_path(0, :wizard => params[:wizard], :design_id => design, :category_id => params[:category_id]), :class => css_class
+      link_to select_design_html(select_text), event_design_path(0, :wizard => params[:wizard], :design_id => design, :category_id => category.id), :class => css_class
     end
   end
 
-  def update_design_link(event, design, css_class = "blue-btn-sml", select_text = nil)
-    return select_design_link(design, css_class, select_text) if !event || event.new_record?
+  def update_design_link(event, design, category, css_class = "blue-btn-sml", select_text = nil)
+    return select_design_link(design, category, css_class, select_text) if !event || event.new_record?
 
     render(:partial => "designs/change_design_form", :locals => {:event => event, :design => design, :css_class => css_class, :select_text => select_text})
   end

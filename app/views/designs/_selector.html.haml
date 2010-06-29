@@ -3,9 +3,9 @@
     .img-box-b
       .content-h
         .image
-          != update_design_link(event, design, "", image_tag(design.preview.url(:medium), :alt => "", :size=>"218x145"))
-      != update_design_link(event, design)
+          != update_design_link(event, design, category, "", image_tag(design.preview.url(:medium), :alt => "", :size=>"218x145"))
+      != update_design_link(event, design, category)
       %a.plus.nyroModal{ :href => "#light_box_#{design.id}" } +
   %div.lightbox{ :id => "light_box_#{design.id}", :style => 'display:none; width:670px; height:500px'}
     != image_tag(design.preview.url(:lightbox))
-    != update_design_link(event, design, "blue-btn-mdl")
+    != update_design_link(event, design, category, "blue-btn-mdl")

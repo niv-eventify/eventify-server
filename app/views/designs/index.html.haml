@@ -16,7 +16,7 @@
         .image-boxes-h-row
           - group.compact.each do |d|
             .img-box
-              != render(:partial => "designs/selector", :locals => {:event => nil, :design => d})
+              != render(:partial => "designs/selector", :locals => {:event => nil, :design => d, :category => @category})
 
     .content-wrapper-bottom
       != will_paginate(collection, :renderer => DesignsWillPaginate)
