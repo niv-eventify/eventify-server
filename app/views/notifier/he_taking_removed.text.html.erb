@@ -1,0 +1,18 @@
+<html>
+<body style="direction: rtl;">
+<div style="direction: rtl;">
+שלום <%= h(@guest.name)%>,
+<br/><br/>
+אין צורך בהבאת <%= h(@thing.name)%> ל<%= "\"#{h(@guest.event.name)}\"" %> של <%= h(@guest.event.user.name)%>.
+<br/><br/>
+ניתן לבחור פריטים אחרים מרשימת ה"דברים להביא" ע"י לחיצה על הקישור הבא:
+<br/>
+<%= @url %>
+<br/><br/>
+אין צורך להשיב למייל זה.
+<br/><br/>
+בברכה,
+צוות Eventify
+</div>
+</body>
+</html>
