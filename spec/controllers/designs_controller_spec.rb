@@ -1,81 +1,20 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe Admin::DesignsController do
+describe DesignsController do
   setup :activate_authlogic
 
-  describe "logged in user not admin" do
-    before(:each) do
-      @user = Factory.create(:user)
-      UserSession.create(@user)
-    end
+  integrate_views
 
-    [:index, :show, :update, :destroy, :create].each do |action|
-      describe_action(action) do
-        before(:each) do
-          @params = {:id => 1}
-        end
-        it_should_redirect_to "/"
-      end
-    end
+  it "should render show" do
+    d = stub_model(Design, :text_top_y => 1, :text_top_x => 1, :text_width => 100, :text_height => 100)
+
+    Design.stub!(:find).and_return(d)
+    Category.should_receive(:find).with("1").and_return(stub_model(Category))
+    Category.should_receive(:find).with(:all).and_return([stub_model(Category, :name => "a"), stub_model(Category, :name => "b")])
+    collection = [d, d]
+    stub_pagination(collection)
+    controller.stub(:collection).and_return(collection)
+    get :show, :event_id => 0, :category_id => 1
+    response.should be_success
   end
-
-  describe "not logged in user" do
-    [:index, :show, :update, :destroy, :create].each do |action|
-      describe_action(action) do
-        before(:each) do
-          @params = {:id => 1}
-        end
-        it_should_require_login
-      end
-    end
-  end
-
-  describe "admin" do
-
-    integrate_views
-
-    before(:each) do
-      @user = Factory.create(:admin)
-      UserSession.create(@user)
-    end
-
-    it "should render index" do
-      designs = [stub_model(Design, :category => stub_model(Category))]
-      Design.available.stub!(:paginate).and_return(designs)
-      get :index
-      response.should be_success
-    end
-
-    it "should render show" do
-      @design = stub_model(Design, :category => stub_model(Category))
-      urler = mock("urler")
-      urler.stub!(:url).and_return("http://image.com/image.png")
-      @design.stub!(:preview).and_return(urler)
-      @design.stub!(:background).and_return(urler)
-      @design.stub!(:card).and_return(urler)
-      Design.stub!(:find).and_return(@design)
-      get :show, :id => @design.id
-      response.should be_success
-    end
-
-    it "should create a design" do
-      design = mock_model(Design, :category_id => 12)
-      design.should_receive(:creator_id=).with(@user.id).and_return(true)
-      design.should_receive(:save).and_return(true)
-      Design.stub(:new).and_return(design)
-      post :create, :design => {:category_id => 12}
-      assigns[:design].should == design
-      response.should redirect_to(admin_designs_path)
-    end
-
-    it "should update disabled_at" do
-      design = mock_model(Design, :category => stub_model(Category))
-      Design.stub!(:find).and_return(design)
-      design.should_receive(:disabled_at=)
-      design.should_receive(:save!).and_return(true)
-      delete :destroy, :id => design.id
-      response.should redirect_to(admin_designs_path)
-    end
-  end
-
 end
