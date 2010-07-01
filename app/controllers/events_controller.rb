@@ -45,11 +45,13 @@ class EventsController < InheritedResources::Base
             @event.user.deliver_activation_instructions!
           end
         end
-        failure.html { render(:action => "new") }
+        failure.html do
+          _add_extra_error_messages
+          render(:action => "new")
+        end
       end
     end
   end
-
 
   def new
     @event = Event.new(:category => @category, :design => @design, :starting_at => Event.default_start_time)
@@ -72,6 +74,18 @@ class EventsController < InheritedResources::Base
   end
 
 protected
+
+  def _add_extra_error_messages
+    if @event.user.new_record? && @event.user.errors.on(:email)
+      if existing_user = User.find_by_email(@event.user.email)
+        if existing_user.activated_at
+          flash.now[:error] = _("You already have an account, please login with your email and password.")
+        else
+          flash.now[:error] = _("Instructions to activate your account have been emailed to you. Please check your email.")
+        end
+      end
+    end
+  end
 
   def collection
     period = past_events? ? :past : :upcoming
