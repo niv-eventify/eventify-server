@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-06-29 14:11+0300\n"
+"POT-Creation-Date: 2010-07-01 20:01+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,21 +69,6 @@ msgid ""
 "\n"
 "Hello %{name},\n"
 "you successfully changed your password.\n"
-"\n"
-"You can login into your account at %{login_url}\n"
-"\n"
-"This email was generated automatically. Please do not reply to it.\n"
-"\n"
-"Best regards,\n"
-"eventify Team\n"
-msgstr ""
-
-#: app/views/astrails/auth/mailer/he_activation_confirmation.text.plain.erb:1
-#: app/views/astrails/auth/mailer/he_activation_confirmation.text.html.erb:1
-msgid ""
-"\n"
-"Hello %{name},\n"
-"your account has been activated.\n"
 "\n"
 "You can login into your account at %{login_url}\n"
 "\n"
@@ -166,11 +151,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:119
+#: app/helpers/events_helper.rb:118
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:119
+#: app/helpers/events_helper.rb:118
 msgid "(sent)"
 msgstr ""
 
@@ -182,7 +167,7 @@ msgstr ""
 msgid "...mail or sms|choose a delivery method"
 msgstr ""
 
-#: app/models/contact_importer.rb:54
+#: app/models/contact_importer.rb:53
 msgid "A problem importing your contacts occured, please try again later."
 msgstr ""
 
@@ -556,11 +541,11 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:65
+#: app/controllers/events_controller.rb:67
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:65
+#: app/controllers/events_controller.rb:67
 msgid "Event updated, but some reminders disabled"
 msgstr ""
 
@@ -739,6 +724,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
+#: app/controllers/events_controller.rb:84
 #: app/views/invitations/edit.html.haml:20
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
 msgid ""
@@ -757,7 +743,6 @@ msgid "Invitation Design"
 msgstr ""
 
 #: app/views/rsvps/show.iphone.haml:8 app/views/rsvps/show.html.haml:8
-#: app/views/rsvps/show.pdf.haml:6
 msgid "Invitation | Eventify"
 msgstr ""
 
@@ -1375,6 +1360,10 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
+#: app/controllers/events_controller.rb:82
+msgid "You already have an account, please login with your email and password."
+msgstr ""
+
 #: app/views/takings/_status.html.haml:2
 msgid "You bring"
 msgstr ""
@@ -1791,23 +1780,28 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/views/events/_form.html.haml:31 app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:57
+#: app/views/events/_event_form.html.haml:1
 msgid "ex. 5th Avenue, Manhattan"
 msgstr ""
 
-#: app/views/events/_form.html.haml:12 app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:57
+#: app/views/events/_event_form.html.haml:1
 msgid "ex. John Doe"
 msgstr ""
 
-#: app/views/events/_form.html.haml:17 app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:57
+#: app/views/events/_event_form.html.haml:1
 msgid "ex. My 40th birthday"
 msgstr ""
 
-#: app/views/events/_form.html.haml:30 app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:57
+#: app/views/events/_event_form.html.haml:1
 msgid "ex. The Neighberhood Bar"
 msgstr ""
 
-#: app/views/events/_form.html.haml:13 app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:57
+#: app/views/events/_event_form.html.haml:1
 msgid "ex. john.doe@gmail.com"
 msgstr ""
 
