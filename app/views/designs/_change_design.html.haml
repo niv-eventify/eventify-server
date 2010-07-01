@@ -8,4 +8,4 @@
       .image-boxes-h-row
         - group.compact.each do |d|
           .img-box
-            != render(:partial => "designs/selector", :locals => {:event => @event, :design => d})
+            != render(:partial => "designs/selector", :locals => {:event => @event, :design => d, :category => @category})
