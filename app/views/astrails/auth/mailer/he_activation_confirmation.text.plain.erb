@@ -1,12 +1,13 @@
-<%= _("
-Hello %{name},
-your account has been activated.
+שלום <%= h(@user.name)%>,
 
-You can login into your account at %{login_url}
+חשבונך ב-Eventify אושר.
+אנו מודים לך על הצטרפותך ומאחלים לך ארוע שמח ומוצלח.
+נשמח לעמוד לרשותך בכל שאלה ב- support@eventify.co.il
 
-This email was generated automatically. Please do not reply to it.
+לכניסה לחשבונך ניתן ללחוץ על הקישור הבא:
+<%= @login_url %>
 
-Best regards,
-eventify Team
-") % {:name => @user.name, :login_url => @login_url}
-%>
+אין צורך להשיב למייל זה.
+
+בברכה,
+צוות Eventify.
