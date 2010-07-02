@@ -4,8 +4,12 @@ function clearInputs(id, default_val){
 		var _el = jQuery(this);
 		_el.bind('focus', function(){
 			if(this.value == default_val) this.value = '';
+			jQuery(this).css('color','#523733')
 		}).bind('blur', function(){
-			if(this.value == '') this.value = default_val;
+			if(this.value == '') {
+				this.value = default_val;
+				jQuery(this).css('color','#a3948f');
+			}
 		}).blur();
 	});
 	
