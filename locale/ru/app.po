@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-07-01 20:01+0300\n"
+"POT-Creation-Date: 2010-07-02 22:33+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -143,7 +143,7 @@ msgid_plural "(%d guests)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/events/_form.html.haml:46
+#: app/views/events/_form.html.haml:47
 msgid "(345 symbols max)"
 msgstr ""
 
@@ -259,7 +259,7 @@ msgid "An error occured during importing contacts from %{name}"
 msgstr ""
 
 #: app/helpers/guests_helper.rb:15 app/helpers/things_helper.rb:14
-#: app/views/events/_form.html.haml:42 app/views/invitations/edit.html.haml:5
+#: app/views/events/_form.html.haml:43 app/views/invitations/edit.html.haml:5
 #: app/views/reminders/_reminder.html.haml:13
 #: app/views/contacts/_contact.html.haml:6
 msgid "Are you sure?"
@@ -393,7 +393,7 @@ msgstr ""
 msgid "Crop"
 msgstr ""
 
-#: app/views/events/_form.html.haml:41
+#: app/views/events/_form.html.haml:42
 msgid "Current Map Image"
 msgstr ""
 
@@ -626,7 +626,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:49
+#: app/views/events/_form.html.haml:50
 msgid "Guests can see other attendees"
 msgstr ""
 
@@ -809,11 +809,11 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: app/views/events/_form.html.haml:38
+#: app/views/events/_form.html.haml:39
 msgid "Map Image"
 msgstr ""
 
-#: app/views/events/_form.html.haml:36
+#: app/views/events/_form.html.haml:37
 msgid "Map Link"
 msgstr ""
 
@@ -826,7 +826,7 @@ msgstr ""
 msgid "Message Confirmations"
 msgstr ""
 
-#: app/views/events/_form.html.haml:46
+#: app/views/events/_form.html.haml:47
 msgid "Message to Guests"
 msgstr ""
 
@@ -1125,7 +1125,7 @@ msgstr ""
 msgid "Reminders | Eventify"
 msgstr ""
 
-#: app/views/events/_form.html.haml:42
+#: app/views/events/_form.html.haml:43
 msgid "Remove"
 msgstr ""
 
@@ -1133,7 +1133,7 @@ msgstr ""
 msgid "Remove End date &amp; Time"
 msgstr ""
 
-#: app/views/events/_form.html.haml:54
+#: app/views/events/_form.html.haml:55
 msgid "Resend invitations"
 msgstr ""
 
@@ -1398,6 +1398,10 @@ msgstr ""
 
 #: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:46
 msgid "You must be logged out to access this page"
+msgstr ""
+
+#: app/views/events/_form.html.haml:36
+msgid "You must fill out the address field in order to find a map"
 msgstr ""
 
 #: app/views/takings/_not_allowed.html.haml:3
@@ -1780,29 +1784,33 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:36 app/views/events/_form.html.haml:58
 #: app/views/events/_event_form.html.haml:1
 msgid "ex. 5th Avenue, Manhattan"
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:58
 #: app/views/events/_event_form.html.haml:1
 msgid "ex. John Doe"
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:58
 #: app/views/events/_event_form.html.haml:1
 msgid "ex. My 40th birthday"
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:58
 #: app/views/events/_event_form.html.haml:1
 msgid "ex. The Neighberhood Bar"
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:58
 #: app/views/events/_event_form.html.haml:1
 msgid "ex. john.doe@gmail.com"
+msgstr ""
+
+#: app/views/events/_form.html.haml:36
+msgid "find address"
 msgstr ""
 
 #: locale/yml_import.rb:97
@@ -1909,7 +1917,7 @@ msgstr ""
 msgid "open"
 msgstr ""
 
-#: app/views/events/_form.html.haml:37 app/views/invitations/show.html.haml:13
+#: app/views/events/_form.html.haml:38 app/views/invitations/show.html.haml:13
 #: app/views/users/_edit.html.haml:11 app/views/passwords/_edit.html.haml:8
 msgid "or"
 msgstr ""
