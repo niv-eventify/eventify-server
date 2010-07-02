@@ -387,7 +387,9 @@ jQuery(document).ready(function(){
 	var addr = jQuery('#event_location_address').val();
 	if(addr.length == 0 || addr == jQuery(this).attr('ex_text')){
 		alert(jQuery(this).attr('alert'));
-		return false;}
-	jQuery(this).attr('href','http://maps.google.com/?hl=he&q=' + addr)
+		jQuery('#event_location_address').focus();
+		return false;
+	}
+	jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
   });
 });
