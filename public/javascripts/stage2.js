@@ -383,4 +383,11 @@ jQuery(document).ready(function(){
 		}
 		return true;
 	})
+  jQuery('#find_address').click(function(){
+	var addr = jQuery('#event_location_address').val();
+	if(addr.length == 0 || addr == jQuery(this).attr('ex_text')){
+		alert(jQuery(this).attr('alert'));
+		return false;}
+	jQuery(this).attr('href','http://maps.google.com/?hl=he&q=' + addr)
+  });
 });
