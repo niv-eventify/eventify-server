@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100629093250) do
+ActiveRecord::Schema.define(:version => 20100704062500) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(:version => 20100629093250) do
     t.integer  "title_top_y"
     t.integer  "title_width"
     t.integer  "title_height"
-    t.string   "font"
+    t.string   "font_body"
     t.string   "title_color"
     t.string   "message_color"
     t.string   "text_align"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20100629093250) do
     t.string   "carousel_content_type"
     t.integer  "carousel_file_size"
     t.datetime "carousel_updated_at"
+    t.string   "font_title"
   end
 
   create_table "events", :force => true do |t|
@@ -147,7 +148,7 @@ ActiveRecord::Schema.define(:version => 20100629093250) do
     t.integer  "msg_font_size",                             :default => 32
     t.string   "title_text_align"
     t.string   "msg_text_align"
-    t.string   "font"
+    t.string   "font_body"
     t.string   "title_color"
     t.string   "msg_color"
     t.integer  "sms_messages_count",                        :default => 0
@@ -155,6 +156,7 @@ ActiveRecord::Schema.define(:version => 20100629093250) do
     t.string   "tz",                        :limit => 128
     t.boolean  "any_invitation_sent",                       :default => false
     t.string   "sms_resend_message"
+    t.string   "font_title"
   end
 
   add_index "events", ["starting_at", "rsvp_summary_send_at"], :name => "index_events_on_starting_at_and_rsvp_summary_send_at"

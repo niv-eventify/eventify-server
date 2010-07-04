@@ -12,7 +12,8 @@
         != f.hidden_field :msg_text_align
         != f.hidden_field :msg_color
         != f.hidden_field :title_color
-        != f.hidden_field :font
+        != f.hidden_field :font_title
+        != f.hidden_field :font_body
         != render(:partial => "form", :locals => {:f => f})
 
     != render(:partial => "selected_design")

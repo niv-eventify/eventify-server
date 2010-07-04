@@ -11,7 +11,7 @@ class Design < ActiveRecord::Base
   validates_numericality_of :title_top_x, :title_top_y, :title_width, :title_height, :allow_nil => true
   
   attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height,
-    :title_top_x, :title_top_y, :title_width, :title_height, :font, :title_color,
+    :title_top_x, :title_top_y, :title_width, :title_height, :font_title, :font_body, :title_color,
     :message_color, :text_align, :in_carousel,
     :classification_attributes
 
@@ -91,7 +91,7 @@ class Design < ActiveRecord::Base
       :height => "#{(text_height/ratio).to_int}px",
       'text-align' => "#{text_align}",
       :color => "rgb(#{message_color})",
-      "font-family" => "#{font}"
+      "font-family" => "#{font_body}"
     }
   end
 
@@ -105,7 +105,7 @@ class Design < ActiveRecord::Base
     res = {
       'text-align' => "#{text_align}",
       :color => "rgb(#{title_color})",
-      "font-family" => "#{font}"
+      "font-family" => "#{font_title}"
     }
     if !title_width.blank?
       res = res.merge({

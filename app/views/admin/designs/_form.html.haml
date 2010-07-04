@@ -14,14 +14,17 @@
   != f.input :text_width
   != f.input :text_height
   
+  != f.input :font_body, :as => :select, :label => "Default message font name", :collection => ["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן"]
+  != f.input :message_color, :label => "Default message color: r,g,b"
+
   != f.input :title_top_x, :label => "Title X (upper left) - optional"
   != f.input :title_top_y, :label => "Title Y (upper left) - optional"
   != f.input :title_width, :label => "Title width - optional"
   != f.input :title_height, :label => "Title height - optional"
   
-  != f.input :font, :as => :select, :label => "Default font name", :collection => ["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן"]
+  != f.input :font_title, :as => :select, :label => "Default title font name", :collection => ["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן"]
   != f.input :title_color, :label => "Default title color: r,g,b"
-  != f.input :message_color, :label => "Default message color: r,g,b"
+
   != f.input :text_align, :label => "Default text alignment"
   != f.input :in_carousel, :label => "this invitation should be in the carousel"
 

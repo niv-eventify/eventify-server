@@ -3,7 +3,7 @@ module RsvpsHelper
     design = event.design
     text_align = event.title_text_align.blank? ? design.text_align : event.title_text_align
     color = event.title_color.blank? ? "rgb(#{design.title_color})" : event.title_color
-    font = event.font.blank? ? design.font : event.font
+    font = event.font_title.blank? ? design.font_title : event.font_title
     "left:#{design.title_top_x}px; top:#{design.title_top_y}px; width:#{design.title_width}px; height:#{design.title_height}px; color:#{color}; text-align: #{text_align}; font-size: #{event.title_font_size}px; font-family: #{font}"
   end
   
@@ -12,7 +12,7 @@ module RsvpsHelper
     top_y = design.text_top_y
     text_align = event.msg_text_align.blank? ? design.text_align : event.msg_text_align
     color = event.msg_color.blank? ? "rgb(#{design.message_color})" : event.msg_color
-    font = event.font.blank? ? design.font : event.font
+    font = event.font_body.blank? ? design.font_body : event.font_body
     "left:#{design.text_top_x}px; top:#{top_y}px; width:#{design.text_width}px; height:#{design.text_height}px; color:#{color}; text-align: #{text_align}; font-size: #{event.msg_font_size}px; font-family: #{font}"
   end
 

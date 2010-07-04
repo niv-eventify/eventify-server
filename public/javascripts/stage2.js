@@ -217,36 +217,23 @@
     jQuery("#select_title").change(function(){
         var currSelected = jQuery("#toolbar_title .selectArea .center");
         currSelected.css("font-family",currSelected.html());
-        jQuery('#free_text, .msg, .background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
-        jQuery("#event_font").val(currSelected.html());
-        jQuery('.selectOptions.select_msg a').each(function(){
-            if(jQuery(this).html() == jQuery("#toolbar_title .selectArea .center").html()){
-                if(jQuery(this).parent("li").hasClass("selected"))
-                    return;
-                jQuery('.selectOptions').hide();
-                jQuery(this).click();
-                return;
-            }
-        });
+        jQuery('.background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
+        jQuery("#event_font_title").val(currSelected.html());
     });
     jQuery("#select_msg").change(function(){
         var currSelected = jQuery("#toolbar_msg .selectArea .center");
         currSelected.css("font-family",currSelected.html());
-        jQuery('#free_text, .msg, .background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
-        jQuery("#event_font").val(currSelected.html());
-        jQuery('.selectOptions.select_title a').each(function(){
-            if(jQuery(this).html() == jQuery("#toolbar_msg .selectArea .center").html()){
-                if(jQuery(this).parent("li").hasClass("selected"))
-                    return;
-                jQuery('.selectOptions').hide();
-                jQuery(this).click();
-                return;
-            }
-        });
+        jQuery('#free_text, .msg').css("font-family",currSelected.html());
+        jQuery("#event_font_body").val(currSelected.html());
     });
-    var currFont = jQuery("#free_text").css("font-family");
+    var msgFont = jQuery("#free_text").css("font-family");
     jQuery('.selectOptions.select_msg a').each(function(){
-        if(jQuery(this).html() == currFont)
+        if(jQuery(this).html() == msgFont)
+            jQuery(this).click();
+    });
+    var titleFont = jQuery("#title").css("font-family");
+    jQuery('.selectOptions.select_title a').each(function(){
+        if(jQuery(this).html() == titleFont)
             jQuery(this).click();
     });
     jQuery("#pallete_title").change(function(){
