@@ -9,7 +9,8 @@
     moinitor_names.push("event[location_address]");
     old_values = {};
     for (var i=0; i<moinitor_names.length; i++) {
-      old_values[moinitor_names[i]] = jQuery("[name=" + moinitor_names[i] + "]").val();
+      var currEl = jQuery("[name=" + moinitor_names[i] + "]");
+      old_values[moinitor_names[i]] = (currEl.val() == currEl.attr('def_value') ? "" :  currEl.val());
     }
     setInterval(function(){
       for (var i=0; i<moinitor_names.length; i++) {
