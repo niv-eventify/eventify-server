@@ -1,7 +1,8 @@
 /*---- clear inputs ---*/
-function clearInputs(id, default_val){
+function clearInputs(id){
 	jQuery('#' + id).each(function(){
 		var _el = jQuery(this);
+		var default_val = _el.attr('def_value');
 		_el.bind('focus', function(){
 			if(this.value == default_val) this.value = '';
 			jQuery(this).css('color','#523733')
@@ -29,8 +30,8 @@ function clearInputs(id, default_val){
 //		jQuery(this).parent().parent().removeClass('input-bg-uni-active');
 //	});
 }
-function clearInputsBeforeFormSubmission(id, default_val){
-	if(jQuery('#' + id).val() == default_val)
+function clearInputsBeforeFormSubmission(id){
+	if(jQuery('#' + id).val() == jQuery('#' + id).attr('def_value'))
 		jQuery('#' + id).val("")
 }
 /*--- IE6 hover ---*/

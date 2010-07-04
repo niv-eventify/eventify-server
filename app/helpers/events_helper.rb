@@ -53,11 +53,12 @@ module EventsHelper
     "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();"
   end
 
-  def event_text_input(f, attribute, label, extra_opts = {})
+  def event_text_input(f, attribute, label, extra_opts = {}, def_value = nil)
     opts = {:input_html => {:class => "input-text", :maxlength => "255", :size => "255"}, :label => label,
       :surround_html => {:tag => :div, :html => {:class => "input-bg-alt"}},
       :required => nil
       }
+    opts[:input_html][:def_value] = def_value unless def_value.blank?
     if block_given?
       opts[:after_html] = capture_haml { yield }
     end

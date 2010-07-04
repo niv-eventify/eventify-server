@@ -7,14 +7,16 @@
     }
     moinitor_names.push("event[location_name]");
     moinitor_names.push("event[location_address]");
-    var old_values = {};
+    old_values = {};
     for (var i=0; i<moinitor_names.length; i++) {
       old_values[moinitor_names[i]] = jQuery("[name=" + moinitor_names[i] + "]").val();
     }
     setInterval(function(){
       for (var i=0; i<moinitor_names.length; i++) {
-        var v = jQuery("[name=" + moinitor_names[i] + "]").val();
-        if (old_values[moinitor_names[i]] != v) {
+        var currEl = jQuery("[name=" + moinitor_names[i] + "]");
+        var def_value = currEl.attr('def_value');
+        var v = currEl.val();
+        if (old_values[moinitor_names[i]] != v && v != def_value && def_value != undefined && old_values[moinitor_names[i]] != def_value) {
           old_values[moinitor_names[i]] = v;
           window.resend_invitations = jQuery("#resend_invitations").is(':checked');
           if (!window.resend_invitations) {            

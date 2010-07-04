@@ -379,4 +379,9 @@ jQuery(document).ready(function(){
 	}
 	jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
   });
+  clearInputs("event_user_attributes_name");
+  clearInputs("event_user_attributes_email");
+  clearInputs("event_name");
+  clearInputs("event_location_name");
+  clearInputs("event_location_address");
 });
