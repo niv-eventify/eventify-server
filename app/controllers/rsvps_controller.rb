@@ -41,6 +41,7 @@ class RsvpsController < InheritedResources::Base
 protected
   def resource
     @resource ||= get_resource_ivar || set_resource_ivar(end_of_association_chain.find_by_email_token(params[:id]))
+    raise ActiveRecord::RecordNotFound unless @resource
   end
 
   def set_timezone
