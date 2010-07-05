@@ -14,7 +14,7 @@
       != text_area_tag "guest[message_to_host]", resource.message_to_host, :id => "guest_message_to_host"
     = _("Note: your message is public")
     .btns-hold.update-rsvp{:style => "display:none"}
-      != link_to_function _("save"), "jQuery(this).parents('form').get(0).submit()"
+      != link_to_function _("send"), "jQuery(this).parents('form').get(0).submit()"
       != link_to_function _("cancel"), "guest_rsvp.cancel()"
 
 :javascript
