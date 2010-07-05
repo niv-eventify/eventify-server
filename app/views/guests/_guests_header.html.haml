@@ -30,3 +30,5 @@
     %td.last
       .head-cell
         %span &nbsp;
+!= javascript_tag "window.event_id = #{@event.id};";
+!= javascript_tag("window.AUTH_TOKEN = '#{form_authenticity_token}';")

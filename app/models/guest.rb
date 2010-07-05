@@ -7,6 +7,8 @@ class Guest < ActiveRecord::Base
     has :event_id
   end
 
+  MASS_UPDATABLE = ["send_sms", "send_email"]
+
   validates_format_of   :email, :with => String::EMAIL_REGEX, :message => N_("does't look like an email"), :allow_blank => true, :allow_nil => true
   validates_presence_of :email, :if => proc {|guest| guest.send_email?}
   validates_uniqueness_of :email, :scope => :event_id, :allow_nil => true, :allow_blank => true

@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :events do |event|
-    event.resources :guests
+    event.resources :guests, :collection => {:mass_update => :put}
     event.resources :things
     event.resource :event_maps
     event.resources :payments

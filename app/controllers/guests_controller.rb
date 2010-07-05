@@ -6,6 +6,18 @@ class GuestsController < InheritedResources::Base
 
   after_filter :clear_flash
 
+  def mass_update
+    raise "wrong attribute #{params[:attr]}" unless Guest::MASS_UPDATABLE.member?(params[:attr])
+
+    @event = current_user.events.find(params[:event_id])
+    params[:guest_ids].split(/,/).each do |gid|
+      guest = @event.guests.find(gid)
+      guest.update_attribute(params[:attr], params[:value])
+    end
+
+    render :nothing => true
+  end
+
   # index
   # create
   # destroy
