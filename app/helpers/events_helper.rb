@@ -120,7 +120,14 @@ module EventsHelper
   end
 
   def months_arr
-    javascript_tag("stage2.months_arr = ['#{_("en.date.abbr_month_names").join("','")}'];stage2.del_time_alert = \"#{_("you can't change the starting time from here. Please edit the \'Time\' field")}\";stage2.del_date_alert = \"#{_("you can't change the starting date from here. Please edit the \'Date\' field")}\";")
+    del_time_alert = _("you can't change the starting time from here. Please edit the 'Time' field")
+    del_date_alert = _("you can't change the starting date from here. Please edit the 'Date' field")
+    javascript_tag("stage2.months_arr = #{_("en.date.abbr_month_names").map(&:to_s).to_json};stage2.del_time_alert = #{del_time_alert.to_json};stage2.del_date_alert = #{del_date_alert.to_json};")
+  end
+
+  def categories_for_select
+    other = s_('category|Other')
+    all_enabled_categories.map { |c| [c.root? ? other : c.name, c.id] }
   end
 
   def add_fonts()
@@ -130,14 +137,6 @@ module EventsHelper
       options_for_select(["Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
     end
   end
-
-  def categories_for_select
-    all_enabled_categories.map do |c|
-      n = c.root? ? s_("category|Other") : c.name
-      [n, c.id]
-    end
-  end
-
 protected
   def js_add_classes(attribute)
     <<-JAVASCRIPT
