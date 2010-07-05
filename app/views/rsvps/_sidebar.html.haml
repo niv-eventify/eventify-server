@@ -14,3 +14,4 @@
           != render(:partial => 'shared/export_links', :locals => {:lnk => :rsvp_ical_path, :event => resource.email_token, :email => false})
   - unless resource.event.things.count.zero?
     != render(:partial => 'takings/edit')
+  != link_to_banner

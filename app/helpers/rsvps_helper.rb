@@ -34,4 +34,12 @@ module RsvpsHelper
   def takings_height(count)
     count > 5 ? "" : "short-container"
   end
+
+  def link_to_banner
+    if current_locale == "he"
+      link_to image_tag("banner2.png", :alt => ""), url_for(lobby_path)
+    elsif current_locale == "en"
+      link_to image_tag("banner2.png", :alt => ""), url_for(lobby_path)
+    end
+  end
 end
