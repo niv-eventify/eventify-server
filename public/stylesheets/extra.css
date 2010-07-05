@@ -1,3 +1,9 @@
+@font-face {
+    font-family: "Arial";
+    src: local("Arial"),local("arial"),
+      url("/fonts/arial.ttf") format("truetype");
+}
+
 a.signup-out {
 	float:right;
 	margin:83px 5px 0 5px;
