@@ -14,7 +14,6 @@
 		message = new_message;
 		return this.change(function() {
 			was_changed = true;
-			console.log("changed!");
 		});
 	}
 })(jQuery);
