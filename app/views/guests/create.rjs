@@ -15,4 +15,5 @@ else
   page << "jQuery('#guest_send_email').removeAttr('checked').redraw_customCheckbox();"
   page << "jQuery('#guest_send_sms').removeAttr('checked').redraw_customCheckbox();"
   page << "jQuery('#new_guest input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
+  page << "jQuery.fn.unload_monit_reset()"
 end

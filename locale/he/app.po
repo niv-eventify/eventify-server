@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-07-05 14:09+0300\n"
+"POT-Creation-Date: 2010-07-06 11:38+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -206,11 +206,11 @@ msgstr ""
 msgid "Add Map"
 msgstr ""
 
-#: app/views/guests/index.html.haml:21
+#: app/views/guests/index.html.haml:22
 msgid "Add from existing contact list:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:40
+#: app/views/guests/index.html.haml:41
 msgid "Add manually:"
 msgstr ""
 
@@ -218,7 +218,7 @@ msgstr ""
 msgid "Add reminder"
 msgstr ""
 
-#: app/views/things/index.html.haml:16
+#: app/views/things/index.html.haml:22
 msgid "Add things you want your guests to bring with them."
 msgstr ""
 
@@ -238,7 +238,7 @@ msgstr ""
 msgid "Address:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:43
+#: app/views/guests/index.html.haml:44
 msgid "All"
 msgstr ""
 
@@ -559,7 +559,7 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: app/views/things/index.html.haml:18
+#: app/views/things/index.html.haml:24
 msgid "Every guest would be able to pick one ore more items to bring."
 msgstr ""
 
@@ -588,7 +588,7 @@ msgstr ""
 msgid "File should be less than 3MB"
 msgstr ""
 
-#: app/views/guests/index.html.haml:42
+#: app/views/guests/index.html.haml:43
 msgid "Filter by RSVP:"
 msgstr ""
 
@@ -618,7 +618,7 @@ msgstr ""
 msgid "Future events"
 msgstr ""
 
-#: app/views/guests/index.html.haml:15 app/views/things/index.html.haml:8
+#: app/views/guests/index.html.haml:16 app/views/things/index.html.haml:14
 msgid "Guest List"
 msgstr ""
 
@@ -817,7 +817,7 @@ msgstr ""
 msgid "Map Link"
 msgstr ""
 
-#: app/models/guest.rb:97 app/views/guests/index.html.haml:46
+#: app/models/guest.rb:99 app/views/guests/index.html.haml:47
 #: app/views/rsvps/_new.html.haml:5
 msgid "May Be"
 msgstr ""
@@ -880,7 +880,7 @@ msgstr ""
 msgid "Next event:"
 msgstr ""
 
-#: app/models/guest.rb:97 app/views/guests/index.html.haml:45
+#: app/models/guest.rb:99 app/views/guests/index.html.haml:46
 #: app/views/rsvps/_new.html.haml:6
 msgid "No"
 msgstr ""
@@ -1296,8 +1296,8 @@ msgstr ""
 msgid "Things To Bring | Eventify"
 msgstr ""
 
-#: app/views/guests/index.html.haml:16 app/views/summaries/show.html.haml:56
-#: app/views/takings/_index.html.haml:2 app/views/things/index.html.haml:9
+#: app/views/guests/index.html.haml:17 app/views/summaries/show.html.haml:56
+#: app/views/takings/_index.html.haml:2 app/views/things/index.html.haml:15
 msgid "Things to bring"
 msgstr ""
 
@@ -1355,7 +1355,7 @@ msgstr ""
 msgid "Who brings"
 msgstr ""
 
-#: app/models/guest.rb:97 app/views/guests/index.html.haml:44
+#: app/models/guest.rb:99 app/views/guests/index.html.haml:45
 #: app/views/rsvps/_new.html.haml:4
 msgid "Yes"
 msgstr ""
@@ -1386,6 +1386,14 @@ msgstr ""
 
 #: app/views/notifier/en_taking_removed.text.plain.erb:6
 msgid "You can select other things to bring by following this URL:"
+msgstr ""
+
+#: app/views/guests/index.html.haml:7
+msgid "You didn't save the last added guest."
+msgstr ""
+
+#: app/views/things/index.html.haml:6
+msgid "You didn't save the last added thing to bring."
 msgstr ""
 
 #: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:55
@@ -1759,7 +1767,7 @@ msgstr ""
 msgid "does't look like a mobile phone number"
 msgstr ""
 
-#: app/models/contact.rb:6 app/models/guest.rb:10
+#: app/models/contact.rb:6 app/models/guest.rb:12
 msgid "does't look like an email"
 msgstr ""
 
@@ -1845,7 +1853,7 @@ msgstr ""
 msgid "login"
 msgstr ""
 
-#: app/models/guest.rb:108
+#: app/models/guest.rb:110
 msgid "not yet responded"
 msgstr ""
 
@@ -1971,7 +1979,7 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/guests/index.html.haml:26 app/views/guests/index.html.haml:29
+#: app/views/guests/index.html.haml:27 app/views/guests/index.html.haml:30
 #: app/views/summaries/show.html.haml:74 app/views/summaries/show.html.haml:77
 msgid "search"
 msgstr ""

@@ -9,4 +9,5 @@ if @thing.new_record?
 else
   page << "jQuery('#new_thing_row').before(#{render(:partial => "thing", :object => @thing).to_json})"
   page << "jQuery('#new_thing').get(0).reset();"
+  page << "jQuery.fn.unload_monit_reset()"
 end

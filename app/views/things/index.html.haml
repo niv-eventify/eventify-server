@@ -1,5 +1,11 @@
 - @page_title=_("Things To Bring | Eventify")
 - @content_css_class = "stars-bg stage-3"
+- content_for :head do
+  != javascript_include_tag("jquery.unload")
+  :javascript
+    jQuery(function(){
+      jQuery("#new_thing_row input:text").unload_monit(#{_("You didn't save the last added thing to bring.").to_json});
+    });
 
 - events_content_section(3, @event) do
   .info-area
