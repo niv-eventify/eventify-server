@@ -893,4 +893,5 @@ ul.contact-tabset li.active a ,
 }
 .floatHeader {
 	z-index: 10;
+	margin-top: -2px;
 }
