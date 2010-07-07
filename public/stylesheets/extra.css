@@ -891,3 +891,6 @@ ul.contact-tabset li.active a ,
 	background-position: 0 -88px;
 	text-decoration: none;
 }
+.floatHeader {
+	z-index: 10;
+}
