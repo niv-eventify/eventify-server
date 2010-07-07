@@ -1,6 +1,6 @@
 - fields_for "design[classification_attributes][]", classification do |c_form|
   .category
-    != c_form.select :category_id, categories_for_select, {}, :index => nil
+    != c_form.select :category_id, categories_for_admin_designs, {}, :index => nil
     != c_form.hidden_field :_delete, :index => nil
     - unless classification.new_record?
       != c_form.hidden_field :id, :index => nil

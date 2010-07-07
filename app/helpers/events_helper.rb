@@ -123,6 +123,10 @@ module EventsHelper
     all_enabled_categories.map { |c| [c.root? ? other : c.name, c.id] }
   end
 
+  def categories_for_admin_designs
+    Category.enabled.all.sort_by(&:name).map{|c| [c.name, c.id]}
+  end
+
   def add_fonts()
     if current_locale == "he"
       options_for_select(["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן","Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
