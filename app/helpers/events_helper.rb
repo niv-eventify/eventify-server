@@ -7,7 +7,7 @@ module EventsHelper
     end
   end
 
-  def event_date_time_select_combo(f, attribute, js_opts = {})
+  def event_date_time_select_combo(f, attribute)
     haml_tag(:li, :class => "#{attribute}_date_select") do
       haml_tag :label, _("Date") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_tag :div, :class => "input-bg-alt" do
@@ -19,7 +19,6 @@ module EventsHelper
     haml_tag(:li, :class => "#{attribute}_time_select") do
       haml_tag :label, _("Time") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_concat f.time_select(attribute, {:time_separator => "", :ignore_date => true, :prompt => {:hour => "&nbsp;", :minute => "&nbsp;"}, :minute_step => 15}, :class => "short")
-      haml_concat javascript_tag(js_for_date_select(attribute, js_opts))
       yield
     end
   end
@@ -43,14 +42,8 @@ module EventsHelper
     end
   end
 
-
-  def js_for_date_select(attribute, opts = {})
-    js = js_add_classes(attribute)
-    "(function(){#{js}})();"
-  end
-
   def toggle_ending_at_block
-    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();"
+    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle()"
   end
 
   def event_text_input(f, attribute, label, extra_opts = {}, def_value = nil)
@@ -136,11 +129,5 @@ module EventsHelper
     elsif current_locale == "en"
       options_for_select(["Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
     end
-  end
-protected
-  def js_add_classes(attribute)
-    <<-JAVASCRIPT
-      jQuery(".#{attribute}_time_select select.short:first").addClass("marg");
-    JAVASCRIPT
   end
 end

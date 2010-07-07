@@ -254,6 +254,8 @@
   }
 }
 jQuery(document).ready(function(){
+  jQuery(".starting_at_time_select select.short:first").addClass("marg");
+  jQuery(".ending_at_time_select select.short:first").addClass("marg");
   jQuery('select').customSelect();
   stage2.seperated_title = (jQuery(".title-holder").length == 1);
   stage2.initToolbars();
