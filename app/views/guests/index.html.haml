@@ -24,17 +24,13 @@
 
           .cancel-form
             .input-area
-              != text_field_tag "search_guests", _('search'), :id => "search_guests", :class => "i-text"
+              != text_field_tag "search_guests", '', :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}"
               != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn", :id => "cancel_search"
               :javascript
                 jQuery(function(){
-                  jQuery("#search_guests").click(function(){
-                    if (jQuery(this).val() == '#{_('search')}'){jQuery(this).val('');}
-                  }).blur(function(){
-                    if (jQuery(this).val() == ''){jQuery(this).val('#{_('search')}');}
-                  })
+                  clearInputs("search_guests");
                   jQuery("#cancel_search").click(function(){
-                    jQuery("#search_guests").val("#{_('search')}");
+                    jQuery("#search_guests").val("").blur();
                   });
                 });
 
