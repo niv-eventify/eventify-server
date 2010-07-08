@@ -895,3 +895,6 @@ ul.contact-tabset li.active a ,
 	z-index: 10;
 	margin-top: -2px;
 }
+.boxe .heading .edit .drop ul a {
+	width: 114px;
+}
