@@ -49,23 +49,27 @@ class ContactImporter < ActiveRecord::Base
         connection.contacts
       rescue Contacts::StandardError, Contacts::ContactsError
         error = $!
+        nil
       rescue
         error = _("A problem importing your contacts occured, please try again later.")
+        nil
       end
     when 'aol'
       begin
        contacts = Blackbook.get(:username => username, :password => password)
      rescue Blackbook::BlackbookError, ArgumentError
        error = $!
+       nil
      end
     when 'csv'
       begin
         Blackbook.get(:csv, :file => csv)
       rescue Blackbook::BlackbookError
         error = $!
+        nil
       end
     end
-    
+
     [contacts.try(:uniq), error]
   end
 
