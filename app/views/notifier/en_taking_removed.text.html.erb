@@ -1,0 +1,13 @@
+<html>
+<body>
+  <p>Hello <%= @guest.name %>,</p>
+  <p>Just a quick update, there is no longer a need to bring <%= h(@thing.name)%> to <%= h(@guest.event.user.name)%>'s <%= "\"#{h(@guest.event.name)}\"" %> event.</p>
+  <p>You can select other things to bring by following this URL:</p>
+  <p><%= link_to(@url, @url) %></p>
+  <br/>
+  <p>Thank you for your understanding.</p>
+  <p>Best regards,</p>
+  <p>The Eventify Team.</p>
+  <p>Please do not reply to this email.</p>
+</body>
+</html>
