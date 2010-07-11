@@ -7,13 +7,23 @@ class DesignsController < InheritedResources::Base
   def index
     super do |format|
       format.html
-      format.js { render :template => "designs/carousel", :layout => false }
+      format.js do
+        if params[:change_design]
+          @event = params[:event_id].to_i > 0 ? current_user.events.find(params[:event_id]) : Event.new
+          render(:update) do |page|
+            page << "jQuery.nyroModalManual({content: #{render(:partial => "designs/change_design").to_json}, minWidth: 900, minHeight: 550})"
+          end
+        else
+          render :template => "designs/carousel", :layout => false
+        end
+      end
     end
   end
 
   # events/0,1,2,.../designs
   def show
     if params[:event_id].to_i > 0
+      return unless require_user
       @event = current_user.events.find(params[:event_id])
       @design = @event.design
       @category = @event.category

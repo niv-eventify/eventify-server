@@ -217,11 +217,6 @@ div.cmf-skinned-text {
 	background:url(/images/btn-blue-mdl-en.gif) no-repeat 100% 0;
 }
 
-#change_design {
-	display:none; 
-	width:900px; 
-	height:550px;
-}
 
 #nyroModalContent .content-wrapper {
 	margin:0;
@@ -245,10 +240,14 @@ div.cmf-skinned-text {
 	width: 65px;
 }
 
-.clear {
+.clear, .vclear {
 	height:1px;
 	clear:both;
 	display:none;
+}
+
+.vclear {
+	display:block;
 }
 
 div.flash {
@@ -836,10 +835,6 @@ table#contacts {
 
 .content-wrapper .pl, .content-wrapper .pr {
 	left:0;
-}
-
-#change_design .content-wrapper-top {
-	height:auto;
 }
 
 #event_map_link {

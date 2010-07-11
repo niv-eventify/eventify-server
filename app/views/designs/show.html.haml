@@ -15,12 +15,21 @@
       .side-area-h
         %h3
           = _("You can always:")
+        != label_tag :change_category, _("Select Category")
+        %br
+        != select_tag "change_category", options_for_select(categories_for_select, @category.id), :id => "change_category"
+        .clear
+          &nbsp;
+        .vclear
         .btns-h
           - if current_locale == "he"
-            %a.btn-right.nyroModal{:href => "#change_design"}= _("Change design")
+            %a.btn-right.change-design{:href => "#"}= _("Change design")
           - else
-            %a.btn-left.nyroModal{:href => "#change_design"}= _("Change design")
+            %a.btn-left.change-design{:href => "#"}= _("Change design")
         .divider &nbsp;
+        - unless @event.new_record?
+          :javascript
+            stage1.event_designs_path = #{designs_path(:event_id => @event).to_json};
       - if @design.windows.length > 0
         .side-area-h
           %h3
@@ -41,6 +50,4 @@
             != render(:partial => "cropped_pictures/new")
     != render(:partial => "events/selected_design")
 
-#change_design{:style => "height:550px"}
-  != render(:partial => "designs/change_design")
 #delete_updates_me{:style => "display:none"}

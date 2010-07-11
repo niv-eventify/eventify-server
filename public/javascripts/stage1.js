@@ -134,4 +134,15 @@ $(document).ready(function(){
 			return false;
 		}
 	});
+	jQuery("a.change-design").click(function(e){
+		var url;
+		if (stage1.event_designs_path) {
+			url = stage1.event_designs_path + "&change_design=true&category_id=" + jQuery("#change_category").val();
+		}
+		else {
+			url = "/categories/" +jQuery("#change_category").val() + "/designs?change_design=true";
+		}
+		jQuery.ajax({url:url, type:'get', dataType:'script'})
+		return false;
+	});
 });
