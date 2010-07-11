@@ -219,13 +219,13 @@ class Guest < ActiveRecord::Base
       return
     end
 
-    if reminder.by_email? && !self.email_token.blank?
+    if reminder.by_email? && self.send_email?
       # TODO: handle delivery errors
       Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
       reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success", :kind => "email")
     end
 
-    if reminder.by_sms?
+    if reminder.by_sms? && self.send_sms?
       sms = sms_messages.create!(:kind => "reminder", :message => reminder.sms_message)
 
       sms.send_sms!

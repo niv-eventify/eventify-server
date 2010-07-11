@@ -258,4 +258,68 @@ describe Guest do
       @guest.email_token.should == "foobar"
     end
   end
+
+  describe "reminders" do
+    before(:each) do
+      @guest = Factory.build(:guest)
+      @reminder = Reminder.new
+      reminder_logs = mock("reminder_logs")
+      reminder_logs.stub!(:create)
+      @reminder.stub!(:reminder_logs).and_return(reminder_logs)
+    end
+
+    it "should not send if not invited" do
+      Notifier.should_not_receive(:deliver_guest_reminder)
+      @guest.send_reminder!(@reminder)
+    end
+
+    describe "delivery" do
+      before(:each) do
+        @guest.stub!(:invited?).and_return(true)
+      end
+
+      describe "email" do
+        before(:each) do
+          @reminder.by_email = true
+        end
+
+        it "should send by email when invitation is by email" do
+          @guest.send_email = true
+          Notifier.should_receive(:deliver_guest_reminder)
+          @guest.send_reminder!(@reminder)
+        end
+
+        it "should not send by email if invitation is not by email" do
+          @guest.send_email = false
+          Notifier.should_not_receive(:deliver_guest_reminder)
+          @guest.send_reminder!(@reminder)
+        end
+      end
+
+      describe "sms" do
+        before(:each) do
+          @reminder.by_sms = true
+          @sms_messages = mock("sms_messages")
+          sms = mock("sms")
+          sms.stub!(:send_sms!)
+          sms.stub!(:success?)
+          @sms_messages.stub!(:create!).and_return(sms)
+          @guest.stub!(:sms_messages).and_return(@sms_messages)
+        end
+
+        it "should send by sms when invitation is by sms" do
+          @guest.send_sms = true
+          @sms_messages.should_receive(:create!)
+          @guest.send_reminder!(@reminder)
+        end
+
+        it "should not send by sms when invitation is not by sms" do
+          @guest.send_sms = false
+          @sms_messages.should_not_receive(:create!)
+          @guest.send_reminder!(@reminder)
+        end
+      end
+    end
+
+  end
 end
