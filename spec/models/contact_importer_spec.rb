@@ -61,8 +61,7 @@ describe ContactImporter do
       end
       it "should use Blackbook for csv" do
         @contact_importer.contact_source = "csv"
-        Blackbook.stub!(:get).with(:csv, :file => "file").and_return(@contacts)
-        Blackbook.should_receive(:get).with(:csv, :file => "file").and_return(@contacts)
+        Astrails::OutlookContact.stub!(:get).with("file").and_return(@contacts)
         @contact_importer.should_receive(:_import!).with(@contacts)
         @contact_importer.import!
       end

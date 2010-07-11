@@ -63,9 +63,11 @@ class ContactImporter < ActiveRecord::Base
      end
     when 'csv'
       begin
-        Blackbook.get(:csv, :file => csv)
-      rescue Blackbook::BlackbookError
-        error = $!
+        res = Astrails::OutlookContact.get(csv)
+        error = _("A problem importing your contacts occured, please try again later.") unless res
+        res
+      rescue
+        error = _("A problem importing your contacts occured, please try again later.")
         nil
       end
     end
