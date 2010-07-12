@@ -1,5 +1,5 @@
 WICKED_PDF = {
-  :wkhtmltopdf => '/usr/local/bin/wkhtmltopdf',
+  :wkhtmltopdf => 'script/wkhtmltopdf',
   #:layout => "pdf.html",
-  :exe_path => '/usr/local/bin/wkhtmltopdf'
+  :exe_path => 'script/wkhtmltopdf'
 }
