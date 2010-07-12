@@ -26,15 +26,29 @@ class RsvpsController < InheritedResources::Base
   end
 
   def show
-    if "true" == params[:more]
-      resource.attendees_count ||= 1
-      render :action => "show_more"
-    else
-      if current_locale != resource.event.language
-        return redirect_to rsvp_path(:id => params[:id], :locale => resource.event.language)
-      end
+    respond_to do |format|
+      format.html{
+        if "true" == params[:more]
+          resource.attendees_count ||= 1
+          render :action => "show_more"
+        else
+          if current_locale != resource.event.language
+            return redirect_to rsvp_path(:id => params[:id], :locale => resource.event.language)
+          end
 
-      render :action => "show", :layout => false
+          render :action => "show", :layout => false
+        end
+      }
+      format.pdf{
+        render :pdf => resource.event.name,
+               :template => 'rsvps/show.pdf.erb',
+               :show_as_html => !params[:debug].blank?,
+               :layout => 'pdf.html',
+               :dpi => '300',
+               :lowquality => false,
+               :disable_smart_shrinking => false,
+               :orientation => 'Landscape'
+      }
     end
   end
 
