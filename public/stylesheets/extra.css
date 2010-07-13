@@ -554,19 +554,27 @@ li.thing.active span.name {
 	float:right;
 }
 
+.rounded span {
+	padding: 0 0 0 3px;
+}
+
+.thing .t-col-3 .cell-bg {
+	width: 95%;
+}
+
 .taking-remove {
 	background:url(/images/taking-close.gif);
 	width:7px;
 	height:7px;
-	text-indent:-9999px;
+	text-indent:0px;
 	display:inline-block;
 	vertical-align:middle;
-	margin: -2px 0px 0px 7px;
+	margin: -2px 7px 0px 0px;
 	text-decoration:none;
 }
 
 .hebrew .taking-remove {
-	margin: -2px 7px 0px 0px;
+	margin: -2px 0px 0px 7px;
 }
 
 .taking-remove:hover {

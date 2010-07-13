@@ -15,11 +15,15 @@ module ThingsHelper
   end
 
   def taking_bar(taking)
-    content_tag(:strong, h(taking.guest.name)) + "&nbsp;" + "x&nbsp;#{taking.amount}&nbsp;" + remove_taking_link(taking)
+    if current_locale == 'he'
+      remove_taking_link(taking) + content_tag(:strong, h(taking.guest.name)) + "&nbsp;" + content_tag(:span, "#{taking.amount}") + content_tag(:span, "x")
+    else
+      remove_taking_link(taking) + content_tag(:strong, h(taking.guest.name)) + "&nbsp;" + "x&nbsp;#{taking.amount}&nbsp;"
+    end
   end
 
   def remove_taking_link(taking)
-    link_to_remote "x", :url => event_taking_path(taking.event_id, taking), :method => :delete, :html => {:class => "taking-remove"},
+    link_to_remote "", :url => event_taking_path(taking.event_id, taking), :method => :delete, :html => {:class => "taking-remove"},
       :before => "jQuery('##{dom_id(taking)}').remove()"
   end
 
