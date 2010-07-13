@@ -896,3 +896,10 @@ ul.contact-tabset li.active a ,
 .hebrew .subnav .inner-box .form-row{
 	width: 190px;
 }
+.top-text li {
+	font-size:1.2em;
+	line-height:1.58em;
+}
+.hebrew .top-text li {
+	font-size:1.4em;
+}
