@@ -19,14 +19,14 @@
 
   - event_date_time_select_combo(f, :starting_at) do
     .f-row
-      != link_to_function _("Add End date &amp; Time"), toggle_ending_at_block, :class => "add-link show_ending_at", :style => "display:none"
-      != link_to_function _("Remove End date &amp; Time"), toggle_ending_at_block, :class => "remove-link hide_ending_at"
+      != link_to_function _("Add End date &amp; Time"), "stage2.show_ending_at_block()", :class => "add-link show_ending_at", :style => "display:none"
+      != link_to_function _("Remove End date &amp; Time"), "stage2.hide_ending_at_block()", :class => "remove-link hide_ending_at"
 
 - f.inputs :class => "ending_at_block" do
   - event_date_time_select_combo(f, :ending_at) do
     .f-row &nbsp;
 
-- f.inputs do
+- f.inputs :class => "location_section" do
   - event_text_input(f, :location_name, _("Location"), {}, "#{_('ex. The Neighberhood Bar')}")
   - event_text_input(f, :location_address, _("Address"), {}, "#{_('ex. 5th Avenue, Manhattan')}") do
     - unless f.object.has_map?

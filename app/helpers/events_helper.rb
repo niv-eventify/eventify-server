@@ -8,10 +8,10 @@ module EventsHelper
   end
 
   def event_date_time_select_combo(f, attribute)
+    hidden_date_fields(f, attribute)
     haml_tag(:li, :class => "#{attribute}_date_select") do
       haml_tag :label, _("Date") + (:starting_at.eql?(attribute) ? "*" : "")
       haml_tag :div, :class => "input-bg-alt" do
-        hidden_date_fields(f, attribute)
         haml_tag :input, :class => "input-text", :id => "#{attribute}_mock", :name => "#{attribute}_mock", :type => "text"
       end
       haml_concat f.inline_errors_for(attribute)
@@ -40,10 +40,6 @@ module EventsHelper
       haml_concat f.label :rsvp_summary_send_every, _("Send RSVPs summary email")
       haml_concat f.select(:rsvp_summary_send_every, summary_kinds_for_select, {}, :onchange => "jQuery(this).parents('form').get(0).onsubmit();")
     end
-  end
-
-  def toggle_ending_at_block
-    "jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle()"
   end
 
   def event_text_input(f, attribute, label, extra_opts = {}, def_value = nil)

@@ -251,6 +251,17 @@
     jQuery("#pallete_msg").colorPicker();
     if(jQuery("#event_msg_color").val().length > 0)
         jQuery("#pallete_msg").val(jQuery("#event_msg_color").val()).change();
+  },
+  show_ending_at_block: function() {
+    jQuery('.show_ending_at, .hide_ending_at').toggle();
+    jQuery('.ending_at_block').css('visibility','visible');
+    jQuery('fieldset.location_section').css('margin-top', '0px')
+  },
+
+  hide_ending_at_block: function() {
+    jQuery('.show_ending_at, .hide_ending_at').toggle();
+    jQuery('.ending_at_block').css('visibility','hidden');
+    jQuery('fieldset.location_section').css('margin-top', '-81px')
   }
 }
 jQuery(document).ready(function(){
@@ -266,8 +277,9 @@ jQuery(document).ready(function(){
   if(jQuery("#event_ending_at_day").val() != "" && jQuery("#event_ending_at_month").val() != "" && jQuery("#event_ending_at_year").val() != "") {
     jQuery("#ending_at_mock").val(jQuery("#event_ending_at_day").val() + "." + jQuery("#event_ending_at_month").val() + "." + jQuery("#event_ending_at_year").val());
   }
-  if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "")
-    jQuery('.ending_at_block, .show_ending_at, .hide_ending_at').toggle();
+  if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "") {
+    stage2.hide_ending_at_block();
+  }
   stage2.max_title_font_size = parseInt(jQuery("#title").css("font-size"));
   stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
   stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
