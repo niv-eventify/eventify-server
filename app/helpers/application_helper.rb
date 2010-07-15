@@ -97,7 +97,7 @@ module ApplicationHelper
     @next_event ||= current_user.events.upcoming.by_starting_at.first
     return haml_concat("&nbsp;") unless @next_event
     haml_concat _("Next event:")
-    haml_concat link_to(h(@next_event.name).utf_snippet(12), summary_path(@next_event))
+    haml_concat link_to(h(@next_event.name).utf_snippet(16), summary_path(@next_event), :title => h(@next_event.name))
   end
 
   def show_errors_for(page, errors, selector_prefix)
