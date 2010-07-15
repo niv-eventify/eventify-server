@@ -705,6 +705,7 @@ li.thing .sel-holder {
 	background:transparent;
 	padding:16px 38px 20px;
 	font-size:80%;
+	overflow-x: hidden;
 }
 
 .hebrew .import {
@@ -712,8 +713,8 @@ li.thing .sel-holder {
 }
 
 .import .table-box .holder {
-	height:200px;
-	overflow:scroll;
+	height:250px;
+	overflow-y:scroll;
 	width:100%;
 }
 
@@ -921,4 +922,7 @@ ul.contact-tabset li.active a ,
 .hebrew .category-selector {
 	float:right;
 	padding:10px 20px 0 0;
+}
+.events-holder {
+	padding:0;
 }
