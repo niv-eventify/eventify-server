@@ -27,7 +27,7 @@
                     %br
                     %br
                     %br
-                    != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();jQuery(this).parents('form').submit()", :class => "btn csv-submit"
+                    != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();jQuery('body').css('cursor', 'wait');jQuery(this).parents('form').submit()", :class => "btn csv-submit"
                     != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
                     %br
                     %br

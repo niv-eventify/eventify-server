@@ -25,6 +25,7 @@ class GuestImportersController < ApplicationController
           render_new_guests_import_form(page)
         else
           page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
+          page << "jQuery('body').css('cursor', 'default')"
         end
       end
     end

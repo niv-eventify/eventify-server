@@ -22,5 +22,5 @@
               != render(:partial => "contact", :collection => contacts)
   .contact-btns
     %br
-    != link_to_function _("Import"), "jQuery('#import_guests').get(0).submit()", :class => "btn"
+    != link_to_function _("Import"), "jQuery('body').css('cursor', 'wait'); jQuery('#import_guests').get(0).submit()", :class => "btn"
     != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
