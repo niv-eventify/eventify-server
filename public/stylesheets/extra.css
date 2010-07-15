@@ -911,3 +911,14 @@ ul.contact-tabset li.active a ,
 .hebrew .top-text li {
 	font-size:1.4em;
 }
+
+.category-selector {
+	float:left;
+	padding:10px 0 0 20px;
+	width:200px;
+}
+
+.hebrew .category-selector {
+	float:right;
+	padding:10px 20px 0 0;
+}

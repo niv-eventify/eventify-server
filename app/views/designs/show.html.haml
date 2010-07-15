@@ -15,12 +15,6 @@
       .side-area-h
         %h3
           = _("You can always:")
-        != label_tag :change_category, _("Select Category")
-        %br
-        != select_tag "change_category", options_for_select(categories_for_select, @category.id), :id => "change_category"
-        .clear
-          &nbsp;
-        .vclear
         .btns-h
           - if current_locale == "he"
             %a.btn-right.change-design{:href => "#"}= _("Change design")
@@ -30,6 +24,8 @@
         - unless @event.new_record?
           :javascript
             stage1.event_designs_path = #{designs_path(:event_id => @event).to_json};
+        :javascript
+          stage1.cetagory_id = #{@category.id};
       - if @design.windows.length > 0
         .side-area-h
           %h3

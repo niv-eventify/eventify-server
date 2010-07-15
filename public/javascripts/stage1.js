@@ -115,6 +115,16 @@ var stage1 = {
 		});
 		$('body').css("cursor", "");
 		$("#crop,#cancel_crop").show();
+	},
+	update_designs: function() {
+		var url;
+		if (stage1.event_designs_path) {
+			url = stage1.event_designs_path + "&change_design=true&category_id=" + stage1.cetagory_id;
+		}
+		else {
+			url = "/categories/" + stage1.cetagory_id + "/designs?change_design=true";
+		}
+		jQuery.ajax({url:url, type:'get', dataType:'script'})		
 	}
 }
 
@@ -135,14 +145,7 @@ $(document).ready(function(){
 		}
 	});
 	jQuery("a.change-design").click(function(e){
-		var url;
-		if (stage1.event_designs_path) {
-			url = stage1.event_designs_path + "&change_design=true&category_id=" + jQuery("#change_category").val();
-		}
-		else {
-			url = "/categories/" +jQuery("#change_category").val() + "/designs?change_design=true";
-		}
-		jQuery.ajax({url:url, type:'get', dataType:'script'})
+		stage1.update_designs();
 		return false;
 	});
 });

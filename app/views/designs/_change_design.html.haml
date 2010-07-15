@@ -1,5 +1,7 @@
 .content-wrapper
   .content-wrapper-top
+    .category-selector
+      != select_tag "change_category", options_for_select(categories_for_select, @category.id), :id => "change_category", :onchange => "stage1.cetagory_id = parseInt(jQuery(this).val());stage1.update_designs();"
     != will_paginate(collection, :renderer => RemoteDesignsWillPaginate)
     .clear
 

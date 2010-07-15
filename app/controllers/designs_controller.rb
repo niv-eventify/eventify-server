@@ -11,7 +11,7 @@ class DesignsController < InheritedResources::Base
         if params[:change_design]
           @event = params[:event_id].to_i > 0 ? current_user.events.find(params[:event_id]) : Event.new
           render(:update) do |page|
-            page << "jQuery.nyroModalManual({content: #{render(:partial => "designs/change_design").to_json}, minWidth: 900, minHeight: 550})"
+            page << "jQuery.nyroModalManual({endShowContent: function(){jQuery('.category-selector select').customSelect();}, content: #{render(:partial => "designs/change_design").to_json}, minWidth: 900, minHeight: 550});"
           end
         else
           render :template => "designs/carousel", :layout => false
