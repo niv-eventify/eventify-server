@@ -1,8 +1,4 @@
 ﻿var stage2 = {
-  location: "",
-  startDate: "",
-  startTime: "",
-  message: "",
   max_title_font_size: 0,
   max_free_text_font_size: 0,
   curr_title_font_size: 0,
@@ -10,8 +6,6 @@
   title_scroll_width: 0,
   free_text_scroll_width: 0,
   months_arr: [],
-  del_date_alert: "",
-  del_time_alert: "",
   seperated_title: false,
   prev_text: "",
   
@@ -83,42 +77,6 @@
     text = text.replace(/\n/g,"<BR/>");
     jQuery("#" + targetId).html(text);
     stage2.calcFontSize();
-  },
-  setDateInMessage: function() {
-    stage2.setFieldValueInMessage(jQuery("#starting_at_mock").val(), "startDate");
-  },
-  setTimeInMessage: function() {
-    var time = "";
-    if(jQuery("#event_starting_at_4i").val() == "" || jQuery("#event_starting_at_5i").val() == "") {
-      if(stage2.startTime == "")
-        return;
-    } else {
-      time = jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val();
-    }
-    
-    stage2.setFieldValueInMessage(time, "startTime");
-  },
-  setFieldValueInMessage: function(newVal, varName) {
-    if(newVal != stage2[varName]) {
-      var newVal = " " + newVal;
-      var message = jQuery("#event_guest_message").val();
-      if(stage2[varName].length > 0) {
-        jQuery("#event_guest_message").val(message.replace(stage2[varName], newVal));
-      } else if(message.length == 0){
-        jQuery("#event_guest_message").val(newVal);
-      } else {
-        jQuery("#event_guest_message").val(message + "\r" + newVal);
-      }
-      stage2[varName] = newVal;
-      stage2.message = jQuery("#event_guest_message").val();
-      stage2.preview_text("event_guest_message", "free_text");
-    }
-  },
-  selectAllSafeValue: function(safeVal) {
-    var textStart = jQuery("#event_guest_message").val().search(safeVal);
-    var textEnd = textStart >= 0 ? (textStart + safeVal.length) : -1;
-    if(jQuery("#event_guest_message").getSelection().start > textStart && jQuery("#event_guest_message").getSelection().start < textEnd)
-      jQuery("#event_guest_message").setSelection(textStart, textEnd);
   },
   setToolbarsPosition: function() {
     var toolbarHeight = 22;
@@ -285,38 +243,19 @@ jQuery(document).ready(function(){
   stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
   stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
   stage2.location = jQuery("#event_location_name").val();
-  if(jQuery("#event_guest_message").html().length == 0){
-    stage2.setDateInMessage();
-    stage2.setTimeInMessage();
-  }
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
-  stage2.message = jQuery("#event_guest_message").val();
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
   jQuery("#event_name").keyup(function(){
     stage2.preview_text("event_name", "title");
   });
-  jQuery("#event_guest_message").click(function(){
-    stage2.selectAllSafeValue(stage2.startDate);
-    stage2.selectAllSafeValue(stage2.startTime);
+  jQuery("#event_guest_message").keyup(function(){
+    stage2.preview_text("event_guest_message", "free_text");
   });
 
-  jQuery("#event_guest_message").keyup(function(){
-    if(stage2.startDate.length > 0 && jQuery(this).val().search(stage2.startDate) < 0) {
-      alert(stage2.del_date_alert);
-      jQuery(this).val(stage2.message);
-    } else if(stage2.startTime.length > 0 && jQuery(this).val().search(stage2.startTime) < 0) {
-      alert(stage2.del_time_alert);
-      jQuery(this).val(stage2.message);
-    } else {
-      stage2.message = jQuery(this).val();
-      stage2.preview_text("event_guest_message", "free_text");
-    }
-  });
   stage2.months_arr = stage2.months_arr.splice(1,13);
-  jQuery("#event_starting_at_4i,#event_starting_at_5i").change(stage2.setTimeInMessage);
-  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr, onHideStart: stage2.setDateInMessage });
+  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr });
   cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr });
   jQuery("#event_guest_message").focus(function(){
     if(stage2.seperated_title)

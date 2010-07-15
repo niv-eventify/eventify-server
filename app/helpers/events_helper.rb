@@ -109,9 +109,7 @@ module EventsHelper
   end
 
   def months_arr
-    del_time_alert = _("you can't change the starting time from here. Please edit the 'Time' field")
-    del_date_alert = _("you can't change the starting date from here. Please edit the 'Date' field")
-    javascript_tag("stage2.months_arr = #{_("en.date.abbr_month_names").map(&:to_s).to_json};stage2.del_time_alert = #{del_time_alert.to_json};stage2.del_date_alert = #{del_date_alert.to_json};")
+    javascript_tag("stage2.months_arr = #{_("en.date.abbr_month_names").map(&:to_s).to_json};")
   end
 
   def categories_for_select
