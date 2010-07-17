@@ -926,3 +926,6 @@ ul.contact-tabset li.active a ,
 .events-holder {
 	padding:0;
 }
+.import .confirmation h2{
+	font-size: 14px;
+}

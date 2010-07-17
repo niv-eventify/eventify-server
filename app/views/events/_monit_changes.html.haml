@@ -23,7 +23,7 @@
           if (!window.resend_invitations) {            
             setTimeout(function(){
               jQuery(".resend_invitaions").show();
-              jQuery.nyroModalManual({content:#{render(:partial => "resend_invitations_popup").to_json}});
+              jQuery.nyroModalManual({minHeight: 200,content:#{render(:partial => "resend_invitations_popup").to_json}});
             }, 800);
           }
         }
