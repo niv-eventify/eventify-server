@@ -333,7 +333,9 @@ class Event < ActiveRecord::Base
   end
 
   def self.default_start_time
-    2.weeks.from_now.beginning_of_day + 11.hours
+    Event.new.with_time_zone do
+      1.hour.from_now.change(:sec => 0, :min => 0)
+    end
   end
 
   def with_time_zone(default_time_zone = DEFAULT_TIME_ZONE)

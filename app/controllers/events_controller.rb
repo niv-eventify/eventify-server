@@ -4,7 +4,7 @@ class EventsController < InheritedResources::Base
   before_filter :require_user, :except => [:create, :new]
 
   before_filter :set_event, :only => [:edit, :update, :show]
-  around_filter :set_event_time_zone, :only => [:edit, :update, :show]
+  around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show]
   after_filter :set_uploaded_pictures, :only => :create
 
   actions :create, :new, :edit, :update, :index, :show
@@ -97,7 +97,11 @@ protected
   end
 
   def set_event_time_zone
-    @event.with_time_zone { yield }
+    if @event
+      @event.with_time_zone { yield }
+    else
+      Event.new.with_time_zone { yield }
+    end
   end
 
   def set_design_and_category
