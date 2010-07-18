@@ -303,6 +303,7 @@ jQuery(document).ready(function(){
 		if (stage2.starting_at() == old_start_date) {
 			return;
 		}
+		jQuery("#starting_at_mock").trigger('change');
 		if ('visible' == jQuery('.ending_at_block').css('visibility')) {
 			if ("" == jQuery("#ending_at_mock").val()) {
 				stage2.set_ending_at(stage2.starting_at());
