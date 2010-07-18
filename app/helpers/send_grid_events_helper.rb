@@ -1,0 +1,2 @@
+module SendGridEventsHelper
+end

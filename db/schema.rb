@@ -9,7 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100727103944) do
+ActiveRecord::Schema.define(:version => 20100718191318) do
+
+  create_table "bounces", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "email"
+    t.string   "status"
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"

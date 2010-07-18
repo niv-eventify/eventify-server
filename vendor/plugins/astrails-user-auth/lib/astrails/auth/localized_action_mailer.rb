@@ -13,6 +13,7 @@ module Astrails
       def _set_receipient_header(obj)
         hdr = SmtpApiHeader.new
         hdr.addTo([obj.email])
+        hdr.setCategory("event_#{obj.event_id || '0'}")
         @headers["X-SMTPAPI"] = hdr.asJSON
       end
 
