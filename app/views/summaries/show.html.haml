@@ -43,11 +43,10 @@
         %h2= _("Guests summary")
         .lists
           %dl.def-list
-            /
-              %dt
-                != link_to_function(_("Bounced emails"), "todo")
-                %span= "info"
-              %dd
+            %dt
+              != link_to _("Bounced emails"), event_bounces_path(@event), :class => "nyroModal"
+              %span= "info"
+            %dd
               ??
             %dt= _("Guests")
             %dd= @event.guests.count

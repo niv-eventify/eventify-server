@@ -1,4 +1,5 @@
 class Bounce < ActiveRecord::Base
   belongs_to :event
-  attr_accessible :event_id, :email, :status, :reason
+  belongs_to :guest
+  attr_accessible :event_id, :guest_id, :status, :reason
 end

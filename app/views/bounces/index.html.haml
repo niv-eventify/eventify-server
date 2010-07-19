@@ -1,0 +1,21 @@
+.import
+  .popup-heading
+    %strong= _("The following guests did not receive an invitation due to a wrong email address. Please fix their emails and resend them the invitations")
+
+  .events-holder
+    .table-box
+      .holder
+        %table#contacts
+          %thead
+            %tr
+              %td &nbsp;
+              %td= _("Name")
+              %td= _("Email")
+              %td= _("Fixed Email")
+              %td &nbsp;
+          %tbody
+            != render(:partial => "bounce", :collection => @bounces)
+  .contact-btns
+    %br
+    != link_to_function _("Resend Invitations"), "jQuery('body').css('cursor', 'wait'); jQuery('#import_guests').get(0).submit()", :class => "btn"
+    != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"

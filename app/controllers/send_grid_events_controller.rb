@@ -4,8 +4,9 @@ class SendGridEventsController < InheritedResources::Base
   def create
     if(params[:event] == 'bounce')
       @bounce = Bounce.new()
-      @bounce.event_id = params[:category].sub("event_", "")
-      @bounce.email = params[:email]
+      event_id = params[:category].sub("event_", "")
+      @bounce.event_id = event_id
+      @bounce.guest_id = Guest.find_by_event_id_and_email(event_id, params[:email]).id
       @bounce.status = params[:status]
       @bounce.reason = params[:reason]
       @bounce.save
