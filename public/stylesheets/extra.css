@@ -929,3 +929,6 @@ ul.contact-tabset li.active a ,
 .import .confirmation h2{
 	font-size: 14px;
 }
+.static a {
+	text-decoration: underline;
+}
