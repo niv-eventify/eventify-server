@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-07-06 11:43+0300\n"
+"POT-Creation-Date: 2010-07-19 23:59+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,11 +151,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:119
+#: app/helpers/events_helper.rb:108
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:119
+#: app/helpers/events_helper.rb:108
 msgid "(sent)"
 msgstr ""
 
@@ -167,7 +167,8 @@ msgstr ""
 msgid "...mail or sms|choose a delivery method"
 msgstr ""
 
-#: app/models/contact_importer.rb:53
+#: app/models/contact_importer.rb:54 app/models/contact_importer.rb:67
+#: app/models/contact_importer.rb:70
 msgid "A problem importing your contacts occured, please try again later."
 msgstr ""
 
@@ -210,7 +211,7 @@ msgstr ""
 msgid "Add from existing contact list:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:41
+#: app/views/guests/index.html.haml:37
 msgid "Add manually:"
 msgstr ""
 
@@ -238,7 +239,7 @@ msgstr ""
 msgid "Address:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:44
+#: app/views/guests/index.html.haml:40
 msgid "All"
 msgstr ""
 
@@ -282,7 +283,7 @@ msgstr ""
 #: app/views/contact_importers/_edit.html.haml:13
 #: app/views/contacts/edit.html.haml:19 app/views/contacts/new.html.haml:19
 #: app/views/cropped_pictures/_new.html.haml:10
-#: app/views/guest_importers/_csv.html.haml:16
+#: app/views/guest_importers/_csv.html.haml:18
 #: app/views/guest_importers/_email.html.haml:31
 #: app/views/guest_importers/_import.html.haml:26
 #: app/views/passwords/_edit.html.haml:9 app/views/reminders/_edit.html.haml:7
@@ -320,7 +321,7 @@ msgstr ""
 msgid "Change Password"
 msgstr ""
 
-#: app/views/designs/show.html.haml:20 app/views/designs/show.html.haml:22
+#: app/views/designs/show.html.haml:24 app/views/designs/show.html.haml:26
 msgid "Change design"
 msgstr ""
 
@@ -368,6 +369,8 @@ msgstr ""
 #: app/views/layouts/_footer.html.haml:11
 #: app/views/pages/contact_en.html.haml:1
 #: app/views/pages/contact_en.html.haml:4
+#: app/views/pages/contact_he.html.haml:1
+#: app/views/pages/contact_he.html.haml:4
 msgid "Contact Us"
 msgstr ""
 
@@ -397,7 +400,7 @@ msgstr ""
 msgid "Current Map Image"
 msgstr ""
 
-#: app/helpers/events_helper.rb:12
+#: app/helpers/events_helper.rb:13
 msgid "Date"
 msgstr ""
 
@@ -440,7 +443,7 @@ msgstr ""
 msgid "Don't send SMS invitations"
 msgstr ""
 
-#: app/views/designs/show.html.haml:39
+#: app/views/designs/show.html.haml:48
 msgid ""
 "Drag your uploaded pictures into the invitation. In order to remove a "
 "picture all you have to do is drag it back out of the invitation"
@@ -479,7 +482,6 @@ msgstr ""
 #: app/views/user_session/_new.html.haml:3
 #: app/views/user_session/new.html.haml:6 app/views/users/_edit.html.haml:4
 #: app/views/users/_form.html.haml:3 app/views/users/_new.html.haml:4
-#: app/views/users/_new.html.haml:6
 msgid "Email"
 msgstr ""
 
@@ -588,7 +590,7 @@ msgstr ""
 msgid "File should be less than 3MB"
 msgstr ""
 
-#: app/views/guests/index.html.haml:43
+#: app/views/guests/index.html.haml:39
 msgid "Filter by RSVP:"
 msgstr ""
 
@@ -681,7 +683,7 @@ msgid "If some of your guests didn't recieve the invitation"
 msgstr ""
 
 #: app/views/contact_importers/_edit.html.haml:12
-#: app/views/guest_importers/_csv.html.haml:15
+#: app/views/guest_importers/_csv.html.haml:17
 #: app/views/guest_importers/_email.html.haml:30
 #: app/views/guest_importers/_import.html.haml:25
 msgid "Import"
@@ -738,7 +740,7 @@ msgid ""
 "your email."
 msgstr ""
 
-#: app/views/designs/show.html.haml:11
+#: app/views/designs/show.html.haml:15
 msgid "Invitation Design"
 msgstr ""
 
@@ -817,7 +819,7 @@ msgstr ""
 msgid "Map Link"
 msgstr ""
 
-#: app/models/guest.rb:99 app/views/guests/index.html.haml:47
+#: app/models/guest.rb:99 app/views/guests/index.html.haml:43
 #: app/views/rsvps/_new.html.haml:5
 msgid "May Be"
 msgstr ""
@@ -858,7 +860,7 @@ msgstr ""
 #: app/views/other_guests/index.html.haml:11
 #: app/views/things/_things_header.html.haml:5
 #: app/views/users/_edit.html.haml:3 app/views/users/_form.html.haml:2
-#: app/views/users/_new.html.haml:3 app/views/users/_new.html.haml:6
+#: app/views/users/_new.html.haml:3
 msgid "Name"
 msgstr ""
 
@@ -872,7 +874,7 @@ msgid "New Reminder to Guests"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:7 app/helpers/events_wizard_helper.rb:9
-#: app/views/designs/show.html.haml:32
+#: app/views/designs/show.html.haml:41
 msgid "Next"
 msgstr ""
 
@@ -880,7 +882,7 @@ msgstr ""
 msgid "Next event:"
 msgstr ""
 
-#: app/models/guest.rb:99 app/views/guests/index.html.haml:46
+#: app/models/guest.rb:99 app/views/guests/index.html.haml:42
 #: app/views/rsvps/_new.html.haml:6
 msgid "No"
 msgstr ""
@@ -1000,7 +1002,7 @@ msgstr ""
 msgid "Please select from the list"
 msgstr ""
 
-#: app/controllers/guest_importers_controller.rb:62
+#: app/controllers/guest_importers_controller.rb:63
 msgid "Please upload a CSV file"
 msgstr ""
 
@@ -1008,7 +1010,7 @@ msgstr ""
 msgid "Please wait..."
 msgstr ""
 
-#: app/views/designs/show.html.haml:37
+#: app/views/designs/show.html.haml:46
 msgid "Prev"
 msgstr ""
 
@@ -1216,7 +1218,7 @@ msgstr ""
 msgid "Send Password Reset Instructions:"
 msgstr ""
 
-#: app/helpers/events_helper.rb:41
+#: app/helpers/events_helper.rb:40
 msgid "Send RSVPs summary email"
 msgstr ""
 
@@ -1327,7 +1329,7 @@ msgstr ""
 msgid "Upload Picture"
 msgstr ""
 
-#: app/views/designs/show.html.haml:27
+#: app/views/designs/show.html.haml:36
 msgid "Upload your own pictures and insert them into the invitation"
 msgstr ""
 
@@ -1335,7 +1337,7 @@ msgstr ""
 msgid "User Settings"
 msgstr ""
 
-#: app/views/designs/show.html.haml:29
+#: app/views/designs/show.html.haml:38
 msgid "Watch example"
 msgstr ""
 
@@ -1355,7 +1357,7 @@ msgstr ""
 msgid "Who brings"
 msgstr ""
 
-#: app/models/guest.rb:99 app/views/guests/index.html.haml:45
+#: app/models/guest.rb:99 app/views/guests/index.html.haml:41
 #: app/views/rsvps/_new.html.haml:4
 msgid "Yes"
 msgstr ""
@@ -1376,7 +1378,7 @@ msgstr ""
 msgid "You can also upload a map and a personal message"
 msgstr ""
 
-#: app/views/designs/show.html.haml:17
+#: app/views/designs/show.html.haml:21
 msgid "You can always:"
 msgstr ""
 
@@ -1384,8 +1386,8 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
-#: app/views/notifier/en_taking_removed.text.plain.erb:6
-msgid "You can select other things to bring by following this URL:"
+#: app/views/events/_form.html.haml:59
+msgid "You didn't save the event."
 msgstr ""
 
 #: app/views/guests/index.html.haml:7
@@ -1394,6 +1396,10 @@ msgstr ""
 
 #: app/views/things/index.html.haml:6
 msgid "You didn't save the last added thing to bring."
+msgstr ""
+
+#: app/views/designs/show.html.haml:9
+msgid "You didn't save your custom design."
 msgstr ""
 
 #: vendor/plugins/astrails-user-auth/lib/astrails/auth/controller.rb:55
@@ -1611,7 +1617,7 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: app/helpers/events_helper.rb:129
+#: app/helpers/events_helper.rb:116
 msgid "category|Other"
 msgstr ""
 
@@ -1797,6 +1803,10 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
+#: app/models/event.rb:206
+msgid "end date should be in a future"
+msgstr ""
+
 #: app/views/events/_form.html.haml:31 app/views/events/_form.html.haml:36
 msgid "ex. 5th Avenue, Manhattan"
 msgstr ""
@@ -1979,8 +1989,8 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/guests/index.html.haml:27 app/views/guests/index.html.haml:30
-#: app/views/summaries/show.html.haml:74 app/views/summaries/show.html.haml:77
+#: app/views/guests/index.html.haml:27 app/views/summaries/show.html.haml:74
+#: app/views/summaries/show.html.haml:77
 msgid "search"
 msgstr ""
 
@@ -1992,7 +2002,7 @@ msgstr ""
 msgid "sent"
 msgstr ""
 
-#: app/models/event.rb:203 app/models/event.rb:206 app/models/reminder.rb:62
+#: app/models/reminder.rb:62
 msgid "should be in a future"
 msgstr ""
 
@@ -2010,6 +2020,10 @@ msgstr ""
 msgid ""
 "some guests already selected this item to bring, please remove them from the "
 "list before changing the amounts"
+msgstr ""
+
+#: app/models/event.rb:203
+msgid "start date should be in a future"
 msgstr ""
 
 #: locale/yml_import.rb:5
@@ -2055,16 +2069,6 @@ msgstr ""
 #: app/views/events/_toolbar_preview.html.haml:6
 #: app/views/rsvps/_toolbar.html.haml:6
 msgid "to Calendar"
-msgstr ""
-
-#: app/helpers/events_helper.rb:124
-msgid ""
-"you can't change the starting date from here. Please edit the 'Date' field"
-msgstr ""
-
-#: app/helpers/events_helper.rb:123
-msgid ""
-"you can't change the starting time from here. Please edit the 'Time' field"
 msgstr ""
 
 #: app/views/uploaded_pictures/new.html.haml:22
