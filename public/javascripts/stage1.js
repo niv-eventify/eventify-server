@@ -50,6 +50,7 @@ var stage1 = {
 				stage1.curr_window_height = $(this).height();
 				stage1.curr_window_width = $(this).width();
 				$(this).removeClass("empty");
+				jQuery.fn.unload_monit_set();
 			}
 		});
 		$(".window").draggable({
@@ -147,5 +148,8 @@ $(document).ready(function(){
 	jQuery("a.change-design").click(function(e){
 		stage1.update_designs();
 		return false;
+	});
+	$("#crop,#cancel_crop").click(function(){
+		jQuery.fn.unload_monit_reset();
 	});
 });

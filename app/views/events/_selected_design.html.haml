@@ -2,5 +2,5 @@
   .holder
     .frame
       .image-h
-        != image_tag(@event.design.card.url(:stage2))
+        != image_tag(@event.design.card.url(:stage2), :size => "561x374")
         != render(:partial => "events/title_and_message", :locals => {:event => @event})

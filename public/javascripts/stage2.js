@@ -300,7 +300,7 @@ jQuery(document).ready(function(){
 
 	var old_start_date = stage2.starting_at();
 	setInterval(function(){
-		if (stage2.starting_at() == old_start_date) {
+		if (stage2.starting_at().getTime() == old_start_date.getTime()) {
 			return;
 		}
 		jQuery("#starting_at_mock").trigger('change');
