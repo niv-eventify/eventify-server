@@ -46,8 +46,7 @@
             %dt
               != link_to _("Bounced emails"), event_bounces_path(@event), :class => "nyroModal"
               %span= "info"
-            %dd
-              ??
+            %dd= @event.bounces.count
             %dt= _("Guests")
             %dd= @event.guests.count
             %dt= _("Total arriving guests")

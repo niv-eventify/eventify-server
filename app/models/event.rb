@@ -37,6 +37,8 @@ class Event < ActiveRecord::Base
 
   has_many :reminders
 
+  has_many :bounces
+
   include Event::Summary
 
   has_attached_file :map,

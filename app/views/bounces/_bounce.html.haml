@@ -1,9 +1,8 @@
 %tr
-  %td!= check_box_tag "bounce.guest_id", "1", false, :class => "checkable"
+  %td!= check_box_tag "bounce.guest_id", "#{bounce.guest.id}", false, :class => "checkable"
   %td
-    = bounce.status
+    = bounce.guest.name
   %td
-    = bounce.reason
+    = bounce.guest.email
   %td
-    = bounce.guest.id
   %td
