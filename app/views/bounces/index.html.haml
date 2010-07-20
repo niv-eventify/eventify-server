@@ -11,10 +11,10 @@
               %td &nbsp;
               %td= _("Name")
               %td= _("Email")
-              %td= _("Fixed Email")
-              %td &nbsp;
+              %td= _("Reason")
+              %td= _("Status")
           %tbody
-            != render(:partial => "bounce", :collection => @bounces)
+            != render(:partial => "bounce", :collection => @guests)
   .contact-btns
     %br
     != link_to_function _("Resend Invitations"), "jQuery('body').css('cursor', 'wait'); jQuery('#import_guests').get(0).submit()", :class => "btn"

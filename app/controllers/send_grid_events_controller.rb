@@ -1,4 +1,4 @@
-class SendGridEventsController < InheritedResources::Base
+class SendGridEventsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
 
   def create

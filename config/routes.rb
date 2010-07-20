@@ -49,5 +49,5 @@ ActionController::Routing::Routes.draw do |map|
   map.lobby "/lobby", :controller => "lobby", :action => "index"
   map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
   map.resources :cropped_pictures
-  map.send_grid_events "/sendgridevents", :controller => "send_grid_events", :action => "create"
+  map.connect "/1234a3a5e723d2e0fa3e43fbef0c3dac", :controller => :send_grid_events, :action => :create, :conditions => {:method => :post}
 end
