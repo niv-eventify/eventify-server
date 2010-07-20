@@ -45,6 +45,8 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
   named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
 
+  named_scope :bounced, {:conditions => "guests.bounced_at IS NOT NULL"}
+
   after_create :reset_event_stage_passed
   after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
@@ -213,6 +215,7 @@ class Guest < ActiveRecord::Base
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at, self.send_email_invitation_at = send_email_invitation_at, nil
     self.any_invitation_sent = true
+    unbounce
     save!
 
     send_at(email_invitation_sent_at, :send_email_invitation!, resend)
@@ -307,5 +310,16 @@ class Guest < ActiveRecord::Base
     # just invited (or scheduled to invite)
     return false if invited?
     true
+  end
+
+  def bounce!(status, reason)
+    self.bounced_at = Time.now.utc
+    self.bounce_status = status
+    self.bounce_reason = reason
+    save!
+  end
+
+  def unbounce
+    self.bounce_reason = self.bounce_status = self.bounced_at = nil
   end
 end
