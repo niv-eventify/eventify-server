@@ -13,7 +13,7 @@ describe Event do
         @event.starting_at = 2.days.from_now
         @event.ending_at = 1.day.from_now
         @event.should_not be_valid
-        @event.errors.on(:ending_at).should == "should be in a future"
+        @event.errors.on(:ending_at).should == "end date should be in a future"
       end
 
       it "should not validate sms messages length on create" do
