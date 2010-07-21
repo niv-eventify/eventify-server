@@ -1,0 +1,24 @@
+<span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">שלום <%= h(@event.user.name)%>,</span>
+<br/><br/>
+<%= s_("rsvp summary|Event %{name}") % {:name => @event.name} %>
+<%= @url %>
+<br/>
+<%- if @summary_since -%>
+<%= s_("rsvp summary|RSVPs summary since %{date_time}") % { :date_time => @summary_since.to_s(:isra_date) } %>
+<%- end -%>
+<br/>
+<%- Guest::RSVP_TEXT.each_with_index do |rsvp, index| -%>
+  <%- unless @guests_groups[index].blank? -%>
+<br/>
+=== <%= s_("rsvp summary|Guests that responded %{rsvp} (%{count})") % {:rsvp => s_(rsvp), :count => @guests_groups[index].size } %>
+<br/>
+    <%- @guests_groups[index].each_with_index do |guest, i| -%>
+<%= i.to_s %>. <%= [guest[:name], guest[:email], guest[:mobile_phone]].compact.join(", ") %>
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
+<br/>
+אין צורך להשיב למייל זה.
+<br/>
+בברכה,
+צוות Eventify
