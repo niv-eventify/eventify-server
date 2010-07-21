@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-07-21 11:36+0300\n"
+"POT-Creation-Date: 2010-07-21 12:43+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -264,6 +264,10 @@ msgstr ""
 #: app/views/reminders/_reminder.html.haml:12
 #: app/views/contacts/_contact.html.haml:6
 msgid "Are you sure?"
+msgstr ""
+
+#: app/views/layouts/mail_template.text.html.erb:28
+msgid "Because planning is half the fun"
 msgstr ""
 
 #: app/views/summaries/show.html.haml:38
