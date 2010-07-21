@@ -1,6 +1,7 @@
 module Astrails
   module Auth
     class LocalizedActionMailer < ActionMailer::Base
+      layout 'mail_template'
 
       private
       def initialize_defaults(method_name)

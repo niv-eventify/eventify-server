@@ -1,14 +1,9 @@
-<html>
-<body style="direction: rtl;">
-<div style="direction: rtl;">
-  <p>שלום <%= h(@guest.name)%>,</p>
-  <p>אין צורך בהבאת <%= h(@thing.name)%> ל<%= "\"#{h(@guest.event.name)}\"" %> של <%= h(@guest.event.user.name)%>.</p>
-  <p>ניתן לבחור פריטים אחרים מרשימת ה"דברים להביא" ע"י לחיצה על הקישור הבא:</p>
-  <p><%= link_to(@url, @url) %></p>
-  <br/>
-  <p>בברכה,</p>
-  <p>צוות Eventify</p>
-  <p>אין צורך להשיב למייל זה.</p>
-</div>
-</body>
-</html>
+<span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">שלום <%= h(@guest.name)%>,</span>
+<br/>
+<p>אין צורך בהבאת <%= h(@thing.name)%> ל<%= "\"#{h(@guest.event.name)}\"" %> של <%= h(@guest.event.user.name)%>.</p>
+<p>ניתן לבחור פריטים אחרים מרשימת ה"דברים להביא" ע"י לחיצה על הקישור הבא:</p>
+<p><%= link_to(@url, @url) %></p>
+<br/>
+<p>בברכה,</p>
+<p>צוות Eventify</p>
+<p>אין צורך להשיב למייל זה.</p>

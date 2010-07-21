@@ -1,13 +1,10 @@
-<html>
-<body style="direction: rtl;">
-<div style="direction: rtl;">
-שלום <%= h(@guest.name)%>,
+<span  style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">שלום <%= h(@guest.name)%>,</span>
 <br/><br/>
 קיבלת הזמנה מ<%= h(@guest.event.user.name) %> ל <%= "\"#{h(@guest.event.name)}\"" %>.
 <br/><br/>
 לפתיחת ההזמנה יש ללחוץ על המעטפה.
 <br/><br/>
-<%= link_to(image_tag("http://eventify.co.il/images/envelope.jpg", :style => "border:0"), @url) %>
+<%= link_to(image_tag("http://eventify.co.il/images/envelope.png", :style => "border:0"), @url) %>
 <br/><br/>
 אם לחיצה על המעטפה אינה פותחת את ההזמנה, ניתן להעתיק את שורת הקישור הבאה ולהדביק אותה בשורת הכתובת בדפדפן:
 <br/>
@@ -18,6 +15,3 @@
 בברכה,
 <br/>
 צוות Eventify
-</div>
-</body>
-</html>
