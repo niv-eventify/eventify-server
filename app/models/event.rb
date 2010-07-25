@@ -348,6 +348,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def delay_sms_sending=(value)
+    @delay_sms_sending = ("true" == value)
+  end
+
 protected
 
   def _cancel_sms_reminders!

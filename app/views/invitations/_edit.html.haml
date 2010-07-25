@@ -16,7 +16,7 @@
       - if !Astrails.good_time_to_send_sms?(Time.now.utc, @event.tz) && @event.allow_delayed_sms?
         .settings-form-row
           %label= _("Send SMS messages tomorrow morning")
-          != f.check_box :delay_sms_sending
+          != f.check_box :delay_sms_sending, {}, true, false
 
   .forms-block-btns
     != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
