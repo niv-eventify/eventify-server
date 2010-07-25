@@ -219,17 +219,22 @@ class Guest < ActiveRecord::Base
       return
     end
 
-    if reminder.by_email? && self.send_email?
-      # TODO: handle delivery errors
-      Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
-      reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success", :kind => "email")
-    end
+    I18n.with_locale(event.language) do
+      event.with_time_zone do
+        if reminder.by_email? && self.send_email?
+          # TODO: handle delivery errors
+      
+          Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
+          reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success", :kind => "email")
+        end
 
-    if reminder.by_sms? && self.send_sms?
-      sms = sms_messages.create!(:kind => "reminder", :message => reminder.sms_message)
+        if reminder.by_sms? && self.send_sms?
+          sms = sms_messages.create!(:kind => "reminder", :message => reminder.sms_message)
 
-      sms.send_sms!
-      reminder.reminder_logs.create(:guest_id => self.id, :destination => mobile_phone, :message => reminder.sms_message, :status => (sms.success? ? "success" : "failure"), :kind => "sms")
+          sms.send_sms!
+          reminder.reminder_logs.create(:guest_id => self.id, :destination => mobile_phone, :message => reminder.sms_message, :status => (sms.success? ? "success" : "failure"), :kind => "sms")
+        end
+      end
     end
 
     logger.info "#{Time.now.utc.to_s(:db)} sending reminder_id=#{reminder.id} to guest_id=#{self.id} - reminder sent\n"
