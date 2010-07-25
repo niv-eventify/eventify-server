@@ -10,8 +10,6 @@
           != link_to_function _("Select All"), "jQuery('input.checkable').attr('checked', 'checked')"
           &nbsp;|&nbsp;
           != link_to_function _("Select None"), "jQuery('input.checkable').removeAttr('checked')"
-        != check_box_tag "save_to_addressbook", "true", true
-        != label_tag :save_to_addressbook, _("Add selected contacts to your address book")
         .holder
           %table#contacts
             %thead
@@ -23,6 +21,8 @@
             %tbody
               != render(:partial => "contact", :collection => contacts)
   .contact-btns
+    != check_box_tag "save_to_addressbook", "true", true
+    != label_tag :save_to_addressbook, _("Add selected contacts to your address book")
     %br
     != link_to_function _("Import"), "jQuery('body').css('cursor', 'wait'); jQuery('#import_guests').get(0).submit()", :class => "btn"
     != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
