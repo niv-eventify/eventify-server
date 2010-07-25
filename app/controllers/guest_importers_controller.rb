@@ -10,14 +10,9 @@ class GuestImportersController < ApplicationController
   }
 
   def create
-    unless params[:source]
-      guests_imported = @event.guests.import(selected_contracts)
-      flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
-      redirect_to event_guests_path(@event)
-      return
-    end
+    return _import_guests  unless params[:source]
 
-    _import
+    _load_from_source
 
     responds_to_parent do
       render(:update) do |page|
@@ -71,7 +66,7 @@ protected
     @error = error.to_s if error
   end
 
-  def _import
+  def _load_from_source
     set_source
 
     if "csv" == params[:source]
@@ -79,5 +74,20 @@ protected
     elsif "email" == params[:source]
       _load_from_emails
     end
+  end
+
+  def _import_guests
+    new_contacts = selected_contracts
+
+    guests_imported = @event.guests.import(new_contacts)
+    flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
+    
+    if params[:save_to_addressbook] && !guests_imported.blank?
+      new_contacts.each do |g|
+        @event.user.contacts.add(g["name"], g["email"])
+      end
+    end
+
+    redirect_to event_guests_path(@event)
   end
 end
