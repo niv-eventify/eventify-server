@@ -144,6 +144,7 @@ $(document).ready(function(){
 			alert(stage1.still_cropping_msg);
 			return false;
 		}
+		jQuery('body').css('cursor', 'wait');
 	});
 	jQuery("a.change-design").click(function(e){
 		stage1.update_designs();
