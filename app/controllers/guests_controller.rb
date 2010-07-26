@@ -3,6 +3,9 @@ class GuestsController < InheritedResources::Base
   belongs_to :event
   actions :index, :create, :update, :destroy, :edit, :show
   respond_to :js, :only => [:create, :update, :destroy, :edit]
+  has_scope :rsvp_yes
+  has_scope :rsvp_no
+  has_scope :rsvp_maybe
 
   after_filter :clear_flash
 
@@ -54,6 +57,29 @@ protected
   end
 
   def collection
-    get_collection_ivar || set_collection_ivar(end_of_association_chain.all)
+    get_collection_ivar || set_collection_ivar(_load_collection)
   end
+
+  def _load_collection
+    if params[:query].blank?
+      end_of_association_chain.paginate(_page_opts.merge(:include => :sms_messages))
+    else
+      @event = current_user.events.find(params[:event_id])
+      Guest.search(params[:query], :with => {:event_id => @event.id}, :allow_star => true).paginate(_page_opts)
+    end
+  end
+
+  def _page_opts
+    {:page => params[:page], :per_page => (params[:per_page] || 40)}
+  end
+
+  def _is_scoped_by?(key)
+    (params.keys.collect(&:to_sym) & scopes_configuration.keys).first == key
+  end
+  helper_method :_is_scoped_by?
+
+  def _any_scope?
+    !(params.keys.collect(&:to_sym) & scopes_configuration.keys).blank?
+  end
+  helper_method :_any_scope?
 end

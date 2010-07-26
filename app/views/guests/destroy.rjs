@@ -1,1 +1,2 @@
 # do nothing, remove link removes a row
+page << "jQuery('h2.total_guests').html(#{(_("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}).to_json})"

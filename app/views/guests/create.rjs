@@ -8,12 +8,14 @@ if @guest.new_record?
   show_errors_for(page, @guest.errors.on(:mobile_phone), "tr#new_guest_row td.t-col-3")
   page << "jQuery('td.error:first input').focus();"
 else
-  page << "jQuery('#new_guest_row').before(#{render(:partial => "guest", :object => @guest).to_json})"
-  page << "jQuery('##{dom_id(@guest)} input:checkbox').customCheckbox();"
-  page << "jQuery('##{dom_id(@guest)}_rsvp').customSelect();"
-  page << "jQuery('#new_guest').get(0).reset();"
-  page << "jQuery('#guest_send_email').removeAttr('checked').redraw_customCheckbox();"
-  page << "jQuery('#guest_send_sms').removeAttr('checked').redraw_customCheckbox();"
-  page << "jQuery('#new_guest input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
-  page << "jQuery.fn.unload_monit_reset()"
+  page << <<-JAVASCRIPT
+    jQuery('#new_guest_row').before(#{render(:partial => "guest", :object => @guest).to_json})
+    jQuery('##{dom_id(@guest)} input:checkbox').customCheckbox();
+    jQuery('##{dom_id(@guest)}_rsvp').customSelect();
+    jQuery('#new_guest').get(0).reset();
+    jQuery('#guest_send_email').removeAttr('checked').redraw_customCheckbox();
+    jQuery('#guest_send_sms').removeAttr('checked').redraw_customCheckbox();
+    jQuery.fn.unload_monit_reset()
+    jQuery('h2.total_guests').html(#{(_("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}).to_json})
+  JAVASCRIPT
 end

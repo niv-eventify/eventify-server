@@ -12,7 +12,7 @@ module GuestsHelper
   def link_to_remove_guest(guest)
     return nil unless guest.allow_delete?
     link_to_remote "del", :url => event_guest_path(guest.event_id, guest), :method => :delete, 
-      :confirm => _("Are you sure?"), :html => {:class => "bin"}, :before => "$('tr##{dom_id(guest)}').remove();jQuery.fn.reload_search();"
+      :confirm => _("Are you sure?"), :html => {:class => "bin"}, :before => "$('tr##{dom_id(guest)}').remove();"
   end
 
   def guest_remote_checkbox(attribute, guest)
@@ -31,7 +31,7 @@ module GuestsHelper
 
   def refresh_guest_row(page, guest)
     page << "jQuery('tr##{dom_id(guest)}').replaceWith(#{render(:partial => "guest", :object => guest).to_json});"
-    page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox(); jQuery.fn.reload_search();"
+    page << "jQuery('tr##{dom_id(guest)} input:checkbox').customCheckbox();"
     page << "jQuery('tr##{dom_id(guest)} select').customSelect();"
     page << "jQuery('tr##{dom_id(guest)} input.remote-checkbox').change(function(){jQuery(this).parents('form').get(0).onsubmit();});"
   end
@@ -77,5 +77,15 @@ module GuestsHelper
         jQuery("#guest_email").keyup(ef).blur(ef).change(ef);
       });
     JAVASCRIPT
+  end
+
+  def scope_class(scope_name = nil)
+    active = if scope_name.nil?
+      !_any_scope?
+    else
+      _is_scoped_by?(scope_name)
+    end
+
+    active ? "active" : ""
   end
 end

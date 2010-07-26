@@ -733,6 +733,11 @@ li.thing .sel-holder {
 
 p.rsvp-filter {
 	clear:both;
+	font-size:110%;
+}
+
+p.rsvp-filter a.active {
+	color: #3A9925;
 }
 
 .selectOptions ul a {

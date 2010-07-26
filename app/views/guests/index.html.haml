@@ -24,8 +24,9 @@
 
           .cancel-form
             .input-area
-              != text_field_tag "search_guests", '', :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}"
-              != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn", :id => "cancel_search"
+              - form_tag event_guests_path(@event), :method => :get do
+                != text_field_tag "query", params[:query], :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}"
+                != link_to image_tag("icon-close.gif"), event_guests_path(@event), :class => "close-btn"
               :javascript
                 jQuery(function(){
                   clearInputs("search_guests");
@@ -34,13 +35,14 @@
                   });
                 });
 
+          %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
           %h3= _("Add manually:")
           %p.rsvp-filter
             %strong= _("Filter by RSVP:")
-            != link_to_function _("All"), "", :id => "filter_all"
-            != link_to_function _("Yes"), "", :id => "filter_yes"
-            != link_to_function _("No"), "", :id => "filter_no"
-            != link_to_function _("May Be"), "", :id => "filter_maybe"
+            != link_to _("All"), event_guests_path(@event), :class => scope_class
+            != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
+            != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
+            != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
 
           %table#guests.info-table
             != render(:partial => "guests_header", :locals => {:check_all => true})
@@ -48,3 +50,5 @@
               != render(:partial => "guest", :collection => collection)
         
               != render(:partial => "new")
+
+          != will_paginate(collection, :renderer => DesignsWillPaginate)
