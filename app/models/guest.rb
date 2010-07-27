@@ -26,12 +26,14 @@ class Guest < ActiveRecord::Base
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
-  named_scope :invited, {:conditions => "(guests.sms_invitation_sent_at IS NOT NULL AND guests.send_sms = 1) OR (guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1)"}
+  named_scope :invited_or_scheduled, {:conditions => "((guests.sms_invitation_sent_at IS NOT NULL OR guests.send_sms_invitation_at IS NOT NULL) AND guests.send_sms = 1) OR (guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1)"}
   named_scope :any_invitation_sent, {:conditions => "guests.any_invitation_sent = 1"}
   named_scope :no_invitation_sent, {:conditions => "guests.any_invitation_sent = 0"}
 
   named_scope :not_invited_by_sms, {:conditions => "guests.send_sms_invitation_at IS NULL AND guests.sms_invitation_sent_at IS NULL AND guests.send_sms = 1"}
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
+
+  named_scope :scheduled_to_invite_by_sms_overdue, lambda {{:conditions => ["guests.send_sms_invitation_at < ? AND guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = 1", Time.now.utc]}}
 
   named_scope :not_invited_by_email, {:conditions => "guests.send_email_invitation_at IS NULL AND guests.email_invitation_sent_at IS NULL AND guests.send_email = 1"}
 
@@ -167,13 +169,28 @@ class Guest < ActiveRecord::Base
     save!
   end
 
-  def prepare_sms_invitation!(resend)
-    # TODO = check sms bulk status / package payments
+  def self.delayed_sms_cron_job
+    loop do
+      guests = scheduled_to_invite_by_sms_overdue.all(:limit => 10)
+      break if guests.blank?
+
+      mass_prepare_sms(guests)
+    end
+  end
+
+  def self.mass_prepare_sms(guests)
+    guests.collect(&:prepare_sms_invitation!)
+  end
+
+  def prepare_sms_invitation!
+    resend = self.delayed_sms_resend
+
     self.sms_invitation_sent_at, self.send_sms_invitation_at = send_sms_invitation_at, nil
     self.any_invitation_sent = true
+    self.delayed_sms_resend = nil
     save!
 
-    send_at(sms_invitation_sent_at, :send_sms_invitation!, resend)
+    send_later(:send_sms_invitation!, resend)
   end
 
   def send_sms_invitation!(resend = false)
@@ -248,12 +265,12 @@ class Guest < ActiveRecord::Base
     invitation_sent_or_scheduled?(:email) || invitation_sent_or_scheduled?(:sms)
   end
 
-  def scheduled_to_invite_by_sms?
-    send_sms_invitation_at && send_sms?
-  end
-
   def scheduled_to_invite_by_email?
     send_email_invitation_at && send_email?
+  end
+
+  def scheduled_to_invite_by_sms?
+    send_sms_invitation_at && send_sms?
   end
 
   def email_recipient

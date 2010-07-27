@@ -25,6 +25,10 @@ every 2.minutes do
   runner "Reminder.send_reminders"
 end
 
+every 2.minutes do
+  runner "Guest.delayed_sms_cron_job"
+end
+
 every 1.hour do
   runner "Event.summary_cron_job"
 end

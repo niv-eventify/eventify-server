@@ -180,28 +180,68 @@ describe Guest do
   describe "send sms invitation" do
     before(:each) do
       @guest = Factory.create(:guest_with_mobile)
-      @guest.event.send_invitations
-      @guest.reload.sms_invitation_sent_at.should be_nil
-      @guest.reload.sms_invitation_failed_at.should be_nil
-      @guest.reload.send_sms_invitation_at.should_not be_nil
     end
 
-    it "should reset sent at" do
-      @guest.prepare_sms_invitation!(false)
-      @guest.sms_invitation_sent_at.should_not be_nil
-      @guest.send_sms_invitation_at.should be_nil
-    end
+    describe "scheduling" do
+      it "should schedule sending" do
+        @guest.send_sms_invitation_at = 1.minute.ago
+        @guest.save!
 
-    it "should save failure time" do
-      @guest.send_sms_invitation!
-      @guest.sms_invitation_failed_at.should_not be_nil
-    end
+        g = Guest.scheduled_to_invite_by_sms_overdue
+        g.size.should == 1
+        g.first.id.should == @guest.id
+      end
 
-    it "should send sms" do
-      Cellact::Sender.stub!(:should_succeed?).and_return(true)
-      @guest.prepare_sms_invitation!(false)
-      @guest.sms_invitation_sent_at.should_not be_nil
-      @guest.sms_invitation_failed_at.should be_nil
+      it "cron should do nothing" do
+        @guest.send_sms_invitation_at = 1.day.from_now
+        @guest.save!
+
+        Guest.should_not_receive(:mass_prepare_sms)
+        Guest.delayed_sms_cron_job
+      end
+
+      it "cron should prepare sms" do
+        @guest.send_sms_invitation_at = 1.day.ago
+        @guest.save!
+
+        Guest.should_receive(:mass_prepare_sms) do |array|
+          array.count.should == 1
+          array.first.id.should == @guest.id
+          # mock functionality
+          @guest.send_sms_invitation_at = nil
+          @guest.save
+        end
+        Guest.delayed_sms_cron_job        
+      end
+    end
+    
+    describe "sending" do
+      before(:each) do
+        @guest.event.send_invitations
+        @guest.reload.sms_invitation_sent_at.should be_nil
+        @guest.sms_invitation_failed_at.should be_nil
+        @guest.send_sms_invitation_at.should_not be_nil
+      end
+
+      it "should reset sent at" do
+        @guest.delayed_sms_resend = false
+        @guest.prepare_sms_invitation!
+        @guest.sms_invitation_sent_at.should_not be_nil
+        @guest.send_sms_invitation_at.should be_nil
+      end
+
+      it "should save failure time" do
+        @guest.send_sms_invitation!
+        @guest.sms_invitation_failed_at.should_not be_nil
+      end
+
+      it "should send sms" do
+        Cellact::Sender.stub!(:should_succeed?).and_return(true)
+        @guest.delayed_sms_resend = false
+        @guest.prepare_sms_invitation!
+        @guest.sms_invitation_sent_at.should_not be_nil
+        @guest.sms_invitation_failed_at.should be_nil
+      end
     end
   end
 
