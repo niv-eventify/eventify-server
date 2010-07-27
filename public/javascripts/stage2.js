@@ -302,8 +302,27 @@ jQuery(document).ready(function(){
   });
 
   stage2.months_arr = stage2.months_arr.splice(1,13);
-  cal1 = new Calendar({ starting_at_mock: {starting_at_mock: 'j.n.Y', event_starting_at_year: 'Y', event_starting_at_month: 'm', event_starting_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr });
-  cal2 = new Calendar({ ending_at_mock: {ending_at_mock: 'j.n.Y', event_ending_at_year: 'Y', event_ending_at_month: 'm', event_ending_at_day: 'd' } }, { classes: ['i-heart-ny','prev_month','next_month'], direction: 0.5, months: stage2.months_arr });
+  cal1 = new Calendar(
+		{
+			starting_at_mock: {
+				starting_at_mock: 'j.n.Y',
+				event_starting_at_year: 'Y',
+				event_starting_at_month: 'm',
+				event_starting_at_day: 'd'
+			},
+			ending_at_mock: {
+				ending_at_mock: 'j.n.Y',
+				event_ending_at_year: 'Y',
+				event_ending_at_month: 'm',
+				event_ending_at_day: 'd'
+			}
+		},
+		{
+			classes: ['i-heart-ny','prev_month','next_month'],
+			direction: 0.5,
+			months: stage2.months_arr
+		}
+	);
 
 	var old_start_date = stage2.starting_at();
 	setInterval(function(){
