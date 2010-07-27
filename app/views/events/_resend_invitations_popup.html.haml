@@ -5,6 +5,7 @@
     %h2= _("Do you want to resend invitation after saving event details to the guests that already received an invitation by email or sms?")
   .contact-btns
     %br
-    != link_to_function s_("resend|Yes"), "jQuery('#resend_invitations').attr('checked', 'checked').redraw_customCheckbox();jQuery.nyroModalRemove()", :class => "btn"
-    != link_to_function s_("resend|No"), "jQuery.nyroModalRemove()", :class => "btn"
+    != link_to_function s_("resend|Yes"), "stage2.submit_form(true)", :class => "btn"
+    != link_to_function s_("resend|No"), "stage2.submit_form(false)", :class => "btn"
+    != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
 

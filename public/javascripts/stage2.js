@@ -260,6 +260,13 @@
 		jQuery("#event_ending_at_5i").val(min);
 		jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(hrs);
 		jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(min);
+	},
+
+	submit_form: function(is_resend_invitation) {
+		jQuery('#event_resend_invitations').val(is_resend_invitation ? 'true' : '');
+		jQuery.nyroModalRemove();
+		jQuery('body').css('cursor', 'wait');
+		jQuery('.form.new-event').submit();
 	}
 }
 jQuery(document).ready(function(){

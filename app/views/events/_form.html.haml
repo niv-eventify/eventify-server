@@ -50,9 +50,7 @@
     != f.label :allow_seeing_other_guests, _("Guests can see other attendees")
 
 - if @event.any_invitation_sent?
-  .resend_invitaions{:style => @event.resend_invitations ? "" : "display:none"}
-    != form_divider
-    != f.input :resend_invitations, :as => :boolean, :label => _("Resend invitations"), :wrapper_html => {:class => "auto_width"}, :require => false, :id => "resend_invitations", :checked_value => "true", :unchecked_value => "false"
+  != f.input :resend_invitations, :as => :hidden
   != render(:partial => "monit_changes")
 
 :javascript
