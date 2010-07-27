@@ -12,11 +12,6 @@
             %dt= _("Where:")
             %dd= resource.event.location_name
 
-          %dt= _("Date:")
-          %dd= resource.event.starting_at.to_s(:isra_date)
-          %dt= _("Time")
-          %dd= resource.event.starting_at.to_s(:isra_time)
-
           - unless resource.event.location_address.blank?
             %dt= _("Address:")
             %dd
@@ -25,3 +20,18 @@
                 != link_to content_tag(:span, _("show map")), resource.event.map.url, :target => "_blank"
               - elsif !resource.event.map_link.blank?
                 != link_to content_tag(:span, _("show map")), resource.event.map_link, :target => "_blank"
+
+          %dt= _("Date:")
+          %dd= resource.event.starting_at.to_s(:isra_date)
+          %dt= _("Time")
+          %dd= resource.event.starting_at.to_s(:isra_time)
+
+          - unless resource.event.ending_at.blank?
+            = _("Event ends at")
+            %br
+            %dt= _("Date:")
+            %dd= resource.event.ending_at.to_s(:isra_date)
+            %dt= _("Time")
+            %dd= resource.event.ending_at.to_s(:isra_time)
+            
+
