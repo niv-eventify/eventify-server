@@ -30,8 +30,8 @@ protected
   end
 
   def sms_message
-    resource.sms_message = resource.default_sms_message
-    resource.sms_resend_message = resource.default_sms_message_for_resend
+    resource.sms_message ||= resource.default_sms_message
+    resource.sms_resend_message ||= resource.default_sms_message_for_resend
   end
 
   def check_event

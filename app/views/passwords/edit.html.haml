@@ -8,8 +8,6 @@
   - middle_box_section("") do
     - form_for(@user ||= User.new, :url => password_path(@user.perishable_token), :method => :put, :builder => MiddleBoxFormBuilder::Builder) do |f|
       = f.object.errors.on(:base)
-
-      != f.password_field :password, :label => _("Password")
-      != f.password_field :password_confirmation, :label => _("Password Confirmation")
+      != render(:partial => "passwords/form", :locals => {:f => f})
       .settings-form-btns
         != link_to_function content_tag(:span, _("Change")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"

@@ -105,7 +105,7 @@ class Event < ActiveRecord::Base
 
   after_update :check_reset_invitation_status
   def check_reset_invitation_status
-    guests.invited.update_all("sms_invitation_sent_at = NULL, email_invitation_sent_at = NULL") if should_resend_invitations? 
+    guests.invited_or_scheduled.update_all("sms_invitation_sent_at = NULL, email_invitation_sent_at = NULL") if should_resend_invitations?
   end
 
   def should_resend_invitations?
@@ -237,7 +237,12 @@ class Event < ActiveRecord::Base
       resend = g.any_invitation_sent?
 
       g.prepare_email_invitation!(resend) if g.scheduled_to_invite_by_email?
-      g.prepare_sms_invitation!(resend)   if g.scheduled_to_invite_by_sms?
+
+      # sms inviations are sent form Guets#delayed_sms_cron_job
+      if g.scheduled_to_invite_by_sms?
+        g.delayed_sms_resend = resend
+        g.save!
+      end
     end
   end
 

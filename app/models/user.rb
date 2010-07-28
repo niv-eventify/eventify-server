@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
     c.perishable_token_valid_for = 2.weeks
   end
   include Astrails::Auth::Model
-  attr_accessible :name, :password, :password_confirmation
+  attr_accessible :name, :password, :password_confirmation, :old_password
+  attr_accessor :old_password
   validates_presence_of :name
+  validate :old_passwords, :on => :update
 
   named_scope :enabled, {:conditions => "users.disabled_at IS NULL"}
   named_scope :disabled, {:conditions => "users.disabled_at IS NOT NULL"}
@@ -48,6 +50,14 @@ class User < ActiveRecord::Base
   def activate_events
     if activated_at_changed? && !activated_at.nil?
       events.update_all "user_is_activated = 1"
+    end
+  end
+
+  def old_passwords
+    return unless password_changed?
+    return if crypted_password_was.blank?
+    if current_controller && current_controller.logged_in?
+      errors.add(:old_password, _("is wrong")) unless valid_password?(old_password)
     end
   end
 end

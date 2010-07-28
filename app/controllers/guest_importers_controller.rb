@@ -14,6 +14,7 @@ class GuestImportersController < ApplicationController
 
     _load_from_source
 
+    @contacts.sort! {|a, b| a.name <=> b.name}
     responds_to_parent do
       render(:update) do |page|
         if @error

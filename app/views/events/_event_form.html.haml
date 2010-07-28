@@ -1,4 +1,18 @@
-- events_content_section(2, @event, :next => {:func => "clearInputsBeforeFormSubmission('event_user_attributes_name');clearInputsBeforeFormSubmission('event_user_attributes_email');clearInputsBeforeFormSubmission('event_name');clearInputsBeforeFormSubmission('event_location_name');clearInputsBeforeFormSubmission('event_location_address');jQuery('.form.new-event').submit()"}) do
+:javascript
+  function on_next_clicked() {
+    clearInputsBeforeFormSubmission('event_user_attributes_name');
+    clearInputsBeforeFormSubmission('event_user_attributes_email');
+    clearInputsBeforeFormSubmission('event_name');
+    clearInputsBeforeFormSubmission('event_location_name');
+    clearInputsBeforeFormSubmission('event_location_address');
+    if (window.show_resend_invitations) {
+      jQuery.nyroModalManual({minHeight: 200,content:#{render(:partial => "resend_invitations_popup").to_json}});
+    }
+    else {
+      stage2.submit_form();
+    }
+  }
+- events_content_section(2, @event, :next => {:func => "on_next_clicked()"}) do
   .content-section-heading
     %h1= _("Please fill out the events details")
   .twocolumns

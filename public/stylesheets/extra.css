@@ -937,3 +937,6 @@ ul.contact-tabset li.active a ,
 .static a {
 	text-decoration: underline;
 }
+.hidden {
+	display:none;
+}

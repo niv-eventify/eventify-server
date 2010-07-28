@@ -23,7 +23,17 @@
               %dd= @event.starting_at.to_s(:isra_date)
               %dt= _("Time")
               %dd= @event.starting_at.to_s(:isra_time)
-              - unless @event.location_address.blank?
+          - unless @event.ending_at.blank?
+            .info-container-row
+              = _("Event ends at")
+              %dl
+                %dt= _("Date:")
+                %dd= @event.ending_at.to_s(:isra_date)
+                %dt= _("Time")
+                %dd= @event.ending_at.to_s(:isra_time)
+          - unless @event.location_address.blank?
+            .info-container-row
+              %dl
                 %dt= _("Address:")
                 %dd= @event.location_address
           .info-container-row

@@ -165,7 +165,7 @@ describe PasswordsController do
       end
 
       it "should call current_user" do
-        controller.should_receive(:current_user).and_return(@user)
+        controller.should_receive(:current_user).twice.and_return(@user)
         eval_request
       end
 
