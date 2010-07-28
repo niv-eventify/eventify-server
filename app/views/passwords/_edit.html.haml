@@ -1,7 +1,6 @@
 - middle_box_section("change_password") do
   - form_for(@user, :url => password_path(@user.perishable_token), :method => :put, :builder => MiddleBoxFormBuilder::Builder) do |f|
-    != f.password_field :password, :label => _("Password")
-    != f.password_field :password_confirmation, :label => _("Password Confirmation")
+    != render(:partial => "passwords/form", :locals => {:f => f})
     .settings-form-btns
       != link_to_function content_tag(:span, _("Save")), "jQuery(this).parents('form').get(0).submit()", :class => "blue-btn-alt"
       %span.cancel-btn
