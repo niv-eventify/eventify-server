@@ -1,7 +1,7 @@
 - unless logged_in?
   %ul.subnav
     %li.btn-1
-      != login_register_button(_("Register"))
+      != login_register_button(_("First time user? Register"))
       .menu-list
         .top
         .mid
@@ -13,7 +13,7 @@
               .bg-b
         .btm
     %li.btn-2
-      != login_register_button(_("Login"))
+      != login_register_button(_("Already a member? Login"))
       .menu-list
         .top
         .mid
