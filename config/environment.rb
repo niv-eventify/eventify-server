@@ -41,6 +41,7 @@ Rails::Initializer.run do |config|
   config.gem "rchardet", :version => '1.2'
   config.gem "parseexcel", :version => '0.5.2'
   config.gem "roo", :version => '1.3.9'
+  config.gem "astrails-user-agent", :version => "1.0.0", :lib => "user-agent"
   
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers

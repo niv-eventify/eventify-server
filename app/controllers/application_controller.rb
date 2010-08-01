@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper :all
   protect_from_forgery
   filter_parameter_logging "password" unless Rails.env.development?
+  before_filter :checkie6
 
 protected
   include ERB::Util # to use h() in flashes
@@ -71,5 +72,13 @@ protected
   def redirect_past
     flash[:error] = _("This is past event. You cannot change it.")
     redirect_to events_path(:past => true)
+  end
+
+  def checkie6
+    a = Agent.new(request.user_agent)
+    if :msie == a.engine && a.version.to_i < 7
+      redirect_to page_path("ie6")
+      return false
+    end
   end
 end
