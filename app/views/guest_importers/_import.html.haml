@@ -20,9 +20,9 @@
                 %td= _("Mobile")
             %tbody
               != render(:partial => "contact", :collection => contacts)
-  .contact-btns
-    != check_box_tag "save_to_addressbook", "true", true
-    != label_tag :save_to_addressbook, _("Add selected contacts to your address book")
-    %br
-    != link_to_function _("Import"), "jQuery('body').css('cursor', 'wait'); jQuery('#import_guests').get(0).submit()", :class => "btn"
-    != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+    .contact-btns
+      != check_box_tag "save_to_addressbook", "true", true
+      != label_tag :save_to_addressbook, _("Add selected contacts to your address book")
+      %br
+      != link_to_function _("Import"), "jQuery('body').css('cursor', 'wait'); jQuery('#import_guests').get(0).submit()", :class => "btn"
+      != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
