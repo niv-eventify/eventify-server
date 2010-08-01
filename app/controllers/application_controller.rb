@@ -67,4 +67,9 @@ protected
       raise "unknown source #{source}"
     end
   end
+
+  def redirect_past
+    flash[:error] = _("This is past event. You cannot change it.")
+    redirect_to events_path(:past => true)
+  end
 end

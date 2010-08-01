@@ -6,7 +6,12 @@ class ThingsController < InheritedResources::Base
 
   after_filter :clear_flash
 
-  # index
+  def index
+    index! do |success|
+      success.html {redirect_past if @event.past?}
+    end
+  end
+
   # create
   # destroy
   # update

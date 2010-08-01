@@ -21,7 +21,12 @@ class GuestsController < InheritedResources::Base
     render :nothing => true
   end
 
-  # index
+  def index
+    index! do |success|
+      success.html {redirect_past if @event.past?}
+    end
+  end
+
   # create
   # destroy
   def update

@@ -361,6 +361,9 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def past?
+    starting_at < Time.now.utc
+  end
 protected
 
   def _cancel_sms_reminders!

@@ -9,6 +9,8 @@ class EventsController < InheritedResources::Base
 
   actions :create, :new, :edit, :update, :index, :show
 
+  before_filter :redirect_past_events, :only => [:show, :edit, :update]
+
   # index
 
   def show
@@ -126,5 +128,9 @@ protected
   def _cancel_sms
     @event.cancel_sms!
     redirect_to edit_invitation_path(@event)
+  end
+
+  def redirect_past_events
+    redirect_past if resource.past? 
   end
 end
