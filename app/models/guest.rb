@@ -50,7 +50,7 @@ class Guest < ActiveRecord::Base
   before_update :update_summary_status
   before_update :update_invitation_methods
   before_update :update_invitation_state
-  after_update :send_summary_status
+  after_update :delayed_send_summary_status
   after_update :check_takings_status
 
   has_many :sms_messages
@@ -153,11 +153,13 @@ class Guest < ActiveRecord::Base
     end
   end
 
+  def delayed_send_summary_status
+    send_later(:send_summary_status) if rsvp_changed? && event.immediately_send_rsvp?
+  end
+
   def send_summary_status
-    if rsvp_changed? && event.immediately_send_rsvp?
-      rsvps = {rsvp => [to_rsvp_email_params]}
-      I18n.with_locale(event.language) {Notifier.send_later(:deliver_guests_summary, event, rsvps, nil)}
-    end
+    rsvps = {rsvp => [to_rsvp_email_params]}
+    I18n.with_locale(event.language) {Notifier.deliver_guests_summary(event, rsvps, nil)}
   end
 
   def to_rsvp_email_params
