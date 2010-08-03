@@ -341,6 +341,10 @@ div.flash.notice {
 	color:#3A9925;
 }
 
+.invitation-bounced {
+	color:#BB3131;
+}
+
 ul.contact-tabset li.hotmail a {background: url(/images/bg-tab-hotmail.gif) no-repeat;}
 ul.contact-tabset li.csv a {background: url(/images/bg-tab-csv.gif) no-repeat;}
 .hebrew ul.contact-tabset li.csv a {background: url(/images/bg-tab-csv-he.gif) no-repeat;}

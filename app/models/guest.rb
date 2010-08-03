@@ -334,6 +334,6 @@ class Guest < ActiveRecord::Base
   end
 
   def bounced?
-    !!bounced_at.nil?
+    bounced_at
   end
 end

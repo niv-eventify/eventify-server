@@ -88,4 +88,9 @@ module GuestsHelper
 
     active ? "active" : ""
   end
+
+  def email_class(guest)
+    return "invitation-bounced" if guest.bounced?
+    return "invitation-sent" if guest.invitation_sent_or_scheduled?(:email)
+  end
 end
