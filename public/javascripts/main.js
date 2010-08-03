@@ -4,7 +4,7 @@ function clearInputs(id){
 		var _el = jQuery(this);
 		var default_val = _el.attr('def_value');
 		_el.bind('focus', function(){
-			if(this.value == default_val) this.value = '';
+			if(jQuery(this).val().replace(/[\n\r]/g,"") == default_val.replace(/[\n\r]/g,"")) this.value = '';
 			jQuery(this).css('color','#523733')
 		}).bind('blur', function(){
 			if(this.value == '') {
