@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-07-29 11:43+0300\n"
+"POT-Creation-Date: 2010-08-03 12:32+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -151,11 +151,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:108
+#: app/helpers/events_helper.rb:109
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:108
+#: app/helpers/events_helper.rb:109
 msgid "(sent)"
 msgstr ""
 
@@ -566,11 +566,11 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:67
+#: app/controllers/events_controller.rb:69
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:67
+#: app/controllers/events_controller.rb:69
 msgid "Event updated, but some reminders disabled"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/controllers/events_controller.rb:84
+#: app/controllers/events_controller.rb:86
 #: app/views/invitations/edit.html.haml:20
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
 msgid ""
@@ -1018,7 +1018,7 @@ msgid "Place:"
 msgstr ""
 
 #: app/controllers/invitations_controller.rb:47
-#: app/controllers/events_controller.rb:16
+#: app/controllers/events_controller.rb:18
 msgid "Please add at least one guest"
 msgstr ""
 
@@ -1326,6 +1326,10 @@ msgstr ""
 msgid "Things to bring"
 msgstr ""
 
+#: app/controllers/application_controller.rb:73
+msgid "This is past event. You cannot change it."
+msgstr ""
+
 #: app/helpers/events_helper.rb:20 app/views/events/_info.html.haml:12
 #: app/views/rsvps/_info.html.haml:26 app/views/rsvps/_info.html.haml:34
 #: app/views/summaries/show.html.haml:24 app/views/summaries/show.html.haml:32
@@ -1390,7 +1394,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: app/controllers/events_controller.rb:82
+#: app/controllers/events_controller.rb:84
 msgid "You already have an account, please login with your email and password."
 msgstr ""
 
@@ -1645,7 +1649,7 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: app/helpers/events_helper.rb:116
+#: app/helpers/events_helper.rb:117
 msgid "category|Other"
 msgstr ""
 
@@ -1844,6 +1848,12 @@ msgstr ""
 
 #: app/views/events/_form.html.haml:17
 msgid "ex. My 40th birthday"
+msgstr ""
+
+#: app/views/events/_form.html.haml:47
+msgid ""
+"ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June "
+"at 22:00 &#13;&#10;at The Neighborhood Bar"
 msgstr ""
 
 #: app/views/events/_form.html.haml:30

@@ -420,4 +420,5 @@ jQuery(document).ready(function(){
   clearInputs("event_name");
   clearInputs("event_location_name");
   clearInputs("event_location_address");
+  clearInputs("event_guest_message");
 });
