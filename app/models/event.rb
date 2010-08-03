@@ -372,6 +372,11 @@ class Event < ActiveRecord::Base
     guest.bounce!(status, reason)
   end
 
+
+  def bounced_emails_count
+    @bounced_emails_count ||= guests.bounced.count
+  end
+
 protected
 
   def _cancel_sms_reminders!
