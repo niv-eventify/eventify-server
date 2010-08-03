@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-08-03 12:32+0300\n"
+"POT-Creation-Date: 2010-08-03 14:36+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,7 +293,6 @@ msgstr ""
 
 #: app/views/admin/designs/edit.html.haml:8
 #: app/views/admin/designs/new.html.haml:9
-#: app/views/bounces/index.html.haml:21
 #: app/views/contact_importers/_edit.html.haml:13
 #: app/views/contacts/edit.html.haml:19 app/views/contacts/new.html.haml:19
 #: app/views/cropped_pictures/_new.html.haml:10
@@ -492,7 +491,7 @@ msgstr ""
 msgid "Edit Reminder to Guests"
 msgstr ""
 
-#: app/views/bounces/index.html.haml:13 app/views/contacts/index.html.haml:16
+#: app/views/contacts/index.html.haml:16
 #: app/views/guest_importers/_import.html.haml:19
 #: app/views/guests/_guests_header.html.haml:8
 #: app/views/guests/_guests_header.html.haml:23
@@ -881,7 +880,7 @@ msgstr ""
 msgid "My Page"
 msgstr ""
 
-#: app/views/bounces/index.html.haml:12 app/views/contacts/index.html.haml:15
+#: app/views/contacts/index.html.haml:15
 #: app/views/guest_importers/_import.html.haml:18
 #: app/views/guests/_guests_header.html.haml:5
 #: app/views/other_guests/index.html.haml:11
@@ -1119,10 +1118,6 @@ msgstr ""
 msgid "RSVPS"
 msgstr ""
 
-#: app/views/bounces/index.html.haml:14
-msgid "Reason"
-msgstr ""
-
 #: app/views/users/_new.html.haml:12 app/views/users/new.html.haml:1
 msgid "Register"
 msgstr ""
@@ -1166,10 +1161,6 @@ msgstr ""
 
 #: app/views/events/_form.html.haml:23
 msgid "Remove End date &amp; Time"
-msgstr ""
-
-#: app/views/bounces/index.html.haml:20
-msgid "Resend Invitations"
 msgstr ""
 
 #: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:16
@@ -1302,7 +1293,6 @@ msgstr ""
 msgid "Start Now"
 msgstr "Start Now!"
 
-#: app/views/bounces/index.html.haml:15
 #: app/views/guests/_guests_header.html.haml:14
 msgid "Status"
 msgstr ""
@@ -1322,12 +1312,6 @@ msgstr ""
 
 #: app/views/guests/_guests_header.html.haml:29
 msgid "Text/SMS"
-msgstr ""
-
-#: app/views/bounces/index.html.haml:3
-msgid ""
-"The following guests did not receive an invitation due to a wrong email "
-"address. Please fix their emails and resend them the invitations"
 msgstr ""
 
 #: app/views/uploaded_pictures/new.html.haml:20
