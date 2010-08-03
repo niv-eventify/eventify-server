@@ -43,7 +43,7 @@
             != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
             != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
             != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
-            != link_to _("Bounced"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
+            != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
 
           %table#guests.info-table
             != render(:partial => "guests_header", :locals => {:check_all => true})

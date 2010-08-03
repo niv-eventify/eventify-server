@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-08-03 14:14+0300\n"
+"POT-Creation-Date: 2010-08-03 14:21+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -133,7 +133,7 @@ msgstr ""
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:69
+#: app/views/summaries/show.html.haml:70
 msgid "%{percent} %"
 msgstr ""
 
@@ -279,11 +279,7 @@ msgstr ""
 msgid "Because planning is half the fun"
 msgstr ""
 
-#: app/views/guests/index.html.haml:46
-msgid "Bounced"
-msgstr ""
-
-#: app/views/summaries/show.html.haml:47
+#: app/views/guests/index.html.haml:46 app/views/summaries/show.html.haml:48
 msgid "Bounced emails"
 msgstr ""
 
@@ -643,7 +639,7 @@ msgstr ""
 msgid "From our fabelous gallery or upload your own pic"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:103
+#: app/views/summaries/show.html.haml:104
 msgid "Full Guests List"
 msgstr ""
 
@@ -657,7 +653,7 @@ msgid "Guest List"
 msgstr ""
 
 #: app/views/rsvps/show_more.html.haml:17
-#: app/views/summaries/show.html.haml:50
+#: app/views/summaries/show.html.haml:51
 msgid "Guests"
 msgstr ""
 
@@ -710,7 +706,7 @@ msgstr ""
 
 #: app/views/pages/no_invitation_en.html.haml:1
 #: app/views/pages/no_invitation_en.html.haml:4
-#: app/views/summaries/show.html.haml:105
+#: app/views/summaries/show.html.haml:106
 msgid "If some of your guests didn't recieve the invitation"
 msgstr ""
 
@@ -934,7 +930,7 @@ msgstr ""
 msgid "No reminders defined yet"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:71
+#: app/views/summaries/show.html.haml:72
 msgid "No things to bring"
 msgstr ""
 
@@ -943,7 +939,7 @@ msgid "No user was found with that email address"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:6
-#: app/views/summaries/show.html.haml:61
+#: app/views/summaries/show.html.haml:62
 msgid "Not responded"
 msgstr ""
 
@@ -1067,7 +1063,7 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:79
+#: app/views/summaries/show.html.haml:80
 msgid "Pring Guests List"
 msgstr ""
 
@@ -1084,12 +1080,12 @@ msgid "RSVP"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:4
-#: app/views/summaries/show.html.haml:57
+#: app/views/summaries/show.html.haml:58
 msgid "RSVP may be"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:5
-#: app/views/summaries/show.html.haml:59
+#: app/views/summaries/show.html.haml:60
 msgid "RSVP no"
 msgstr ""
 
@@ -1110,7 +1106,7 @@ msgid "RSVP summary|When a guest updates RSVP"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:3
-#: app/views/summaries/show.html.haml:55
+#: app/views/summaries/show.html.haml:56
 msgid "RSVP yes"
 msgstr ""
 
@@ -1226,7 +1222,7 @@ msgstr ""
 msgid "Select None"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:68
+#: app/views/summaries/show.html.haml:69
 msgid "Selected"
 msgstr ""
 
@@ -1342,7 +1338,7 @@ msgstr ""
 msgid "Things To Bring | Eventify"
 msgstr ""
 
-#: app/views/guests/index.html.haml:17 app/views/summaries/show.html.haml:64
+#: app/views/guests/index.html.haml:17 app/views/summaries/show.html.haml:65
 #: app/views/takings/_index.html.haml:2 app/views/things/index.html.haml:15
 msgid "Things to bring"
 msgstr ""
@@ -1357,7 +1353,7 @@ msgstr ""
 msgid "Time"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:52
+#: app/views/summaries/show.html.haml:53
 msgid "Total arriving guests"
 msgstr ""
 
@@ -1682,7 +1678,7 @@ msgstr ""
 msgid "change RSVP|change"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:106
+#: app/views/summaries/show.html.haml:107
 msgid "click here for help"
 msgstr ""
 
@@ -1832,7 +1828,7 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:81
 #: app/views/contacts/_contact.html.haml:5
-#: app/views/summaries/show.html.haml:73
+#: app/views/summaries/show.html.haml:74
 msgid "edit"
 msgstr ""
 
@@ -2053,8 +2049,8 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/guests/index.html.haml:28 app/views/summaries/show.html.haml:82
-#: app/views/summaries/show.html.haml:85
+#: app/views/guests/index.html.haml:28 app/views/summaries/show.html.haml:83
+#: app/views/summaries/show.html.haml:86
 msgid "search"
 msgstr ""
 
