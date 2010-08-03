@@ -1,5 +1,6 @@
-<%= @message %>
+<%= h(@message).gsub("\n", "<br/>") %>
 
+<br/>
 p.s. You can view your invitation at the following link:
 <%= link_to(@url, @url) %>
 
