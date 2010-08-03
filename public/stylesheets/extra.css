@@ -925,7 +925,10 @@ ul.contact-tabset li.active a ,
 .category-selector {
 	float:left;
 	padding:10px 0 0 20px;
-	width:200px;
+}
+
+.category-selector, .category-selector select {
+	width:350px;
 }
 
 .hebrew .category-selector {
