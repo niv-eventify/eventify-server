@@ -54,9 +54,10 @@ module EventsHelper
     haml_concat f.input(attribute, opts.merge(extra_opts))
   end
 
-  def event_input_text(f, attribute, label, hint)
+  def event_input_text(f, attribute, label, hint, def_value = nil)
     opts = {:label => label, :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}},
-      :required => nil, :hint => hint, :as => :text }
+      :required => nil, :hint => hint, :as => :text, :input_html => {} }
+    opts[:input_html][:def_value] = def_value unless def_value.blank?
     haml_concat f.input(attribute, opts)
   end
 

@@ -44,7 +44,7 @@
 
 != form_divider
 - f.inputs do
-  - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"))
+  - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"), "#{_("ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June at 22:00 &#13;&#10;at The Neighborhood Bar")}")
   %li.boolean.optional.allow_seeing_other_guests.auto_width
     != f.check_box :allow_seeing_other_guests
     != f.label :allow_seeing_other_guests, _("Guests can see other attendees")

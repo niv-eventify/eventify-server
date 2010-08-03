@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-08-03 14:21+0300\n"
+"POT-Creation-Date: 2010-08-03 12:32+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,11 +152,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:108
+#: app/helpers/events_helper.rb:109
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:108
+#: app/helpers/events_helper.rb:109
 msgid "(sent)"
 msgstr ""
 
@@ -1666,7 +1666,7 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: app/helpers/events_helper.rb:116
+#: app/helpers/events_helper.rb:117
 msgid "category|Other"
 msgstr ""
 
@@ -1866,6 +1866,12 @@ msgstr ""
 
 #: app/views/events/_form.html.haml:17
 msgid "ex. My 40th birthday"
+msgstr ""
+
+#: app/views/events/_form.html.haml:47
+msgid ""
+"ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June "
+"at 22:00 &#13;&#10;at The Neighborhood Bar"
 msgstr ""
 
 #: app/views/events/_form.html.haml:30
