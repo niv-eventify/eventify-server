@@ -6,6 +6,7 @@ class GuestsController < InheritedResources::Base
   has_scope :rsvp_yes
   has_scope :rsvp_no
   has_scope :rsvp_maybe
+  has_scope :bounced
 
   after_filter :clear_flash
 

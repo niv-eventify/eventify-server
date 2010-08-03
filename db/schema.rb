@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100727103944) do
+ActiveRecord::Schema.define(:version => 20100803093048) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -200,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20100727103944) do
     t.boolean  "delayed_sms_resend",         :default => false
   end
 
+  add_index "guests", ["email", "bounced_at"], :name => "index_guests_on_email_and_bounced_at"
   add_index "guests", ["event_id", "bounced_at"], :name => "index_guests_on_event_id_and_bounced_at"
 
   create_table "hosts", :force => true do |t|

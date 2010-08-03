@@ -45,6 +45,14 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
   named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
 
+  named_scope :not_bounced_by_email, lambda { |email|
+    {
+      :include => :event, 
+      :conditions => ["guests.bounced_at IS NULL AND guests.email = ? AND events.starting_at >= ?", email, Time.now.utc]
+    }
+  }
+  named_scope :bounced, {:conditions => "guests.bounced_at IS NOT NULL"}
+
   after_create :reset_event_stage_passed
   after_update :check_invitation_failures # TODO -smth is wrong here
   before_update :update_summary_status
@@ -52,6 +60,7 @@ class Guest < ActiveRecord::Base
   before_update :update_invitation_state
   after_update :delayed_send_summary_status
   after_update :check_takings_status
+  before_update :check_unbounce
 
   has_many :sms_messages
 
@@ -307,5 +316,24 @@ class Guest < ActiveRecord::Base
     # just invited (or scheduled to invite)
     return false if invited?
     true
+  end
+
+  def bounce!(status, reason)
+    self.bounced_at = Time.now.utc
+    self.bounce_status = status
+    self.bounce_reason = reason
+    save!
+  end
+
+  def check_unbounce
+    unbounce if email_changed?
+  end
+
+  def unbounce
+    self.bounce_reason = self.bounce_status = self.bounced_at = nil
+  end
+
+  def bounced?
+    bounced_at
   end
 end

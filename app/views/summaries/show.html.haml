@@ -43,12 +43,11 @@
         %h2= _("Guests summary")
         .lists
           %dl.def-list
-            /
+            - if @event.bounced_emails_count > 0
               %dt
-                != link_to_function(_("Bounced emails"), "todo")
+                != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true)
                 %span= "info"
-              %dd
-              ??
+              %dd= @event.bounced_emails_count
             %dt= _("Guests")
             %dd= @event.guests.count
             %dt= _("Total arriving guests")

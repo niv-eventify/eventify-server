@@ -5,7 +5,7 @@
       - link_to_inline_edit(guest, :name)
 
   - info_table_column(2) do
-    - link_to_inline_edit(guest, :email, guest.invitation_sent_or_scheduled?(:email) ? "invitation-sent" : "")
+    - link_to_inline_edit(guest, :email, email_class(guest))
 
   - info_table_column(3) do
     - link_to_inline_edit(guest, :mobile_phone, guest.invitation_sent_or_scheduled?(:sms) ? "invitation-sent" : "")

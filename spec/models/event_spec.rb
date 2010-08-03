@@ -2,6 +2,25 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
 
+  describe "bounces" do
+    before(:each) do
+      @guest = Factory.create(:guest)
+    end
+
+    it "should create bounce" do
+      @guest.event.bounce_guest_by_email!(@guest.email, "status", "reason")
+      @guest.reload.bounce_status.should == "status"
+      @guest.bounce_reason.should == "reason"
+      @guest.bounced_at.should_not be_blank
+    end
+
+    it "shound unbounce" do
+      @guest.bounced_at = Time.now.utc
+      @guest.unbounce
+      @guest.bounced_at.should be_nil
+    end
+  end
+
   describe "validations" do
     describe "new event" do
       before(:each) do

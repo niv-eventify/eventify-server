@@ -364,6 +364,19 @@ class Event < ActiveRecord::Base
   def past?
     starting_at < Time.now.utc
   end
+
+  def bounce_guest_by_email!(email, status, reason)
+    guest = guests.find_by_email(email)
+    return unless guests
+
+    guest.bounce!(status, reason)
+  end
+
+
+  def bounced_emails_count
+    @bounced_emails_count ||= guests.bounced.count
+  end
+
 protected
 
   def _cancel_sms_reminders!
@@ -374,6 +387,7 @@ protected
   def _cancel_sms_invitations!
     guests.update_all("send_sms = 0")
   end
+
 private
   def instantiate_time_object(name, values)
     if "starting_at" == name && 3 == values.size

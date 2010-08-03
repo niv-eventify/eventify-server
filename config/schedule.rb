@@ -36,3 +36,7 @@ end
 every 1.minutes do
   rake "ts:index"
 end
+
+every 4.hours do
+  runner "Bounce.cron_job"
+end
