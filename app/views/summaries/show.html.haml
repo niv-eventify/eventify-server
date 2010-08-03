@@ -44,9 +44,9 @@
         .lists
           %dl.def-list
             %dt
-              != link_to _("Bounced emails"), event_bounces_path(@event), :class => "nyroModal"
+              != link_to _("Bounced emails"), "#", :class => "nyroModal" # event_bounces_path(@event)
               %span= "info"
-            %dd= @event.bounces.count
+            %dd= #@event.bounces.count
             %dt= _("Guests")
             %dd= @event.guests.count
             %dt= _("Total arriving guests")

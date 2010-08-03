@@ -353,7 +353,6 @@ class Event < ActiveRecord::Base
     end
   end
 
-<<<<<<< HEAD
   def delay_sms_sending=(value)
     if value.is_a?(String)
       @delay_sms_sending = ("true" == value)

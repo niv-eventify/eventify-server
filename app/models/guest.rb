@@ -45,6 +45,12 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
   named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
 
+  named_scope :not_bounced_by_email, lambda { |email|
+    {
+      :include => :event, 
+      :conditions => ["guests.bounced_at IS NULL AND guests.email = ? AND events.starting_at >= ?", email, Time.now.utc]
+    }
+  }
   named_scope :bounced, {:conditions => "guests.bounced_at IS NOT NULL"}
 
   after_create :reset_event_stage_passed
