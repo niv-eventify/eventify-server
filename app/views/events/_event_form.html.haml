@@ -5,7 +5,7 @@
     clearInputsBeforeFormSubmission('event_name');
     clearInputsBeforeFormSubmission('event_location_name');
     clearInputsBeforeFormSubmission('event_location_address');
-    if (window.show_resend_invitations) {
+    if (window.show_resend_invitations && window.show_resend_invitations()) {
       jQuery.nyroModalManual({minHeight: 200,content:#{render(:partial => "resend_invitations_popup").to_json}});
     }
     else {

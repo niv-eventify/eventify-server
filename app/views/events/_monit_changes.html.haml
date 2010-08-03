@@ -1,14 +1,16 @@
 :javascript
   jQuery(function(){
 
-    window.show_resend_invitations = false;
+    var real_value = function(o) {
+      return (o.val() == o.attr("def_value") ? "" : o.val());
+    }
 
     var current_values = function() {
       return [
         stage2.starting_at().toString(), 
         stage2.ending_at().toString(),
-        jQuery("[name=event[location_name]]").val(),
-        jQuery("[name=event[location_address]]").val()
+        real_value(jQuery("[name=event[location_name]]")),
+        real_value(jQuery("[name=event[location_address]]"))
       ];
     };
 
@@ -24,12 +26,7 @@
   
     var old_values = current_values();
 
-    var monit = function(){
-      if (eql_array(old_values, current_values())) {
-        setTimeout(monit, 200);
-        return;
-      }
-      window.show_resend_invitations = true;
+    window.show_resend_invitations = function() {
+      return !eql_array(old_values, current_values());
     }
-    setTimeout(monit, 200);
   });
