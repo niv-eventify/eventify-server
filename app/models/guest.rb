@@ -60,6 +60,7 @@ class Guest < ActiveRecord::Base
   before_update :update_invitation_state
   after_update :delayed_send_summary_status
   after_update :check_takings_status
+  before_update :check_unbounce
 
   has_many :sms_messages
 
@@ -221,7 +222,6 @@ class Guest < ActiveRecord::Base
     self.email_token ||= Astrails.generate_token
     self.email_invitation_sent_at, self.send_email_invitation_at = send_email_invitation_at, nil
     self.any_invitation_sent = true
-    unbounce
     save!
 
     send_at(email_invitation_sent_at, :send_email_invitation!, resend)
@@ -325,7 +325,15 @@ class Guest < ActiveRecord::Base
     save!
   end
 
+  def check_unbounce
+    unbounce if email_changed?
+  end
+
   def unbounce
     self.bounce_reason = self.bounce_status = self.bounced_at = nil
+  end
+
+  def bounced?
+    !!bounced_at.nil?
   end
 end

@@ -22,6 +22,12 @@ Factory.define :guest_with_token, :parent => :guest do |guest|
   guest.email_token "token"
 end
 
+Factory.define :guest_with_bounce, :parent => :guest_with_token do |guest|
+  guest.email_token "token"
+  guest.bounced_at Time.now.utc
+end
+
+
 Factory.define :guest_with_mobile, :parent => :guest_from_event_with_mobile do |guest|
   guest.mobile_phone "050-1234567"
   guest.send_sms  1

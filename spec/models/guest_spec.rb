@@ -273,6 +273,24 @@ describe Guest do
     end
   end
 
+  describe "bounces" do
+    it "should clear unbounce" do
+      @guest = Factory.create(:guest_with_bounce)
+      @guest.bounced_at.should_not be_nil
+
+      @guest.email = "another@q.com"
+      @guest.save
+      @guest.bounced_at.should be_nil
+    end
+
+    it "should bounce" do
+      @guest = Factory.create(:guest)
+      @guest.bounced_at.should be_nil
+      @guest.bounce!("foo", "bar")
+      @guest.bounced_at.should_not be_nil
+    end
+  end
+
   describe "send email invitation" do
     before(:each) do
       @guest = Factory.create(:guest)
