@@ -747,7 +747,9 @@ p.rsvp-filter a.active {
 .selectOptions ul a {
 	height:12px;
 }
-
+.hebrew .selectOptions ul a {
+	direction: rtl;
+}
 p.takings-changed {
 	color:#E11335;
 	font-size:110%
@@ -816,6 +818,10 @@ p.takings-changed {
 
 .selectArea .center{
 	top:0
+}
+
+.hebrew .selectArea .center{
+	direction: rtl;
 }
 
 #guests .input-bg-uni .input-text  {
@@ -931,10 +937,15 @@ ul.contact-tabset li.active a ,
 	width:350px;
 }
 
+.category-selector select {
+	width: 150px;
+}
+
 .hebrew .category-selector {
 	float:right;
 	padding:10px 20px 0 0;
 }
+
 .events-holder {
 	padding:0;
 }
