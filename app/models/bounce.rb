@@ -4,7 +4,7 @@ class Bounce
   
   def self.all
     res = get("https://sendgrid.com/api/bounces.get.xml?api_user=#{ActionMailer::Base.smtp_settings[:user_name]}&api_key=#{ActionMailer::Base.smtp_settings[:password]}")
-    res["bounces"]["bounce"]
+    res && res["bounces"] && res["bounces"]["bounce"]
   end
 
   def self.cron_job
