@@ -26,7 +26,10 @@ module DesignsHelper
   end
 
   def set_alert
-    javascript_tag("stage1.still_cropping_msg = '#{_("Saving in progress. Please wait")}';\nstage1.delete_crop_alert = '#{_("Are you sure you want to remove this picture?")}'\nstage1.delete_uploaded_pic_alert = '#{_("Are you sure you want to remove the picture you uploaded?")}'")
+  	still_cropping_msg = _("Saving in progress. Please wait")
+  	delete_crop_alert = _("Are you sure you want to remove this picture?")
+  	delete_uploaded_pic_alert = _("Are you sure you want to remove the picture you uploaded?")
+    javascript_tag("stage1.still_cropping_msg = '#{still_cropping_msg.to_json}';\nstage1.delete_crop_alert = '#{delete_crop_alert.to_json}'\nstage1.delete_uploaded_pic_alert = '#{delete_uploaded_pic_alert.to_json}'")
   end
 
   def categories_list(design)

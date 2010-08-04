@@ -53,7 +53,7 @@ var stage1 = {
 				jQuery.fn.unload_monit_set();
 			}
 		});
-		$(".window").draggable({
+		$(".window, .crop_preview").draggable({
 			opacity: 0.7,
 			helper: 'clone',
 			appendTo: 'body',
@@ -64,6 +64,8 @@ var stage1 = {
 				if(ui.draggable.hasClass('window')){
 					if(!confirm(stage1.delete_crop_alert)) return;
 					ui.draggable.find('a').click();
+				}else if(ui.draggable.hasClass('crop_preview')) {
+					$('#cancel_crop').click();
 				}else if(ui.draggable.hasClass('pic_thumb')) {
 					if(!confirm(stage1.delete_uploaded_pic_alert)) return;
 					ui.draggable.next('a').click();
@@ -87,6 +89,15 @@ var stage1 = {
 		});
 		$('.visual-box').mousedown(function(ev){
 			ev.stopPropagation();
+			$('.crop_preview').each(function(){
+				var X = $(this).offset().left;
+				var Y = $(this).offset().top;
+				var W = $(this).width();
+				var H = $(this).height();
+				if(ev.pageX >= X && ev.pageX <= (X+W) && ev.pageY >= Y && ev.pageY <= (Y+H)){
+					$(this).trigger(ev);
+				}
+			});
 			$('.window').each(function(){
 				var X = $(this).offset().left;
 				var Y = $(this).offset().top;
@@ -97,7 +108,7 @@ var stage1 = {
 				}
 			});
 		});
-		$('.window').mousedown(function(ev){
+		$('.crop_preview, .window').mousedown(function(ev){
 			ev.stopPropagation();
 		});
 	},
