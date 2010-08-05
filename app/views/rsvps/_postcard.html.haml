@@ -1,8 +1,10 @@
 - if event.design.is_seperated_title?
-  .title_holder{:style => "#{title_position_css(event)}"}= event.name
+  .title_holder{:style => "#{title_position_css(event)}"}
+    != event.name.gsub(" ", "&nbsp;")
 .msg_holder{:style => "#{message_position_css(event)}"}
   - if !event.design.is_seperated_title?
-    .title{:style => "#{title_position_css(event)}"}= event.name
+    .title{:style => "#{title_position_css(event)}"}
+      != event.name.gsub(" ", "&nbsp;")
   .msg
-    != (event.guest_message || "").gsub("\n", "<BR/>")
+    != (event.guest_message || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;")
 - set_windows(event, 1)

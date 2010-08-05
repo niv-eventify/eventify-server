@@ -74,7 +74,7 @@
     var text = jQuery("#" + sourceId).val();
     if(stage2.prev_text == text) return;
     stage2.prev_text = text;
-    text = text.replace(/\n/g,"<BR/>");
+    text = text.replace(/\n/g,"<BR/>").replace(/ /g,"&nbsp;");
     jQuery("#" + targetId).html(text);
     stage2.calcFontSize();
   },
