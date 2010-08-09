@@ -220,10 +220,14 @@ div.cmf-skinned-text {
 
 #nyroModalContent .content-wrapper {
 	margin:0;
-	width:auto;
-	float:none;
+	width: 100%;
 }
-
+#nyroModalContent .content-wrapper .image-boxes-h {
+	position: absolute;
+	height: 84%;
+	overflow-y: auto;
+	width: 825px;
+}
 #login_form p.error-msg, #register_form p.error-msg {
 	padding:0;
 }
@@ -934,7 +938,7 @@ ul.contact-tabset li.active a ,
 }
 
 .category-selector, .category-selector select {
-	width:350px;
+       width:350px;
 }
 
 .category-selector select {
@@ -957,4 +961,12 @@ ul.contact-tabset li.active a ,
 }
 .hidden {
 	display:none;
+}
+.image-boxes-h-row .image img {
+	position: relative;
+}
+.minus {
+	background: url(/images/ico-minus.gif) no-repeat;
+	visibility: visible;
+	margin: 20px 20px 0;
 }

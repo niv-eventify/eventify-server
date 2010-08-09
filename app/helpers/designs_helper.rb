@@ -25,6 +25,15 @@ module DesignsHelper
     render(:partial => "designs/change_design_form", :locals => {:event => event, :design => design, :css_class => css_class, :select_text => select_text})
   end
 
+  def design_zoom(event, design, category)
+    event_id = event == nil ? 0 : event.id
+    link_to '+', category_design_path(category, design, :event_id => event_id), :class => "plus nyroModal"
+  end
+
+  def design_zoomout(event, design, category)
+    link_to_function "-", "jQuery(function(){if(typeof stage1 == 'undefined'){$.nyroModalRemove();}else{stage1.update_designs();}})", :class => "plus minus nyroModal"
+  end
+
   def set_alert
   	still_cropping_msg = _("Saving in progress. Please wait")
   	delete_crop_alert = _("Are you sure you want to remove this picture?")

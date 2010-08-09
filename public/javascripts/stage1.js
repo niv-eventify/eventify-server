@@ -7,6 +7,7 @@ var stage1 = {
 	still_cropping_msg: "Saving in progress. Please wait",
 	delete_crop_alert: "Are you sure you want to remove this picture?",
 	delete_uploaded_pic_alert: "Are you sure you want to remove the picture you uploaded?",
+	page_num: 1,
 
 	showPreview: function(coords){
 		if (parseInt(coords.w) > 0){
@@ -131,10 +132,10 @@ var stage1 = {
 	update_designs: function() {
 		var url;
 		if (stage1.event_designs_path) {
-			url = stage1.event_designs_path + "&change_design=true&category_id=" + stage1.cetagory_id;
+			url = stage1.event_designs_path + "&change_design=true&category_id=" + stage1.cetagory_id + "&page=" + stage1.page_num;
 		}
 		else {
-			url = "/categories/" + stage1.cetagory_id + "/designs?change_design=true";
+			url = "/categories/" + stage1.cetagory_id + "/designs?change_design=true&page=" + stage1.page_num;
 		}
 		jQuery.ajax({url:url, type:'get', dataType:'script'})		
 	}

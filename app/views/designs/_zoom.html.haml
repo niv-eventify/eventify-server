@@ -1,0 +1,21 @@
+%div{:style => "width: 667px"}
+  :javascript
+    jQuery(function(){
+      if(typeof stage1 == "undefined") {
+        //prevent weird animation in categories pages when clicking zoom.
+        $.nyroModalSettings({
+          minWidth: 667,
+          minHeight: 510
+        });
+      } else {
+        //in change_design (stage 1), make sure the size is correct when clicking zoom
+        $.nyroModalSettings({
+          width: 675,
+          minHeight: 510
+        });
+      }
+    });
+  != image_tag(@design.preview.url(:lightbox))
+  %div{:style => "width: 667px"}
+    != update_design_link(@event, @design, @category, "blue-btn-mdl")
+    != design_zoomout(@event, @design, @category)
