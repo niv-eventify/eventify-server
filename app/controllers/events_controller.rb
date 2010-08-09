@@ -67,8 +67,13 @@ class EventsController < InheritedResources::Base
     update! do |success, failure|
       success.html do
         flash[:notice] = resource.reminders_disabled? ? _("Event updated, but some reminders disabled") : _("Event updated")
-        return redirect_to(edit_event_path(@event, :wizard => params[:wizard])) if "true" == params[:update_design]
-
+        if "true" == params[:update_design]
+          if @event.design.windows.blank?
+            return redirect_to(edit_event_path(@event, :wizard => params[:wizard]))
+          else
+            return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
+          end
+        end
         redirect_to event_guests_path(@event, :wizard => params[:wizard])
       end
       success.js { render(:nothing => true) }
