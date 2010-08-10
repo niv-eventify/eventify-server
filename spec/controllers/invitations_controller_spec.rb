@@ -4,7 +4,7 @@ describe InvitationsController do
 
   setup :activate_authlogic
 
-  describe "not logged in user" do
+  describe "disabled user" do
     [:show, :edit, :update].each do |a|
       describe_action(a) do
         before(:each) do
@@ -21,7 +21,7 @@ describe InvitationsController do
     end
   end
 
-  describe "disabled user" do
+  describe "not logged in user" do
     [:show, :edit, :update].each do |a|
       describe_action(a) do
         before(:each) do

@@ -34,6 +34,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :guest_importers
     event.resources :bounces
   end
+  map.resources :cancellations
   map.resources :summary, :controller => "summaries"
   map.resources :invitations
   map.resources :rsvps do |rsvp|

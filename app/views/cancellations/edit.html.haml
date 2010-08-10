@@ -1,0 +1,21 @@
+- @page_title = _("Cancel Event | Eventify")
+
+.h-container
+  .t &nbsp;
+  .c
+    .h-container-content
+      .confirmed-box.send-invitations
+        %h3
+          = @event.name
+          - event_status
+        - semantic_form_for(:cancellation, resource, :live_validations => false, :html => {:class => "form new-event", :method => :put}) do |f|
+
+          %h1= _("Notify your guests that event is canceled")
+
+          - unless @invited_stats[:email].zero?
+            != render(:partial => "email", :locals => {:f => f})
+
+          - unless @invited_stats[:sms].zero?
+            != render(:partial => "sms", :locals => {:f => f})
+          
+  .b-alt &nbsp;

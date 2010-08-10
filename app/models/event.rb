@@ -23,6 +23,12 @@ class Event < ActiveRecord::Base
 
       guests_imported
     end
+
+    def invited_stats
+      e = invited_by_email.count
+      s = invited_by_sms.count
+      {:email => e, :sms => s, :total => (e + s)}
+    end
   end
   has_many :things do
     def total_amount
@@ -66,8 +72,10 @@ class Event < ActiveRecord::Base
     :allow_nil => true, :allow_blank => true, :live_validator => /|/
 
   # sms sending validations
-  attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
-  attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations
+  attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations,
+    :cancel_by_email, :cancel_by_sms
+  attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations,
+    :cancel_by_email, :cancel_by_sms
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_or_resend_sms?
   validates_phone_number :host_mobile_number, :if => :going_to_send_or_resend_sms?, :on => :update
 

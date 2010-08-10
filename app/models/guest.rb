@@ -27,6 +27,10 @@ class Guest < ActiveRecord::Base
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
   named_scope :invited_or_scheduled, {:conditions => "((guests.sms_invitation_sent_at IS NOT NULL OR guests.send_sms_invitation_at IS NOT NULL) AND guests.send_sms = 1) OR (guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1)"}
+
+  named_scope :invited_by_email, {:conditions => "guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1"}
+  named_scope :invited_by_sms, {:conditions => "guests.sms_invitation_sent_at IS NOT NULL AND guests.send_sms = 1"}
+
   named_scope :any_invitation_sent, {:conditions => "guests.any_invitation_sent = 1"}
   named_scope :no_invitation_sent, {:conditions => "guests.any_invitation_sent = 0"}
 

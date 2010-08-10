@@ -3,13 +3,13 @@ class EventsController < InheritedResources::Base
 
   before_filter :require_user, :except => [:create, :new]
 
-  before_filter :set_event, :only => [:edit, :update, :show]
+  before_filter :set_event, :only => [:edit, :update, :show, :destroy]
   around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show]
   after_filter :set_uploaded_pictures, :only => :create
 
-  actions :create, :new, :edit, :update, :index, :show
+  actions :create, :new, :edit, :update, :index, :show, :destroy
 
-  before_filter :redirect_past_events, :only => [:show, :edit, :update]
+  before_filter :redirect_disabled_events, :only => [:show, :edit, :update]
 
   # index
 
@@ -80,6 +80,12 @@ class EventsController < InheritedResources::Base
     end
   end
 
+  def destroy
+    @event.cancel!
+    flash["notice"] = _("Event canceled.")
+    redirect_to edit_cancellation_path(@event)
+  end
+
 protected
 
   def _add_extra_error_messages
@@ -135,7 +141,7 @@ protected
     redirect_to edit_invitation_path(@event)
   end
 
-  def redirect_past_events
+  def redirect_disabled_events
     redirect_changes_disabled(@event)
   end
 end

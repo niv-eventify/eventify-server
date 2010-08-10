@@ -2,4 +2,4 @@
   %ul
     %li.sum!= link_to _("Event summary"), summary_path(event)
     - unless event.past?
-      %li.cancel!= link_to_function _("Cancel event"), "alert('todo')"
+      %li.cancel!= link_to _("Cancel event"), event_path(event), :confirm => _("Are you sure?"), :method => :delete
