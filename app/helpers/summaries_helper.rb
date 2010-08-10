@@ -53,4 +53,19 @@ module SummariesHelper
       params[:query].blank? ? 1 : 5
     end
   end
+
+  def event_status
+    text = if @event.past?
+      _("Passed")
+    elsif @event.canceled?
+      _("Canceled")
+    end
+
+    return nil if text.nil?
+
+    haml_tag(:span, :class => "event-changes-disabled") do
+      haml_concat("&nbsp;-&nbsp;")
+      haml_concat(text)
+    end
+  end
 end
