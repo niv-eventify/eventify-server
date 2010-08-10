@@ -134,7 +134,7 @@ class Event < ActiveRecord::Base
     @reminders_disabled
   end
 
-  named_scope :upcoming, lambda{{:conditions => ["events.starting_at > ?", Time.now.utc]}}
+  named_scope :upcoming, lambda{{:conditions => ["events.canceled_at IS NULL AND events.starting_at > ?", Time.now.utc]}}
   named_scope :past, lambda{{:conditions => ["events.starting_at < ?", Time.now.utc]}}
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
@@ -375,6 +375,26 @@ class Event < ActiveRecord::Base
 
   def bounced_emails_count
     @bounced_emails_count ||= guests.bounced.count
+  end
+
+  def _cancel_pending_invitations!
+    guests.scheduled_to_invite_by_sms.update_all("send_sms_invitation_at = NULL")
+    # emails should already be sent
+  end
+
+  def cancel!
+    _cancel_pending_invitations!
+
+    self.canceled_at = Time.now.utc
+    save!
+  end
+
+  def canceled?
+    canceled_at
+  end
+
+  def changes_allowed?
+    !(canceled? || past?)
   end
 
 protected

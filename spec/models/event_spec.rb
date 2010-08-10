@@ -2,6 +2,32 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
 
+  describe "cancel" do
+    before(:each) do
+      @guest = Factory.create(:guest_with_mobile)
+    end
+
+    it "should set event as canceled" do
+      @guest.event.cancel!
+      @guest.event.should be_canceled
+    end
+
+    it "should cancel delayed sms invitations" do
+      @guest.send_sms_invitation_at = Time.now.utc
+      @guest.save!
+      @guest.should be_scheduled_to_invite_by_sms
+
+      @guest.event.cancel!
+      @guest.reload.should_not be_scheduled_to_invite_by_sms
+    end
+
+    it "should not allow changes" do
+      @guest.event.should be_changes_allowed
+      @guest.event.cancel!
+      @guest.event.reload.should_not be_changes_allowed
+    end
+  end
+
   describe "bounces" do
     before(:each) do
       @guest = Factory.create(:guest)
