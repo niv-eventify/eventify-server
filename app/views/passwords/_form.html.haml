@@ -1,4 +1,4 @@
 - if !f.object.crypted_password.blank? && logged_in?
-  != f.password_field :old_password, :label => _("Current Password")
-!= f.password_field :password, :label => _("New Password")
-!= f.password_field :password_confirmation, :label => _("New Password Confirmation")
+  != f.password_field :old_password, :label => _("Current Password"), :autocomplete => "off"
+!= f.password_field :password, :label => _("New Password"), :autocomplete => "off"
+!= f.password_field :password_confirmation, :label => _("New Password Confirmation"), :autocomplete => "off"
