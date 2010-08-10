@@ -377,13 +377,10 @@ class Event < ActiveRecord::Base
     @bounced_emails_count ||= guests.bounced.count
   end
 
-  def _cancel_pending_invitations!
-    guests.scheduled_to_invite_by_sms.update_all("send_sms_invitation_at = NULL")
-    # emails should already be sent
-  end
-
   def cancel!
     _cancel_pending_invitations!
+    # summary will be disabled automatically
+    _disable_reminders!
 
     self.canceled_at = Time.now.utc
     save!
@@ -398,6 +395,15 @@ class Event < ActiveRecord::Base
   end
 
 protected
+
+  def _cancel_pending_invitations!
+    guests.scheduled_to_invite_by_sms.update_all("send_sms_invitation_at = NULL")
+    # emails should already be sent
+  end
+
+  def _disable_reminders!
+    reminders.update_all("is_active = 0")
+  end
 
   def _cancel_sms_reminders!
     reminders.update_all("by_sms = 0")

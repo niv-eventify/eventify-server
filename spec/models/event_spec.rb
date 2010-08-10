@@ -26,6 +26,13 @@ describe Event do
       @guest.event.cancel!
       @guest.event.reload.should_not be_changes_allowed
     end
+
+    it "should cancel reminders" do
+      @guest.event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
+      @guest.event.reminders.first.should be_is_active
+      @guest.event.cancel!
+      @guest.event.reload.reminders.first.should_not be_is_active
+    end
   end
 
   describe "bounces" do
