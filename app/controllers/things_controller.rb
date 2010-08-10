@@ -8,7 +8,7 @@ class ThingsController < InheritedResources::Base
 
   def index
     index! do |success|
-      success.html {redirect_past if @event.past?}
+      success.html { redirect_changes_disabled(@event) }
     end
   end
 

@@ -69,9 +69,16 @@ protected
     end
   end
 
-  def redirect_past
-    flash[:error] = _("This is past event. You cannot change it.")
-    redirect_to events_path(:past => true)
+  def redirect_changes_disabled(event)
+    if event.past?
+      flash[:error] = _("This is a past event. You cannot change it.")
+      redirect_to events_path(:past => true)
+      true
+    elsif event.canceled?
+      flash[:error] = _("This is a canceled event. You cannot change it.")
+      redirect_to events_path
+      true
+    end
   end
 
   def checkie6

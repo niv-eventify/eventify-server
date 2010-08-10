@@ -28,7 +28,7 @@ class DesignsController < InheritedResources::Base
         if params[:event_id].to_i > 0
           return unless require_user
           @event = current_user.events.find(params[:event_id])
-          redirect_past and return if @event.past?
+          return if redirect_changes_disabled(@event)
           @design = @event.design
           @category = @event.category
           @uploaded_pictures = UploadedPicture.find_all_by_event_id(@event.id)

@@ -136,6 +136,6 @@ protected
   end
 
   def redirect_past_events
-    redirect_past if resource.past? 
+    redirect_changes_disabled(@event)
   end
 end
