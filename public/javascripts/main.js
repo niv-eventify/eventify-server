@@ -31,7 +31,8 @@ function clearInputs(id){
 //	});
 }
 function clearInputsBeforeFormSubmission(id){
-	if(jQuery('#' + id).val() == jQuery('#' + id).attr('def_value'))
+	if(jQuery('#' + id).length == 0) return;
+	if(jQuery('#' + id).val().replace(/[\n\r]/g,"") == jQuery('#' + id).attr('def_value').replace(/[\n\r]/g,""))
 		jQuery('#' + id).val("")
 }
 /*--- IE6 hover ---*/
