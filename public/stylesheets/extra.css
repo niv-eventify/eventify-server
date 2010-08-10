@@ -970,3 +970,6 @@ ul.contact-tabset li.active a ,
 	visibility: visible;
 	margin: 20px 20px 0;
 }
+.add-link, .hebrew .add-link, .remove-link, .hebrew .remove-link, .query_address_link {
+	font-size: 1.2em;
+}
