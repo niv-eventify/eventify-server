@@ -144,13 +144,14 @@ class Event < ActiveRecord::Base
     @reminders_disabled
   end
 
-  def check_send_cancellation
-    debugger
-    return unless going_to_send_cancellation?
+  def send_cancellation
+    return true unless going_to_send_cancellation?
     self.cancellation_sent_at = Time.now.utc
+    # TODO return false when not enough money to proceed with sms
+    save!
     send_later(:send_cancellation!)
+    true
   end
-  before_update :check_send_cancellation
 
   named_scope :upcoming, lambda{{:conditions => ["events.canceled_at IS NULL AND events.starting_at > ?", Time.now.utc]}}
   named_scope :cancelled, {:conditions => "canceled_at is not null"}

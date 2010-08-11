@@ -10,7 +10,19 @@ class CancellationsController < InheritedResources::Base
     edit!
   end
 
-  # update
+  def update
+    update! do |success, failure|
+      failure.html
+      success.html do
+        if resource.send_cancellation
+          flash[:notice] = _("Notifications are being sent.")
+          redirect_to summary_path(resource)
+        else
+          # TODO: redirect to sms payments
+        end
+      end
+    end
+  end
 
 protected
   def begin_of_association_chain
