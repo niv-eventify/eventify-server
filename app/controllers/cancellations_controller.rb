@@ -6,7 +6,7 @@ class CancellationsController < InheritedResources::Base
   actions :edit, :update
 
   def edit
-    resource.cancel_by_email = resource.cancel_by_sms = true
+    resource.set_cancellations(@invited_stats)
     edit!
   end
 
@@ -20,7 +20,7 @@ protected
   def verify_stats
     @invited_stats = resource.guests.invited_stats
 
-    if @invited_stats[:total].zero? || !@event.canceled?
+    if @invited_stats[:total].zero? || !@event.canceled? || @event.cancellation_sent?
       redirect_to summary_path(resource)
       return false
     end

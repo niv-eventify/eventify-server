@@ -1,8 +1,10 @@
 - f.inputs do
-  != f.input :cancel_by_email, :as => :boolean, :label => _("By Email"), :input_html => {:class => "auto_width"}
-.table-box.by_email
+  != f.input :cancel_by_email, :label => _("By Email"), :input_html => {:class => "auto_width"}, :checked_value => "true", :unchecked_value => "false"
+.table-box.by_email{:style => (f.object.cancel_by_email? ? "" : "display:none")}
   .table-box-t
     .holder
       .forms-block
         %h4= _("Send following email to %{guests_count}") % {:guests_count => emails_count}
-        klsadfj;klasjf;aksjf;askljf
+        - f.inputs do
+          - event_text_input(f, :cancellation_email_subject, _("Email subject"), {:required => true})
+          - event_input_text(f, :cancellation_email, _("Message to Guests"), {:required => true})

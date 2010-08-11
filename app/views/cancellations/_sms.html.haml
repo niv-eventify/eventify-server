@@ -1,8 +1,9 @@
 - f.inputs do
-  != f.input :cancel_by_sms, :as => :boolean, :label => _("By SMS"), :input_html => {:class => "auto_width"}
-.table-box.by_email
+  != f.input :cancel_by_sms, :label => _("By SMS"), :input_html => {:class => "auto_width"}, :checked_value => "true", :unchecked_value => "false"
+.table-box.by_sms{:style => (f.object.cancel_by_sms? ? "" : "display:none")}
   .table-box-t
     .holder
       .forms-block
         %h4= _("Send following message to %{guests_count}") % {:guests_count => sms_count}
-        klsadfj;klasjf;aksjf;askljf
+        - f.inputs do
+          != f.input :cancellation_sms, :as => :text, :label => _("SMS Message"), :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}}

@@ -341,4 +341,12 @@ class Guest < ActiveRecord::Base
   def bounced?
     bounced_at
   end
+
+  def send_cancellation_email(subject, content)
+    
+  end
+
+  def send_cancellation_sms(message)
+    
+  end
 end

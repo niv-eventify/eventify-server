@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100810081535) do
+ActiveRecord::Schema.define(:version => 20100811132628) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -128,36 +128,42 @@ ActiveRecord::Schema.define(:version => 20100810081535) do
     t.datetime "ending_at"
     t.string   "location_name"
     t.string   "location_address"
-    t.string   "map_link",                  :limit => 2048
+    t.string   "map_link",                   :limit => 2048
     t.string   "map_file_name"
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
-    t.string   "guest_message",             :limit => 345
+    t.string   "guest_message",              :limit => 345
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stage_passed"
-    t.string   "language",                  :limit => 16
+    t.string   "language",                   :limit => 16
     t.string   "host_mobile_number"
     t.string   "sms_message"
     t.datetime "rsvp_summary_send_at"
-    t.integer  "rsvp_summary_send_every",                   :default => 0
+    t.integer  "rsvp_summary_send_every",                    :default => 0
     t.datetime "last_summary_sent_at"
-    t.boolean  "allow_seeing_other_guests",                 :default => true
-    t.integer  "title_font_size",                           :default => 35
-    t.integer  "msg_font_size",                             :default => 32
+    t.boolean  "allow_seeing_other_guests",                  :default => true
+    t.integer  "title_font_size",                            :default => 35
+    t.integer  "msg_font_size",                              :default => 32
     t.string   "title_text_align"
     t.string   "msg_text_align"
     t.string   "font_body"
     t.string   "title_color"
     t.string   "msg_color"
-    t.integer  "sms_messages_count",                        :default => 0
-    t.boolean  "user_is_activated",                         :default => false
-    t.string   "tz",                        :limit => 128
-    t.boolean  "any_invitation_sent",                       :default => false
+    t.integer  "sms_messages_count",                         :default => 0
+    t.boolean  "user_is_activated",                          :default => false
+    t.string   "tz",                         :limit => 128
+    t.boolean  "any_invitation_sent",                        :default => false
     t.string   "sms_resend_message"
     t.string   "font_title"
     t.datetime "canceled_at"
+    t.string   "cancellation_sms"
+    t.string   "cancellation_email",         :limit => 8192
+    t.string   "cancellation_email_subject"
+    t.datetime "cancellation_sent_at"
+    t.boolean  "cancel_by_sms"
+    t.boolean  "cancel_by_email"
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
@@ -199,6 +205,8 @@ ActiveRecord::Schema.define(:version => 20100810081535) do
     t.string   "bounce_status"
     t.string   "bounce_reason"
     t.boolean  "delayed_sms_resend",         :default => false
+    t.datetime "cancellation_sms_sent_at"
+    t.datetime "cancellation_email_sent_at"
   end
 
   add_index "guests", ["email", "bounced_at"], :name => "index_guests_on_email_and_bounced_at"

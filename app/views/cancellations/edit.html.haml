@@ -8,7 +8,7 @@
         %h3
           = @event.name
           - event_status
-        - semantic_form_for(:cancellation, resource, :live_validations => false, :html => {:class => "form new-event", :method => :put}) do |f|
+        - semantic_form_for(:event, resource, :url => resource_path(resource), :live_validations => false, :html => {:class => "form new-event", :method => :put}) do |f|
 
           %h1= _("Notify your guests that the event is cancelled")
 
@@ -17,5 +17,20 @@
 
           - unless @invited_stats[:sms].zero?
             != render(:partial => "sms", :locals => {:f => f})
+
+          .forms-block-btns
+            != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+            != link_to _("Cancel"), summary_path(resource), :class => "btn"
           
   .b-alt &nbsp;
+
+
+:javascript
+  jQuery(function(){
+    jQuery("#event_cancel_by_email").change(function(){
+      jQuery(".table-box.by_email")[jQuery(this).attr("checked") ? "show" : "hide"]();
+    });
+    jQuery("#event_cancel_by_sms").change(function(){
+      jQuery(".table-box.by_sms")[jQuery(this).attr("checked") ? "show" : "hide"]();
+    })
+  });

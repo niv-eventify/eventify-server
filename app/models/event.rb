@@ -60,8 +60,8 @@ class Event < ActiveRecord::Base
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
-    :msg_color, :title_color, :font_title, :font_body, :allow_seeing_other_guests, :tz
-    
+    :msg_color, :title_color, :font_title, :font_body, :allow_seeing_other_guests, :tz,
+    :cancellation_sms, :cancellation_email, :cancellation_email_subject
 
   datetime_select_accessible :starting_at, :ending_at
 
@@ -72,8 +72,7 @@ class Event < ActiveRecord::Base
     :allow_nil => true, :allow_blank => true, :live_validator => /|/
 
   # sms sending validations
-  attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations,
-    :cancel_by_email, :cancel_by_sms
+  attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
   attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations,
     :cancel_by_email, :cancel_by_sms
   validates_presence_of :host_mobile_number, :on => :update, :if => :going_to_send_or_resend_sms?
@@ -84,6 +83,9 @@ class Event < ActiveRecord::Base
 
   validates_presence_of   :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
   validates_sms_length_of :sms_resend_message, :on => :update, :if => :going_to_resend_sms?
+
+  validates_presence_of :cancellation_sms, :on => :update, :if => :cancel_by_sms?
+  validates_presence_of :cancellation_email, :cancellation_email_subject, :on => :update, :if => :cancel_by_email?
 
   def going_to_send_or_resend_sms?
     going_to_send_sms? || going_to_resend_sms?
@@ -141,6 +143,14 @@ class Event < ActiveRecord::Base
   def reminders_disabled?
     @reminders_disabled
   end
+
+  def check_send_cancellation
+    debugger
+    return unless going_to_send_cancellation?
+    self.cancellation_sent_at = Time.now.utc
+    send_later(:send_cancellation!)
+  end
+  before_update :check_send_cancellation
 
   named_scope :upcoming, lambda{{:conditions => ["events.canceled_at IS NULL AND events.starting_at > ?", Time.now.utc]}}
   named_scope :cancelled, {:conditions => "canceled_at is not null"}
@@ -400,11 +410,38 @@ class Event < ActiveRecord::Base
   end
 
   def cancellation_sent?
-    false
+    !cancellation_sent_at.nil?
   end
 
   def changes_allowed?
     !(canceled? || past?)
+  end
+
+  def going_to_send_cancellation?
+    cancel_by_email? || cancel_by_sms?
+  end
+
+  def send_cancellation!
+    if cancel_by_email?
+      guests.invited_by_email.find_each(:batch_size => 1) do |g|
+        g.cancellation_email_sent_at = Time.now.utc
+        g.save!
+        g.send_cancellation_email(e.cancellation_email_subject, e.cancellation_email)
+      end
+    end
+
+    if cancel_by_sms?
+      guests.invited_by_sms.find_each(:batch_size => 1) do |g|
+        g.cancellation_sms_sent_at = Time.now.utc
+        g.save!
+        g.send_cancellation_sms(e.cancellation_sms)
+      end
+    end
+  end
+
+  def set_cancellations(invited_stats)
+    self.cancel_by_sms = !invited_stats[:sms].zero?
+    self.cancel_by_email = !invited_stats[:email].zero?
   end
 
 protected
