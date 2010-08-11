@@ -10,7 +10,7 @@
           - event_status
         - semantic_form_for(:cancellation, resource, :live_validations => false, :html => {:class => "form new-event", :method => :put}) do |f|
 
-          %h1= _("Notify your guests that event is canceled")
+          %h1= _("Notify your guests that the event is cancelled")
 
           - unless @invited_stats[:email].zero?
             != render(:partial => "email", :locals => {:f => f})

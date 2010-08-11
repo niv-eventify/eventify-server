@@ -5,7 +5,7 @@
         %h4
           != link_to h(my_event.name), summary_path(my_event)
           != event_sent_status(my_event)
-        - unless my_event.past?
+        - if my_event.changes_allowed?
           != render(:partial => "edit_menu", :locals => {:event => my_event})
       .boxe-wrap
         != render(:partial => "info", :locals => {:event => my_event})

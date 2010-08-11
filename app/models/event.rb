@@ -143,6 +143,7 @@ class Event < ActiveRecord::Base
   end
 
   named_scope :upcoming, lambda{{:conditions => ["events.canceled_at IS NULL AND events.starting_at > ?", Time.now.utc]}}
+  named_scope :cancelled, {:conditions => "canceled_at is not null"}
   named_scope :past, lambda{{:conditions => ["events.starting_at < ?", Time.now.utc]}}
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
@@ -396,6 +397,10 @@ class Event < ActiveRecord::Base
 
   def canceled?
     canceled_at
+  end
+
+  def cancellation_sent?
+    false
   end
 
   def changes_allowed?

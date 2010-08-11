@@ -32,3 +32,7 @@ end
 Factory.define :event_with_tz , :parent => :event do |event|
   event.tz "Jerusalem"
 end
+
+Factory.define :cancelled_event , :parent => :event do |event|
+  event.canceled_at Time.now.utc
+end

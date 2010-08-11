@@ -101,7 +101,7 @@ protected
   end
 
   def collection
-    period = past_events? ? :past : :upcoming
+    period = past_events? ? :past : (cancelled_events? ? :cancelled : :upcoming)
     current_user.events.send(period).with(:user, :design).paginate(:page => params[:page], :per_page => params[:per_page])
   end
 
@@ -135,6 +135,11 @@ protected
     "true" == params[:past]
   end
   helper_method :past_events?
+
+  def cancelled_events?
+    "true" == params[:cancelled]
+  end
+  helper_method :cancelled_events?
 
   def _cancel_sms
     @event.cancel_sms!

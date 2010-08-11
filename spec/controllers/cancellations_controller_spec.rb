@@ -19,7 +19,7 @@ describe CancellationsController do
     integrate_views
 
     before(:each) do
-      @event = Factory.create(:event)
+      @event = Factory.create(:cancelled_event)
       UserSession.create(@event.user)
       controller.current_user.events.stub!(:find).and_return(@event)
     end
@@ -43,7 +43,7 @@ describe CancellationsController do
 
   describe "nothing to send" do
     before(:each) do
-      @event = Factory.create(:event)
+      @event = Factory.create(:cancelled_event)
       UserSession.create(@event.user)
       @event.guests.stub!(:invited_stats).and_return({:total => 0})
       controller.current_user.events.stub!(:find).and_return(@event)

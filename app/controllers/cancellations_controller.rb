@@ -19,7 +19,8 @@ protected
 
   def verify_stats
     @invited_stats = resource.guests.invited_stats
-    if @invited_stats[:total].zero?
+
+    if @invited_stats[:total].zero? || !@event.canceled?
       redirect_to summary_path(resource)
       return false
     end

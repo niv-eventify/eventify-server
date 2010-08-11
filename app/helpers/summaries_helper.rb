@@ -58,7 +58,7 @@ module SummariesHelper
     text = if @event.past?
       _("Passed")
     elsif @event.canceled?
-      _("Canceled")
+      _("Cancelled")
     end
 
     return nil if text.nil?

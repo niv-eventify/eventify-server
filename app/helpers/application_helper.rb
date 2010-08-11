@@ -33,18 +33,23 @@ module ApplicationHelper
   end
 
   def events_navigation(only_my_events)
+    caption = ""
+
     haml_tag(:div, :class => "nav-bar") do
       haml_tag(:ul) do
-        haml_tag(:li, :class => (past_events? ? "" : "active")) do
-          haml_concat link_to(_("Future events"), url_for(params.merge(:past => nil)))
-        end
-        haml_tag(:li, :class => (past_events? ? "active" : "")) do
-          haml_concat link_to(_("Past events"), url_for(params.merge(:past => true)))
+        [[_("Future events"), [nil, nil]], [_("Past events"), [true, nil]], [_("Cancelled events"), [nil, true]]].each do |e|
+          if active = (past_events? && e.last.first) || (cancelled_events? && e.last.last) || (!e.last.last || e.last.first)
+            caption = e.first
+          end
+
+          haml_tag(:li, :class => (active ? "active" : "")) do
+            haml_concat link_to(e.first, url_for(params.merge(:past => e.last.first, :cancelled => e.last.last)))
+          end          
         end
       end
     end
     haml_tag(:div, :class => "events-holder") do
-      haml_tag(:h3, past_events? ? _("Past events") : _("Future events"))
+      haml_tag(:h3, caption)
       haml_tag(:ul, :class => "choice") do
         # haml_tag :li, link_to(_("My Events"), events_path(:past => params[:past])), :class => (only_my_events ? "active" : "")
         # haml_tag :li, link_to_function(_("Friend’s events"), "alert('todo')"), :class => (only_my_events ? "" : "active")

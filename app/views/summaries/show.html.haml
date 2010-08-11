@@ -73,7 +73,7 @@
             - else
               %dt= _("No things to bring")
               %dd &nbsp;
-          - unless @event.past?
+          - if @event.changes_allowed?
             != link_to _("edit"), event_things_path(@event), :class => "more-link"
 
   - info_container("info-container-alt") do
@@ -104,7 +104,7 @@
         jQuery.ajax({url: #{event_other_guests_path(@event).to_json}, type:'get', dataType:'script'});
       });
     .info-bottom
-      - unless @event.past?
+      - if @event.changes_allowed?
         != link_to _("Full Guests List"), event_guests_path(@event), :class => "btn-sml"
       %p
         = _("If some of your guests didn't recieve the invitation")

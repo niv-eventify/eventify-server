@@ -1,5 +1,7 @@
 .event-menu
   %ul
     %li.sum!= link_to _("Event summary"), summary_path(event)
-    - unless event.past?
+    - if event.changes_allowed?
       %li.cancel!= link_to _("Cancel event"), event_path(event), :confirm => _("Are you sure?"), :method => :delete
+    - if event.canceled? && !event.cancellation_sent?
+      != link_to _("Notify guests"), edit_cancellation_path(event)
