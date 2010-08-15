@@ -974,3 +974,7 @@ ul.contact-tabset li.active a ,
 span.event-changes-disabled {
 	color:#BB3131
 }
+
+.add-link, .hebrew .add-link, .remove-link, .hebrew .remove-link, .query_address_link {
+	font-size: 1.2em;
+}

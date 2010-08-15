@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-08-03 22:03+0300\n"
+"POT-Creation-Date: 2010-08-10 14:28+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -143,7 +143,7 @@ msgid_plural "(%d guests)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/events/_form.html.haml:47
+#: app/views/events/_form.html.haml:49
 msgid "(345 symbols max)"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Add End date &amp; Time"
 msgstr ""
 
-#: app/views/events/_form.html.haml:34
+#: app/views/events/_form.html.haml:33
 msgid "Add Map"
 msgstr ""
 
@@ -267,11 +267,11 @@ msgstr ""
 msgid "An error occured during importing contacts from %{name}"
 msgstr ""
 
-#: app/helpers/designs_helper.rb:31
+#: app/helpers/designs_helper.rb:40
 msgid "Are you sure you want to remove the picture you uploaded?"
 msgstr ""
 
-#: app/helpers/designs_helper.rb:30
+#: app/helpers/designs_helper.rb:39
 msgid "Are you sure you want to remove this picture?"
 msgstr ""
 
@@ -663,7 +663,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:50
+#: app/views/events/_form.html.haml:52
 msgid "Guests can see other attendees"
 msgstr ""
 
@@ -693,6 +693,10 @@ msgstr ""
 #: app/views/contacts/new.html.haml:4 app/views/contacts/edit.html.haml:4
 #: app/views/contacts/index.html.haml:4
 msgid "Here your can manage contracts, and import them from your email!"
+msgstr ""
+
+#: app/views/events/_form.html.haml:34
+msgid "Hide Map"
 msgstr ""
 
 #: app/views/welcome/index.html.haml:1
@@ -761,7 +765,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/controllers/events_controller.rb:86
+#: app/controllers/events_controller.rb:91
 #: app/views/invitations/edit.html.haml:20
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
 msgid ""
@@ -862,7 +866,7 @@ msgstr ""
 msgid "Message Confirmations"
 msgstr ""
 
-#: app/views/events/_form.html.haml:47
+#: app/views/events/_form.html.haml:49
 msgid "Message to Guests"
 msgstr ""
 
@@ -1203,7 +1207,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: app/helpers/designs_helper.rb:29
+#: app/helpers/designs_helper.rb:38
 msgid "Saving in progress. Please wait"
 msgstr ""
 
@@ -1406,7 +1410,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: app/controllers/events_controller.rb:84
+#: app/controllers/events_controller.rb:89
 msgid "You already have an account, please login with your email and password."
 msgstr ""
 
@@ -1430,7 +1434,7 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:59
 msgid "You didn't save the event."
 msgstr ""
 
@@ -1862,7 +1866,7 @@ msgstr ""
 msgid "ex. My 40th birthday"
 msgstr ""
 
-#: app/views/events/_form.html.haml:47
+#: app/views/events/_form.html.haml:49
 msgid ""
 "ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June "
 "at 22:00 &#13;&#10;at The Neighborhood Bar"

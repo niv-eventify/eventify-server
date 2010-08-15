@@ -292,10 +292,30 @@ jQuery(document).ready(function(){
   stage2.location = jQuery("#event_location_name").val();
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
+
+  clearInputs("event_user_attributes_name");
+  clearInputs("event_user_attributes_email");
+  clearInputs("event_name");
+  clearInputs("event_location_name");
+  clearInputs("event_location_address");
+  clearInputs("event_guest_message");
+
   stage2.preview_text("event_guest_message", "free_text");
   stage2.preview_text("event_name", "title");
+  jQuery("#event_name").blur(function(){
+    stage2.preview_text("event_name", "title");
+  });
+  jQuery("#event_name").focus(function(){
+    stage2.preview_text("event_name", "title");
+  });
   jQuery("#event_name").keyup(function(){
     stage2.preview_text("event_name", "title");
+  });
+  jQuery("#event_guest_message").blur(function(){
+    stage2.preview_text("event_guest_message", "free_text");
+  });
+  jQuery("#event_guest_message").focus(function(){
+    stage2.preview_text("event_guest_message", "free_text");
   });
   jQuery("#event_guest_message").keyup(function(){
     stage2.preview_text("event_guest_message", "free_text");
@@ -415,10 +435,4 @@ jQuery(document).ready(function(){
 	}
 	jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
   });
-  clearInputs("event_user_attributes_name");
-  clearInputs("event_user_attributes_email");
-  clearInputs("event_name");
-  clearInputs("event_location_name");
-  clearInputs("event_location_address");
-  clearInputs("event_guest_message");
 });
