@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-08-15 12:56+0300\n"
+"POT-Creation-Date: 2010-08-15 13:11+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -280,6 +280,7 @@ msgstr ""
 #: app/views/events/_actions_menu.html.haml:5
 #: app/views/events/_form.html.haml:43 app/views/invitations/edit.html.haml:5
 #: app/views/reminders/_reminder.html.haml:12
+#: app/views/summaries/show.html.haml:110
 msgid "Are you sure?"
 msgstr ""
 
@@ -324,6 +325,7 @@ msgid "Cancel Event | Eventify"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:5
+#: app/views/summaries/show.html.haml:110
 msgid "Cancel event"
 msgstr ""
 
@@ -571,6 +573,14 @@ msgstr ""
 msgid "Event canceled."
 msgstr ""
 
+#: app/controllers/cancellations_controller.rb:36
+msgid "Event cancelled - no guests to notify or guests are already notified."
+msgstr ""
+
+#: app/views/summaries/show.html.haml:113
+msgid "Event cancelled:"
+msgstr ""
+
 #: app/helpers/events_wizard_helper.rb:3
 msgid "Event details"
 msgstr ""
@@ -692,6 +702,7 @@ msgid "Guests can see other attendees"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:10
+#: app/views/summaries/show.html.haml:117
 msgid "Guests notified"
 msgstr ""
 
@@ -753,7 +764,7 @@ msgstr ""
 
 #: app/views/pages/no_invitation_en.html.haml:1
 #: app/views/pages/no_invitation_en.html.haml:4
-#: app/views/summaries/show.html.haml:110
+#: app/views/summaries/show.html.haml:119
 msgid "If some of your guests didn't recieve the invitation"
 msgstr ""
 
@@ -1000,6 +1011,7 @@ msgid "Notifications are being sent."
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:8
+#: app/views/summaries/show.html.haml:115
 msgid "Notify guests"
 msgstr ""
 
@@ -1749,7 +1761,7 @@ msgstr ""
 msgid "change RSVP|change"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:111
+#: app/views/summaries/show.html.haml:120
 msgid "click here for help"
 msgstr ""
 

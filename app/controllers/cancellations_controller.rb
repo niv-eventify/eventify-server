@@ -33,6 +33,7 @@ protected
     @invited_stats = resource.guests.invited_stats
 
     if @invited_stats[:total].zero? || !@event.canceled? || @event.cancellation_sent?
+      flash[:notice] = _("Event cancelled - no guests to notify or guests are already notified.")
       redirect_to summary_path(resource)
       return false
     end

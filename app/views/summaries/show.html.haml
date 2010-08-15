@@ -106,6 +106,15 @@
     .info-bottom
       - if @event.changes_allowed?
         != link_to _("Full Guests List"), event_guests_path(@event), :class => "btn-sml"
+        %p
+          != link_to _("Cancel event"), event_path(@event), :confirm => _("Are you sure?"), :method => :delete
+      -elsif @event.canceled?
+        %p
+          = _("Event cancelled:")
+          - if !@event.cancellation_sent?
+            != link_to _("Notify guests"), edit_cancellation_path(@event)
+          - else
+            = _("Guests notified")
       %p
         = _("If some of your guests didn't recieve the invitation")
         != link_to _("click here for help"), page_path("no_invitation")
