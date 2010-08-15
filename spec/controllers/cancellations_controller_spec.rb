@@ -41,6 +41,41 @@ describe CancellationsController do
     end
   end
 
+  describe "sending" do
+    before(:each) do
+      @event = Factory.create(:cancelled_event)
+      UserSession.create(@event.user)
+      @event.guests.stub!(:invited_stats).and_return({:total => 1})
+      controller.current_user.events.stub!(:find).and_return(@event)    
+    end
+
+    it "nothing to do" do
+      @event.should_not_receive(:send_later).with(:send_cancellation!)
+      put :update, :id => @event.id, :event => {}
+      @event.cancellation_sent_at.should be_nil
+      response.should redirect_to(summary_path(@event))
+      @event.reload.should_not be_going_to_send_cancellation
+    end
+
+    it "should not send if cant validate" do
+      @event.should_not_receive(:send_later).with(:send_cancellation!)
+      put :update, :id => @event.id, :event => {:cancel_by_email => "true"}
+      response.should be_success
+    end
+
+    it "should send" do
+      @event.should_receive(:send_later).with(:send_cancellation!)
+      put :update, :id => @event.id, :event => {
+        :cancel_by_email => "true", 
+        :cancel_by_sms => "true", 
+        :cancellation_email_subject => "subj", 
+        :cancellation_email => "message",
+        :cancel_by_sms => "sms"}
+      @event.reload.cancellation_sent_at.should_not be_nil
+      response.should redirect_to(summary_path(@event))
+    end
+  end
+
   describe "nothing to send" do
     before(:each) do
       @event = Factory.create(:cancelled_event)

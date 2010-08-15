@@ -9,6 +9,15 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     body        :guest => guest, :url => rsvp_url(guest.email_token)
   end
 
+  def event_cancelled(guest, message_subject, message_text)
+    subject     message_subject
+    recipients  [guest.email_recipient]
+    _set_receipient_header(guest)
+    from        "Eventify <invitations@#{domain}>"
+    sent_on     Time.now.utc
+    body        :message => message_text
+  end
+
   def invite_guest(guest)
     subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]

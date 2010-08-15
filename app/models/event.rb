@@ -427,7 +427,7 @@ class Event < ActiveRecord::Base
       guests.invited_by_email.find_each(:batch_size => 1) do |g|
         g.cancellation_email_sent_at = Time.now.utc
         g.save!
-        g.send_cancellation_email(e.cancellation_email_subject, e.cancellation_email)
+        g.send_cancellation_email(self.cancellation_email_subject, self.cancellation_email)
       end
     end
 
@@ -435,7 +435,7 @@ class Event < ActiveRecord::Base
       guests.invited_by_sms.find_each(:batch_size => 1) do |g|
         g.cancellation_sms_sent_at = Time.now.utc
         g.save!
-        g.send_cancellation_sms(e.cancellation_sms)
+        g.send_cancellation_sms(self.cancellation_sms)
       end
     end
   end
@@ -443,6 +443,23 @@ class Event < ActiveRecord::Base
   def set_cancellations(invited_stats)
     self.cancel_by_sms = !invited_stats[:sms].zero?
     self.cancel_by_email = !invited_stats[:email].zero?
+    self.cancellation_sms = cancel_sms_default_text
+    self.cancellation_email = cancel_email_default_text
+    self.cancellation_email_subject = cancel_email_default_subject
+  end
+
+  def cancel_sms_default_text
+    _("Sorry, %{event_name} has been cancelled") % { :event_name => name }
+  end
+
+  def cancel_email_default_text
+    _("Hi,\n\n%{event_name} has been cancelled.\n\n%{host_name}") % {
+      :event_name => name, :host_name => user.name
+    }
+  end
+
+  def cancel_email_default_subject
+    _("Cancelled: %{event_name}") % { :event_name => name }
   end
 
 protected

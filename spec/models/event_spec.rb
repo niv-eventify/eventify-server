@@ -33,6 +33,54 @@ describe Event do
       @guest.event.cancel!
       @guest.event.reload.reminders.first.should_not be_is_active
     end
+
+    describe "cancellations" do
+      it "should validate sms message" do
+        @guest.event.cancel_by_sms = true
+        @guest.event.should_not be_valid
+        @guest.event.errors.on(:cancellation_sms).should_not be_blank
+      end
+
+      it "should validate email message" do
+        @guest.event.cancel_by_email = true
+        @guest.event.should_not be_valid
+        @guest.event.errors.on(:cancellation_email).should_not be_blank
+        @guest.event.errors.on(:cancellation_email_subject).should_not be_blank
+      end
+
+      it "should not send when nothing to send" do
+        Notifier.should_not_receive(:deliver_event_cancelled)
+        @guest.event.send_cancellation!
+        SmsMessage.count.should == 0
+      end
+
+      it "should send email when cancel by email" do
+        @guest.send_email = true
+        @guest.email_invitation_sent_at = Time.now.utc
+        @guest.save(false)
+        
+        @guest.event.cancel_by_email = true
+        @guest.event.cancellation_email = @guest.event.cancellation_email_subject = "foo"
+        @guest.save(false)
+        
+        Notifier.should_receive(:deliver_event_cancelled)
+        @guest.event.send_cancellation!
+      end
+
+      it "should send sms when cancel by sms" do
+        @guest.send_sms = true
+        @guest.sms_invitation_sent_at = Time.now.utc
+        SmsMessage.count.should == 0
+        @guest.save(false)
+        
+        @guest.event.cancel_by_sms = true
+        @guest.event.cancellation_sms = "sms"
+        @guest.save(false)
+        
+        @guest.event.send_cancellation!
+        SmsMessage.last.kind.should == "cancel"
+      end
+    end
   end
 
   describe "bounces" do

@@ -343,10 +343,19 @@ class Guest < ActiveRecord::Base
   end
 
   def send_cancellation_email(subject, content)
-    
+    I18n.with_locale(event.language) do
+      event.with_time_zone do
+        Notifier.deliver_event_cancelled(self, subject, content)
+      end
+    end
   end
 
   def send_cancellation_sms(message)
-    
+    I18n.with_locale(event.language) do
+      event.with_time_zone do
+        sms = sms_messages.create!(:kind => "cancel", :message => message)
+        sms.send_sms!
+      end
+    end    
   end
 end
