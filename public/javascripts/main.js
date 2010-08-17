@@ -13,22 +13,6 @@ function clearInputs(id){
 			}
 		}).blur();
 	});
-	
-//	jQuery('div.input-bg-alt > input').bind('focus', function(){
-//		jQuery(this).parent().addClass('input-bg-alt-active');
-//	}).bind('blur', function(){
-//		jQuery(this).parent().removeClass('input-bg-alt-active');
-//	});
-//	jQuery('div.input-text-middle > input').bind('focus', function(){
-//		jQuery(this).parent().addClass('input-text-middle-active');
-//	}).bind('blur', function(){
-//		jQuery(this).parent().removeClass('input-text-middle-active');
-//	});
-//	jQuery('div.input-bg-uni input').bind('focus', function(){
-//		jQuery(this).parent().parent().addClass('input-bg-uni-active');
-//	}).bind('blur', function(){
-//		jQuery(this).parent().parent().removeClass('input-bg-uni-active');
-//	});
 }
 function clearInputsBeforeFormSubmission(id){
 	if(jQuery('#' + id).length == 0) return;
@@ -52,6 +36,7 @@ function ieHover(h_list, h_class){
 		});
 	}
 }
+
 /*--- slide blocks ---*/
 function initSlide(){
 	var t_box = false;
@@ -168,7 +153,7 @@ function initSlide(){
 	jQuery('div.edit').each(function(){
 		var _hold = jQuery(this);
 		var _t;
-		var _btn = _hold.find('a.open, a.open-edit');
+		var _btn = _hold.find('a.open');
 		var _box = _hold.find('div.drop');
 		if(_btn.length && _box.length){
 			_btn.click(function(){
@@ -235,6 +220,7 @@ function initSlide(){
 		}
 	});
 }
+
 /*--- promo navigation ---*/
 function promoNav(){
 	var _speed = 1000;
@@ -297,7 +283,6 @@ return this.each(function(){
 			var selectBtn = replaced.find(_options.selectBtn);
 			var selectDisabled = replaced.find(_options.selectDisabled).hide();
 			var optHolder = jQuery(_options.optStructure);
-			optHolder.addClass(select.attr("id"));
 			var optList = optHolder.find(_options.optList);
 			if(select.attr('disabled')) selectDisabled.show();
 			select.find('option').each(function(){
@@ -355,7 +340,7 @@ return this.each(function(){
 						left: replaced.offset().left,
 						display: 'block'
 					});
-					if (optHolder.children('ul').height() > 200) optHolder.children('ul').css({height:200, overflow:'auto'});
+					if(optHolder.children('ul').height() > 200) optHolder.children('ul').css({height:200, overflow:'auto'});
 					else optHolder.children('ul').css({height:'auto', overflow:'hidden'});
 				}
 				return false;
@@ -364,6 +349,52 @@ return this.each(function(){
 		}
 	}
 });
+}
+/*------------------------ CUSTOM RADIO'S -----------------------------*/
+jQuery.fn.customRadio = function(_options){
+	var _options = jQuery.extend({
+		radioStructure: '<div></div>',
+		radioDisabled: 'disabled',
+		radioDefault: 'radioArea',
+		radioChecked: 'radioAreaChecked'
+	}, _options);
+	return this.each(function(){
+		var radio = jQuery(this);
+		if(!radio.hasClass('outtaHere') && radio.is(':radio')){
+			var replaced = jQuery(_options.radioStructure);
+			this._replaced = replaced;
+			replaced.insertBefore(radio);
+			radio.addClass('outtaHere');
+			if(radio.is(':disabled')) replaced.addClass(_options.radioDisabled);
+			else if (radio.is(':checked')) {
+				replaced.addClass(_options.radioChecked);
+				replaced.parent().addClass("selected");
+			}
+			else 
+				replaced.addClass(_options.radioDefault);
+			replaced.click(function(){
+				if(jQuery(this).hasClass(_options.radioDefault)){
+					radio.attr('checked', 'checked');
+					changeRadio(radio.get(0));
+				}
+			});
+			radio.click(function(){
+				changeRadio(this);
+			});
+			
+		}
+	});
+	function changeRadio(_this){
+		jQuery(_this).change();
+		jQuery('input:radio[name='+jQuery(_this).attr("name")+']').not(_this).each(function(){
+			if (this._replaced && !jQuery(this).is(':disabled')) {
+				this._replaced.removeClass().addClass(_options.radioDefault);
+				this._replaced.parent().removeClass("selected");
+			}
+		});
+		_this._replaced.removeClass().addClass(_options.radioChecked);
+		_this._replaced.parent().removeClass("selected").addClass("selected");
+	}
 }
 /*------------------------ CUSTOM CHECKBOX'S -----------------------------*/
 jQuery.fn.customCheckbox = function(_options){
@@ -378,10 +409,16 @@ jQuery.fn.customCheckbox = function(_options){
 		if(!checkbox.hasClass('outtaHere') && checkbox.is(':checkbox')){
 			var replaced = jQuery(_options.checkboxStructure);
 			this._replaced = replaced;
+			replaced.insertBefore(checkbox);
+			checkbox.addClass('outtaHere');
 			if(checkbox.is(':disabled')) replaced.addClass(_options.checkboxDisabled);
-			else if(checkbox.is(':checked')) replaced.addClass(_options.checkboxChecked);
-			else replaced.addClass(_options.checkboxDefault);
-
+			else if (checkbox.is(':checked')) {
+				replaced.addClass(_options.checkboxChecked);
+				replaced.parent().addClass("selected");
+			}
+			else 
+				replaced.addClass(_options.checkboxDefault);
+			
 			replaced.click(function(){
 				if(checkbox.is(':checked')) checkbox.removeAttr('checked');
 				else checkbox.attr('checked', 'checked');
@@ -391,22 +428,25 @@ jQuery.fn.customCheckbox = function(_options){
 			checkbox.click(function(){
 				changeCheckbox(checkbox);
 			});
-			replaced.insertBefore(checkbox);
-			checkbox.addClass('outtaHere');
 		}
 	});
 	function changeCheckbox(_this){
-		if(_this.is(':checked')) _this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked);
-		else _this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault);
+		if (_this.is(':checked')) {
+			_this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked).parent().removeClass().addClass("selected");
+		}
+		else 
+			_this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault).parent().removeClass();
 	}
 }
+
 jQuery.fn.redraw_customCheckbox = function() {
-	return this.each(function(){
-		var checkbox = jQuery(this);
-		if(checkbox.is(':checked')) checkbox.get(0)._replaced.removeClass().addClass("checkboxAreaChecked");
-		else checkbox.get(0)._replaced.removeClass().addClass("checkboxArea");
-	});
+  return this.each(function(){
+    var checkbox = jQuery(this);
+    if(checkbox.is(':checked')) checkbox.get(0)._replaced.removeClass().addClass("checkboxAreaChecked");
+    else checkbox.get(0)._replaced.removeClass().addClass("checkboxArea");
+  });
 };
+
 /*------------------------ SlideEffect -----------------------------*/
 function initSlideEffect(){
     var _parentSlide = 'div.slider';
@@ -470,11 +510,38 @@ jQuery(document).ready(function(){
 	initDrop();
 });
 
+
+var transparentImage = "/images/none.gif";
+function fixTrans()
+{
+	if (typeof document.body.style.maxHeight == 'undefined') 
+	{
+		var imgs = document.getElementsByTagName("img");
+		for (i = 0; i < imgs.length; i++)
+		{	
+			if (imgs[i].src.indexOf(transparentImage) != -1)
+			{
+				return;
+			}
+			if (imgs[i].src.indexOf(".png") != -1)
+			{
+				var src = imgs[i].src;
+				imgs[i].src = transparentImage;
+				imgs[i].runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" + src + "',sizingMethod='scale')";
+				imgs[i].style.display = "inline-block";
+			}
+		}	
+	}
+}
+
+if (document.all && !window.opera)
+	attachEvent("onload", fixTrans);
+
 function show_nyro_loading(func) {
-	var opts = {
-		content: '<div id="nyroModalLoading" style="position: absolute; top: 50%; left: 50%; margin-top: -155px; margin-left: -106px; width: 210px; border:1px solid #fff; height: 308px;"><a class="nyroModalClose" href="#">Cancel</a></div>'
-	};
-	if (func)
-		opts.endShowContent = func;
-	jQuery.nyroModalManual(opts);
+		  var opts = {
+		    content: '<div id="nyroModalLoading" style="position: absolute; top: 50%; left: 50%; margin-top: -155px; margin-left: -106px; width: 210px; border:1px solid #fff; height: 308px;"><a class="nyroModalClose" href="#">Cancel</a></div>'
+		  };
+		  if (func)
+		      opts.endShowContent = func;
+		  jQuery.nyroModalManual(opts);
 }
