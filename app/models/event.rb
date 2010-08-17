@@ -359,7 +359,7 @@ class Event < ActiveRecord::Base
 
   def self.default_start_time
     Event.new.with_time_zone do
-      1.hour.from_now.change(:sec => 0, :min => 0)
+      1.hour.ago.change(:sec => 0, :min => 0)
     end
   end
 
