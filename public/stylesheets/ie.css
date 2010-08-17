@@ -1,6 +1,6 @@
 /* IE6 and IE7 css */
-#content {margin-top: expression(document.getElementById("header").offsetHeight + "px");}
-#header {margin-top: expression((0 - (this.offsetHeight + document.getElementById("content").offsetHeight)) + "px");}
+#header{position: absolute;}
+#content{margin-top: 117px;}
 *+html .tabset-nav li a span em {
 	white-space: nowrap;
 	display: block;
