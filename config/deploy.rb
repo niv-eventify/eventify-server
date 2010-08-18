@@ -7,6 +7,16 @@ require "vladify/thinking_sphinx"
 require "vladify/whenever"
 # require "vladify/workling"
 
-set :application, "eventify.com"
 set :repository, "git@alpha.astrails.com:eventify/eventify-server"
 set :domain, "astrails@eventify.astrails.com"
+
+
+desc "production"
+task :prod do
+  set :application, "eventify.com"
+end
+
+task :stage do
+  set :application, "eventify.astrails.com"
+end
+
