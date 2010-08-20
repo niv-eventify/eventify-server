@@ -8,15 +8,16 @@ require "vladify/whenever"
 # require "vladify/workling"
 
 set :repository, "git@alpha.astrails.com:eventify/eventify-server"
-set :domain, "astrails@eventify.astrails.com"
 
 
 desc "production"
 task :prod do
+  set :domain, "astrails@eventify.co.il"
   set :application, "eventify.com"
 end
 
 task :stage do
+  set :domain, "astrails@eventify.astrails.com"
   set :application, "eventify.astrails.com"
 end
 
