@@ -522,9 +522,6 @@ li.thing.active span.name {
 .twocolumns-decor {
 	background-image: url(/images/bg-decor-h.gif)
 }
-.tab {
-	display: block;
-}
 
 .lb-popup {
 	padding: 0;
@@ -977,4 +974,56 @@ span.event-changes-disabled {
 
 .add-link, .hebrew .add-link, .remove-link, .hebrew .remove-link, .query_address_link {
 	font-size: 1.2em;
+}
+
+ul.tabset li.tab-1 a {
+	background:url("/images/bg-tab-1.png") no-repeat scroll 0 0 transparent;
+}
+ul.tabset li.tab-1 a.active {
+	background:url("/images/bg-tab-1-h.png") no-repeat scroll 0 0 transparent;
+}
+.tabs-container #tab-1 {
+	background:url("/images/bg-tabset-green-en.gif") no-repeat scroll 100% 0 transparent;
+}
+.hebrew .tabs-container #tab-1 {
+	background:url("/images/bg-tabset-green.gif") no-repeat scroll 100% 0 transparent;
+}
+ul.tabset li.tab-2 a {
+	background:url("/images/bg-tab-2.png") no-repeat scroll 0 0 transparent;
+}
+ul.tabset li.tab-2 a.active {
+	background:url("/images/bg-tab-2-h.png") no-repeat scroll 0 0 transparent;
+}
+.tabs-container #tab-2 {
+	background:url("/images/bg-tabset-orange-en.gif") no-repeat scroll 100% 0 transparent;
+}
+.hebrew .tabs-container #tab-2 {
+	background:url("/images/bg-tabset-orange.gif") no-repeat scroll 100% 0 transparent;
+}
+ul.tabset li.tab-3 a {
+	background:url("/images/bg-tab-3.png") no-repeat scroll 0 0 transparent;
+}
+ul.tabset li.tab-3 a.active {
+	background:url("/images/bg-tab-3-h.png") no-repeat scroll 0 0 transparent;
+}
+.tabs-container #tab-3 {
+	background:url("/images/bg-tabset-red-en.gif") no-repeat scroll 100% 0 transparent;
+}
+.hebrew .tabs-container #tab-3 {
+	background:url("/images/bg-tabset-red.gif") no-repeat scroll 100% 0 transparent;
+}
+ul.tabset li.tab-4 a {
+	background:url("/images/bg-tab-4.png") no-repeat scroll 0 0 transparent;
+}
+ul.tabset li.tab-4 a.active {
+	background:url("/images/bg-tab-4-h.png") no-repeat scroll 0 0 transparent;
+}
+.tabs-container #tab-4 {
+	background:url("/images/bg-tabset-gray-en.gif") no-repeat scroll 100% 0 transparent;
+}
+.hebrew .tabs-container #tab-4 {
+	background:url("/images/bg-tabset-gray.gif") no-repeat scroll 100% 0 transparent;
+}
+div.tab {
+	display: block;
 }

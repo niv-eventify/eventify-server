@@ -1,17 +1,18 @@
 - guest_index = -1
 - items_per_column = collection.size / @columns_count; items_per_column += 1 unless (collection.size % @columns_count).zero?
 
-!= render(:partial => "shared/rsvp_tabs", :locals => {:event => parent})
-.tab{:id => "tab-#{active_tab_index}"}
-  .tabs-block
-    .tabs-bottom
-      .info-cols
-        - if collection.blank?
-          .info-col= _("No guests")
-        - else
-          - 0.step(@columns_count - 1) do |column|
-            .info-col
-              - 0.step(items_per_column - 1) do |x|
-                - guest_index += 1
-                != render(:partial => 'guest', :object => collection[guest_index]) if collection[guest_index]
-      != will_paginate(collection, :renderer => RemoteGuestsWillPaginate)
+.tabs-container
+  != render(:partial => "shared/rsvp_tabs", :locals => {:event => parent})
+  .tab{:id => "tab-#{active_tab_index}"}
+    .tabs-block
+      .tabs-bottom
+        .info-cols
+          - if collection.blank?
+            .info-col= _("No guests")
+          - else
+            - 0.step(@columns_count - 1) do |column|
+              .info-col
+                - 0.step(items_per_column - 1) do |x|
+                  - guest_index += 1
+                  != render(:partial => 'guest', :object => collection[guest_index]) if collection[guest_index]
+        != will_paginate(collection, :renderer => RemoteGuestsWillPaginate)
