@@ -1024,6 +1024,21 @@ ul.tabset li.tab-4 a.active {
 .hebrew .tabs-container #tab-4 {
 	background:url("/images/bg-tabset-gray.gif") no-repeat scroll 100% 0 transparent;
 }
+ul.tabset li.tab-5 a {
+	background:url("/images/bg-tab-5.png") no-repeat scroll 0 0 transparent;
+}
+ul.tabset li.tab-5 a.active {
+	background:url("/images/bg-tab-5-h.png") no-repeat scroll 0 0 transparent;
+}
+.tabs-container #tab-5 {
+	background:url("/images/bg-tabset-brown-en.gif") no-repeat scroll 100% 0 transparent;
+}
+.hebrew .tabs-container #tab-5 {
+	background:url("/images/bg-tabset-brown.gif") no-repeat scroll 100% 0 transparent;
+}
 div.tab {
 	display: block;
+}
+ul.tabset {
+	width: 756px;
 }
