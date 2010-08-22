@@ -98,7 +98,7 @@
               });
             });
 
-    .other-guests
+    .other-guests.tabs-container
     :javascript
       jQuery(function(){
         jQuery.ajax({url: #{event_other_guests_path(@event).to_json}, type:'get', dataType:'script'});
