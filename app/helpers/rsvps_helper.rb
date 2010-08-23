@@ -27,6 +27,17 @@ module RsvpsHelper
     end
   end
 
+  def rsvp_item_class(rsvp)
+    case rsvp
+    when 0 # no
+      "item-3"
+    when 1 # yes
+      "item-1"
+    when 2 # maybe
+      "item-2"
+    end
+  end
+
   def link_to_rsvp_update(text, value)
     link_to_remote text, :url => rsvp_path(resource.email_token, :guest => {:rsvp => value}), :method => :put, :before => "jQuery(this).parents('ul.link-box').hide();jQuery('#updating_rsvp_status').show()"
   end

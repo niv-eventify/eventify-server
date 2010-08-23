@@ -1,7 +1,10 @@
 .side-box-row
-  %span.rsvp{:class => rsvp_status_class(resource.rsvp)}
-    != link_to_remote s_("change RSVP|change"), :url => edit_rsvp_path(resource.email_token), :method => :get
-    = resource.rsvp_text
+  %ul.link-box
+    %li{:class => rsvp_item_class(resource.rsvp)}
+      %a
+        != resource.rsvp_text
+    %li.item-text
+      != link_to_remote s_("change RSVP|change"), :url => edit_rsvp_path(resource.email_token), :method => :get
 
 .side-box-row
   - if resource.can_change_number_of_guests?
