@@ -296,47 +296,6 @@ div.flash.notice {
 	margin:100px auto;
 }
 
-#startNow {
-	margin:-9px auto;
-	width: 240px;
-	text-align: center;
-	position: relative;
-}
-#startNow a{
-	float:left;
-	padding-bottom:4px;
-	width:auto;
-	color:#fff;
-	font-size:3em;
-	line-height:46px;
-	font-weight:bold;
-	height:45px;
-	cursor:pointer;
-	position:relative;
-	z-index:2;
-	text-decoration: none;
-}
-#startNow a span{
-	float:left;
-	padding: 2px 10px 0px 20px;
-	margin-left:27px;
-	background:url("/images/bg-start-l-rtl.png") no-repeat scroll 0 0 transparent;
-}
-.hebrew #startNow a span{
-	background:url("/images/bg-start-l-rtl.png") no-repeat scroll 0 0 transparent;
-}
-#startNow a em{
-	display: inline;
-	float:left;
-	width:12px;
-	height:56px;
-	overflow:hidden;
-	position:relative;	background:url("/images/bg-start-r-rtl.png") no-repeat;
-}
-.hebrew #startNow a em{
-	background:url("/images/bg-start-r-rtl.png") no-repeat;
-}
-
 .arrival-container select {
 	width:210px;
 }
