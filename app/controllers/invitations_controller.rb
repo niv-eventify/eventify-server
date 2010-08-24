@@ -40,6 +40,11 @@ protected
       redirect_to edit_event_path(resource)
       return false
     end
+
+    if resource.canceled?
+      redirect_to summary_path(resource)
+      return false
+    end
   end
 
   def check_guests

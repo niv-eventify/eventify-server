@@ -94,6 +94,13 @@ describe InvitationsController do
       response.should redirect_to("/summary/#{@event.id}")
     end
 
+    it "should redirect to summary if event cancelled" do
+      @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 2, :sms => 1, :resend_email => 0, :resend_sms => 2})
+      @event.stub!(:canceled?).and_return(true)
+      get :edit, :id => @event
+      response.should redirect_to("/summary/#{@event.id}")
+    end
+
     it "should render send form" do
       @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 2, :sms => 1, :resend_email => 0, :resend_sms => 2})
       get :edit, :id => @event

@@ -11,7 +11,7 @@ protected
 
   # don't allow access summaries until all invitations are sent
   def check_invitations
-    return redirect_to(edit_invitation_path(resource)) if resource.stage_passed < 4
+    return redirect_to(edit_invitation_path(resource)) if resource.stage_passed < 4 && !resource.canceled?
   end
 
   def set_time_zone
