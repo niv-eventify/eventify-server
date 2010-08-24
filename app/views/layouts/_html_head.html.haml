@@ -2,4 +2,6 @@
 
 != render(:partial => "layouts/javascripts")
 != yield :head
-!= javascript_include_tag "jrails", "jquery.validate.min.js", "main", :cache => "alljs2"
+!= javascript_include_tag "jrails", "jquery.validate.min.js", "jquery.charcounter.js", "main", :cache => "alljs3"
+:javascript
+  window.sms_counter_format = "#{_('%1 left')}";

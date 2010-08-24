@@ -21,6 +21,17 @@ module MiddleBoxFormBuilder
       RUBY
     end
 
+    def text_area(method, options = {}, html_options = {})
+      outerdiv_class = options.delete(:outerdiv_class) || "textarea-bg"
+      clean_field do
+        html = label(method, options.delete(:label)) + 
+          content_tag(:div, super(method, options), :class => "input-bg-contact") +
+          (has_errors?(method) ? @template.content_tag(:p, merge_errors(method), :class => "error-msg") : "")
+          
+        @template.content_tag(:div, html, :class => outerdiv_class)
+      end
+    end
+
     include CommonForm
   end
 end

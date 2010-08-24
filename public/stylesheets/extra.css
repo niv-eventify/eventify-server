@@ -1020,3 +1020,21 @@ ul.tabset {
 .hebrew .print_btns .item1{
 	float: left;
 }
+
+em.counter {
+	float:left;
+	clear:both;
+}
+
+.hebrew em.counter {
+	float:right;
+	direction:rtl;
+}
+
+.send-invitations .input-bg-contact {
+	clear:both;
+}
+
+#event_cancellation_sms_input .textarea-bg {
+	clear:both;
+}

@@ -37,7 +37,11 @@
 .f-row.f-row-alt
   .f-row-1
     != f.label :sms_message, _("SMS Message")
-    .input-bg-alt.input-alt-2
-      != f.text_field :sms_message, :class => "input-text"
+    .taxtarea-h
+      .texarea-bg
+        != f.text_area :sms_message, :class => "sms-message-body"
     .span= _("(text 140)")
   != f.inline_errors_for :sms_message
+
+:javascript
+  set_sms_counters();

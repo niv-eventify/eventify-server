@@ -8,7 +8,7 @@
 
     .form-cols.send-invitations
       - unless @invitations_to_send[:sms].zero?
-        != f.text_field :sms_message, :label => _("SMS message text")
+        != f.text_field :sms_message, :label => _("SMS message text"), :class => "sms-message-body"
       - unless @invitations_to_send[:resend_sms].zero?
         != f.text_field :sms_resend_message, :label => _("SMS message text fo resend")
       != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")

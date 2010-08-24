@@ -6,4 +6,4 @@
       .forms-block
         %h4= _("Send following message to %{guests_count}") % {:guests_count => sms_count}
         - f.inputs do
-          != f.input :cancellation_sms, :as => :text, :label => _("SMS Message"), :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}}
+          != f.input :cancellation_sms, :as => :text, :input_html => {:class => "sms-message-body"}, :label => _("SMS Message"), :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}}

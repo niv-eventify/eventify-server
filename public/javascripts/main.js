@@ -501,6 +501,16 @@ function initDrop() {
 	})
 }
 
+function set_sms_counters() {
+	jQuery(".sms-message-body").charCounter(140, {
+		container: "<em></em>",
+		classname: "counter",
+		format: window.sms_counter_format || "%1",
+		pulse: false,
+		delay: 100
+	});
+}
+
 jQuery(document).ready(function(){
 	initSlideEffect();
 	ieHover('.img-box, .edit-bg');
@@ -509,6 +519,7 @@ jQuery(document).ready(function(){
 	jQuery('select').customSelect();
 	jQuery('input:checkbox').customCheckbox();
 	initDrop();
+	set_sms_counters();
 });
 
 
