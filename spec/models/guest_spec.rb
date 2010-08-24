@@ -1,6 +1,27 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Guest do
+
+  describe "filling in contacts" do
+    before(:each) do
+      @event = Factory.create(:event)
+      @event.user.contacts.count.should be_zero
+    end
+
+    it "should create a contact when adding a new guest" do
+      @event.guests.create(:name => "foo", :email => "foo@bar.com")
+      @event.user.contacts.first.email.should == "foo@bar.com"
+    end
+
+    it "should set a suggested name when contact already exists" do
+      @event.user.contacts.create(:name => "FOOBAR", :email => "foo@bar.com")
+      lambda { 
+        g = @event.guests.create(:name => "foo", :email => "foo@bar.com")
+        g.suggested_name.should == "FOOBAR"
+      }.should_not change(Contact, :count)
+    end
+  end
+
   describe "validations" do
     before(:each) do
       @guest = Guest.new

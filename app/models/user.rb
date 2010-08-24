@@ -21,12 +21,11 @@ class User < ActiveRecord::Base
 
   has_many :contacts, :conditions => "contacts.removed_at IS NULL", :order => "contacts.email" do
     def add(name, email)
-      return false if email.blank? || find_by_email(email)
       unless name
         email =~ /(.+)@/
         name = $1
       end
-      !create(:name => name, :email => email).new_record?
+      create(:name => name, :email => email)
     end
   end
   has_many :contact_importers do

@@ -48,7 +48,6 @@ class GuestsController < InheritedResources::Base
       end
     end
   end
-  # edit
   # show
 
   def edit

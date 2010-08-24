@@ -66,6 +66,7 @@ class Guest < ActiveRecord::Base
   after_update :delayed_send_summary_status
   after_update :check_takings_status
   before_update :check_unbounce
+  after_create :save_to_contacts
 
   has_many :sms_messages
 
@@ -357,5 +358,11 @@ class Guest < ActiveRecord::Base
         sms.send_sms!
       end
     end    
+  end
+
+  attr_reader :suggested_name
+  def save_to_contacts
+    suggested_name = event.user.contacts.find_by_email(email).try(:name) if event.user.contacts.add(name, email).new_record?
+    @suggested_name = suggested_name if suggested_name && suggested_name != name
   end
 end

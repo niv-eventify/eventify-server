@@ -93,4 +93,9 @@ module GuestsHelper
     return "invitation-bounced" if guest.bounced?
     return "invitation-sent" if guest.invitation_sent_or_scheduled?(:email)
   end
+
+  def link_to_use_suggestion(event, guest, attribute, value)
+    js = "jQuery.ajax({url: '#{event_guest_path(event, guest)}', type:'post', dataType:'script', data: {'_method': 'put', authenticity_token:'#{form_authenticity_token}', attribute:'#{attribute}','guest[#{attribute}]':'#{h(value)}'}});"
+    haml_concat link_to_function(h(value), js, :class => "value-suggestion")
+  end
 end

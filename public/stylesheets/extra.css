@@ -1042,3 +1042,8 @@ em.counter {
 .send-invitations label {
 	width:auto;
 }
+
+.value-suggestion {
+	text-decoration:underline;
+	color:#3A9925;
+}

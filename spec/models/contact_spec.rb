@@ -25,5 +25,15 @@ describe Contact do
         @contact.errors.on(a).should_not be_blank
       end
     end
+
+    it "should validate uniquness" do
+      c = Contact.new(:name => "foo", :email => "foo@car.com")
+      c.user_id = 12
+      c.save.should be_true
+      c = Contact.new(:name => "foo", :email => "foo@car.com")
+      c.user_id = 12
+      c.should_not be_valid
+      c.errors.on(:email).should_not be_blank
+    end
   end
 end

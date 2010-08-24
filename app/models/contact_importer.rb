@@ -112,7 +112,8 @@ protected
     self.contacts_imported = 0
     contacts.each do |c|
       name, email = ContactImporter.parse_name_and_email(c)
-      self.contacts_imported += 1 if user.contacts.add(name, email)
+      c = user.contacts.add(name, email)
+      self.contacts_imported += 1 unless c.new_record?
     end
     self.completed_at = Time.now.utc
     save!

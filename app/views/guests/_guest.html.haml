@@ -3,6 +3,10 @@
   - info_table_column(1) do
     %label{ :for => "name-1" }
       - link_to_inline_edit(guest, :name)
+      - if guest.suggested_name
+        %div
+          = _("Suggested:")
+          - link_to_use_suggestion(@event, guest, :name, guest.suggested_name)
 
   - info_table_column(2) do
     - link_to_inline_edit(guest, :email, email_class(guest))

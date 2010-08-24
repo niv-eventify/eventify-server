@@ -7,4 +7,5 @@ class Contact < ActiveRecord::Base
   validates_phone_number :mobile
 
   attr_accessible :name, :email, :mobile, :country, :city, :street, :zip, :company, :title
+  validates_uniqueness_of :email, :scope => :user_id
 end
