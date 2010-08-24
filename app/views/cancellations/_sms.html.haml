@@ -1,5 +1,7 @@
 - f.inputs do
-  != f.input :cancel_by_sms, :label => _("By SMS"), :input_html => {:class => "auto_width"}, :checked_value => "true", :unchecked_value => "false"
+  %li.boolean.optional.allow_seeing_other_guests.auto_width
+    != f.check_box :cancel_by_sms
+    != f.label :cancel_by_sms, _("By SMS"), :checked_value => "true", :unchecked_value => "false"
 .table-box.by_sms{:style => (f.object.cancel_by_sms? ? "" : "display:none")}
   .table-box-t
     .holder

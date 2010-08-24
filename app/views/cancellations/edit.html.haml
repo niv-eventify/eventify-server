@@ -17,7 +17,7 @@
 
           - unless @invited_stats[:sms].zero?
             != render(:partial => "sms", :locals => {:f => f})
-
+          %br
           .forms-block-btns
             != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
             != link_to _("Cancel"), summary_path(resource), :class => "btn"

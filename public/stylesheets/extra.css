@@ -576,11 +576,11 @@ li.thing.active span.name {
 	background: url("/images/coctails.gif") no-repeat scroll 48px 1px transparent;
 }
 
-.stage-3 .form label {
-	width:auto;
-}
 .stage-2 .form label {
 	width: 72px;
+}
+.event-details .form label {
+	width:auto;
 }
 .stage-2 .form li.auto_width label {
 	width: auto;
@@ -1037,4 +1037,8 @@ em.counter {
 
 #event_cancellation_sms_input .textarea-bg {
 	clear:both;
+}
+
+.send-invitations label {
+	width:auto;
 }

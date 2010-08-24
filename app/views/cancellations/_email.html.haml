@@ -1,5 +1,7 @@
 - f.inputs do
-  != f.input :cancel_by_email, :label => _("By Email"), :input_html => {:class => "auto_width"}, :checked_value => "true", :unchecked_value => "false"
+  %li.boolean.optional.allow_seeing_other_guests.auto_width
+    != f.check_box :cancel_by_email
+    != f.label :cancel_by_email, _("By Email"), :checked_value => "true", :unchecked_value => "false"
 .table-box.by_email{:style => (f.object.cancel_by_email? ? "" : "display:none")}
   .table-box-t
     .holder
