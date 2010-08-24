@@ -38,7 +38,7 @@ module ApplicationHelper
     haml_tag(:div, :class => "nav-bar") do
       haml_tag(:ul) do
         [[_("Future events"), [nil, nil]], [_("Past events"), [true, nil]], [_("Cancelled events"), [nil, true]]].each do |e|
-          if active = (past_events? && e.last.first) || (cancelled_events? && e.last.last) || (!e.last.last || e.last.first)
+          if active = (past_events? && e.last.first) || (cancelled_events? && e.last.last) || (e.last.last.nil? && e.last.first.nil? && !cancelled_events? && !past_events?)
             caption = e.first
           end
 
