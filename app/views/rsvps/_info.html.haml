@@ -6,7 +6,10 @@
           != image_tag(resource.event.design.card.url(:stage2))
           / %img{ :src => "images/img-ill-6-en.jpg", :height => "395", :alt => "image", :width => "587" }
           != render(:partial => "events/title_and_message", :locals => {:event => resource.event})
-        != link_to content_tag(:span, _("Print Invitation")), "#{rsvp_path(resource.email_token)}.pdf", :class => "blue-btn-mdl"
+        .print_btns
+          %ul.link-box
+            %li.item1
+              != link_to _("Print Invitation"), "#{rsvp_path(resource.email_token)}.pdf"
         %h3= resource.event.name
         %dl.d-list
           - unless resource.event.location_name.blank?

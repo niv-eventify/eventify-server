@@ -121,7 +121,7 @@ div.cmf-skinned-text {
 	font-size: 1.1em;
 	background:url(/images/btn-blue-brown-mdl.gif) no-repeat 0 0;
 }
-#nyroModalContent  .blue-btn-mdl span, .content-box-holder .blue-btn-mdl span{
+#nyroModalContent  .blue-btn-mdl span{
 	padding:0 0 0 13px;
 	float: left;
 	height: 26px;
@@ -134,19 +134,16 @@ div.cmf-skinned-text {
 	position: relative;
 	background:#f8f8f8 url(/images/btn-blue-brown-mdl-en.gif) no-repeat;
 }
-.hebrew #nyroModalContent  .blue-btn-mdl span, .hebrew .content-box-holder .blue-btn-mdl span {
+.hebrew #nyroModalContent  .blue-btn-mdl span{
 	padding:0 13px 0 0;
 	background:#f8f8f8 url(/images/btn-blue-brown-mdl.gif) no-repeat 100% 0;
 	font-size: 1.2em;
 }
-#nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover, .content-box-holder .blue-btn-mdl:hover, .content-box-holder .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 100% -26px;}
+#nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 100% -26px;}
 
-#nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span, .content-box-holder .blue-btn-mdl:hover span, .content-box-holder .blue-btn-mdl.hover span
-{
-	background-position: 0 -26px;
-}
-.hebrew #nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover, .hebrew .content-box-holder .blue-btn-mdl:hover, .hebrew .content-box-holder .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 0 -26px;}
-.hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span, .hebrew .content-box-holder .blue-btn-mdl:hover span, .hebrew .content-box-holder .blue-btn-mdl.hover span{background-position: 100% -26px;}
+#nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 0 -26px;}
+.hebrew #nyroModalContent .blue-btn-mdl:hover, #nyroModalContent .blue-btn-mdl.hover{color: #fff; text-decoration: none;background-position: 0 -26px;}
+.hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 100% -26px;}
 
 .promo-gallery {
 	margin: -172px 0px 40px 125px;
@@ -1004,4 +1001,22 @@ div.tab {
 }
 ul.tabset {
 	width: 756px;
+}
+.hebrew .content-box-holder .link-box {
+	margin: 0;
+}
+.print_btns {
+	float: right;
+}
+.hebrew .print_btns {
+	float: left;
+}
+.print_btns .item1{
+	float: right;
+	width: 133px;
+	text-align: center;
+	background:url("/images/bg-link-box-item-turk.gif") no-repeat scroll 0 0 transparent;
+}
+.hebrew .print_btns .item1{
+	float: left;
 }
