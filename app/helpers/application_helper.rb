@@ -122,12 +122,18 @@ module ApplicationHelper
     page << <<-JAVASCRIPT
       var h = jQuery('.inline_#{dom_id(resource)}_#{attribute}').parents('div.cell-bg').html(#{html.to_json});
       var allow_submit = true;
+      var focused = false;
       h.find('.input-text:first').blur(function(e){
-        if (allow_submit) {          
-          jQuery(this).parents('form').get(0).onsubmit();
-        }
-      });
-      h.find('.input-text:first').focus().keyup(function(e){
+        focused = false;
+        var form = jQuery(this).parents('form').get(0);
+        setTimeout(function(){
+          if (!focused && allow_submit) {
+            form.onsubmit();
+          }
+        },500);
+      }).focus(function(){
+        focused = true;
+      }).keyup(function(e){
         if (27 == e.which) {
           jQuery.ajax({url: #{send("event_#{resource.class.name.downcase}_path", resource.event_id, resource).to_json}, type:'get', dataType:'script'});
           e.stopPropagation();
@@ -136,6 +142,12 @@ module ApplicationHelper
         }
       });
     JAVASCRIPT
+
+    if "email" == attribute
+      page << <<-JAVASCRIPT
+        jQuery(".inline_guest_#{resource.id}_email input[name=guest[email]]").autocomplete({source:#{current_user.contacts.collect(&:email).to_json}});
+      JAVASCRIPT
+    end
   end
 
   def resource_remote_form(resource, attribute, short_css_class = true, hidden_true_attribute = nil)
@@ -144,7 +156,7 @@ module ApplicationHelper
     fields_opts = {:input_css_class => klass, 
       :container_class => "inline_#{dom_id(resource)}_#{attribute}"}
     form_remote_for resource, :builder => ShortTableCellFormBuilder::Builder, :url => send("event_#{resource.class.name.downcase}_path", resource.event_id, resource), :method => :put do |f|
-      haml_concat f.text_field(attribute, fields_opts)
+      haml_concat f.text_field(attribute, fields_opts.merge(:autocomplete => :off))
       haml_concat hidden_field_tag("attribute", attribute)
       if hidden_true_attribute
         haml_concat f.hidden_field(hidden_true_attribute, :value => true)

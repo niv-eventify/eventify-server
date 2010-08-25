@@ -4,3 +4,7 @@
     - info_table_column do
       != submit_tag _("Add"), :id => "adding_guest"
     != change_observers
+
+:javascript
+  jQuery("#new_guest_row input[name=guest[email]]").autocomplete({source:#{current_user.contacts.collect(&:email).to_json}});
+  

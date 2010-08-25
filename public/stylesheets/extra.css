@@ -1047,3 +1047,21 @@ em.counter {
 	text-decoration:underline;
 	color:#3A9925;
 }
+
+.ui-autocomplete {
+	background:#fff;
+	width:100px;
+	font-size:13px;
+	padding:5px;
+	border:1px solid #ddd;
+}
+
+.ui-autocomplete li {
+	list-style:none;
+	padding:3px;
+	margin:0;
+}
+
+.ui-autocomplete li a {
+	cursor:pointer;
+}
