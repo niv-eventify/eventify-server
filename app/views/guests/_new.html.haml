@@ -6,5 +6,7 @@
     != change_observers
 
 :javascript
-  jQuery("#new_guest_row input[name=guest[email]]").autocomplete({source:#{current_user.contacts.collect(&:email).to_json}});
+  jQuery(function(){    
+    jQuery("#new_guest_row input[name=guest[email]]").autocomplete({source:#{current_user.contacts.collect(&:email).to_json}});
+  });
   
