@@ -59,13 +59,14 @@ class Event < ActiveRecord::Base
   validates_attachment_size :map, :less_than => 10.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
-    :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
+    :location_name, :location_address, :map_link, :invitation_title, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
     :msg_color, :title_color, :font_title, :font_body, :allow_seeing_other_guests, :tz,
     :cancellation_sms, :cancellation_email, :cancellation_email_subject
 
   datetime_select_accessible :starting_at, :ending_at
 
-  validates_presence_of :category_id, :design_id, :name, :starting_at
+  validates_presence_of :category_id, :design_id, :name, :starting_at, :invitation_title
+  validates_length_of :invitation_title, :maximum => 100
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
   validates_format_of :map_link,
     :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,

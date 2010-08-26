@@ -98,8 +98,11 @@
 }
 .hebrew .title_holder, .hebrew .msg_holder {
 	direction: rtl;
+	
 }
-
+.hebrew .title, .hebrew .msg {
+	padding-right: 8px;
+}
 #envelope {
 	width:578px;
 	height:572px;

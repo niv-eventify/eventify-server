@@ -192,7 +192,7 @@ div.cmf-skinned-text {
   overflow-y: hidden;
   z-index: 100;
 }
-.msg-holder .title, .title-holder  .title{
+.msg-holder .title, .title-holder .title{
   font-weight: bold;
   margin: 0;
   font-size: 22px;
@@ -208,6 +208,9 @@ div.cmf-skinned-text {
   font-weight: normal;
   overflow-x: hidden;
   overflow-y: hidden;
+  padding-right: 0px;
+}
+.hebrew .msg-holder .title, .hebrew .title-holder .title, .hebrew .msg-holder .free_text {
   padding-right: 8px;
 }
 .blue-btn-mdl {
@@ -1068,4 +1071,20 @@ em.counter {
 
 .subnav .form-area .block {
 	position:static;
+}
+.overflow_warning {
+	display: none;
+	padding: 2px;
+	text-align: left;
+	border: 2px solid red;
+	font-size: 0.9em;
+	position: absolute;
+	left: 300px;
+	top: 300px;
+	width: 100px;
+	z-index: 1000;
+	background-color: white;
+}
+.hebrew .overflow_warning {
+	text-align: right;
 }

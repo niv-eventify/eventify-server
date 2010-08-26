@@ -21,11 +21,11 @@
 
         jQuery("#" + invitation_id + " .background_holder .title_holder, #" + invitation_id + " .background_holder .msg_holder, #" + invitation_id + " .background_holder .window").each(function(){
             var minimized_by = 900 / rsvps.dialog_width;
-            jQuery(this).css("width", Math.ceil(parseInt(jQuery(this).css("width")) / minimized_by) + "px");
-            jQuery(this).css("height", Math.ceil(parseInt(jQuery(this).css("height")) / minimized_by) + "px");
-            jQuery(this).css("top", Math.ceil(parseInt(jQuery(this).css("top")) / minimized_by) + "px");
-            jQuery(this).css("left", Math.ceil(parseInt(jQuery(this).css("left")) / minimized_by) + "px");
-            jQuery(this).css("font-size", Math.ceil(parseInt(jQuery(this).css("font-size")) / minimized_by) + "px");
+            jQuery(this).css("width", Math.floor(parseInt(jQuery(this).css("width")) / minimized_by) + "px");
+            jQuery(this).css("height", Math.floor(parseInt(jQuery(this).css("height")) / minimized_by) + "px");
+            jQuery(this).css("top", Math.floor(parseInt(jQuery(this).css("top")) / minimized_by) + "px");
+            jQuery(this).css("left", Math.floor(parseInt(jQuery(this).css("left")) / minimized_by) + "px");
+            jQuery(this).css("font-size", Math.floor(parseInt(jQuery(this).css("font-size")) / minimized_by) + "px");
         });
         jQuery("#" + invitation_id + " .background_holder .window").each(function(){
             var minimized_by = 900 / rsvps.dialog_width;

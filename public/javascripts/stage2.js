@@ -8,7 +8,32 @@
   months_arr: [],
   seperated_title: false,
   prev_text: "",
-  
+
+  isTextOverflow: function() {
+    var overflow = false;
+    stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
+    stage2.curr_title_font_size = parseInt(jQuery("#title").css("font-size"));
+    if(!stage2.seperated_title) {
+      if(jQuery(".msg-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
+		overflow = true;
+      }
+    } else {
+      if(jQuery(".msg-holder").height() < jQuery("#free_text").height()) {
+        overflow = true;
+      }
+      if(jQuery(".title-holder").height() < jQuery("#title").height()) {
+        overflow = true;
+      }
+    }
+    if(jQuery("#title")[0].scrollWidth > stage2.title_scroll_width) {
+        overflow = true;
+    }
+    if(jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width) {
+        overflow = true;
+    }
+    return overflow;
+  },
+
   calcFontSize: function() {
     var loop_protection = 0;
     stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
@@ -76,7 +101,8 @@
     stage2.prev_text = text;
     text = text.replace(/\n/g,"<BR/>").replace(/ /g,"&nbsp;");
     jQuery("#" + targetId).html(text);
-    stage2.calcFontSize();
+	stage2.setOverflowWarning();
+//    stage2.calcFontSize();
   },
   setToolbarsPosition: function() {
     var toolbarHeight = 22;
@@ -104,6 +130,13 @@
         jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left + "px");
       }
     }
+  },
+
+  setOverflowWarning: function() {
+    if(stage2.isTextOverflow())
+        jQuery(".overflow_warning").show();
+    else
+        jQuery(".overflow_warning").hide();
   },
 
   initToolbars: function() {
@@ -144,29 +177,23 @@
         return false;
     });
     jQuery('#toolbar_title a.font-plus').click(function(){
-        stage2.max_title_font_size++;
-        var curr = stage2.curr_title_font_size;
-        stage2.calcFontSize();
-        if(curr == stage2.curr_title_font_size)
-            stage2.max_title_font_size--;
+        stage2.change_font_size_by(1, "title");
+		stage2.setOverflowWarning();
         return false;
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
-        stage2.max_title_font_size--;
-        stage2.calcFontSize();
+        stage2.change_font_size_by(-1, "title");
+		stage2.setOverflowWarning();
         return false;
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
-        stage2.max_free_text_font_size++;
-        var curr = stage2.curr_free_text_font_size;
-        stage2.calcFontSize();
-        if(curr == stage2.curr_free_text_font_size)
-            stage2.max_free_text_font_size--;
+        stage2.change_font_size_by(1, "free_text");
+		stage2.setOverflowWarning();
         return false;
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
-        stage2.max_free_text_font_size--;
-        stage2.calcFontSize();
+        stage2.change_font_size_by(-1, "free_text");
+		stage2.setOverflowWarning();
         return false;
     });
     jQuery('.selectOptions.select_title a, .selectOptions.select_msg a, #toolbar_title .selectArea .center, #toolbar_msg .selectArea .center').each(function(){
@@ -298,18 +325,19 @@ jQuery(document).ready(function(){
   clearInputs("event_name");
   clearInputs("event_location_name");
   clearInputs("event_location_address");
+  clearInputs("event_invitation_title");
   clearInputs("event_guest_message");
 
   stage2.preview_text("event_guest_message", "free_text");
-  stage2.preview_text("event_name", "title");
-  jQuery("#event_name").blur(function(){
-    stage2.preview_text("event_name", "title");
+  stage2.preview_text("event_invitation_title", "title");
+  jQuery("#event_invitation_title").blur(function(){
+    stage2.preview_text("event_invitation_title", "title");
   });
-  jQuery("#event_name").focus(function(){
-    stage2.preview_text("event_name", "title");
+  jQuery("#event_invitation_title").focus(function(){
+    stage2.preview_text("event_invitation_title", "title");
   });
-  jQuery("#event_name").keyup(function(){
-    stage2.preview_text("event_name", "title");
+  jQuery("#event_invitation_title").keyup(function(){
+    stage2.preview_text("event_invitation_title", "title");
   });
   jQuery("#event_guest_message").blur(function(){
     stage2.preview_text("event_guest_message", "free_text");
@@ -374,7 +402,7 @@ jQuery(document).ready(function(){
     else
       jQuery("#free_text").css("border", "");
   });
-  jQuery("#event_name").focus(function(){
+  jQuery("#event_invitation_title").focus(function(){
     if(stage2.seperated_title)
       jQuery(".title-holder").css("border", "1px dashed red");
     else
@@ -382,7 +410,7 @@ jQuery(document).ready(function(){
     stage2.setToolbarsPosition();
     jQuery('#toolbar_title').css("visibility", "visible");
   });
-  jQuery("#event_name").blur(function(){
+  jQuery("#event_invitation_title").blur(function(){
     if(stage2.seperated_title)
       jQuery(".title-holder").css("border", "");
     else
@@ -390,7 +418,7 @@ jQuery(document).ready(function(){
   });
   jQuery("#title,#free_text").css("cursor", "pointer");
   jQuery("#title").click(function(){
-    jQuery("#event_name").focus();
+    jQuery("#event_invitation_title").focus();
   });
   jQuery("#free_text").click(function(){
     jQuery("#event_guest_message").focus();
@@ -409,7 +437,7 @@ jQuery(document).ready(function(){
             jQuery('#toolbar_msg').css("visibility", "visible");
         }
     }
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title, .selectOptions.select_title').length == 0;;
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_invitation_title', 'title']) == -1) && t.parents('#toolbar_title, #event_invitation_title, #title, .selectOptions.select_title').length == 0;;
     if(!clickedColorPallete) {
         if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
             jQuery('#toolbar_title').css("visibility", "hidden");
