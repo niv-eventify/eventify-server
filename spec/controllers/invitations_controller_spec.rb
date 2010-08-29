@@ -39,7 +39,6 @@ describe InvitationsController do
       UserSession.create(@user)
       @event = stub_model(Event)
       controller.current_user.events.stub!(:find).and_return(@event)
-      @event.stub(:payments).and_return([])
     end
 
     it "should render show" do
@@ -60,8 +59,8 @@ describe InvitationsController do
       guests = mock("guests")
       guests.stub!(:count).and_return(1)
       @event.stub(:guests).and_return(guests)
-      @event.stub(:payments).and_return([])
       Astrails.stub!(:good_time_to_send_sms?).and_return(true)
+      @event.stub(:payments_required?).and_return(false)
       @event.stub!(:invitations_to_send_counts).and_return({:total => 0})
     end
 
@@ -83,7 +82,7 @@ describe InvitationsController do
       guests = mock("guests")
       guests.stub!(:count).and_return(1)
       @event.stub(:guests).and_return(guests)
-      @event.stub(:payments).and_return([])
+      @event.stub(:payments_required?).and_return(false)
       Astrails.stub!(:good_time_to_send_sms?).and_return(true)
     end
 
@@ -151,6 +150,7 @@ describe InvitationsController do
       UserSession.create(@event.user)
       controller.current_user.events.stub!(:find).and_return(@event)
       # @event.stub!(:guests).and_return(guests)
+      @event.stub(:payments_required?).and_return(false)
     end
 
     it "should redirect if event in past" do

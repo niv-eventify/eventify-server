@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100811132628) do
+ActiveRecord::Schema.define(:version => 20100829093513) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -164,6 +164,10 @@ ActiveRecord::Schema.define(:version => 20100811132628) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
+    t.integer  "emails_plan",                                :default => 50
+    t.integer  "sms_plan",                                   :default => 0
+    t.integer  "prints_plan",                                :default => 0
+    t.integer  "prints_ordered",                             :default => 0
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"

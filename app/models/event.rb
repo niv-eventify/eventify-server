@@ -41,7 +41,13 @@ class Event < ActiveRecord::Base
   end
   has_many :takings
 
-  has_many :reminders
+  has_many :reminders do
+    def upcoming_by_sms_count
+      active.pending.with_activated_event.by_sms.count
+    end
+  end
+
+  has_many :sms_messages
 
   include Event::Summary
 
@@ -184,15 +190,6 @@ class Event < ActiveRecord::Base
     }
   end
 
-  def payments
-    [] # TODO association with payment history
-  end
-
-  def payment_required?
-    false
-    # require_payment_for_guests? || require_payment_for_sms?
-  end
-
   def allow_delayed_sms?
     best_time_to_send_invitation_sms(true) < starting_at
   end
@@ -221,21 +218,12 @@ class Event < ActiveRecord::Base
 
   def validate
     errors.add(:starting_at, _("start date should be in a future")) if starting_at && starting_at < Time.now.utc
-    errors.add(:base, _("Payments are not completed yet")) if send_invitations_now && payment_required?
     errors.add(:starting_at, _("time cannot be blank")) if @no_time_selected
     errors.add(:ending_at, _("end date should be in a future")) if starting_at && ending_at && ending_at < starting_at
   end
 
   def has_map?
     !map_link.blank? || (map && !map.url.blank?)
-  end
-
-  def allow_send_invitations?
-    true # TODO: payments logic
-  end
-
-  def require_payment_for_guests?
-    false # TODO: check max number/program and existing payment in payments table
   end
 
   def should_resend_sms?
@@ -245,11 +233,6 @@ class Event < ActiveRecord::Base
   def should_send_sms?
     !guests.no_invitation_sent.not_invited_by_sms.count.zero?
     # TODO: also check reminders
-  end
-
-  def require_payment_for_sms?
-    false 
-    # should_send_sms? && sms_package_ok? # TODO: check sms payments in payments table
   end
 
   def delayed_send_invitations
@@ -460,6 +443,32 @@ class Event < ActiveRecord::Base
 
   def cancel_email_default_subject
     _("Cancelled: %{event_name}") % { :event_name => name }
+  end
+
+  def payments_required?
+    guests_payments_required? || sms_payments_required? || prints_payments_required?
+  end
+
+  def prints_payments_required?
+    prints_ordered > prints_plan
+  end
+
+  def guests_payments_required?
+    guests.count > emails_plan
+  end
+
+  def sms_payments_required?
+    total_sms_count > sms_plan
+  end
+
+  def total_sms_count
+    invitations_to_be_sent = guests.scheduled_to_invite_by_sms.count + guests.not_invited_by_sms.count
+
+    messagess_sent = sms_messages.count
+
+    reminders_to_be_sent = reminders.upcoming_by_sms_count * guests.invite_by_sms.count
+
+    invitations_to_be_sent + messagess_sent + reminders_to_be_sent
   end
 
 protected
