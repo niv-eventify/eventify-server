@@ -6,7 +6,8 @@ class PaymentsController < InheritedResources::Base
 
   def new
     build_resource
-    resource.set_defaults
+    resource.calc_defaults
+    @guests_count = resource.event.guests.count
   end
 
 protected

@@ -2,9 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Eventify do
   it "should calculate emails amounts" do
-    Eventify.emails_plan(1).should == [50, 0]
-    Eventify.emails_plan(50).should == [50, 0]
-    Eventify.emails_plan(51).should == [100, 5000]
+    Eventify.emails_plan(1).should == [100, 0]
+    Eventify.emails_plan(100).should == [100, 0]
     Eventify.emails_plan(101).should == [200, 15000]
     Eventify.emails_plan(201).should == [300, 25000]
     Eventify.emails_plan(301).should == [400, 35000]

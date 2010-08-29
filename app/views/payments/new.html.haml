@@ -1,1 +1,70 @@
-woohoo
+.pricing
+  %h2= _("Pricing")
+  .intro
+    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  .heading
+    %h3= _("Pricing Summary")
+  - form_for :payment, resource, :url => event_payments_path(@event), :html => {:class => "pricing-form"} do |f|
+    %fieldset
+      .section
+        %dl
+          %dt= _("Guests Package -")
+          %dd= _("number of guests of this event: %{guests_count}") % {:guests_count => @guests_count}
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        .invite
+          != render(:partial => "header")
+          .result-panel{:style => "display:none;"}
+          .slide
+            .slide-hold
+              %ul
+                - emails_plans.each_with_index do |p, indx|
+                  %li{:class => li_class_for_email_plan(p, indx)}
+                    - emails_radio(p, indx)
+                    %label{:for => "radio-quantity-#{indx}"}
+                      %span.quantity= _("#{p.first.first} - #{p.first.last}")
+                      %span.price
+                        %strong= p.last.last.format_cents(false)
+                        ₪
+                      
+              != link_to_function "open", "", :class => "btn-open"
+      .section.sms-package
+        != f.hidden_field :sms_plan
+        %dl
+          %dt= _("SMS Package - ")
+          %dd= _("number of messages to send: %{sms_count}") % {:sms_count => resource.event.total_sms_count}
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        .invite
+          != render(:partial => "header")
+          .result-panel
+            != render(:partial => "controls", :locals => {:count => resource.sms_plan})
+            %span.price
+              %strong= Eventify.sms_plan(resource.sms_plan).last.format_cents
+              ₪
+
+      .section.printings-package
+        != f.hidden_field :prints_plan
+        %dl
+          %dt= _("Printings Package -")
+          %dd= _("number of printings: %{prints_count}") % {:prints_count => resource.event.prints_ordered}
+        %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        .invite
+          != render(:partial => "header")
+          .result-panel
+            != render(:partial => "controls", :locals => {:count => resource.prints_plan})
+            %span.price
+              %strong= Eventify.prints_plan(resource.prints_plan).last.format_cents
+              ₪
+
+      .total-bar
+        %span.label= _("Total")
+        %em
+          %strong#total_amount= resource.amount.format_cents
+          ₪
+      .agree
+        %input#check-agree.check{:type => "checkbox"}/
+        %label{:for => "check-agree"}
+          אני מצהיר שקראת את “
+          %a{:href => "#"}> תנאי האתר
+          ” ואני מסכים להם
+      .nav
+        != link_to_function _("Continue"), "jQuery('form.pricing-form').submit()", :class => "btn-continue"

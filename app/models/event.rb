@@ -463,13 +463,15 @@ class Event < ActiveRecord::Base
   end
 
   def total_sms_count
+    return @total_sms_count if @total_sms_count
+
     invitations_to_be_sent = guests.scheduled_to_invite_by_sms.count + guests.not_invited_by_sms.count
 
     messagess_sent = sms_messages.count
 
     reminders_to_be_sent = reminders.upcoming_by_sms_count * guests.invite_by_sms.count
 
-    invitations_to_be_sent + messagess_sent + reminders_to_be_sent
+    @total_sms_count = invitations_to_be_sent + messagess_sent + reminders_to_be_sent
   end
 
 protected
