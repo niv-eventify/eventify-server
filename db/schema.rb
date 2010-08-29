@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100829093513) do
+ActiveRecord::Schema.define(:version => 20100829110947) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -237,7 +237,10 @@ ActiveRecord::Schema.define(:version => 20100829093513) do
     t.integer  "http_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "context"
   end
+
+  add_index "netpay_logs", ["context"], :name => "index_netpay_logs_on_context"
 
   create_table "reminder_logs", :force => true do |t|
     t.integer  "reminder_id"
