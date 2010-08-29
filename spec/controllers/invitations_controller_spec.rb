@@ -71,6 +71,31 @@ describe InvitationsController do
     end
   end
 
+  describe "payments required" do
+    before(:each) do
+      @user = Factory.create(:active_user)
+      UserSession.create(@user)
+      @event = stub_model(Event, :starting_at => 10.days.from_now.utc, :user => @user, :stage_passed => 3, :default_sms_message => "foo bar", :default_sms_message_for_resend => "bar foo")
+      controller.current_user.events.stub!(:find).and_return(@event)
+      @event.stub!(:payments_required?).and_return(true)
+      guests = mock("guests")
+      guests.stub!(:count).and_return(1)
+      @event.stub!(:guests).and_return(guests)
+      @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 2, :sms => 1, :resend_email => 0, :resend_sms => 2})
+    end
+
+    it "should redirect on edit" do
+      get :edit, :id => @event.id
+      response.should redirect_to(new_event_payment_path(@event, :back => "invitations"))
+    end
+
+    it "should redirect on update" do
+      put :update, :id => @event.id, :event => {}
+      response.should redirect_to(new_event_payment_path(@event, :back => "invitations"))
+    end
+  end
+
+
   describe "edit" do
     integrate_views
 
