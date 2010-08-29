@@ -242,6 +242,22 @@ ActiveRecord::Schema.define(:version => 20100829110947) do
 
   add_index "netpay_logs", ["context"], :name => "index_netpay_logs_on_context"
 
+  create_table "payments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "amount"
+    t.integer  "emails_plan", :default => 0
+    t.integer  "integer",     :default => 0
+    t.integer  "sms_plan",    :default => 0
+    t.integer  "prints_plan", :default => 0
+    t.datetime "paid_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["event_id"], :name => "index_payments_on_event_id"
+  add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
+
   create_table "reminder_logs", :force => true do |t|
     t.integer  "reminder_id"
     t.integer  "guest_id"
