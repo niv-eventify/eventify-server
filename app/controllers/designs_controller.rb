@@ -40,7 +40,7 @@ class DesignsController < InheritedResources::Base
         end
       }
       format.js {
-        @design = Design.find(params[:id])
+        @design = Design.find(params[:design_id])
         @category = Category.find(params[:category_id])
         if params[:event_id].to_i > 0
           @event = Event.find(params[:event_id])
