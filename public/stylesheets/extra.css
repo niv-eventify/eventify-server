@@ -1069,3 +1069,12 @@ em.counter {
 .subnav .form-area .block {
 	position:static;
 }
+
+.answered-form .text {
+	width: 15px;
+	direction: ltr;
+}
+
+.hebrew .answered-form label {
+	float: right;
+}
