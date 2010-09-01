@@ -103,6 +103,11 @@
 .hebrew .title, .hebrew .msg {
 	padding-right: 8px;
 }
+
+.msg, .title, .title_holder {
+	white-space: pre;
+}
+
 #envelope {
 	width:578px;
 	height:572px;

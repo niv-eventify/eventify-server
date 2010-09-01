@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100826061551) do
+ActiveRecord::Schema.define(:version => 20100831062017) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -144,8 +144,8 @@ ActiveRecord::Schema.define(:version => 20100826061551) do
     t.integer  "rsvp_summary_send_every",                    :default => 0
     t.datetime "last_summary_sent_at"
     t.boolean  "allow_seeing_other_guests",                  :default => true
-    t.integer  "title_font_size",                            :default => 35
-    t.integer  "msg_font_size",                              :default => 32
+    t.integer  "title_font_size",                            :default => 22
+    t.integer  "msg_font_size",                              :default => 20
     t.string   "title_text_align"
     t.string   "msg_text_align"
     t.string   "font_body"
