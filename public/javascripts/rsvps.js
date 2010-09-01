@@ -2,7 +2,8 @@
     dialog_height: 0,
     dialog_width: 0,
     minimized_by: 0,
-    replacedHolder: null,
+    replacedTitleHolder: null,
+    replacedMsgHolder: null,
 
     adjust_dialog_size: function(invitation_id) {
         var width = jQuery(window).width() - 62;
@@ -22,27 +23,19 @@
         jQuery("#" + invitation_id + " .background_holder, #" + invitation_id).css("height",rsvps.dialog_height + "px");
         rsvps.minimized_by = 900 / rsvps.dialog_width;
 
-//        jQuery("#" + invitation_id + " .background_holder .title_holder, #" + invitation_id + " .background_holder .msg_holder, #" + invitation_id + " .background_holder .window").each(function(){
-//            jQuery(this).css("width", Math.floor(parseInt(jQuery(this).css("width")) / minimized_by) + "px");
-//            jQuery(this).css("height", Math.floor(parseInt(jQuery(this).css("height")) / minimized_by) + "px");
-//            jQuery(this).css("top", Math.floor(parseInt(jQuery(this).css("top")) / minimized_by) + "px");
-//            jQuery(this).css("left", Math.floor(parseInt(jQuery(this).css("left")) / minimized_by) + "px");
-//            jQuery(this).css("font-size", Math.floor(parseInt(jQuery(this).css("font-size")) / minimized_by) + "px");
-//        });
-        
         jQuery("#" + invitation_id + " .background_holder .window").each(function(){
             var minimized_by = 900 / rsvps.dialog_width;
             jQuery(this).css("top", (parseInt(jQuery(this).css("top"))+5) + "px");
             jQuery(this).css("left", (parseInt(jQuery(this).css("left"))+5) + "px");
         });
     },
-    setTextBoxes: function() {
+    cloneTextBox: function(holderClass, clonedClass) {
         var zoom = 1.6 / rsvps.minimized_by;
-        var clone = jQuery(".image-h .msg-holder").clone();
-        var msgHolder = jQuery(".background_holder .msg_holder");
+        var clone = jQuery(".image-h ." + clonedClass).clone();
+        var holder = jQuery(".background_holder ." + holderClass);
         clone.css({
-            top: Math.floor(parseInt(msgHolder.css("top")) / rsvps.minimized_by),
-            left: Math.floor(parseInt(msgHolder.css("left")) / rsvps.minimized_by)
+            top: Math.ceil(parseInt(clone.css("top")) * zoom),
+            left: Math.ceil(parseInt(clone.css("left")) * zoom)
         });
         if(jQuery.browser.webkit)
             clone.css('-webkit-transform', 'scale(' + zoom + ')').css('-webkit-transform-origin','top left');
@@ -50,7 +43,7 @@
             clone.css('-moz-transform', 'scale(' + zoom + ')').css('-moz-transform-origin','top left');
         else if (jQuery.browser.msie)
             clone.css('zoom', zoom);
-        rsvps.replacedHolder = msgHolder.replaceWith(clone);
+        return holder.replaceWith(clone);
     }
 }
 jQuery(document).ready(function(jQuery){
@@ -61,14 +54,17 @@ jQuery(document).ready(function(jQuery){
     jQuery('.toolbar_preview').appendTo('body');
     jQuery('a.preview.nyroModal').nyroModal({
         endFillContent: function(elts, settings){
-            rsvps.setTextBoxes();
+            rsvps.replacedTitleHolder = rsvps.cloneTextBox("msg_holder","msg-holder");
+            rsvps.replacedMsgHolder = rsvps.cloneTextBox("title_holder","title-holder");
         },
         endShowContent: function(elts, settings){
             jQuery('.toolbar').show();
         },
         endRemove: function(elts, settings){
             jQuery('.toolbar').hide();
-            jQuery('.background_holder .msg-holder').replaceWith(rsvps.replacedHolder);        }
+            jQuery('.background_holder .msg_holder').replaceWith(rsvps.replacedMsgHolder);
+            jQuery('.background_holder .title_holder').replaceWith(rsvps.replacedMsgHolder);
+        }
     });
 });
 jQuery(window).load(function () {

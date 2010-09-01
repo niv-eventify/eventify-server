@@ -1,5 +1,5 @@
 - if event.design.is_seperated_title?
-  .title-holder{:style => stage2_title_css(event)}
+  .title-holder{:style => "#{stage2_title_css(event)};border:1px solid blue;"}
     #title.title
       != (h(event.invitation_title) || "").gsub("\n", "<br/>").gsub(" ", "&nbsp;")
 .msg-holder{:style => "#{stage2_message_css(event)};border:1px solid blue;"}
