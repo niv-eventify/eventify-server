@@ -1072,6 +1072,7 @@ em.counter {
 .subnav .form-area .block {
 	position:static;
 }
+
 .overflow_warning {
 	display: none;
 	padding: 2px;
@@ -1088,3 +1089,13 @@ em.counter {
 .hebrew .overflow_warning {
 	text-align: right;
 }
+
+.answered-form .text {
+	width: 15px;
+	direction: ltr;
+}
+
+.hebrew .answered-form label {
+	float: right;
+}
+
