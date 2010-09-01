@@ -29,6 +29,7 @@
         != f.hidden_field :title_color
         != f.hidden_field :font_title
         != f.hidden_field :font_body
+        != hidden_field_tag :just_save
         != render(:partial => "form", :locals => {:f => f})
 
     != render(:partial => "selected_design")
