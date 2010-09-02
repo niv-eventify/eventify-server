@@ -1,3 +1,6 @@
+- content_for :head do
+  != javascript_include_tag "jquery.package_price"
+
 .pricing
   %h2= _("Pricing")
   .intro
@@ -24,6 +27,7 @@
                       %span.quantity= _("#{p.first.first} - #{p.first.last}")
                       %span.price
                         %strong= p.last.last.format_cents(false)
+                        %span.price{:style => "display:none"}= p.last.last
                         ₪
                       
               != link_to_function "open", "", :class => "btn-open"
@@ -40,6 +44,10 @@
             %span.price
               %strong= Eventify.sms_plan(resource.sms_plan).last.format_cents
               ₪
+        :javascript
+          jQuery(function(){
+            jQuery(".section.sms-package").package_price(#{Eventify.sms_plan(resource.sms_plan).last}, #{resource.sms_plan}, #{Eventify::SMS_BATCH}, #{Eventify::SMS_PRICE})
+          })
 
       .section.printings-package
         != f.hidden_field :prints_plan
@@ -54,6 +62,10 @@
             %span.price
               %strong= Eventify.prints_plan(resource.prints_plan).last.format_cents
               ₪
+        :javascript
+          jQuery(function(){
+            jQuery(".section.printings-package").package_price(#{Eventify.prints_plan(resource.prints_plan).last}, #{resource.prints_plan}, #{Eventify::PRINTS_BATCH}, #{Eventify::PRINTS_PRICE})
+          })
 
       .total-bar
         %span.label= _("Total")

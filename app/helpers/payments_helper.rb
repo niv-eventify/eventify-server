@@ -11,7 +11,7 @@ module PaymentsHelper
     returning([]) do |res|
       res << "disabled" if p.first.last < @guests_count
       res << "selected" if current_plan?(p)
-      res << "first"    if index + 1 == Eventify::EMAILS_PLAN_PROPERTIES.size
+      res << "first"    if index + 1 == Eventify::EMAILS_PLAN_PROPERTIES.size && !current_plan?(p)
     end.join(" ")
   end
 
@@ -19,7 +19,6 @@ module PaymentsHelper
     opts = {:class => "radio", :id => "radio-quantity-#{indx}", :name => "payment[emails_plan]", :type => "radio", :value => plan.last.first}
     opts[:disabled] = "disabled" if plan.first.last < @guests_count
     opts[:checked] = "checked"   if current_plan?(plan)
-
     haml_tag(:input, opts)
   end
 end
