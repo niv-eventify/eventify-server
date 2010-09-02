@@ -155,6 +155,11 @@ $(document).ready(function(){
 		if(stage1.is_cropping) {
 			alert(stage1.still_cropping_msg);
 			return false;
+		}else if(jQuery.fn.unload_monit_is_set()){
+			jQuery("#just_save").val("false");
+			jQuery("#crop").click();
+			jQuery('body').css('cursor', 'wait');
+			return false;
 		}
 		jQuery('body').css('cursor', 'wait');
 	});
