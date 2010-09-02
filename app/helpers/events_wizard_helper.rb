@@ -44,6 +44,7 @@ module EventsWizardHelper
           
             if 2 == stage_number
               haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")
+              haml_concat link_to_function(_("Save"), 'jQuery("#just_save").val("true");on_next_clicked();', :class => "preview-btn")
             end
             if 4 == stage_number #last
               haml_concat link_to(_("Preview"), '#invitation', :class => "preview-btn preview nyroModal")

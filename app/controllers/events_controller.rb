@@ -41,7 +41,11 @@ class EventsController < InheritedResources::Base
       create! do |success, failure|
         success.html do
           flash[:notice] = nil
-          redirect_to event_guests_path(@event, :wizard => true)
+          if "true" == params[:just_save]
+            redirect_to edit_event_path(@event, :wizard => true)
+          else
+            redirect_to event_guests_path(@event, :wizard => true)
+          end
           unless logged_in?
             UserSession.create(@event.user)
             @event.user.deliver_activation_instructions!
@@ -74,7 +78,11 @@ class EventsController < InheritedResources::Base
             return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
           end
         end
-        redirect_to event_guests_path(@event, :wizard => params[:wizard])
+        if "true" == params[:just_save]
+          redirect_to edit_event_path(@event, :wizard => params[:wizard])
+        else
+          redirect_to event_guests_path(@event, :wizard => params[:wizard])
+        end
       end
       success.js { render(:nothing => true) }
     end
