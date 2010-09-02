@@ -26,8 +26,7 @@ module DesignsHelper
   end
 
   def design_zoom(event, design, category)
-    event_id = event == nil ? 0 : event.id
-    link_to '+', category_design_path(category, design, :event_id => event_id), :class => "plus nyroModal"
+    link_to '+', event_design_path(0, :design_id => design.id, :category_id => category.id), :class => "plus nyroModal"
   end
 
   def design_zoomout(event, design, category)
