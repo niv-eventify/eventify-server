@@ -43,7 +43,7 @@ class Event < ActiveRecord::Base
 
   has_many :reminders do
     def upcoming_by_sms_count
-      active.pending.with_activated_event.by_sms.count
+      active.outstanding.with_activated_event.by_sms.count
     end
   end
 
