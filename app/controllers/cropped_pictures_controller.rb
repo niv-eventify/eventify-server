@@ -16,7 +16,17 @@ class CroppedPicturesController < InheritedResources::Base
         session[:cropped_picture_ids] = session[:cropped_picture_ids] || []
         session[:cropped_picture_ids] << @cropped_picture.id
       end
-      render :index
+      if "true" == params[:just_save]
+        render :index
+      else
+        render(:update) do |page|
+          if @cropped_picture.event_id.to_i == 0
+            page.redirect_to new_event_path(:design_id => params[:design_id], :category_id => params[:category_id], :wizard => params[:wizard])
+          else
+            page.redirect_to edit_event_path(@cropped_picture.event_id, :wizard => params[:wizard])
+          end
+        end
+      end
     else
       render :create
     end

@@ -1102,3 +1102,14 @@ em.counter {
 	float: right;
 }
 
+.tree-buttons-preview {
+	padding: 31px 226px 0;
+}
+
+.hebrew .next-btn, .previous-btn {
+	margin: 0 3px 0 0;
+}
+
+.next-btn, .hebrew .previous-btn {
+	margin: 0 0 0 3px;
+}
