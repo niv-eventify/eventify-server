@@ -21,4 +21,17 @@ module PaymentsHelper
     opts[:checked] = "checked"   if current_plan?(plan)
     haml_tag(:input, opts)
   end
+
+  def payment_detail(title, value)
+    haml_tag(:div, :class => "settings-row") do
+      haml_tag(:div, :class => "settings-info") do
+        haml_tag(:strong, title)
+      end
+      haml_tag(:em, value)
+    end
+  end
+
+  def years_for_select
+    (Time.now.utc.year..10.years.from_now.utc.year).to_a
+  end
 end

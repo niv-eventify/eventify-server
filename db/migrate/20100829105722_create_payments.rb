@@ -7,6 +7,7 @@ class CreatePayments < ActiveRecord::Migration
       t.integer :emails_plan
       t.integer :sms_plan
       t.integer :prints_plan
+      t.integer :succeed_netpay_log_id
       t.datetime :paid_at
       t.timestamps
     end

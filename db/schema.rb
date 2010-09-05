@@ -246,10 +246,10 @@ ActiveRecord::Schema.define(:version => 20100829110947) do
     t.integer  "user_id"
     t.integer  "event_id"
     t.integer  "amount"
-    t.integer  "emails_plan", :default => 0
-    t.integer  "integer",     :default => 0
-    t.integer  "sms_plan",    :default => 0
-    t.integer  "prints_plan", :default => 0
+    t.integer  "emails_plan"
+    t.integer  "sms_plan"
+    t.integer  "prints_plan"
+    t.integer  "succeed_netpay_log_id"
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"

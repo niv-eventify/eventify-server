@@ -3,25 +3,44 @@ class PaymentsController < InheritedResources::Base
   belongs_to :event
   before_filter :ssl_redirect, :only => :edit
   before_filter :ssl_required, :only => :update
+  before_filter :verify_paid, :only => :update
 
   actions :new, :edit, :update, :create
+
+  filter_parameter_logging :cc, :expiration_month, :expiration_year, :ccv2
 
   def new
     build_resource
     resource.calc_defaults
     @guests_count = resource.event.guests.count
+    new!
   end
 
   def edit
-    debugger
+    resource.set_names_from_user
     edit!
+  end
+
+  def update
+    resource.load_payment_details(params[:payment])
+
+    begin
+      resource.pay!
+      flash[:notice] = _("Paid successfully.")
+      redirect_to_back_page
+    rescue ActiveRecord::RecordInvalid
+      render :action => :edit
+    rescue PaymentError
+      flash.now[:error] = _("A problem occured: %{error_description} (TODO:translate all?)") % {:error_description => resource.payment_status_description}
+      render :action => :edit
+    end
   end
 
   def create
     build_resource
-    debugger
+    resource.user_id = current_user.id
     if resource.save
-      redirect_to edit_resource_path(resource)
+      redirect_to edit_resource_path(resource, :back => params[:back])
     else # shouldn't happen unless someone hacks form html manually
       resource.calc_defaults
       @guests_count = resource.event.guests.count
@@ -31,6 +50,19 @@ class PaymentsController < InheritedResources::Base
   end
 
 protected
+  def verify_paid
+    redirect_to_back_page unless resource.paid_at.nil?
+  end
+
+  def redirect_to_back_page
+    case params[:back]
+    when "cancellation"
+      # TODO
+      1
+    else # any or 'invitations'
+      redirect_to edit_invitation_path(resource.event_id)
+    end
+  end
 
   def begin_of_association_chain
     current_user
@@ -38,5 +70,9 @@ protected
 
   def ssl_redirect
     redirect_to(:protocol => "https://") if Rails.env == "production" && !request.ssl?
+  end
+
+  def ssl_required
+    return false if Rails.env == "production" && !request.ssl?
   end
 end

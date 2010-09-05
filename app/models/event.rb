@@ -49,6 +49,7 @@ class Event < ActiveRecord::Base
 
   has_many :sms_messages
   has_many :payments
+  has_many :payment_attempts, :through => :payments
 
   include Event::Summary
 
