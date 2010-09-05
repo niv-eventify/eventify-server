@@ -164,7 +164,7 @@ ActiveRecord::Schema.define(:version => 20100829110947) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
-    t.integer  "emails_plan",                                :default => 50
+    t.integer  "emails_plan",                                :default => 0
     t.integer  "sms_plan",                                   :default => 0
     t.integer  "prints_plan",                                :default => 0
     t.integer  "prints_ordered",                             :default => 0

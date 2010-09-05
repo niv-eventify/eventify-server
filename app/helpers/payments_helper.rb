@@ -11,7 +11,6 @@ module PaymentsHelper
     returning([]) do |res|
       res << "disabled" if p.first.last < @guests_count
       res << "selected" if current_plan?(p)
-      res << "first"    if index + 1 == Eventify::EMAILS_PLAN_PROPERTIES.size && !current_plan?(p)
     end.join(" ")
   end
 

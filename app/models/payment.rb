@@ -5,8 +5,11 @@ class Payment < ActiveRecord::Base
   belongs_to :event
   belongs_to :succeed_netpay_log, :class_name => "NetpayLog"
   has_many   :payment_attempts, :class_name => "NetpayLog", :foreign_key => :context
+
   attr_accessor :cc, :expiration_month, :expiration_year, :name_on_card,
     :ccv2, :email, :user_ident, :phone_number, :transaction_description
+
+  attr_reader :extra_payment_sms, :extra_payment_prints
 
   attr_accessible :emails_plan, :sms_plan, :prints_plan, :amount
 
@@ -33,6 +36,7 @@ class Payment < ActiveRecord::Base
 
     self.paid_at = Time.now.utc
     self.succeed_netpay_log_id = s.log_id
+    save!
     # update event plans
     self.event.emails_plan = emails_plan
     self.event.sms_plan = sms_plan
@@ -64,40 +68,34 @@ class Payment < ActiveRecord::Base
   end
 
   def calc_defaults
-    self.sms_plan, extra_payment_sms = calc_sms_plan
-    self.prints_plan, extra_payment_prints = calc_prints_plan
-    self.emails_plan, extra_payment_emails = calc_emails_plan
+    self.sms_plan, @extra_payment_sms       = upgrade_plan(:sms_plan, event.total_sms_count, event.sms_plan)
+    self.prints_plan, @extra_payment_prints = upgrade_plan(:prints_plan, event.prints_ordered, event.prints_plan)
+    self.emails_plan, extra_payment_emails  = upgrade_plan(:emails_plan, event.guests.count, event.emails_plan)
 
-    self.amount = extra_payment_sms + extra_payment_prints + extra_payment_emails
+    self.amount = @extra_payment_sms + @extra_payment_prints + extra_payment_emails
   end
 
   def calculated_amount
-    _, pay_sms        = Eventify.sms_plan(sms_plan)
-    _, pay_prints     = Eventify.prints_plan(prints_plan)
-    _, pay_emails     = Eventify.emails_plan(emails_plan)
+    _, pay_sms        = upgrade_plan(:sms_plan, sms_plan, event.sms_plan)
+    _, pay_prints     = upgrade_plan(:prints_plan, prints_plan, event.prints_plan)
+    _, pay_emails     = upgrade_plan(:emails_plan, emails_plan, event.emails_plan)
     pay_sms + pay_prints + pay_emails
+  end
+
+  def upgrade?
+    @upgrade ||= (event.payments.paid.count > 0)
+  end
+
+  def email_upgrade_price(to_count)
+    _, price = upgrade_plan(:emails_plan, to_count, event.emails_plan)
+    price < 0 ? 0 : price
   end
 
 protected
 
-  def calc_sms_plan
-    new_plan, full_payment = Eventify.sms_plan(event.total_sms_count)
-    _, already_paid        = Eventify.sms_plan(event.sms_plan)
-
-    [new_plan, full_payment - already_paid]
-  end
-
-
-  def calc_prints_plan
-    new_plan, full_payment = Eventify.prints_plan(event.prints_ordered)
-    _, already_paid        = Eventify.prints_plan(event.prints_plan)
-
-    [new_plan, full_payment - already_paid]
-  end
-
-  def calc_emails_plan
-    new_plan, full_payment = Eventify.emails_plan(event.guests.count)
-    _, already_paid        = Eventify.emails_plan(event.emails_plan)
+  def upgrade_plan(plan, new_count, old_count)
+    new_plan, full_payment = Eventify.send(plan, new_count)
+    _, already_paid        = Eventify.send(plan, old_count)
 
     [new_plan, full_payment - already_paid]
   end

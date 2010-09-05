@@ -74,6 +74,7 @@ protected
   end
 
   def check_payments
+    resource.set_free_plans!
     redirect_to(new_event_payment_path(resource, :back => "invitations")) if resource.payments_required?
   end
 end
