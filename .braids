@@ -100,7 +100,7 @@ vendor/plugins/log_buddy:
 vendor/plugins/netpay: 
   branch: master
   remote: braid/vendor/plugins/netpay
-  revision: 79bfe0b11394fc111563d26184c6195ae423949d
+  revision: 6f90c9682ae9ce4b137e472f560b240f68c2d5c4
   squashed: true
   type: git
   url: git@github.com:astrails/netpay.git
