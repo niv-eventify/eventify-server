@@ -4,6 +4,7 @@ class AddPlansToEvent < ActiveRecord::Migration
     add_column :events, :sms_plan, :integer, :default => 0
     add_column :events, :prints_plan, :integer, :default => 0
     add_column :events, :prints_ordered, :integer, :default => 0
+    Event.update_all "emails_plan = 100", "emails_plan = 0"
   end
 
   def self.down

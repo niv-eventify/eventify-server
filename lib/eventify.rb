@@ -1,6 +1,6 @@
 module Eventify
 
-    all prices are in ogorot
+    # all prices are in ogorot
     EMAILS_PLAN_PROPERTIES = [
       [0..100, [100, 0]],
       [101..200, [200, 15000]],

@@ -7,6 +7,12 @@ describe Event do
       @event = Factory.create(:event)
     end
 
+    it "should set default plans" do
+      @event.emails_plan.should == 100
+      @event.sms_plan.should be_zero
+      @event.prints_plan.should be_zero
+    end
+
     it "should check prints" do
       @event.prints_ordered = 1
       @event.prints_plan = 2

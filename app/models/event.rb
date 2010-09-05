@@ -475,12 +475,10 @@ class Event < ActiveRecord::Base
     @total_sms_count = invitations_to_be_sent + messagess_sent + reminders_to_be_sent
   end
 
-  def set_free_plans!
+  before_create :set_free_plans
+  def set_free_plans
     plan, price = Eventify.emails_plan(1)
-    if price.zero? && emails_plan < plan
-      self.emails_plan = plan
-      save!
-    end
+    self.emails_plan = plan if price.zero? && emails_plan < plan
   end
 
 protected
