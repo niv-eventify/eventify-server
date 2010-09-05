@@ -3,7 +3,7 @@
 
 		return this.each(function() {
 			var obj = $(this);
-			var fld = obj.find("input[name=sms_plan]");
+			var fld = obj.find("input[type=hidden]");
 			var price = obj.find("span.price strong");
 			var count = obj.find(".controls span.count");
 			obj.find(".controls a.btn-plus").click(function(){
@@ -12,6 +12,7 @@
 				fld.val(new_count);
 				var new_price = parseInt(parseFloat(price.html()) * 100 + unit_price * batch_size);
 				price.html((new_price/100).toFixed(2));
+				jQuery(window).trigger('amount-changed');
 			});
 			obj.find(".controls a.btn-minus").click(function(){
 				var current_count = parseInt(count.html());
@@ -21,6 +22,7 @@
 					fld.val(current_count);
 					var new_price = parseInt(parseFloat(price.html()) * 100 - unit_price * batch_size);
 					price.html((new_price/100).toFixed(2));
+					jQuery(window).trigger('amount-changed');
 				}
 			});
 		});

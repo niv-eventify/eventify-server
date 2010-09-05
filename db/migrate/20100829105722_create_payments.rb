@@ -4,9 +4,9 @@ class CreatePayments < ActiveRecord::Migration
       t.integer :user_id
       t.integer :event_id
       t.integer :amount
-      t.integer :emails_plan, :integer, :default
-      t.integer :sms_plan, :integer, :default
-      t.integer :prints_plan, :integer, :default
+      t.integer :emails_plan
+      t.integer :sms_plan
+      t.integer :prints_plan
       t.datetime :paid_at
       t.timestamps
     end

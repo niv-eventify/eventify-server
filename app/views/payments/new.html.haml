@@ -1,5 +1,24 @@
 - content_for :head do
   != javascript_include_tag "jquery.package_price"
+  :javascript
+    jQuery(function(){
+      jQuery("input[name=payment[emails_plan]]").click(function(){
+        jQuery(window).trigger('amount-changed');
+      });
+      jQuery(window).bind('amount-changed', function() {
+        // get users
+        var users = parseInt(jQuery("input[name=payment[emails_plan]]:checked").parents("li:first").find("span.price span.price").html()) || 0;
+        // get sms
+        var sms = parseInt(parseFloat(jQuery(".section.sms-package span.price strong").html()) * 100);
+        // get prints
+        var printings = parseInt((parseFloat(jQuery(".section.printings-package span.price strong").html()) || 0) * 100);
+        // set total
+        var amount = users + sms + printings;
+
+        jQuery("#payment_amount").val(amount)
+        jQuery("#total_amount").html((amount/100).toFixed(2));
+      });
+    });
 
 .pricing
   %h2= _("Pricing")
@@ -9,6 +28,7 @@
     %h3= _("Pricing Summary")
   - form_for :payment, resource, :url => event_payments_path(@event), :html => {:class => "pricing-form"} do |f|
     %fieldset
+      != hidden_field_tag :back, params[:back]
       .section
         %dl
           %dt= _("Guests Package -")
@@ -72,6 +92,7 @@
         %em
           %strong#total_amount= resource.amount.format_cents
           ₪
+        != f.hidden_field :amount
       .agree
         %input#check-agree.check{:type => "checkbox"}/
         %label{:for => "check-agree"}
