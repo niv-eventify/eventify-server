@@ -19,7 +19,8 @@ class Payment < ActiveRecord::Base
 
   validates_presence_of :emails_plan, :sms_plan, :prints_plan, :amount,
     :cc, :expiration_month, :expiration_year, :name_on_card,
-    :ccv2, :email, :user_ident, :phone_number, :on => :update
+    :ccv2, :email, :user_ident, :phone_number, 
+    :on => :update
 
   named_scope :paid, :conditions => "paid_at IS NOT NULL"
 
@@ -90,8 +91,6 @@ class Payment < ActiveRecord::Base
     _, price = upgrade_plan(:emails_plan, to_count, event.emails_plan)
     price < 0 ? 0 : price
   end
-
-protected
 
   def upgrade_plan(plan, new_count, old_count)
     new_plan, full_payment = Eventify.send(plan, new_count)
