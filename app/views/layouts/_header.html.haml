@@ -12,6 +12,7 @@
       .top-user-menu
         != render(:partial => "layouts/user_menu")
     %div
-      %ul.lang
-        - (FastGettext.available_locales - ["ru"]).each do |locale|
-          %li!= link_to(AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale))
+      - unless @disable_language_change
+        %ul.lang
+          - (FastGettext.available_locales - ["ru"]).each do |locale|
+            %li!= link_to(AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale))

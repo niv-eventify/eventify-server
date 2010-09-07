@@ -5,6 +5,10 @@ class PaymentsController < InheritedResources::Base
   before_filter :ssl_required, :only => :update
   before_filter :verify_paid, :only => :update
 
+  skip_before_filter :setup_localization, :only => [:edit, :update]
+  before_filter      :setup_localization_skip_domain, :only => [:edit, :update]
+
+
   actions :new, :edit, :update, :create
 
   filter_parameter_logging :cc, :expiration_month, :expiration_year, :ccv2
@@ -40,7 +44,7 @@ class PaymentsController < InheritedResources::Base
     build_resource
     resource.user_id = current_user.id
     if resource.save
-      redirect_to edit_resource_path(resource, :back => params[:back])
+      redirect_to edit_resource_url(resource, ssl_host_and_port.merge(:back => params[:back]))
     else # shouldn't happen unless someone hacks form html manually
       resource.calc_defaults
       @guests_count = resource.event.guests.count
@@ -60,7 +64,7 @@ protected
       # TODO
       1
     else # any or 'invitations'
-      redirect_to edit_invitation_path(resource.event_id)
+      redirect_to edit_invitation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
     end
   end
 
@@ -69,10 +73,15 @@ protected
   end
 
   def ssl_redirect
-    redirect_to(:protocol => "https://") if Rails.env == "production" && !request.ssl?
+    redirect_to(:protocol => "https://")  if Rails.env == "production" && !request.ssl?
   end
 
   def ssl_required
     return false if Rails.env == "production" && !request.ssl?
+  end
+
+  def setup_localization_skip_domain
+    @disable_language_change = true
+    setup_localization({})
   end
 end
