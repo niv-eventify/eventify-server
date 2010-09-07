@@ -116,7 +116,7 @@ class ActionController::Base
   def locale_domain_for(locale)
     _, domain, port = parse_host_and_port_for_locale
     domain = "#{domain}:#{port}" if port && port != "80"
-    (locale == default_locale) ? domain : locale + "." + domain
+    (locale == default_locale) ? "www." + domain : locale + "." + domain
   end
 
   # returns 'home' path to redirect to. override in ApplicationController

@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<title>Eventify</title>
+	<link rel="stylesheet" type="text/css" href="css/all.css" media="all"/>
+	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<!--[if IE]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
+	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/lt7.css" media="screen"/><![endif]-->
+</head>
+<body>
+<div id="wrapper">
+	<div id="main">
+		<div id="content">
+			<div class="content-area">
+				<form action="#" class="payment-form">
+					<fieldset>
+						<div class="section">
+							<h2>פרטי תשלום</h2>
+							<div class="holder">
+								<div class="col-1">
+									<h3>שיטת התשלום:</h3>
+									<div class="row">
+										<input id="radio-method-1" class="radio" name="radio-method" type="radio" />
+										<label for="radio-method-1" class="label4">פייפאל</label>
+										<span class="pp"><img src="images/ico-paypal.gif" width="53" height="22" alt="image description" /></span>
+									</div>
+									<div class="row">
+										<input id="radio-method-2" class="radio" name="radio-method" type="radio" />
+										<label for="radio-method-2" class="label4">כרטיס אשראי:</label>
+										<select>
+											<option>מאסטרקארד</option>
+										</select>
+										<span class="cards"><img src="images/ico-cards.gif" width="96" height="22" alt="image description" /></span>
+									</div>
+									<div class="row">
+										<label for="card-number-field" class="label5">מס’ כרטיס:</label>
+										<div class="text sm">
+											<input id="card-number-field" type="text" value="" />
+										</div>
+										<div class="text sm">
+											<input type="text" value="" />
+										</div>
+										<div class="text sm">
+											<input type="text" value="" />
+										</div>
+										<div class="text sm">
+											<input type="text" value="" />
+										</div>
+									</div>
+									<div class="row">
+										<label for="validity-field" class="label5">תוקף:</label>
+										<select class="select-m" id="validity-field">
+											<option>2012</option>
+										</select>
+										<select class="select-sm">
+											<option>01</option>
+										</select>
+									</div>
+									<div class="row">
+										<label for="cvv-field" class="label5">CVV:</label>
+										<div class="text sm3">
+											<input id="cvv-field" type="text" value="" />
+										</div>
+										<a class="btn-info" href="#">info</a>
+									</div>
+								</div>
+								<div class="col-2">
+									<div class="row">
+										<label for="name-field">שם בעל הכרטיס:</label>
+										<div class="text">
+											<input id="name-field" type="text" value="" />
+										</div>
+									</div>
+									<div class="row">
+										<label for="phone-field">מספר טלפון:</label>
+										<div class="text m3">
+											<input id="phone-field" type="text" value="" />
+										</div>
+										<select class="select-m2">
+											<option>050</option>
+										</select>
+									</div>
+									<div class="row">
+										<label for="email-field">אימייל:</label>
+										<div class="text">
+											<input id="email-field" type="text" value="" />
+										</div>
+									</div>
+									<div class="row">
+										<label for="id-field">ת.ז.</label>
+										<div class="text">
+											<input id="id-field" type="text" value="" />
+										</div>
+									</div>
+									<div class="section2">
+										<h3>כתובת בעל הכרטיס:</h3>
+										<div class="row">
+											<label for="street-field2" class="label2">רחוב:</label>
+											<div class="text m3">
+												<input id="street-field2" type="text" value="" />
+											</div>
+											<label for="number-field2" class="label3">מספר:</label>
+											<div class="text sm">
+												<input id="number-field2" type="text" value="" />
+											</div>
+										</div>
+										<div class="row">
+											<label for="city-field2" class="label2">עיר:</label>
+											<div class="text m3">
+												<input id="city-field2" type="text" value="" />
+											</div>
+											<label for="zip-field2" class="label3">מיקוד:</label>
+											<div class="text sm2">
+												<input id="zip-field2" type="text" value="" />
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="section">
+							<h2>כתובת למשלוח</h2>
+							<div class="holder">
+								<div class="col-1">
+									<h3>האם כתובת המשלוח זהה לכתובת התשלום?</h3>
+									<div class="row">
+										<input id="radio-yes" class="radio" name="radio-yes-no" type="radio" />
+										<label for="radio-yes">כן</label>
+									</div>
+									<div class="row">
+										<input id="radio-no" class="radio" name="radio-yes-no" type="radio" />
+										<label for="radio-no">לא</label>
+									</div>
+									<div class="row">
+										<label for="street-field" class="label2">רחוב:</label>
+										<div class="text m3">
+											<input id="street-field" type="text" value="" />
+										</div>
+										<label for="number-field" class="label3">מספר:</label>
+										<div class="text sm">
+											<input id="number-field" type="text" value="" />
+										</div>
+									</div>
+									<div class="row">
+										<label for="city-field" class="label2">עיר:</label>
+										<div class="text m3">
+											<input id="city-field" type="text" value="" />
+										</div>
+										<label for="zip-field" class="label3">מיקוד:</label>
+										<div class="text sm2">
+											<input id="zip-field" type="text" value="" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="nav">
+							<a href="#">ביטול</a>
+							<a href="#">אישור</a>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<div id="header">
+			<div class="header-area">
+				<strong class="logo"><a href="#">Eventify</a></strong>
+				<div class="search-form">
+					<form action="#">
+						<fieldset>
+							<input type="image" src="images/ico-search-en.gif" class="search-btn"/>
+							<div class="input-bg">
+								<input type="text" class="text" value="lorem" />
+							</div>
+						</fieldset>
+					</form>
+				</div>
+				<ul id="top-nav">
+					<li>
+						<a href="#" class="top">Categories</a>
+						<div class="popup">
+							<a href="#" class="close">close</a>
+							<div class="popup-t">&nbsp;</div>
+							<div class="popup-c">
+								<div class="popup-content">
+									<ul>
+										<li><a href="#">LOREM IPSUM</a></li>
+										<li><a href="#">LOREM IPSUM</a></li>
+										<li><a href="#">LOREM IPSUM</a></li>
+									</ul>
+									<ul>
+										<li><a href="#">LOREM IPSUM</a></li>
+										<li><a href="#">LOREM IPSUM</a></li>
+										<li><a href="#">LOREM IPSUM</a></li>
+									</ul>
+									<ul>
+										<li><a href="#">LOREM IPSUM</a></li>
+										<li><a href="#">LOREM IPSUM</a></li>
+										<li><a href="#">LOREM IPSUM</a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="popup-b">&nbsp;</div>
+						</div>
+					</li>
+					<li><a href="#" class="top">FAQ</a></li>
+					<li><a href="#" class="top">Sign Up</a></li>
+				</ul>
+				<div class="personal-menu-w">
+					<div class="personal-menu">
+						<div class="personal-menu-c">
+							<a href="#" class="exit">Exit</a>
+							<strong>Hello, Yaniv</strong>
+							<p>Next event: <a href="#">karen's birthday</a></p>
+							<div class="personal-menu-h">
+								<div class="personal-menu-h-frame">
+									<div class="opener"><a href="#">My Page</a></div>
+									<div class="menu-list">
+										<ul>
+											<li><a href="#">Lorem</a></li>
+											<li><a href="#">Lorem</a></li>
+											<li><a href="#">Lorem</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="personal-menu-b">&nbsp;</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="footer-area">
+			<h3>Categories</h3>
+			<div class="foot-lists">
+				<ul class="list">
+					<li><a href="#">Birthdays</a></li>
+					<li><a href="#">Birthdays-kids</a></li>
+					<li><a href="#">Weddings</a></li>
+					<li><a href="#">Engagement party</a></li>
+					<li><a href="#">Poker Night</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="#">Mondial</a></li>
+					<li><a href="#">Thanksgiving</a></li>
+					<li><a href="#">Christmast</a></li>
+					<li><a href="#">Girls’ night out</a></li>
+					<li><a href="#">Bacheloore party</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="#">Birthdays</a></li>
+					<li><a href="#">Birthdays-kids</a></li>
+					<li><a href="#">Weddings</a></li>
+					<li><a href="#">Engagement party</a></li>
+					<li><a href="#">Poker Night</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="#">Mondial</a></li>
+					<li><a href="#">Thanksgiving</a></li>
+					<li><a href="#">Christmast</a></li>
+					<li><a href="#">Girls’ night out</a></li>
+					<li><a href="#">Bacheloore party</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="#">Birthdays</a></li>
+					<li><a href="#">Birthdays-kids</a></li>
+					<li><a href="#">Weddings</a></li>
+					<li><a href="#">Engagement party</a></li>
+					<li><a href="#">Poker Night</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="#">Mondial</a></li>
+					<li><a href="#">Thanksgiving</a></li>
+					<li><a href="#">Christmast</a></li>
+					<li><a href="#">Girls’ night out</a></li>
+					<li><a href="#">Bacheloore party</a></li>
+				</ul>
+				<ul class="list">
+					<li><a href="#">Mondial</a></li>
+					<li><a href="#">Thanksgiving</a></li>
+					<li><a href="#">Christmast</a></li>
+					<li><a href="#">Girls’ night out</a></li>
+					<li><a href="#">Engagement party</a></li>
+				</ul>
+			</div>
+			<div class="foot-box">
+				<ul>
+					<li><a href="#">About Eventify </a></li>
+					<li><a href="#">Pricing</a></li>
+					<li><a href="#">Contact Us</a></li>
+					<li><a href="#">Terms of Use</a></li>
+					<li><a href="#">Site Map</a></li>
+				</ul>
+				<p>All right resevred to Eventify &copy;</p>
+				<p class="by">Design and UI <a href="#">Cat&amp;Dog Studio</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

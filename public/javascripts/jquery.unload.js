@@ -13,6 +13,9 @@
 	$.fn.unload_monit_set = function() {
 		was_changed = true;
 	};
+	$.fn.unload_monit_is_set = function() {
+		return was_changed;
+	};
 	$.fn.unload_monit_set_message = function(new_message) {
 		message = new_message;
 	};
