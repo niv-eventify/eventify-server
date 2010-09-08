@@ -1110,3 +1110,27 @@ em.counter {
 .next-btn, .hebrew .previous-btn {
 	margin: 0 0 0 3px;
 }
+
+.settings-info {
+	width:auto;
+}
+
+.payment-form .settings-box {
+	padding:0 0 30px 0;
+}
+
+.payment-form .settings-row em {
+	float:right;
+	margin-right:10px;
+	font-size:14px;
+}
+
+.hebrew .payment-form .settings-row em {
+	float:left;
+	margin-left:10px;
+}
+
+
+.payment-form .text.error {
+	background-position:0 -22px;
+}

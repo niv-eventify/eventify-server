@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100826061551) do
+ActiveRecord::Schema.define(:version => 20100829110947) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -164,7 +164,10 @@ ActiveRecord::Schema.define(:version => 20100826061551) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
-    t.string   "invitation_title",           :limit => 100
+    t.integer  "emails_plan",                                :default => 0
+    t.integer  "sms_plan",                                   :default => 0
+    t.integer  "prints_plan",                                :default => 0
+    t.integer  "prints_ordered",                             :default => 0
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
@@ -202,10 +205,10 @@ ActiveRecord::Schema.define(:version => 20100826061551) do
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
     t.boolean  "any_invitation_sent",        :default => false
-    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "bounced_at"
     t.string   "bounce_status"
     t.string   "bounce_reason"
+    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
   end
@@ -234,7 +237,26 @@ ActiveRecord::Schema.define(:version => 20100826061551) do
     t.integer  "http_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "context"
   end
+
+  add_index "netpay_logs", ["context"], :name => "index_netpay_logs_on_context"
+
+  create_table "payments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "amount"
+    t.integer  "emails_plan"
+    t.integer  "sms_plan"
+    t.integer  "prints_plan"
+    t.integer  "succeed_netpay_log_id"
+    t.datetime "paid_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["event_id"], :name => "index_payments_on_event_id"
+  add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
 
   create_table "reminder_logs", :force => true do |t|
     t.integer  "reminder_id"

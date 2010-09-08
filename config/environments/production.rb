@@ -33,3 +33,5 @@ SMS_PASSWORD = "Croatia684"
 
 
 config.action_mailer.delivery_method = :smtp
+
+load EXTRA_ENVIR_FILE if File.exists?(EXTRA_ENVIR_FILE)

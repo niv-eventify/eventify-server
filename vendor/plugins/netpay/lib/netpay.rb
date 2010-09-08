@@ -16,10 +16,10 @@ module Netpay
       :Payments => 1
     }
 
-    attr_reader :response
+    attr_reader :response, :log_id
 
-    def initialize(url, company_number)
-      @url, @company_number = url, company_number
+    def initialize(url, company_number, context, skip_ssl_verification)
+      @url, @company_number, @context, @skip_ssl_verification = url, company_number, context, skip_ssl_verification
     end
 
     def post(opts)
@@ -41,6 +41,8 @@ module Netpay
 
       net = Net::HTTP.new(uri.host, uri.port)
       net.use_ssl = true
+      net.verify_mode = OpenSSL::SSL::VERIFY_NONE if @skip_ssl_verification
+
       res = net.start do |http|
         http.open_timeout = DEFAULT_TIMEOUT
         http.request(request)
@@ -59,8 +61,11 @@ module Netpay
         exception = e
       end
 
-      NetpayLog.create(:request => form_data.inspect, :response => @response, 
-        :exception => exception, :netpay_status => parsed_response[:Reply], :http_code => code)
+      log_record = NetpayLog.create(:request => form_data.inspect, :response => @response,
+        :exception => exception, :netpay_status => parsed_response[:Reply], :http_code => code,
+        :context => @context)
+
+      @log_id = log_record.id
 
       success
     end
@@ -84,8 +89,8 @@ module Netpay
   end
 
   class SilentPost < Poster
-    def initialize(company_number)
-      super("https://process.netpay-intl.com/member/remote_charge.asp", company_number)
+    def initialize(company_number, context = nil, skip_ssl_verification = false)
+      super("https://process.netpay-intl.com/member/remote_charge.asp", company_number, context, skip_ssl_verification)
     end
 
     def process(cc, expiration_month, expiration_year, name_on_card, amount_cents, ccv2, email, user_ident, phone_number, transaction_description, currency = "ILS")

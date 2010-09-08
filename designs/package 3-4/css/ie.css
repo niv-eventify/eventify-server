@@ -1,0 +1,38 @@
+/* IE6 and IE7 css */
+#content {margin-top: expression(document.getElementById("header").offsetHeight + "px");}
+#header {margin-top: expression((0 - (this.offsetHeight + document.getElementById("content").offsetHeight)) + "px");}
+*+html .tabset-nav li a span em {
+	white-space: nowrap;
+	display: block;
+	margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");
+}
+* html .tabset-nav li a span em {
+	white-space: nowrap;
+	display: block;
+	margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");
+}
+* +html .contact-list li a {display: block;}
+* html .contact-list li a {display: block;}
+* +html .contact-list li a strong{display: block;}
+* html .contact-list li a strong{display: block;}
+* +html .contact-list li a span{
+	display: block;
+	margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");
+}
+* html .contact-list li a span{
+	display: block;
+	margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");
+}
+.lb-print-orders .total-bar dt,
+.lb-print-orders .total-bar dd,
+.selectOptions ul{
+	zoom:1;
+}
+.selectOptions ul li{
+	width:auto;
+	zoom:1;
+}
+.pricing-form .invite .thead .tr,
+.pricing-form .invite .thead .tr .td{display:block;}
+.pricing-form .invite .thead .tr .td{margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");}
+

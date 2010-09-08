@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<title>Eventify</title>
+	<link media="all" rel="stylesheet" type="text/css" href="css/all.css" />
+	<script type="text/javascript" src="js/jquery-1.3.2.min.js" ></script>
+	<script type="text/javascript" src="js/main.js" ></script>
+	<script type="text/javascript">
+	//<![CDATA[
+	var mobi = ['opera', 'iemobile', 'webos', 'android', 'iphone', 'ipad'];
+	var midp = ['blackberry', 'symbian'];
+	var ua = navigator.userAgent.toLowerCase();
+	var desktop = '<link rel="stylesheet" href="css/all.css" type="text/css" media="all"/><!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->';
+	if ((ua.indexOf('midp') != -1) || (ua.indexOf('mobi') != -1) || ((ua.indexOf('ppc') != -1) && (ua.indexOf('mac') == -1)) || (ua.indexOf('webos') != -1)) {
+		document.write('<link rel="stylesheet" href="css/allmobile.css" type="text/css" media="all"/>');
+		if (ua.indexOf('midp') != -1) {
+			for (var i = 0; i < midp.length; i++) {
+				if (ua.indexOf(midp[i]) != -1) {
+					document.write('<link rel="stylesheet" href="css/' + midp[i] + '.css" type="text/css"/>');
+					document.write('<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>');
+				}
+			}
+		}
+		else {
+			if ((ua.indexOf('mobi') != -1) || (ua.indexOf('ppc') != -1) || (ua.indexOf('webos') != -1)) {
+				for (var i = 0; i < mobi.length; i++) {
+					if (ua.indexOf(mobi[i]) != -1) {
+						document.write('<link rel="stylesheet" href="css/' + mobi[i] + '.css" type="text/css"/>');
+						document.write('<meta name="viewport" content="width=device-width"/>');
+						break;
+					}
+				}
+			}
+		}
+	}
+	else {
+		document.write(desktop);
+	}
+	//]]>
+	</script>
+	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css/ie.css" media="screen"/><![endif]-->
+</head>
+<body class="mobile hebrew">
+	<div id="wrapper">
+		<div id="m-header">
+			<a class="back-link" href="#">יציאה</a>
+			<strong>שלום, תאיר!</strong>
+		</div>
+		<div id="m-content">
+			<div class="event-summary">
+				<div class="heading">
+					<a href="#" class="back-link">חזרה לדף האירועים</a>
+					<h1>סיכום אירוע</h1>
+				</div>
+				<div class="content">
+					<div class="m-event-info">
+						<div class="title-hold">
+							<div class="image"><img src="images/image1.jpg" width="81" height="51" alt="image description" /></div>
+							<strong>ערב פוקר עם הבנים  </strong>
+						</div>
+						<dl>
+							<dt>מארחים:</dt>
+							<dd>ניב קנר, יובל קנר</dd>
+							<dt>תאריך:</dt>
+							<dd>20 בספטמבר, 2009</dd>
+							<dt>שעה:</dt>
+							<dd>20:00</dd>
+							<dt>מקום:</dt>
+							<dd>לבונטין 7</dd>
+						</dl>
+					</div>
+					<div class="m-link-box">
+						<a href="#">ערוך</a>
+						<strong>מגיע/ה</strong>
+					</div>
+					<form action="#" class="m-group-form">
+						<fieldset>
+							<label for="number-field">מספר האנשים בקבוצה שלך:</label>
+							<div class="text">
+								<input id="number-field" type="text" value="" />							</div>
+						</fieldset>
+					</form>
+					<div class="m-section">
+						<div class="m-section-title">
+							<strong>שלח מסר למארח:</strong>
+						</div>
+						<form action="#" class="comment-form">
+							<fieldset>
+								<div class="textarea">
+									<textarea cols="46" rows="5"></textarea>
+								</div>
+								<div class="hide">
+									<a href="#">הסתר את המסר מהאורחים</a>
+								</div>
+								<div class="btn-hold">
+									<a href="#">שלח</a>
+									<a href="#">ביטול</a>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="map"><img src="images/map.jpg" width="286" height="255" alt="image description" /></div>
+					<div class="m-section">
+						<div class="m-section-title">
+							<strong>רשימת דברים להביא</strong>
+						</div>
+						<div class="m-box">
+							<div class="holder">
+								<div class="frame">
+									<div class="headline">
+										<strong>בחר/י פריט מהרשימה:</strong>
+									</div>
+									<form action="#" class="bring-form">
+										<fieldset>
+											<ul>
+												<li>
+													<div class="sel-holder">
+														<select>
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+														</select>
+													</div>
+													<div class="check-holder">
+														<input type="checkbox" class="input-check" id="checkbox-1" />
+														<label for="checkbox-1">בקבוק יין אדום x <span>3</span> </label>
+													</div>
+												</li>
+												<li>
+													<div class="sel-holder">
+														<select>
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+														</select>
+													</div>
+													<div class="check-holder">
+														<input type="checkbox" class="input-check" id="checkbox-2" />
+														<label for="checkbox-2"> פשטידת עיזים x <span>23</span></label>
+													</div>
+												</li>
+												<li>
+													<div class="sel-holder">
+														<select>
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+														</select>
+													</div>
+													<div class="check-holder">
+														<input type="checkbox" class="input-check" checked="checked" id="checkbox-3" />
+														<label for="checkbox-3"> סלט ירוק  x <span>7</span></label>
+													</div>
+												</li>
+												<li>
+													<div class="sel-holder">
+														<select>
+															<option>1</option>
+															<option>2</option>
+															<option>3</option>
+														</select>
+													</div>
+													<div class="check-holder">
+														<input type="checkbox" class="input-check" id="checkbox-4" />
+														<label for="checkbox-4"> חומוס</label>
+													</div>
+												</li>
+											</ul>
+											<div class="btns-hold">
+												<a href="#">שלח</a>
+												<a href="#">ביטול</a>
+											</div>
+										</fieldset>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="m-section">
+						<div class="m-section-title">
+							<strong>רשימת האורחים</strong>
+						</div>
+						<div class="m-box">
+							<div class="holder">
+								<div class="frame">
+									<ul class="m-tabset">
+										<li class="first"><a class="active" href="#">מגיעים</a></li>
+										<li><a href="#">אולי מגיעים </a></li>
+										<li><a href="#">לא מגיעים</a></li>
+										<li class="last"><a href="#">עוד לא הגיבו</a></li>
+									</ul>
+									<div class="info-col">
+										<div class="info-col-row">
+											<p>ניב קנר <em> (5 אורחים)	</em></p>
+											<div class="note-box">
+												 הי, אני מגיע! איזה כיף
+											</div>
+										</div>
+										<div class="info-col-row">
+											<p>תאיר ברקא </p>
+										</div>
+										<div class="info-col-row">
+											<p>שגב הריס  <em>(2 אורחים)</em></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

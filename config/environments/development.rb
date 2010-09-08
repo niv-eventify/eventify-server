@@ -22,3 +22,5 @@ require 'ruby-debug'
 SMS_FROM = "eventify"
 SMS_USER = "eventify"
 SMS_PASSWORD = "Croatia684"
+
+load EXTRA_ENVIR_FILE if File.exists?(EXTRA_ENVIR_FILE)
