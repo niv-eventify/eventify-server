@@ -193,7 +193,6 @@ div.cmf-skinned-text {
   z-index: 100;
 }
 .msg-holder .title, .title-holder  .title{
-  font-weight: bold;
   margin: 0;
   font-size: 22px;
   line-height: 1.2em;
@@ -205,7 +204,6 @@ div.cmf-skinned-text {
   margin: 0;
   font-size: 20px;
   line-height: 1em;
-  font-weight: normal;
   overflow-x: hidden;
   overflow-y: hidden;
   padding-right: 8px;
