@@ -165,6 +165,10 @@ ActiveRecord::Schema.define(:version => 20100831062017) do
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
     t.string   "invitation_title",           :limit => 100
+    t.integer  "emails_plan",                                :default => 0
+    t.integer  "sms_plan",                                   :default => 0
+    t.integer  "prints_plan",                                :default => 0
+    t.integer  "prints_ordered",                             :default => 0
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
@@ -234,7 +238,26 @@ ActiveRecord::Schema.define(:version => 20100831062017) do
     t.integer  "http_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "context"
   end
+
+  add_index "netpay_logs", ["context"], :name => "index_netpay_logs_on_context"
+
+  create_table "payments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "event_id"
+    t.integer  "amount"
+    t.integer  "emails_plan"
+    t.integer  "sms_plan"
+    t.integer  "prints_plan"
+    t.integer  "succeed_netpay_log_id"
+    t.datetime "paid_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payments", ["event_id"], :name => "index_payments_on_event_id"
+  add_index "payments", ["user_id"], :name => "index_payments_on_user_id"
 
   create_table "reminder_logs", :force => true do |t|
     t.integer  "reminder_id"

@@ -17,9 +17,11 @@ class Reminder < ActiveRecord::Base
   attr_accessible :by_email, :by_sms, :email_subject, :email_body, :sms_message, :before_units, :before_value, :is_active
 
   named_scope :pending, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}}
+  named_scope :outstanding, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at > ?", Time.now.utc]}}
   named_scope :active, :conditions => {:is_active => true}
   named_scope :not_sent, {:conditions => "reminders.reminder_sent_at IS NULL"}
-  named_scope :with_activated_event, :include => :event, :conditions => "events.user_is_activated = 1"
+  named_scope :with_activated_event, :include => :event, :conditions => "events.user_is_activated = 1 AND events.canceled_at is NULL"
+  named_scope :by_sms, :conditions => {:by_sms => true}
 
   before_validation :set_before_units
   def set_before_units

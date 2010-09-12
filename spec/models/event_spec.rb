@@ -2,6 +2,56 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Event do
 
+  describe "payments" do
+    before(:each) do
+      @event = Factory.create(:event)
+    end
+
+    it "should set default plans" do
+      @event.emails_plan.should == 100
+      @event.sms_plan.should be_zero
+      @event.prints_plan.should be_zero
+    end
+
+    it "should check prints" do
+      @event.prints_ordered = 1
+      @event.prints_plan = 2
+      @event.should_not be_prints_payments_required
+
+      @event.prints_ordered = 3
+      @event.should be_prints_payments_required
+    end
+
+    it "should check guests" do
+      @event.guests.stub(:count).and_return(2)
+      @event.emails_plan = 2
+      @event.should_not be_guests_payments_required
+
+      @event.emails_plan = 1
+      @event.should be_guests_payments_required
+    end
+
+    it "should check sms" do
+      @event.sms_plan = 2
+      @event.stub(:total_sms_count).and_return(2)
+      @event.should_not be_sms_payments_required
+
+      @event.sms_plan = 1
+      @event.should be_sms_payments_required
+    end
+
+    it "should calc total_sms_count" do
+      @event.stub!(:guests).and_return(mock("guests", :invite_by_sms => "", :scheduled_to_invite_by_sms => "", :not_invited_by_sms => ""))
+      @event.guests.scheduled_to_invite_by_sms.stub(:count).and_return(1)
+      @event.guests.not_invited_by_sms.stub(:count).and_return(10)
+      @event.sms_messages.stub(:count).and_return(100)
+      @event.reminders.stub(:upcoming_by_sms_count).and_return(5)
+      @event.guests.invite_by_sms.stub(:count).and_return(200)
+
+      @event.total_sms_count.should == 1111
+    end
+  end
+
   describe "cancel" do
     before(:each) do
       @guest = Factory.create(:guest_with_mobile)

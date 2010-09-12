@@ -10,6 +10,11 @@ require File.join(File.dirname(__FILE__), 'boot')
 #require 'activesupport'
 #ActiveSupport::Dependencies.log_activity = true
 
+EXTRA_ENVIR_FILE = File.join(File.dirname(__FILE__), '/extra.rb')
+
+NETPAY_MERCHANT_ID = 1415119 # demo, overide in extra.rb
+NETPAY_SKIP_SSL = true
+
 Rails::Initializer.run do |config|
   if "irb" == $0
     config.logger = Logger.new(STDOUT)

@@ -1,7 +1,7 @@
 module MiddleBoxHelper
-  def setting_row(name, value, edit_function)
+  def setting_row(name, value, edit_function, opts = {})
     haml_tag :div, :class => "settings-row" do
-      haml_concat link_to_function(_("Edit"), edit_function, :class => "edit-link")
+      haml_concat link_to_function(_("Edit"), edit_function, :class => "edit-link") unless opts[:no_edit]
       haml_tag :div, :class => "settings-info" do
         haml_tag :strong, name
         haml_tag :span, h(value)
