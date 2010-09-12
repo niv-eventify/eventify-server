@@ -5,6 +5,12 @@
     replacedTitleHolder: null,
     replacedMsgHolder: null,
 
+	adjust_dialogs_size: function() {
+        jQuery("div[id ^= 'invitation']").each(function(){
+            rsvps.adjust_dialog_size(jQuery(this).attr("id"));
+        })
+	},
+
     adjust_dialog_size: function(invitation_id) {
         var width = jQuery(window).width() - 62;
         var height = jQuery(window).height() - 63;
@@ -29,10 +35,10 @@
             jQuery(this).css("left", (parseInt(jQuery(this).css("left"))+5) + "px");
         });
     },
-    cloneTextBox: function(holderClass, clonedClass) {
+    cloneTextBox: function(holderClass) {
         var zoom = 1.6 / rsvps.minimized_by;
-        var clone = jQuery(".image-h ." + clonedClass).clone();
         var holder = jQuery(".background_holder ." + holderClass);
+        var clone = holder.clone();
         clone.css({
             top: Math.ceil(parseInt(clone.css("top")) * zoom),
             left: Math.ceil(parseInt(clone.css("left")) * zoom)
@@ -48,14 +54,24 @@
 }
 jQuery(document).ready(function(jQuery){
     jQuery(".toolbar").hide();
-    jQuery("div[id ^= 'invitation']").each(function(){
-        rsvps.adjust_dialog_size(jQuery(this).attr("id"));
-    })
+    rsvps.adjust_dialogs_size();
+    jQuery(window).resize(function(){rsvps.adjust_dialogs_size();});
     jQuery('.toolbar_preview').appendTo('body');
     jQuery('a.preview.nyroModal').nyroModal({
+	    processHandler: function(settings){
+			if(jQuery('.title_holder').length > 1 && jQuery('#title').text() != jQuery('#invitation .title_holder').text()) {
+				jQuery('#invitation .title_holder').html(jQuery('#title').html());
+			}
+			if(jQuery('.msg-holder .title').length > 0 && jQuery('#title').text() != jQuery('#invitation .msg_holder .title').text()) {
+				jQuery('#invitation .msg_holder .title').html(jQuery('#title').html());
+			}
+			if(jQuery('#free_text').length > 0 && jQuery('#free_text').text() != jQuery('#invitation .msg_holder .msg').text()) {
+				jQuery('#invitation .msg_holder .msg').html(jQuery('#free_text').html());
+			}
+		},
         endFillContent: function(elts, settings){
-            rsvps.replacedTitleHolder = rsvps.cloneTextBox("msg_holder","msg-holder");
-            rsvps.replacedMsgHolder = rsvps.cloneTextBox("title_holder","title-holder");
+            rsvps.replacedTitleHolder = rsvps.cloneTextBox("title_holder");
+            rsvps.replacedMsgHolder = rsvps.cloneTextBox("msg_holder");
         },
         endShowContent: function(elts, settings){
             jQuery('.toolbar').show();
@@ -63,7 +79,7 @@ jQuery(document).ready(function(jQuery){
         endRemove: function(elts, settings){
             jQuery('.toolbar').hide();
             jQuery('.background_holder .msg_holder').replaceWith(rsvps.replacedMsgHolder);
-            jQuery('.background_holder .title_holder').replaceWith(rsvps.replacedMsgHolder);
+            jQuery('.background_holder .title_holder').replaceWith(rsvps.replacedTitleHolder);
         }
     });
 });

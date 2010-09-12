@@ -6,7 +6,9 @@ module RsvpsHelper
     font = event.font_title.blank? ? design.font_title : event.font_title
     width_part = design.title_width.blank? ? "" : "width:#{(design.title_width).to_int}px"
     height_part = design.title_height.blank? ? "" : "height:#{(design.title_height/1.6).to_int}px"
-    "left:#{design.title_top_x}px; top:#{design.title_top_y}px; #{width_part}; #{height_part}; color:#{color}; text-align: #{text_align}; font-size: #{event.title_font_size}px; font-family: #{font}"
+    top_part = design.title_top_y.blank? ? "" : "top:#{(design.title_top_y/1.6).to_int}px"
+    left_part = design.title_top_x.blank? ? "" : "left:#{(design.title_top_x/1.6).to_int}px"
+    "#{left_part}; #{top_part}; #{width_part}; #{height_part}; color:#{color}; text-align: #{text_align}; font-size: #{event.title_font_size}px; font-family: #{font}"
   end
   
   def message_position_css(event)
@@ -17,7 +19,9 @@ module RsvpsHelper
     font = event.font_body.blank? ? design.font_body : event.font_body
     width = (design.text_width/1.6).to_int
     height = (design.text_height/1.6).to_int
-    "left:#{design.text_top_x}px; top:#{top_y}px; width:#{width}px; height:#{height}px; color:#{color}; text-align: #{text_align}; font-size: #{event.msg_font_size}px; font-family: #{font}"
+    left = (design.text_top_x/1.6).to_int
+    top = (design.text_top_y/1.6).to_int
+    "left:#{left}px; top:#{top}px; width:#{width}px; height:#{height}px; color:#{color}; text-align: #{text_align}; font-size: #{event.msg_font_size}px; font-family: #{font}"
   end
 
   def rsvp_status_class(rsvp)
