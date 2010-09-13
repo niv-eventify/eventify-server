@@ -203,8 +203,7 @@ div.cmf-skinned-text {
   margin: 0;
   font-size: 20px;
   line-height: 1em;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   padding-right: 0px;
 }
 .hebrew .msg-holder, .hebrew .title-holder {

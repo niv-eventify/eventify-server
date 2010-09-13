@@ -91,10 +91,15 @@
 }
 .title {
 	position: relative;
+    line-height: 1.2em;
+}
+.msg {
+    line-height: 1em;
 }
 .title_holder, .msg_holder {
 	position: absolute;
 	z-index: 100;
+    overflow-y: hidden;
 }
 .hebrew .title_holder, .hebrew .msg_holder {
 	direction: rtl;
@@ -104,8 +109,8 @@
 	padding-right: 8px;
 }
 
-.msg, .title, .title_holder {
-	white-space: pre;
+.msg, .title{
+    overflow: hidden;
 }
 
 #envelope {
