@@ -6,5 +6,5 @@
     .title{:style => title_position_css(event)}
       != (h(event.invitation_title) || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;")
   .msg
-    != (h(event.guest_message) || "").gsub("\n", "<BR/>")
+    != (h(event.guest_message) || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;")
 - set_windows(event, 1)

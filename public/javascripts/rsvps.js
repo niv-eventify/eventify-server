@@ -86,8 +86,8 @@ jQuery(document).ready(function(jQuery){
 jQuery(window).load(function () {
     if(jQuery("#envelope").length > 0) {
         jQuery('#envelope').crossSlide({
-            sleep: 0.5,
-            fade: 0.5,
+            sleep: 0.4,
+            fade: 0.4,
             loop: 1
         }, [
             { src: '/images/envelope1.png'},
@@ -97,6 +97,10 @@ jQuery(window).load(function () {
                 jQuery("#envelope a").nyroModalManual({
                     closeButton:'',
                     modal: true,
+                    endFillContent: function(elts, settings){
+                        rsvps.replacedTitleHolder = rsvps.cloneTextBox("title_holder");
+                        rsvps.replacedMsgHolder = rsvps.cloneTextBox("msg_holder");
+                    },
                     endShowContent: function(elts, settings){
                         jQuery("#envelope img").hide();
                     }

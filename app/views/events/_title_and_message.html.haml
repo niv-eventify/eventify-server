@@ -7,7 +7,7 @@
     #title.title{:style => stage2_title_css(event)}
       != (h(event.invitation_title) || "").gsub("\n", "<br/>").gsub(" ", "&nbsp;")
   #free_text.free_text{:style => stage2_free_text_css(event)}
-    != (h(event.guest_message) || "").gsub("\n", "<br/>")
+    != (h(event.guest_message) || "").gsub("\n", "<br/>").gsub(" ", "&nbsp;")
 - set_windows(event, 1.605)
 .crop_preview
 
