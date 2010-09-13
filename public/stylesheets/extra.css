@@ -932,6 +932,7 @@ span.event-changes-disabled {
 
 .add-link, .hebrew .add-link, .remove-link, .hebrew .remove-link, .query_address_link {
 	font-size: 1.2em;
+	font-weight: bold;
 }
 
 ul.tabset li.tab-1 a {
