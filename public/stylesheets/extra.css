@@ -196,19 +196,21 @@ div.cmf-skinned-text {
   margin: 0;
   font-size: 22px;
   line-height: 1.2em;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding-right: 8px;
+  overflow: hidden;
+  padding-right: 0px;
 }
 .msg-holder .free_text{
   margin: 0;
   font-size: 20px;
   line-height: 1em;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   padding-right: 0px;
 }
+.hebrew .msg-holder, .hebrew .title-holder {
+	direction: rtl;
+}
 .hebrew .msg-holder .title, .hebrew .title-holder .title, .hebrew .msg-holder .free_text {
+  overflow: hidden;
   padding-right: 8px;
 }
 .blue-btn-mdl {

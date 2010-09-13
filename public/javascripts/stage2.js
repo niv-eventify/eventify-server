@@ -82,11 +82,11 @@
     var new_font_size = parseInt(jQuery("#" + id).css("font-size")) + delta;
     jQuery("#" + id).css("font-size", new_font_size + "px");
     if(id == "title") {
-      jQuery("#event_title_font_size").val(Math.floor(new_font_size * 1.6));
-      jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", Math.floor(new_font_size * 1.6) + "px");
+      jQuery("#event_title_font_size").val(new_font_size);
+      jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", new_font_size + "px");
     } else {
-      jQuery("#event_msg_font_size").val(Math.floor(new_font_size * 1.6));
-      jQuery(".background_holder .msg").css("font-size", Math.floor(new_font_size * 1.6) + "px");
+      jQuery("#event_msg_font_size").val(new_font_size);
+      jQuery(".background_holder .msg").css("font-size", new_font_size + "px");
     }
     stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
   },
@@ -99,7 +99,7 @@
     var text = jQuery("#" + sourceId).val();
     if(stage2.prev_text == text) return;
     stage2.prev_text = text;
-    text = text.replace(/\n/g,"<BR/>").replace(/ /g,"&nbsp;");
+    text = text.replace(/\n/g,"<BR/>").replace(/ /g, "&nbsp;");
     jQuery("#" + targetId).html(text);
 	stage2.setOverflowWarning();
 //    stage2.calcFontSize();
