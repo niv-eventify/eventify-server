@@ -577,9 +577,7 @@ li.thing.active span.name {
 .stage-2 .form label {
 	width: 72px;
 }
-.event-details .form label {
-	width:auto;
-}
+
 .stage-2 .form li.auto_width label {
 	width: auto;
 }
