@@ -35,9 +35,9 @@
             jQuery(this).css("left", (parseInt(jQuery(this).css("left"))+5) + "px");
         });
     },
-    cloneTextBox: function(holderClass) {
+    cloneTextBox: function(nyroModalContent, holderClass) {
         var zoom = 1.6 / rsvps.minimized_by;
-        var holder = jQuery(".background_holder ." + holderClass);
+        var holder = nyroModalContent.find(".background_holder ." + holderClass);
         var clone = holder.clone();
         clone.css({
             top: Math.ceil(parseInt(clone.css("top")) * zoom),
@@ -70,16 +70,16 @@ jQuery(document).ready(function(jQuery){
 			}
 		},
         endFillContent: function(elts, settings){
-            rsvps.replacedTitleHolder = rsvps.cloneTextBox("title_holder");
-            rsvps.replacedMsgHolder = rsvps.cloneTextBox("msg_holder");
+            rsvps.replacedTitleHolder = rsvps.cloneTextBox(elts.content, "title_holder");
+            rsvps.replacedMsgHolder = rsvps.cloneTextBox(elts.content, "msg_holder");
         },
         endShowContent: function(elts, settings){
             jQuery('.toolbar').show();
         },
         endRemove: function(elts, settings){
             jQuery('.toolbar').hide();
-            jQuery('.background_holder .msg_holder').replaceWith(rsvps.replacedMsgHolder);
-            jQuery('.background_holder .title_holder').replaceWith(rsvps.replacedTitleHolder);
+            jQuery(this.selector + ' .background_holder .msg_holder').replaceWith(rsvps.replacedMsgHolder);
+            jQuery(this.selector + ' .background_holder .title_holder').replaceWith(rsvps.replacedTitleHolder);
         }
     });
 });
@@ -97,6 +97,10 @@ jQuery(window).load(function () {
                 jQuery("#envelope a").nyroModalManual({
                     closeButton:'',
                     modal: true,
+                    endFillContent: function(elts, settings){
+                        rsvps.replacedTitleHolder = rsvps.cloneTextBox(elts.content, "title_holder");
+                        rsvps.replacedMsgHolder = rsvps.cloneTextBox(elts.content, "msg_holder");
+                    },
                     endShowContent: function(elts, settings){
                         jQuery("#envelope img").hide();
                     }
