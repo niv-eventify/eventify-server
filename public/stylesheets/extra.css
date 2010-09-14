@@ -582,9 +582,7 @@ li.thing.active span.name {
 .stage-2 .form label {
 	width: 72px;
 }
-.event-details .form label {
-	width:auto;
-}
+
 .stage-2 .form li.auto_width label {
 	width: auto;
 }
@@ -937,6 +935,7 @@ span.event-changes-disabled {
 
 .add-link, .hebrew .add-link, .remove-link, .hebrew .remove-link, .query_address_link {
 	font-size: 1.2em;
+	font-weight: bold;
 }
 
 ul.tabset li.tab-1 a {
@@ -1134,3 +1133,4 @@ em.counter {
 .payment-form .text.error {
 	background-position:0 -22px;
 }
+
