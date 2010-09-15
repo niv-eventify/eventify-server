@@ -204,12 +204,14 @@
         currSelected.css("font-family",currSelected.html());
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
         jQuery("#event_font_title").val(currSelected.html());
+		stage2.setOverflowWarning();
     });
     jQuery("#select_msg").change(function(){
         var currSelected = jQuery("#toolbar_msg .selectArea .center");
         currSelected.css("font-family",currSelected.html());
         jQuery('#free_text, .msg').css("font-family",currSelected.html());
         jQuery("#event_font_body").val(currSelected.html());
+		stage2.setOverflowWarning();
     });
     var msgFont = jQuery("#free_text").css("font-family");
     jQuery('.selectOptions.select_msg a').each(function(){

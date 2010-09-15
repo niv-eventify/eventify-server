@@ -1077,16 +1077,17 @@ em.counter {
 	padding: 2px;
 	text-align: left;
 	border: 2px solid red;
-	font-size: 0.9em;
+	font-size: 1em;
 	position: absolute;
-	left: 300px;
-	top: 300px;
-	width: 100px;
+	width: 120px;
 	z-index: 1000;
 	background-color: white;
+	top: 465px;
+	left: 520px;
 }
 .hebrew .overflow_warning {
 	text-align: right;
+	left: 775px;
 }
 
 .answered-form .text {
