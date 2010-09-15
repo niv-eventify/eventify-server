@@ -1,19 +1,19 @@
-<div id="invitation">
+<div id="invitation_pdf">
   <div class="background_holder" style="position: relative">
     <%= image_tag(resource.event.design.card.url, :class => "back") %>
     <% if resource.event.design.is_seperated_title? %>
       <div class="title_holder" style="<%= title_position_css(resource.event) %>">
-      	<%= resource.event.name%>
+        <%= (resource.event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
       </div>
     <% end %>
-    <div class="msg_holder" style="<%= message_position_css(resource.event) %>">
+    <div class="msg_holder" style="<%= message_position_css(resource.event, 1) %>">
       <% if !resource.event.design.is_seperated_title? %>
         <div class="title" style="<%= title_position_css(resource.event) %>">
-          <%= resource.event.name%>
+          <%= (resource.event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
         </div>
       <% end %>
       <div class="msg">
-      	<%= (resource.event.guest_message || "").gsub("\n", "<BR/>") %>
+        <%= (resource.event.guest_message || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
       </div>
     </div>
     <% for window in resource.event.design.windows %>
