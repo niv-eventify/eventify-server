@@ -1,10 +1,11 @@
 class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.merge_validates_format_of_email_field_options :live_validator => String::EMAIL_REGEX
+    c.ignore_blank_passwords=false
     c.validates_length_of_password_field_options =
-      {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+      {:on => :update, :minimum => 4}
     c.validates_length_of_password_confirmation_field_options =
-      {:on => :update, :minimum => 4, :if => :has_no_credentials?}
+      {:on => :update, :minimum => 4,:unless => Proc.new {|u| u.password.blank?}}
     c.perishable_token_valid_for = 2.weeks
   end
   include Astrails::Auth::Model
