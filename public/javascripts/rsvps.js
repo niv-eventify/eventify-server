@@ -59,8 +59,8 @@ jQuery(document).ready(function(jQuery){
     jQuery('.toolbar_preview').appendTo('body');
     jQuery('a.preview.nyroModal').nyroModal({
 	    processHandler: function(settings){
-			if(jQuery('.title_holder').length > 1 && jQuery('#title').text() != jQuery('#invitation .title_holder').text()) {
-				jQuery('#invitation .title_holder').html(jQuery('#title').html());
+			if(jQuery('.title-holder').length > 0 && jQuery('#title').text() != jQuery('#invitation .title').text()) {
+				jQuery('#invitation .title').html(jQuery('#title').html());
 			}
 			if(jQuery('.msg-holder .title').length > 0 && jQuery('#title').text() != jQuery('#invitation .msg_holder .title').text()) {
 				jQuery('#invitation .msg_holder .title').html(jQuery('#title').html());

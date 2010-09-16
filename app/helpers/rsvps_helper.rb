@@ -1,13 +1,13 @@
 module RsvpsHelper
-  def title_position_css(event)
+  def title_position_css(event, position_fix_ratio = 1.6)
     design = event.design
     text_align = event.title_text_align.blank? ? design.text_align : event.title_text_align
     color = event.title_color.blank? ? "rgb(#{design.title_color})" : event.title_color
     font = event.font_title.blank? ? design.font_title : event.font_title
-    width_part = design.title_width.blank? ? "" : "width:#{(design.title_width).to_int}px"
+    width_part = design.title_width.blank? ? "" : "width:#{(design.title_width/1.6).to_int}px"
     height_part = design.title_height.blank? ? "" : "height:#{(design.title_height/1.6).to_int}px"
-    top_part = design.title_top_y.blank? ? "" : "top:#{(design.title_top_y/1.6).to_int}px"
-    left_part = design.title_top_x.blank? ? "" : "left:#{(design.title_top_x/1.6).to_int}px"
+    top_part = design.title_top_y.blank? ? "" : "top:#{(design.title_top_y/position_fix_ratio).to_int}px"
+    left_part = design.title_top_x.blank? ? "" : "left:#{(design.title_top_x/position_fix_ratio).to_int}px"
     "#{left_part}; #{top_part}; #{width_part}; #{height_part}; color:#{color}; text-align: #{text_align}; font-size: #{event.title_font_size}px; font-family: #{font}"
   end
   

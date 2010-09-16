@@ -2,8 +2,10 @@
   <div class="background_holder" style="position: relative">
     <%= image_tag(resource.event.design.card.url, :class => "back") %>
     <% if resource.event.design.is_seperated_title? %>
-      <div class="title_holder" style="<%= title_position_css(resource.event) %>">
-        <%= (resource.event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
+      <div class="title_holder" style="<%= title_position_css(resource.event, 1) %>">
+        <div class="title">
+          <%= (resource.event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
+        </div>
       </div>
     <% end %>
     <div class="msg_holder" style="<%= message_position_css(resource.event, 1) %>">
