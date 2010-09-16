@@ -198,6 +198,7 @@ div.cmf-skinned-text {
   line-height: 1.2em;
   overflow: hidden;
   padding-right: 0px;
+  min-height: 1em;
 }
 .msg-holder .free_text{
   margin: 0;
@@ -205,6 +206,7 @@ div.cmf-skinned-text {
   line-height: 1em;
   overflow: hidden;
   padding-right: 0px;
+  min-height: 1em;
 }
 .hebrew .msg-holder, .hebrew .title-holder {
 	direction: rtl;
