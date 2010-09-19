@@ -467,13 +467,18 @@ class Event < ActiveRecord::Base
   def total_sms_count
     return @total_sms_count if @total_sms_count
 
-    invitations_to_be_sent = guests.scheduled_to_invite_by_sms.count + guests.not_invited_by_sms.count
+    if canceled?
+      # already recieved sms invitation are the same guests we're going to send cancellation text
+      @total_sms_count = guests.invited_by_sms.count * 2
+    else
+      invitations_to_be_sent = guests.scheduled_to_invite_by_sms.count + guests.not_invited_by_sms.count
 
-    messagess_sent = sms_messages.count
+      messagess_sent = sms_messages.count
 
-    reminders_to_be_sent = reminders.upcoming_by_sms_count * guests.invite_by_sms.count
+      reminders_to_be_sent = reminders.upcoming_by_sms_count * guests.invite_by_sms.count
 
-    @total_sms_count = invitations_to_be_sent + messagess_sent + reminders_to_be_sent
+      @total_sms_count = invitations_to_be_sent + messagess_sent + reminders_to_be_sent
+    end
   end
 
   before_create :set_free_plans

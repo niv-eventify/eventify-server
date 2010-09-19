@@ -60,9 +60,8 @@ protected
 
   def redirect_to_back_page
     case params[:back]
-    when "cancellation"
-      # TODO
-      1
+    when "cancellations"
+      redirect_to edit_cancellation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
     else # any or 'invitations'
       redirect_to edit_invitation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
     end

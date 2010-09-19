@@ -40,16 +40,27 @@ describe Event do
       @event.should be_sms_payments_required
     end
 
-    it "should calc total_sms_count" do
-      @event.stub!(:guests).and_return(mock("guests", :invite_by_sms => "", :scheduled_to_invite_by_sms => "", :not_invited_by_sms => ""))
-      @event.guests.scheduled_to_invite_by_sms.stub(:count).and_return(1)
-      @event.guests.not_invited_by_sms.stub(:count).and_return(10)
-      @event.sms_messages.stub(:count).and_return(100)
-      @event.reminders.stub(:upcoming_by_sms_count).and_return(5)
-      @event.guests.invite_by_sms.stub(:count).and_return(200)
+    describe "total sms count" do
+      before(:each) do
+        @event.stub!(:guests).and_return(mock("guests", :invite_by_sms => "", :scheduled_to_invite_by_sms => "", :not_invited_by_sms => ""))
+        @event.guests.scheduled_to_invite_by_sms.stub(:count).and_return(1)
+        @event.guests.not_invited_by_sms.stub(:count).and_return(10)
+        @event.sms_messages.stub(:count).and_return(100)
+        @event.reminders.stub(:upcoming_by_sms_count).and_return(5)
+        @event.guests.invite_by_sms.stub(:count).and_return(200)
+      end
 
-      @event.total_sms_count.should == 1111
+      it "should calc for cancellations" do
+        @event.stub!(:canceled?).and_return(true)
+        @event.guests.stub!(:invited_by_sms).and_return(mock("obj", :count => 7))
+        @event.total_sms_count.should == 14
+      end
+
+      it "should calc for invitaions" do
+        @event.total_sms_count.should == 1111
+      end
     end
+
   end
 
   describe "cancel" do

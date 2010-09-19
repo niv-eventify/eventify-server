@@ -77,7 +77,7 @@ protected
       true
     elsif event.canceled?
       flash[:error] = _("This is a cancelled event. You cannot change it.")
-      redirect_to events_path
+      redirect_to events_path(:cancelled => true)
       true
     end
   end

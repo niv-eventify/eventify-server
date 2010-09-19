@@ -2,6 +2,7 @@ class CancellationsController < InheritedResources::Base
   defaults :resource_class => Event, :collection_name => 'events', :instance_name => 'event', :route_instance_name => "cancellation"
   before_filter :require_user
   before_filter :verify_stats
+  before_filter :check_payments
 
   actions :edit, :update
 
@@ -37,5 +38,9 @@ protected
       redirect_to summary_path(resource)
       return false
     end
+  end
+
+  def check_payments
+    redirect_to(new_event_payment_path(resource, :back => "cancellations")) if resource.payments_required?
   end
 end
