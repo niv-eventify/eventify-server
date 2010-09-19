@@ -24,7 +24,8 @@
                 != link_to content_tag(:span, _("show map")), resource.event.map.url, :target => "_blank"
               - elsif !resource.event.map_link.blank?
                 != link_to content_tag(:span, _("show map")), resource.event.map_link, :target => "_blank"
-
+              - else
+                != link_to content_tag(:span, _("find address")), "http://maps.google.com/?hl=he&t=m&q=#{resource.event.location_address}", :target => "_blank", :id => "find_address", :class => "query_address_link"
           %dt= _("Date:")
           %dd= resource.event.starting_at.to_s(:isra_date)
           %dt= _("Time")
