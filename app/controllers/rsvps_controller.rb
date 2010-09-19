@@ -26,6 +26,7 @@ class RsvpsController < InheritedResources::Base
   end
 
   def show
+    resource.update_attribute(:first_viewed_invitation_at, Time.now) unless resource.first_viewed_invitation_at
     respond_to do |format|
       format.html{
         if "true" == params[:more]
