@@ -20,8 +20,7 @@ class Guest < ActiveRecord::Base
 
   attr_accessor :force_resend_email, :force_resend_sms
 
-  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp,
-    :takings_attributes, :force_resend_email, :force_resend_sms
+  attr_accessible :name, :email, :mobile_phone, :send_email, :send_sms, :allow_snow_ball, :attendees_count, :rsvp, :first_viewed_invitation_at, :takings_attributes, :force_resend_email, :force_resend_sms
 
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
@@ -49,7 +48,8 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
   named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
-
+  named_scope :rsvp_not_rsvped, {:conditions => "guests.first_viewed_invitation_at IS NOT NULL AND guests.rsvp IS NULL"}
+  named_scope :rsvp_not_opened_invite, :conditions => {:first_viewed_invitation_at => nil}
   named_scope :not_bounced_by_email, lambda { |email|
     {
       :include => :event, 
