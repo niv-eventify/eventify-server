@@ -69,17 +69,18 @@ class Payment < ActiveRecord::Base
   end
 
   def calc_defaults
-    self.sms_plan, @extra_payment_sms       = upgrade_plan(:sms_plan, event.total_sms_count, event.sms_plan)
-    self.prints_plan, @extra_payment_prints = upgrade_plan(:prints_plan, event.prints_ordered, event.prints_plan)
-    self.emails_plan, extra_payment_emails  = upgrade_plan(:emails_plan, event.guests.count, event.emails_plan)
+    self.sms_plan, @extra_payment_sms       = Payment.upgrade_plan(:sms_plan, event.total_sms_count, event.sms_plan)
+    self.prints_plan, @extra_payment_prints = Payment.upgrade_plan(:prints_plan, event.prints_ordered, event.prints_plan)
+    self.emails_plan, extra_payment_emails  = Payment.upgrade_plan(:emails_plan, event.guests.count, event.emails_plan)
 
     self.amount = @extra_payment_sms + @extra_payment_prints + extra_payment_emails
+    self
   end
 
   def calculated_amount
-    _, pay_sms        = upgrade_plan(:sms_plan, sms_plan, event.sms_plan)
-    _, pay_prints     = upgrade_plan(:prints_plan, prints_plan, event.prints_plan)
-    _, pay_emails     = upgrade_plan(:emails_plan, emails_plan, event.emails_plan)
+    _, pay_sms        = Payment.upgrade_plan(:sms_plan, sms_plan, event.sms_plan)
+    _, pay_prints     = Payment.upgrade_plan(:prints_plan, prints_plan, event.prints_plan)
+    _, pay_emails     = Payment.upgrade_plan(:emails_plan, emails_plan, event.emails_plan)
     pay_sms + pay_prints + pay_emails
   end
 
@@ -88,11 +89,11 @@ class Payment < ActiveRecord::Base
   end
 
   def email_upgrade_price(to_count)
-    _, price = upgrade_plan(:emails_plan, to_count, event.emails_plan)
+    _, price = Payment.upgrade_plan(:emails_plan, to_count, event.emails_plan)
     price < 0 ? 0 : price
   end
 
-  def upgrade_plan(plan, new_count, old_count)
+  def self.upgrade_plan(plan, new_count, old_count)
     new_plan, full_payment = Eventify.send(plan, new_count)
     _, already_paid        = Eventify.send(plan, old_count)
 

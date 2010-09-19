@@ -7,13 +7,13 @@ describe Payment do
   end
 
   it "should have upgrade plan for new" do
-    plan, price = @payment.upgrade_plan(:emails_plan, 101, 0)
+    plan, price = Payment.upgrade_plan(:emails_plan, 101, 0)
     plan.should == 200
     price.should == 15000
   end
 
   it "should have upgrade plan for paid" do
-    plan, price = @payment.upgrade_plan(:emails_plan, 201, 101)
+    plan, price = Payment.upgrade_plan(:emails_plan, 201, 101)
     plan.should == 300
     price.should == 10000
   end
@@ -28,9 +28,9 @@ describe Payment do
     @payment.emails_plan = 2
     @payment.prints_plan = 3
     
-    @payment.should_receive(:upgrade_plan).with(:sms_plan, 1, 1).and_return([0, 1])
-    @payment.should_receive(:upgrade_plan).with(:emails_plan, 2, 2).and_return([0, 10])
-    @payment.should_receive(:upgrade_plan).with(:prints_plan, 3, 3).and_return([0, 100])
+    Payment.should_receive(:upgrade_plan).with(:sms_plan, 1, 1).and_return([0, 1])
+    Payment.should_receive(:upgrade_plan).with(:emails_plan, 2, 2).and_return([0, 10])
+    Payment.should_receive(:upgrade_plan).with(:prints_plan, 3, 3).and_return([0, 100])
 
     @payment.stub!(:event).and_return(event)
 
