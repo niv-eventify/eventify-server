@@ -53,6 +53,11 @@
     }
 }
 jQuery(document).ready(function(jQuery){
+    if(jQuery.browser.msie) {
+        jQuery(".msg, .title").each(function(){
+            jQuery(this).html(jQuery(this).html().replace(/ /g, ""))
+        });
+    }
     jQuery(".toolbar").hide();
     rsvps.adjust_dialogs_size();
     jQuery(window).resize(function(){rsvps.adjust_dialogs_size();});

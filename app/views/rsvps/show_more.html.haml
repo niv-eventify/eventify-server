@@ -2,7 +2,13 @@
 - content_for(:head) do
   != stylesheet_link_tag "rsvps", "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal", "jquery.numeric.min"
-
+  :javascript
+    $(document).ready(function(){
+      if(jQuery.browser.msie) {
+        jQuery("#free_text").html(jQuery("#free_text").html().replace(/ /g, ""));
+        jQuery("#title").html(jQuery("#title").html().replace(/ /g, ""));
+      }
+    });
 - @skip_header = @skip_footer = true; @extra_body_class = "alt-page"
 
 .content-area
