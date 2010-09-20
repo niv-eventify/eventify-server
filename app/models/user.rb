@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
   acts_as_authentic do |c|
     c.merge_validates_format_of_email_field_options :live_validator => String::EMAIL_REGEX
-    c.ignore_blank_passwords=false
     c.validates_length_of_password_field_options =
-      {:on => :update, :minimum => 4}
+      {:on => :update, :minimum => 4, :if => :has_no_credentials_and_password_changed?}
     c.validates_length_of_password_confirmation_field_options =
-      {:on => :update, :minimum => 4,:unless => Proc.new {|u| u.password.blank?}}
+      {:on => :update, :minimum => 4, :if => :has_no_credentials_and_password_changed?}
     c.perishable_token_valid_for = 2.weeks
   end
   include Astrails::Auth::Model
@@ -16,6 +15,11 @@ class User < ActiveRecord::Base
 
   named_scope :enabled, {:conditions => "users.disabled_at IS NULL"}
   named_scope :disabled, {:conditions => "users.disabled_at IS NOT NULL"}
+
+  def has_no_credentials_and_password_changed?
+    has_no_credentials? || !password.blank? || !old_password.blank?
+  end
+
   def disabled?
     !disabled_at.blank?
   end
