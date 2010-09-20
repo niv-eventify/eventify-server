@@ -1,6 +1,4 @@
 ﻿var stage2 = {
-  max_title_font_size: 0,
-  max_free_text_font_size: 0,
   curr_title_font_size: 0,
   curr_free_text_font_size: 0,
   title_scroll_width: 0,
@@ -34,50 +32,6 @@
     return overflow;
   },
 
-  calcFontSize: function() {
-    var loop_protection = 0;
-    stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
-    stage2.curr_title_font_size = parseInt(jQuery("#title").css("font-size"));
-    if(!stage2.seperated_title) {
-      while(loop_protection < 100 && (stage2.curr_free_text_font_size < stage2.max_free_text_font_size || stage2.curr_title_font_size < stage2.max_title_font_size) && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
-        loop_protection++;
-        if(stage2.curr_free_text_font_size < stage2.max_free_text_font_size)
-            stage2.change_font_size_by(1, "free_text");
-        if(stage2.curr_title_font_size < stage2.max_title_font_size)
-            stage2.change_font_size_by(1, "title");
-      }
-      while(loop_protection < 100 && jQuery(".msg-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
-        loop_protection++;
-        stage2.change_font_size_by(-1, "free_text");
-        stage2.change_font_size_by(-1, "title");
-      }
-    } else {
-      while(loop_protection < 100 && stage2.curr_free_text_font_size < stage2.max_free_text_font_size && jQuery(".msg-holder").height() > jQuery("#free_text").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(1, "free_text");
-      }
-      while(loop_protection < 100 && stage2.curr_title_font_size < stage2.max_title_font_size && jQuery(".title-holder").height() > jQuery("#title").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(1, "title");
-      }
-      while(loop_protection < 100 && jQuery(".msg-holder").height() < jQuery("#free_text").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(-1, "free_text");
-      }
-      while(loop_protection < 100 && jQuery(".title-holder").height() < jQuery("#title").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(-1, "title");
-      }
-    }
-    while(loop_protection < 100 && (stage2.curr_title_font_size > stage2.max_title_font_size || jQuery("#title")[0].scrollWidth > stage2.title_scroll_width)) {
-      loop_protection++;
-      stage2.change_font_size_by(-1,"title");
-    }
-    while(loop_protection < 100 && (stage2.curr_free_text_font_size > stage2.max_free_text_font_size || jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width)) {
-      loop_protection++;
-      stage2.change_font_size_by(-1, "free_text");
-    }
-  },
   change_font_size_by: function(delta, id) {
     var new_font_size = parseInt(jQuery("#" + id).css("font-size")) + delta;
     jQuery("#" + id).css("font-size", new_font_size + "px");
@@ -103,7 +57,6 @@
     jQuery("#" + targetId).html(text);
     stage2.setOverflowWarning();
     stage2.setToolbarsPosition();
-//    stage2.calcFontSize();
   },
   setToolbarsPosition: function() {
     var toolbarHeight = 22;
@@ -338,6 +291,17 @@
         jQuery.nyroModalRemove();
         jQuery('body').css('cursor', 'wait');
         jQuery('.form.new-event').submit();
+    },
+
+    setScrollWidths: function() {
+        var title_bk = jQuery("#title").html();
+        var free_text_bk = jQuery("#free_text").html();
+        jQuery("#title").html("");
+        jQuery("#free_text").html("");
+        stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
+        stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
+        jQuery("#title").html(title_bk);
+        jQuery("#free_text").html(free_text_bk);
     }
 }
 jQuery(document).ready(function(){
@@ -357,10 +321,9 @@ jQuery(document).ready(function(){
   if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "") {
     stage2.hide_ending_at_block();
   }
-  stage2.max_title_font_size = parseInt(jQuery("#title").css("font-size"));
-  stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
-  stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
-  stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
+
+  stage2.setScrollWidths();
+
   stage2.location = jQuery("#event_location_name").val();
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
