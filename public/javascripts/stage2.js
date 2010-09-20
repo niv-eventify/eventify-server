@@ -420,12 +420,12 @@ jQuery(document).ready(function(){
     }
   });
   jQuery(".form input:first").focus();
-	jQuery("#event_map_link").focus(function(){
+/*	jQuery("#event_map_link").focus(function(){
 		if ("" == jQuery(this).val()) {
 			jQuery(this).val("http://");
 		}
 		return true;
-	})
+	})*/
   jQuery('#find_address').click(function(){
 	var addr = jQuery('#event_location_address').val();
 	if(addr.length == 0 || addr == jQuery(this).attr('ex_text')){

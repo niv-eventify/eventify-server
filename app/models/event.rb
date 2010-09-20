@@ -67,9 +67,9 @@ class Event < ActiveRecord::Base
 
   validates_presence_of :category_id, :design_id, :name, :starting_at
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
-  validates_format_of :map_link,
-    :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
-    :allow_nil => true, :allow_blank => true, :live_validator => /|/
+ # validates_format_of :map_link,
+ #   :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix,
+ #   :allow_nil => true, :allow_blank => true, :live_validator => /|/
 
   # sms sending validations
   attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
@@ -138,6 +138,13 @@ class Event < ActiveRecord::Base
     return unless starting_at_changed?
     disabled = reminders.not_sent.collect(&:adjust!)
     @reminders_disabled = disabled.any?
+  end
+
+  before_save :set_http_in_map_link
+  def set_http_in_map_link
+    unless map_link.include?("http://")
+      map_link.insert(0,"http://")
+    end
   end
 
   def reminders_disabled?
