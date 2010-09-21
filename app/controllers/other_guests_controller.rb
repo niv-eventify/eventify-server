@@ -47,6 +47,10 @@ protected
       :rsvp_maybe
     when "not_responded"
       :rsvp_not_responded
+    when "not_rsvped"
+      :rsvp_not_rsvped
+    when "not_opened_invite"
+      :rsvp_not_opened_invite
     else
       :rsvp_yes
     end

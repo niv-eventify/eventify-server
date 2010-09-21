@@ -18,9 +18,9 @@ module SummariesHelper
     haml_tag(:li, :class => "tab-#{tab_index}") do
       if 5 == tab_index
         query = params[:query] || params[:previous_query]
-        haml_concat link_to_remote(txt, :url => other_guests_path(:query => query), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
+        haml_concat link_to_remote(txt, :url => other_guests_path(:query => query, :separate_not_responded => params[:separate_not_responded]), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
       else
-        haml_concat link_to_remote(txt, :url => other_guests_path(:filter => filter), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
+        haml_concat link_to_remote(txt, :url => other_guests_path(:filter => filter, :separate_not_responded => params[:separate_not_responded]), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
       end
     end
   end
@@ -43,6 +43,10 @@ module SummariesHelper
 
   def active_tab_index
     @active_tab_index ||= case params[:filter]
+    when "not_opened_invite"
+      6
+    when "not_rsvped"
+      4
     when "not_responded"
       4
     when "no"
