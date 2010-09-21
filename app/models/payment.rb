@@ -23,6 +23,7 @@ class Payment < ActiveRecord::Base
     :on => :update
 
   named_scope :paid, :conditions => "paid_at IS NOT NULL"
+  named_scope :for_list, :order => "paid_at DESC", :include => :event 
 
   def pay!
     raise ActiveRecord::RecordInvalid.new(self) unless valid?
