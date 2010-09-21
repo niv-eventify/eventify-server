@@ -25,5 +25,5 @@
               = _("Loading guests...")
       :javascript
         jQuery(function(){
-          jQuery.ajax({url: #{rsvp_other_guests_path(resource.email_token, :columns_count => 3).to_json}, type:'get', dataType:'script'});
+          jQuery.ajax({url: #{rsvp_other_guests_path(resource.email_token, :columns_count => 3, :separate_not_responded => false).to_json}, type:'get', dataType:'script'});
         });

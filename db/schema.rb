@@ -9,8 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100831062017) do
-
+ActiveRecord::Schema.define(:version => 20100919083123) do
   create_table "categories", :force => true do |t|
     t.string   "name_en"
     t.string   "name_he"
@@ -212,6 +211,7 @@ ActiveRecord::Schema.define(:version => 20100831062017) do
     t.string   "bounce_reason"
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
+    t.datetime "first_viewed_invitation_at"
   end
 
   add_index "guests", ["email", "bounced_at"], :name => "index_guests_on_email_and_bounced_at"
