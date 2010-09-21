@@ -1,0 +1,21 @@
+- @page_title=_("Payments | Eventify")
+.top-text
+  %h2= _("Hello %{username},") % {:username => h(current_user.name)}
+
+- page_with_tabs(:payments) do
+  .events-holder.payments
+    %h3= _("Payments")
+    .table-box
+      .holder
+        %table
+          %thead
+            %tr
+              %td= _("Event")
+              %td= _("Amount")
+              %td= _("Date")
+          %tbody
+            != render collection
+        - if collection.total_pages > 1
+          != will_paginate(collection, :renderer => DesignsWillPaginate)
+        - else
+          &nbsp; 
