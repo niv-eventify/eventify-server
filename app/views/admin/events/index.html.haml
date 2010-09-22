@@ -1,0 +1,19 @@
+%h3
+  Events
+  (
+  = collection.total_entries
+  )
+
+%table
+  %tr
+    %th ID
+    %th Name
+    %th User
+    %th Guests
+    %th Emails
+    %th SMSs
+    %th Paid
+    %th Created
+  != render collection
+
+!= will_paginate(collection)
