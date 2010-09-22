@@ -1,0 +1,14 @@
+%h3 Users
+
+%table
+  %tr
+    %th ID
+    %th Name
+    %th Email
+    %th Events Count
+    %th Paid so far
+    %th Is Free
+    %th &nbsp;
+  != render collection
+
+!= will_paginate(collection)

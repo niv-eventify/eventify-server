@@ -1,0 +1,11 @@
+%tr{:id => dom_id(user)}
+  %td= user.id
+  %td
+    = user.name
+    - if user.is_admin?
+      (admin)
+  %td= user.email
+  %td= user.events.count
+  %td= user.payments.paid.sum(:amount).format_cents
+  %td.is_free= user.is_free?
+  %td!= link_to_remote "Toggle Free User", :url => admin_user_path(user), :method => :put, :confirm => _("Are you sure?")

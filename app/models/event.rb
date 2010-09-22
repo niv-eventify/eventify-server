@@ -449,6 +449,8 @@ class Event < ActiveRecord::Base
   end
 
   def payments_required?
+    return false if user.is_free?
+
     guests_payments_required? || sms_payments_required? || prints_payments_required?
   end
 

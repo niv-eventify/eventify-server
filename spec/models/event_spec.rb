@@ -7,6 +7,21 @@ describe Event do
       @event = Factory.create(:event)
     end
 
+    describe "free user" do
+      before(:each) do
+        @event.prints_ordered = 3
+      end
+
+      it "should require payments if not free user" do
+        @event.should be_payments_required
+      end
+
+      it "should not require payments if  free user" do
+        @event.user.is_free = true
+        @event.should_not be_payments_required
+      end
+    end
+
     it "should set default plans" do
       @event.emails_plan.should == 100
       @event.sms_plan.should be_zero
