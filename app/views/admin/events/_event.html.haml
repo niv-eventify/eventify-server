@@ -1,0 +1,12 @@
+%tr
+  %td= event.id
+  %td= event.name
+  %td
+    = event.user.email
+    - if event.user.is_free?
+      (free)
+  %td= event.guests.count
+  %td= event.guests.invite_by_email.count
+  %td= event.guests.invite_by_sms.count
+  %td= event.payments.paid.sum(:amount).format_cents
+  %td= event.created_at.to_s(:isra_date_time)

@@ -2,7 +2,6 @@ require File.dirname(__FILE__) + '/../../spec_helper'
 
 describe Admin::UsersController do
 
-
   setup :activate_authlogic
 
   describe "logged in user not admin" do

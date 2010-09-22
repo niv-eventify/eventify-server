@@ -1,6 +1,5 @@
 class Admin::UsersController < InheritedResources::Base
 
-  defaults :resource_class => User, :collection_name => 'users', :instance_name => 'users'
   before_filter :require_admin
   actions :index, :update
 

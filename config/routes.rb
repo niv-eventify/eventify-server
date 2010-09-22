@@ -20,6 +20,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :designs
     admin.resources :users
+    admin.resources :events
   end
 
   map.resources :events do |event|
