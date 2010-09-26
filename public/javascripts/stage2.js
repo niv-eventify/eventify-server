@@ -110,12 +110,14 @@
 
   alignTitle: function(align) {
         jQuery('#title').css('text-align',align);
+        jQuery('#event_title_text_align').val(align);
         jQuery.fn.unload_monit_set();
         jQuery(".background_holder .title_holder, .background_holder .title").css("text-align",align);
   },
 
   alignFreeText: function(align) {
         jQuery('#free_text').css("text-align",align);
+        jQuery('#event_msg_text_align').val(align);
         jQuery.fn.unload_monit_set();
         jQuery(".msg").css("text-align",align);
   },
