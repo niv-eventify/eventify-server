@@ -6,6 +6,8 @@
   months_arr: [],
   seperated_title: false,
   prev_text: "",
+  title_first_font_change: false,
+  msg_first_font_change: false,
 
   isTextOverflow: function() {
     var overflow = false;
@@ -110,60 +112,56 @@
     jQuery(selector).css("border", "");
   },
 
-  initToolbars: function() {
-    jQuery('#toolbar_title li.a-l a').click(function(){
-        jQuery('#title').css('text-align','left');
-        jQuery('#event_title_text_align').val('left');
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","left");
+  alignTitle: function(align) {
+        jQuery('#title').css('text-align',align);
+        jQuery('#event_title_text_align').val(align);
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
+        jQuery.fn.unload_monit_set();
+        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align",align);
+  },
+
+  alignFreeText: function(align) {
+        jQuery('#free_text').css("text-align",align);
+        jQuery('#event_msg_text_align').val(align);
+        stage2.showTitleBorder();
+        stage2.setToolbarsPosition();
+        jQuery.fn.unload_monit_set();
+        jQuery(".msg").css("text-align",align);
+  },
+
+  initToolbars: function() {
+    jQuery('#toolbar_title li.a-l a').click(function(){
+        stage2.alignTitle("left")
         return false;
     });
     jQuery('#toolbar_title li.a-c a').click(function(){
-        jQuery('#title').css("text-align","center");
-        jQuery('#event_title_text_align').val('center');
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","center");
-        stage2.showTitleBorder();
-        stage2.setToolbarsPosition();
+        stage2.alignTitle("center")
         return false;
     });
     jQuery('#toolbar_title li.a-r a').click(function(){
-        jQuery('#title').css("text-align","right");
-        jQuery('#event_title_text_align').val('right');
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","right");
-        stage2.showTitleBorder();
-        stage2.setToolbarsPosition();
+        stage2.alignTitle("right")
         return false;
     });
     jQuery('#toolbar_msg li.a-l a').click(function(){
-        jQuery('#free_text').css("text-align","left");
-        jQuery('#event_msg_text_align').val('left');
-        jQuery(".msg").css("text-align","left");
-        stage2.showMsgBorder();
-        stage2.setToolbarsPosition();
+        stage2.alignFreeText("left")
         return false;
     });
     jQuery('#toolbar_msg li.a-c a').click(function(){
-        jQuery('#free_text').css("text-align","center");
-        jQuery('#event_msg_text_align').val('center');
-        jQuery(".msg").css("text-align","center");
-        stage2.showMsgBorder();
-        stage2.setToolbarsPosition();
+        stage2.alignFreeText("center")
         return false;
     });
     jQuery('#toolbar_msg li.a-r a').click(function(){
-        jQuery('#free_text').css("text-align","right");
-        jQuery('#event_msg_text_align').val('right');
-        jQuery(".msg").css("text-align","right");
-        stage2.showMsgBorder();
-        stage2.setToolbarsPosition();
+        stage2.alignFreeText("right")
         return false;
     });
+
     jQuery('#toolbar_title a.font-plus').click(function(){
         stage2.change_font_size_by(1, "title");
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
@@ -171,6 +169,7 @@
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
@@ -178,6 +177,7 @@
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
@@ -185,6 +185,7 @@
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('.selectOptions.select_title a, .selectOptions.select_msg a, #toolbar_title .selectArea .center, #toolbar_msg .selectArea .center').each(function(){
@@ -198,6 +199,10 @@
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
+        if(stage2.title_first_font_change){
+          jQuery.fn.unload_monit_set();
+        }
+        stage2.title_first_font_change = true;
     });
     jQuery("#select_msg").change(function(){
         var currSelected = jQuery("#toolbar_msg .selectArea .center");
@@ -207,6 +212,10 @@
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
+        if(stage2.msg_first_font_change){
+          jQuery.fn.unload_monit_set();
+        }
+        stage2.msg_first_font_change = true;
     });
     var msgFont = jQuery("#free_text").css("font-family");
     jQuery('.selectOptions.select_msg a').each(function(){
@@ -221,6 +230,7 @@
     jQuery("#pallete_title").change(function(){
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
         jQuery("#event_title_color").val(jQuery(this).val());
+        jQuery.fn.unload_monit_set();
     });
     jQuery("#pallete_title").colorPicker();
     if(jQuery("#event_title_color").val().length > 0)
@@ -229,6 +239,7 @@
     jQuery("#pallete_msg").change(function(){
         jQuery('#free_text, .msg').css("color",jQuery(this).val());
         jQuery("#event_msg_color").val(jQuery(this).val());
+        jQuery.fn.unload_monit_set();
     });
     jQuery("#pallete_msg").colorPicker();
     if(jQuery("#event_msg_color").val().length > 0)

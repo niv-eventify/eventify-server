@@ -58,7 +58,7 @@
 
 :javascript
   jQuery(function(){
-    jQuery(".side-area input").unload_monit(#{_("You didn't save the event.").to_json});
+    jQuery(".side-area input, .side-area textarea").unload_monit(#{_("You didn't save the event.").to_json});
     jQuery('.form.new-event').submit(function(){
       jQuery.fn.unload_monit_reset();
     });
