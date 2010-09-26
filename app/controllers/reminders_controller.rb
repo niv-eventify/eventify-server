@@ -4,7 +4,7 @@ class RemindersController < InheritedResources::Base
   belongs_to :event
   layout nil
 
-  actions :new, :create, :update, :destroy, :edit
+  actions :index, :new, :create, :update, :destroy, :edit
   respond_to :js, :except => [:new, :edit]
 
   def new

@@ -1,0 +1,4 @@
+page << <<-JAVASCRIPT
+  jQuery.nyroModalManual({content: #{render(:partial => 'index').to_json}});
+  jQuery(function(){jQuery('a.link_to_add_reminder').nyroModal();});
+JAVASCRIPT
