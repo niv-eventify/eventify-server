@@ -8,7 +8,9 @@
   months_arr: [],
   seperated_title: false,
   prev_text: "",
-  
+  title_first_font_change: false,
+  msg_first_font_change: false,
+
   calcFontSize: function() {
     var loop_protection = 0;
     stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
@@ -106,41 +108,41 @@
     }
   },
 
+  alignTitle: function(align) {
+        jQuery('#title').css('text-align',align);
+        jQuery.fn.unload_monit_set();
+        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align",align);
+  },
+
+  alignFreeText: function(align) {
+        jQuery('#free_text').css("text-align",align);
+        jQuery.fn.unload_monit_set();
+        jQuery(".msg").css("text-align",align);
+  },
+
   initToolbars: function() {
     jQuery('#toolbar_title li.a-l a').click(function(){
-        jQuery('#title').css('text-align','left');
-        jQuery('#event_title_text_align').val('left');
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","left");
+        stage2.alignTitle("left")
         return false;
     });
     jQuery('#toolbar_title li.a-c a').click(function(){
-        jQuery('#title').css("text-align","center");
-        jQuery('#event_title_text_align').val('center');
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","center");
+        stage2.alignTitle("center")
         return false;
     });
     jQuery('#toolbar_title li.a-r a').click(function(){
-        jQuery('#title').css("text-align","right");
-        jQuery('#event_title_text_align').val('right');
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align","right");
+        stage2.alignTitle("right")
         return false;
     });
     jQuery('#toolbar_msg li.a-l a').click(function(){
-        jQuery('#free_text').css("text-align","left");
-        jQuery('#event_msg_text_align').val('left');
-        jQuery(".msg").css("text-align","left");
+        stage2.alignFreeText("left")
         return false;
     });
     jQuery('#toolbar_msg li.a-c a').click(function(){
-        jQuery('#free_text').css("text-align","center");
-        jQuery('#event_msg_text_align').val('center');
-        jQuery(".msg").css("text-align","center");
+        stage2.alignFreeText("center")
         return false;
     });
     jQuery('#toolbar_msg li.a-r a').click(function(){
-        jQuery('#free_text').css("text-align","right");
-        jQuery('#event_msg_text_align').val('right');
-        jQuery(".msg").css("text-align","right");
+        stage2.alignFreeText("right")
         return false;
     });
     jQuery('#toolbar_title a.font-plus').click(function(){
@@ -149,11 +151,13 @@
         stage2.calcFontSize();
         if(curr == stage2.curr_title_font_size)
             stage2.max_title_font_size--;
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
         stage2.max_title_font_size--;
         stage2.calcFontSize();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
@@ -162,11 +166,13 @@
         stage2.calcFontSize();
         if(curr == stage2.curr_free_text_font_size)
             stage2.max_free_text_font_size--;
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
         stage2.max_free_text_font_size--;
         stage2.calcFontSize();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('.selectOptions.select_title a, .selectOptions.select_msg a, #toolbar_title .selectArea .center, #toolbar_msg .selectArea .center').each(function(){
@@ -177,12 +183,20 @@
         currSelected.css("font-family",currSelected.html());
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
         jQuery("#event_font_title").val(currSelected.html());
+        if(stage2.title_first_font_change){
+          jQuery.fn.unload_monit_set();
+        }
+        stage2.title_first_font_change = true;
     });
     jQuery("#select_msg").change(function(){
         var currSelected = jQuery("#toolbar_msg .selectArea .center");
         currSelected.css("font-family",currSelected.html());
         jQuery('#free_text, .msg').css("font-family",currSelected.html());
         jQuery("#event_font_body").val(currSelected.html());
+        if(stage2.msg_first_font_change){
+          jQuery.fn.unload_monit_set();
+        }
+        stage2.msg_first_font_change = true;
     });
     var msgFont = jQuery("#free_text").css("font-family");
     jQuery('.selectOptions.select_msg a').each(function(){
@@ -197,6 +211,7 @@
     jQuery("#pallete_title").change(function(){
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
         jQuery("#event_title_color").val(jQuery(this).val());
+        jQuery.fn.unload_monit_set();
     });
     jQuery("#pallete_title").colorPicker();
     if(jQuery("#event_title_color").val().length > 0)
@@ -205,6 +220,7 @@
     jQuery("#pallete_msg").change(function(){
         jQuery('#free_text, .msg').css("color",jQuery(this).val());
         jQuery("#event_msg_color").val(jQuery(this).val());
+        jQuery.fn.unload_monit_set();
     });
     jQuery("#pallete_msg").colorPicker();
     if(jQuery("#event_msg_color").val().length > 0)
