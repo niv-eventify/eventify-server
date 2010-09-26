@@ -9,7 +9,7 @@ class Bounce
 
   def self.cron_job
     begin
-      all.each do |bounce|
+      (all || []).each do |bounce|
         if g = Guest.not_bounced_by_email(bounce["email"]).first
           g.bounce!(bounce["status"], bounce["reason"])
         end
