@@ -5,7 +5,7 @@ class RemindersController < InheritedResources::Base
   layout nil
 
   actions :index, :new, :create, :update, :destroy, :edit
-  respond_to :js, :except => [:new, :edit]
+  respond_to :js, :except => [:new]
 
   def new
     new! do |success|

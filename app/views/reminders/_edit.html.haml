@@ -1,7 +1,12 @@
-- popup_title(_("Edit Reminder to Guests"))
+.edit_reminder.lb-popup
+  - unless resource.reminder_sent_at.nil?
+    - popup_title(_("Edit Reminder to Guests"))
+    %h4= _("Reminder has already been sent")
+  - else
+    - popup_title(_("Edit Reminder to Guests"))
 
-- form_remote_for :reminder, resource, :builder => InlineErrorFormBuilder::Builder, :html => {:class => "download-form upload-form form", :method => :put}, :url => event_reminder_path(@event, resource) do |f|
-  != render(:partial => "reminders/form", :locals => {:f => f})
-  .popup-btns.popup-btns-alt
-    != link_to_function _("Update"), "jQuery(this).parents('form').get(0).onsubmit();", :class => "btn"
-    != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
+    - form_remote_for :reminder, resource, :builder => InlineErrorFormBuilder::Builder, :html => {:class => "download-form upload-form form", :method => :put}, :url => event_reminder_path(@event, resource) do |f|
+      != render(:partial => "reminders/form", :locals => {:f => f})
+      .popup-btns.popup-btns-alt
+        != link_to_function _("Update"), "jQuery(this).parents('form').get(0).onsubmit();", :class => "btn"
+        != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
