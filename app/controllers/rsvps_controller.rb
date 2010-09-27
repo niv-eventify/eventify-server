@@ -48,7 +48,7 @@ class RsvpsController < InheritedResources::Base
                :dpi => '300',
                :lowquality => false,
                :disable_smart_shrinking => false,
-               :orientation => 'Landscape'
+               :orientation => 'Portrait'
       }
     end
   end

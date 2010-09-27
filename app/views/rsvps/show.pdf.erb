@@ -1,4 +1,39 @@
-<div id="invitation_pdf">
+<div class="invitation_pdf">
+  <div class="background_holder" style="position: relative">
+    <%= image_tag(resource.event.design.card.url, :class => "back") %>
+    <% if resource.event.design.is_seperated_title? %>
+      <div class="title_holder" style="<%= title_position_css(resource.event, 1) %>">
+        <div class="title">
+          <%= (resource.event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
+        </div>
+      </div>
+    <% end %>
+    <div class="msg_holder" style="<%= message_position_css(resource.event, 1) %>">
+      <% if !resource.event.design.is_seperated_title? %>
+        <div class="title" style="<%= title_position_css(resource.event) %>">
+          <%= (resource.event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
+        </div>
+      <% end %>
+      <div class="msg">
+        <%= (resource.event.guest_message || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
+      </div>
+    </div>
+    <% for window in resource.event.design.windows %>
+      <div class="window" window_id="<%= window.id %>" style="<%= window_css(window, 1) %>">
+        <% for cropped_pic in window.cropped_pictures.find_all_by_event_id(resource.event.id.to_i) %>
+          <%= image_tag(cropped_pic.pic.url(:original)) %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<BR/>
+<BR/>
+<BR/>
+<BR/>
+<BR/>
+<BR/>
+<div class="invitation_pdf">
   <div class="background_holder" style="position: relative">
     <%= image_tag(resource.event.design.card.url, :class => "back") %>
     <% if resource.event.design.is_seperated_title? %>
