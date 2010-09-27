@@ -1,6 +1,16 @@
 module Eventify
 
-    # all prices are in ogorot
+  # all prices are in ogorot
+
+  if ::IS_STAGE
+    EMAILS_PLAN_PROPERTIES = [
+      [0..1, [1, 0]],
+      [2..2, [2, 100]],
+      [3..300, [300, 25000]],
+      [301..400, [400, 35000]],
+      [401..500, [500, 45000]]
+    ]
+  else
     EMAILS_PLAN_PROPERTIES = [
       [0..100, [100, 0]],
       [101..200, [200, 15000]],
@@ -8,14 +18,8 @@ module Eventify
       [301..400, [400, 35000]],
       [401..500, [500, 45000]]
     ]
+  end
 
-    # EMAILS_PLAN_PROPERTIES = [
-    #   [0..1, [1, 0]],
-    #   [2..2, [2, 100]],
-    #   [3..300, [300, 25000]],
-    #   [301..400, [400, 35000]],
-    #   [401..500, [500, 45000]]
-    # ]
 
     SMS_BATCH = 25
     SMS_PRICE = 20 # 0.2nis
