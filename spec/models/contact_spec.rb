@@ -26,14 +26,41 @@ describe Contact do
       end
     end
 
-    it "should validate uniquness" do
-      c = Contact.new(:name => "foo", :email => "foo@car.com")
-      c.user_id = 12
-      c.save.should be_true
-      c = Contact.new(:name => "foo", :email => "foo@car.com")
-      c.user_id = 12
-      c.should_not be_valid
-      c.errors.on(:email).should_not be_blank
+    describe "uniquness" do
+      it "should validate uniquness" do
+        c = Contact.new(:name => "foo", :email => "foo@car.com")
+        c.user_id = 12
+        c.save.should be_true
+        c = Contact.new(:name => "foo", :email => "foo@car.com")
+        c.user_id = 12
+        c.should_not be_valid
+        c.errors.on(:email).should_not be_blank
+      end
+
+      it "should allow deleting" do
+        c = Contact.new(:name => "foo", :email => "foo@car.com")
+        c.user_id = 12
+        c.save!
+
+        c.removed_at = Time.now.utc
+        c.save!
+
+        # allows to create new one with same email
+        c = Contact.new(:name => "foo", :email => "foo@car.com")
+        c.user_id = 12
+        c.save.should be_true
+
+        # and delete again
+        c.removed_at = Time.now.utc
+        c.save.should be_true
+
+        # and create again with same email
+        c = Contact.new(:name => "foo", :email => "foo@car.com")
+        c.user_id = 12
+        c.save.should be_true
+
+        Contact.find(:all, :conditions => ["email = ?", "foo@car.com"]).size.should == 3
+      end
     end
   end
 end
