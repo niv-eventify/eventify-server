@@ -561,17 +561,8 @@ li.thing.active span.name {
 	padding: 15px 28px 13px 0px;
 }
 
-.emails-phones {
-	background: url("/images/coctails.gif") no-repeat scroll 723px 1px transparent;
-	min-height:200px;
-}
-
 * html .emails-phones {
 	height:200px;
-}
-
-.hebrew .emails-phones {
-	background: url("/images/coctails.gif") no-repeat scroll 48px 1px transparent;
 }
 
 .stage-2 .form label {
@@ -1098,4 +1089,12 @@ em.counter {
 
 .next-btn, .hebrew .previous-btn {
 	margin: 0 0 0 3px;
+}
+
+.import .form-col-alt input[type="checkbox"] {
+  float:left;
+}
+
+.hebrew .import .form-col-alt input[type="checkbox"] {
+  float:right;
 }
