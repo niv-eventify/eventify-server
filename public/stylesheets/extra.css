@@ -1099,3 +1099,6 @@ em.counter {
 .next-btn, .hebrew .previous-btn {
 	margin: 0 0 0 3px;
 }
+
+.def-list dt.blue,
+.def-list dd.blue { color: #41bdcd;}
