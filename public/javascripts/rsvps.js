@@ -30,9 +30,10 @@
         rsvps.minimized_by = 900 / rsvps.dialog_width;
 
         jQuery("#" + invitation_id + " .background_holder .window").each(function(){
-            var minimized_by = 900 / rsvps.dialog_width;
-            jQuery(this).css("top", (parseInt(jQuery(this).css("top"))+5) + "px");
-            jQuery(this).css("left", (parseInt(jQuery(this).css("left"))+5) + "px");
+            jQuery(this).css("width", Math.ceil(parseInt(jQuery(this).css("width")) / rsvps.minimized_by) + "px");
+            jQuery(this).css("height", Math.ceil(parseInt(jQuery(this).css("height")) / rsvps.minimized_by) + "px");
+            jQuery(this).css("top", Math.ceil(parseInt(jQuery(this).css("top")) / rsvps.minimized_by + 5) + "px");
+            jQuery(this).css("left", Math.ceil(parseInt(jQuery(this).css("left")) / rsvps.minimized_by + 5) + "px");
         });
     },
     cloneTextBox: function(nyroModalContent, holderClass) {
