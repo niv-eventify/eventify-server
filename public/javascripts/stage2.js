@@ -1,4 +1,4 @@
-﻿var stage2 = {
+var stage2 = {
   max_title_font_size: 0,
   max_free_text_font_size: 0,
   curr_title_font_size: 0,
@@ -33,7 +33,8 @@
     }
     return overflow;
   },
-
+  title_first_font_change: false,
+  msg_first_font_change: false,
   calcFontSize: function() {
     var loop_protection = 0;
     stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
@@ -155,6 +156,18 @@
   hideMsgBorder: function() {
     var selector = stage2.seperated_title ? ".msg-holder" : "#free_text";
     jQuery(selector).css("border", "");
+  alignTitle: function(align) {
+        jQuery('#title').css('text-align',align);
+        jQuery('#event_title_text_align').val(align);
+        jQuery.fn.unload_monit_set();
+        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align",align);
+  },
+
+  alignFreeText: function(align) {
+        jQuery('#free_text').css("text-align",align);
+        jQuery('#event_msg_text_align').val(align);
+        jQuery.fn.unload_monit_set();
+        jQuery(".msg").css("text-align",align);
   },
 
   initToolbars: function() {
@@ -232,6 +245,57 @@
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
+        stage2.alignTitle("left")
+        return false;
+    });
+    jQuery('#toolbar_title li.a-c a').click(function(){
+        stage2.alignTitle("center")
+        return false;
+    });
+    jQuery('#toolbar_title li.a-r a').click(function(){
+        stage2.alignTitle("right")
+        return false;
+    });
+    jQuery('#toolbar_msg li.a-l a').click(function(){
+        stage2.alignFreeText("left")
+        return false;
+    });
+    jQuery('#toolbar_msg li.a-c a').click(function(){
+        stage2.alignFreeText("center")
+        return false;
+    });
+    jQuery('#toolbar_msg li.a-r a').click(function(){
+        stage2.alignFreeText("right")
+        return false;
+    });
+    jQuery('#toolbar_title a.font-plus').click(function(){
+        stage2.max_title_font_size++;
+        var curr = stage2.curr_title_font_size;
+        stage2.calcFontSize();
+        if(curr == stage2.curr_title_font_size)
+            stage2.max_title_font_size--;
+        jQuery.fn.unload_monit_set();
+        return false;
+    });
+    jQuery('#toolbar_title a.font-minus').click(function(){
+        stage2.max_title_font_size--;
+        stage2.calcFontSize();
+        jQuery.fn.unload_monit_set();
+        return false;
+    });
+    jQuery('#toolbar_msg a.font-plus').click(function(){
+        stage2.max_free_text_font_size++;
+        var curr = stage2.curr_free_text_font_size;
+        stage2.calcFontSize();
+        if(curr == stage2.curr_free_text_font_size)
+            stage2.max_free_text_font_size--;
+        jQuery.fn.unload_monit_set();
+        return false;
+    });
+    jQuery('#toolbar_msg a.font-minus').click(function(){
+        stage2.max_free_text_font_size--;
+        stage2.calcFontSize();
+        jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('.selectOptions.select_title a, .selectOptions.select_msg a, #toolbar_title .selectArea .center, #toolbar_msg .selectArea .center').each(function(){
@@ -245,6 +309,10 @@
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
+        if(stage2.title_first_font_change){
+          jQuery.fn.unload_monit_set();
+        }
+        stage2.title_first_font_change = true;
     });
     jQuery("#select_msg").change(function(){
         var currSelected = jQuery("#toolbar_msg .selectArea .center");
@@ -254,6 +322,10 @@
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
+        if(stage2.msg_first_font_change){
+          jQuery.fn.unload_monit_set();
+        }
+        stage2.msg_first_font_change = true;
     });
     var msgFont = jQuery("#free_text").css("font-family");
     jQuery('.selectOptions.select_msg a').each(function(){
@@ -268,6 +340,7 @@
     jQuery("#pallete_title").change(function(){
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
         jQuery("#event_title_color").val(jQuery(this).val());
+        jQuery.fn.unload_monit_set();
     });
     jQuery("#pallete_title").colorPicker();
     if(jQuery("#event_title_color").val().length > 0)
@@ -276,6 +349,7 @@
     jQuery("#pallete_msg").change(function(){
         jQuery('#free_text, .msg').css("color",jQuery(this).val());
         jQuery("#event_msg_color").val(jQuery(this).val());
+        jQuery.fn.unload_monit_set();
     });
     jQuery("#pallete_msg").colorPicker();
     if(jQuery("#event_msg_color").val().length > 0)
@@ -483,12 +557,6 @@ jQuery(document).ready(function(){
     }
   });
   jQuery(".form input:first").focus();
-    jQuery("#event_map_link").focus(function(){
-        if ("" == jQuery(this).val()) {
-            jQuery(this).val("http://");
-        }
-        return true;
-    })
   jQuery('#find_address').click(function(){
     var addr = jQuery('#event_location_address').val();
     if(addr.length == 0 || addr == jQuery(this).attr('ex_text')){

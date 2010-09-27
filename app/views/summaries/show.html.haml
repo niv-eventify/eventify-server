@@ -62,7 +62,9 @@
             %dt.red= _("RSVP no")
             %dd.red= @event.guests.rsvp_no.count
             %dt= _("Not responded")
-            %dd= @event.guests.rsvp_not_responded.count
+            %dd= @event.guests.rsvp_not_rsvped.count
+            %dt.blue= _("Not Opened Invitation")
+            %dd.blue= @event.guests.rsvp_not_opened_invite.count
       .column-1
         %h2= _("Things to bring")
         .lists

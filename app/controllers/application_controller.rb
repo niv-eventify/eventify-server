@@ -83,6 +83,8 @@ protected
   end
 
   def checkie6
+    return false if request.user_agent.blank?
+
     a = Agent.new(request.user_agent)
     if :msie == a.engine && a.version.to_i < 7
       redirect_to page_path("ie6")
