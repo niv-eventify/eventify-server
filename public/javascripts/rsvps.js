@@ -43,7 +43,7 @@ jQuery(document).ready(function(jQuery){
     jQuery('a.preview.nyroModal').nyroModal({
         processHandler: function(settings){
             var change = false;
-            if(jQuery('.title_holder').length > 1 && jQuery('#title').text() != jQuery('#invitation .title_holder').text()) {
+            if(jQuery('.title_holder').length > 0 && jQuery('#title').text() != jQuery('#invitation .title_holder').text()) {
                 jQuery('#invitation .title_holder').html(jQuery('#title').html());
                 change = true;
             }
