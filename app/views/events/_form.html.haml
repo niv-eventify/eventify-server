@@ -40,7 +40,7 @@
   != link_to(_("find address"), "http://maps.google.com/?hl=he", :target => "_blank", :id => "find_address", :alert => _("You must fill out the address field in order to find a map"), :ex_text => _("ex. 5th Avenue, Manhattan"), :class => "query_address_link")
   - event_text_input(f, :map_link, _("Map Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"}) do
     = _("or")
-  != f.input(:map, :as => :file, :label => _("Map Image"))
+  != f.input(:map, :as => :file, :label => _("Map Image") , :after_html => _("2MB Max"))
   - unless f.object.map.url.blank?
     .f-row.current_map_iamges
       != link_to _("Current Map Image"), f.object.map.url, :target => "_blank"

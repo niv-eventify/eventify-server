@@ -1125,6 +1125,7 @@ em.counter {
 	margin: 0 0 0 3px;
 }
 
+<<<<<<< HEAD
 .settings-info {
 	width:auto;
 }
@@ -1154,3 +1155,5 @@ em.counter {
   width:760px 
 }
 
+.def-list dt.blue,
+.def-list dd.blue { color: #41bdcd;}
