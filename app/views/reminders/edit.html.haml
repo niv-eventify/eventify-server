@@ -1,6 +1,0 @@
-.edit_reminder.lb-popup
-  - unless resource.reminder_sent_at.nil?
-    - popup_title(_("Edit Reminder to Guests"))
-    %h4= _("Reminder has already been sent")
-  - else
-    != render(:partial => "reminders/edit")

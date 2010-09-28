@@ -3,8 +3,6 @@
     .form-col.form-col-edit
       - if reminder.reminder_sent_at.nil?
         != link_to _("Edit"), edit_event_reminder_path(@event, reminder), :class => "link_to_edit_#{dom_id(reminder)} edit"
-        :javascript
-          jQuery(function(){jQuery('a.link_to_edit_#{dom_id(reminder)}').nyroModal();});
       - else
         = s_("reminder|(sent)")
     - if reminder.reminder_sent_at.nil?

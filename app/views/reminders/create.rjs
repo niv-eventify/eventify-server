@@ -3,6 +3,5 @@ if resource.new_record?
   page << "jQuery('#nyroModalContent select').customSelect();"
   page << "jQuery('#nyroModalContent input:checkbox').customCheckbox();"
 else
-  page << "jQuery.nyroModalRemove()"
   rerender_reminders(page)
 end
