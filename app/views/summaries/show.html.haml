@@ -5,6 +5,9 @@
 
 - @content_css_class = "stars-bg"
 
+:javascript
+  jQuery(function(){jQuery('a.send-message-guests-link').nyroModal();});
+
 - events_content_section(5, @event, {}, :content_section_class => "content-section-alt") do
   .content-section-heading
     %h1
@@ -65,6 +68,8 @@
             %dd= @event.guests.rsvp_not_rsvped.count
             %dt.blue= _("Not Opened Invitation")
             %dd.blue= @event.guests.rsvp_not_opened_invite.count
+        %span.button-holder
+          != link_to _("Send Message to Guests"), new_event_guests_message_path(@event) , :class => 'btn-sml send-message-guests-link'   
       .column-1
         %h2= _("Things to bring")
         .lists

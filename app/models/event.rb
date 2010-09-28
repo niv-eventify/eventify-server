@@ -43,6 +43,8 @@ class Event < ActiveRecord::Base
 
   has_many :reminders
 
+  has_many :guests_messages
+
   include Event::Summary
 
   has_attached_file :map,

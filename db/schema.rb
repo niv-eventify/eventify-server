@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100919083123) do
+ActiveRecord::Schema.define(:version => 20100928121723) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -144,8 +144,8 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.integer  "rsvp_summary_send_every",                    :default => 0
     t.datetime "last_summary_sent_at"
     t.boolean  "allow_seeing_other_guests",                  :default => true
-    t.integer  "title_font_size",                            :default => 22
-    t.integer  "msg_font_size",                              :default => 20
+    t.integer  "title_font_size",                            :default => 35
+    t.integer  "msg_font_size",                              :default => 32
     t.string   "title_text_align"
     t.string   "msg_text_align"
     t.string   "font_body"
@@ -164,7 +164,6 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
-    t.string   "invitation_title",           :limit => 100
     t.integer  "emails_plan",                                :default => 0
     t.integer  "sms_plan",                                   :default => 0
     t.integer  "prints_plan",                                :default => 0
@@ -206,10 +205,10 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
     t.boolean  "any_invitation_sent",        :default => false
-    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "bounced_at"
     t.string   "bounce_status"
     t.string   "bounce_reason"
+    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
     t.datetime "first_viewed_invitation_at"
@@ -217,6 +216,16 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
 
   add_index "guests", ["email", "bounced_at"], :name => "index_guests_on_email_and_bounced_at"
   add_index "guests", ["event_id", "bounced_at"], :name => "index_guests_on_event_id_and_bounced_at"
+
+  create_table "guests_messages", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guests_messages", ["event_id"], :name => "index_guests_messages_on_event_id"
 
   create_table "hosts", :force => true do |t|
     t.integer  "event_id"

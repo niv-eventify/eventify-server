@@ -1102,3 +1102,10 @@ em.counter {
 
 .def-list dt.blue,
 .def-list dd.blue { color: #41bdcd;}
+
+.send-message-guests-link {
+  float:left;
+  margin-left: 60px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
