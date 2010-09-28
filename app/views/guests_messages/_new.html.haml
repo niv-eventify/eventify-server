@@ -1,0 +1,9 @@
+.import
+  - popup_title(_("New Message to Guests"))
+
+  - form_remote_for :guests_message, resource, :builder => InlineErrorFormBuilder::Builder, :html => {:class => "upload-form form"}, :url => event_guests_messages_path(@event) do |f|
+    != render(:partial => "guests_messages/form", :locals => {:f => f})
+
+    .popup-btns.popup-btns-alt
+      != link_to_function _("Send"), "jQuery(this).parents('form').get(0).onsubmit();", :class => "btn"
+      != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"

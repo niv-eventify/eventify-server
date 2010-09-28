@@ -2,11 +2,15 @@
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal"
-
+  :javascript
+    jQuery(function(){
+      jQuery("a.send-message-guests-link").click(function(){
+        var url = jQuery(this).attr("href");
+        show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
+        return false;
+      });
+    })
 - @content_css_class = "stars-bg"
-
-:javascript
-  jQuery(function(){jQuery('a.send-message-guests-link').nyroModal();});
 
 - events_content_section(5, @event, {}, :content_section_class => "content-section-alt") do
   .content-section-heading
