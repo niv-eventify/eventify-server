@@ -1098,3 +1098,7 @@ em.counter {
 .hebrew .import .form-col-alt input[type="checkbox"] {
   float:right;
 }
+
+.def-list dt.blue,
+.def-list dd.blue { color: #41bdcd;}
+

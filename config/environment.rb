@@ -10,6 +10,8 @@ require File.join(File.dirname(__FILE__), 'boot')
 #require 'activesupport'
 #ActiveSupport::Dependencies.log_activity = true
 
+::IS_STAGE = true # override in extra.rb
+
 Rails::Initializer.run do |config|
   if "irb" == $0
     config.logger = Logger.new(STDOUT)
