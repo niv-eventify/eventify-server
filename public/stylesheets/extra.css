@@ -1102,3 +1102,8 @@ em.counter {
 
 .def-list dt.blue,
 .def-list dd.blue { color: #41bdcd;}
+.stage-3 .page-nav {
+	background: none;
+	padding-top: 0px;
+	margin-top: 0px;
+}
