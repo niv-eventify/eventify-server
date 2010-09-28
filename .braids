@@ -163,7 +163,7 @@ vendor/plugins/validation_reflection:
 vendor/plugins/vladify: 
   branch: master
   remote: braid/vendor/plugins/vladify
-  revision: 5ed6406cb78cdfa0041ee3985ba39749cbb74e01
+  revision: a5f0afbee4690114405fad4bd5d7c67d02c1e1ab
   squashed: true
   type: git
   url: git://github.com/astrails/vladify.git
