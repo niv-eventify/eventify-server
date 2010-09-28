@@ -10,6 +10,7 @@ module Eventify
       [301..400, [400, 35000]],
       [401..500, [500, 45000]]
     ]
+    SMS_BATCH = 5
   else
     EMAILS_PLAN_PROPERTIES = [
       [0..100, [100, 0]],
@@ -18,10 +19,10 @@ module Eventify
       [301..400, [400, 35000]],
       [401..500, [500, 45000]]
     ]
+    SMS_BATCH = 25
   end
 
 
-    SMS_BATCH = 25
     SMS_PRICE = 20 # 0.2nis
 
     PRINTS_BATCH = 50
