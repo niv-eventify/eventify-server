@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100922103242) do
+ActiveRecord::Schema.define(:version => 20100929154913) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -275,16 +275,13 @@ ActiveRecord::Schema.define(:version => 20100922103242) do
     t.integer  "event_id"
     t.boolean  "by_email"
     t.boolean  "by_sms"
-    t.string   "email_subject"
-    t.string   "email_body",       :limit => 2048
-    t.string   "sms_message"
-    t.string   "before_units",                     :default => "days"
+    t.string   "before_units",     :default => "days"
     t.integer  "before_value"
     t.datetime "send_reminder_at"
     t.datetime "reminder_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_active",                        :default => true
+    t.boolean  "is_active",        :default => true
   end
 
   add_index "reminders", ["event_id"], :name => "index_reminders_on_event_id"

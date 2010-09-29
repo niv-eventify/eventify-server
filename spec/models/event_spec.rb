@@ -104,7 +104,7 @@ describe Event do
     end
 
     it "should cancel reminders" do
-      @guest.event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
+      @guest.event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true)
       @guest.event.reminders.first.should be_is_active
       @guest.event.cancel!
       @guest.event.reload.reminders.first.should_not be_is_active
@@ -483,7 +483,7 @@ describe Event do
         @original_start = 2.days.from_now.utc
         @event.starting_at = @original_start
         @event.save!
-        @reminder = @event.reminders.create!(:before_units => "days", :before_value => 1, :by_sms => true, :sms_message => "some")        
+        @reminder = @event.reminders.create!(:before_units => "days", :before_value => 1, :by_sms => true)        
         @reminder.reminder_sent_at.should be_nil
         at_time(Time.now) do
           Time.now = 1.day.from_now + 12.hours
@@ -497,7 +497,7 @@ describe Event do
         @original_start = 2.days.from_now.utc
         @event.starting_at = @original_start
         @event.save!
-        @reminder = @event.reminders.create!(:before_units => "days", :before_value => 1, :by_sms => true, :sms_message => "some")        
+        @reminder = @event.reminders.create!(:before_units => "days", :before_value => 1, :by_sms => true)        
         @reminder.reminder_sent_at.should be_nil
         at_time(Time.now) do
           Time.now = 1.day.from_now + 12.hours

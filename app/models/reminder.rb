@@ -14,7 +14,7 @@ class Reminder < ActiveRecord::Base
     @default_before_units
   end
 
-  attr_accessible :by_email, :by_sms, :email_subject, :email_body, :sms_message, :before_units, :before_value, :is_active
+  attr_accessible :by_email, :by_sms, :before_units, :before_value, :is_active
 
   named_scope :pending, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at <= ?", Time.now.utc]}}
   named_scope :outstanding, lambda {{:conditions => ["reminders.reminder_sent_at IS NULL AND reminders.send_reminder_at > ?", Time.now.utc]}}
@@ -54,11 +54,6 @@ class Reminder < ActiveRecord::Base
   end
 
   validates_presence_of :before_units, :before_value
-  validates_presence_of :email_subject, :email_body, :if => :by_email?
-  validates_length_of   :email_subject, :within => 2..255, :if => :by_email?
-  validates_length_of   :email_body, :within => 2..2048, :if => :by_email?
-  validates_presence_of :sms_message, :if => :by_sms
-  validates_sms_length_of :sms_message, :on => :update, :if => :by_sms
 
   def validate
     errors.add(:before_value, _("should be in a future")) if active_not_yet_sent? && (send_reminder_at.blank? || in_past?)
@@ -125,6 +120,18 @@ class Reminder < ActiveRecord::Base
     end
   end
 
+  def email_subject
+    _("Reminder: %{event_name}") % {:event_name => event.name}
+  end
+
+  def email_body
+    event.default_reminder_message
+  end
+
+  def sms_message
+    _("Reminder: %{default_sms}") % {:default_sms => event.default_sms_message}
+  end
+
   def set_default_values
     return unless event
 
@@ -132,10 +139,7 @@ class Reminder < ActiveRecord::Base
       :by_sms => !event.guests.invite_by_sms.count.zero?,
       :by_email => true,
       :before_units => "days",
-      :before_value => 1,
-      :email_subject => _("Reminder: %{event_name}") % {:event_name => event.name},
-      :email_body => event.default_reminder_message,
-      :sms_message => _("Reminder: %{default_sms}") % {:default_sms => event.default_sms_message}
+      :before_value => 1
     }
   end
 end
