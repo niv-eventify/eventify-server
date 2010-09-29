@@ -1,10 +1,21 @@
-- if @event.reminders.blank?
-  %br
-  = _("No reminders defined yet")
-  %br
-- else
-  != render(:partial => "reminders/reminder", :collection => @event.reminders)
+.import
+  - popup_title(_("Reminders &amp; RSVP’s"))
+  .form
+    .stage-containers
+      - middle_box_container("reminders-list") do
+        %h2= _("Reminders")
+        .event-reminders
+          - if @event.reminders.blank?
+            %br
+            = _("No reminders defined yet")
+            %br
+          - else
+            != render(:partial => "reminders/reminder", :collection => @event.reminders)
+          != link_to content_tag(:span, _("Add reminder")), new_event_reminder_path(@event), :class => "btn-mdl link_to_add_reminder"
 
-!= link_to content_tag(:span, _("Add reminder")), new_event_reminder_path(@event), :class => "btn-mdl link_to_add_reminder"
-:javascript
-  jQuery(function(){jQuery('a.link_to_add_reminder').nyroModal();});
+      - middle_box_container("summaries-list") do
+        %h2= _("Message Confirmations")
+        .arrival-container
+          .arr-row
+            - event_rsvp_summary_select(@event)
+

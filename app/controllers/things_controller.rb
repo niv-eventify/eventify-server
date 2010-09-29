@@ -2,7 +2,7 @@ class ThingsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
   actions :index, :create, :update, :destroy, :edit, :update
-  respond_to :js, :only => [:create, :update, :destroy, :edit]
+  respond_to :js, :only => [:index,:create, :update, :destroy, :edit]
 
   after_filter :clear_flash
 

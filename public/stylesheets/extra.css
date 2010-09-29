@@ -568,17 +568,8 @@ li.thing.active span.name {
 	padding: 15px 28px 13px 0px;
 }
 
-.emails-phones {
-	background: url("/images/coctails.gif") no-repeat scroll 723px 1px transparent;
-	min-height:200px;
-}
-
 * html .emails-phones {
 	height:200px;
-}
-
-.hebrew .emails-phones {
-	background: url("/images/coctails.gif") no-repeat scroll 48px 1px transparent;
 }
 
 .stage-2 .form label {
@@ -1125,6 +1116,7 @@ em.counter {
 	margin: 0 0 0 3px;
 }
 
+<<<<<<< HEAD
 .settings-info {
 	width:auto;
 }
@@ -1154,5 +1146,19 @@ em.counter {
   width:760px 
 }
 
+.import .form-col-alt input[type="checkbox"] {
+  float:left;
+}
+
+.hebrew .import .form-col-alt input[type="checkbox"] {
+  float:right;
+}
+
 .def-list dt.blue,
 .def-list dd.blue { color: #41bdcd;}
+
+.stage-3 .page-nav {
+	background: none;
+	padding-top: 0px;
+	margin-top: 0px;
+}
