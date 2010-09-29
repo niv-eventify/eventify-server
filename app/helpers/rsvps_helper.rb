@@ -53,4 +53,17 @@ module RsvpsHelper
       link_to image_tag("banner2.png", :alt => ""), url_for(lobby_path)
     end
   end
+
+  def show_map_when_needed(next_to_location)
+    if next_to_location && !resource.event.location_address.blank?
+      return ""
+    end
+    if resource.event.map && !resource.event.map.url.blank?
+      link_to content_tag(:span, _("show map")), resource.event.map.url, :target => "_blank"
+    elsif !resource.event.map_link.blank?
+      link_to content_tag(:span, _("show map")), resource.event.map_link, :target => "_blank"
+    elsif !resource.event.location_address.blank?
+      link_to content_tag(:span, _("find address")), "http://maps.google.com/?hl=he&t=m&q=#{resource.event.location_address}", :target => "_blank", :id => "find_address", :class => "query_address_link"
+    end
+  end
 end

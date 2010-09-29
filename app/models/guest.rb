@@ -47,9 +47,9 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_no,             :conditions => {:rsvp => 0}
   named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
-  named_scope :rsvp_not_responded,  :conditions => {:rsvp => nil}
+  named_scope :rsvp_not_responded,  {:conditions => "guests.rsvp IS NULL AND guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1"}
   named_scope :rsvp_not_rsvped, {:conditions => "guests.first_viewed_invitation_at IS NOT NULL AND guests.rsvp IS NULL"}
-  named_scope :rsvp_not_opened_invite, :conditions => {:first_viewed_invitation_at => nil}
+  named_scope :rsvp_not_opened_invite, {:conditions => "guests.first_viewed_invitation_at IS NULL AND guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1"}
   named_scope :not_bounced_by_email, lambda { |email|
     {
       :include => :event, 
