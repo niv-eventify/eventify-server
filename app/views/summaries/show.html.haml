@@ -84,7 +84,7 @@
         %li
           != link_to content_tag(:strong, content_tag(:span, _("Pring Guests List"))), event_other_guests_path(@event, :print => true), :class => "print", :target => "_blank"
         %li
-          != link_to content_tag(:strong, content_tag(:span, _("Print Invitation"))), "#{rsvp_path(@event.guests(0))}.pdf", :class => "print"
+          != link_to content_tag(:strong, content_tag(:span, _("Print Invitation"))), print_invitation_path(@event, :format => :pdf), :class => "print"
       - form_remote_tag :url => event_other_guests_path(@event, :separate_not_responded => true) , :method => :get, :html => {:method => :get, :class => "cancel-form"} do
         .input-area
           != text_field_tag "query", _("search"), :class => "i-text", :id => "guests_query"

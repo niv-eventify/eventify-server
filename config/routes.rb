@@ -37,6 +37,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :bounces
   end
   map.resources :cancellations
+  map.resources :print_invitations
 
   map.namespace :my do |my|
     my.resources :payments, :only => :index

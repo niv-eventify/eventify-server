@@ -40,17 +40,6 @@ class RsvpsController < InheritedResources::Base
           render :action => "show", :layout => false
         end
       }
-      format.pdf{
-        @event = resource.event
-        render :pdf => @event.name,
-               :template => 'rsvps/show.pdf.erb',
-               :show_as_html => !params[:debug].blank?,
-               :layout => 'pdf.html',
-               :dpi => '300',
-               :lowquality => false,
-               :disable_smart_shrinking => false,
-               :orientation => 'Portrait'
-      }
     end
   end
 
