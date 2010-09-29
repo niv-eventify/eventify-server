@@ -342,6 +342,7 @@ describe Guest do
     before(:each) do
       @guest = Factory.build(:guest)
       @reminder = Reminder.new
+      @reminder.event = @guest.event
       reminder_logs = mock("reminder_logs")
       reminder_logs.stub!(:create)
       @reminder.stub!(:reminder_logs).and_return(reminder_logs)
