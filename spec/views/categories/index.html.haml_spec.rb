@@ -4,11 +4,11 @@ describe "/categories/index.html.haml" do
   
   before do
     category_98 = stub_model(Category)
-    category_98.should_receive(:name_en).and_return("MyString1")
-    category_98.should_receive(:name_he).and_return("MyString1")
+    category_98.should_receive(:name_en).at_least(1).times.and_return("MyString1")
+    category_98.should_receive(:name_he).at_least(1).times.and_return("MyString1")
     category_99 = stub_model(Category)
-    category_99.should_receive(:name_en).and_return("MyString2")
-    category_99.should_receive(:name_he).and_return("MyString2")
+    category_99.should_receive(:name_en).at_least(1).times.and_return("MyString2")
+    category_99.should_receive(:name_he).at_least(1).times.and_return("MyString2")
 
     assigns[:categories] = [category_98, category_99]
   end
