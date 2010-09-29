@@ -13,12 +13,12 @@ jQuery(document).ready(function() {
 	    };
 	    jQuery.ajax({url: "/events/" + window.event_id + "/guests/mass_update", type:'post', dataType:'script', data: data});
 		};
-		jQuery("input.select_all_emails").change(function(){
+		jQuery("input.select_all_emails").live("change", function(){
 			var checked = jQuery(this).attr("checked");
 			jQuery("input.input-check.guest_send_email").attr("checked", checked).redraw_customCheckbox();
 			mass_update("send_email", checked, jQuery("input.input-check.guest_send_email"));
 		});
-		jQuery("input.select_all_sms").change(function(){
+		jQuery("input.select_all_sms").live("change", function(){
 			var checked = jQuery(this).attr("checked");
 			jQuery("input.input-check.guest_send_sms").attr("checked", checked).redraw_customCheckbox();
 			mass_update("send_sms", checked, jQuery("input.input-check.guest_send_sms"));
