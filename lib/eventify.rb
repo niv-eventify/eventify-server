@@ -2,7 +2,7 @@ module Eventify
 
   # all prices are in ogorot
 
-  if ::IS_STAGE
+  if DUMMY_PAYMENT_PROGRAM
     EMAILS_PLAN_PROPERTIES = [
       [0..1, [1, 0]],
       [2..2, [2, 100]],
