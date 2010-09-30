@@ -1091,14 +1091,6 @@ em.counter {
 	margin: 0 0 0 3px;
 }
 
-.import .form-col-alt input[type="checkbox"] {
-  float:left;
-}
-
-.hebrew .import .form-col-alt input[type="checkbox"] {
-  float:right;
-}
-
 .def-list dt.blue,
 .def-list dd.blue { color: #41bdcd;}
 
