@@ -1,5 +1,5 @@
 if resource.new_record?
-page << "jQuery.nyroModalManual({content: #{render(:partial => 'new').to_json}});"
+  page << "jQuery('.new_guests_message').html(#{render(:partial => 'new').to_json})"
 else
-page << "jQuery.nyroModalRemove();"  
+  page << "jQuery.nyroModalRemove();"  
 end

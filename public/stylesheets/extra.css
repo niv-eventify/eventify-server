@@ -1100,3 +1100,11 @@ em.counter {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.new_guests_message .error-msg {
+  padding: 0px 0px 4px 132px;
+}
+
+.hebrew .new_guests_message .error-msg {
+  padding: 0px 132px 4px 0px;
+}
