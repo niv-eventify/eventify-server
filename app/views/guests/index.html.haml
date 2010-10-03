@@ -50,5 +50,5 @@
               != render(:partial => "guest", :collection => collection)
         
               != render(:partial => "new")
-
+          %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
           != will_paginate(collection, :renderer => DesignsWillPaginate)

@@ -139,7 +139,7 @@ class Event < ActiveRecord::Base
 
   before_save :set_http_in_map_link
   def set_http_in_map_link
-    if map_link_changed? && map_link[/\A(http)/].nil?
+    if !map_link.blank? && map_link[/\A(http)/].nil?
       map_link.insert(0,"http://")
     end
   end
