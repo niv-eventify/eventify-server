@@ -34,7 +34,7 @@ class PaymentsController < InheritedResources::Base
     rescue ActiveRecord::RecordInvalid
       render :action => :edit
     rescue PaymentError
-      flash.now[:error] = _("A problem occured: %{error_description} (TODO:translate all?)") % {:error_description => resource.payment_status_description}
+      flash.now[:error] = _("A problem occured: %{error_description}") % {:error_description => resource.payment_status_description}
       render :action => :edit
     end
   end

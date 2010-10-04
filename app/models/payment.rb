@@ -27,6 +27,33 @@ class Payment < ActiveRecord::Base
 
   before_validation_on_create :set_plans
 
+   TRANSLATE_PAYMENT_ERRORS = {
+    507 => N_("Credit card number is invalid"),
+    509 => N_("Credit card number is blocked"),
+    510 => N_("Credit card is expired"),
+    511 => N_("Missing card holder Name"),
+    512 => N_("Missing or incorrect length of card verification number (cvv2)"),
+    513 => N_("Missing government issued id number"),
+    514 => N_("Missing card holder phone number"),
+    515 => N_("Missing card holder email address"),
+    517 => N_("Full name is invalid"),
+    525 => N_("Daily volume limit exceeded"),
+    540 => N_("Billing address - missing address"),
+    541 => N_("Billing address - missing city name"),
+    542 => N_("Billing address - missing zip code"),
+    543 => N_("Billing address - missing or invalid state"),
+    544 => N_("Billing address - missing or invalid country"),
+    583 => N_("Weekly charge count limit reached for this credit card"),
+    584 => N_("Weekly charge amount limit reached for this credit card"),
+    585 => N_("Charge count limit reached for this credit card"),
+    586 => N_("Charge amount limit reached for this credit card"),
+    593 => N_("Monthly charge count limit reached for this credit card"),
+    594 => N_("Monthly charge amount limit reached for this credit card"),
+    597 => N_("Daily charge count limit reached for this credit card"),
+    598 => N_("Daily charge amount limit reached for this credit card"),
+    599 => N_("Declined by issuing bank")
+  }
+
   def pay!
     raise ActiveRecord::RecordInvalid.new(self) unless valid?
 
@@ -35,8 +62,12 @@ class Payment < ActiveRecord::Base
     s = Netpay::SilentPost.new(NETPAY_MERCHANT_ID, self.id.to_s, NETPAY_SKIP_SSL)
     s.process(cc, expiration_month, expiration_year, name_on_card, amount, ccv2, email, user_ident, phone_number, transaction_description, "ILS")
 
-    @payment_status_description = s.parsed_response[:ReplyDesc]
-    raise PaymentError unless s.success?
+    unless s.success?
+      @payment_status_description = TRANSLATE_PAYMENT_ERRORS.member?(s.parsed_response[:Reply].to_i) ?
+        _(s.parsed_response[:ReplyDesc]) : _("Payment failed")
+
+      raise PaymentError
+    end
 
     self.paid_at = Time.now.utc
     self.succeed_netpay_log_id = s.log_id
