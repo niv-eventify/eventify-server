@@ -15,8 +15,7 @@ class PaymentsController < InheritedResources::Base
 
   def new
     build_resource
-    resource.calc_defaults
-    @guests_count = resource.event.guests.count
+    reload_payment
     new!
   end
 
@@ -46,8 +45,7 @@ class PaymentsController < InheritedResources::Base
     if resource.save
       redirect_to edit_resource_url(resource, ssl_host_and_port.merge(:back => params[:back]))
     else # shouldn't happen unless someone hacks form html manually
-      resource.calc_defaults
-      @guests_count = resource.event.guests.count
+      reload_payment
       flash.now[:error] = _("Please choose a package that reflects your event")
       render :action => "new"
     end
@@ -82,5 +80,10 @@ protected
   def setup_localization_skip_domain
     @disable_language_change = true
     setup_localization({})
+  end
+
+  def reload_payment
+    resource.calc_defaults
+    @invitations_count = resource.event.total_invitations_count
   end
 end

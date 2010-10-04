@@ -84,7 +84,7 @@ class Payment < ActiveRecord::Base
   def calc_defaults
     self.sms_plan, @extra_payment_sms       = Payment.upgrade_plan(:sms_plan, event.total_sms_count, event.sms_plan)
     self.prints_plan, @extra_payment_prints = Payment.upgrade_plan(:prints_plan, event.prints_ordered, event.prints_plan)
-    self.emails_plan, extra_payment_emails  = Payment.upgrade_plan(:emails_plan, event.guests.count, event.emails_plan)
+    self.emails_plan, extra_payment_emails  = Payment.upgrade_plan(:emails_plan, event.total_invitations_count, event.emails_plan)
 
     self.amount = @extra_payment_sms + @extra_payment_prints + extra_payment_emails
     self

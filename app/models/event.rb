@@ -473,6 +473,10 @@ class Event < ActiveRecord::Base
     total_sms_count > sms_plan
   end
 
+  def total_invitations_count
+    @total_invitations_count ||= guests.invite_by_email.count
+  end
+
   def total_sms_count
     return @total_sms_count if @total_sms_count
 
