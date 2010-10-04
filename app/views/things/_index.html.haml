@@ -8,9 +8,11 @@
           %br
           = _("Every guest would be able to pick one ore more items to bring.")
 
-        %table#thing.info-table.things
-          != render(:partial => "things_header")
-          %tbody
-            != render(:partial => "thing", :collection => collection)
-      
-            != render(:partial => "new")
+        - new_things_form do |f|
+          %table#thing.info-table.things
+            != render(:partial => "things_header")
+            %tbody
+              != render(:partial => "thing", :collection => collection)
+        
+              %tr#new_thing_row
+                != render(:partial => "form", :locals => {:f => f})
