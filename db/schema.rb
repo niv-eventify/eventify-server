@@ -218,6 +218,16 @@ ActiveRecord::Schema.define(:version => 20100929154913) do
   add_index "guests", ["email", "bounced_at"], :name => "index_guests_on_email_and_bounced_at"
   add_index "guests", ["event_id", "bounced_at"], :name => "index_guests_on_event_id_and_bounced_at"
 
+  create_table "guests_messages", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guests_messages", ["event_id"], :name => "index_guests_messages_on_event_id"
+
   create_table "hosts", :force => true do |t|
     t.integer  "event_id"
     t.integer  "name"

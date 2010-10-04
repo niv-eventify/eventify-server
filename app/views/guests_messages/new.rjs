@@ -1,0 +1,2 @@
+page << "jQuery.nyroModalManual({content: #{render(:partial => 'new').to_json}});"
+

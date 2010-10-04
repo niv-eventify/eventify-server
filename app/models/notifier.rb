@@ -63,4 +63,14 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
 
     attachment :content_type => "text/calendar; charset=UTF-8", :body => event.to_ical, :filename => event.ical_filename
   end
+
+  def message_to_guest(guest,message)
+    subject     guest.event.name
+    recipients  [guest.email_recipient]
+    _set_receipient_header(guest)
+    from        guest.event.user.email
+    sent_on     Time.now.utc
+    body        :guest => guest, :message => message
+  end
+
 end

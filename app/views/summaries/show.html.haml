@@ -2,7 +2,14 @@
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal"
-
+  :javascript
+    jQuery(function(){
+      jQuery("a.send-message-guests-link").click(function(){
+        var url = jQuery(this).attr("href");
+        show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
+        return false;
+      });
+    })
 - @content_css_class = "stars-bg"
 
 - events_content_section(5, @event, {}, :content_section_class => "content-section-alt") do
@@ -65,6 +72,8 @@
             %dd= @event.guests.rsvp_not_rsvped.count
             %dt.blue= _("Not Opened Invitation")
             %dd.blue= @event.guests.rsvp_not_opened_invite.count
+        %span.button-holder
+          != link_to _("Send Message to Guests"), new_event_guests_message_path(@event) , :class => 'btn-sml send-message-guests-link'   
       .column-1
         %h2= _("Things to bring")
         .lists

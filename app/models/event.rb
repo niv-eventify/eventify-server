@@ -51,6 +51,8 @@ class Event < ActiveRecord::Base
   has_many :payments
   has_many :payment_attempts, :through => :payments
 
+  has_many :guests_messages
+
   include Event::Summary
 
   has_attached_file :map,
