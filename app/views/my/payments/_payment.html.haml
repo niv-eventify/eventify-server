@@ -1,6 +1,16 @@
 %tr
   %td!= link_to h(payment.event.name), summary_path(payment.event_id)
   %td
-    = payment.amount.format_cents
+    = payment.pay_emails.to_i.format_cents
+    ₪
+  %td
+    = payment.pay_sms.to_i.format_cents
+    ₪
+  /
+    %td
+      = payment.pay_prints.to_i.format_cents
+      ₪
+  %td
+    = payment.amount.to_i.format_cents
     ₪
   %td= payment.paid_at.to_s(:isra_date_time)

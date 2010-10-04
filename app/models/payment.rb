@@ -25,6 +25,8 @@ class Payment < ActiveRecord::Base
   named_scope :paid, :conditions => "paid_at IS NOT NULL"
   named_scope :for_list, :order => "paid_at DESC", :include => :event 
 
+  before_validation_on_create :set_plans
+
   def pay!
     raise ActiveRecord::RecordInvalid.new(self) unless valid?
 
@@ -45,6 +47,16 @@ class Payment < ActiveRecord::Base
     self.event.prints_plan = prints_plan
     self.event.save!
     true
+  end
+
+  def set_plans
+    self.emails_plan_prev = event.emails_plan
+    self.sms_plan_prev = event.sms_plan
+    self.prints_plan_prev = event.prints_plan
+
+    _, self.pay_sms        = Payment.upgrade_plan(:sms_plan, sms_plan, event.sms_plan)
+    _, self.pay_prints     = Payment.upgrade_plan(:prints_plan, prints_plan, event.prints_plan)
+    _, self.pay_emails     = Payment.upgrade_plan(:emails_plan, emails_plan, event.emails_plan)
   end
 
   def load_payment_details(opts)
@@ -79,9 +91,7 @@ class Payment < ActiveRecord::Base
   end
 
   def calculated_amount
-    _, pay_sms        = Payment.upgrade_plan(:sms_plan, sms_plan, event.sms_plan)
-    _, pay_prints     = Payment.upgrade_plan(:prints_plan, prints_plan, event.prints_plan)
-    _, pay_emails     = Payment.upgrade_plan(:emails_plan, emails_plan, event.emails_plan)
+    set_plans unless pay_sms || pay_prints || pay_emails
     pay_sms + pay_prints + pay_emails
   end
 

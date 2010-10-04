@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100929154913) do
+ActiveRecord::Schema.define(:version => 20101004213642) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -265,6 +265,12 @@ ActiveRecord::Schema.define(:version => 20100929154913) do
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "emails_plan_prev"
+    t.integer  "sms_plan_prev"
+    t.integer  "prints_plan_prev"
+    t.integer  "pay_sms"
+    t.integer  "pay_emails"
+    t.integer  "pay_prints"
   end
 
   add_index "payments", ["event_id"], :name => "index_payments_on_event_id"
