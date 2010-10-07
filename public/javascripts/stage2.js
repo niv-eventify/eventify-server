@@ -247,25 +247,23 @@
   },
   show_ending_at_block: function() {
     jQuery('.show_ending_at, .hide_ending_at').toggle();
-    jQuery('.ending_at_block').css('visibility','visible');
-    jQuery('fieldset.location_section').css('margin-top', '0px');
-        if ("" == jQuery("#ending_at_mock").val()) {
-            stage2.set_ending_at(stage2.starting_at());
-        }
+    jQuery('.ending_at_block').css('display','block');
+    if ("" == jQuery("#ending_at_mock").val()) {
+        stage2.set_ending_at(stage2.starting_at());
+    }
   },
 
   hide_ending_at_block: function() {
     jQuery('.show_ending_at, .hide_ending_at').toggle();
-    jQuery('.ending_at_block').css('visibility','hidden');
-    jQuery('fieldset.location_section').css('margin-top', '-81px');
-        jQuery("#ending_at_mock").val("");
-        jQuery("#event_ending_at_year").val("");
-        jQuery("#event_ending_at_month").val("");
-        jQuery("#event_ending_at_day").val("");
-        jQuery("#event_ending_at_4i").val("");
-        jQuery("#event_ending_at_5i").val("");
-        jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html('');
-        jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html('');
+    jQuery('.ending_at_block').css('display','none');
+    jQuery("#ending_at_mock").val("");
+    jQuery("#event_ending_at_year").val("");
+    jQuery("#event_ending_at_month").val("");
+    jQuery("#event_ending_at_day").val("");
+    jQuery("#event_ending_at_4i").val("");
+    jQuery("#event_ending_at_5i").val("");
+    jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html('');
+    jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html('');
   },
 
     starting_at: function() {
