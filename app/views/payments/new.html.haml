@@ -68,23 +68,24 @@
             jQuery(".section.sms-package").package_price(#{resource.extra_payment_sms}, #{resource.sms_plan}, #{Eventify::SMS_BATCH}, #{Eventify::SMS_PRICE})
           })
 
-      .section.printings-package
-        != f.hidden_field :prints_plan
-        %dl
-          %dt= _("Printed Invitations Package -")
-          %dd= _("Number of printed invitations you requested: %{prints_count}") % {:prints_count => resource.event.prints_ordered}
-        %p= _("In case you wish to print more invitations, you can select a bigger package")
-        .invite
-          != render(:partial => "header")
-          .result-panel
-            != render(:partial => "controls", :locals => {:count => resource.prints_plan})
-            %span.price
-              %strong= resource.extra_payment_prints.format_cents
-              ₪
-        :javascript
-          jQuery(function(){
-            jQuery(".section.printings-package").package_price(#{resource.extra_payment_prints}, #{resource.prints_plan}, #{Eventify::PRINTS_BATCH}, #{Eventify::PRINTS_PRICE})
-          })
+      /
+        .section.printings-package
+          != f.hidden_field :prints_plan
+          %dl
+            %dt= _("Printed Invitations Package -")
+            %dd= _("Number of printed invitations you requested: %{prints_count}") % {:prints_count => resource.event.prints_ordered}
+          %p= _("In case you wish to print more invitations, you can select a bigger package")
+          .invite
+            != render(:partial => "header")
+            .result-panel
+              != render(:partial => "controls", :locals => {:count => resource.prints_plan})
+              %span.price
+                %strong= resource.extra_payment_prints.format_cents
+                ₪
+          :javascript
+            jQuery(function(){
+              jQuery(".section.printings-package").package_price(#{resource.extra_payment_prints}, #{resource.prints_plan}, #{Eventify::PRINTS_BATCH}, #{Eventify::PRINTS_PRICE})
+            })
 
       .total-bar
         %span.label= _("Total")
