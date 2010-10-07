@@ -75,7 +75,7 @@ class Payment < ActiveRecord::Base
     # update event plans
     self.event.emails_plan = emails_plan
     self.event.sms_plan = sms_plan
-    self.event.prints_plan = prints_plan
+    self.event.prints_plan = prints_plan.to_i
     self.event.save!
     true
   end
@@ -85,9 +85,9 @@ class Payment < ActiveRecord::Base
     self.sms_plan_prev = event.sms_plan
     self.prints_plan_prev = event.prints_plan
 
-    _, self.pay_sms        = Payment.upgrade_plan(:sms_plan, sms_plan, event.sms_plan)
-    _, self.pay_prints     = Payment.upgrade_plan(:prints_plan, prints_plan, event.prints_plan)
-    _, self.pay_emails     = Payment.upgrade_plan(:emails_plan, emails_plan, event.emails_plan)
+    _, self.pay_sms        = Payment.upgrade_plan(:sms_plan, sms_plan.to_i, event.sms_plan)
+    _, self.pay_prints     = Payment.upgrade_plan(:prints_plan, prints_plan.to_i, event.prints_plan)
+    _, self.pay_emails     = Payment.upgrade_plan(:emails_plan, emails_plan.to_i, event.emails_plan)
   end
 
   def load_payment_details(opts)
@@ -109,7 +109,7 @@ class Payment < ActiveRecord::Base
     p = event.payments.new
     p.calc_defaults
 
-    (emails_plan < p.emails_plan) || (sms_plan < p.sms_plan) || (prints_plan < p.prints_plan)
+    (emails_plan < p.emails_plan) || (sms_plan < p.sms_plan) || (prints_plan.to_i < p.prints_plan)
   end
 
   def calc_defaults
