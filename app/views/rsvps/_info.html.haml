@@ -32,8 +32,7 @@
           %dd= resource.event.starting_at.to_s(:isra_time)
 
           - unless resource.event.ending_at.blank?
-            = _("Event ends at")
-            %br
+            %div= _("Event ends at")
             %dt= _("Date:")
             %dd= resource.event.ending_at.to_s(:isra_date)
             %dt= _("Time")
