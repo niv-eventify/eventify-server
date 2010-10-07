@@ -9,6 +9,8 @@ module Netpay
   class Poster
     # names are the same as provided by NetPay documentation
     REQUIRED_OPTS = [:CardNum, :ExpMonth, :ExpYear, :Member, :Amount, :Currency, :CVV2, :Email, :PersonalNum, :PhoneNumber, :Comment]
+    OBFUSCATE_OPTS = [:CardNum, :PersonalNum]
+    NEVERLOG_OPTS = [:ExpMonth, :ExpYear, :CVV2]
 
     DEFAULT_OPTS = {
       :TransType => 0,
@@ -61,7 +63,7 @@ module Netpay
         exception = e
       end
 
-      log_record = NetpayLog.create(:request => form_data.inspect, :response => @response,
+      log_record = NetpayLog.create(:request => Poster.obfuscate(form_data).inspect, :response => @response,
         :exception => exception, :netpay_status => parsed_response[:Reply], :http_code => code,
         :context => @context)
 
@@ -79,6 +81,18 @@ module Netpay
     end
 
   protected
+
+    def self.obfuscate(opts)
+     OBFUSCATE_OPTS.each do |key|
+       opts[key] = "FILTERED#{opts[key][-4..-1]}"
+     end 
+     NEVERLOG_OPTS.each do |key|
+       opts[key] = "[FILTERED]"
+     end
+
+     opts
+    end
+
     def self.parse_response(response_string)
       res = CGI.parse(response_string)
       res.keys.inject(HashWithIndifferentAccess.new) do |h, v|

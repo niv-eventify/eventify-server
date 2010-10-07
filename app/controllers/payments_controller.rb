@@ -11,7 +11,7 @@ class PaymentsController < InheritedResources::Base
 
   actions :new, :edit, :update, :create
 
-  filter_parameter_logging :cc, :expiration_month, :expiration_year, :ccv2
+  filter_parameter_logging :cc, :expiration_month, :expiration_year, :ccv2, :user_ident
 
   def new
     build_resource
