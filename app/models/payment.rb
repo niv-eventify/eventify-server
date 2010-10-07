@@ -17,7 +17,9 @@ class Payment < ActiveRecord::Base
     :ccv2, :email, :user_ident, :phone_number]
   attr_reader :payment_status_description
 
-  validates_presence_of :emails_plan, :sms_plan, :prints_plan, :amount,
+  validates_presence_of :emails_plan, :sms_plan, 
+    # :prints_plan, 
+    :amount,
     :cc, :expiration_month, :expiration_year, :name_on_card,
     :ccv2, :email, :user_ident, :phone_number, 
     :on => :update
