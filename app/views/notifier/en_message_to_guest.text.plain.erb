@@ -1,3 +1,11 @@
+Dear <%= @guest.name%>,
+
 <%= @message.subject%>
 
 <%= @message.body%>
+
+Please do not reply to this email.
+
+Best regards,
+<%= @guest.event.user.name %>
+
