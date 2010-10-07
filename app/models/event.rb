@@ -66,7 +66,7 @@ class Event < ActiveRecord::Base
     },
     :url => ':s3_domain_url'
   attr_accessible :map
-  validates_attachment_size :map, :less_than => 10.megabytes
+  validates_attachment_size :map, :less_than => 2.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :invitation_title, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
