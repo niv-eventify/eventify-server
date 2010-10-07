@@ -4,7 +4,7 @@ class EventsController < InheritedResources::Base
   before_filter :require_user, :except => [:create, :new]
 
   before_filter :set_event, :only => [:edit, :update, :show, :destroy]
-  around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show]
+  around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show, :index]
   after_filter :set_uploaded_pictures, :only => :create
 
   actions :create, :new, :edit, :update, :index, :show, :destroy
