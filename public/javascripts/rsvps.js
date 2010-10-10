@@ -4,6 +4,8 @@
     minimized_by: 0,
     replacedTitleHolder: null,
     replacedMsgHolder: null,
+    envelopeTimeout: null,
+    maxWaitTimeReached: false,
 
 	adjust_dialogs_size: function() {
         jQuery("div[id ^= 'invitation']").each(function(){
@@ -51,9 +53,30 @@
         else if (jQuery.browser.msie)
             clone.css('zoom', zoom);
         return holder.replaceWith(clone);
+    },
+
+    showRealInvitation: function() {
+        jQuery("#envelope a").nyroModalManual({
+            closeButton:'',
+            modal: true,
+            endFillContent: function(elts, settings){
+                rsvps.replacedTitleHolder = rsvps.cloneTextBox(elts.content, "title_holder");
+                rsvps.replacedMsgHolder = rsvps.cloneTextBox(elts.content, "msg_holder");
+            },
+            endShowContent: function(elts, settings){
+                jQuery("#envelope img").hide();
+            }
+        });
+        jQuery(".toolbar").show();
     }
 }
 jQuery(document).ready(function(jQuery){
+    if(jQuery("#envelope").length > 0) {
+        rsvps.envelopeTimeout = setTimeout(function(){
+            rsvps.maxWaitTimeReached = true;
+            rsvps.showRealInvitation();
+        }, 5000);
+    }
     if(jQuery.browser.msie) {
         jQuery(".msg, .title").each(function(){
             jQuery(this).html(jQuery(this).html().replace(/ /g, ""))
@@ -91,6 +114,8 @@ jQuery(document).ready(function(jQuery){
 });
 jQuery(window).load(function () {
     if(jQuery("#envelope").length > 0) {
+        if(rsvps.maxWaitTimeReached) return;
+        clearTimeout(rsvps.envelopeTimeout);
         jQuery('#envelope').crossSlide({
             sleep: 0.4,
             fade: 0.4,
@@ -100,18 +125,7 @@ jQuery(window).load(function () {
             { src: '/images/envelope2.png'},
             { src: '/images/envelope3.png'},
             { src: '/images/envelope4.png', href: '#invitation', onclick: function(){
-                jQuery("#envelope a").nyroModalManual({
-                    closeButton:'',
-                    modal: true,
-                    endFillContent: function(elts, settings){
-                        rsvps.replacedTitleHolder = rsvps.cloneTextBox(elts.content, "title_holder");
-                        rsvps.replacedMsgHolder = rsvps.cloneTextBox(elts.content, "msg_holder");
-                    },
-                    endShowContent: function(elts, settings){
-                        jQuery("#envelope img").hide();
-                    }
-                });
-                jQuery(".toolbar").show();
+                rsvps.showRealInvitation();
             }}
         ]);
         var intervalId = setInterval(function(){
