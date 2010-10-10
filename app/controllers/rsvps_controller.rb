@@ -40,6 +40,9 @@ class RsvpsController < InheritedResources::Base
           render :action => "show", :layout => false
         end
       }
+      format.pdf{
+        redirect_to print_invitation_path(resource.event, :format => :pdf)
+      }
     end
   end
 
