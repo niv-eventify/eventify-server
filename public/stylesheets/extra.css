@@ -357,6 +357,21 @@ ul.contact-tabset li.active a:hover,
 	padding-top:12px;
 }
 
+.confirmed-box h2 {
+	margin: 0 0 10px -40px;
+}
+
+.hebrew .confirmed-box h2 {
+	margin: 0 -25px 10px 0;
+}
+
+.confirmed-box {
+	padding: 172px 100px 187px 280px;
+}
+.hebrew .confirmed-box {
+	padding: 172px 320px 187px 100px;
+}
+
 .boxe .heading .drop {
 	left:-18px;
 }
