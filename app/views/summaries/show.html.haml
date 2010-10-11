@@ -100,7 +100,7 @@
               });
             });
 
-    .other-guests.tabs-container
+    #summary_other_guests.other-guests.tabs-container
     :javascript
       jQuery(function(){
         jQuery.ajax({url: #{event_other_guests_path(@event, :separate_not_responded => true).to_json}, type:'get', dataType:'script'});

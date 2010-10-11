@@ -967,7 +967,7 @@ ul.tabset li.tab-2 a.active {
 	background:url("/images/bg-tab-2-h.png") no-repeat scroll 0 0 transparent;
 }
 .tabs-container #tab-2 {
-	background:url("/images/bg-tabset-orange-en.gif") no-repeat scroll 100% 0 transparent;
+	background:url("/images/bg-tabset-orange-en.gif") no-repeat scroll 0 0 transparent;
 }
 .hebrew .tabs-container #tab-2 {
 	background:url("/images/bg-tabset-orange.gif") no-repeat scroll 100% 0 transparent;
@@ -979,7 +979,7 @@ ul.tabset li.tab-3 a.active {
 	background:url("/images/bg-tab-3-h.png") no-repeat scroll 0 0 transparent;
 }
 .tabs-container #tab-3 {
-	background:url("/images/bg-tabset-red-en.gif") no-repeat scroll 100% 0 transparent;
+	background:url("/images/bg-tabset-red-en.gif") no-repeat scroll 0 0 transparent;
 }
 .hebrew .tabs-container #tab-3 {
 	background:url("/images/bg-tabset-red.gif") no-repeat scroll 100% 0 transparent;
@@ -991,7 +991,7 @@ ul.tabset li.tab-4 a.active {
 	background:url("/images/bg-tab-4-h.png") no-repeat scroll 0 0 transparent;
 }
 .tabs-container #tab-4 {
-	background:url("/images/bg-tabset-gray-en.gif") no-repeat scroll 100% 0 transparent;
+	background:url("/images/bg-tabset-gray-en.gif") no-repeat scroll 0 0 transparent;
 }
 .hebrew .tabs-container #tab-4 {
 	background:url("/images/bg-tabset-gray.gif") no-repeat scroll 100% 0 transparent;
@@ -1121,4 +1121,26 @@ em.counter {
 	background: none;
 	padding-top: 0px;
 	margin-top: 0px;
+}
+#summary_other_guests .tabs-bottom {
+	padding: 0 8px 12px;
+}
+.tabs-container .info-col {
+	margin: 0 7px 7px 0;
+	width: 176px;
+}
+.hebrew .tabs-container .info-col {
+	margin: 0 0 7px 7px;
+	width: 176px;
+}
+.tabs-container .info-cols {
+	margin: 0 -15px 0 0;
+	width: 915px;
+}
+.hebrew .tabs-container .info-cols {
+	margin: 0 0 0 -15px;
+	width: 915px;
+}
+#summary_other_guests.tabs-container {
+	padding: 0;
 }
