@@ -7,7 +7,7 @@
     .settings-box
       - payment_detail(_("Emails"), resource.emails_plan)
       - payment_detail(_("SMS"), resource.sms_plan)
-      - payment_detail(_("Prints"), resource.prints_plan)
+      -# payment_detail(_("Prints"), resource.prints_plan)
       %br
       - payment_detail(_("Total"), "#{resource.amount.format_cents}₪")
     .section
