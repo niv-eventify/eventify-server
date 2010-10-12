@@ -1,24 +1,36 @@
 <span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">שלום <%= h(@event.user.name)%>,</span>
-<br/><br/>
-<%= s_("rsvp summary|Event %{name}") % {:name => @event.name} %>
-<%= @url %>
 <br/>
-<%- if @summary_since -%>
-<%= s_("rsvp summary|RSVPs summary since %{date_time}") % { :date_time => @summary_since.to_s(:isra_date) } %>
-<%- end -%>
 <br/>
-<%- Guest::RSVP_TEXT.each_with_index do |rsvp, index| -%>
+להלן השינויים באישורי ההשתתפות לארוע: "<%= @event.name %>" בתאריך <%= @event.starting_at.to_s(:isra_date) %> בשעה <%= @start_time %>
+<br/>
+<ul style="list-style-type:circle;">
+<%- Event::RSVP_SUMMARY_HEADER.each_with_index do |rsvp, index| -%>
   <%- unless @guests_groups[index].blank? -%>
-<br/>
-=== <%= s_("rsvp summary|Guests that responded %{rsvp} (%{count})") % {:rsvp => s_(rsvp), :count => @guests_groups[index].size } %>
-<br/>
-    <%- @guests_groups[index].each_with_index do |guest, i| -%>
-<%= i.to_s %>. <%= [guest[:name], guest[:email], guest[:mobile_phone]].compact.join(", ") %>
+  <li><%= s_(rsvp) %>
+    <ul style="list-style-type:square;">
+    <%- @guests_groups[index].each do |guest| -%>
+      <li><%= guest[:name] %>
+        <%- unless guest[:attendees_count].blank? || index == 0 -%>
+          - קבוצה של <%= guest[:attendees_count] %>
+        <%- end -%>
+      </li>
     <%- end -%>
+    </ul>
+  </li>
   <%- end -%>
 <%- end -%>
+</ul>
 <br/>
-אין צורך להשיב למייל זה.
+סך כל המוזמנים שאישרו השתתפותם: <%= @event.guests.rsvp_yes.total_attendees_count %>
+<br/>
+<br/>
+למידע נוסף על המוזמנים ואפשרויות ניהול נוספות: <%= link_to("דף סיכום אירוע", @url) %>
+<br/>
+<br/>
+הערות והארות יתקבלו תמיד בברכה ב: <a href="mailto:feedback@eventify.co.il">feedback@eventify.co.il</a>
+<br/>
 <br/>
 בברכה,
+<br/>
+<br/>
 צוות Eventify

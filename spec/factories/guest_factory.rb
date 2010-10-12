@@ -43,7 +43,7 @@ end
 Factory.define :guest_summary_not_sent, :parent => :guest do |guest|
   guest.name "New Guest"
   guest.email "new@guest.com"
-  guest.mobile_phone "0501234567"
+  guest.attendees_count 3
   guest.summary_email_sent_at nil
   guest.rsvp  1
 end

@@ -58,6 +58,9 @@ module Event::Summary
     save!
   end
 
+  RSVP_SUMMARY_HEADER = [
+    N_("The newly Declined invitees are:"), N_("The newly approved invitees are:"), N_("The newly Tentative invitees are:")]
+
   def send_summary_email!
     guests_count, rsvps = guests_for_this_summary!
 
@@ -67,7 +70,10 @@ module Event::Summary
     summary_since = last_summary_sent_at || created_at
     self.last_summary_sent_at = Time.now.utc
     save!
-    I18n.with_locale(language) {Notifier.deliver_guests_summary(self, rsvps, summary_since)}
+    start_time = self.with_time_zone do
+      self.starting_at.to_s(:isra_time)
+    end
+    I18n.with_locale(language) {Notifier.deliver_guests_summary(self, rsvps, summary_since, start_time)}
   end
 
   def guests_for_this_summary!

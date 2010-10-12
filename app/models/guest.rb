@@ -174,11 +174,14 @@ class Guest < ActiveRecord::Base
 
   def send_summary_status
     rsvps = {rsvp => [to_rsvp_email_params]}
-    I18n.with_locale(event.language) {Notifier.deliver_guests_summary(event, rsvps, nil)}
+    start_time = event.with_time_zone do
+      event.starting_at.to_s(:isra_time)
+    end
+    I18n.with_locale(event.language) {Notifier.deliver_guests_summary(event, rsvps, nil, start_time)}
   end
 
   def to_rsvp_email_params
-    {:name => name, :email => email, :mobile_phone => mobile_phone}
+    {:name => name, :attendees_count => attendees_count}
   end
 
   def reset_summary_status!

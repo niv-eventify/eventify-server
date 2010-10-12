@@ -16,7 +16,7 @@ describe Notifier do
     I18n.with_locale(locale) do
 
       it "should send summary email in #{locale}" do
-        Notifier.deliver_guests_summary(@guest.event, {2 => [@guest.to_rsvp_email_params]}, 10.day.ago)
+        Notifier.deliver_guests_summary(@guest.event, {2 => [@guest.to_rsvp_email_params]}, 10.day.ago, @guest.event.starting_at(:isra_time))
       end      
 
       it "should send invite_resend_guest with locale #{locale}" do

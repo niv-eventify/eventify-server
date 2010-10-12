@@ -1,24 +1,36 @@
-<span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">Hello <%= h(@event.user.name)%>,</span>
+<span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">Hi <%= h(@event.user.name)%>,</span>
 <br/>
-Event <%= @event.name %>
-<%= @url %>
 <br/>
-<%- if @summary_since -%>
-  RSVPs summary since <%= @summary_since.to_s(:isra_date) %>
-<%- end -%>
+Following are the RSVP changes for the event: "<%= @event.name %>" on <%= @event.starting_at.to_s(:isra_date) %> at <%= @start_time %>
 <br/>
-<%- Guest::RSVP_TEXT.each_with_index do |rsvp, index| -%>
+<ul style="list-style-type:circle;">
+<%- Event::RSVP_SUMMARY_HEADER.each_with_index do |rsvp, index| -%>
   <%- unless @guests_groups[index].blank? -%>
-
-=== Guests that responded <%= s_(rsvp) %> (<%= @guests_groups[index].size %>)
-<br/>
-    <%- @guests_groups[index].each_with_index do |guest, i| -%>
-<%= i.to_s %>. <%= [guest[:name], guest[:email], guest[:mobile_phone]].compact.join(", ") %>
+  <li><%= s_(rsvp) %>
+    <ul style="list-style-type:square;">
+    <%- @guests_groups[index].each do |guest| -%>
+      <li><%= guest[:name] %>
+        <%- unless guest[:attendees_count].blank? || index == 0 -%>
+          - party of <%= guest[:attendees_count] %>
+        <%- end -%>
+      </li>
     <%- end -%>
+    </ul>
+  </li>
   <%- end -%>
 <%- end -%>
+</ul>
 <br/>
-Please do not reply to this email.
+The total number of guests so far (approved and their companions) is: <%= @event.guests.rsvp_yes.total_attendees_count %>
 <br/>
-Thank you,
-The Eventify Team.
+<br/>
+Get updated at the <%= link_to("event summary page", @url) %> of more RSVP details and event management options.
+<br/>
+<br/>
+Comments, feedbacks and just about any thoughts you might have, are always welcomed at: <a href="mailto:feedback@eventify.co.il">feedback@eventify.co.il</a>
+<br/>
+<br/>
+<b>E</b>ventify <b>Y</b>our <b>D</b>ay,
+<br/>
+<br/>
+The Eventify team.
