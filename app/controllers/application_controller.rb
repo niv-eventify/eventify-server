@@ -20,10 +20,11 @@ protected
   helper_method :all_enabled_categories
 
   before_filter :setup_localization
-  def setup_localization
+  def setup_localization(opts = nil)
+    opts ||= {:session_domain => true, :canonic_redirect => true}
     FastGettext.available_locales = AVAILABLE_LOCALES
     FastGettext.text_domain = 'app'
-    super(:session_domain => true, :canonic_redirect => true)
+    super(opts)
   end
 
   alias :authenticate_translations_admin :require_admin
@@ -76,7 +77,7 @@ protected
       true
     elsif event.canceled?
       flash[:error] = _("This is a cancelled event. You cannot change it.")
-      redirect_to events_path
+      redirect_to events_path(:cancelled => true)
       true
     end
   end
@@ -89,5 +90,12 @@ protected
       redirect_to page_path("ie6")
       return false
     end
+  end
+
+  def ssl_host_and_port
+    host, port = request.host_with_port.split(':')
+    parts = host.split(".")
+    parts[0] = "www"
+    {:host => parts.join("."), :port => port}
   end
 end

@@ -20,6 +20,14 @@ describe Reminder do
       @reminder.before_value = @reminder.before_units = nil # skip defaults for new form
     end
 
+    describe "reminder defaults" do
+      [:email_subject, :email_body, :sms_message].each do |k|
+        it "should have #{k}" do
+          @reminder.send(k).should_not be_blank
+        end
+      end
+    end
+
     it "should validate presense of before_units/before_value" do
       @reminder.should_not be_valid
       @reminder.errors.on(:before_units).should be_blank
@@ -39,28 +47,12 @@ describe Reminder do
       @reminder.send_reminder_at.to_i.should == (@event.starting_at + 2.days).to_i
       @reminder.errors.on(:before_value).should =~ /should be in a future/
     end
-
-    it "should validate if sending by email" do
-      @reminder.by_email = true
-      @reminder.should_not be_valid
-      @reminder.errors.on(:email_subject).should_not be_blank
-      @reminder.errors.on(:email_body).should_not be_blank
-      @reminder.errors.on(:sms_message).should be_blank
-    end
-
-    it "should validate if sending by sms" do
-      @reminder.by_sms = true
-      @reminder.should_not be_valid
-      @reminder.errors.on(:email_subject).should be_blank
-      @reminder.errors.on(:email_body).should be_blank
-      @reminder.errors.on(:sms_message).should_not be_blank
-    end
   end
 
   describe "remove reminders" do
     before(:each) do
       @event = Factory.create(:event)
-      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
+      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true)
     end
 
     it "should destroy not sent reminder" do
@@ -82,7 +74,7 @@ describe Reminder do
       @original_start = 11.days.from_now.utc.beginning_of_day + 15.hours
       @event.starting_at = @original_start
       @event.save!
-      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true, :sms_message => "some")
+      @reminder = @event.reminders.create!(:before_units => "hours", :before_value => 1, :by_sms => true)
     end
 
     it "should be active reminder" do
@@ -117,12 +109,6 @@ describe Reminder do
         opts = {
           :before_units => "days", :before_value => 2,
         }
-        if :by_sms == by
-          opts[:sms_message] = "body body body"
-        else
-          opts[:email_body] = "body body body"
-          opts[:email_subject] = "subject subject subject"
-        end
         opts[by] = true
 
         @reminder = @event.reminders.create(opts)

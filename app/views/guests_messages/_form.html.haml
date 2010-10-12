@@ -1,0 +1,12 @@
+.f-row.f-row-alt
+  .f-row-1
+    != f.label :subject, _("Email subject")
+    .input-bg-alt.input-alt-2
+      != f.text_field :subject, :class => "input-text"
+  != f.inline_errors_for :subject
+  .f-row-1
+    != f.label :body, _("Email body")
+    .taxtarea-h
+      .texarea-bg
+        != f.text_area :body
+  != f.inline_errors_for :body

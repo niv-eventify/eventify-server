@@ -9,6 +9,8 @@ module Netpay
   class Poster
     # names are the same as provided by NetPay documentation
     REQUIRED_OPTS = [:CardNum, :ExpMonth, :ExpYear, :Member, :Amount, :Currency, :CVV2, :Email, :PersonalNum, :PhoneNumber, :Comment]
+    OBFUSCATE_OPTS = [:CardNum, :PersonalNum]
+    NEVERLOG_OPTS = [:ExpMonth, :ExpYear, :CVV2]
 
     DEFAULT_OPTS = {
       :TransType => 0,
@@ -16,10 +18,10 @@ module Netpay
       :Payments => 1
     }
 
-    attr_reader :response
+    attr_reader :response, :log_id
 
-    def initialize(url, company_number)
-      @url, @company_number = url, company_number
+    def initialize(url, company_number, context, skip_ssl_verification)
+      @url, @company_number, @context, @skip_ssl_verification = url, company_number, context, skip_ssl_verification
     end
 
     def post(opts)
@@ -41,6 +43,8 @@ module Netpay
 
       net = Net::HTTP.new(uri.host, uri.port)
       net.use_ssl = true
+      net.verify_mode = OpenSSL::SSL::VERIFY_NONE if @skip_ssl_verification
+
       res = net.start do |http|
         http.open_timeout = DEFAULT_TIMEOUT
         http.request(request)
@@ -59,8 +63,11 @@ module Netpay
         exception = e
       end
 
-      NetpayLog.create(:request => form_data.inspect, :response => @response, 
-        :exception => exception, :netpay_status => parsed_response[:Reply], :http_code => code)
+      log_record = NetpayLog.create(:request => Poster.obfuscate(form_data).inspect, :response => @response,
+        :exception => exception, :netpay_status => parsed_response[:Reply], :http_code => code,
+        :context => @context)
+
+      @log_id = log_record.id
 
       success
     end
@@ -74,6 +81,18 @@ module Netpay
     end
 
   protected
+
+    def self.obfuscate(opts)
+     OBFUSCATE_OPTS.each do |key|
+       opts[key] = "FILTERED#{opts[key][-4..-1]}"
+     end 
+     NEVERLOG_OPTS.each do |key|
+       opts[key] = "[FILTERED]"
+     end
+
+     opts
+    end
+
     def self.parse_response(response_string)
       res = CGI.parse(response_string)
       res.keys.inject(HashWithIndifferentAccess.new) do |h, v|
@@ -84,8 +103,8 @@ module Netpay
   end
 
   class SilentPost < Poster
-    def initialize(company_number)
-      super("https://process.netpay-intl.com/member/remote_charge.asp", company_number)
+    def initialize(company_number, context = nil, skip_ssl_verification = false)
+      super("https://process.netpay-intl.com/member/remote_charge.asp", company_number, context, skip_ssl_verification)
     end
 
     def process(cc, expiration_month, expiration_year, name_on_card, amount_cents, ccv2, email, user_ident, phone_number, transaction_description, currency = "ILS")

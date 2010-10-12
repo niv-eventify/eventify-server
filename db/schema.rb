@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100919083123) do
+ActiveRecord::Schema.define(:version => 20101004213642) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -164,11 +164,11 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
-    t.string   "invitation_title",           :limit => 100
     t.integer  "emails_plan",                                :default => 0
     t.integer  "sms_plan",                                   :default => 0
     t.integer  "prints_plan",                                :default => 0
     t.integer  "prints_ordered",                             :default => 0
+    t.string   "invitation_title",           :limit => 100
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
@@ -206,10 +206,10 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
     t.boolean  "any_invitation_sent",        :default => false
-    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "bounced_at"
     t.string   "bounce_status"
     t.string   "bounce_reason"
+    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
     t.datetime "first_viewed_invitation_at"
@@ -217,6 +217,16 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
 
   add_index "guests", ["email", "bounced_at"], :name => "index_guests_on_email_and_bounced_at"
   add_index "guests", ["event_id", "bounced_at"], :name => "index_guests_on_event_id_and_bounced_at"
+
+  create_table "guests_messages", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "subject"
+    t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guests_messages", ["event_id"], :name => "index_guests_messages_on_event_id"
 
   create_table "hosts", :force => true do |t|
     t.integer  "event_id"
@@ -255,6 +265,12 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "emails_plan_prev"
+    t.integer  "sms_plan_prev"
+    t.integer  "prints_plan_prev"
+    t.integer  "pay_sms"
+    t.integer  "pay_emails"
+    t.integer  "pay_prints"
   end
 
   add_index "payments", ["event_id"], :name => "index_payments_on_event_id"
@@ -275,16 +291,13 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.integer  "event_id"
     t.boolean  "by_email"
     t.boolean  "by_sms"
-    t.string   "email_subject"
-    t.string   "email_body",       :limit => 2048
-    t.string   "sms_message"
-    t.string   "before_units",                     :default => "days"
+    t.string   "before_units",     :default => "days"
     t.integer  "before_value"
     t.datetime "send_reminder_at"
     t.datetime "reminder_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_active",                        :default => true
+    t.boolean  "is_active",        :default => true
   end
 
   add_index "reminders", ["event_id"], :name => "index_reminders_on_event_id"
@@ -377,6 +390,7 @@ ActiveRecord::Schema.define(:version => 20100919083123) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "disabled_at"
+    t.boolean  "is_free"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

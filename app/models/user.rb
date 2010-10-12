@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   end
 
   has_many :events
+  has_many :payments
 
   # allow not activated users to access just created events
   def active?

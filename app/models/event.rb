@@ -41,7 +41,17 @@ class Event < ActiveRecord::Base
   end
   has_many :takings
 
-  has_many :reminders
+  has_many :reminders do
+    def upcoming_by_sms_count
+      active.outstanding.with_activated_event.by_sms.count
+    end
+  end
+
+  has_many :sms_messages
+  has_many :payments
+  has_many :payment_attempts, :through => :payments
+
+  has_many :guests_messages
 
   include Event::Summary
 
@@ -56,16 +66,17 @@ class Event < ActiveRecord::Base
     },
     :url => ':s3_domain_url'
   attr_accessible :map
-  validates_attachment_size :map, :less_than => 10.megabytes
+  validates_attachment_size :map, :less_than => 2.megabytes
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
-    :location_name, :location_address, :map_link, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
+    :location_name, :location_address, :map_link, :invitation_title, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
     :msg_color, :title_color, :font_title, :font_body, :allow_seeing_other_guests, :tz,
     :cancellation_sms, :cancellation_email, :cancellation_email_subject
 
   datetime_select_accessible :starting_at, :ending_at
 
   validates_presence_of :category_id, :design_id, :name, :starting_at
+  validates_length_of :invitation_title, :maximum => 100, :allow_nil => true, :allow_blank => true
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
   
   # sms sending validations
@@ -162,6 +173,7 @@ class Event < ActiveRecord::Base
   named_scope :past, lambda{{:conditions => ["events.starting_at < ?", Time.now.utc]}}
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
+  named_scope :by_created_at, :order => "events.created_at DESC"
 
   before_create :set_initial_stage
   def set_initial_stage
@@ -186,15 +198,6 @@ class Event < ActiveRecord::Base
       :resend_email => e_resend,
       :resend_sms => s_resend
     }
-  end
-
-  def payments
-    [] # TODO association with payment history
-  end
-
-  def payment_required?
-    false
-    # require_payment_for_guests? || require_payment_for_sms?
   end
 
   def allow_delayed_sms?
@@ -225,21 +228,12 @@ class Event < ActiveRecord::Base
 
   def validate
     errors.add(:starting_at, _("start date should be in a future")) if starting_at && starting_at < Time.now.utc
-    errors.add(:base, _("Payments are not completed yet")) if send_invitations_now && payment_required?
     errors.add(:starting_at, _("time cannot be blank")) if @no_time_selected
     errors.add(:ending_at, _("end date should be in a future")) if starting_at && ending_at && ending_at < starting_at
   end
 
   def has_map?
     !map_link.blank? || (map && !map.url.blank?)
-  end
-
-  def allow_send_invitations?
-    true # TODO: payments logic
-  end
-
-  def require_payment_for_guests?
-    false # TODO: check max number/program and existing payment in payments table
   end
 
   def should_resend_sms?
@@ -249,11 +243,6 @@ class Event < ActiveRecord::Base
   def should_send_sms?
     !guests.no_invitation_sent.not_invited_by_sms.count.zero?
     # TODO: also check reminders
-  end
-
-  def require_payment_for_sms?
-    false 
-    # should_send_sms? && sms_package_ok? # TODO: check sms payments in payments table
   end
 
   def delayed_send_invitations
@@ -464,6 +453,51 @@ class Event < ActiveRecord::Base
 
   def cancel_email_default_subject
     _("Cancelled: %{event_name}") % { :event_name => name }
+  end
+
+  def payments_required?
+    return false if user.is_free?
+
+    guests_payments_required? || sms_payments_required? || prints_payments_required?
+  end
+
+  def prints_payments_required?
+    prints_ordered > prints_plan
+  end
+
+  def guests_payments_required?
+    guests.count > emails_plan
+  end
+
+  def sms_payments_required?
+    total_sms_count > sms_plan
+  end
+
+  def total_invitations_count
+    @total_invitations_count ||= guests.invite_by_email.count
+  end
+
+  def total_sms_count
+    return @total_sms_count if @total_sms_count
+
+    if canceled?
+      # already recieved sms invitation are the same guests we're going to send cancellation text
+      @total_sms_count = guests.invited_by_sms.count * 2
+    else
+      invitations_to_be_sent = guests.scheduled_to_invite_by_sms.count + guests.not_invited_by_sms.count
+
+      messagess_sent = sms_messages.count
+
+      reminders_to_be_sent = reminders.upcoming_by_sms_count * guests.invite_by_sms.count
+
+      @total_sms_count = invitations_to_be_sent + messagess_sent + reminders_to_be_sent
+    end
+  end
+
+  before_create :set_free_plans
+  def set_free_plans
+    plan, price = Eventify.emails_plan(1)
+    self.emails_plan = plan if price.zero? && emails_plan < plan
   end
 
 protected

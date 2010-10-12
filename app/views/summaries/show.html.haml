@@ -2,7 +2,14 @@
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal"
-
+  :javascript
+    jQuery(function(){
+      jQuery("a.send-message-guests-link").click(function(){
+        var url = jQuery(this).attr("href");
+        show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
+        return false;
+      });
+    })
 - @content_css_class = "stars-bg"
 
 - events_content_section(5, @event, {}, :content_section_class => "content-section-alt") do
@@ -65,6 +72,8 @@
             %dd= @event.guests.rsvp_not_rsvped.count
             %dt.blue= _("Not Opened Invitation")
             %dd.blue= @event.guests.rsvp_not_opened_invite.count
+        %span.button-holder
+          != link_to _("Send Message to Guests"), new_event_guests_message_path(@event) , :class => 'btn-sml send-message-guests-link'   
       .column-1
         %h2= _("Things to bring")
         .lists
@@ -83,6 +92,8 @@
       %ul.contact-list.tools-list
         %li
           != link_to content_tag(:strong, content_tag(:span, _("Pring Guests List"))), event_other_guests_path(@event, :print => true), :class => "print", :target => "_blank"
+        %li
+          != link_to content_tag(:strong, content_tag(:span, _("Print Invitation"))), print_invitation_path(@event, :format => :pdf), :class => "print"
       - form_remote_tag :url => event_other_guests_path(@event, :separate_not_responded => true) , :method => :get, :html => {:method => :get, :class => "cancel-form"} do
         .input-area
           != text_field_tag "query", _("search"), :class => "i-text", :id => "guests_query"

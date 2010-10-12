@@ -1,3 +1,4 @@
+config/extra.rb
 tmtags
 db/sphinx/*
 config/*.sphinx.conf

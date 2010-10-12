@@ -16,8 +16,16 @@ module RemindersHelper
   end
 
   def rerender_reminders(page)
-    page << "jQuery('.event-reminders').html(#{render(:partial => "index").to_json});"
-    page << "jQuery('.event-reminders input:checkbox').customCheckbox();"
+    page << <<-JAVASCRIPT
+      jQuery.nyroModalManual({content: #{render(:partial => 'index').to_json}});
+      jQuery(function(){jQuery('a.link_to_add_reminder').nyroModal({minWidth: 405});});
+      jQuery("div.form-col-edit a.edit").click(function(){
+        var url = jQuery(this).attr("href");
+        show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
+        return false;
+      });  
+      jQuery('.event-reminders input:checkbox').customCheckbox();
+    JAVASCRIPT
   end
 
 end

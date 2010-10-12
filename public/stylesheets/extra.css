@@ -192,20 +192,27 @@ div.cmf-skinned-text {
   overflow-y: hidden;
   z-index: 100;
 }
-.msg-holder .title, .title-holder  .title{
+.msg-holder .title, .title-holder .title{
   margin: 0;
   font-size: 22px;
   line-height: 1.2em;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  padding-right: 8px;
+  overflow: hidden;
+  padding-right: 0px;
+  min-height: 1em;
 }
 .msg-holder .free_text{
   margin: 0;
   font-size: 20px;
   line-height: 1em;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
+  padding-right: 0px;
+  min-height: 1em;
+}
+.hebrew .msg-holder, .hebrew .title-holder {
+	direction: rtl;
+}
+.hebrew .msg-holder .title, .hebrew .title-holder .title, .hebrew .msg-holder .free_text {
+  overflow: hidden;
   padding-right: 8px;
 }
 .blue-btn-mdl {
@@ -576,17 +583,8 @@ li.thing.active span.name {
 	padding: 15px 28px 13px 0px;
 }
 
-.emails-phones {
-	background: url("/images/coctails.gif") no-repeat scroll 723px 1px transparent;
-	min-height:200px;
-}
-
 * html .emails-phones {
 	height:200px;
-}
-
-.hebrew .emails-phones {
-	background: url("/images/coctails.gif") no-repeat scroll 48px 1px transparent;
 }
 
 .stage-2 .form label {
@@ -1094,6 +1092,24 @@ em.counter {
 	position:static;
 }
 
+.overflow_warning {
+	display: none;
+	padding: 2px;
+	text-align: left;
+	border: 2px solid red;
+	font-size: 1em;
+	position: absolute;
+	width: 120px;
+	z-index: 1000;
+	background-color: white;
+	top: 465px;
+	left: 520px;
+}
+.hebrew .overflow_warning {
+	text-align: right;
+	left: 775px;
+}
+
 .answered-form .text {
 	width: 15px;
 	direction: ltr;
@@ -1115,8 +1131,53 @@ em.counter {
 	margin: 0 0 0 3px;
 }
 
+.settings-info {
+	width:auto;
+}
+
+.payment-form .settings-box {
+	padding:0 0 30px 0;
+}
+
+.payment-form .settings-row em {
+	float:right;
+	margin-right:10px;
+	font-size:14px;
+}
+
+.hebrew .payment-form .settings-row em {
+	float:left;
+	margin-left:10px;
+}
+
+
+.payment-form .text.error {
+	background-position:0 -22px;
+}
+
+.events-holder.payments {
+  margin:0 18px;
+  width:760px 
+}
+
+.send-message-guests-link {
+  float:left;
+  margin-left: 60px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.new_guests_message .error-msg {
+  padding: 0px 0px 4px 132px;
+}
+
+.hebrew .new_guests_message .error-msg {
+  padding: 0px 132px 4px 0px;
+}
+
 .def-list dt.blue,
 .def-list dd.blue { color: #41bdcd;}
+
 .stage-3 .page-nav {
 	background: none;
 	padding-top: 0px;

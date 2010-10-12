@@ -73,7 +73,7 @@ module EventsHelper
     msg_params = {}
     msg_params["font-family"] = event.font_body unless event.font_body.blank?
     msg_params[:color] = event.msg_color unless event.msg_color.blank?
-    msg_params["font-size"] = "#{(event.msg_font_size/1.6).to_int}px" unless event.msg_font_size.blank?
+    msg_params["font-size"] = "#{event.msg_font_size.to_int}px" unless event.msg_font_size.blank?
     msg_params["text-align"] = event.msg_text_align unless event.msg_text_align.blank?
     msg_params.keys.map {|k| "#{k}:#{msg_params[k]}"}.join(";")
   end
@@ -82,7 +82,7 @@ module EventsHelper
     title_params = event.design.stage2_title_dimensions
     title_params["font-family"] = event.font_title if not event.font_title.blank?
     title_params[:color] = event.title_color if not event.title_color.blank?
-    title_params["font-size"] = "#{(event.title_font_size/1.6).to_int}px" if not event.title_font_size.blank?
+    title_params["font-size"] = "#{event.title_font_size.to_int}px" if not event.title_font_size.blank?
     title_params["text-align"] = event.title_text_align if not event.title_text_align.blank?
     title_params.keys.map {|k| "#{k}:#{title_params[k]}"}.join(";")
   end

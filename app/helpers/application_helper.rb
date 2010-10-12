@@ -5,6 +5,7 @@ module ApplicationHelper
   USER_NAVIGATION = [
     {:title => N_("Events"), :id => :events, :url => "/events"},
     {:title => N_("Address Book"), :id => :contacts, :url => "/contacts"},
+    {:title => N_("Payments"), :id => :payments, :url => "/my/payments"},
     {:title => N_("Settings"), :id => :settings, :url => "/profile"},
   ]
 

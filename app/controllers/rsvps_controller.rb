@@ -26,9 +26,9 @@ class RsvpsController < InheritedResources::Base
   end
 
   def show
-    resource.update_attribute(:first_viewed_invitation_at, Time.now) unless resource.first_viewed_invitation_at
     respond_to do |format|
       format.html{
+        resource.update_attribute(:first_viewed_invitation_at, Time.now) unless resource.first_viewed_invitation_at
         if "true" == params[:more]
           resource.attendees_count ||= 1
           render :action => "show_more"
@@ -41,21 +41,14 @@ class RsvpsController < InheritedResources::Base
         end
       }
       format.pdf{
-        render :pdf => resource.event.name,
-               :template => 'rsvps/show.pdf.erb',
-               :show_as_html => !params[:debug].blank?,
-               :layout => 'pdf.html',
-               :dpi => '300',
-               :lowquality => false,
-               :disable_smart_shrinking => false,
-               :orientation => 'Landscape'
+        redirect_to print_invitation_path(resource.event, :format => :pdf)
       }
     end
   end
 
 protected
   def resource
-    @resource ||= get_resource_ivar || set_resource_ivar(end_of_association_chain.find_by_email_token(params[:id]))
+    @resource ||= get_resource_ivar || set_resource_ivar(end_of_association_chain.find_by_email_token(params[:id]) || end_of_association_chain.find_by_id(params[:id]))
     raise ActiveRecord::RecordNotFound unless @resource
     @resource
   end

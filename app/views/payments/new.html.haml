@@ -1,0 +1,98 @@
+- @page_title = _("Pricing | Eventify")
+
+- content_for :head do
+  != javascript_include_tag "jquery.package_price"
+  :javascript
+    jQuery(function(){
+      jQuery("input[name=payment[emails_plan]]").click(function(){
+        jQuery(window).trigger('amount-changed');
+      });
+      jQuery(window).bind('amount-changed', function() {
+        // get users
+        var users = parseInt(jQuery("input[name=payment[emails_plan]]:checked").parents("li:first").find("span.price span.price").html()) || 0;
+        // get sms
+        var sms = parseInt(parseFloat(jQuery(".section.sms-package span.price strong").html()) * 100);
+        // get prints
+        var printings = parseInt((parseFloat(jQuery(".section.printings-package span.price strong").html()) || 0) * 100);
+        // set total
+        var amount = users + sms + printings;
+
+        jQuery("#payment_amount").val(amount)
+        jQuery("#total_amount").html((amount/100).toFixed(2));
+      });
+    });
+
+.pricing
+  .heading
+    %h3= _("Pricing Summary%{upgrade_status}") % {:upgrade_status => resource.upgrade? ? _(" - upgrade") : ""}
+  - form_for :payment, resource, :url => event_payments_path(@event), :html => {:class => "pricing-form"} do |f|
+    %fieldset
+      != hidden_field_tag :back, params[:back]
+      .section
+        %dl
+          %dt= _("Invitation Package -")
+          %dd= _("Number of invitations sent in this event: %{guests_count}") % {:guests_count => @invitations_count}
+        %p= _("In case you wish to add more invitations, you can select a bigger package")
+        .invite
+          != render(:partial => "header")
+          .result-panel{:style => "display:none;"}
+          .slide
+            .slide-hold
+              %ul
+                - emails_plans.each_with_index do |p, indx|
+                  %li{:class => li_class_for_email_plan(p, indx)}
+                    - emails_radio(p, indx)
+                    %label{:for => "radio-quantity-#{indx}"}
+                      %span.quantity= _("#{p.first.first} - #{p.first.last}")
+                      %span.price
+                        %strong= resource.email_upgrade_price(p.last.first).format_cents(false)
+                        %span.price{:style => "display:none"}= resource.email_upgrade_price(p.last.first)
+                        ₪
+                      
+              != link_to_function "open", "", :class => "btn-open"
+      .section.sms-package
+        != f.hidden_field :sms_plan
+        %dl
+          %dt= _("SMS Package - ")
+          %dd= _("Number of SMSs to send: %{sms_count}") % {:sms_count => resource.event.total_sms_count}
+        %p= _("In case you wish to send more SMSs, you can select a bigger package")
+        .invite
+          != render(:partial => "header")
+          .result-panel
+            != render(:partial => "controls", :locals => {:count => resource.sms_plan})
+            %span.price
+              %strong= resource.extra_payment_sms.format_cents
+              ₪
+        :javascript
+          jQuery(function(){
+            jQuery(".section.sms-package").package_price(#{resource.extra_payment_sms}, #{resource.sms_plan}, #{Eventify::SMS_BATCH}, #{Eventify::SMS_PRICE})
+          })
+
+      /
+        .section.printings-package
+          != f.hidden_field :prints_plan
+          %dl
+            %dt= _("Printed Invitations Package -")
+            %dd= _("Number of printed invitations you requested: %{prints_count}") % {:prints_count => resource.event.prints_ordered}
+          %p= _("In case you wish to print more invitations, you can select a bigger package")
+          .invite
+            != render(:partial => "header")
+            .result-panel
+              != render(:partial => "controls", :locals => {:count => resource.prints_plan})
+              %span.price
+                %strong= resource.extra_payment_prints.format_cents
+                ₪
+          :javascript
+            jQuery(function(){
+              jQuery(".section.printings-package").package_price(#{resource.extra_payment_prints}, #{resource.prints_plan}, #{Eventify::PRINTS_BATCH}, #{Eventify::PRINTS_PRICE})
+            })
+
+      .total-bar
+        %span.label= _("Total")
+        %em
+          %strong#total_amount= resource.amount.format_cents
+          ₪
+        != f.hidden_field :amount
+      .nav
+        != link_to_function _("Continue"), "jQuery('form.pricing-form').submit()", :class => "btn-continue"
+        != link_to _("Edit Guests"), event_guests_path(resource.event_id)

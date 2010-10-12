@@ -9,6 +9,7 @@ class InvitationsController < InheritedResources::Base
   before_filter :check_event, :only => [:edit, :update]
   before_filter :check_guests, :only => [:edit, :update]
   before_filter :set_invitations, :only => [:edit, :update]
+  before_filter :check_payments, :only => [:edit, :update]
   before_filter :check_invitations, :only => :edit
 
   # show
@@ -70,5 +71,9 @@ protected
       redirect_to summary_path(resource)
       return false
     end
+  end
+
+  def check_payments
+    redirect_to(new_event_payment_path(resource, :back => "invitations")) if resource.payments_required?
   end
 end

@@ -4,7 +4,7 @@ class EventsController < InheritedResources::Base
   before_filter :require_user, :except => [:create, :new]
 
   before_filter :set_event, :only => [:edit, :update, :show, :destroy]
-  around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show]
+  around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show, :index]
   after_filter :set_uploaded_pictures, :only => :create
 
   actions :create, :new, :edit, :update, :index, :show, :destroy
@@ -41,8 +41,11 @@ class EventsController < InheritedResources::Base
       create! do |success, failure|
         success.html do
           flash[:notice] = nil
-          if "true" == params[:just_save]
+          case params[:where_to]
+          when "edit"            
             redirect_to edit_event_path(@event, :wizard => true)
+          when "design"
+            redirect_to event_design_path(@event, :wizard => true)
           else
             redirect_to event_guests_path(@event, :wizard => true)
           end
@@ -78,11 +81,14 @@ class EventsController < InheritedResources::Base
             return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
           end
         end
-        if "true" == params[:just_save]
-          redirect_to edit_event_path(@event, :wizard => params[:wizard])
-        else
-          redirect_to event_guests_path(@event, :wizard => params[:wizard])
-        end
+          case params[:where_to]
+          when "edit"            
+            redirect_to edit_event_path(@event, :wizard => params[:wizard])
+          when "design"
+            redirect_to event_design_path(@event, :wizard => params[:wizard])
+          else
+            redirect_to event_guests_path(@event, :wizard => params[:wizard])
+          end
       end
       success.js { render(:nothing => true) }
     end

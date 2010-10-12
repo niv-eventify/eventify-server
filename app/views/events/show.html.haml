@@ -1,33 +1,23 @@
 - @page_title=_("Reminders | Eventify")
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full", "rsvps"
-  != javascript_include_tag "jquery.nyroModal", "rsvps"
+  != javascript_include_tag "jquery.nyroModal", "rsvps", "jquery.unload"
   :javascript
-    jQuery(function(){      
-      jQuery.fn.nyroModal.settings.endShowContent = function(obj){
-        jQuery(obj.content.selector + " select").customSelect();
-        jQuery(obj.content.selector + " input:checkbox").customCheckbox();
-        jQuery("#reminder_email_subject").focus();
-      };
+    jQuery(function(){
+      jQuery("ul.create-list li a").click(function(){
+        var url = jQuery(this).attr("href");
+        show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
+        return false;
+      });
     })
 
-- @content_css_class = "stars-bg stage-3"
+- @content_css_class = "stars-bg stage-4"
 
 - events_content_section(4, @event) do
-  .content-section-heading
-    %h1= _("Set event reminders for you and your guests")
-
-  .twocolumns.twocolumns-decor
-    .form
-      .stage-containers
-        - middle_box_container("reminders-list") do
-          %h2= _("Reminders")
-          .event-reminders
-            != render(:partial => "reminders/index")
-
-        - middle_box_container("summaries-list") do
-          %h2= _("Message Confirmations")
-          .arrival-container
-            .arr-row
-              - event_rsvp_summary_select(@event)
+  %ul.create-list
+    %li
+      != link_to _('Reminders'), event_reminders_path(@event), :class => 'link-reminders'
+    %li
+      != link_to _('Things to bring'), event_things_path(@event), :class => 'link-things'
 != render(:partial => "preview")
+

@@ -15,8 +15,12 @@
           != link_to_function _("I already have an account"), "jQuery('li.btn-2 a.opener').click();jQuery('#user_session_email').focus()", :class => "add-link"
 
   - event_text_input(f, :name, _("Event name"), {:required => true}, "#{_('ex. My 40th birthday')}")
-  != f.input :category, :label => _("Event Type"), :required => nil, :collection => categories_for_select
-
+- f.inputs do
+  - event_input_text(f, :invitation_title, _("Invitation Title"), _("(100 symbols max)"), "#{_("#{_('ex. My 40th birthday')}")}")
+- f.inputs do
+  - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"), "#{_("ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June at 22:00 &#13;&#10;at The Neighborhood Bar")}")
+!= form_divider
+- f.inputs do
   - event_date_time_select_combo(f, :starting_at) do
     .f-row
       != link_to_function _("Add End date &amp; Time"), "stage2.show_ending_at_block()", :class => "add-link show_ending_at", :style => "display:none"
@@ -44,9 +48,6 @@
 - if f.object.has_map?
   != javascript_tag("jQuery('#show_map').click()")
 
-!= form_divider
-- f.inputs do
-  - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"), "#{_("ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June at 22:00 &#13;&#10;at The Neighborhood Bar")}")
   %li.boolean.optional.allow_seeing_other_guests.auto_width
     != f.check_box :allow_seeing_other_guests
     != f.label :allow_seeing_other_guests, _("Guests can see other attendees")

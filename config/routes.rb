@@ -19,13 +19,15 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.namespace :admin do |admin|
     admin.resources :designs
+    admin.resources :users
+    admin.resources :events
   end
 
   map.resources :events do |event|
     event.resources :guests, :collection => {:mass_update => :put}
     event.resources :things
     event.resource :event_maps
-    event.resources :payments
+    event.resources :payments, :only => [:new, :edit, :update, :create]
     event.resources :reminders
     event.resource :design
     event.resources :other_guests
@@ -33,8 +35,15 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :takings
     event.resources :guest_importers
     event.resources :bounces
+    event.resources :guests_messages
   end
   map.resources :cancellations
+  map.resources :print_invitations
+
+  map.namespace :my do |my|
+    my.resources :payments, :only => :index
+  end
+
   map.resources :summary, :controller => "summaries"
   map.resources :invitations
   map.resources :rsvps do |rsvp|

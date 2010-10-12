@@ -13,7 +13,7 @@
       stage2.submit_form();
     }
   }
-- events_content_section(2, @event, :next => {:func => "on_next_clicked()"}) do
+- events_content_section(2, @event, :next => {:func => "on_next_clicked()"},:prev => {:func => 'jQuery("#where_to").val("design");on_next_clicked()'}) do
   .content-section-heading
     %h1= _("Please fill out the events details")
   .twocolumns
@@ -29,7 +29,9 @@
         != f.hidden_field :title_color
         != f.hidden_field :font_title
         != f.hidden_field :font_body
-        != hidden_field_tag :just_save
+        != f.hidden_field :category_id
+        != hidden_field_tag :where_to
         != render(:partial => "form", :locals => {:f => f})
 
     != render(:partial => "selected_design")
+.overflow_warning= _("Some of your text doesn't fit. Try shortening your text or reducing the font size.")

@@ -1,0 +1,40 @@
+- @page_title = _("Payment | Eventify")
+
+- form_for resource, :builder => PaymentFormBuilder::Builder, :url => event_payment_path(resource.event_id, resource), :html => {:class => "payment-form"} do |f|
+  != hidden_field_tag :back, params[:back]
+  %fieldset
+    %h2= _("Payment details")
+    .settings-box
+      - payment_detail(_("Emails"), resource.emails_plan)
+      - payment_detail(_("SMS"), resource.sms_plan)
+      -# payment_detail(_("Prints"), resource.prints_plan)
+      %br
+      - payment_detail(_("Total"), "#{resource.amount.format_cents}₪")
+    .section
+      .holder
+        .col-1
+          %h3= _("Payment method")
+          .row
+            %input.radio{:name => "radio-method", :type => "radio", :checked => "checked"}/
+            %label.label4{:for => "radio-method-2"}= _("Credit Card")
+            %span.cards
+              %img{:alt => "image description", :height => "22", :src => "/images/ico-cards.gif", :width => "96"}/
+          != f.text_field :cc, :label => _("Card Number:")
+          .row
+            != f.label :expiration_year, _("Expiration:"), :class => "label5"
+            - if "he" == I18n.locale
+              != f.select :expiration_year, options_for_select(years_for_select), {}, :class => "select-m"
+              != f.select :expiration_month, options_for_select((1..12).to_a), {}, :class => "select-sm"
+            - else
+              != f.select :expiration_month, options_for_select((1..12).to_a), {}, :class => "select-sm"
+              != f.select :expiration_year, options_for_select(years_for_select), {}, :class => "select-m"
+            
+          != f.text_field :ccv2, :label => _("CCV2:"), :container_class => "text sm3", :extra_html => '<a href="javascript:void(0)" class="btn-info">info</a>'
+        .col-2
+          != f.text_field :name_on_card, :label => _("Name on card:")
+          != f.text_field :phone_number, :label => _("Phone number:")
+          != f.text_field :email, :label => _("E-mail:")
+          != f.text_field :user_ident, :label => _("ID:")
+    .nav
+      != link_to _("Cancel"), new_event_payment_path(resource.event_id)
+      != link_to_function _("Pay now"), "jQuery(this).parents('form').submit()"

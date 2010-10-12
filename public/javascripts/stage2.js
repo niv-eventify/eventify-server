@@ -11,59 +11,39 @@
   title_first_font_change: false,
   msg_first_font_change: false,
 
-  calcFontSize: function() {
-    var loop_protection = 0;
+  isTextOverflow: function() {
+    var overflow = false;
     stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
     stage2.curr_title_font_size = parseInt(jQuery("#title").css("font-size"));
     if(!stage2.seperated_title) {
-      while(loop_protection < 100 && (stage2.curr_free_text_font_size < stage2.max_free_text_font_size || stage2.curr_title_font_size < stage2.max_title_font_size) && (jQuery(".msg-holder").height() > (jQuery("#free_text").height() + jQuery("#title").height() + parseInt(jQuery("#free_text").css("line-height"))))) {
-        loop_protection++;
-        if(stage2.curr_free_text_font_size < stage2.max_free_text_font_size)
-            stage2.change_font_size_by(1, "free_text");
-        if(stage2.curr_title_font_size < stage2.max_title_font_size)
-            stage2.change_font_size_by(1, "title");
-      }
-      while(loop_protection < 100 && jQuery(".msg-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
-        loop_protection++;
-        stage2.change_font_size_by(-1, "free_text");
-        stage2.change_font_size_by(-1, "title");
+      if(jQuery(".msg-holder").height() < (jQuery("#free_text").height() + jQuery("#title").height())) {
+        overflow = true;
       }
     } else {
-      while(loop_protection < 100 && stage2.curr_free_text_font_size < stage2.max_free_text_font_size && jQuery(".msg-holder").height() > jQuery("#free_text").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(1, "free_text");
+      if(jQuery(".msg-holder").height() < jQuery("#free_text").height()) {
+        overflow = true;
       }
-      while(loop_protection < 100 && stage2.curr_title_font_size < stage2.max_title_font_size && jQuery(".title-holder").height() > jQuery("#title").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(1, "title");
-      }
-      while(loop_protection < 100 && jQuery(".msg-holder").height() < jQuery("#free_text").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(-1, "free_text");
-      }
-      while(loop_protection < 100 && jQuery(".title-holder").height() < jQuery("#title").height()) {
-        loop_protection++;
-        stage2.change_font_size_by(-1, "title");
+      if(jQuery(".title-holder").height() < jQuery("#title").height()) {
+        overflow = true;
       }
     }
-    while(loop_protection < 100 && (stage2.curr_title_font_size > stage2.max_title_font_size || jQuery("#title")[0].scrollWidth > stage2.title_scroll_width)) {
-      loop_protection++;
-      stage2.change_font_size_by(-1,"title");
+    if(jQuery("#title")[0].scrollWidth > stage2.title_scroll_width) {
+        overflow = true;
     }
-    while(loop_protection < 100 && (stage2.curr_free_text_font_size > stage2.max_free_text_font_size || jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width)) {
-      loop_protection++;
-      stage2.change_font_size_by(-1, "free_text");
+    if(jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width) {
+        overflow = true;
     }
+    return overflow;
   },
   change_font_size_by: function(delta, id) {
     var new_font_size = parseInt(jQuery("#" + id).css("font-size")) + delta;
     jQuery("#" + id).css("font-size", new_font_size + "px");
     if(id == "title") {
-      jQuery("#event_title_font_size").val(Math.floor(new_font_size * 1.6));
-      jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", Math.floor(new_font_size * 1.6) + "px");
+      jQuery("#event_title_font_size").val(new_font_size);
+      jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", new_font_size + "px");
     } else {
-      jQuery("#event_msg_font_size").val(Math.floor(new_font_size * 1.6));
-      jQuery(".background_holder .msg").css("font-size", Math.floor(new_font_size * 1.6) + "px");
+      jQuery("#event_msg_font_size").val(new_font_size);
+      jQuery(".background_holder .msg").css("font-size", new_font_size + "px");
     }
     stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
   },
@@ -76,9 +56,10 @@
     var text = jQuery("#" + sourceId).val();
     if(stage2.prev_text == text) return;
     stage2.prev_text = text;
-    text = text.replace(/\n/g,"<BR/>").replace(/ /g,"&nbsp;");
+    text = text.replace(/\n/g,"<BR/>").replace(/ /g, "&nbsp;");
     jQuery("#" + targetId).html(text);
-    stage2.calcFontSize();
+    stage2.setOverflowWarning();
+    stage2.setToolbarsPosition();
   },
   setToolbarsPosition: function() {
     var toolbarHeight = 22;
@@ -86,7 +67,7 @@
       var hebrewOffsetTitle = jQuery('#toolbar_title').width() + 10 - jQuery('.title-holder').width();
       var hebrewOffsetMsg = jQuery('#toolbar_msg').width() + 10 - jQuery('.msg-holder').width();
       jQuery("#toolbar_title").css("top",jQuery(".title-holder").offset().top - toolbarHeight + "px");
-      jQuery("#toolbar_msg").css("top",jQuery(".msg-holder").offset().top - toolbarHeight + "px");
+      jQuery("#toolbar_msg").css("top",jQuery(".msg-holder").offset().top + jQuery(".msg-holder").height() + 3 + "px");
       if(jQuery('.hebrew').length > 0) {
         jQuery("#toolbar_title").css("left",jQuery(".title-holder").offset().left - hebrewOffsetTitle + "px");
         jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left - hebrewOffsetMsg + "px");
@@ -97,7 +78,7 @@
     }else{
       var hebrewOffset = jQuery('#toolbar_title').width() + 10 - jQuery('.msg-holder').width();
       jQuery("#toolbar_title").css("top",jQuery(".msg-holder").offset().top - toolbarHeight + "px");
-      jQuery("#toolbar_msg").css("top",jQuery(".msg-holder").offset().top + jQuery("#title").height() - toolbarHeight + "px");
+      jQuery("#toolbar_msg").css("top",jQuery(".msg-holder").offset().top + jQuery("#title").height() + jQuery("#free_text").height() + 3 + "px");
       if(jQuery('.hebrew').length > 0) {
         jQuery("#toolbar_title").css("left",jQuery(".msg-holder").offset().left - hebrewOffset + "px");
         jQuery("#toolbar_msg").css("left",jQuery(".msg-holder").offset().left - hebrewOffset + "px");
@@ -108,9 +89,34 @@
     }
   },
 
+  setOverflowWarning: function() {
+    if(stage2.isTextOverflow())
+        jQuery(".overflow_warning").show();
+    else
+        jQuery(".overflow_warning").hide();
+  },
+
+  showTitleBorder: function() {
+    var selector = stage2.seperated_title ? ".title-holder" : "#title";
+    jQuery(selector).css("border", "1px dashed red");
+  },
+  showMsgBorder: function() {
+    var selector = stage2.seperated_title ? ".msg-holder" : "#free_text";
+    jQuery(selector).css("border", "1px dashed red");
+  },
+  hideTitleBorder: function() {
+    var selector = stage2.seperated_title ? ".title-holder" : "#title";
+    jQuery(selector).css("border", "");
+  },
+  hideMsgBorder: function() {
+    var selector = stage2.seperated_title ? ".msg-holder" : "#free_text";
+    jQuery(selector).css("border", "");
+  },
   alignTitle: function(align) {
         jQuery('#title').css('text-align',align);
         jQuery('#event_title_text_align').val(align);
+        stage2.showTitleBorder();
+        stage2.setToolbarsPosition();
         jQuery.fn.unload_monit_set();
         jQuery(".background_holder .title_holder, .background_holder .title").css("text-align",align);
   },
@@ -118,6 +124,8 @@
   alignFreeText: function(align) {
         jQuery('#free_text').css("text-align",align);
         jQuery('#event_msg_text_align').val(align);
+        stage2.showTitleBorder();
+        stage2.setToolbarsPosition();
         jQuery.fn.unload_monit_set();
         jQuery(".msg").css("text-align",align);
   },
@@ -147,33 +155,36 @@
         stage2.alignFreeText("right")
         return false;
     });
+
     jQuery('#toolbar_title a.font-plus').click(function(){
-        stage2.max_title_font_size++;
-        var curr = stage2.curr_title_font_size;
-        stage2.calcFontSize();
-        if(curr == stage2.curr_title_font_size)
-            stage2.max_title_font_size--;
+        stage2.change_font_size_by(1, "title");
+        stage2.setOverflowWarning();
+        stage2.showTitleBorder();
+        stage2.setToolbarsPosition();
         jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
-        stage2.max_title_font_size--;
-        stage2.calcFontSize();
+        stage2.change_font_size_by(-1, "title");
+        stage2.setOverflowWarning();
+        stage2.showTitleBorder();
+        stage2.setToolbarsPosition();
         jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
-        stage2.max_free_text_font_size++;
-        var curr = stage2.curr_free_text_font_size;
-        stage2.calcFontSize();
-        if(curr == stage2.curr_free_text_font_size)
-            stage2.max_free_text_font_size--;
+        stage2.change_font_size_by(1, "free_text");
+        stage2.setOverflowWarning();
+        stage2.showMsgBorder();
+        stage2.setToolbarsPosition();
         jQuery.fn.unload_monit_set();
         return false;
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
-        stage2.max_free_text_font_size--;
-        stage2.calcFontSize();
+        stage2.change_font_size_by(-1, "free_text");
+        stage2.setOverflowWarning();
+        stage2.showMsgBorder();
+        stage2.setToolbarsPosition();
         jQuery.fn.unload_monit_set();
         return false;
     });
@@ -185,6 +196,9 @@
         currSelected.css("font-family",currSelected.html());
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
         jQuery("#event_font_title").val(currSelected.html());
+        stage2.setOverflowWarning();
+        stage2.showTitleBorder();
+        stage2.setToolbarsPosition();
         if(stage2.title_first_font_change){
           jQuery.fn.unload_monit_set();
         }
@@ -195,6 +209,9 @@
         currSelected.css("font-family",currSelected.html());
         jQuery('#free_text, .msg').css("font-family",currSelected.html());
         jQuery("#event_font_body").val(currSelected.html());
+        stage2.setOverflowWarning();
+        stage2.showMsgBorder();
+        stage2.setToolbarsPosition();
         if(stage2.msg_first_font_change){
           jQuery.fn.unload_monit_set();
         }
@@ -249,41 +266,52 @@
     jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html('');
   },
 
-	starting_at: function() {
-		var start_date = jQuery("#starting_at_mock").val().split(".");
-		start_date.push(jQuery("#event_starting_at_4i").val());
-		start_date.push(jQuery("#event_starting_at_5i").val());
-		return new Date(start_date[2], start_date[1], start_date[0], start_date[3], start_date[4]);
-	},
+    starting_at: function() {
+        var start_date = jQuery("#starting_at_mock").val().split(".");
+        start_date.push(jQuery("#event_starting_at_4i").val());
+        start_date.push(jQuery("#event_starting_at_5i").val());
+        return new Date(start_date[2], start_date[1], start_date[0], start_date[3], start_date[4]);
+    },
 
-	ending_at: function () {
-		var ending_date = jQuery("#ending_at_mock").val().split(".");
-		ending_date.push(jQuery("#event_ending_at_4i").val());
-		ending_date.push(jQuery("#event_ending_at_5i").val());
-		return new Date(ending_date[2], ending_date[1], ending_date[0], ending_date[3], ending_date[4]);		
-	},
+    ending_at: function () {
+        var ending_date = jQuery("#ending_at_mock").val().split(".");
+        ending_date.push(jQuery("#event_ending_at_4i").val());
+        ending_date.push(jQuery("#event_ending_at_5i").val());
+        return new Date(ending_date[2], ending_date[1], ending_date[0], ending_date[3], ending_date[4]);		
+    },
 
-	set_ending_at: function(date) {
-		var hrs = date.getHours().toString();
-		if (hrs.length < 2) hrs = "0" + hrs;
-		var min = date.getMinutes().toString();
-		if (min.length < 2) min = "0" + min;
-		jQuery("#ending_at_mock").val(jQuery("#starting_at_mock").val());
-		jQuery("#event_ending_at_year").val(date.getFullYear());
-		jQuery("#event_ending_at_month").val(date.getMonth() + 1);
-		jQuery("#event_ending_at_day").val(date.getDate());
-		jQuery("#event_ending_at_4i").val(hrs);
-		jQuery("#event_ending_at_5i").val(min);
-		jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(hrs);
-		jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(min);
-	},
+    set_ending_at: function(date) {
+        var hrs = date.getHours().toString();
+        if (hrs.length < 2) hrs = "0" + hrs;
+        var min = date.getMinutes().toString();
+        if (min.length < 2) min = "0" + min;
+        jQuery("#ending_at_mock").val(jQuery("#starting_at_mock").val());
+        jQuery("#event_ending_at_year").val(date.getFullYear());
+        jQuery("#event_ending_at_month").val(date.getMonth() + 1);
+        jQuery("#event_ending_at_day").val(date.getDate());
+        jQuery("#event_ending_at_4i").val(hrs);
+        jQuery("#event_ending_at_5i").val(min);
+        jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(hrs);
+        jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(min);
+    },
 
-	submit_form: function(is_resend_invitation) {
-		jQuery('#event_resend_invitations').val(is_resend_invitation ? 'true' : '');
-		jQuery.nyroModalRemove();
-		jQuery('body').css('cursor', 'wait');
-		jQuery('.form.new-event').submit();
-	}
+    submit_form: function(is_resend_invitation) {
+        jQuery('#event_resend_invitations').val(is_resend_invitation ? 'true' : '');
+        jQuery.nyroModalRemove();
+        jQuery('body').css('cursor', 'wait');
+        jQuery('.form.new-event').submit();
+    },
+
+    setScrollWidths: function() {
+        var title_bk = jQuery("#title").html();
+        var free_text_bk = jQuery("#free_text").html();
+        jQuery("#title").html("");
+        jQuery("#free_text").html("");
+        stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
+        stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
+        jQuery("#title").html(title_bk);
+        jQuery("#free_text").html(free_text_bk);
+    }
 }
 jQuery(document).ready(function(){
   jQuery(".starting_at_time_select select.short:first").addClass("marg");
@@ -291,7 +319,8 @@ jQuery(document).ready(function(){
   jQuery('select').customSelect();
   stage2.seperated_title = (jQuery(".title-holder").length == 1);
   stage2.initToolbars();
-
+  stage2.hideMsgBorder();
+  stage2.hideTitleBorder();
   if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
     jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
   }
@@ -301,10 +330,9 @@ jQuery(document).ready(function(){
   if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "") {
     stage2.hide_ending_at_block();
   }
-  stage2.max_title_font_size = parseInt(jQuery("#title").css("font-size"));
-  stage2.max_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
-  stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
-  stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
+
+  stage2.setScrollWidths();
+
   stage2.location = jQuery("#event_location_name").val();
   stage2.startDate = jQuery("#starting_at_mock").val();
   stage2.startTime = (jQuery("#event_starting_at_4i").val().length > 0 && jQuery("#event_starting_at_5i").val().length > 0) ? jQuery("#event_starting_at_4i").val() + ":" + jQuery("#event_starting_at_5i").val() : "";
@@ -314,18 +342,19 @@ jQuery(document).ready(function(){
   clearInputs("event_name");
   clearInputs("event_location_name");
   clearInputs("event_location_address");
+  clearInputs("event_invitation_title");
   clearInputs("event_guest_message");
 
   stage2.preview_text("event_guest_message", "free_text");
-  stage2.preview_text("event_name", "title");
-  jQuery("#event_name").blur(function(){
-    stage2.preview_text("event_name", "title");
+  stage2.preview_text("event_invitation_title", "title");
+  jQuery("#event_invitation_title").blur(function(){
+    stage2.preview_text("event_invitation_title", "title");
   });
-  jQuery("#event_name").focus(function(){
-    stage2.preview_text("event_name", "title");
+  jQuery("#event_invitation_title").focus(function(){
+    stage2.preview_text("event_invitation_title", "title");
   });
-  jQuery("#event_name").keyup(function(){
-    stage2.preview_text("event_name", "title");
+  jQuery("#event_invitation_title").keyup(function(){
+    stage2.preview_text("event_invitation_title", "title");
   });
   jQuery("#event_guest_message").blur(function(){
     stage2.preview_text("event_guest_message", "free_text");
@@ -339,74 +368,64 @@ jQuery(document).ready(function(){
 
   stage2.months_arr = stage2.months_arr.splice(1,13);
   cal1 = new Calendar(
-		{
-			starting_at_mock: {
-				starting_at_mock: 'j.n.Y',
-				event_starting_at_year: 'Y',
-				event_starting_at_month: 'm',
-				event_starting_at_day: 'd'
-			},
-			ending_at_mock: {
-				ending_at_mock: 'j.n.Y',
-				event_ending_at_year: 'Y',
-				event_ending_at_month: 'm',
-				event_ending_at_day: 'd'
-			}
-		},
-		{
-			classes: ['i-heart-ny','prev_month','next_month'],
-			direction: 0.5,
-			months: stage2.months_arr
-		}
-	);
+        {
+            starting_at_mock: {
+                starting_at_mock: 'j.n.Y',
+                event_starting_at_year: 'Y',
+                event_starting_at_month: 'm',
+                event_starting_at_day: 'd'
+            },
+            ending_at_mock: {
+                ending_at_mock: 'j.n.Y',
+                event_ending_at_year: 'Y',
+                event_ending_at_month: 'm',
+                event_ending_at_day: 'd'
+            }
+        },
+        {
+            classes: ['i-heart-ny','prev_month','next_month'],
+            direction: 0.5,
+            months: stage2.months_arr
+        }
+    );
 
-	var old_start_date = stage2.starting_at();
-	setInterval(function(){
-		if (stage2.starting_at().getTime() == old_start_date.getTime()) {
-			return;
-		}
-		jQuery("#starting_at_mock").trigger('change');
-		if ('visible' == jQuery('.ending_at_block').css('visibility')) {
-			if ("" == jQuery("#ending_at_mock").val()) {
-				stage2.set_ending_at(stage2.starting_at());
-			}
-			else if (stage2.ending_at() < stage2.starting_at()) {
-				stage2.set_ending_at(stage2.starting_at());
-			}
-		}
-		old_start_date = stage2.starting_at();
-	}, 200);
+    var old_start_date = stage2.starting_at();
+    setInterval(function(){
+        if (stage2.starting_at().getTime() == old_start_date.getTime()) {
+            return;
+        }
+        jQuery("#starting_at_mock").trigger('change');
+        if ('visible' == jQuery('.ending_at_block').css('visibility')) {
+            if ("" == jQuery("#ending_at_mock").val()) {
+                stage2.set_ending_at(stage2.starting_at());
+            }
+            else if (stage2.ending_at() < stage2.starting_at()) {
+                stage2.set_ending_at(stage2.starting_at());
+            }
+        }
+        old_start_date = stage2.starting_at();
+    }, 200);
   jQuery("#event_guest_message").focus(function(){
-    if(stage2.seperated_title)
-      jQuery(".msg-holder").css("border", "1px dashed red");
-    else
-      jQuery("#free_text").css("border", "1px dashed red");
+    stage2.showMsgBorder();
     stage2.setToolbarsPosition();
     jQuery('#toolbar_msg').css("visibility", "visible");
   });
   jQuery("#event_guest_message").blur(function(){
-    if(stage2.seperated_title)
-      jQuery(".msg-holder").css("border", "");
-    else
-      jQuery("#free_text").css("border", "");
+    stage2.hideMsgBorder();
   });
-  jQuery("#event_name").focus(function(){
-    if(stage2.seperated_title)
-      jQuery(".title-holder").css("border", "1px dashed red");
-    else
-      jQuery("#title").css("border", "1px dashed red");
+  jQuery("#event_invitation_title").focus(function(){
+    stage2.showTitleBorder();
     stage2.setToolbarsPosition();
     jQuery('#toolbar_title').css("visibility", "visible");
   });
-  jQuery("#event_name").blur(function(){
-    if(stage2.seperated_title)
-      jQuery(".title-holder").css("border", "");
-    else
-      jQuery("#title").css("border", "");
+  jQuery("#event_invitation_title").blur(function(){
+    stage2.hideTitleBorder();
+    var selector = stage2.seperated_title ? ".title-holder" : "#title";
+    jQuery(selector).css("border", "");
   });
   jQuery("#title,#free_text").css("cursor", "pointer");
   jQuery("#title").click(function(){
-    jQuery("#event_name").focus();
+    jQuery("#event_invitation_title").focus();
   });
   jQuery("#free_text").click(function(){
     jQuery("#event_guest_message").focus();
@@ -425,7 +444,7 @@ jQuery(document).ready(function(){
             jQuery('#toolbar_msg').css("visibility", "visible");
         }
     }
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_name', 'title']) == -1) && t.parents('#toolbar_title, #event_name, #title, .selectOptions.select_title').length == 0;;
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_invitation_title', 'title']) == -1) && t.parents('#toolbar_title, #event_invitation_title, #title, .selectOptions.select_title').length == 0;;
     if(!clickedColorPallete) {
         if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
             jQuery('#toolbar_title').css("visibility", "hidden");
@@ -437,12 +456,12 @@ jQuery(document).ready(function(){
   });
   jQuery(".form input:first").focus();
   jQuery('#find_address').click(function(){
-	var addr = jQuery('#event_location_address').val();
-	if(addr.length == 0 || addr == jQuery(this).attr('ex_text')){
-		alert(jQuery(this).attr('alert'));
-		jQuery('#event_location_address').focus();
-		return false;
-	}
-	jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
+    var addr = jQuery('#event_location_address').val();
+    if(addr.length == 0 || addr == jQuery(this).attr('ex_text')){
+        alert(jQuery(this).attr('alert'));
+        jQuery('#event_location_address').focus();
+        return false;
+    }
+    jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
   });
 });

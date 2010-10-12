@@ -33,3 +33,4 @@ require 'ruby-debug'
 SMS_FROM = "eventify"
 SMS_USER = "eventify"
 SMS_PASSWORD = "junkjunk"
+DUMMY_PAYMENT_PROGRAM = false

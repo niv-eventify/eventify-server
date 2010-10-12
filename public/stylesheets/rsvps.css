@@ -91,13 +91,29 @@
 }
 .title {
 	position: relative;
+    line-height: 1.2em;
+}
+.msg {
+    line-height: 1em;
 }
 .title_holder, .msg_holder {
 	position: absolute;
 	z-index: 100;
+    overflow-y: hidden;
 }
 .hebrew .title_holder, .hebrew .msg_holder {
 	direction: rtl;
+}
+.hebrew .title, .hebrew .msg {
+	padding-right: 8px;
+}
+
+.msg, .title{
+    overflow: hidden;
+}
+.invitation_pdf .background_holder .msg_holder, .invitation_pdf .background_holder .title_holder{
+	-webkit-transform: scale(1.6);
+	-webkit-transform-origin: top left;
 }
 
 #envelope {

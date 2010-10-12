@@ -142,7 +142,11 @@ var stage1 = {
 }
 
 $(document).ready(function(){
-	$("a.blue-btn-mdl").hide();
+    if(jQuery.browser.msie) {
+        jQuery("#free_text").html(jQuery("#free_text").html().replace(/ /g, ""));
+        jQuery("#title").html(jQuery("#title").html().replace(/ /g, ""));
+    }
+    $("a.blue-btn-mdl").hide();
 	$("a.nyroModal.uploadLink").nyroModal({
 		minHeight: 270
 	});

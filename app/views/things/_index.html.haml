@@ -1,0 +1,18 @@
+.import
+  - popup_title(_("Things to bring"))
+  .holder
+    .frame
+      .emails-phones
+        %h3
+          = _("Add things you want your guests to bring with them.")
+          %br
+          = _("Every guest would be able to pick one ore more items to bring.")
+
+        - new_things_form do |f|
+          %table#thing.info-table.things
+            != render(:partial => "things_header")
+            %tbody
+              != render(:partial => "thing", :collection => collection)
+        
+              %tr#new_thing_row
+                != render(:partial => "form", :locals => {:f => f})

@@ -35,4 +35,7 @@
 .pricing-form .invite .thead .tr,
 .pricing-form .invite .thead .tr .td{display:block;}
 .pricing-form .invite .thead .tr .td{margin-top: expression(this.parentNode.offsetHeight > this.offsetHeight ? ((this.parentNode.offsetHeight-this.offsetHeight)/2 + "px") : "0");}
-
+.create-list li{
+	display:inline;
+	zoom:1;
+}

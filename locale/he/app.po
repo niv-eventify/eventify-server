@@ -7,20 +7,20 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-10-10 20:51+0200\n"
+"POT-Creation-Date: 2010-10-12 12:14+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: app/views/astrails/auth/mailer/en_activation_instructions.text.html.erb:1
-#: app/views/astrails/auth/mailer/he_activation_instructions.text.plain.erb:1
 #: app/views/astrails/auth/mailer/en_activation_instructions.text.plain.erb:1
 #: app/views/astrails/auth/mailer/he_activation_instructions.text.html.erb:1
+#: app/views/astrails/auth/mailer/he_activation_instructions.text.plain.erb:1
 msgid ""
 "\n"
 "Hello %{name},\n"
@@ -39,10 +39,10 @@ msgid ""
 "eventify Team\n"
 msgstr ""
 
-#: app/views/astrails/auth/mailer/en_password_reset_instructions.text.plain.erb:1
 #: app/views/astrails/auth/mailer/en_password_reset_instructions.text.html.erb:1
-#: app/views/astrails/auth/mailer/he_password_reset_instructions.text.plain.erb:1
+#: app/views/astrails/auth/mailer/en_password_reset_instructions.text.plain.erb:1
 #: app/views/astrails/auth/mailer/he_password_reset_instructions.text.html.erb:1
+#: app/views/astrails/auth/mailer/he_password_reset_instructions.text.plain.erb:1
 msgid ""
 "\n"
 "Hello %{name},\n"
@@ -62,9 +62,9 @@ msgid ""
 "eventify Team\n"
 msgstr ""
 
-#: app/views/astrails/auth/mailer/he_password_reset_confirmation.text.html.erb:1
-#: app/views/astrails/auth/mailer/en_password_reset_confirmation.text.plain.erb:1
 #: app/views/astrails/auth/mailer/en_password_reset_confirmation.text.html.erb:1
+#: app/views/astrails/auth/mailer/en_password_reset_confirmation.text.plain.erb:1
+#: app/views/astrails/auth/mailer/he_password_reset_confirmation.text.html.erb:1
 #: app/views/astrails/auth/mailer/he_password_reset_confirmation.text.plain.erb:1
 msgid ""
 "\n"
@@ -85,6 +85,10 @@ msgid ""
 "        If you are having issues try copying and pasting the URL\n"
 "        from your email into your browser or restarting the\n"
 "        reset password process.\n"
+msgstr ""
+
+#: app/views/payments/new.html.haml:27
+msgid " - upgrade"
 msgstr ""
 
 #: app/views/layouts/_html_head.html.haml:7
@@ -119,25 +123,25 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
-#: app/models/event.rb:322
+#: app/models/event.rb:311
 msgid "%{event_name} on %{date} at %{time}%{location}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:319
+#: app/models/event.rb:308
 msgid ""
-"%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
-"{host_name}"
+"%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. "
+"%{host_name}"
 msgstr ""
 
-#: app/models/event.rb:325
+#: app/models/event.rb:314
 msgid "%{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:361
+#: app/models/event.rb:350
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:74
+#: app/views/summaries/show.html.haml:83
 msgid "%{percent} %"
 msgstr ""
 
@@ -148,7 +152,11 @@ msgid_plural "(%d guests)"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/events/_form.html.haml:49
+#: app/views/events/_form.html.haml:19
+msgid "(100 symbols max)"
+msgstr ""
+
+#: app/views/events/_form.html.haml:21
 msgid "(345 symbols max)"
 msgstr ""
 
@@ -168,17 +176,21 @@ msgstr ""
 msgid "(text 140)"
 msgstr ""
 
-#: app/models/reminder.rb:63
+#: app/models/reminder.rb:60
 msgid "...mail or sms|choose a delivery method"
 msgstr ""
 
-#: app/views/events/_form.html.haml:39
+#: app/views/events/_form.html.haml:43
 msgid "2MB Max"
 msgstr ""
 
 #: app/models/contact_importer.rb:54 app/models/contact_importer.rb:67
 #: app/models/contact_importer.rb:70
 msgid "A problem importing your contacts occured, please try again later."
+msgstr ""
+
+#: app/controllers/payments_controller.rb:37
+msgid "A problem occured: %{error_description}"
 msgstr ""
 
 #: app/views/layouts/_footer.html.haml:9
@@ -201,8 +213,8 @@ msgstr ""
 msgid "Activate Account"
 msgstr ""
 
-#: app/views/guests/_new.html.haml:5 app/views/things/_form.html.haml:5
-#: app/views/contacts/new.html.haml:18
+#: app/views/contacts/new.html.haml:18 app/views/guests/_new.html.haml:5
+#: app/views/things/_form.html.haml:5
 msgid "Add"
 msgstr ""
 
@@ -214,23 +226,23 @@ msgstr ""
 msgid "Add Contact | Eventify"
 msgstr ""
 
-#: app/views/events/_form.html.haml:22
+#: app/views/events/_form.html.haml:26
 msgid "Add End date &amp; Time"
 msgstr ""
 
-#: app/views/events/_form.html.haml:33
+#: app/views/events/_form.html.haml:37
 msgid "Add Map"
 msgstr ""
 
-#: app/views/guests/index.html.haml:22
+#: app/views/guests/index.html.haml:21
 msgid "Add from existing contact list:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:39
+#: app/views/guests/index.html.haml:38
 msgid "Add manually:"
 msgstr ""
 
-#: app/views/reminders/_index.html.haml:8
+#: app/views/reminders/_index.html.haml:14
 msgid "Add reminder"
 msgstr ""
 
@@ -238,11 +250,11 @@ msgstr ""
 msgid "Add selected contacts to your address book"
 msgstr ""
 
-#: app/views/things/index.html.haml:22
+#: app/views/things/_index.html.haml:7
 msgid "Add things you want your guests to bring with them."
 msgstr ""
 
-#: app/views/events/_form.html.haml:31
+#: app/views/events/_form.html.haml:35
 msgid "Address"
 msgstr ""
 
@@ -254,12 +266,11 @@ msgstr ""
 msgid "Address Book | Eventify"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:21 app/views/summaries/show.iphone.haml:21
-#: app/views/summaries/show.html.haml:39
+#: app/views/rsvps/_info.html.haml:21 app/views/summaries/show.html.haml:46
 msgid "Address:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:42
+#: app/views/guests/index.html.haml:41
 msgid "All"
 msgstr ""
 
@@ -275,6 +286,7 @@ msgstr ""
 msgid "Already a member? Login"
 msgstr ""
 
+#: app/views/my/payments/index.html.haml:17
 #: app/views/things/_things_header.html.haml:8
 msgid "Amount"
 msgstr ""
@@ -292,52 +304,73 @@ msgid "Are you sure you want to remove this picture?"
 msgstr ""
 
 #: app/helpers/guests_helper.rb:15 app/helpers/things_helper.rb:14
-#: app/views/events/_form.html.haml:43
-#: app/views/events/_actions_menu.html.haml:5
-#: app/views/invitations/edit.html.haml:5
-#: app/views/summaries/show.html.haml:112
-#: app/views/reminders/_reminder.html.haml:12
+#: app/views/admin/users/_user.html.haml:11
 #: app/views/contacts/_contact.html.haml:6
+#: app/views/events/_actions_menu.html.haml:5
+#: app/views/events/_form.html.haml:47 app/views/invitations/edit.html.haml:5
+#: app/views/reminders/_reminder.html.haml:10
+#: app/views/summaries/show.html.haml:123
 msgid "Are you sure?"
-msgstr ""
-
-#: app/views/summaries/show.iphone.haml:3
-msgid "Back to Events page"
 msgstr ""
 
 #: app/views/layouts/mail_template.text.html.erb:28
 msgid "Because planning is half the fun"
 msgstr ""
 
-#: app/views/guests/index.html.haml:46 app/views/summaries/show.html.haml:50
+#: app/models/payment.rb:43
+msgid "Billing address - missing address"
+msgstr ""
+
+#: app/models/payment.rb:44
+msgid "Billing address - missing city name"
+msgstr ""
+
+#: app/models/payment.rb:47
+msgid "Billing address - missing or invalid country"
+msgstr ""
+
+#: app/models/payment.rb:46
+msgid "Billing address - missing or invalid state"
+msgstr ""
+
+#: app/models/payment.rb:45
+msgid "Billing address - missing zip code"
+msgstr ""
+
+#: app/views/guests/index.html.haml:45 app/views/summaries/show.html.haml:57
 msgid "Bounced emails"
 msgstr ""
 
 #: app/views/cancellations/_email.html.haml:4
-#: app/views/reminders/_reminder.html.haml:23
+#: app/views/reminders/_reminder.html.haml:21
 msgid "By Email"
 msgstr ""
 
 #: app/views/cancellations/_sms.html.haml:4
-#: app/views/reminders/_reminder.html.haml:26
+#: app/views/reminders/_reminder.html.haml:24
 msgid "By SMS"
 msgstr ""
 
-#: app/views/cancellations/edit.html.haml:23
-#: app/views/events/_resend_invitations_popup.html.haml:10
-#: app/views/reminders/_edit.html.haml:7 app/views/reminders/_new.html.haml:8
-#: app/views/guest_importers/_csv.html.haml:18
-#: app/views/guest_importers/_import.html.haml:28
-#: app/views/guest_importers/_email.html.haml:31
-#: app/views/uploaded_pictures/new.html.haml:23
-#: app/views/users/_edit.html.haml:12
-#: app/views/contact_importers/_edit.html.haml:13
-#: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
-#: app/views/passwords/_edit.html.haml:8
-#: app/views/cropped_pictures/_new.html.haml:13
+#: app/views/payments/edit.html.haml:32
+msgid "CCV2:"
+msgstr ""
+
+#: app/views/admin/designs/edit.html.haml:8
 #: app/views/admin/designs/new.html.haml:9
-#: app/views/admin/designs/edit.html.haml:8 app/views/windows/new.html.haml:9
-#: app/views/windows/edit.html.haml:8
+#: app/views/cancellations/edit.html.haml:23
+#: app/views/contact_importers/_edit.html.haml:13
+#: app/views/contacts/edit.html.haml:19 app/views/contacts/new.html.haml:19
+#: app/views/cropped_pictures/_new.html.haml:13
+#: app/views/events/_resend_invitations_popup.html.haml:10
+#: app/views/guest_importers/_csv.html.haml:18
+#: app/views/guest_importers/_email.html.haml:31
+#: app/views/guest_importers/_import.html.haml:28
+#: app/views/guests_messages/_new.html.haml:9
+#: app/views/passwords/_edit.html.haml:8 app/views/payments/edit.html.haml:39
+#: app/views/reminders/_edit.html.haml:12 app/views/reminders/_new.html.haml:8
+#: app/views/uploaded_pictures/new.html.haml:23
+#: app/views/users/_edit.html.haml:12 app/views/windows/edit.html.haml:8
+#: app/views/windows/new.html.haml:9
 msgid "Cancel"
 msgstr ""
 
@@ -346,7 +379,7 @@ msgid "Cancel Event | Eventify"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:5
-#: app/views/summaries/show.html.haml:112
+#: app/views/summaries/show.html.haml:123
 msgid "Cancel event"
 msgstr ""
 
@@ -354,20 +387,24 @@ msgstr ""
 msgid "Cancelled"
 msgstr ""
 
-#: app/helpers/application_helper.rb:40
+#: app/helpers/application_helper.rb:41
 msgid "Cancelled events"
 msgstr ""
 
-#: app/models/event.rb:466
+#: app/models/event.rb:455
 msgid "Cancelled: %{event_name}"
+msgstr ""
+
+#: app/views/payments/edit.html.haml:22
+msgid "Card Number:"
 msgstr ""
 
 #: app/views/layouts/_footer.html.haml:25
 msgid "Cat&amp;Dog Studio"
 msgstr ""
 
+#: app/views/designs/index.html.haml:26 app/views/layouts/_footer.html.haml:4
 #: app/views/layouts/_top_categories.haml:2
-#: app/views/layouts/_footer.html.haml:4 app/views/designs/index.html.haml:26
 msgid "Categories"
 msgstr ""
 
@@ -389,14 +426,22 @@ msgstr ""
 msgid "Change design"
 msgstr ""
 
-#: app/models/event.rb:287
+#: app/models/event.rb:276
 msgid ""
 "Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your "
 "email. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:290
+#: app/models/event.rb:279
 msgid "Changes: %{event_name} on %{date} at %{time}. %{host_name}"
+msgstr ""
+
+#: app/models/payment.rb:51
+msgid "Charge amount limit reached for this credit card"
+msgstr ""
+
+#: app/models/payment.rb:50
+msgid "Charge count limit reached for this credit card"
 msgstr ""
 
 #: app/views/invitations/show.html.haml:11
@@ -442,6 +487,10 @@ msgstr ""
 msgid "Contacts"
 msgstr ""
 
+#: app/views/payments/new.html.haml:97
+msgid "Continue"
+msgstr ""
+
 #: app/views/designs/index.html.haml:1
 msgid "Create the perfect %{category_name} online invitation"
 msgstr ""
@@ -452,11 +501,27 @@ msgid ""
 "Online invitations made easy."
 msgstr ""
 
+#: app/views/payments/edit.html.haml:19
+msgid "Credit Card"
+msgstr ""
+
+#: app/models/payment.rb:35
+msgid "Credit card is expired"
+msgstr ""
+
+#: app/models/payment.rb:34
+msgid "Credit card number is blocked"
+msgstr ""
+
+#: app/models/payment.rb:33
+msgid "Credit card number is invalid"
+msgstr ""
+
 #: app/views/cropped_pictures/_new.html.haml:12
 msgid "Crop"
 msgstr ""
 
-#: app/views/events/_form.html.haml:42
+#: app/views/events/_form.html.haml:46
 msgid "Current Map Image"
 msgstr ""
 
@@ -464,18 +529,34 @@ msgstr ""
 msgid "Current Password"
 msgstr ""
 
-#: app/helpers/events_helper.rb:13
+#: app/models/payment.rb:55
+msgid "Daily charge amount limit reached for this credit card"
+msgstr ""
+
+#: app/models/payment.rb:54
+msgid "Daily charge count limit reached for this credit card"
+msgstr ""
+
+#: app/models/payment.rb:42
+msgid "Daily volume limit exceeded"
+msgstr ""
+
+#: app/helpers/events_helper.rb:13 app/views/my/payments/index.html.haml:18
 msgid "Date"
 msgstr ""
 
 #: app/views/events/_info.html.haml:9 app/views/rsvps/_info.html.haml:29
-#: app/views/rsvps/_info.html.haml:36 app/views/summaries/show.iphone.haml:12
-#: app/views/summaries/show.html.haml:24 app/views/summaries/show.html.haml:32
+#: app/views/rsvps/_info.html.haml:36 app/views/summaries/show.html.haml:31
+#: app/views/summaries/show.html.haml:39
 msgid "Date:"
 msgstr ""
 
 #: app/models/reminder.rb:10
 msgid "Days"
+msgstr ""
+
+#: app/models/payment.rb:56
+msgid "Declined by issuing bank"
 msgstr ""
 
 #: app/views/contacts/index.html.haml:19
@@ -494,7 +575,7 @@ msgstr ""
 msgid "Design | Eventify"
 msgstr ""
 
-#: app/views/events/new.html.haml:1 app/views/events/edit.html.haml:1
+#: app/views/events/edit.html.haml:1 app/views/events/new.html.haml:1
 msgid "Details | Eventify"
 msgstr ""
 
@@ -514,9 +595,13 @@ msgid ""
 "picture all you have to do is drag it back out of the invitation"
 msgstr ""
 
-#: app/helpers/middle_box_helper.rb:4 app/views/events/_edit_menu.html.haml:3
+#: app/views/payments/edit.html.haml:36
+msgid "E-mail:"
+msgstr ""
+
+#: app/helpers/middle_box_helper.rb:4 app/views/contacts/index.html.haml:18
+#: app/views/events/_edit_menu.html.haml:3
 #: app/views/reminders/_reminder.html.haml:5
-#: app/views/contacts/index.html.haml:18
 msgid "Edit"
 msgstr ""
 
@@ -528,49 +613,60 @@ msgstr ""
 msgid "Edit Contact | Eventify"
 msgstr ""
 
-#: app/views/invitations/edit.html.haml:4
 #: app/views/invitations/_edit.html.haml:23
+#: app/views/invitations/edit.html.haml:4 app/views/payments/new.html.haml:98
 msgid "Edit Guests"
 msgstr ""
 
-#: app/views/reminders/edit.html.haml:3 app/views/reminders/_edit.html.haml:1
+#: app/views/reminders/_edit.html.haml:3 app/views/reminders/_edit.html.haml:6
 msgid "Edit Reminder to Guests"
 msgstr ""
 
+#: app/views/contacts/index.html.haml:16
+#: app/views/guest_importers/_import.html.haml:19
 #: app/views/guests/_guests_header.html.haml:8
 #: app/views/guests/_guests_header.html.haml:23
-#: app/views/reminders/_form.html.haml:6
-#: app/views/guest_importers/_import.html.haml:19
-#: app/views/user_session/new.html.haml:6
-#: app/views/user_session/_new.html.haml:3 app/views/users/_form.html.haml:3
-#: app/views/users/_edit.html.haml:4 app/views/users/_new.html.haml:4
-#: app/views/contacts/index.html.haml:16 app/views/passwords/new.html.haml:9
-#: app/views/passwords/_new.html.haml:5
 #: app/views/other_guests/index.html.haml:12
+#: app/views/passwords/_new.html.haml:5 app/views/passwords/new.html.haml:9
+#: app/views/reminders/_form.html.haml:6
+#: app/views/user_session/_new.html.haml:3
+#: app/views/user_session/new.html.haml:6 app/views/users/_edit.html.haml:4
+#: app/views/users/_form.html.haml:3 app/views/users/_new.html.haml:4
 msgid "Email"
 msgstr ""
 
+#: app/views/guests_messages/_form.html.haml:8
 #: app/views/reminders/_form.html.haml:31
 msgid "Email body"
 msgstr ""
 
-#: app/views/guest_importers/_email.html.haml:19
 #: app/views/contact_importers/_edit.html.haml:8
+#: app/views/guest_importers/_email.html.haml:19
 msgid "Email or Username"
 msgstr ""
 
 #: app/views/cancellations/_email.html.haml:11
+#: app/views/guests_messages/_form.html.haml:3
 #: app/views/reminders/_form.html.haml:26
 msgid "Email subject"
 msgstr ""
 
-#: app/views/users/edit.html.haml:9 app/views/users/show.html.haml:10
-#: app/views/contacts/_form.html.haml:5
+#: app/views/contacts/_form.html.haml:5 app/views/users/edit.html.haml:9
+#: app/views/users/show.html.haml:10
 msgid "Email:"
+msgstr ""
+
+#: app/views/my/payments/index.html.haml:14
+#: app/views/payments/edit.html.haml:8
+msgid "Emails"
 msgstr ""
 
 #: app/views/welcome/_container123.html.haml:21
 msgid "Enter event details"
+msgstr ""
+
+#: app/views/my/payments/index.html.haml:13
+msgid "Event"
 msgstr ""
 
 #: app/views/events/_toolbar_preview.html.haml:5
@@ -578,27 +674,19 @@ msgstr ""
 msgid "Event Details"
 msgstr ""
 
-#: app/views/summaries/show.iphone.haml:4
-msgid "Event Summary"
-msgstr ""
-
 #: app/views/invitations/show.html.haml:12
 msgid "Event Summary Page"
 msgstr ""
 
-#: app/views/events/_form.html.haml:18
-msgid "Event Type"
-msgstr ""
-
-#: app/controllers/events_controller.rb:93
+#: app/controllers/events_controller.rb:99
 msgid "Event canceled."
 msgstr ""
 
-#: app/controllers/cancellations_controller.rb:36
+#: app/controllers/cancellations_controller.rb:37
 msgid "Event cancelled - no guests to notify or guests are already notified."
 msgstr ""
 
-#: app/views/summaries/show.html.haml:115
+#: app/views/summaries/show.html.haml:126
 msgid "Event cancelled:"
 msgstr ""
 
@@ -614,7 +702,7 @@ msgstr ""
 msgid "Event details sent to your email"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:35 app/views/summaries/show.html.haml:30
+#: app/views/rsvps/_info.html.haml:35 app/views/summaries/show.html.haml:37
 msgid "Event ends at"
 msgstr ""
 
@@ -622,7 +710,7 @@ msgstr ""
 msgid "Event name"
 msgstr ""
 
-#: app/controllers/invitations_controller.rb:39
+#: app/controllers/invitations_controller.rb:40
 msgid "Event start time is passed."
 msgstr ""
 
@@ -630,12 +718,16 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:73
+#: app/controllers/events_controller.rb:76
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:73
+#: app/controllers/events_controller.rb:76
 msgid "Event updated, but some reminders disabled"
+msgstr ""
+
+#: app/models/payment.rb:62
+msgid "Eventify - payment for %{event_name}"
 msgstr ""
 
 #: app/views/lobby/index.html.haml:8
@@ -647,13 +739,16 @@ msgstr ""
 msgid "Events"
 msgstr ""
 
-#: app/views/things/index.html.haml:24
+#: app/views/things/_index.html.haml:9
 msgid "Every guest would be able to pick one ore more items to bring."
 msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:54
-#: app/views/layouts/application.iphone.haml:16
 msgid "Exit"
+msgstr ""
+
+#: app/views/payments/edit.html.haml:24
+msgid "Expiration:"
 msgstr ""
 
 #: app/views/shared/_export_links.html.haml:3
@@ -664,7 +759,7 @@ msgstr ""
 msgid "Export to iCal"
 msgstr ""
 
-#: app/views/rsvps/_sidebar.html.haml:13 app/views/summaries/show.html.haml:42
+#: app/views/rsvps/_sidebar.html.haml:13 app/views/summaries/show.html.haml:49
 msgid "Export to your calendar:"
 msgstr ""
 
@@ -677,7 +772,7 @@ msgstr ""
 msgid "File should be less than 3MB"
 msgstr ""
 
-#: app/views/guests/index.html.haml:41
+#: app/views/guests/index.html.haml:40
 msgid "Filter by RSVP:"
 msgstr ""
 
@@ -693,8 +788,8 @@ msgstr ""
 msgid "Forgot Password | Eventify"
 msgstr ""
 
-#: app/views/user_session/new.html.haml:15
 #: app/views/user_session/_new.html.haml:14
+#: app/views/user_session/new.html.haml:15
 msgid "Forgot password?"
 msgstr ""
 
@@ -702,33 +797,38 @@ msgstr ""
 msgid "From our fabelous gallery or upload your own pic"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:110
+#: app/views/summaries/show.html.haml:121
 msgid "Full Guests List"
 msgstr ""
 
-#: app/helpers/application_helper.rb:40 app/views/events/_sidebar.html.haml:5
+#: app/models/payment.rb:41
+msgid "Full name is invalid"
+msgstr ""
+
+#: app/helpers/application_helper.rb:41 app/views/events/_sidebar.html.haml:5
 msgid "Future events"
 msgstr ""
 
-#: app/views/guests/index.html.haml:16 app/views/things/index.html.haml:14
+#: app/views/guests/index.html.haml:16
 msgid "Guest List"
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:17
-#: app/views/summaries/show.html.haml:53
+#: app/views/payments/_header.html.haml:3
+#: app/views/rsvps/show_more.html.haml:23
+#: app/views/summaries/show.html.haml:60
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:52
+#: app/views/events/_form.html.haml:53
 msgid "Guests can see other attendees"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:10
-#: app/views/summaries/show.html.haml:119
+#: app/views/summaries/show.html.haml:130
 msgid "Guests notified"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:45
+#: app/views/summaries/show.html.haml:52
 msgid "Guests summary"
 msgstr ""
 
@@ -736,28 +836,27 @@ msgstr ""
 msgid "Hello %{username}"
 msgstr ""
 
-#: app/views/events/index.html.haml:7 app/views/users/edit.html.haml:2
-#: app/views/users/show.html.haml:3
 #: app/views/contact_importers/index.html.haml:3
 #: app/views/contact_importers/show.html.haml:3
-#: app/views/contacts/new.html.haml:3 app/views/contacts/edit.html.haml:3
-#: app/views/contacts/index.html.haml:3
+#: app/views/contacts/edit.html.haml:3 app/views/contacts/index.html.haml:3
+#: app/views/contacts/new.html.haml:3 app/views/events/index.html.haml:7
+#: app/views/my/payments/index.html.haml:3 app/views/users/edit.html.haml:2
+#: app/views/users/show.html.haml:3
 msgid "Hello %{username},"
 msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:33
-#: app/views/layouts/application.iphone.haml:17
 msgid "Hello, %{user}"
 msgstr ""
 
 #: app/views/contact_importers/index.html.haml:4
 #: app/views/contact_importers/show.html.haml:4
-#: app/views/contacts/new.html.haml:4 app/views/contacts/edit.html.haml:4
-#: app/views/contacts/index.html.haml:4
+#: app/views/contacts/edit.html.haml:4 app/views/contacts/index.html.haml:4
+#: app/views/contacts/new.html.haml:4
 msgid "Here your can manage contracts, and import them from your email!"
 msgstr ""
 
-#: app/models/event.rb:460
+#: app/models/event.rb:449
 msgid ""
 "Hi,\n"
 "\n"
@@ -766,7 +865,7 @@ msgid ""
 "%{host_name}"
 msgstr ""
 
-#: app/views/events/_form.html.haml:34
+#: app/views/events/_form.html.haml:38
 msgid "Hide Map"
 msgstr ""
 
@@ -786,16 +885,20 @@ msgstr ""
 msgid "I already have an account"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:121
+#: app/views/payments/edit.html.haml:37
+msgid "ID:"
+msgstr ""
+
 #: app/views/pages/no_invitation_en.html.haml:1
 #: app/views/pages/no_invitation_en.html.haml:4
+#: app/views/summaries/show.html.haml:132
 msgid "If some of your guests didn't recieve the invitation"
 msgstr ""
 
-#: app/views/guest_importers/_csv.html.haml:17
-#: app/views/guest_importers/_import.html.haml:27
-#: app/views/guest_importers/_email.html.haml:30
 #: app/views/contact_importers/_edit.html.haml:12
+#: app/views/guest_importers/_csv.html.haml:17
+#: app/views/guest_importers/_email.html.haml:30
+#: app/views/guest_importers/_import.html.haml:27
 msgid "Import"
 msgstr ""
 
@@ -831,12 +934,26 @@ msgstr ""
 msgid "Importing, please wait..."
 msgstr ""
 
+#: app/views/payments/new.html.haml:35
+msgid ""
+"In case you wish to add more invitations, you can select a bigger package"
+msgstr ""
+
+#: app/views/payments/new.html.haml:77
+msgid ""
+"In case you wish to print more invitations, you can select a bigger package"
+msgstr ""
+
+#: app/views/payments/new.html.haml:58
+msgid "In case you wish to send more SMSs, you can select a bigger package"
+msgstr ""
+
 #: app/views/events/index.html.haml:8
 msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/controllers/events_controller.rb:105
+#: app/controllers/events_controller.rb:111
 #: app/views/invitations/edit.html.haml:20
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
 msgid ""
@@ -854,7 +971,15 @@ msgstr ""
 msgid "Invitation Design"
 msgstr ""
 
-#: app/views/rsvps/show.iphone.haml:8 app/views/rsvps/show.html.haml:8
+#: app/views/payments/new.html.haml:33
+msgid "Invitation Package -"
+msgstr ""
+
+#: app/views/events/_form.html.haml:19
+msgid "Invitation Title"
+msgstr ""
+
+#: app/views/rsvps/show.html.haml:8 app/views/rsvps/show.iphone.haml:8
 msgid "Invitation | Eventify"
 msgstr ""
 
@@ -894,16 +1019,16 @@ msgstr ""
 msgid "Loading CSV file, please wait..."
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:19
+#: app/views/rsvps/show_more.html.haml:25
 msgid "Loading guests..."
 msgstr ""
 
-#: app/views/events/_form.html.haml:30
+#: app/views/events/_form.html.haml:34
 msgid "Location"
 msgstr ""
 
-#: app/views/user_session/new.html.haml:13
 #: app/views/user_session/_new.html.haml:8
+#: app/views/user_session/new.html.haml:13
 msgid "Login"
 msgstr ""
 
@@ -920,36 +1045,64 @@ msgstr ""
 msgid "Map"
 msgstr ""
 
-#: app/views/events/_form.html.haml:39
+#: app/views/events/_form.html.haml:43
 msgid "Map Image"
 msgstr ""
 
-#: app/views/events/_form.html.haml:37
+#: app/views/events/_form.html.haml:41
 msgid "Map Link"
 msgstr ""
 
-#: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:5
-#: app/views/guests/index.html.haml:45
+#: app/models/guest.rb:116 app/views/guests/index.html.haml:44
+#: app/views/rsvps/_new.html.haml:5
 msgid "May Be"
 msgstr ""
 
-#: app/views/events/show.html.haml:29
+#: app/views/reminders/_index.html.haml:17
 msgid "Message Confirmations"
 msgstr ""
 
 #: app/views/cancellations/_email.html.haml:12
-#: app/views/events/_form.html.haml:49
+#: app/views/events/_form.html.haml:21
 msgid "Message to Guests"
 msgstr ""
 
-#: app/views/guest_importers/_import.html.haml:20
+#: app/models/payment.rb:36
+msgid "Missing card holder Name"
+msgstr ""
+
+#: app/models/payment.rb:40
+msgid "Missing card holder email address"
+msgstr ""
+
+#: app/models/payment.rb:39
+msgid "Missing card holder phone number"
+msgstr ""
+
+#: app/models/payment.rb:38
+msgid "Missing government issued id number"
+msgstr ""
+
+#: app/models/payment.rb:37
+msgid "Missing or incorrect length of card verification number (cvv2)"
+msgstr ""
+
 #: app/views/contacts/index.html.haml:17
+#: app/views/guest_importers/_import.html.haml:20
 #: app/views/other_guests/index.html.haml:13
 msgid "Mobile"
 msgstr ""
 
 #: app/views/contacts/_form.html.haml:8
 msgid "Mobile:"
+msgstr ""
+
+#: app/models/payment.rb:53
+msgid "Monthly charge amount limit reached for this credit card"
+msgstr ""
+
+#: app/models/payment.rb:52
+msgid "Monthly charge count limit reached for this credit card"
 msgstr ""
 
 #: app/models/reminder.rb:12
@@ -964,18 +1117,27 @@ msgstr ""
 msgid "My Page"
 msgstr ""
 
-#: app/views/guests/_guests_header.html.haml:5
+#: app/views/contacts/index.html.haml:15
 #: app/views/guest_importers/_import.html.haml:18
-#: app/views/things/_things_header.html.haml:5
-#: app/views/users/_form.html.haml:2 app/views/users/_edit.html.haml:3
-#: app/views/users/_new.html.haml:3 app/views/contacts/index.html.haml:15
+#: app/views/guests/_guests_header.html.haml:5
 #: app/views/other_guests/index.html.haml:11
+#: app/views/things/_things_header.html.haml:5
+#: app/views/users/_edit.html.haml:3 app/views/users/_form.html.haml:2
+#: app/views/users/_new.html.haml:3
 msgid "Name"
 msgstr ""
 
-#: app/views/users/edit.html.haml:8 app/views/users/show.html.haml:9
-#: app/views/contacts/_form.html.haml:4
+#: app/views/payments/edit.html.haml:34
+msgid "Name on card:"
+msgstr ""
+
+#: app/views/contacts/_form.html.haml:4 app/views/users/edit.html.haml:8
+#: app/views/users/show.html.haml:9
 msgid "Name:"
+msgstr ""
+
+#: app/views/guests_messages/_new.html.haml:2
+msgid "New Message to Guests"
 msgstr ""
 
 #: app/views/passwords/_form.html.haml:3
@@ -995,12 +1157,12 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: app/helpers/application_helper.rb:104
+#: app/helpers/application_helper.rb:105
 msgid "Next event:"
 msgstr ""
 
-#: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:6
-#: app/views/guests/index.html.haml:44
+#: app/models/guest.rb:116 app/views/guests/index.html.haml:43
+#: app/views/rsvps/_new.html.haml:6
 msgid "No"
 msgstr ""
 
@@ -1008,11 +1170,11 @@ msgstr ""
 msgid "No guests"
 msgstr ""
 
-#: app/views/reminders/_index.html.haml:3
+#: app/views/reminders/_index.html.haml:10
 msgid "No reminders defined yet"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:76
+#: app/views/summaries/show.html.haml:85
 msgid "No things to bring"
 msgstr ""
 
@@ -1020,14 +1182,14 @@ msgstr ""
 msgid "No user was found with that email address"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:66
 #: app/views/shared/_rsvp_tabs.html.haml:8
+#: app/views/summaries/show.html.haml:73
 msgid "Not Opened Invitation"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:64
 #: app/views/shared/_rsvp_tabs.html.haml:7
 #: app/views/shared/_rsvp_tabs.html.haml:10
+#: app/views/summaries/show.html.haml:71
 msgid "Not responded"
 msgstr ""
 
@@ -1035,12 +1197,12 @@ msgstr ""
 msgid "Note: your message is public"
 msgstr ""
 
-#: app/controllers/cancellations_controller.rb:18
+#: app/controllers/cancellations_controller.rb:19
 msgid "Notifications are being sent."
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:8
-#: app/views/summaries/show.html.haml:117
+#: app/views/summaries/show.html.haml:128
 msgid "Notify guests"
 msgstr ""
 
@@ -1048,42 +1210,54 @@ msgstr ""
 msgid "Notify your guests that the event is cancelled"
 msgstr ""
 
-#: app/views/rsvps/_edit.html.haml:14
 #: app/views/guests/_guests_header.html.haml:17
+#: app/views/rsvps/_edit.html.haml:14
 msgid "Number of Guests"
 msgstr ""
 
-#: app/models/reminder.rb:92
+#: app/views/payments/new.html.haml:57
+msgid "Number of SMSs to send: %{sms_count}"
+msgstr ""
+
+#: app/views/payments/new.html.haml:34
+msgid "Number of invitations sent in this event: %{guests_count}"
+msgstr ""
+
+#: app/views/payments/new.html.haml:76
+msgid "Number of printed invitations you requested: %{prints_count}"
+msgstr ""
+
+#: app/models/reminder.rb:89
 msgid "One day before the event"
 msgid_plural "%d days before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:90
+#: app/models/reminder.rb:87
 msgid "One hour before the event"
 msgid_plural "%d hours before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:96
+#: app/models/reminder.rb:93
 msgid "One month before the event"
 msgid_plural "%d months before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:94
+#: app/models/reminder.rb:91
 msgid "One week before the event"
 msgid_plural "%d weeks before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/views/rsvps/show.iphone.haml:6 app/views/rsvps/show.html.haml:6
-#: app/views/layouts/application.html.haml:6
+#: app/views/layouts/application.html.haml:6 app/views/rsvps/show.html.haml:6
+#: app/views/rsvps/show.iphone.haml:6
 msgid "Online Invitations, Event Planning and Managing – Eventify"
 msgstr ""
 
-#: app/views/rsvps/show.iphone.haml:7 app/views/rsvps/show.html.haml:7
-#: app/views/layouts/application.html.haml:7
+#: app/views/layouts/application.html.haml:7 app/views/rsvps/show.html.haml:7
+#: app/views/rsvps/show.iphone.haml:7
 msgid ""
 "Online invitations made easy. Create & manage online invitations with "
 "templates to match any event! Plan your event in style!"
@@ -1093,14 +1267,18 @@ msgstr ""
 msgid "Our site allows you to manage your events easily and have fun"
 msgstr ""
 
+#: app/controllers/payments_controller.rb:32
+msgid "Paid successfully."
+msgstr ""
+
 #: app/helpers/summaries_helper.rb:63
 msgid "Passed"
 msgstr ""
 
-#: app/views/guest_importers/_email.html.haml:23
-#: app/views/user_session/new.html.haml:7
-#: app/views/user_session/_new.html.haml:4
 #: app/views/contact_importers/_edit.html.haml:9
+#: app/views/guest_importers/_email.html.haml:23
+#: app/views/user_session/_new.html.haml:4
+#: app/views/user_session/new.html.haml:7
 msgid "Password"
 msgstr ""
 
@@ -1112,21 +1290,53 @@ msgstr ""
 msgid "Password:"
 msgstr ""
 
-#: app/helpers/application_helper.rb:40
+#: app/helpers/application_helper.rb:41
 msgid "Past events"
 msgstr ""
 
-#: app/models/event.rb:228
-msgid "Payments are not completed yet"
+#: app/views/payments/edit.html.haml:40
+msgid "Pay now"
+msgstr ""
+
+#: app/views/payments/edit.html.haml:6
+msgid "Payment details"
+msgstr ""
+
+#: app/models/payment.rb:69
+msgid "Payment failed"
+msgstr ""
+
+#: app/views/payments/edit.html.haml:16
+msgid "Payment method"
+msgstr ""
+
+#: app/views/payments/edit.html.haml:1
+msgid "Payment | Eventify"
+msgstr ""
+
+#: app/helpers/application_helper.rb:8 app/views/my/payments/index.html.haml:7
+msgid "Payments"
+msgstr ""
+
+#: app/views/my/payments/index.html.haml:1
+msgid "Payments | Eventify"
+msgstr ""
+
+#: app/views/payments/edit.html.haml:35
+msgid "Phone number:"
 msgstr ""
 
 #: app/views/events/_info.html.haml:16
 msgid "Place:"
 msgstr ""
 
-#: app/controllers/invitations_controller.rb:52
 #: app/controllers/events_controller.rb:18
+#: app/controllers/invitations_controller.rb:53
 msgid "Please add at least one guest"
+msgstr ""
+
+#: app/controllers/payments_controller.rb:49
+msgid "Please choose a package that reflects your event"
 msgstr ""
 
 #: app/views/events/_event_form.html.haml:18
@@ -1159,6 +1369,10 @@ msgstr ""
 msgid "Previous"
 msgstr ""
 
+#: app/views/payments/_header.html.haml:5
+msgid "Price"
+msgstr ""
+
 #: app/views/layouts/_footer.html.haml:10
 #: app/views/layouts/_header.html.haml:11
 #: app/views/pages/pricing_en.html.haml:1
@@ -1168,12 +1382,24 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:85
+#: app/views/payments/new.html.haml:27
+msgid "Pricing Summary%{upgrade_status}"
+msgstr ""
+
+#: app/views/payments/new.html.haml:1
+msgid "Pricing | Eventify"
+msgstr ""
+
+#: app/views/summaries/show.html.haml:94
 msgid "Pring Guests List"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:12
+#: app/views/rsvps/_info.html.haml:12 app/views/summaries/show.html.haml:96
 msgid "Print Invitation"
+msgstr ""
+
+#: app/views/payments/new.html.haml:75
+msgid "Printed Invitations Package -"
 msgstr ""
 
 #: app/views/layouts/_user_menu.html.haml:53
@@ -1184,17 +1410,17 @@ msgstr ""
 msgid "Profile | Eventify"
 msgstr ""
 
-#: app/views/rsvps/_new.html.haml:2 app/views/other_guests/index.html.haml:14
+#: app/views/other_guests/index.html.haml:14 app/views/rsvps/_new.html.haml:2
 msgid "RSVP"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:60
 #: app/views/shared/_rsvp_tabs.html.haml:4
+#: app/views/summaries/show.html.haml:67
 msgid "RSVP may be"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:62
 #: app/views/shared/_rsvp_tabs.html.haml:5
+#: app/views/summaries/show.html.haml:69
 msgid "RSVP no"
 msgstr ""
 
@@ -1214,8 +1440,8 @@ msgstr ""
 msgid "RSVP summary|When a guest updates RSVP"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:58
 #: app/views/shared/_rsvp_tabs.html.haml:3
+#: app/views/summaries/show.html.haml:65
 msgid "RSVP yes"
 msgstr ""
 
@@ -1228,48 +1454,53 @@ msgstr ""
 msgid "RSVPS"
 msgstr ""
 
-#: app/views/users/new.html.haml:1 app/views/users/_new.html.haml:12
+#: app/views/users/_new.html.haml:12 app/views/users/new.html.haml:1
 msgid "Register"
 msgstr ""
 
-#: app/views/user_session/new.html.haml:10
 #: app/views/user_session/_new.html.haml:12
+#: app/views/user_session/new.html.haml:10
 msgid "Remember me"
 msgstr ""
 
-#: app/views/reminders/edit.html.haml:4
+#: app/views/reminders/_edit.html.haml:4
 msgid "Reminder has already been sent"
 msgstr ""
 
-#: app/models/reminder.rb:136
+#: app/models/reminder.rb:132
 msgid "Reminder: %{default_sms}"
 msgstr ""
 
-#: app/models/reminder.rb:134
+#: app/models/reminder.rb:124
 msgid "Reminder: %{event_name}"
 msgstr ""
 
-#: app/models/event.rb:303
+#: app/models/event.rb:292
 msgid "Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}"
 msgstr ""
 
-#: app/models/event.rb:306
+#: app/models/event.rb:295
 msgid "Reminder:%{event_name} on %{date} at %{time}.%{host_name}"
 msgstr ""
 
-#: app/helpers/events_wizard_helper.rb:3 app/views/events/show.html.haml:24
+#: app/helpers/events_wizard_helper.rb:3 app/views/events/show.html.haml:19
+#: app/views/reminders/_index.html.haml:6
 msgid "Reminders"
+msgstr ""
+
+#: app/views/reminders/_index.html.haml:2
+msgid "Reminders &amp; RSVP’s"
 msgstr ""
 
 #: app/views/events/show.html.haml:1
 msgid "Reminders | Eventify"
 msgstr ""
 
-#: app/views/events/_form.html.haml:43
+#: app/views/events/_form.html.haml:47
 msgid "Remove"
 msgstr ""
 
-#: app/views/events/_form.html.haml:23
+#: app/views/events/_form.html.haml:27
 msgid "Remove End date &amp; Time"
 msgstr ""
 
@@ -1281,13 +1512,18 @@ msgstr ""
 msgid "SELECT"
 msgstr ""
 
-#: app/views/reminders/_form.html.haml:10
+#: app/views/my/payments/index.html.haml:15
+#: app/views/payments/edit.html.haml:9 app/views/reminders/_form.html.haml:10
 msgid "SMS"
 msgstr ""
 
 #: app/views/cancellations/_sms.html.haml:11
 #: app/views/reminders/_form.html.haml:39
 msgid "SMS Message"
+msgstr ""
+
+#: app/views/payments/new.html.haml:56
+msgid "SMS Package - "
 msgstr ""
 
 #: app/views/invitations/_edit.html.haml:14
@@ -1302,9 +1538,9 @@ msgstr ""
 msgid "SMS message text fo resend"
 msgstr ""
 
-#: app/helpers/events_wizard_helper.rb:47 app/views/reminders/_new.html.haml:7
-#: app/views/users/_edit.html.haml:9 app/views/contacts/edit.html.haml:18
-#: app/views/passwords/_edit.html.haml:5
+#: app/helpers/events_wizard_helper.rb:47 app/views/contacts/edit.html.haml:18
+#: app/views/passwords/_edit.html.haml:5 app/views/reminders/_new.html.haml:7
+#: app/views/users/_edit.html.haml:9
 msgid "Save"
 msgstr ""
 
@@ -1329,13 +1565,14 @@ msgstr ""
 msgid "Select None"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:73
+#: app/views/summaries/show.html.haml:82
 msgid "Selected"
 msgstr ""
 
 #: app/views/cancellations/edit.html.haml:22
+#: app/views/guests_messages/_new.html.haml:8
 #: app/views/invitations/_edit.html.haml:22
-#: app/views/passwords/new.html.haml:11 app/views/passwords/_new.html.haml:8
+#: app/views/passwords/_new.html.haml:8 app/views/passwords/new.html.haml:11
 msgid "Send"
 msgstr ""
 
@@ -1349,6 +1586,10 @@ msgstr ""
 
 #: app/views/invitations/edit.html.haml:1
 msgid "Send Invitations | Eventify"
+msgstr ""
+
+#: app/views/summaries/show.html.haml:76
+msgid "Send Message to Guests"
 msgstr ""
 
 #: app/views/passwords/new.html.haml:3
@@ -1396,11 +1637,7 @@ msgstr ""
 msgid "Sending Invitations | Eventify"
 msgstr ""
 
-#: app/views/events/show.html.haml:18
-msgid "Set event reminders for you and your guests"
-msgstr ""
-
-#: app/helpers/application_helper.rb:8
+#: app/helpers/application_helper.rb:9
 msgid "Settings"
 msgstr ""
 
@@ -1414,7 +1651,13 @@ msgid ""
 "list before changing the name"
 msgstr ""
 
-#: app/models/event.rb:456
+#: app/views/events/_event_form.html.haml:37
+msgid ""
+"Some of your text doesn't fit. Try shortening your text or reducing the font "
+"size."
+msgstr ""
+
+#: app/models/event.rb:445
 msgid "Sorry, %{event_name} has been cancelled"
 msgstr ""
 
@@ -1451,39 +1694,38 @@ msgstr ""
 msgid "The picture I uploaded does not violate any copyright laws"
 msgstr ""
 
-#: app/views/things/index.html.haml:1
-msgid "Things To Bring | Eventify"
-msgstr ""
-
-#: app/views/guests/index.html.haml:17 app/views/summaries/show.html.haml:69
-#: app/views/things/index.html.haml:15 app/views/takings/_index.html.haml:2
+#: app/views/events/show.html.haml:21 app/views/summaries/show.html.haml:78
+#: app/views/takings/_index.html.haml:2 app/views/things/_index.html.haml:2
 msgid "Things to bring"
 msgstr ""
 
-#: app/controllers/application_controller.rb:78
+#: app/controllers/application_controller.rb:79
 msgid "This is a cancelled event. You cannot change it."
 msgstr ""
 
-#: app/controllers/application_controller.rb:74
+#: app/controllers/application_controller.rb:75
 msgid "This is a past event. You cannot change it."
 msgstr ""
 
 #: app/helpers/events_helper.rb:20 app/views/events/_info.html.haml:12
 #: app/views/rsvps/_info.html.haml:31 app/views/rsvps/_info.html.haml:38
-#: app/views/summaries/show.iphone.haml:14
-#: app/views/summaries/show.html.haml:26 app/views/summaries/show.html.haml:34
+#: app/views/summaries/show.html.haml:33 app/views/summaries/show.html.haml:41
 msgid "Time"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:55
+#: app/views/payments/edit.html.haml:12 app/views/payments/new.html.haml:91
+msgid "Total"
+msgstr ""
+
+#: app/views/summaries/show.html.haml:62
 msgid "Total arriving guests"
 msgstr ""
 
-#: app/views/guests/index.html.haml:38 app/views/guests/index.html.haml:54
+#: app/views/guests/index.html.haml:37 app/views/guests/index.html.haml:53
 msgid "Total guests - %{total_guests}"
 msgstr ""
 
-#: app/views/reminders/_edit.html.haml:6
+#: app/views/reminders/_edit.html.haml:11
 msgid "Update"
 msgstr ""
 
@@ -1495,8 +1737,8 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:4
 #: app/views/uploaded_pictures/_empty_thumbnail.html.haml:5
+#: app/views/uploaded_pictures/new.html.haml:4
 msgid "Upload Picture"
 msgstr ""
 
@@ -1512,6 +1754,14 @@ msgstr ""
 msgid "Watch example"
 msgstr ""
 
+#: app/models/payment.rb:49
+msgid "Weekly charge amount limit reached for this credit card"
+msgstr ""
+
+#: app/models/payment.rb:48
+msgid "Weekly charge count limit reached for this credit card"
+msgstr ""
+
 #: app/models/reminder.rb:11
 msgid "Weeks"
 msgstr ""
@@ -1521,8 +1771,7 @@ msgid "Welcome to %{domain}"
 msgstr ""
 
 #: app/views/rsvps/_info.html.haml:16 app/views/rsvps/_info.html.haml:26
-#: app/views/summaries/show.iphone.haml:17
-#: app/views/summaries/show.html.haml:22
+#: app/views/summaries/show.html.haml:29
 msgid "Where:"
 msgstr ""
 
@@ -1530,12 +1779,12 @@ msgstr ""
 msgid "Who brings"
 msgstr ""
 
-#: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:4
-#: app/views/guests/index.html.haml:43
+#: app/models/guest.rb:116 app/views/guests/index.html.haml:42
+#: app/views/rsvps/_new.html.haml:4
 msgid "Yes"
 msgstr ""
 
-#: app/controllers/events_controller.rb:103
+#: app/controllers/events_controller.rb:109
 msgid "You already have an account, please login with your email and password."
 msgstr ""
 
@@ -1559,16 +1808,12 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
-#: app/views/events/_form.html.haml:59
+#: app/views/events/_form.html.haml:60
 msgid "You didn't save the event."
 msgstr ""
 
 #: app/views/guests/index.html.haml:7
 msgid "You didn't save the last added guest."
-msgstr ""
-
-#: app/views/things/index.html.haml:6
-msgid "You didn't save the last added thing to bring."
 msgstr ""
 
 #: app/views/designs/show.html.haml:9
@@ -1587,7 +1832,7 @@ msgstr ""
 msgid "You must be logged out to access this page"
 msgstr ""
 
-#: app/views/events/_form.html.haml:36
+#: app/views/events/_form.html.haml:40
 msgid "You must fill out the address field in order to find a map"
 msgstr ""
 
@@ -1802,7 +2047,7 @@ msgstr ""
 msgid "change RSVP|change"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:122
+#: app/views/summaries/show.html.haml:133
 msgid "click here for help"
 msgstr ""
 
@@ -1946,12 +2191,13 @@ msgstr ""
 msgid "does't look like a mobile phone number"
 msgstr ""
 
-#: app/models/guest.rb:12 app/models/contact.rb:6
+#: app/models/contact.rb:6 app/models/guest.rb:12
 msgid "does't look like an email"
 msgstr ""
 
-#: app/helpers/application_helper.rb:86 app/views/summaries/show.html.haml:79
+#: app/helpers/application_helper.rb:87
 #: app/views/contacts/_contact.html.haml:5
+#: app/views/summaries/show.html.haml:88
 msgid "edit"
 msgstr ""
 
@@ -1975,11 +2221,11 @@ msgstr ""
 msgid "edit event menu|Things to bring"
 msgstr ""
 
-#: app/models/event.rb:230
+#: app/models/event.rb:232
 msgid "end date should be in a future"
 msgstr ""
 
-#: app/views/events/_form.html.haml:31 app/views/events/_form.html.haml:36
+#: app/views/events/_form.html.haml:35 app/views/events/_form.html.haml:40
 msgid "ex. 5th Avenue, Manhattan"
 msgstr ""
 
@@ -1987,17 +2233,17 @@ msgstr ""
 msgid "ex. John Doe"
 msgstr ""
 
-#: app/views/events/_form.html.haml:17
+#: app/views/events/_form.html.haml:17 app/views/events/_form.html.haml:19
 msgid "ex. My 40th birthday"
 msgstr ""
 
-#: app/views/events/_form.html.haml:49
+#: app/views/events/_form.html.haml:21
 msgid ""
 "ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June "
 "at 22:00 &#13;&#10;at The Neighborhood Bar"
 msgstr ""
 
-#: app/views/events/_form.html.haml:30
+#: app/views/events/_form.html.haml:34
 msgid "ex. The Neighberhood Bar"
 msgstr ""
 
@@ -2005,7 +2251,7 @@ msgstr ""
 msgid "ex. john.doe@gmail.com"
 msgstr ""
 
-#: app/helpers/rsvps_helper.rb:66 app/views/events/_form.html.haml:36
+#: app/helpers/rsvps_helper.rb:74 app/views/events/_form.html.haml:40
 msgid "find address"
 msgstr ""
 
@@ -2037,7 +2283,7 @@ msgstr ""
 msgid "is too long, %{chars} max"
 msgstr ""
 
-#: app/models/user.rb:64
+#: app/models/user.rb:65
 msgid "is wrong"
 msgstr ""
 
@@ -2127,25 +2373,25 @@ msgstr[1] ""
 msgid "open"
 msgstr ""
 
-#: app/views/events/_form.html.haml:38 app/views/users/_edit.html.haml:11
-#: app/views/passwords/_edit.html.haml:7
+#: app/views/events/_form.html.haml:42 app/views/passwords/_edit.html.haml:7
+#: app/views/users/_edit.html.haml:11
 msgid "or"
 msgstr ""
 
-#: app/models/reminder.rb:102
+#: app/models/reminder.rb:99
 msgid "reminder send by|by Email"
 msgstr ""
 
-#: app/models/reminder.rb:103
+#: app/models/reminder.rb:100
 msgid "reminder send by|by SMS"
 msgstr ""
 
-#: app/views/reminders/_reminder.html.haml:9
+#: app/views/reminders/_reminder.html.haml:7
 msgid "reminder|(sent)"
 msgstr ""
 
-#: app/views/reminders/_reminder.html.haml:12
 #: app/views/contacts/_contact.html.haml:6
+#: app/views/reminders/_reminder.html.haml:10
 msgid "remove"
 msgstr ""
 
@@ -2161,13 +2407,13 @@ msgstr ""
 msgid "resend|Yes"
 msgstr ""
 
-#: app/views/notifier/he_guests_summary.text.plain.erb:3
 #: app/views/notifier/he_guests_summary.text.html.erb:3
+#: app/views/notifier/he_guests_summary.text.plain.erb:3
 msgid "rsvp summary|Event %{name}"
 msgstr ""
 
-#: app/views/notifier/he_guests_summary.text.plain.erb:13
 #: app/views/notifier/he_guests_summary.text.html.erb:13
+#: app/views/notifier/he_guests_summary.text.plain.erb:13
 msgid "rsvp summary|Guests that responded %{rsvp} (%{count})"
 msgstr ""
 
@@ -2175,8 +2421,8 @@ msgstr ""
 msgid "rsvp summary|Hello %{username},"
 msgstr ""
 
-#: app/views/notifier/he_guests_summary.text.plain.erb:7
 #: app/views/notifier/he_guests_summary.text.html.erb:7
+#: app/views/notifier/he_guests_summary.text.plain.erb:7
 msgid "rsvp summary|RSVPs summary since %{date_time}"
 msgstr ""
 
@@ -2184,8 +2430,8 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/guests/index.html.haml:28 app/views/summaries/show.html.haml:88
-#: app/views/summaries/show.html.haml:91
+#: app/views/guests/index.html.haml:27 app/views/summaries/show.html.haml:99
+#: app/views/summaries/show.html.haml:102
 msgid "search"
 msgstr ""
 
@@ -2197,11 +2443,11 @@ msgstr ""
 msgid "sent"
 msgstr ""
 
-#: app/models/reminder.rb:62
+#: app/models/reminder.rb:59
 msgid "should be in a future"
 msgstr ""
 
-#: app/helpers/rsvps_helper.rb:62 app/helpers/rsvps_helper.rb:64
+#: app/helpers/rsvps_helper.rb:70 app/helpers/rsvps_helper.rb:72
 msgid "show map"
 msgstr ""
 
@@ -2217,7 +2463,7 @@ msgid ""
 "list before changing the amounts"
 msgstr ""
 
-#: app/models/event.rb:227
+#: app/models/event.rb:230
 msgid "start date should be in a future"
 msgstr ""
 
@@ -2237,7 +2483,7 @@ msgstr ""
 msgid "support.select.prompt"
 msgstr ""
 
-#: app/models/event.rb:229
+#: app/models/event.rb:231
 msgid "time cannot be blank"
 msgstr ""
 

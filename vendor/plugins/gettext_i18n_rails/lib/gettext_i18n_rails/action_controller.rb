@@ -31,7 +31,8 @@ class ActionController::Base
 
       parts.shift if parts.first == 'www'
 
-      lang = parts.shift if valid_locale?(parts.first)
+      #lang = parts.shift if valid_locale?(parts.first)
+      valid_locale?(parts.first) ? lang = parts.shift : lang = default_locale
 
       host, port = parts.join('.').split(':')
       [lang, host, port]
@@ -44,15 +45,13 @@ class ActionController::Base
   # return nil if locale can't be found from the source
   def detect_locale_from(source)
     case source
-    when :params
-      params[:locale]
+    when :domain
+      parse_host_and_port_for_locale[0]
     when :session
       logger.debug "Session: #{session.inspect}"
       session[:locale]
     when :cookie
       cookies[:locale]
-    when :domain
-      parse_host_and_port_for_locale[0]
     when :header
       request.env['HTTP_ACCEPT_LANGUAGE']
     when :default
@@ -76,7 +75,7 @@ class ActionController::Base
   # you can pass opts[:session_domain] to set as the domain for the session
   # or just pass 'true' to use currenly parsed base domain for it (w/o the www and/or language part)
   def set_gettext_locale(sources)
-    sources ||= [:params, :session, :cookie, :domain, :header, :default]
+    sources ||= [:domain,:session, :cookie, :header, :default]
     session[:locale] = FastGettext.set_locale(detect_locale(sources))
   end
 
@@ -126,9 +125,9 @@ class ActionController::Base
 
   def locale_url_for(locale)
     if request.get?
-      url_for(params.merge(:locale => locale, :host => locale_domain_for(locale)))
+      url_for(params.merge(:host => locale_domain_for(locale)))
     else
-      request.protocol + locale_domain_for(locale) + home_path + "?locale=" + locale
+      request.protocol + locale_domain_for(locale) + home_path
     end
   end
 

@@ -4,8 +4,8 @@ class RemindersController < InheritedResources::Base
   belongs_to :event
   layout nil
 
-  actions :new, :create, :update, :destroy, :edit
-  respond_to :js, :except => [:new, :edit]
+  actions :index, :new, :create, :update, :destroy, :edit
+  respond_to :js, :except => [:new]
 
   def new
     new! do |success|
@@ -25,6 +25,10 @@ class RemindersController < InheritedResources::Base
   # destroy
 
 protected
+  def collection
+    get_collection_ivar || set_collection_ivar(end_of_association_chain.find(:all))
+  end
+
   def begin_of_association_chain
     current_user
   end
