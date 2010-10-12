@@ -1,5 +1,5 @@
 if resource.errors.blank?
-  page << "jQuery.nyroModalRemove();" 
+  rerender_reminders(page)
 else
   page << "jQuery('.edit_reminder').html(#{render(:partial => 'edit').to_json})"
   page << "jQuery('#nyroModalContent select').customSelect();"
