@@ -349,7 +349,7 @@ ul.contact-tabset li.active a:hover,
 
 .confirmed-box.send-invitations {
 	background: transparent;
-	padding: 100px 170px;
+	padding: 30px 170px;
 }
 
 .confirmed-box.send-invitations h3 {
@@ -362,21 +362,6 @@ ul.contact-tabset li.active a:hover,
 
 .confirmed-box.send-invitations .forms-block-btns a.cancel {
 	padding-top:12px;
-}
-
-.confirmed-box h2 {
-	margin: 0 0 10px -40px;
-}
-
-.hebrew .confirmed-box h2 {
-	margin: 0 -25px 10px 0;
-}
-
-.confirmed-box {
-	padding: 172px 100px 187px 280px;
-}
-.hebrew .confirmed-box {
-	padding: 172px 320px 187px 100px;
 }
 
 .boxe .heading .drop {
