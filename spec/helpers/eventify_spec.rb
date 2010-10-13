@@ -2,20 +2,23 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Eventify do
   it "should calculate emails amounts" do
-    Eventify.emails_plan(1).should == [100, 0]
+    Eventify.emails_plan(1).should == [20, 0]
+    Eventify.emails_plan(20).should == [20, 0]
+    Eventify.emails_plan(21).should == [100, 0]
     Eventify.emails_plan(100).should == [100, 0]
-    Eventify.emails_plan(101).should == [200, 15000]
-    Eventify.emails_plan(201).should == [300, 25000]
-    Eventify.emails_plan(301).should == [400, 35000]
-    Eventify.emails_plan(401).should == [500, 45000]
-    Eventify.emails_plan(501).should == [501, 50100]
+    Eventify.emails_plan(101).should == [200, 0]
+    Eventify.emails_plan(200).should == [200, 0]
+    Eventify.emails_plan(201).should == [300, 0]
+    Eventify.emails_plan(300).should == [300, 0]
+    Eventify.emails_plan(301).should == [500, 0]
+    Eventify.emails_plan(500).should == [500, 0]
     Eventify.emails_plan(501, 200).should == [501, 100200]
   end
 
   it "should calculate sms amounts" do
-    Eventify.sms_plan(1).should == [25, 500]
-    Eventify.sms_plan(25).should == [25, 500]
-    Eventify.sms_plan(26).should == [50, 1000]
+    Eventify.sms_plan(1).should == [20, 700]
+    Eventify.sms_plan(20).should == [20, 700]
+    Eventify.sms_plan(21).should == [40, 1400]
   end
 
   it "should calculate prints amounts" do

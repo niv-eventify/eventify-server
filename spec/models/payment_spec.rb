@@ -9,13 +9,13 @@ describe Payment do
   it "should have upgrade plan for new" do
     plan, price = Payment.upgrade_plan(:emails_plan, 101, 0)
     plan.should == 200
-    price.should == 15000
+    price.should == 0
   end
 
   it "should have upgrade plan for paid" do
     plan, price = Payment.upgrade_plan(:emails_plan, 201, 101)
     plan.should == 300
-    price.should == 10000
+    price.should == 0
   end
 
   it "should calculate amount" do

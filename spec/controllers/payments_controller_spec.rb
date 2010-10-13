@@ -32,7 +32,7 @@ describe PaymentsController do
 
     it "should create a payment" do
       @event.stub!(:total_sms_count).and_return(2)
-      post :create, :event_id => @event.id, :payment => {:sms_plan => 25, :emails_plan => 100, :prints_plan => 0, :amount => 500}
+      post :create, :event_id => @event.id, :payment => {:sms_plan => 20, :emails_plan => 20, :prints_plan => 0, :amount => 700}
       assigns[:payment].should_not be_new_record
       response.should be_redirect
     end

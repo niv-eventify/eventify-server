@@ -23,7 +23,7 @@ describe Event do
     end
 
     it "should set default plans" do
-      @event.emails_plan.should == 100
+      @event.emails_plan.should == 20
       @event.sms_plan.should be_zero
       @event.prints_plan.should be_zero
     end
