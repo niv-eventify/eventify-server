@@ -1,6 +1,6 @@
 module EventsWizardHelper
 
-  STAGE_NAMES = [N_("Design"), N_("Event details"), N_("Invite guests"), N_("Reminders"), N_("Summary")]
+  STAGE_NAMES = [N_("Design"), N_("Event details"), N_("Invite guests"), N_("Reminders|tab"), N_("Summary")]
 
   def wizard_next_link(opts)
     if opts[:func]
