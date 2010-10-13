@@ -14,6 +14,10 @@ function clearInputs(id){
 		}).blur();
 	});
 }
+function isInputFieldWithDefaultVal(id) {
+  var el = jQuery('#' + id);
+  return el.val().replace(/[\n\r]/g,"") == el.attr('def_value').replace(/[\n\r]/g,"")
+}
 function clearInputsBeforeFormSubmission(id){
 	if(jQuery('#' + id).length == 0) return;
 	if(jQuery('#' + id).val().replace(/[\n\r]/g,"") == jQuery('#' + id).attr('def_value').replace(/[\n\r]/g,""))

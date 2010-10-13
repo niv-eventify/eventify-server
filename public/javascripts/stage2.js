@@ -48,16 +48,19 @@
     stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
   },
 
-  is_good_font_size: function(id) {
-    return jQuery("#" + id)[0].scrollWidth <= stage2[id + "_scroll_width"]
-  },
-
-  preview_text: function(sourceId, targetId) {
+  preview_text: function(sourceId, targetId, allowOverFlow) {
     var text = jQuery("#" + sourceId).val();
     if(stage2.prev_text == text) return;
     stage2.prev_text = text;
     text = text.replace(/\n/g,"<BR/>").replace(/ /g, "&nbsp;");
     jQuery("#" + targetId).html(text);
+    if(!allowOverFlow) {
+      protectionCounter = 0;
+      while(stage2.isTextOverflow() && protectionCounter < 20) {
+        stage2.change_font_size_by(-1, targetId);
+        protectionCounter++;
+      }
+    }
     stage2.setOverflowWarning();
     stage2.setToolbarsPosition();
   },
@@ -345,25 +348,26 @@ jQuery(document).ready(function(){
   clearInputs("event_invitation_title");
   clearInputs("event_guest_message");
 
-  stage2.preview_text("event_guest_message", "free_text");
-  stage2.preview_text("event_invitation_title", "title");
+  stage2.preview_text("event_invitation_title", "title", !isInputFieldWithDefaultVal("event_invitation_title"));
+  stage2.preview_text("event_guest_message", "free_text", !isInputFieldWithDefaultVal("event_guest_message"));
+
   jQuery("#event_invitation_title").blur(function(){
-    stage2.preview_text("event_invitation_title", "title");
+    stage2.preview_text("event_invitation_title", "title", true);
   });
   jQuery("#event_invitation_title").focus(function(){
-    stage2.preview_text("event_invitation_title", "title");
+    stage2.preview_text("event_invitation_title", "title", true);
   });
   jQuery("#event_invitation_title").keyup(function(){
-    stage2.preview_text("event_invitation_title", "title");
+    stage2.preview_text("event_invitation_title", "title", true);
   });
   jQuery("#event_guest_message").blur(function(){
-    stage2.preview_text("event_guest_message", "free_text");
+    stage2.preview_text("event_guest_message", "free_text", true);
   });
   jQuery("#event_guest_message").focus(function(){
-    stage2.preview_text("event_guest_message", "free_text");
+    stage2.preview_text("event_guest_message", "free_text", true);
   });
   jQuery("#event_guest_message").keyup(function(){
-    stage2.preview_text("event_guest_message", "free_text");
+    stage2.preview_text("event_guest_message", "free_text", true);
   });
 
   stage2.months_arr = stage2.months_arr.splice(1,13);
