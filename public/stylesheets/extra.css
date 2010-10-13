@@ -1205,3 +1205,6 @@ em.counter {
 #summary_other_guests.tabs-container {
 	padding: 0;
 }
+.hebrew #top-nav li .popup ul{
+  float: right;
+}
