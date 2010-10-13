@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-10-12 12:50+0200\n"
+"POT-Creation-Date: 2010-10-13 10:26+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -269,6 +269,10 @@ msgstr ""
 #: app/views/rsvps/_info.html.haml:21 app/views/summaries/show.iphone.haml:21
 #: app/views/summaries/show.html.haml:46
 msgid "Address:"
+msgstr ""
+
+#: app/helpers/events_wizard_helper.rb:3
+msgid "Advance Options"
 msgstr ""
 
 #: app/views/guests/index.html.haml:41
@@ -1496,8 +1500,7 @@ msgstr ""
 msgid "Reminder:%{event_name} on %{date} at %{time}.%{host_name}"
 msgstr ""
 
-#: app/helpers/events_wizard_helper.rb:3 app/views/events/show.html.haml:19
-#: app/views/reminders/_index.html.haml:6
+#: app/views/events/show.html.haml:19 app/views/reminders/_index.html.haml:6
 msgid "Reminders"
 msgstr ""
 
