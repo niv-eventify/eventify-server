@@ -22,7 +22,7 @@ class Category < ActiveRecord::Base
   named_scope :has_designs, :conditions => "categories.id IN (SELECT DISTINCT category_id FROM classifications LEFT OUTER JOIN designs on classifications.design_id = designs.id WHERE designs.disabled_at IS NULL)"
 
   def to_param
-    "#{id}-#{name.gsub(/ /, "-")}"
+    "#{id}-#{name.gsub(/ /, "-").gsub(/-\/-/, "-")}"
   end
   def disabled?
     !disabled_at.blank?
