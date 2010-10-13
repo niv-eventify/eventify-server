@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101004213642) do
+ActiveRecord::Schema.define(:version => 20101013074830) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(:version => 20101004213642) do
     t.string   "host_mobile_number"
     t.string   "sms_message"
     t.datetime "rsvp_summary_send_at"
-    t.integer  "rsvp_summary_send_every",                    :default => 0
+    t.integer  "rsvp_summary_send_every",                    :default => 2
     t.datetime "last_summary_sent_at"
     t.boolean  "allow_seeing_other_guests",                  :default => true
     t.integer  "title_font_size",                            :default => 22
@@ -164,11 +164,11 @@ ActiveRecord::Schema.define(:version => 20101004213642) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
+    t.string   "invitation_title",           :limit => 100
     t.integer  "emails_plan",                                :default => 0
     t.integer  "sms_plan",                                   :default => 0
     t.integer  "prints_plan",                                :default => 0
     t.integer  "prints_ordered",                             :default => 0
-    t.string   "invitation_title",           :limit => 100
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
@@ -206,10 +206,10 @@ ActiveRecord::Schema.define(:version => 20101004213642) do
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
     t.boolean  "any_invitation_sent",        :default => false
+    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "bounced_at"
     t.string   "bounce_status"
     t.string   "bounce_reason"
-    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
     t.datetime "first_viewed_invitation_at"
