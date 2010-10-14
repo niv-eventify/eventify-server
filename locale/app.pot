@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-10-13 10:26+0200\n"
+"POT-Creation-Date: 2010-10-14 20:56+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -153,6 +153,11 @@ msgstr[1] ""
 
 #: app/views/events/_form.html.haml:19
 msgid "(100 symbols max)"
+msgstr ""
+
+#: app/views/invitations/_edit.html.haml:15
+#: app/views/invitations/_edit.html.haml:17
+msgid "(140 symbols max)"
 msgstr ""
 
 #: app/views/events/_form.html.haml:21
@@ -624,7 +629,7 @@ msgid "Edit Contact | Eventify"
 msgstr ""
 
 #: app/views/invitations/edit.html.haml:4
-#: app/views/invitations/_edit.html.haml:23
+#: app/views/invitations/_edit.html.haml:27
 #: app/views/payments/new.html.haml:98
 msgid "Edit Guests"
 msgstr ""
@@ -646,6 +651,7 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+#: app/views/cancellations/_email.html.haml:12
 #: app/views/guests_messages/_form.html.haml:8
 #: app/views/reminders/_form.html.haml:31
 msgid "Email body"
@@ -886,6 +892,10 @@ msgstr ""
 msgid "Hide Map"
 msgstr ""
 
+#: app/views/layouts/_header.html.haml:19
+msgid "Home Page"
+msgstr ""
+
 #: app/views/welcome/index.html.haml:1
 msgid "Home | Eventify"
 msgstr ""
@@ -971,7 +981,7 @@ msgid ""
 msgstr ""
 
 #: app/controllers/events_controller.rb:111
-#: app/views/invitations/edit.html.haml:20
+#: app/views/invitations/edit.html.haml:16
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:20
 msgid ""
 "Instructions to activate your account have been emailed to you. Please check "
@@ -1079,7 +1089,6 @@ msgstr ""
 msgid "Message Confirmations"
 msgstr ""
 
-#: app/views/cancellations/_email.html.haml:12
 #: app/views/events/_form.html.haml:21
 msgid "Message to Guests"
 msgstr ""
@@ -1542,15 +1551,15 @@ msgstr ""
 msgid "SMS Package - "
 msgstr ""
 
-#: app/views/invitations/_edit.html.haml:14
+#: app/views/invitations/_edit.html.haml:18
 msgid "SMS Replys mobile phone"
 msgstr ""
 
-#: app/views/invitations/_edit.html.haml:11
+#: app/views/invitations/_edit.html.haml:15
 msgid "SMS message text"
 msgstr ""
 
-#: app/views/invitations/_edit.html.haml:13
+#: app/views/invitations/_edit.html.haml:17
 msgid "SMS message text fo resend"
 msgstr ""
 
@@ -1587,7 +1596,7 @@ msgstr ""
 
 #: app/views/cancellations/edit.html.haml:22
 #: app/views/guests_messages/_new.html.haml:8
-#: app/views/invitations/_edit.html.haml:22
+#: app/views/invitations/_edit.html.haml:26
 #: app/views/passwords/new.html.haml:11 app/views/passwords/_new.html.haml:8
 msgid "Send"
 msgstr ""
@@ -1620,7 +1629,7 @@ msgstr ""
 msgid "Send RSVPs summary email"
 msgstr ""
 
-#: app/views/invitations/_edit.html.haml:18
+#: app/views/invitations/_edit.html.haml:22
 msgid "Send SMS messages tomorrow morning"
 msgstr ""
 
@@ -2447,10 +2456,6 @@ msgstr ""
 
 #: app/views/rsvps/_edit.html.haml:23
 msgid "send"
-msgstr ""
-
-#: app/helpers/guests_helper.rb:53
-msgid "sent"
 msgstr ""
 
 #: app/models/reminder.rb:59

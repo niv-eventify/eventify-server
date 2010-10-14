@@ -1197,3 +1197,17 @@ em.counter {
   float:none;
   display: block;
 }
+li.home_page{
+  width: 80px;
+}
+li.home_page a{
+  background: url("/images/homeicon.png") no-repeat scroll 1% 0px transparent;
+  color: #56C8D7;
+  float: right;
+  padding: 0 0 0 18px;
+}
+.hebrew li.home_page a{
+  background: url("/images/homeicon.png") no-repeat scroll 99% 0px transparent;
+  padding: 0 18px 0 0;
+  float: left;
+}
