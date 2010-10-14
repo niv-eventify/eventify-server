@@ -9,4 +9,4 @@
         %h4= _("Send following email to %{guests_count}") % {:guests_count => emails_count}
         - f.inputs do
           - event_text_input(f, :cancellation_email_subject, _("Email subject"), {:required => true})
-          - event_input_text(f, :cancellation_email, _("Message to Guests"), {:required => true})
+          - event_input_text(f, :cancellation_email, _("Email body"), {:required => true})

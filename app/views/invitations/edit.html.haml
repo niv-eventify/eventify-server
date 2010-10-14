@@ -10,12 +10,8 @@
     .h-container-content
       .confirmed-box.send-invitations
         %h1= @event.name
-        .table-box
-          .table-box-t
-            .holder
-              .forms-block
-                - if @event.user.activated_at
-                  != render(:partial => "edit")
-                - else
-                  %h2= _("Instructions to activate your account have been emailed to you. Please check your email.")
+        - if @event.user.activated_at
+          != render(:partial => "edit")
+        - else
+          %h2= _("Instructions to activate your account have been emailed to you. Please check your email.")
   .b-alt &nbsp;

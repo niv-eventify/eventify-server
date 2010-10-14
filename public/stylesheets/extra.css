@@ -1193,3 +1193,7 @@ em.counter {
 .hebrew #top-nav li .popup ul{
   float: right;
 }
+.form #invitation_edit.forms-block label {
+  float:none;
+  display: block;
+}

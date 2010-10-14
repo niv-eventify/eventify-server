@@ -1,23 +1,28 @@
-- invitations_to_send
-
-- invitations_to_resend
-
-- form_for @event, :event, :url => invitation_path(@event), :builder => MiddleBoxFormBuilder::Builder, :method => :post do |f|
+- semantic_form_for @event, :event, :url => invitation_path(@event), :html => {:class => "form", :method => :post} do |f|
   = f.object.errors.on(:base)
-  - if @invitations_to_send[:sms] > 0 || @invitations_to_send[:resend_sms] > 0
+  .table-box
+    .table-box-t
+      .holder
+        #invitation_edit.forms-block
+          - invitations_to_send
 
-    .form-cols.send-invitations
-      - unless @invitations_to_send[:sms].zero?
-        != f.text_field :sms_message, :label => _("SMS message text"), :class => "sms-message-body"
-      - unless @invitations_to_send[:resend_sms].zero?
-        != f.text_field :sms_resend_message, :label => _("SMS message text fo resend")
-      != f.text_field :host_mobile_number, :label => _("SMS Replys mobile phone")
+          - invitations_to_resend
 
-      - if !Astrails.good_time_to_send_sms?(Time.now.utc, @event.tz) && @event.allow_delayed_sms?
-        .settings-form-row
-          %label= _("Send SMS messages tomorrow morning")
-          != f.check_box :delay_sms_sending, {}, true, false
+          - if @invitations_to_send[:sms] > 0 || @invitations_to_send[:resend_sms] > 0
 
-  .forms-block-btns
-    != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
-    != link_to _("Edit Guests"), event_guests_path(@event), :class => "cancel"
+            -f.inputs do
+              - unless @invitations_to_send[:sms].zero?
+                - event_input_text(f, :sms_message, _("SMS message text"),_("(140 symbols max)"))
+              - unless @invitations_to_send[:resend_sms].zero?
+                - event_input_text(f, :sms_resend_message, _("SMS message text fo resend"),_("(140 symbols max)"))
+              - event_text_input(f, :host_mobile_number, _("SMS Replys mobile phone"), {:required => true})
+
+            - if !Astrails.good_time_to_send_sms?(Time.now.utc, @event.tz) && @event.allow_delayed_sms?
+              .settings-form-row
+                %label= _("Send SMS messages tomorrow morning")
+                != f.check_box :delay_sms_sending, {}, true, false
+
+          .forms-block-btns
+            != link_to_function _("Send"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+            != link_to _("Edit Guests"), event_guests_path(@event), :class => "cancel"
+  
