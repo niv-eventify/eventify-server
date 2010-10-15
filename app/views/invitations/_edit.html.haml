@@ -1,4 +1,4 @@
-- semantic_form_for @event, :event, :url => invitation_path(@event), :html => {:class => "form", :method => :post} do |f|
+- semantic_form_for @event, :event, :url => invitation_path(@event), :html => {:class => "form", :method => :put} do |f|
   = f.object.errors.on(:base)
   .table-box
     .table-box-t
