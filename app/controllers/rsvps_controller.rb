@@ -34,7 +34,7 @@ class RsvpsController < InheritedResources::Base
           render :action => "show_more"
         else
           if current_locale != resource.event.language
-            return redirect_to rsvp_path(:id => params[:id], :locale => resource.event.language)
+            return redirect_to rsvp_url(:id => params[:id], :host => locale_domain_for(resource.event.language))
           end
 
           render :action => "show", :layout => false
