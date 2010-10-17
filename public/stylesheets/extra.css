@@ -746,6 +746,7 @@ p.takings-changed {
 .links {
 	font-size: 1.2em;
 	color: blue;
+	padding-bottom: 10px;
 }
 .links a{
 	color: blue;
