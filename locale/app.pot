@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-10-14 20:56+0200\n"
+"POT-Creation-Date: 2010-10-17 16:11+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -145,7 +145,7 @@ msgid "%{percent} %"
 msgstr ""
 
 #: app/views/other_guests/_guest.html.haml:9
-#: app/views/other_guests/_guest.html.haml:23
+#: app/views/other_guests/_guest.html.haml:25
 msgid "(%d guest)"
 msgid_plural "(%d guests)"
 msgstr[0] ""
@@ -1883,6 +1883,10 @@ msgstr ""
 msgid "Your Email"
 msgstr ""
 
+#: app/views/events/_form.html.haml:19
+msgid "Your Invitation Title Here"
+msgstr ""
+
 #: app/views/events/_form.html.haml:12
 msgid "Your Name"
 msgstr ""
@@ -2271,7 +2275,7 @@ msgstr ""
 msgid "ex. John Doe"
 msgstr ""
 
-#: app/views/events/_form.html.haml:17 app/views/events/_form.html.haml:19
+#: app/views/events/_form.html.haml:17
 msgid "ex. My 40th birthday"
 msgstr ""
 
