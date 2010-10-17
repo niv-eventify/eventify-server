@@ -5,7 +5,7 @@ module Astrails
     class << self
       def get(csv)
         importer = Astrails::Importer.new(csv)
-        return false if importer.data.blank?
+        return nil if importer.data.blank?
 
         n_id = name_column_id(importer.data)
         e_id = email_column_id(importer.data)
