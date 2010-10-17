@@ -1,7 +1,7 @@
 require 'logger'
 module Astrails
   class OutlookContact
-    EMAIL_COLUMNS = ["Email", "email", "E-mail Address", "E-mail Address 2", "E-mail Address 3", "כתובת דואר אלקטרוני", "2 כתובת דואר אלקטרוני", "3 כתובת דואר אלקטרוני", "דוא״ל ראשי", "דוא״ל משני"]
+    EMAIL_COLUMNS = ["Email", "email", "E-mail Address", "E-mail Address 2", "E-mail Address 3", "כתובת דואר אלקטרוני", "2 כתובת דואר אלקטרוני", "3 כתובת דואר אלקטרוני", "דוא״ל ראשי", "דוא״ל משני", "Primary Email", "Secondary Email"]
     class << self
       def get(csv)
         importer = Astrails::Importer.new(csv)
