@@ -468,4 +468,7 @@ jQuery(document).ready(function(){
     }
     jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
   });
+  set_counter("#event_invitation_title", "#event_invitation_title_input .inline-hints", 100);
+  set_counter("#event_guest_message", "#event_guest_message_input .inline-hints", 345);
+
 });

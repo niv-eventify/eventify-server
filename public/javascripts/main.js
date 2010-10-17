@@ -515,6 +515,16 @@ function set_sms_counters() {
 	});
 }
 
+function set_counter(textAreaId, containerId, max) {
+	jQuery(textAreaId).charCounter(max, {
+		container: containerId,
+		classname: "counter",
+		format: window.sms_counter_format || "%1",
+		pulse: false,
+		delay: 100
+	});
+}
+
 jQuery(document).ready(function(){
 	initSlideEffect();
 	ieHover('.img-box, .edit-bg');
