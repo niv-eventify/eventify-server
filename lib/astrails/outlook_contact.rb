@@ -26,7 +26,13 @@ module Astrails
         res = []
         returning([]) do |res|
           1.step(importer.data.size - 1) do |index|
-            res << [name.call(importer.data[index]).to_s, email.call(importer.data[index]).to_s]
+            n = name.call(importer.data[index]).to_s.strip
+            e = email.call(importer.data[index]).to_s
+            if String::EMAIL_REGEX.match(e) == nil
+              res
+            else
+               res << [n.blank? ? e : n, e]
+            end
           end          
         end
       end
