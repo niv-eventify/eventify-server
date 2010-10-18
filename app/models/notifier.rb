@@ -65,7 +65,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   end
 
   def message_to_guest(guest,message)
-    subject     guest.event.name
+    subject     message.subject
     recipients  [guest.email_recipient]
     _set_receipient_header(guest)
     from        guest.event.user.email
