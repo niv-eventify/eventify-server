@@ -4,7 +4,7 @@
   != javascript_include_tag "jquery.nyroModal", "rsvps", "jquery.unload"
   :javascript
     jQuery(function(){
-      jQuery("ul.create-list li a").click(function(){
+      jQuery("ul.create-list li a, .back-btn").live("click", function(){
         var url = jQuery(this).attr("href");
         show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
         return false;

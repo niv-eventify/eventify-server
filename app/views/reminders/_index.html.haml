@@ -18,4 +18,5 @@
         .arrival-container
           .arr-row
             - event_rsvp_summary_select(@event)
-
+  .popup-btns.popup-btns-alt.one_button
+    != link_to_function _("Approve"), "jQuery.nyroModalRemove();", :class => "btn"

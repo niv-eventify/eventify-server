@@ -5,4 +5,4 @@
 
   .popup-btns.popup-btns-alt
     != link_to_function _("Save"), "jQuery(this).parents('form').get(0).onsubmit();", :class => "btn"
-    != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
+    != link_to _('Cancel'), event_reminders_path(@event), :class => "btn back-btn"
