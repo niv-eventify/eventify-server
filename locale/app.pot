@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-10-17 16:11+0200\n"
+"POT-Creation-Date: 2010-10-18 16:20+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -302,6 +302,10 @@ msgstr ""
 
 #: app/views/contact_importers/show.html.haml:18
 msgid "An error occured during importing contacts from %{name}"
+msgstr ""
+
+#: app/views/reminders/_index.html.haml:22
+msgid "Approve"
 msgstr ""
 
 #: app/helpers/designs_helper.rb:39
