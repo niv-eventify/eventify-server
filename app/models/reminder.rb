@@ -136,7 +136,7 @@ class Reminder < ActiveRecord::Base
     return unless event
 
     self.attributes = {
-      :by_sms => !event.guests.invite_by_sms.count.zero?,
+      :by_sms => false,
       :by_email => true,
       :before_units => "days",
       :before_value => 1
