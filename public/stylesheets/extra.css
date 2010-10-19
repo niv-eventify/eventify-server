@@ -1218,3 +1218,6 @@ li.home_page a{
 .hebrew .popup-btns-alt.one_button {
   padding: 7px 205px 4px 0;
 }
+.faq .item .slide a {
+  color: blue;
+}
