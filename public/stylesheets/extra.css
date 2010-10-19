@@ -1221,3 +1221,6 @@ li.home_page a{
 .faq .item .slide a {
   color: blue;
 }
+.tabset-nav li a span {
+  padding: 0 30px 0 64px;
+}
