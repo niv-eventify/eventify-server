@@ -1224,3 +1224,7 @@ li.home_page a{
 .tabset-nav li a span {
   padding: 0 30px 0 64px;
 }
+
+.new_guests_message .download-form {
+  height:auto;
+}
