@@ -14,7 +14,7 @@ class UploadedPicture < ActiveRecord::Base
     :url => ':s3_domain_url'
   attr_accessible :pic
   validates_attachment_presence :pic
-  validates_attachment_size :pic, :less_than => 3.megabytes
+  validates_attachment_size :pic, :less_than => 4.megabytes
 
   def pic_geometry(style = :original)
     @geometry ||= {}
