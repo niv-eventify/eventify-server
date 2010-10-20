@@ -58,7 +58,7 @@ class Event < ActiveRecord::Base
   has_attached_file :map,
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
-    :path =>        "/maps/:id/:filename",
+    :path =>        "maps/:id/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
