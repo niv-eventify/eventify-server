@@ -7,7 +7,7 @@ class CroppedPicture < ActiveRecord::Base
   validates_presence_of :crop_x, :crop_y, :crop_h, :crop_w
 
   has_attached_file :pic,
-    :styles         => {:original => "275x275>"},
+    :styles         => {:original => "900x600>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
     :path =>        "cropped_pictures/:id/:style/:filename",
