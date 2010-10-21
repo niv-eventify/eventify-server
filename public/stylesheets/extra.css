@@ -1228,3 +1228,6 @@ li.home_page a{
 .new_guests_message .download-form {
   height:auto;
 }
+.hebrew .logo {
+  background-image: url("/images/logo_he.gif");
+}
