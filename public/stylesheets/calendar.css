@@ -40,18 +40,18 @@ div.i-heart-ny div {
   position: relative;
   width: 164px;
 }
-div.i-heart-ny.month0 div { background-image: url(/images/tyul1_small.gif); }
-div.i-heart-ny.month1 div { background-image: url(/images/charaty1_small.gif); }
-div.i-heart-ny.month2 div { background-image: url(/images/tyul1_small.gif); }
-div.i-heart-ny.month3 div { background-image: url(/images/charaty1_small.gif); }
-div.i-heart-ny.month4 div { background-image: url(/images/tyul1_small.gif); }
-div.i-heart-ny.month5 div { background-image: url(/images/charaty1_small.gif); }
-div.i-heart-ny.month6 div { background-image: url(/images/tyul1_small.gif); }
-div.i-heart-ny.month7 div { background-image: url(/images/charaty1_small.gif); }
-div.i-heart-ny.month8 div { background-image: url(/images/tyul1_small.gif); }
-div.i-heart-ny.month9 div { background-image: url(/images/charaty1_small.gif); }
-div.i-heart-ny.month10 div { background-image: url(/images/tyul1_small.gif); }
-div.i-heart-ny.month11 div { background-image: url(/images/charaty1_small.gif); }
+div.i-heart-ny.month0 div { background-image: url(/images/calendar/arc.gif); }
+div.i-heart-ny.month1 div { background-image: url(/images/calendar/dira.gif); }
+div.i-heart-ny.month2 div { background-image: url(/images/calendar/dragon.gif); }
+div.i-heart-ny.month3 div { background-image: url(/images/calendar/family.gif); }
+div.i-heart-ny.month4 div { background-image: url(/images/calendar/elephant.gif); }
+div.i-heart-ny.month5 div { background-image: url(/images/calendar/drinks.gif); }
+div.i-heart-ny.month6 div { background-image: url(/images/calendar/beach.gif); }
+div.i-heart-ny.month7 div { background-image: url(/images/calendar/movie.gif); }
+div.i-heart-ny.month8 div { background-image: url(/images/calendar/beer.gif); }
+div.i-heart-ny.month9 div { background-image: url(/images/calendar/charity.gif); }
+div.i-heart-ny.month10 div { background-image: url(/images/calendar/picnic.gif); }
+div.i-heart-ny.month11 div { background-image: url(/images/calendar/brunch.gif); }
 
 /*
 We won't be using the caption element traditionally
