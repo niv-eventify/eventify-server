@@ -5,9 +5,8 @@
     .drop
       .drop-top
       %ul
-        %li!= link_to s_("edit event menu|Details"), edit_event_path(event)
         %li!= link_to s_("edit event menu|Design"), event_design_path(event)
+        %li!= link_to s_("edit event menu|Details"), edit_event_path(event)
         %li!= link_to s_("edit event menu|Guests list"), event_guests_path(event)
-        %li!= link_to s_("edit event menu|RSVPs"), event_path(event)
-        %li!= link_to s_("edit event menu|Things to bring"), event_things_path(event)
+        %li!= link_to _("Advance Options"), event_path(event)
       .drop-btm
