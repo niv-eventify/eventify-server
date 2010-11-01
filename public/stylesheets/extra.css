@@ -1215,6 +1215,7 @@ li.home_page a{
 }
 .popup-btns-alt.one_button {
   padding: 7px 0 4px 275px;
+  border: none;
 }
 .hebrew .popup-btns-alt.one_button {
   padding: 7px 205px 4px 0;

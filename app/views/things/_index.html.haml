@@ -16,3 +16,5 @@
         
               %tr#new_thing_row
                 != render(:partial => "form", :locals => {:f => f})
+  .popup-btns.popup-btns-alt.one_button
+    != link_to_function _("Approve"), "jQuery.nyroModalRemove();", :class => "btn"
