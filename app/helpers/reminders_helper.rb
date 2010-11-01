@@ -17,7 +17,7 @@ module RemindersHelper
 
   def rerender_reminders(page)
     page << <<-JAVASCRIPT
-      jQuery.nyroModalManual({content: #{render(:partial => 'index').to_json}});
+      jQuery.nyroModalManual({minHeight: 430, content: #{render(:partial => 'index').to_json}});
       jQuery(function(){jQuery('a.link_to_add_reminder').nyroModal({minWidth: 405});});
       jQuery("div.form-col-edit a.edit").click(function(){
         var url = jQuery(this).attr("href");
