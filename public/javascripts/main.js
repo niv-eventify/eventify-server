@@ -437,10 +437,10 @@ jQuery.fn.customCheckbox = function(_options){
 	});
 	function changeCheckbox(_this){
 		if (_this.is(':checked')) {
-			_this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked).parent().removeClass().addClass("selected");
+			_this.get(0)._replaced.removeClass().addClass(_options.checkboxChecked).parent().addClass("selected");
 		}
 		else 
-			_this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault).parent().removeClass();
+			_this.get(0)._replaced.removeClass().addClass(_options.checkboxDefault).parent().removeClass("selected");
 	}
 }
 
