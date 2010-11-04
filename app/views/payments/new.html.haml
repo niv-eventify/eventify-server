@@ -34,7 +34,7 @@
           %dd= _("Number of invitations sent in this event: %{guests_count}") % {:guests_count => @invitations_count}
         %p= _("In case you wish to add more invitations, you can select a bigger package")
         .invite
-          != render(:partial => "header")
+          != render(:partial => "header", :locals => {:item => "#{_('Guests')}"})
           .result-panel{:style => "display:none;"}
           .slide
             .slide-hold
@@ -57,7 +57,7 @@
           %dd= _("Number of SMSs to send: %{sms_count}") % {:sms_count => resource.event.total_sms_count}
         %p= _("In case you wish to send more SMSs, you can select a bigger package")
         .invite
-          != render(:partial => "header")
+          != render(:partial => "header", :locals => {:item => "#{_('SMS')}"})
           .result-panel
             != render(:partial => "controls", :locals => {:count => resource.sms_plan})
             %span.price
@@ -76,7 +76,7 @@
             %dd= _("Number of printed invitations you requested: %{prints_count}") % {:prints_count => resource.event.prints_ordered}
           %p= _("In case you wish to print more invitations, you can select a bigger package")
           .invite
-            != render(:partial => "header")
+            != render(:partial => "header", :locals => {:item => "#{_('Guests')}"})
             .result-panel
               != render(:partial => "controls", :locals => {:count => resource.prints_plan})
               %span.price

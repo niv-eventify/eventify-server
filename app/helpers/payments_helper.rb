@@ -21,10 +21,10 @@ module PaymentsHelper
     haml_tag(:input, opts)
   end
 
-  def payment_detail(title, value)
+  def payment_detail(title, amount, value)
     haml_tag(:div, :class => "settings-row") do
       haml_tag(:div, :class => "settings-info") do
-        haml_tag(:strong, title)
+        haml_tag(:strong, "#{amount} #{title}")
       end
       haml_tag(:em, value)
     end

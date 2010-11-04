@@ -5,11 +5,11 @@
   %fieldset
     %h2= _("Payment details")
     .settings-box
-      - payment_detail(_("Emails"), resource.emails_plan)
-      - payment_detail(_("SMS"), resource.sms_plan)
+      - payment_detail(_('Emails'),resource.emails_plan, "#{resource.pay_emails.format_cents} ₪")
+      - payment_detail(_("SMS"), resource.sms_plan, "#{resource.pay_sms.format_cents} ₪")
       -# payment_detail(_("Prints"), resource.prints_plan)
       %br
-      - payment_detail(_("Total"), "#{resource.amount.format_cents}₪")
+      - payment_detail(_("Total"), "",  "#{resource.amount.format_cents} ₪")
     .section
       .holder
         .col-1

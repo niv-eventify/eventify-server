@@ -45,7 +45,7 @@ describe PaymentsController do
 
     describe "edit/update" do
       before(:each) do
-        @payment = stub_model(Payment, :event_id => @event.id, :user => @event.user, :amount => 500)
+        @payment = stub_model(Payment, :event_id => @event.id, :user => @event.user, :amount => 500, :pay_emails => 10, :pay_sms => 20)
         Payment.stub!(:find).and_return(@payment)
       end
 
