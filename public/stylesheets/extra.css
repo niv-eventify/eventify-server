@@ -1237,3 +1237,6 @@ li.home_page a{
 .hebrew .logo {
   background-image: url("/images/logo_he.gif");
 }
+h2.weak {
+  font-weight: normal;
+}

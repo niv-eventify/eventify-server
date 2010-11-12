@@ -7,7 +7,9 @@
     .content-wrapper-top
       != will_paginate(collection, :renderer => DesignsWillPaginate)
       %h1= _("Invitations for ") + @category.name
-      %h3= @meta_description
+      %h2.weak
+        = @description
+        %b>= @feature
     .image-boxes-h
       - collection.in_groups_of(3).each do |group|
         .image-boxes-h-row
