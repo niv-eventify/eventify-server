@@ -6,7 +6,18 @@ class DesignsController < InheritedResources::Base
 
   def index
     super do |format|
-      format.html
+      format.html do
+        seo = current_locale == "en" ? Seo::SEO_EN : Seo::SEO_HE
+        if cat_seo = seo["cat_#{@category.id}".to_sym]
+          seo_index = params[:page].blank? ? 0 : params[:page].to_i - 1
+          @page_title = cat_seo[:title][seo_index] || cat_seo[:title][0]
+          @meta_description = cat_seo[:description][seo_index] || cat_seo[:description][0]
+          @meta_keywords = cat_seo[:meta_keywords].gsub("_title",@page_title)
+        else
+          @page_title = _("Invitations | Eventify")
+        end
+        @meta_title = @page_title
+      end
       format.js do
         if params[:change_design]
           @event = params[:event_id].to_i > 0 ? current_user.events.find(params[:event_id]) : Event.new

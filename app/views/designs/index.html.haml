@@ -1,6 +1,3 @@
-- @meta_title=_("Create the perfect %{category_name} online invitation") % { :category_name => @category.name }
-- @meta_description=_("Create, send & manage online invitations with templates to match any event! Online invitations made easy.")
-- @page_title=_("Invitations | Eventify")
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full"
   != javascript_include_tag "jquery.nyroModal"
@@ -9,8 +6,8 @@
   .content-wrapper
     .content-wrapper-top
       != will_paginate(collection, :renderer => DesignsWillPaginate)
-      %h1= @category.name
-
+      %h1= _("Invitations for ") + @category.name
+      %h3= @meta_description
     .image-boxes-h
       - collection.in_groups_of(3).each do |group|
         .image-boxes-h-row

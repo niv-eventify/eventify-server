@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-10-20 13:53+0200\n"
+"POT-Creation-Date: 2010-11-12 15:15+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -276,6 +276,7 @@ msgid "Address:"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:3
+#: app/views/events/_edit_menu.html.haml:11
 msgid "Advance Options"
 msgstr ""
 
@@ -305,6 +306,7 @@ msgid "An error occured during importing contacts from %{name}"
 msgstr ""
 
 #: app/views/reminders/_index.html.haml:22
+#: app/views/things/_index.html.haml:20
 msgid "Approve"
 msgstr ""
 
@@ -423,7 +425,7 @@ msgid "Cat&amp;Dog Studio"
 msgstr ""
 
 #: app/views/layouts/_top_categories.haml:2
-#: app/views/layouts/_footer.html.haml:4 app/views/designs/index.html.haml:26
+#: app/views/layouts/_footer.html.haml:4 app/views/designs/index.html.haml:23
 msgid "Categories"
 msgstr ""
 
@@ -508,16 +510,6 @@ msgstr ""
 
 #: app/views/payments/new.html.haml:97
 msgid "Continue"
-msgstr ""
-
-#: app/views/designs/index.html.haml:1
-msgid "Create the perfect %{category_name} online invitation"
-msgstr ""
-
-#: app/views/designs/index.html.haml:2
-msgid ""
-"Create, send & manage online invitations with templates to match any event! "
-"Online invitations made easy."
 msgstr ""
 
 #: app/views/payments/edit.html.haml:19
@@ -789,12 +781,11 @@ msgstr ""
 msgid "Export to your calendar:"
 msgstr ""
 
-#: app/views/layouts/_header.html.haml:10 app/views/pages/faq_en.html.haml:1
-#: app/views/pages/faq_en.html.haml:4
+#: app/views/layouts/_header.html.haml:10
 msgid "FAQ"
 msgstr ""
 
-#: app/views/pages/faq_he.html.haml:1
+#: app/views/pages/faq_en.html.haml:1 app/views/pages/faq_he.html.haml:1
 msgid "FAQ | Eventify"
 msgstr ""
 
@@ -843,9 +834,8 @@ msgstr ""
 msgid "Guest List"
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:23
-#: app/views/payments/_header.html.haml:3
-#: app/views/summaries/show.html.haml:60
+#: app/views/rsvps/show_more.html.haml:23 app/views/payments/new.html.haml:37
+#: app/views/payments/new.html.haml:79 app/views/summaries/show.html.haml:60
 msgid "Guests"
 msgstr ""
 
@@ -1022,6 +1012,10 @@ msgstr ""
 msgid "Invitations are being sent!"
 msgstr ""
 
+#: app/views/designs/index.html.haml:9
+msgid "Invitations for "
+msgstr ""
+
 #: app/helpers/invitations_helper.rb:12
 msgid "Invitations to re-send: %{email_count} by email and %{sms_count} by SMS"
 msgstr ""
@@ -1030,7 +1024,7 @@ msgstr ""
 msgid "Invitations to send: %{email_count} by email and %{sms_count} by SMS"
 msgstr ""
 
-#: app/views/designs/index.html.haml:3
+#: app/controllers/designs_controller.rb:17
 msgid "Invitations | Eventify"
 msgstr ""
 
@@ -1285,12 +1279,10 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: app/views/rsvps/show.iphone.haml:6 app/views/rsvps/show.html.haml:6
-#: app/views/layouts/application.html.haml:6
 msgid "Online Invitations, Event Planning and Managing – Eventify"
 msgstr ""
 
 #: app/views/rsvps/show.iphone.haml:7 app/views/rsvps/show.html.haml:7
-#: app/views/layouts/application.html.haml:7
 msgid ""
 "Online invitations made easy. Create & manage online invitations with "
 "templates to match any event! Plan your event in style!"
@@ -1544,7 +1536,7 @@ msgstr ""
 msgid "SELECT"
 msgstr ""
 
-#: app/views/payments/edit.html.haml:9
+#: app/views/payments/new.html.haml:60 app/views/payments/edit.html.haml:9
 #: app/views/my/payments/index.html.haml:15
 #: app/views/reminders/_form.html.haml:10
 msgid "SMS"
@@ -1714,8 +1706,7 @@ msgstr ""
 msgid "Summary | Eventify"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:12 app/views/pages/terms_en.html.haml:1
-#: app/views/pages/terms_en.html.haml:4
+#: app/views/layouts/_footer.html.haml:12
 msgid "Terms of Use"
 msgstr ""
 
@@ -2251,24 +2242,16 @@ msgstr ""
 msgid "edit"
 msgstr ""
 
-#: app/views/events/_edit_menu.html.haml:9
+#: app/views/events/_edit_menu.html.haml:8
 msgid "edit event menu|Design"
 msgstr ""
 
-#: app/views/events/_edit_menu.html.haml:8
+#: app/views/events/_edit_menu.html.haml:9
 msgid "edit event menu|Details"
 msgstr ""
 
 #: app/views/events/_edit_menu.html.haml:10
 msgid "edit event menu|Guests list"
-msgstr ""
-
-#: app/views/events/_edit_menu.html.haml:11
-msgid "edit event menu|RSVPs"
-msgstr ""
-
-#: app/views/events/_edit_menu.html.haml:12
-msgid "edit event menu|Things to bring"
 msgstr ""
 
 #: app/models/event.rb:232
