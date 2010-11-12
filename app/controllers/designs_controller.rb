@@ -14,11 +14,11 @@ class DesignsController < InheritedResources::Base
           @description = cat_seo[:description][seo_index] || cat_seo[:description][0]
           @feature = cat_seo[:features][seo_index] || cat_seo[:features][0]
           @meta_keywords = cat_seo[:meta_keywords].gsub("_title",@page_title)
+          @meta_description = @description + @feature
         else
           @page_title = _("Invitations | Eventify")
         end
         @meta_title = @page_title
-        @meta_description = @description + @feature
       end
       format.js do
         if params[:change_design]
