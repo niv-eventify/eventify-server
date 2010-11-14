@@ -8,11 +8,12 @@ class DesignsController < InheritedResources::Base
     super do |format|
       format.html do
         seo = current_locale == "en" ? Seo::SEO_EN : Seo::SEO_HE
+        features = current_locale == "en" ? Seo::FEATURES_EN : Seo::FEATURES_HE
         if cat_seo = seo["cat_#{@category.id}".to_sym]
           seo_index = params[:page].blank? ? 0 : params[:page].to_i - 1
           @page_title = cat_seo[:title][seo_index] || cat_seo[:title][0]
           @description = cat_seo[:description][seo_index] || cat_seo[:description][0]
-          @feature = cat_seo[:features][seo_index] || cat_seo[:features][0]
+          @feature = features[seo_index] || features[0]
           @meta_keywords = cat_seo[:meta_keywords].gsub("_title",@page_title)
           @meta_description = @description + @feature
         else
