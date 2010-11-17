@@ -52,7 +52,7 @@ describe Event do
       @event.should_not be_sms_payments_required
 
       @event.sms_plan = 1
-      @event.should be_sms_payments_required
+      @event.should_not be_sms_payments_required
     end
 
     describe "total sms count" do
