@@ -16,9 +16,9 @@ describe Eventify do
   end
 
   it "should calculate sms amounts" do
-    Eventify.sms_plan(1).should == [20, 0]
-    Eventify.sms_plan(20).should == [20, 0]
-    Eventify.sms_plan(21).should == [40, 0]
+    Eventify.sms_plan(1).should == [20, 700]
+    Eventify.sms_plan(20).should == [20, 700]
+    Eventify.sms_plan(21).should == [40, 1400]
   end
 
   it "should calculate prints amounts" do

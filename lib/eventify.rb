@@ -23,7 +23,7 @@ module Eventify
   end
 
 
-    SMS_PRICE = 0# 35 # 0.35nis
+    SMS_PRICE = 35 # 0.35nis
 
     PRINTS_BATCH = 50
     PRINTS_PRICE = 375 # 3.75nis

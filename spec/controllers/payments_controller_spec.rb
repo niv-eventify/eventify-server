@@ -33,8 +33,8 @@ describe PaymentsController do
     it "should create a payment" do
       @event.stub!(:total_sms_count).and_return(2)
       post :create, :event_id => @event.id, :payment => {:sms_plan => 20, :emails_plan => 20, :prints_plan => 0, :amount => 700}
-      assigns[:payment].should be_new_record
-      response.should_not be_redirect
+      assigns[:payment].should_not be_new_record
+      response.should be_redirect
     end
 
     it "should fail on validations" do

@@ -470,8 +470,6 @@ class Event < ActiveRecord::Base
   end
 
   def sms_payments_required?
-    return false if Eventify::SMS_PRICE == 0
-
     total_sms_count > sms_plan
   end
 
