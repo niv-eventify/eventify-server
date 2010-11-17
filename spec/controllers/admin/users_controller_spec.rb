@@ -48,10 +48,10 @@ describe Admin::UsersController do
     end
 
     it "should toggle is_free" do
-      @u.reload.should_not be_is_free
+      @u.reload.should be_is_free
       put :update, :id => @u.id
       response.should be_success
-      @u.reload.should be_is_free
+      @u.reload.should_not be_is_free
     end
   end
 end

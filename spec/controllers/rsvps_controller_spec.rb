@@ -31,7 +31,7 @@ describe RsvpsController do
     it "should redirect to corrent locale" do
       @guest.event.stub!(:language).and_return("en")
       get :show, :id => @guest.email_token
-      response.should redirect_to("/rsvps/#{@guest.email_token}?locale=en")
+      response.should redirect_to("http://en.test.host/rsvps/#{@guest.email_token}")
     end
 
     it "should render guests" do

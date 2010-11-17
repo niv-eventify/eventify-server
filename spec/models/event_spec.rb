@@ -13,6 +13,7 @@ describe Event do
       end
 
       it "should require payments if not free user" do
+        @event.user.is_free = false
         @event.should be_payments_required
       end
 
