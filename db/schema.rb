@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101013074830) do
+ActiveRecord::Schema.define(:version => 20101117152050) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -164,11 +164,11 @@ ActiveRecord::Schema.define(:version => 20101013074830) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
+    t.string   "invitation_title",           :limit => 100
     t.integer  "emails_plan",                                :default => 0
     t.integer  "sms_plan",                                   :default => 0
     t.integer  "prints_plan",                                :default => 0
     t.integer  "prints_ordered",                             :default => 0
-    t.string   "invitation_title",           :limit => 100
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
@@ -206,10 +206,10 @@ ActiveRecord::Schema.define(:version => 20101013074830) do
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
     t.boolean  "any_invitation_sent",        :default => false
+    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "bounced_at"
     t.string   "bounce_status"
     t.string   "bounce_reason"
-    t.boolean  "delayed_sms_resend",         :default => false
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
     t.datetime "first_viewed_invitation_at"
@@ -253,6 +253,75 @@ ActiveRecord::Schema.define(:version => 20101013074830) do
   end
 
   add_index "netpay_logs", ["context"], :name => "index_netpay_logs_on_context"
+
+  create_table "number_windows", :force => true do |t|
+    t.integer  "design_id"
+    t.integer  "default_age"
+    t.integer  "top_x"
+    t.integer  "top_y"
+    t.string   "zero_file_name"
+    t.string   "zero_content_type"
+    t.integer  "zero_file_size"
+    t.datetime "zero_updated_at"
+    t.string   "one_file_name"
+    t.string   "one_content_type"
+    t.integer  "one_file_size"
+    t.datetime "one_updated_at"
+    t.string   "two_file_name"
+    t.string   "two_content_type"
+    t.integer  "two_file_size"
+    t.datetime "two_updated_at"
+    t.string   "three_file_name"
+    t.string   "three_content_type"
+    t.integer  "three_file_size"
+    t.datetime "three_updated_at"
+    t.string   "four_file_name"
+    t.string   "four_content_type"
+    t.integer  "four_file_size"
+    t.datetime "four_updated_at"
+    t.string   "five_file_name"
+    t.string   "five_content_type"
+    t.integer  "five_file_size"
+    t.datetime "five_updated_at"
+    t.string   "six_file_name"
+    t.string   "six_content_type"
+    t.integer  "six_file_size"
+    t.datetime "six_updated_at"
+    t.string   "seven_file_name"
+    t.string   "seven_content_type"
+    t.integer  "seven_file_size"
+    t.datetime "seven_updated_at"
+    t.string   "eight_file_name"
+    t.string   "eight_content_type"
+    t.integer  "eight_file_size"
+    t.datetime "eight_updated_at"
+    t.string   "nine_file_name"
+    t.string   "nine_content_type"
+    t.integer  "nine_file_size"
+    t.datetime "nine_updated_at"
+    t.integer  "zero_width"
+    t.integer  "zero_height"
+    t.integer  "one_width"
+    t.integer  "one_height"
+    t.integer  "two_width"
+    t.integer  "two_height"
+    t.integer  "three_width"
+    t.integer  "three_height"
+    t.integer  "four_width"
+    t.integer  "four_height"
+    t.integer  "five_width"
+    t.integer  "five_height"
+    t.integer  "six_width"
+    t.integer  "six_height"
+    t.integer  "seven_width"
+    t.integer  "seven_height"
+    t.integer  "eight_width"
+    t.integer  "eight_height"
+    t.integer  "nine_width"
+    t.integer  "nine_height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "payments", :force => true do |t|
     t.integer  "user_id"
@@ -373,7 +442,7 @@ ActiveRecord::Schema.define(:version => 20101013074830) do
 
   create_table "users", :force => true do |t|
     t.string   "name",                :limit => 48
-    t.string   "email",               :limit => 100, :null => false
+    t.string   "email",               :limit => 100,                   :null => false
     t.string   "crypted_password",    :limit => 128
     t.string   "password_salt",       :limit => 20
     t.string   "persistence_token",   :limit => 128
@@ -390,7 +459,7 @@ ActiveRecord::Schema.define(:version => 20101013074830) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "disabled_at"
-    t.boolean  "is_free"
+    t.boolean  "is_free",                            :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
