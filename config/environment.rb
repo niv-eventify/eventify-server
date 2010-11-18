@@ -50,7 +50,8 @@ Rails::Initializer.run do |config|
   config.gem "roo", :version => '1.3.9'
   config.gem "astrails-user-agent", :version => "1.0.0", :lib => "user-agent"
   config.gem "httparty", :version => '0.6.0'
-  
+  config.gem "newrelic_rpm", :version => '2.13.2'
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
