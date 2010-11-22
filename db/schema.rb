@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117152050) do
+ActiveRecord::Schema.define(:version => 20101122082730) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(:version => 20101117152050) do
     t.integer  "carousel_file_size"
     t.datetime "carousel_updated_at"
     t.string   "font_title"
+    t.integer  "ordering",              :default => 0
+    t.integer  "redirect_to_category"
   end
 
   create_table "events", :force => true do |t|

@@ -71,7 +71,7 @@ protected
   end
 
   def collection
-    @collection ||= category.designs.paginate(:page => params[:page], :per_page => (params[:per_page] || 9))
+    @collection ||= category.designs.paginate(:page => params[:page], :per_page => (params[:per_page] || 9), :order => "ordering desc")
   end
 
   def carusel_collection
