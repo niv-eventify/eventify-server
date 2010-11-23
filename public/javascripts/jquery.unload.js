@@ -17,6 +17,7 @@
 		return was_changed;
 	};
 	$.fn.unload_monit_set_message = function(new_message) {
+	  if(!new_message) return;
 		message = new_message;
 	};
 	$.fn.unload_monit = function(new_message) {
