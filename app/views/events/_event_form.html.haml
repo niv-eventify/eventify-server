@@ -13,7 +13,7 @@
       stage2.submit_form();
     }
   }
-- events_content_section(2, @event, :next => {:func => "on_next_clicked()"},:prev => {:func => 'jQuery("#where_to").val("design");on_next_clicked()'}) do
+- events_content_section(2, @event, :next => {:func => "on_next_clicked()"}) do
   .content-section-heading
     %h1= _("Please fill out the events details")
   .twocolumns
@@ -30,7 +30,7 @@
         != f.hidden_field :font_title
         != f.hidden_field :font_body
         != f.hidden_field :category_id
-        != hidden_field_tag :where_to
+        != hidden_field_tag :just_save
         != render(:partial => "form", :locals => {:f => f})
 
     != render(:partial => "selected_design")

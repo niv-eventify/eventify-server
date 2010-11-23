@@ -41,11 +41,8 @@ class EventsController < InheritedResources::Base
       create! do |success, failure|
         success.html do
           flash[:notice] = nil
-          case params[:where_to]
-          when "edit"            
+          if "true" == params[:just_save]
             redirect_to edit_event_path(@event, :wizard => true)
-          when "design"
-            redirect_to event_design_path(@event, :wizard => true)
           else
             redirect_to event_guests_path(@event, :wizard => true)
           end
@@ -81,14 +78,11 @@ class EventsController < InheritedResources::Base
             return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
           end
         end
-          case params[:where_to]
-          when "edit"            
-            redirect_to edit_event_path(@event, :wizard => params[:wizard])
-          when "design"
-            redirect_to event_design_path(@event, :wizard => params[:wizard])
-          else
-            redirect_to event_guests_path(@event, :wizard => params[:wizard])
-          end
+        if "true" == params[:just_save]
+          redirect_to edit_event_path(@event, :wizard => params[:wizard])
+        else
+          redirect_to event_guests_path(@event, :wizard => params[:wizard])
+        end
       end
       success.js { render(:nothing => true) }
     end
