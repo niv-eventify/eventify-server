@@ -91,8 +91,7 @@ module EventsHelper
     for window in event.design.windows
       haml_tag(:div, :class => "window", :window_id => window.id, :style => "#{window_css(window, ratio)};") do
         if event.id.to_i == 0
-          return if session[:cropped_picture_ids].blank?
-          for cropped_pic in window.cropped_pictures.find_all_by_id(session[:cropped_picture_ids]) do
+          for cropped_pic in window.cropped_pictures.find_all_by_id(session[:cropped_picture_ids] || []) do
             haml_tag(:img, :src => cropped_pic.pic.url(:original))
             haml_concat link_to_remote "Delete", :update => "delete_updates_me", :url => cropped_picture_path(cropped_pic), :method => :delete
           end
