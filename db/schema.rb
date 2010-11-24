@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122082730) do
+ActiveRecord::Schema.define(:version => 20101124112856) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -478,5 +478,7 @@ ActiveRecord::Schema.define(:version => 20101122082730) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "windows", ["design_id"], :name => "index_windows_on_design_id"
 
 end
