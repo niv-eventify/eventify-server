@@ -1,3 +1,5 @@
 - klass = cycle("", "alt")
 %li.thing{:class => klass}
-  %span.name= "#{readonly_taking.thing.name} x %{count}" % {:count => readonly_taking.amount}
+  %span.name= "#{readonly_taking.thing.name}"
+  %span.name= " x "
+  %span.name= "%{count}" % {:count => readonly_taking.amount}
