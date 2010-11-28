@@ -13,4 +13,4 @@
   %td= event.prints_plan
   %td= event.payments.paid.sum(:amount).format_cents
   %td= event.created_at.to_s(:isra_date_time)
-  %td= event.guests.first.blank? ? "" : event.guests.first.email_token
+  %td= event.design_id
