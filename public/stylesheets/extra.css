@@ -1240,3 +1240,6 @@ li.home_page a{
 h2.weak {
   font-weight: normal;
 }
+#event_type {
+  visibility: hidden;
+}

@@ -32,6 +32,7 @@
         != f.hidden_field :category_id
         != hidden_field_tag :just_save
         != render(:partial => "form", :locals => {:f => f})
-
+        -#honey trap - if event_type field is filled form is dumped
+        != text_field_tag :event_type
     != render(:partial => "selected_design")
 .overflow_warning= _("Some of your text doesn't fit. Try shortening your text or reducing the font size.")

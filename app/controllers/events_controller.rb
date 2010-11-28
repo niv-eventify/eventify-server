@@ -24,6 +24,7 @@ class EventsController < InheritedResources::Base
   end
 
   def create
+    redirect_to "/" and return unless params[:event_type].blank?
     if !logged_in? && params[:event] && params[:event][:user_attributes]
       params[:event].trust(:user_attributes)
       params[:event][:user_attributes].trust(:email)
