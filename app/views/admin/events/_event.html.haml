@@ -14,3 +14,4 @@
   %td= event.payments.paid.sum(:amount).format_cents
   %td= event.created_at.to_s(:isra_date_time)
   %td= event.design_id
+  %td= event.cropped_pictures.map{|c| "#{c.id} "}

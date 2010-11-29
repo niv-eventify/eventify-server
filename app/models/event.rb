@@ -50,7 +50,7 @@ class Event < ActiveRecord::Base
   has_many :sms_messages
   has_many :payments
   has_many :payment_attempts, :through => :payments
-
+  has_many :cropped_pictures
   has_many :guests_messages
 
   include Event::Summary
