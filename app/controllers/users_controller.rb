@@ -8,7 +8,7 @@ class UsersController < InheritedResources::Base
     user = build_resource
     user.is_admin = true if User.count.zero?
     if user.save_without_session_maintenance
-      user.deliver_activation_instructions!
+      user.deliver_activation_instructions!(locale_domain_for(current_locale))
       flash[:notice] = _("Your account has been created. Please check your e-mail for your account activation instructions!")
       respond_to do |wants|
         wants.html do
