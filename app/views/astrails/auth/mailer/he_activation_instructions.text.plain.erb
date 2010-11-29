@@ -1,16 +1,13 @@
-<%= _("
-Hello %{name},
+שלום <%= h(@user.name)%>,
 
-To activate your eventify account please click on the URL below.
+להפעלת חשבונך ב-Eventify ניתן ללחוץ על הקישור הבא:
+<%= @account_activation_url %>
 
-%{account_activation_url}
+אם לחיצה על הקישור אינה פותחת את ההזמנה, ניתן להעתיק את שורת הקישור ולהדביק אותה בשורת הכתובת בדפדפן.
 
-If the above URL does not work try copying and pasting it into your browser.
-If you continue to have problems, please feel free to contact us.
+נשמח לעמוד לרשותך בכל שאלה ב- support@eventify.co.il
 
-This email was generated automatically. Please do not reply to it.
+אין צורך להשיב למייל זה.
 
-Best regards,
-eventify Team
-") % { :name => @user.name, :account_activation_url => @account_activation_url}
- %>
+בברכה,
+צוות Eventify.

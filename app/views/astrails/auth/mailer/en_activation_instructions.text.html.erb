@@ -1,16 +1,10 @@
-<%= _("
-Hello %{name},
-
-To activate your eventify account please click on the URL below.
-
-%{account_activation_url}
-
-If the above URL does not work try copying and pasting it into your browser.
-If you continue to have problems, please feel free to contact us.
-
-This email was generated automatically. Please do not reply to it.
-
-Best regards,
-eventify Team
-") % { :name => @user.name, :account_activation_url => @account_activation_url}
- %>
+<span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">Dear <%= h(@user.name)%>,</span>
+<p>To activate your Eventify account please click on the URL below.</p>
+<p><%= link_to(@account_activation_url, @account_activation_url) %>
+<br/>
+<p>If the above URL does not work try copying and pasting it into your browser.</p>
+<p>If you continue to have problems, please feel free to contact us at: <a href="mailto:support@eventify.co.il">support@eventify.co.il</a></p>
+<p>Best regards,<p>
+<p>The Eventify team.</p>
+<br/>
+<p>Please do not reply to this email.</p>

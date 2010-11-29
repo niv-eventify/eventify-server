@@ -1,16 +1,9 @@
-<%= _("
-Hello %{name},
-
-To activate your eventify account please click on the URL below.
-
-%{account_activation_url}
-
-If the above URL does not work try copying and pasting it into your browser.
-If you continue to have problems, please feel free to contact us.
-
-This email was generated automatically. Please do not reply to it.
-
-Best regards,
-eventify Team
-") % { :name => @user.name, :account_activation_url => @account_activation_url}
- %>
+<span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">שלום <%= h(@user.name)%>,</span>
+<p>להפעלת חשבונך ב-Eventify ניתן ללחוץ על הקישור הבא:</p>
+<p><%= link_to(@account_activation_url, @account_activation_url) %></p>
+<p>אם לחיצה על הקישור אינה פותחת את ההזמנה, ניתן להעתיק את שורת הקישור ולהדביק אותה בשורת הכתובת בדפדפן.</p>
+<br/>
+<p>נשמח לעמוד לרשותך בכל שאלה ב- <a href="mailto:support@eventify.co.il">support@eventify.co.il</a></p>
+<p>אין צורך להשיב למייל זה.</p>
+<p>בברכה,</p>
+<p>צוות Eventify.</p>
