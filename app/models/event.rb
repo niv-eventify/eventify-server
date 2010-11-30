@@ -141,6 +141,15 @@ class Event < ActiveRecord::Base
     r.save
   end
 
+  after_create :update_summary
+  def update_summary
+    return if rsvp_summary_send_every_changed?
+    return unless rsvp_summary_send_at.nil?
+
+    self.rsvp_summary_send_at = created_at # reset
+    save!
+  end
+
   after_update :adjust_reminders
   def adjust_reminders
     return unless starting_at_changed?

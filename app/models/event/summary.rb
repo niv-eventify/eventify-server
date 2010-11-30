@@ -37,14 +37,6 @@ module Event::Summary
     1 == rsvp_summary_send_every
   end
 
-  def update_summary
-    return unless rsvp_summary_send_every_changed?
-    return unless rsvp_summary_send_at.nil?
-
-    self.rsvp_summary_send_at = created_at # reset
-    save!
-  end
-
   def update_next_summary_send!
     self.rsvp_summary_send_at = Time.now.utc + (2 == rsvp_summary_send_every ? 1.day : 1.week)
     if rsvp_summary_send_at > starting_at
