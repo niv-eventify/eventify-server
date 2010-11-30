@@ -85,7 +85,7 @@
               %dt= _("No things to bring")
               %dd &nbsp;
           - if @event.changes_allowed?
-            != link_to _("edit"), event_things_path(@event), :class => "more-link"
+            != link_to _("edit"), event_path(@event), :class => "more-link"
 
   - info_container("info-container-alt") do
     .top-holder
