@@ -52,8 +52,11 @@
     var text = jQuery("#" + sourceId).val();
     if(stage2.prev_text == text) return;
     stage2.prev_text = text;
-    jQuery("#" + targetId).text(text);
-    jQuery("#" + targetId).html(jQuery("#" + targetId).html().replace(/\n/g,"<BR/>").replace(/ /g, "&nbsp;"));
+    var findReplace = [[/&/g, "&amp;"], [/</g, "&lt;"], [/>/g, "&gt;"], [/ /g, "&nbsp;"], [/\n/g, "<BR />"]]
+    for(var i = 0; i < findReplace.length; i++)//it's important to do the replaces in the order of the array
+      text = text.replace(findReplace[i][0], findReplace[i][1]);
+
+    jQuery("#" + targetId).html(text);
     if(!allowOverFlow) {
       protectionCounter = 0;
       while(stage2.isTextOverflow() && protectionCounter < 20) {
