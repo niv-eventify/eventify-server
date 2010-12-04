@@ -37,12 +37,13 @@ class Taking < ActiveRecord::Base
     @skip_noitfication = skip_noitfication
   end
 
-  after_destroy :notifiy_guest
-  def notifiy_guest
+  after_destroy :notify_guest
+  def notify_guest
     I18n.with_locale(event.language) { Notifier.deliver_taking_removed(guest, thing) }
   end
 
   def max_amount
     thing.left_to_bring + amount.to_i
   end
+
 end

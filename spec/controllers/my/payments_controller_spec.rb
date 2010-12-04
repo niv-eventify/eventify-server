@@ -23,7 +23,7 @@ describe My::PaymentsController do
 
       get :index
       response.should be_success
-      response.body.should =~ /123/
+      response.body.should =~ /1\.23/
     end
 
   end

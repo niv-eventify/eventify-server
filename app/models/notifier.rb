@@ -42,7 +42,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(event.user)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
-    body        :event => event, :guests_groups => guests_groups, :summary_since => summary_since, :url => summary_url(event), :start_time => start_time
+    body        :event => event, :guests_groups => guests_groups, :summary_since => summary_since, :url => summary_url(event, :locale => event.language), :start_time => start_time
   end
 
   def taking_removed(guest, thing)
@@ -51,7 +51,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
-    body        :guest => guest, :thing => thing, :url => rsvp_url(guest.email_token, :more => true)
+    body        :guest => guest, :thing => thing, :url => rsvp_url(guest.email_token, :more => true, :host => host)
   end
 
   def ical_attachment(event)

@@ -311,7 +311,7 @@ describe Event do
     describe "summary timer reset" do
       before(:each) do
         @event = Factory.create(:event_with_daily_summary_never_sent)
-        @event.rsvp_summary_send_at.should be_nil
+        @event.rsvp_summary_send_at.should_not be_nil
       end
 
       it "should reset summary timer when next sending timer is blank" do
@@ -330,7 +330,7 @@ describe Event do
 
       it "should not reset summary timer if schedule is not changed" do
         @event.save!
-        @event.rsvp_summary_send_at.should be_nil
+        @event.rsvp_summary_send_at.should_not be_nil
       end
     end
 

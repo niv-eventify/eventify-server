@@ -6,13 +6,12 @@ class PasswordsController < InheritedResources::Base
 
   before_filter :require_no_user, :except => [:edit, :update]
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
-  before_filter :set_host, :only => [:create, :update]
   # new! + new.html.haml
 
   def create
     @user = User.find_by_email(params[:user][:email])
     if @user
-      @user.deliver_password_reset_instructions!(@host)
+      I18n.with_locale(current_locale){@user.deliver_password_reset_instructions!}
       if @user.activated_at
         # user is already active
         flash[:notice] = _("Instructions to reset your password have been emailed to you. Please check your email.")
@@ -43,7 +42,7 @@ class PasswordsController < InheritedResources::Base
 
     update! do |success, failure|
       if resource.errors.empty?
-        @user.send(@activated ? :deliver_activation_confirmation! : :deliver_password_reset_confirmation!, @host)
+        I18n.with_locale(current_locale){@user.send(@activated ? :deliver_activation_confirmation! : :deliver_password_reset_confirmation!)}
       else
         resource.activated_at = nil if @activated # need to revert so that the password_edit_title will set right title
       end
@@ -81,9 +80,5 @@ class PasswordsController < InheritedResources::Base
       )
       redirect_to new_password_path
     end
-  end
-
-  def set_host
-    @host = locale_domain_for(current_locale)
   end
 end

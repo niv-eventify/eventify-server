@@ -49,7 +49,7 @@ class EventsController < InheritedResources::Base
           end
           unless logged_in?
             UserSession.create(@event.user)
-            @event.user.deliver_activation_instructions!(locale_domain_for(current_locale))
+            I18n.with_locale(current_locale){@event.user.deliver_activation_instructions!}
           end
         end
         failure.html do

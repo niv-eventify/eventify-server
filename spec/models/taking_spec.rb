@@ -52,7 +52,7 @@ describe Taking do
         @taking = @guest.takings.create(:amount => 2, :thing_id => @thing.id)
       end
 
-      it "shoud decrement amount_picked when new taking is created" do
+      it "should decrement amount_picked when new taking is created" do
         @thing.reload.amount_picked.should == 2
         @thing.left_to_bring.should == 3
       end

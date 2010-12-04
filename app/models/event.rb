@@ -141,13 +141,9 @@ class Event < ActiveRecord::Base
     r.save
   end
 
-  after_create :update_summary
-  def update_summary
-    return if rsvp_summary_send_every_changed?
-    return unless rsvp_summary_send_at.nil?
-
-    self.rsvp_summary_send_at = created_at # reset
-    save!
+  before_create :set_default_summary
+  def set_default_summary
+    self.rsvp_summary_send_at = self.created_at if self.rsvp_summary_send_at.nil? #default summary is once per day
   end
 
   after_update :adjust_reminders

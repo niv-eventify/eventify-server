@@ -14,7 +14,7 @@ class RsvpsController < InheritedResources::Base
     resource.rsvp = params[:guest][:rsvp] if params[:guest][:rsvp]
     resource.message_to_host = params[:guest][:message_to_host] if params[:guest][:message_to_host]
     resource.attendees_count = params[:guest][:attendees_count] if params[:guest][:attendees_count]
-    resource.save!
+    I18n.with_locale(current_locale){resource.save!}
 
     redirect_opts = {:action => "show", :id => resource.email_token, :more => "true"}
     respond_to do |wants|

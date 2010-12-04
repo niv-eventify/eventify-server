@@ -7,6 +7,7 @@ Factory.define :event do |event|
   event.starting_at 10.days.from_now
   event.language "en"
   event.user_is_activated true
+  event.created_at Time.now
 end
 
 Factory.define :inactive_event, :parent => :event do |event|
@@ -22,7 +23,6 @@ end
 Factory.define :event_with_daily_summary, :parent => :event do |event|
   event.rsvp_summary_send_every 2
   event.starting_at 10.days.from_now
-  event.rsvp_summary_send_at 1.day.ago
 end
 
 Factory.define :event_with_daily_summary_never_sent, :parent => :event do |event|

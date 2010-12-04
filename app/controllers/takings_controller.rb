@@ -15,7 +15,7 @@ class TakingsController < InheritedResources::Base
   end
 
   def destroy
-    resource.destroy
+    I18n.with_locale(resource.event.language){resource.destroy}
   end
 
 

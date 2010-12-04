@@ -22,7 +22,11 @@ module Astrails
         end
         @domain ||= domain
       end
-    end
 
+      def host
+        @host = (I18n.locale == :he) ? "www." + domain : "#{I18n.locale}.#{domain}"
+      end
+
+    end
   end
 end
