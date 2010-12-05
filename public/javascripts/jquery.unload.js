@@ -23,7 +23,8 @@
 	$.fn.unload_monit = function(new_message) {
 		$.fn.unload_monit_set_message(new_message);
 		return this.change(function() {
-			console.log($(this)[0]);
+			if(typeof console != 'undefined')
+				console.log($(this)[0]);
 			$.fn.unload_monit_set();
 		});
 	}
