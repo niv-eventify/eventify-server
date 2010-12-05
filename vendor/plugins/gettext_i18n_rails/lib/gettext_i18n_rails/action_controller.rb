@@ -75,7 +75,7 @@ class ActionController::Base
   # you can pass opts[:session_domain] to set as the domain for the session
   # or just pass 'true' to use currenly parsed base domain for it (w/o the www and/or language part)
   def set_gettext_locale(sources)
-    sources ||= [:domain,:session, :cookie, :header, :default]
+    sources ||= [:params, :domain, :session, :cookie, :header, :default]
     session[:locale] = FastGettext.set_locale(detect_locale(sources))
   end
 
