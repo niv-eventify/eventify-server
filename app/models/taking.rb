@@ -39,7 +39,7 @@ class Taking < ActiveRecord::Base
 
   after_destroy :notify_guest
   def notify_guest
-    I18n.with_locale(event.language) { Notifier.deliver_taking_removed(guest, thing) }
+    Notifier.deliver_taking_removed(guest, thing)
   end
 
   def max_amount
