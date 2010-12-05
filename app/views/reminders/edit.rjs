@@ -1,3 +1,4 @@
 page << <<-JAVASCRIPT
   jQuery.nyroModalManual({minWidth: 405, content: #{render(:partial => 'edit').to_json}});
+  jQuery("#reminder_before_value").numeric();
 JAVASCRIPT

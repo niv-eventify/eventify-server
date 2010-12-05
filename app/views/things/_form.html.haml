@@ -1,5 +1,5 @@
 != f.text_field :name, :td_class => "t-col-1"
-!= f.text_field :amount, :td_class => "t-col-2"
+!= f.text_field :amount, :td_class => "t-col-2", :maxlength => "3"
 %td.t-col-3 &nbsp;
 - info_table_column do
   != submit_tag _("Add"), :id => "adding_thing"

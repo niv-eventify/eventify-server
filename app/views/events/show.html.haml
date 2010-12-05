@@ -1,7 +1,7 @@
 - @page_title=_("Reminders | Eventify")
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full", "rsvps"
-  != javascript_include_tag "jquery.nyroModal", "rsvps", "jquery.unload"
+  != javascript_include_tag "jquery.nyroModal", "rsvps", "jquery.unload", "jquery.numeric.min"
   :javascript
     jQuery(function(){
       jQuery("ul.create-list li a, .back-btn").live("click", function(){

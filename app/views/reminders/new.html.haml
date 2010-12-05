@@ -1,2 +1,4 @@
 .new_reminder.lb-popup
   != render(:partial => "reminders/new")
+:javascript
+  jQuery("#reminder_before_value").numeric();

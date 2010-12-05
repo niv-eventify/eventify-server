@@ -15,12 +15,11 @@
   .f-col
     .f-row-1
       .input-bg-alt.input-sml-1
-        != f.text_field :before_value, :class => "input-text"
+        != f.text_field :before_value, :class => "input-text", :maxlength => "2"
       != f.select :before_units, before_units_for_select
       != f.label :before_value, _("before the event")
       != f.inline_errors_for :before_units
       != f.inline_errors_for :before_value
-
 .f-row.f-row-alt
   .f-row-1
     != f.label :email_subject, _("Email subject")
@@ -40,8 +39,4 @@
     .taxtarea-h
       .texarea-bg
         != text_area_tag :sms_message, f.object.sms_message, :class => "sms-message-body", :readonly => true
-    .span= _("(text 140)")
   != f.inline_errors_for :sms_message
-
-:javascript
-  set_sms_counters();
