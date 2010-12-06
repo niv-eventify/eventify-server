@@ -1220,6 +1220,8 @@ li.home_page a{
 .popup-btns-alt.one_button {
   padding: 7px 0 4px 275px;
   border: none;
+  height: 50px;
+  width: 150px;
 }
 .hebrew .popup-btns-alt.one_button {
   padding: 7px 205px 4px 0;
@@ -1242,4 +1244,14 @@ h2.weak {
 }
 #event_type {
   visibility: hidden;
+}
+.info-table thead.things-to-bring td div.head-cell {
+  position: static;
+}
+#reminder_button {
+  width: 400px;
+  padding-top: 0;
+}
+.import.reminders {
+  padding-bottom: 0;
 }

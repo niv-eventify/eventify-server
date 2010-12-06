@@ -1,4 +1,4 @@
-.import
+.import.reminders
   - popup_title(_("Reminders &amp; RSVP’s"))
   .form
     .stage-containers
@@ -18,5 +18,5 @@
         .arrival-container
           .arr-row
             - event_rsvp_summary_select(@event)
-  .popup-btns.popup-btns-alt.one_button
-    != link_to_function _("Approve"), "jQuery.nyroModalRemove();", :class => "btn"
+#reminder_button.popup-btns.popup-btns-alt.one_button
+  != link_to_function _("Approve"), "jQuery.nyroModalRemove();", :class => "btn"
