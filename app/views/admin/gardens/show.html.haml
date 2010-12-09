@@ -3,7 +3,9 @@
 
 %h3= "Name: #{@garden.name}"
 %h3= "Address: #{@garden.address}"
-%h3= "URL: #{@garden.url}"
+- unless @garden.url.blank?
+  %h3
+  != link_to "click to view map", @garden.url, :target => "_blank"
 - unless @garden.map.url.blank?
-  %h3 Map
+  %h3 Map:
   != image_tag(@garden.map.url)
