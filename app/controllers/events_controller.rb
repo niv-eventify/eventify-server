@@ -33,6 +33,7 @@ class EventsController < InheritedResources::Base
     # will allow passing params[:event][:tz] in a future
     Time.use_zone(params[:event] && params[:event][:tz] || Event::DEFAULT_TIME_ZONE) do
       @event = Event.new(params[:event])
+      @event.map = Garden.find(params[:garden_id]).map unless params[:garden_id].blank? || Garden.find(params[:garden_id]).map.url.blank?
       if logged_in?
         @event.user = current_user
         @event.user_is_activated = !current_user.activated_at.nil?
@@ -63,6 +64,14 @@ class EventsController < InheritedResources::Base
   def new
     @event = Event.new(:category => @category, :design => @design, :starting_at => Event.default_start_time)
     @event.build_user unless logged_in?
+    unless params[:garden_id].blank?
+      garden = Garden.find(params[:garden_id])
+      @event.location_name = garden.name unless garden.name.blank?
+      @event.location_address = garden.address unless garden.address.blank?
+      @event.map_link = garden.url unless garden.url.blank?
+      @map = garden.map unless garden.map.url.blank?
+      @garden = garden.id
+    end
     new!
   end
 

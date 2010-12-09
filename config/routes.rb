@@ -21,6 +21,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :designs
     admin.resources :users
     admin.resources :events
+    admin.resources :gardens
   end
 
   map.resources :events do |event|

@@ -1,0 +1,9 @@
+%h1 New Garden
+
+- semantic_form_for(@garden, :live_validations => false, :url => admin_gardens_path, :html => {:multipart => true}) do |f|
+  = f.object.errors.on(:base)
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Save"
+  != link_to _("Cancel"), admin_gardens_path

@@ -1,0 +1,15 @@
+%h3 Gardens
+
+!= link_to "New", new_admin_garden_path
+
+%table
+  %tr
+    %th ID
+    %th Name
+    %th Address
+    %th Map Image
+    %th &nbsp;
+    %th &nbsp;
+  != render collection
+
+!= will_paginate(collection)

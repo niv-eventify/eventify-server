@@ -1,0 +1,7 @@
+%tr
+  %td= garden.id
+  %td!= link_to garden.name, admin_garden_path(garden)
+  %td= garden.address
+  %td!= image_tag garden.map.url(:small) unless garden.map.url.blank?
+  %td!= link_to "Delete", admin_garden_path(garden), :method => :delete, :confirm => "Are you sure?"
+  %td!= link_to "Edit", edit_admin_garden_path(garden)

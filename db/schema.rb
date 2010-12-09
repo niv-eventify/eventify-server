@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101124112856) do
+ActiveRecord::Schema.define(:version => 20101208105236) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -174,6 +174,18 @@ ActiveRecord::Schema.define(:version => 20101124112856) do
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
+
+  create_table "gardens", :force => true do |t|
+    t.string   "name"
+    t.string   "address"
+    t.string   "url"
+    t.string   "map_file_name"
+    t.string   "map_content_type"
+    t.integer  "map_file_size"
+    t.datetime "map_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "global_preferences", :force => true do |t|
     t.string   "name"

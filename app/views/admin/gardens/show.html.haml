@@ -1,0 +1,9 @@
+!= link_to "Back to gardens", admin_gardens_path
+!= link_to "Edit", edit_admin_garden_path(@garden)
+
+%h3= "Name: #{@garden.name}"
+%h3= "Address: #{@garden.address}"
+%h3= "URL: #{@garden.url}"
+- unless @garden.map.url.blank?
+  %h3 Map
+  != image_tag(@garden.map.url)

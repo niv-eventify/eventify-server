@@ -1,0 +1,9 @@
+!= f.error_messages
+
+- f.inputs do
+  != f.input :name, :label => "Name"
+  != f.input :address, :label => "Address"
+  != f.input :url, :label => "URL (don't forget 'http://')"
+
+- f.inputs do
+  != f.input :map, :as => :file, :label => "Map"
