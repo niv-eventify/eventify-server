@@ -1,5 +1,5 @@
 class GuestImportersController < ApplicationController
-  before_filter :require_user, :set_event
+  before_filter :require_user, :event_by_user_or_host
   before_filter :set_source, :only => :new
 
   SOURCES = ["email", "csv", "addressbook"]
@@ -34,10 +34,6 @@ class GuestImportersController < ApplicationController
 protected
   def set_source
     @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)
-  end
-
-  def set_event
-    @event = current_user.events.find(params[:event_id])
   end
 
   def selected_contracts
@@ -85,7 +81,7 @@ protected
     
     if params[:save_to_addressbook] && !guests_imported.blank?
       new_contacts.each do |g|
-        @event.user.contacts.add(g["name"], g["email"])
+        current_user.contacts.add(g["name"], g["email"])
       end
     end
 

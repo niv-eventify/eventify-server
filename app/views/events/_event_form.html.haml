@@ -31,7 +31,7 @@
         != f.hidden_field :font_body
         != f.hidden_field :category_id
         != hidden_field_tag :just_save
-        != hidden_field_tag :garden_id, @garden
+        != hidden_field_tag :garden_id, @garden.id unless @garden.blank?
         != render(:partial => "form", :locals => {:f => f})
         -#honey trap - if event_type field is filled form is dumped
         != text_field_tag :event_type

@@ -179,7 +179,10 @@ class Event < ActiveRecord::Base
   named_scope :with, lambda {|*with_associations| {:include => with_associations} }
   named_scope :by_starting_at, :order => "events.starting_at ASC"
   named_scope :by_created_at, :order => "events.created_at DESC"
-
+  named_scope :by_user_id, lambda{|user_id|
+    user = User.find(user_id)
+    {:conditions => ["events.id IN (SELECT event_id FROM hosts WHERE hosts.email = ?) OR events.id IN (SELECT id FROM events WHERE user_id = ?)", user.email, user.id]}
+  }
   before_create :set_initial_stage
   def set_initial_stage
     self.stage_passed = 2
@@ -451,7 +454,7 @@ class Event < ActiveRecord::Base
   end
 
   def cancel_email_default_text
-    _("Hi,\n\n%{event_name} has been cancelled.\n\n%{host_name}") % {
+    _("Hi,%{event_name} has been cancelled.%{host_name}") % {
       :event_name => name, :host_name => user.name
     }
   end

@@ -3,7 +3,7 @@ class EventsController < InheritedResources::Base
 
   before_filter :require_user, :except => [:create, :new]
 
-  before_filter :set_event, :only => [:edit, :update, :show, :destroy]
+  before_filter :event_by_user_or_host, :only => [:edit, :update, :show, :destroy]
   around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show, :index]
   after_filter :set_uploaded_pictures, :only => :create
 
@@ -33,15 +33,21 @@ class EventsController < InheritedResources::Base
     # will allow passing params[:event][:tz] in a future
     Time.use_zone(params[:event] && params[:event][:tz] || Event::DEFAULT_TIME_ZONE) do
       @event = Event.new(params[:event])
-      @event.map = Garden.find(params[:garden_id]).map unless params[:garden_id].blank? || Garden.find(params[:garden_id]).map.url.blank?
+
       if logged_in?
         @event.user = current_user
         @event.user_is_activated = !current_user.activated_at.nil?
       end
       @event.language = current_locale
 
+      set_garden_data unless params[:garden_id].blank?
+
       create! do |success, failure|
         success.html do
+          unless @host.blank?
+            @host.event = @event
+            @host.save
+          end
           flash[:notice] = nil
           if "true" == params[:just_save]
             redirect_to edit_event_path(@event, :wizard => true)
@@ -70,7 +76,7 @@ class EventsController < InheritedResources::Base
       @event.location_address = garden.address unless garden.address.blank?
       @event.map_link = garden.url unless garden.url.blank?
       @map = garden.map unless garden.map.url.blank?
-      @garden = garden.id
+      @garden = garden
     end
     new!
   end
@@ -120,11 +126,7 @@ protected
 
   def collection
     period = past_events? ? :past : (cancelled_events? ? :cancelled : :upcoming)
-    current_user.events.send(period).with(:user, :design).paginate(:page => params[:page], :per_page => params[:per_page])
-  end
-
-  def set_event
-    @event = current_user.events.find(params[:id])
+    Event.by_user_id(current_user.id).send(period).with(:user, :design).by_created_at.paginate(:page => params[:page], :per_page => params[:per_page])
   end
 
   def set_event_time_zone
@@ -166,5 +168,11 @@ protected
 
   def redirect_disabled_events
     redirect_changes_disabled(@event)
+  end
+
+  def set_garden_data
+    garden = Garden.find(params[:garden_id])
+    @event.map = garden.map unless garden.map.url.blank?
+    @host = Host.new(:user =>  @event.user, :name => garden.user.name, :email => garden.user.email)
   end
 end

@@ -129,4 +129,9 @@ module EventsHelper
       options_for_select(["Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"])
     end
   end
+
+  def event_hosts(event)
+    other_hosts = event.hosts.map{|h| ", " + h.name }
+    "#{event.user.name}#{other_hosts.to_s}"
+  end
 end

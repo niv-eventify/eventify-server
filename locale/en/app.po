@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-12-05 16:29+0200\n"
+"POT-Creation-Date: 2010-12-14 14:15+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgid_plural "%d contacts imported"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/controllers/guest_importers_controller.rb:84
+#: app/controllers/guest_importers_controller.rb:80
 msgid "%d guest imported"
 msgid_plural "%d guests imported"
 msgstr[0] ""
@@ -61,21 +61,21 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
-#: app/models/event.rb:316
+#: app/models/event.rb:319
 msgid "%{event_name} on %{date} at %{time}%{location}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:313
+#: app/models/event.rb:316
 msgid ""
 "%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:319
+#: app/models/event.rb:322
 msgid "%{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:355
+#: app/models/event.rb:358
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -113,10 +113,6 @@ msgstr ""
 
 #: app/helpers/events_helper.rb:109
 msgid "(sent)"
-msgstr ""
-
-#: app/views/reminders/_form.html.haml:43
-msgid "(text 140)"
 msgstr ""
 
 #: app/models/reminder.rb:60
@@ -258,7 +254,7 @@ msgid "Are you sure you want to remove this picture?"
 msgstr ""
 
 #: app/helpers/guests_helper.rb:15 app/helpers/things_helper.rb:14
-#: app/views/events/_form.html.haml:47
+#: app/views/events/_form.html.haml:51
 #: app/views/events/_actions_menu.html.haml:5
 #: app/views/invitations/edit.html.haml:5
 #: app/views/summaries/show.html.haml:123
@@ -328,6 +324,8 @@ msgstr ""
 #: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
 #: app/views/passwords/_edit.html.haml:8
 #: app/views/cropped_pictures/_new.html.haml:13
+#: app/views/admin/gardens/new.html.haml:9
+#: app/views/admin/gardens/edit.html.haml:8
 #: app/views/admin/designs/new.html.haml:9
 #: app/views/admin/designs/edit.html.haml:8 app/views/windows/new.html.haml:9
 #: app/views/windows/edit.html.haml:8
@@ -351,7 +349,7 @@ msgstr ""
 msgid "Cancelled events"
 msgstr ""
 
-#: app/models/event.rb:460
+#: app/models/event.rb:463
 msgid "Cancelled: %{event_name}"
 msgstr ""
 
@@ -386,13 +384,13 @@ msgstr ""
 msgid "Change design"
 msgstr ""
 
-#: app/models/event.rb:281
+#: app/models/event.rb:284
 msgid ""
 "Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your "
 "email. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:284
+#: app/models/event.rb:287
 msgid "Changes: %{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
@@ -471,8 +469,12 @@ msgstr ""
 msgid "Crop"
 msgstr ""
 
-#: app/views/events/_form.html.haml:46
+#: app/views/events/_form.html.haml:47 app/views/events/_form.html.haml:49
 msgid "Current Map Image"
+msgstr ""
+
+#: app/views/events/_form.html.haml:50
+msgid "Current Map Link"
 msgstr ""
 
 #: app/views/passwords/_form.html.haml:2
@@ -588,7 +590,7 @@ msgstr ""
 
 #: app/views/cancellations/_email.html.haml:12
 #: app/views/guests_messages/_form.html.haml:8
-#: app/views/reminders/_form.html.haml:31
+#: app/views/reminders/_form.html.haml:30
 msgid "Email body"
 msgstr ""
 
@@ -599,7 +601,7 @@ msgstr ""
 
 #: app/views/cancellations/_email.html.haml:11
 #: app/views/guests_messages/_form.html.haml:3
-#: app/views/reminders/_form.html.haml:26
+#: app/views/reminders/_form.html.haml:25
 msgid "Email subject"
 msgstr ""
 
@@ -634,11 +636,11 @@ msgstr ""
 msgid "Event Summary Page"
 msgstr ""
 
-#: app/controllers/events_controller.rb:94
+#: app/controllers/events_controller.rb:112
 msgid "Event canceled."
 msgstr ""
 
-#: app/controllers/cancellations_controller.rb:37
+#: app/controllers/cancellations_controller.rb:34
 msgid "Event cancelled - no guests to notify or guests are already notified."
 msgstr ""
 
@@ -666,7 +668,7 @@ msgstr ""
 msgid "Event name"
 msgstr ""
 
-#: app/controllers/invitations_controller.rb:40
+#: app/controllers/invitations_controller.rb:36
 msgid "Event start time is passed."
 msgstr ""
 
@@ -674,11 +676,11 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:74
+#: app/controllers/events_controller.rb:89
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:74
+#: app/controllers/events_controller.rb:89
 msgid "Event updated, but some reminders disabled"
 msgstr ""
 
@@ -778,7 +780,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:53
+#: app/views/events/_form.html.haml:57
 msgid "Guests can see other attendees"
 msgstr ""
 
@@ -816,13 +818,8 @@ msgstr ""
 msgid "Here your can manage contracts, and import them from your email!"
 msgstr ""
 
-#: app/models/event.rb:454
-msgid ""
-"Hi,\n"
-"\n"
-"%{event_name} has been cancelled.\n"
-"\n"
-"%{host_name}"
+#: app/models/event.rb:457
+msgid "Hi,%{event_name} has been cancelled.%{host_name}"
 msgstr ""
 
 #: app/views/events/_form.html.haml:38
@@ -917,7 +914,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/controllers/events_controller.rb:106
+#: app/controllers/events_controller.rb:124
 #: app/views/invitations/edit.html.haml:16
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:19
 msgid ""
@@ -1166,7 +1163,7 @@ msgstr ""
 msgid "Note: your message is public"
 msgstr ""
 
-#: app/controllers/cancellations_controller.rb:19
+#: app/controllers/cancellations_controller.rb:20
 msgid "Notifications are being sent."
 msgstr ""
 
@@ -1297,7 +1294,7 @@ msgstr ""
 msgid "Place:"
 msgstr ""
 
-#: app/controllers/invitations_controller.rb:53
+#: app/controllers/invitations_controller.rb:49
 #: app/controllers/events_controller.rb:18
 msgid "Please add at least one guest"
 msgstr ""
@@ -1314,7 +1311,7 @@ msgstr ""
 msgid "Please select from the list"
 msgstr ""
 
-#: app/controllers/guest_importers_controller.rb:59
+#: app/controllers/guest_importers_controller.rb:55
 msgid "Please upload a CSV file"
 msgstr ""
 
@@ -1442,11 +1439,11 @@ msgstr ""
 msgid "Reminder: %{event_name}"
 msgstr ""
 
-#: app/models/event.rb:297
+#: app/models/event.rb:300
 msgid "Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}"
 msgstr ""
 
-#: app/models/event.rb:300
+#: app/models/event.rb:303
 msgid "Reminder:%{event_name} on %{date} at %{time}.%{host_name}"
 msgstr ""
 
@@ -1462,7 +1459,7 @@ msgstr ""
 msgid "Reminders | Eventify"
 msgstr ""
 
-#: app/views/events/_form.html.haml:47
+#: app/views/events/_form.html.haml:51
 msgid "Remove"
 msgstr ""
 
@@ -1485,7 +1482,7 @@ msgid "SMS"
 msgstr ""
 
 #: app/views/cancellations/_sms.html.haml:11
-#: app/views/reminders/_form.html.haml:39
+#: app/views/reminders/_form.html.haml:38
 msgid "SMS Message"
 msgstr ""
 
@@ -1618,13 +1615,13 @@ msgid ""
 "list before changing the name"
 msgstr ""
 
-#: app/views/events/_event_form.html.haml:38
+#: app/views/events/_event_form.html.haml:39
 msgid ""
 "Some of your text doesn't fit. Try shortening your text or reducing the font "
 "size."
 msgstr ""
 
-#: app/models/event.rb:450
+#: app/models/event.rb:453
 msgid "Sorry, %{event_name} has been cancelled"
 msgstr ""
 
@@ -1764,7 +1761,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: app/controllers/events_controller.rb:104
+#: app/controllers/events_controller.rb:122
 msgid "You already have an account, please login with your email and password."
 msgstr ""
 
@@ -1788,7 +1785,7 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
-#: app/views/events/_form.html.haml:60
+#: app/views/events/_form.html.haml:64
 msgid "You didn't save the event."
 msgstr ""
 
@@ -2196,7 +2193,7 @@ msgstr ""
 msgid "edit event menu|Guests list"
 msgstr ""
 
-#: app/models/event.rb:237
+#: app/models/event.rb:240
 msgid "end date should be in a future"
 msgstr ""
 
@@ -2415,7 +2412,7 @@ msgid ""
 "list before changing the amounts"
 msgstr ""
 
-#: app/models/event.rb:235
+#: app/models/event.rb:238
 msgid "start date should be in a future"
 msgstr ""
 
@@ -2435,7 +2432,7 @@ msgstr ", "
 msgid "support.select.prompt"
 msgstr "Please select"
 
-#: app/models/event.rb:236
+#: app/models/event.rb:239
 msgid "time cannot be blank"
 msgstr ""
 

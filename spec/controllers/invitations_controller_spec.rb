@@ -42,7 +42,7 @@ describe InvitationsController do
     end
 
     it "should render show" do
-      get :show, :id => @event
+      get :show, :id => @event.id
       response.should be_success
       response.should render_template("show")
     end
@@ -65,7 +65,7 @@ describe InvitationsController do
     end
 
     it "should render activation email sent" do
-      get :edit, :id => @event
+      get :edit, :id => @event.id
       response.should be_success
       response.body.should =~ /Instructions to activate your account have been emailed to you. Please check your email./
     end
@@ -114,20 +114,20 @@ describe InvitationsController do
     it "should redirect to summary page when nothing to send" do
       @event.stub!(:stage_passed).and_return(4)
       @event.stub!(:invitations_to_send_counts).and_return({:total => 0})
-      get :edit, :id => @event
+      get :edit, :id => @event.id
       response.should redirect_to("/summary/#{@event.id}")
     end
 
     it "should redirect to summary if event cancelled" do
       @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 2, :sms => 1, :resend_email => 0, :resend_sms => 2})
       @event.stub!(:canceled?).and_return(true)
-      get :edit, :id => @event
+      get :edit, :id => @event.id
       response.should redirect_to("/summary/#{@event.id}")
     end
 
     it "should render send form" do
       @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 2, :sms => 1, :resend_email => 0, :resend_sms => 2})
-      get :edit, :id => @event
+      get :edit, :id => @event.id
       response.should be_success
       response.body.should =~ /Invitations to send: 2 by email and 1 by SMS/
       response.body.should =~ /Invitations to re-send: 0 by email and 2 by SMS/
@@ -135,7 +135,7 @@ describe InvitationsController do
 
     it "should not ask for sms messages when only email invitations are there" do
       @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 3, :sms => 0, :resend_email => 0, :resend_sms => 0})
-      get :edit, :id => @event
+      get :edit, :id => @event.id
       response.should be_success
       response.body.should_not =~ /event_sms_message/
       response.body.should_not =~ /host_mobile_number/
@@ -144,7 +144,7 @@ describe InvitationsController do
 
     it "should ask for sms message when need to send sms" do
       @event.stub!(:invitations_to_send_counts).and_return({:total => 3, :email => 0, :sms => 3, :resend_email => 0, :resend_sms => 1})
-      get :edit, :id => @event
+      get :edit, :id => @event.id
       response.should be_success
       response.body.should =~ /event_sms_message/
       response.body.should =~ /host_mobile_number/

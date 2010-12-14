@@ -6,7 +6,7 @@ class IcalController < InheritedResources::Base
   actions :show, :create
 
   def create
-    Notifier.deliver_ical_attachment(parent)
+    Notifier.deliver_ical_attachment(parent, current_user)
     flash[:notice] = _("Event details sent to your email")
     redirect_to summary_path(parent)
   end
@@ -18,6 +18,6 @@ class IcalController < InheritedResources::Base
 
 protected
   def parent
-    @parent ||= params[:event_id] ? current_user.events.find(params[:event_id]) : (Guest.find_by_email_token(params[:rsvp_id]).try(:event) || raise(ActiveRecord::RecordNotFound))
+    @parent ||= params[:event_id] ? event_by_user_or_host : (Guest.find_by_email_token(params[:rsvp_id]).try(:event) || raise(ActiveRecord::RecordNotFound))
   end
 end

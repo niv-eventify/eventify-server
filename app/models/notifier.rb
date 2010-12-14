@@ -54,10 +54,10 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     body        :guest => guest, :thing => thing, :url => rsvp_url(guest.email_token, :more => true, :host => host)
   end
 
-  def ical_attachment(event)
+  def ical_attachment(event, user)
     subject     event.name
-    recipients  [event.user.email]
-    _set_receipient_header(event.user)
+    recipients  [user]
+    _set_receipient_header(user)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
 

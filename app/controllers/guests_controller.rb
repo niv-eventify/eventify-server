@@ -13,7 +13,7 @@ class GuestsController < InheritedResources::Base
   def mass_update
     raise "wrong attribute #{params[:attr]}" unless Guest::MASS_UPDATABLE.member?(params[:attr])
 
-    @event = current_user.events.find(params[:event_id])
+    event_by_user_or_host
     params[:guest_ids].split(/,/).each do |gid|
       guest = @event.guests.find(gid)
       guest.update_attribute(params[:attr], params[:value])
@@ -58,7 +58,7 @@ class GuestsController < InheritedResources::Base
 protected
   
   def begin_of_association_chain
-    current_user
+    event_by_user_or_host
   end
 
   def collection
@@ -69,7 +69,7 @@ protected
     if params[:query].blank?
       end_of_association_chain.paginate(_page_opts.merge(:include => :sms_messages))
     else
-      @event = current_user.events.find(params[:event_id])
+      event_by_user_or_host
       Guest.search(params[:query], :with => {:event_id => @event.id}, :allow_star => true).paginate(_page_opts)
     end
   end

@@ -27,7 +27,7 @@ protected
   def resource
     return @resource if @resource
     if params[:event_id]
-      e = current_user.events.find(params[:event_id])
+      e = event_by_user_or_host
       @resource = e.takings.find(params[:id])
     else
       @resource = Guest.find_by_email_token(params[:id] || params[:rsvp_id])

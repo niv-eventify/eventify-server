@@ -5,8 +5,8 @@ class SummariesController < InheritedResources::Base
   actions :show
 
 protected
-  def begin_of_association_chain
-    current_user
+  def resource
+    event_by_user_or_host
   end
 
   # don't allow access summaries until all invitations are sent

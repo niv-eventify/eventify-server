@@ -1,5 +1,6 @@
 %tr
   %td= garden.id
+  %td!= garden.user.email unless garden.user.blank?
   %td!= link_to garden.name, admin_garden_path(garden)
   %td= garden.address
   %td!= image_tag garden.map.url(:small) unless garden.map.url.blank?

@@ -23,7 +23,7 @@ class DesignsController < InheritedResources::Base
       end
       format.js do
         if params[:change_design]
-          @event = params[:event_id].to_i > 0 ? current_user.events.find(params[:event_id]) : Event.new
+          @event = params[:event_id].to_i > 0 ? event_by_user_or_host : Event.new
           render(:update) do |page|
             page << "stage1.page_num = #{params[:page]}"
             page << "jQuery.nyroModalManual({endShowContent: function(){jQuery('.category-selector select').customSelect();}, content: #{render(:partial => "designs/change_design").to_json}, width: 825, minHeight: 550});"
@@ -41,7 +41,7 @@ class DesignsController < InheritedResources::Base
       format.html {
         if params[:event_id].to_i > 0
           return unless require_user
-          @event = current_user.events.find(params[:event_id])
+          event_by_user_or_host
           return if redirect_changes_disabled(@event)
           @design = @event.design
           @category = @event.category

@@ -43,7 +43,7 @@ class ThingsController < InheritedResources::Base
 protected
   
   def begin_of_association_chain
-    current_user
+    event_by_user_or_host
   end
 
   def collection

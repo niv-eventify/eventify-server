@@ -5,6 +5,7 @@
     = event.user.email
     - if event.user.is_free?
       (free)
+  %td= event.hosts.map{|h| h.email}
   %td= event.guests.count
   %td= event.guests.invite_by_email.count
   %td= event.guests.invite_by_sms.count

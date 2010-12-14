@@ -1,13 +1,14 @@
 class CancellationsController < InheritedResources::Base
-  defaults :resource_class => Event, :collection_name => 'events', :instance_name => 'event', :route_instance_name => "cancellation"
+  defaults :resource_class => Event, :instance_name => 'event', :route_instance_name => "cancellation"
   before_filter :require_user
+  before_filter :event_by_user_or_host
   before_filter :verify_stats
   before_filter :check_payments
 
   actions :edit, :update
 
   def edit
-    resource.set_cancellations(@invited_stats)
+    @event.set_cancellations(@invited_stats)
     edit!
   end
 
@@ -15,9 +16,9 @@ class CancellationsController < InheritedResources::Base
     update! do |success, failure|
       failure.html
       success.html do
-        if resource.send_cancellation
+        if @event.send_cancellation
           flash[:notice] = _("Notifications are being sent.")
-          redirect_to summary_path(resource)
+          redirect_to summary_path(@event)
         else
           # TODO: redirect to sms payments
         end
@@ -26,21 +27,17 @@ class CancellationsController < InheritedResources::Base
   end
 
 protected
-  def begin_of_association_chain
-    current_user
-  end
-
   def verify_stats
-    @invited_stats = resource.guests.invited_stats
+    @invited_stats = @event.guests.invited_stats
 
     if @invited_stats[:total].zero? || !@event.canceled? || @event.cancellation_sent?
       flash[:notice] = _("Event cancelled - no guests to notify or guests are already notified.")
-      redirect_to summary_path(resource)
+      redirect_to summary_path(@event)
       return false
     end
   end
 
   def check_payments
-    redirect_to(new_event_payment_path(resource, :back => "cancellations")) if resource.payments_required?
+    redirect_to(new_event_payment_path(@event, :back => "cancellations")) if @event.payments_required?
   end
 end

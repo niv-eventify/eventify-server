@@ -32,7 +32,7 @@ protected
   end
 
   def parent
-    @parent ||= params[:event_id] ? current_user.events.find(params[:event_id]) : (Guest.find_by_email_token(params[:rsvp_id]).try(:event) || raise(ActiveRecord::RecordNotFound))
+    @parent ||= params[:event_id] ? event_by_user_or_host : (Guest.find_by_email_token(params[:rsvp_id]).try(:event) || raise(ActiveRecord::RecordNotFound))
   end
 
   def set_columns_count

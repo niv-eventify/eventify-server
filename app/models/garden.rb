@@ -1,5 +1,6 @@
 class Garden < ActiveRecord::Base
-  attr_accessible :name, :address, :url
+  belongs_to :user
+  attr_accessible :name, :address, :url, :user_id
   has_attached_file :map,
     :styles         => {:small => "75x76>"},
     :storage        => :s3,

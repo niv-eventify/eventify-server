@@ -98,4 +98,10 @@ protected
     parts[0] = "www"
     {:host => parts.join("."), :port => port}
   end
+
+  def event_by_user_or_host
+    event_id = params[:event_id] || params[:id]
+    host = Host.find_by_event_id_and_email(event_id, current_user.email)
+    @event = (!host.nil? && host.event) || current_user.events.find(event_id)
+  end
 end

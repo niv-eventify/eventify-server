@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101208105236) do
+ActiveRecord::Schema.define(:version => 20101212084701) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -185,6 +185,7 @@ ActiveRecord::Schema.define(:version => 20101208105236) do
     t.datetime "map_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "global_preferences", :force => true do |t|
@@ -244,8 +245,8 @@ ActiveRecord::Schema.define(:version => 20101208105236) do
 
   create_table "hosts", :force => true do |t|
     t.integer  "event_id"
-    t.integer  "name"
-    t.integer  "email"
+    t.string   "name",       :null => false
+    t.string   "email",      :null => false
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -1,6 +1,7 @@
 != link_to "Back to gardens", admin_gardens_path
 != link_to "Edit", edit_admin_garden_path(@garden)
 
+%h3= "User: #{@garden.user.email}"
 %h3= "Name: #{@garden.name}"
 %h3= "Address: #{@garden.address}"
 - unless @garden.url.blank?
