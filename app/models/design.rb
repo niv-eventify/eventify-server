@@ -33,6 +33,7 @@ class Design < ActiveRecord::Base
 
   named_scope :available, {:conditions => "designs.disabled_at IS NULL"}
   named_scope :carousel, {:conditions => "designs.in_carousel IS true"}
+  named_scope :by_ordering, :order => "designs.ordering desc"
   after_create :assign_root_classification
 
   has_attached_file :card,

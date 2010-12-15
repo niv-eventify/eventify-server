@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     @popular_categories = Category.enabled.popular(2)
-    @designs = Design.carousel
+    @designs = Design.carousel.by_ordering
     @redirect_on_login = true
 
     respond_to do |format|
