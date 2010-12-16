@@ -33,6 +33,7 @@ a.signup-out {
 .form ol li.error .input-bg-alt { background-position: 0 -24px !important;}
 
 .info-table.things {
+  margin: 2px 0 0;
 	width: 650px;
 }
 
@@ -809,7 +810,7 @@ table#contacts {
 	float: right;
 }
 
-.hebrew  #guests .input-bg-uni {
+.hebrew  #guests .input-bg-uni, .hebrew table.things .input-bg-uni{
 	float:right;
 }
 
@@ -1256,3 +1257,6 @@ h2.weak {
   padding-bottom: 0;
 }
 .hebrew .main-box p { font-size: 1.4em;}
+.hebrew h3.things-header{
+  font-size: 120%;
+}
