@@ -1256,7 +1256,7 @@ h2.weak {
 .import.reminders {
   padding-bottom: 0;
 }
-.hebrew .main-box p { font-size: 1.4em;}
+.hebrew .main-box h2 { font-size: 1.3em;}
 .hebrew h3.things-header{
   font-size: 120%;
 }
