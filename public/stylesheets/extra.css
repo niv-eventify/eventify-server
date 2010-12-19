@@ -1260,3 +1260,6 @@ h2.weak {
 .hebrew h3.things-header{
   font-size: 120%;
 }
+.hebrew .sml-gallery ul li span {
+  cursor: pointer;
+}
