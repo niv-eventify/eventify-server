@@ -8,5 +8,8 @@
 :javascript
   jQuery(function(){    
     jQuery("#new_guest_row input[name=guest[email]]").autocomplete({source:#{current_user.contacts.collect(&:email).to_json}});
+    jQuery("#new_guest_row form").submit(function(){
+      window.location.hash = "guest_added";
+    });
   });
   

@@ -8,6 +8,12 @@
       jQuery("table#guests").floatHeader();
       jQuery("#new_guest_row input:text").unload_monit(#{_("You didn't save the last added guest.").to_json});
     });
+    jQuery(document).ready(function(){
+      if(window.location.hash == "#guest_added") {
+        window.location.hash = "";
+        window.location.reload();
+      }
+    });
 
 - events_content_section(3, @event) do
   .info-area
