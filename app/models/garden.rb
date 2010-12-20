@@ -13,4 +13,14 @@ class Garden < ActiveRecord::Base
     },
     :url => ':s3_domain_url'
   attr_accessible :map
+
+  after_update :update_hosts
+  def update_hosts
+    Host.find_all_by_garden_id(id).each do |h|
+      h.email = user.email
+      h.name = name
+      h.save!
+    end
+  end
+
 end

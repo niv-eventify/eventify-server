@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101212084701) do
+ActiveRecord::Schema.define(:version => 20101220060710) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -250,6 +250,7 @@ ActiveRecord::Schema.define(:version => 20101212084701) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "garden_id"
   end
 
   add_index "hosts", ["email"], :name => "index_hosts_on_email"

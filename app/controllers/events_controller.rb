@@ -173,6 +173,6 @@ protected
   def set_garden_data
     garden = Garden.find(params[:garden_id])
     @event.map = garden.map unless garden.map.url.blank?
-    @host = Host.new(:user =>  @event.user, :name => garden.user.name, :email => garden.user.email)
+    @host = Host.new(:user => @event.user, :name => garden.name, :email => garden.user.email, :garden => garden)
   end
 end
