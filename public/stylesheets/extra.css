@@ -1263,3 +1263,8 @@ h2.weak {
 .hebrew .sml-gallery ul li span {
   cursor: pointer;
 }
+#map_holder img, #map_holder iframe{
+  width: 561px;
+  height: 374px;
+  border: none;
+}

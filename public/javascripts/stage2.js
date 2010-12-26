@@ -272,52 +272,63 @@
     jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html('');
   },
 
-    starting_at: function() {
-        var start_date = jQuery("#starting_at_mock").val().split(".");
-        start_date.push(jQuery("#event_starting_at_4i").val());
-        start_date.push(jQuery("#event_starting_at_5i").val());
-        return new Date(start_date[2], start_date[1], start_date[0], start_date[3], start_date[4]);
-    },
+  starting_at: function() {
+    var start_date = jQuery("#starting_at_mock").val().split(".");
+    start_date.push(jQuery("#event_starting_at_4i").val());
+    start_date.push(jQuery("#event_starting_at_5i").val());
+    return new Date(start_date[2], start_date[1], start_date[0], start_date[3], start_date[4]);
+  },
 
-    ending_at: function () {
-        var ending_date = jQuery("#ending_at_mock").val().split(".");
-        ending_date.push(jQuery("#event_ending_at_4i").val());
-        ending_date.push(jQuery("#event_ending_at_5i").val());
-        return new Date(ending_date[2], ending_date[1], ending_date[0], ending_date[3], ending_date[4]);		
-    },
+  ending_at: function () {
+    var ending_date = jQuery("#ending_at_mock").val().split(".");
+    ending_date.push(jQuery("#event_ending_at_4i").val());
+    ending_date.push(jQuery("#event_ending_at_5i").val());
+    return new Date(ending_date[2], ending_date[1], ending_date[0], ending_date[3], ending_date[4]);
+  },
 
-    set_ending_at: function(date) {
-        var hrs = date.getHours().toString();
-        if (hrs.length < 2) hrs = "0" + hrs;
-        var min = date.getMinutes().toString();
-        if (min.length < 2) min = "0" + min;
-        jQuery("#ending_at_mock").val(jQuery("#starting_at_mock").val());
-        jQuery("#event_ending_at_year").val(date.getFullYear());
-        jQuery("#event_ending_at_month").val(date.getMonth() + 1);
-        jQuery("#event_ending_at_day").val(date.getDate());
-        jQuery("#event_ending_at_4i").val(hrs);
-        jQuery("#event_ending_at_5i").val(min);
-        jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(hrs);
-        jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(min);
-    },
+  set_ending_at: function(date) {
+    var hrs = date.getHours().toString();
+    if (hrs.length < 2) hrs = "0" + hrs;
+    var min = date.getMinutes().toString();
+    if (min.length < 2) min = "0" + min;
+    jQuery("#ending_at_mock").val(jQuery("#starting_at_mock").val());
+    jQuery("#event_ending_at_year").val(date.getFullYear());
+    jQuery("#event_ending_at_month").val(date.getMonth() + 1);
+    jQuery("#event_ending_at_day").val(date.getDate());
+    jQuery("#event_ending_at_4i").val(hrs);
+    jQuery("#event_ending_at_5i").val(min);
+    jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(hrs);
+    jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(min);
+  },
 
-    submit_form: function(is_resend_invitation) {
-        jQuery('#event_resend_invitations').val(is_resend_invitation ? 'true' : '');
-        jQuery.nyroModalRemove();
-        jQuery('body').css('cursor', 'wait');
-        jQuery('.form.new-event').submit();
-    },
+  submit_form: function(is_resend_invitation) {
+    jQuery('#event_resend_invitations').val(is_resend_invitation ? 'true' : '');
+    jQuery.nyroModalRemove();
+    jQuery('body').css('cursor', 'wait');
+    jQuery('.form.new-event').submit();
+  },
 
-    setScrollWidths: function() {
-        var title_bk = jQuery("#title").html();
-        var free_text_bk = jQuery("#free_text").html();
-        jQuery("#title").html("");
-        jQuery("#free_text").html("");
-        stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
-        stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
-        jQuery("#title").html(title_bk);
-        jQuery("#free_text").html(free_text_bk);
+  setScrollWidths: function() {
+    var title_bk = jQuery("#title").html();
+    var free_text_bk = jQuery("#free_text").html();
+    jQuery("#title").html("");
+    jQuery("#free_text").html("");
+    stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
+    stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
+    jQuery("#title").html(title_bk);
+    jQuery("#free_text").html(free_text_bk);
+  },
+
+  previewMap: function() {
+    if(jQuery("#map_holder img").length > 0) return;//there is a map image already shown
+    var link = jQuery("#event_map_link").val()
+    if(link == "") {
+      jQuery("#map_box").hide();
+      return;
     }
+    jQuery("#map_holder").html("<iframe src='" + link + "'></iframe>");
+    jQuery("#map_box").show();
+  }
 }
 jQuery(document).ready(function(){
   jQuery(".starting_at_time_select select.short:first").addClass("marg");
@@ -327,6 +338,7 @@ jQuery(document).ready(function(){
   stage2.initToolbars();
   stage2.hideMsgBorder();
   stage2.hideTitleBorder();
+  stage2.previewMap();
   if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
     jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
   }
@@ -474,4 +486,7 @@ jQuery(document).ready(function(){
   set_counter("#event_invitation_title", "#event_invitation_title_input .inline-hints", 100);
   set_counter("#event_guest_message", "#event_guest_message_input .inline-hints", 345);
   jQuery(".side-area input, .side-area textarea").unload_monit();
+  jQuery("#event_map_link").live("blur", function(){
+    stage2.previewMap();
+  });
 });

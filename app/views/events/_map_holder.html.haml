@@ -1,0 +1,5 @@
+.visual-box#map_box
+  .holder
+    .frame
+      .image-h#map_holder
+        != image_tag @event.map.url unless @event.map.blank? || @event.map.url.blank?
