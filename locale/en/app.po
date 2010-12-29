@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-12-14 14:15+0200\n"
+"POT-Creation-Date: 2010-12-29 17:50+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,14 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-
-#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:74
-msgid ""
-"        We're sorry, but we could not locate your account.\n"
-"        If you are having issues try copying and pasting the URL\n"
-"        from your email into your browser or restarting the\n"
-"        reset password process.\n"
-msgstr ""
 
 #: app/views/payments/new.html.haml:27
 msgid " - upgrade"
@@ -107,11 +99,11 @@ msgstr ""
 msgid "(google, yahoo, etc.)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:109
+#: app/helpers/events_helper.rb:115
 msgid "(not sent)"
 msgstr ""
 
-#: app/helpers/events_helper.rb:109
+#: app/helpers/events_helper.rb:115
 msgid "(sent)"
 msgstr ""
 
@@ -173,11 +165,11 @@ msgstr ""
 msgid "Add Map"
 msgstr ""
 
-#: app/views/guests/index.html.haml:21
+#: app/views/guests/index.html.haml:27
 msgid "Add from existing contact list:"
 msgstr ""
 
-#: app/views/guests/index.html.haml:38
+#: app/views/guests/index.html.haml:44
 msgid "Add manually:"
 msgstr ""
 
@@ -215,7 +207,7 @@ msgstr ""
 msgid "Advance Options"
 msgstr ""
 
-#: app/views/guests/index.html.haml:41
+#: app/views/guests/index.html.haml:47
 msgid "All"
 msgstr ""
 
@@ -241,7 +233,7 @@ msgid "An error occured during importing contacts from %{name}"
 msgstr ""
 
 #: app/views/reminders/_index.html.haml:22
-#: app/views/things/_index.html.haml:20
+#: app/views/things/_index.html.haml:22
 msgid "Approve"
 msgstr ""
 
@@ -260,7 +252,7 @@ msgstr ""
 #: app/views/summaries/show.html.haml:123
 #: app/views/reminders/_reminder.html.haml:10
 #: app/views/contacts/_contact.html.haml:6
-#: app/views/admin/users/_user.html.haml:11
+#: app/views/admin/users/_user.html.haml:13
 msgid "Are you sure?"
 msgstr ""
 
@@ -292,7 +284,7 @@ msgstr ""
 msgid "Billing address - missing zip code"
 msgstr ""
 
-#: app/views/guests/index.html.haml:45 app/views/summaries/show.html.haml:57
+#: app/views/guests/index.html.haml:51 app/views/summaries/show.html.haml:57
 msgid "Bounced emails"
 msgstr ""
 
@@ -636,7 +628,7 @@ msgstr ""
 msgid "Event Summary Page"
 msgstr ""
 
-#: app/controllers/events_controller.rb:112
+#: app/controllers/events_controller.rb:109
 msgid "Event canceled."
 msgstr ""
 
@@ -734,7 +726,7 @@ msgstr ""
 msgid "File should be less than 4MB"
 msgstr ""
 
-#: app/views/guests/index.html.haml:40
+#: app/views/guests/index.html.haml:46
 msgid "Filter by RSVP:"
 msgstr ""
 
@@ -771,7 +763,7 @@ msgstr ""
 msgid "Future events"
 msgstr ""
 
-#: app/views/guests/index.html.haml:16
+#: app/views/guests/index.html.haml:22
 msgid "Guest List"
 msgstr ""
 
@@ -914,7 +906,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/controllers/events_controller.rb:124
+#: app/controllers/events_controller.rb:121
 #: app/views/invitations/edit.html.haml:16
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:19
 msgid ""
@@ -1023,7 +1015,7 @@ msgid "Map Link"
 msgstr ""
 
 #: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:5
-#: app/views/guests/index.html.haml:44
+#: app/views/guests/index.html.haml:50
 msgid "May Be"
 msgstr ""
 
@@ -1128,7 +1120,7 @@ msgid "Next event:"
 msgstr ""
 
 #: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:6
-#: app/views/guests/index.html.haml:43
+#: app/views/guests/index.html.haml:49
 msgid "No"
 msgstr ""
 
@@ -1313,6 +1305,10 @@ msgstr ""
 
 #: app/controllers/guest_importers_controller.rb:55
 msgid "Please upload a CSV file"
+msgstr ""
+
+#: app/views/uploaded_pictures/new.html.haml:22
+msgid "Please upload a valid image file"
 msgstr ""
 
 #: app/views/contact_importers/show.html.haml:12
@@ -1697,7 +1693,7 @@ msgstr ""
 msgid "Total arriving guests"
 msgstr ""
 
-#: app/views/guests/index.html.haml:37 app/views/guests/index.html.haml:53
+#: app/views/guests/index.html.haml:43 app/views/guests/index.html.haml:59
 msgid "Total guests - %{total_guests}"
 msgstr ""
 
@@ -1730,6 +1726,13 @@ msgstr ""
 msgid "Watch example"
 msgstr ""
 
+#: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:74
+msgid ""
+"We're sorry, but we could not locate your account. If you are having issues "
+"try copying and pasting the URL from your email into your browser or "
+"restarting the reset password process."
+msgstr ""
+
 #: app/models/payment.rb:49
 msgid "Weekly charge amount limit reached for this credit card"
 msgstr ""
@@ -1757,11 +1760,11 @@ msgid "Who brings"
 msgstr ""
 
 #: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:4
-#: app/views/guests/index.html.haml:42
+#: app/views/guests/index.html.haml:48
 msgid "Yes"
 msgstr ""
 
-#: app/controllers/events_controller.rb:122
+#: app/controllers/events_controller.rb:119
 msgid "You already have an account, please login with your email and password."
 msgstr ""
 
@@ -2016,7 +2019,7 @@ msgstr ""
 msgid "cancel"
 msgstr ""
 
-#: app/helpers/events_helper.rb:117
+#: app/helpers/events_helper.rb:123
 msgid "category|Other"
 msgstr ""
 
@@ -2255,7 +2258,7 @@ msgstr ""
 msgid "is too long, %{chars} max"
 msgstr ""
 
-#: app/models/user.rb:65
+#: app/models/user.rb:66
 msgid "is wrong"
 msgstr ""
 
@@ -2383,7 +2386,7 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/guests/index.html.haml:27 app/views/summaries/show.html.haml:99
+#: app/views/guests/index.html.haml:33 app/views/summaries/show.html.haml:99
 #: app/views/summaries/show.html.haml:102
 msgid "search"
 msgstr ""
