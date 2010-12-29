@@ -48,7 +48,7 @@
       - elsif !@map.blank?
         != link_to(_("Current Map Image"), @map.url, :target => "_blank")
       != link_to(_("Current Map Link"), f.object.map_link, :target => "_blank") unless f.object.map_link.blank?
-      != link_to_remote _("Remove"), :url => event_event_maps_path(f.object), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_iamges').remove()", :after => "jQuery('#event_map_link').val('');jQuery('#map_holder').html('');"
+      != link_to_remote _("Remove"), :url => event_event_maps_path(f.object), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_iamges').remove()", :after => "jQuery('#event_map_link').val('');jQuery('#map_holder').html('');jQuery('#map_box').hide();"
 - if f.object.has_map? || !@map.blank?
   != javascript_tag("jQuery('#show_map').click()")
 
