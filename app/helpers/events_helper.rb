@@ -47,7 +47,10 @@ module EventsHelper
       :surround_html => {:tag => :div, :html => {:class => "input-bg-alt"}},
       :required => nil
       }
-    opts[:input_html][:def_value] = def_value unless def_value.blank?
+    unless def_value.blank? then
+      opts[:input_html][:def_value] = def_value
+      opts[:input_html][:title] = def_value
+    end
     if block_given?
       opts[:after_html] = capture_haml { yield }
     end
@@ -57,7 +60,10 @@ module EventsHelper
   def event_input_text(f, attribute, label, hint, def_value = nil)
     opts = {:label => label, :wrapper_html => {:class => "auto_width"}, :surround_html => {:tag => :div, :html => {:class => "textarea-bg"}},
       :required => nil, :hint => hint, :as => :text, :input_html => {} }
-    opts[:input_html][:def_value] = def_value unless def_value.blank?
+    unless def_value.blank? then
+      opts[:input_html][:def_value] = def_value
+      opts[:input_html][:title] = def_value
+    end
     haml_concat f.input(attribute, opts)
   end
 
