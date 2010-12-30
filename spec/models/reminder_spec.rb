@@ -47,6 +47,27 @@ describe Reminder do
       @reminder.send_reminder_at.to_i.should == (@event.starting_at + 2.days).to_i
       @reminder.errors.on(:before_value).should =~ /should be in a future/
     end
+
+    it "should validate uniqueness of email reminder" do
+      @reminder.before_units = "days"
+      @reminder.before_value = "1"
+      @reminder.by_email = true
+      @reminder.should_not be_valid
+      @reminder.errors.on(:by_email).should =~ /An email reminder for this exact time has already been created/
+    end
+
+    it "should validate uniqueness of SMS reminder" do
+      @reminder.before_units = "days"
+      @reminder.before_value = "1"
+      @reminder.by_sms = true
+      @reminder.save!
+      @reminder2 = @event.reminders.build
+      @reminder2.before_units = "days"
+      @reminder2.before_value = "1"
+      @reminder2.by_sms = true
+      @reminder2.should_not be_valid
+      @reminder2.errors.on(:by_sms).should =~ /An SMS reminder for this exact time has already been created/
+    end
   end
 
   describe "remove reminders" do

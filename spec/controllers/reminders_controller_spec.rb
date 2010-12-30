@@ -29,14 +29,12 @@ describe RemindersController do
   end
 
   it "should render edit" do
-    @reminder = @event.reminders.build
-    @reminder.set_default_values
-    @reminder.save!
+    @reminder = @event.reminders.last
     Reminder.stub!(:find).and_return(@reminder)
     xhr :get, :edit, :event_id => @event.id, :id => 1
     response.should render_template(:edit)
   end  
- 
+
   it "should create reminder" do
     lambda {
       xhr :post, :create, :event_id => @event.id, :reminder => {:before_units => "hours", :before_value => 1, :by_sms => true}

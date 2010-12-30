@@ -54,10 +54,12 @@ class Reminder < ActiveRecord::Base
   end
 
   validates_presence_of :before_units, :before_value
+  validates_uniqueness_of :by_email, :scope => [:before_units, :before_value, :event_id], :message => _("An email reminder for this exact time has already been created."), :if => :by_email
 
+  validates_uniqueness_of :by_sms, :scope => [:before_units, :before_value, :event_id], :message => _("An SMS reminder for this exact time has already been created."), :if => :by_sms
   def validate
     errors.add(:before_value, _("should be in a future")) if active_not_yet_sent? && (send_reminder_at.blank? || in_past?)
-    errors.add(:by_email, s_("...mail or sms|choose a delivery method")) if !by_email? && !by_sms?
+    errors.add(:by_email, s_("mail or sms - choose a delivery method")) if !by_email? && !by_sms?
   end
 
   def before_destroy

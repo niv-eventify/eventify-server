@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-12-29 17:50+0200\n"
+"POT-Creation-Date: 2010-12-30 12:27+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,10 +105,6 @@ msgstr ""
 
 #: app/helpers/events_helper.rb:115
 msgid "(sent)"
-msgstr ""
-
-#: app/models/reminder.rb:60
-msgid "...mail or sms|choose a delivery method"
 msgstr ""
 
 #: app/views/events/_form.html.haml:43
@@ -226,6 +222,14 @@ msgstr ""
 #: app/views/my/payments/index.html.haml:17
 #: app/views/things/_things_header.html.haml:8
 msgid "Amount"
+msgstr ""
+
+#: app/models/reminder.rb:59
+msgid "An SMS reminder for this exact time has already been created."
+msgstr ""
+
+#: app/models/reminder.rb:57
+msgid "An email reminder for this exact time has already been created."
 msgstr ""
 
 #: app/views/contact_importers/show.html.haml:18
@@ -569,7 +573,7 @@ msgstr ""
 
 #: app/views/guests/_guests_header.html.haml:8
 #: app/views/guests/_guests_header.html.haml:23
-#: app/views/reminders/_form.html.haml:6
+#: app/views/reminders/_form.html.haml:8
 #: app/views/guest_importers/_import.html.haml:19
 #: app/views/user_session/new.html.haml:6
 #: app/views/user_session/_new.html.haml:3 app/views/users/_form.html.haml:3
@@ -1185,25 +1189,25 @@ msgstr ""
 msgid "Number of printed invitations you requested: %{prints_count}"
 msgstr ""
 
-#: app/models/reminder.rb:89
+#: app/models/reminder.rb:91
 msgid "One day before the event"
 msgid_plural "%d days before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:87
+#: app/models/reminder.rb:89
 msgid "One hour before the event"
 msgid_plural "%d hours before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:93
+#: app/models/reminder.rb:95
 msgid "One month before the event"
 msgid_plural "%d months before the event"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/models/reminder.rb:91
+#: app/models/reminder.rb:93
 msgid "One week before the event"
 msgid_plural "%d weeks before the event"
 msgstr[0] ""
@@ -1427,11 +1431,11 @@ msgstr ""
 msgid "Reminder has already been sent"
 msgstr ""
 
-#: app/models/reminder.rb:132
+#: app/models/reminder.rb:134
 msgid "Reminder: %{default_sms}"
 msgstr ""
 
-#: app/models/reminder.rb:124
+#: app/models/reminder.rb:126
 msgid "Reminder: %{event_name}"
 msgstr ""
 
@@ -1473,7 +1477,7 @@ msgstr ""
 
 #: app/views/payments/new.html.haml:60 app/views/payments/edit.html.haml:9
 #: app/views/my/payments/index.html.haml:15
-#: app/views/reminders/_form.html.haml:10
+#: app/views/reminders/_form.html.haml:11
 msgid "SMS"
 msgstr ""
 
@@ -1536,11 +1540,11 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: app/views/reminders/_form.html.haml:14
+#: app/views/reminders/_form.html.haml:16
 msgid "Send At"
 msgstr ""
 
-#: app/views/reminders/_form.html.haml:2
+#: app/views/reminders/_form.html.haml:4
 msgid "Send By"
 msgstr ""
 
@@ -2011,7 +2015,7 @@ msgstr "is not valid"
 msgid "authlogic.models.user_session"
 msgstr "UserSession"
 
-#: app/views/reminders/_form.html.haml:20
+#: app/views/reminders/_form.html.haml:22
 msgid "before the event"
 msgstr ""
 
@@ -2270,6 +2274,10 @@ msgstr ""
 msgid "ltr"
 msgstr ""
 
+#: app/models/reminder.rb:62
+msgid "mail or sms - choose a delivery method"
+msgstr ""
+
 #: app/models/guest.rb:127
 msgid "not yet responded"
 msgstr ""
@@ -2353,11 +2361,11 @@ msgstr ""
 msgid "or"
 msgstr ""
 
-#: app/models/reminder.rb:99
+#: app/models/reminder.rb:101
 msgid "reminder send by|by Email"
 msgstr ""
 
-#: app/models/reminder.rb:100
+#: app/models/reminder.rb:102
 msgid "reminder send by|by SMS"
 msgstr ""
 
@@ -2395,7 +2403,7 @@ msgstr ""
 msgid "send"
 msgstr ""
 
-#: app/models/reminder.rb:59
+#: app/models/reminder.rb:61
 msgid "should be in a future"
 msgstr ""
 
