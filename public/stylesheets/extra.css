@@ -1092,6 +1092,7 @@ em.counter {
 	background-color: white;
 	top: 465px;
 	left: 520px;
+	cursor: move;
 }
 .hebrew .overflow_warning {
 	text-align: right;

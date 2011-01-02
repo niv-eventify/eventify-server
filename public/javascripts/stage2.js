@@ -465,4 +465,10 @@ jQuery(document).ready(function(){
   set_counter("#event_invitation_title", "#event_invitation_title_input .inline-hints", 100);
   set_counter("#event_guest_message", "#event_guest_message_input .inline-hints", 345);
   jQuery(".side-area input, .side-area textarea").unload_monit();
+  jQuery(".overflow_warning").draggable({
+    opacity: 0.7,
+    appendTo: 'body',
+    zIndex: 200,
+  });
+
 });
