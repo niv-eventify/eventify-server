@@ -21,11 +21,11 @@
 
 set :cron_log, "#{RAILS_ROOT}/log/cron.log"
 
-every 2.minutes do
+every 4.minutes do
   runner "Reminder.send_reminders"
 end
 
-every 2.minutes do
+every 4.minutes do
   runner "Guest.delayed_sms_cron_job"
 end
 
