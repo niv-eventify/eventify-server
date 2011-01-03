@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   named_scope :enabled, {:conditions => "users.disabled_at IS NULL"}
   named_scope :disabled, {:conditions => "users.disabled_at IS NOT NULL"}
+  named_scope :by_created_at, :order => "users.created_at DESC"
 
   def has_no_credentials_and_password_changed?
     has_no_credentials? || !password.blank? || !old_password.blank?

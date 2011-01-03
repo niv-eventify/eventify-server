@@ -3,8 +3,10 @@
   %head
     %meta{ :content => "text/html; charset=utf-8", "http-equiv" => "Content-Type" }
     %meta{"http-equiv" => "X-UA-Compatible", :content => "IE=EmulateIE7"}
-
-  %body
+    :css
+      body.hebrew {direction: rtl;}
+      th,td {padding: 0 10px;}
+  %body{:class => body_class}
     %h1= parent.name
     %table
       %tr
@@ -12,11 +14,15 @@
         %th= _("Email")
         %th= _("Mobile")
         %th= _("RSVP")
+        %th= _("Number of Guests")
+        %th= _("Message to Host")
       - collection.each do |guest|
         %tr
           %td= guest.name
           %td= guest.email || "&nbsp;"
           %td= guest.mobile_phone || "&nbsp;"
           %td= guest.rsvp_text
+          %td= guest.attendees_count
+          %td= guest.message_to_host
     :javascript
       window.print()

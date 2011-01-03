@@ -71,13 +71,7 @@ class PasswordsController < InheritedResources::Base
 
   def load_user_using_perishable_token
     unless resource
-      flash[:error] = _(<<-END
-        We're sorry, but we could not locate your account.
-        If you are having issues try copying and pasting the URL
-        from your email into your browser or restarting the
-        reset password process.
-      END
-      )
+      flash[:error] = _("We're sorry, but we could not locate your account. If you are having issues try copying and pasting the URL from your email into your browser or restarting the reset password process.")
       redirect_to new_password_path
     end
   end

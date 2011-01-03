@@ -1,16 +1,18 @@
 .f-row
+  != f.inline_errors_for :by_email
+  != f.inline_errors_for :by_sms
   %strong.title= _("Send By")
   %ul.hosts-container
     %li
       != f.check_box :by_email, :class => "input-check"
       != f.label :by_email, _("Email"), :class => "mail"
-      != f.inline_errors_for :by_email
     %li
       != f.check_box :by_sms, :class => "input-check"
       != f.label :by_sms, _("SMS"), :class => "phone"
-      != f.inline_errors_for :by_sms
 
 .f-row
+  != f.inline_errors_for :before_units
+  != f.inline_errors_for :before_value
   %strong.title= _("Send At")
   .f-col
     .f-row-1
@@ -18,8 +20,6 @@
         != f.text_field :before_value, :class => "input-text", :maxlength => "2"
       != f.select :before_units, before_units_for_select
       != f.label :before_value, _("before the event")
-      != f.inline_errors_for :before_units
-      != f.inline_errors_for :before_value
 .f-row.f-row-alt
   .f-row-1
     != f.label :email_subject, _("Email subject")
@@ -40,3 +40,7 @@
       .texarea-bg
         != text_area_tag :sms_message, f.object.sms_message, :class => "sms-message-body", :readonly => true
   != f.inline_errors_for :sms_message
+:javascript
+  jQuery('p.error-msg').each(function(){
+    jQuery(this).toggle(jQuery(this).html() !== '&nbsp;');
+  });

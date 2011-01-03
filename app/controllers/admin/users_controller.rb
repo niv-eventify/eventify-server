@@ -2,6 +2,7 @@ class Admin::UsersController < InheritedResources::Base
 
   before_filter :require_admin
   actions :index, :update
+  has_scope :by_created_at, :default => true
 
   def update
     resource.is_free = !resource.is_free

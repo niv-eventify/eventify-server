@@ -7,7 +7,8 @@
   free_text_scroll_width: 0,
   months_arr: [],
   seperated_title: false,
-  prev_text: "",
+  prev_event_invitation_title: "",
+  prev_event_guest_message: "",
   title_first_font_change: false,
   msg_first_font_change: false,
 
@@ -50,8 +51,8 @@
 
   preview_text: function(sourceId, targetId, allowOverFlow) {
     var text = jQuery("#" + sourceId).val();
-    if(stage2.prev_text == text) return;
-    stage2.prev_text = text;
+    if(stage2["prev" + sourceId] == text) return;
+    stage2["prev" + sourceId] = text;
     var findReplace = [[/&/g, "&amp;"], [/</g, "&lt;"], [/>/g, "&gt;"], [/ /g, "&nbsp;"], [/\n/g, "<BR />"]]
     for(var i = 0; i < findReplace.length; i++)//it's important to do the replaces in the order of the array
       text = text.replace(findReplace[i][0], findReplace[i][1]);
@@ -360,28 +361,18 @@ jQuery(document).ready(function(){
   clearInputs("event_name");
   clearInputs("event_location_name");
   clearInputs("event_location_address");
-  clearInputs("event_invitation_title");
-  clearInputs("event_guest_message");
+  clearInputs("event_invitation_title", ["event_guest_message"]);
+  clearInputs("event_guest_message", ["event_invitation_title"]);
 
   stage2.preview_text("event_invitation_title", "title", !isInputFieldWithDefaultVal("event_invitation_title"));
   stage2.preview_text("event_guest_message", "free_text", !isInputFieldWithDefaultVal("event_guest_message"));
 
-  jQuery("#event_invitation_title").blur(function(){
-    stage2.preview_text("event_invitation_title", "title", true);
-  });
-  jQuery("#event_invitation_title").focus(function(){
-    stage2.preview_text("event_invitation_title", "title", true);
-  });
-  jQuery("#event_invitation_title").keyup(function(){
-    stage2.preview_text("event_invitation_title", "title", true);
-  });
-  jQuery("#event_guest_message").blur(function(){
+  jQuery("#event_invitation_title").bind("blur focus keyup", function(){
     stage2.preview_text("event_guest_message", "free_text", true);
+    stage2.preview_text("event_invitation_title", "title", true);
   });
-  jQuery("#event_guest_message").focus(function(){
-    stage2.preview_text("event_guest_message", "free_text", true);
-  });
-  jQuery("#event_guest_message").keyup(function(){
+  jQuery("#event_guest_message").bind("blur focus keyup", function(){
+    stage2.preview_text("event_invitation_title", "title", true);
     stage2.preview_text("event_guest_message", "free_text", true);
   });
 
@@ -488,5 +479,10 @@ jQuery(document).ready(function(){
   jQuery(".side-area input, .side-area textarea").unload_monit();
   jQuery("#event_map_link").live("blur", function(){
     stage2.previewMap();
+  });
+  jQuery(".overflow_warning").draggable({
+    opacity: 0.7,
+    appendTo: 'body',
+    zIndex: 200,
   });
 });

@@ -1,18 +1,41 @@
 /*---- clear inputs ---*/
-function clearInputs(id){
-	jQuery('#' + id).each(function(){
-		var _el = jQuery(this);
-		var default_val = _el.attr('def_value');
-		_el.bind('focus', function(){
-			if(jQuery(this).val().replace(/[\n\r]/g,"") == default_val.replace(/[\n\r]/g,"")) this.value = '';
-			jQuery(this).css('color','#523733')
-		}).bind('blur', function(){
-			if(this.value == '') {
-				this.value = default_val;
-				jQuery(this).css('color','#a3948f');
-			}
-		}).blur();
-	});
+function clearInputs(id, coupledIds){
+  jQuery('#' + id).each(function(){
+    jQuery(this).bind('focus', function(){
+      clearField(jQuery(this));
+      if(!coupledIds) return;
+      for(var i = 0; i < coupledIds.length; i++) {
+        clearField(jQuery('#' + coupledIds[i]));
+      }
+    }).bind('blur', function(){
+      var fields = [jQuery(this)];
+      if(coupledIds) {
+        for(var i = 0; i < coupledIds.length; i++) {
+          fields.push(jQuery('#' + coupledIds[i]));
+        }
+      }
+      fillFields(fields)
+    }).blur();
+  });
+}
+function clearField(elem){
+  var default_val = elem.attr('def_value');
+  if(elem.val().replace(/[\n\r]/g,"") == default_val.replace(/[\n\r]/g,"")) elem.val('');
+  elem.css('color','#523733')
+}
+function fillFields(fields) {
+  var allEmpty = true;
+  jQuery.each(fields, function(index, elem) {
+    if(elem.val() != "") allEmpty = false;
+  });
+  if(!allEmpty) return;
+  jQuery.each(fields, function(index, elem) {
+    var default_val = elem.attr('def_value');
+    if(elem.val() == '') {
+      elem.val(default_val);
+      elem.css('color','#a3948f');
+    }
+  });
 }
 function isInputFieldWithDefaultVal(id) {
   var el = jQuery('#' + id);
