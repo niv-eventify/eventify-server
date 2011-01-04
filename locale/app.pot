@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2010-12-30 12:27+0200\n"
+"POT-Creation-Date: 2011-01-04 12:25+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -249,7 +249,7 @@ msgid "Are you sure you want to remove this picture?"
 msgstr ""
 
 #: app/helpers/guests_helper.rb:15 app/helpers/things_helper.rb:14
-#: app/views/events/_form.html.haml:51
+#: app/views/events/_form.html.haml:46
 #: app/views/events/_actions_menu.html.haml:5
 #: app/views/invitations/edit.html.haml:5
 #: app/views/summaries/show.html.haml:123
@@ -464,14 +464,6 @@ msgstr ""
 msgid "Crop"
 msgstr ""
 
-#: app/views/events/_form.html.haml:47 app/views/events/_form.html.haml:49
-msgid "Current Map Image"
-msgstr ""
-
-#: app/views/events/_form.html.haml:50
-msgid "Current Map Link"
-msgstr ""
-
 #: app/views/passwords/_form.html.haml:2
 msgid "Current Password"
 msgstr ""
@@ -579,7 +571,7 @@ msgstr ""
 #: app/views/users/_edit.html.haml:4 app/views/users/_new.html.haml:4
 #: app/views/contacts/index.html.haml:16 app/views/passwords/new.html.haml:9
 #: app/views/passwords/_new.html.haml:5
-#: app/views/other_guests/index.html.haml:12
+#: app/views/other_guests/index.html.haml:14
 msgid "Email"
 msgstr ""
 
@@ -775,7 +767,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:57
+#: app/views/events/_form.html.haml:52
 msgid "Guests can see other attendees"
 msgstr ""
 
@@ -1030,6 +1022,10 @@ msgstr ""
 msgid "Message to Guests"
 msgstr ""
 
+#: app/views/other_guests/index.html.haml:18
+msgid "Message to Host"
+msgstr ""
+
 #: app/models/payment.rb:36
 msgid "Missing card holder Name"
 msgstr ""
@@ -1052,7 +1048,7 @@ msgstr ""
 
 #: app/views/guest_importers/_import.html.haml:20
 #: app/views/contacts/index.html.haml:17
-#: app/views/other_guests/index.html.haml:13
+#: app/views/other_guests/index.html.haml:15
 msgid "Mobile"
 msgstr ""
 
@@ -1084,7 +1080,7 @@ msgstr ""
 #: app/views/guest_importers/_import.html.haml:18
 #: app/views/users/_form.html.haml:2 app/views/users/_edit.html.haml:3
 #: app/views/users/_new.html.haml:3 app/views/contacts/index.html.haml:15
-#: app/views/other_guests/index.html.haml:11
+#: app/views/other_guests/index.html.haml:13
 msgid "Name"
 msgstr ""
 
@@ -1173,6 +1169,7 @@ msgstr ""
 
 #: app/views/rsvps/_edit.html.haml:14
 #: app/views/guests/_guests_header.html.haml:17
+#: app/views/other_guests/index.html.haml:17
 msgid "Number of Guests"
 msgstr ""
 
@@ -1373,7 +1370,7 @@ msgstr ""
 msgid "Profile | Eventify"
 msgstr ""
 
-#: app/views/rsvps/_new.html.haml:2 app/views/other_guests/index.html.haml:14
+#: app/views/rsvps/_new.html.haml:2 app/views/other_guests/index.html.haml:16
 msgid "RSVP"
 msgstr ""
 
@@ -1458,12 +1455,12 @@ msgstr ""
 msgid "Reminders | Eventify"
 msgstr ""
 
-#: app/views/events/_form.html.haml:51
-msgid "Remove"
-msgstr ""
-
 #: app/views/events/_form.html.haml:27
 msgid "Remove End date &amp; Time"
+msgstr ""
+
+#: app/views/events/_form.html.haml:46
+msgid "Remove Map"
 msgstr ""
 
 #: vendor/plugins/astrails-user-auth/app/helpers/passwords_helper.rb:16
@@ -1614,7 +1611,7 @@ msgid ""
 "list before changing the name"
 msgstr ""
 
-#: app/views/events/_event_form.html.haml:39
+#: app/views/events/_event_form.html.haml:40
 msgid ""
 "Some of your text doesn't fit. Try shortening your text or reducing the font "
 "size."
@@ -1791,7 +1788,7 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
-#: app/views/events/_form.html.haml:64
+#: app/views/events/_form.html.haml:59
 msgid "You didn't save the event."
 msgstr ""
 

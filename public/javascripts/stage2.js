@@ -483,6 +483,6 @@ jQuery(document).ready(function(){
   jQuery(".overflow_warning").draggable({
     opacity: 0.7,
     appendTo: 'body',
-    zIndex: 200,
+    zIndex: 200
   });
 });
