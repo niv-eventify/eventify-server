@@ -21,7 +21,7 @@
 
 set :cron_log, "#{RAILS_ROOT}/log/cron.log"
 
-every 4.minutes do
+every 15.minutes do
   runner "Reminder.send_reminders"
 end
 
