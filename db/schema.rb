@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101220060710) do
+ActiveRecord::Schema.define(:version => 20101223113223) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -376,6 +376,15 @@ ActiveRecord::Schema.define(:version => 20101220060710) do
   end
 
   add_index "translation_texts", ["translation_key_id", "locale"], :name => "index_translation_texts_on_translation_key_id_and_locale", :unique => true
+
+  create_table "uploaded_maps", :force => true do |t|
+    t.string   "map_file_name"
+    t.string   "map_content_type"
+    t.integer  "map_file_size"
+    t.datetime "map_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "uploaded_pictures", :force => true do |t|
     t.integer  "event_id"
