@@ -1276,3 +1276,8 @@ h2.weak {
   max-height: 374px;
   border: none;
 }
+#map_holder.preview{
+  width: 561px;
+  height: 203px;
+  padding-top: 171px;
+}

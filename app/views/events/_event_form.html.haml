@@ -37,4 +37,5 @@
         != text_field_tag :event_type
     != render(:partial => "selected_design")
     != render(:partial => "map_holder")
+  %iframe#upload_frame{:name => "upload_frame", :style => "width:1px;height:1px;border:0px", :src => "about:blank"}
 .overflow_warning= _("Some of your text doesn't fit. Try shortening your text or reducing the font size.")

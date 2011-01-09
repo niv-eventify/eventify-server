@@ -33,19 +33,22 @@
 - f.inputs :class => "location_section" do
   - event_text_input(f, :location_name, _("Location"), {}, "#{_('ex. The Neighberhood Bar')}")
   - event_text_input(f, :location_address, _("Address"), {}, "#{_('ex. 5th Avenue, Manhattan')}") do
+    != link_to(_("find address"), "http://maps.google.com/?hl=he", :target => "_blank", :id => "find_address", :alert => _("You must fill out the address field in order to find a map"), :ex_text => _("ex. 5th Avenue, Manhattan"), :class => "query_address_link")
     .f-row
       != link_to_function _("Add Map"), "jQuery(this).toggle();jQuery('#hide_map').toggle();jQuery('.map-section').toggle()", :class => "add-link", :id => "show_map"
       != link_to_function _("Hide Map"), "jQuery(this).toggle();jQuery('#show_map').toggle();jQuery('.map-section').toggle()", :class => "remove-link", :id => "hide_map", :style => "display:none"
 - f.inputs :class => "map-section", :style => "display:none" do
-  != link_to(_("find address"), "http://maps.google.com/?hl=he", :target => "_blank", :id => "find_address", :alert => _("You must fill out the address field in order to find a map"), :ex_text => _("ex. 5th Avenue, Manhattan"), :class => "query_address_link")
   - event_text_input(f, :map_link, _("Map Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"}) do
     = _("or")
-  != f.input(:map, :as => :file, :label => _("Map Image") , :after_html => _("2MB Max"))
-  - if f.object.has_map? || !@map.blank?
-    .f-row.current_map_iamges
-      != link_to_remote _("Remove Map"), :url => event_event_maps_path(f.object), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_iamges').remove()", :after => "jQuery('#event_map_link').val('');jQuery('#map_holder').html('');jQuery('#map_box').hide();"
+    %br
+  != link_to _("Upload Map"), new_uploaded_map_path(:event => @event), :class => "nyroModal"
+  .f-row.current_map_images
+    != link_to_remote _("Remove Map"), :url => event_event_maps_path(:event_id => @event.id || 0), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_images').hide()", :after => "jQuery('#map_holder').html('');jQuery('#map_box').hide();stage2.previewMap();"
 - if f.object.has_map? || !@map.blank?
   != javascript_tag("jQuery('#show_map').click()")
+- else
+  != javascript_tag("jQuery('.current_map_images').hide()")
+
 %ol
   %li.boolean.optional.allow_seeing_other_guests.auto_width
     != f.check_box :allow_seeing_other_guests

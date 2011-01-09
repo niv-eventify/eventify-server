@@ -2,4 +2,4 @@
   .holder
     .frame
       .image-h#map_holder
-        != image_tag @event.map.url unless @event.map.blank? || @event.map.url.blank?
+        != render(:partial => "map_image", :locals => {:map => @map || @event.map})

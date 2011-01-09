@@ -41,7 +41,7 @@
                 = _("Next")
               .holder
                 %ul
-                  != render(:partial => "uploaded_pictures/uploaded_pictures")
+                  != render(:partial => "uploaded_pictures/uploaded_pictures", :locals => {:event => @event})
               %a{:class => "prev-g-btn", :href => "#"}
                 = _("Prev")
             %p
@@ -51,3 +51,4 @@
     != render(:partial => "events/selected_design")
 
 #delete_updates_me{:style => "display:none"}
+%iframe#upload_frame{:name => "upload_frame", :style => "width:1px;height:1px;border:0px", :src => "about:blank"}

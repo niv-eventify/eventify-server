@@ -41,6 +41,7 @@ class EventsController < InheritedResources::Base
       @event.language = current_locale
 
       set_garden_data unless params[:garden_id].blank?
+      set_uploaded_map
 
       create! do |success, failure|
         success.html do
@@ -78,6 +79,8 @@ class EventsController < InheritedResources::Base
       @map = garden.map unless garden.map.url.blank?
       @garden = garden
     end
+    set_uploaded_map
+
     new!
   end
 
@@ -174,5 +177,10 @@ protected
     garden = Garden.find(params[:garden_id])
     @event.map = garden.map unless garden.map.url.blank?
     @host = Host.new(:user => @event.user, :name => garden.name, :email => garden.user.email, :garden => garden)
+  end
+
+  def set_uploaded_map
+    uploaded_map = UploadedMap.find_by_id(session[:uploaded_map_id])
+    @event.map = @map = uploaded_map.map unless uploaded_map.blank?
   end
 end

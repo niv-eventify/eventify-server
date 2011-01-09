@@ -54,6 +54,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :takings
   map.resources :uploaded_pictures
+  map.resources :uploaded_maps
   map.resources :designs do |design|
     design.resources :windows
   end

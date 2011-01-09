@@ -1,11 +1,17 @@
 class EventMapsController < InheritedResources::Base
-  before_filter :require_user
 
   def destroy
-    event_by_user_or_host
-    @event.map = nil
-    @event.map_link = nil
-    @event.save
+    if params[:event_id].to_i == 0
+      map = UploadedMap.find_by_id(session[:uploaded_map_id])
+      map.destroy unless map.blank?
+      session[:uploaded_map_id] = nil
+    else
+      require_user
+      event_by_user_or_host
+      @event.map = nil
+      @event.map_link = nil
+      @event.save
+    end
     render :nothing => true
   end
 end

@@ -17,7 +17,7 @@ class UploadedPicturesController < InheritedResources::Base
 
   def create
     @uploaded_picture = UploadedPicture.new(params[:uploaded_picture])
-    @uploaded_picture.event_id = params[:uploaded_picture][:event_id]
+    @uploaded_picture.event_id = params[:event_id]
     respond_to do |format|
       if @uploaded_picture.save
         if @uploaded_picture.event_id.to_i == 0
