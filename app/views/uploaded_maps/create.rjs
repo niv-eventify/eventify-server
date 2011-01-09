@@ -1,0 +1,4 @@
+page << 'alert("bad")'
+page << 'jQuery("#map_holder").removeClass("preview")'
+page.replace_html("#map_holder", :partial => 'events/map_image', :locals => {:map => @map})
+page << 'jQuery("#map_box").hide()' unless !@map.blank? && !@map.url.blank?

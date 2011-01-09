@@ -1,0 +1,3 @@
+page << 'jQuery("#map_holder").removeClass("preview")'
+page << 'jQuery(".current_map_images").show()'
+page.replace_html("#map_holder", :partial => 'events/map_image', :locals => {:map => @map})

@@ -1,0 +1,14 @@
+#upload_file.lb-popup.lb-popup-1
+  .c
+    .popup-heading
+      %strong= _("Upload Picture")
+    - form_for(@uploaded_map, :url => uploaded_maps_path(:format => 'js'), :html => {:multipart => true, :target => 'upload_frame', :class => "download-form"}) do |f|
+      = f.object.errors.on(:base)
+      != render(:partial => "uploaded_pictures/upload_form", :locals => {:f => f})
+:javascript
+  jQuery("#new_uploaded_map").submit(function(){
+    jQuery.nyroModalRemove();
+    jQuery("body").css("cursor", "default");
+    jQuery("#map_holder").html("<img src='/images/ajax-loader.gif' class='loader'></img>").addClass("preview");
+    jQuery('#map_box').show();
+  });

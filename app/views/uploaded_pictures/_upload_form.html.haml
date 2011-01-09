@@ -1,0 +1,17 @@
+!= hidden_field_tag :event_id, @event
+%fieldset
+  .brown-box
+    .brown-box-holder
+      .f-row
+        %label{:for => "file"}
+          = _("Select File")
+        %input#file.file{:type => "file", :size => "38", :name => "uploaded_picture[pic]"}
+      %p
+        = _("File should be less than 4MB")
+  .f-row
+    %input#certify.input-check{:type => "checkbox"}
+    %label{:for => "certify"}
+      = _("The picture I uploaded does not violate any copyright laws")
+.popup-btns
+  != link_to_function _("Upload"), "if(!jQuery('#certify').is(':checked')){alert('#{_("you have to agree to the terms in order to upload a picture")}');return false;}var ext=jQuery(':file').val().split('.').pop().toLowerCase();if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1){alert('#{_("Please upload a valid image file")}');return false;}jQuery('body').css('cursor', 'wait');jQuery(this).parents('form').submit();", :class => "btn"
+  != link_to_function _("Cancel"), "jQuery.nyroModalRemove();", :class => "btn"
