@@ -10,6 +10,11 @@ class UploadedMapsController < InheritedResources::Base
   
   def create
     if params[:event_id].to_i == 0
+      if !session[:uploaded_map_id].blank?
+        um = UploadedMap.find_by_id(session[:uploaded_map_id])
+        um.destroy unless um.blank?
+        session[:uploaded_map_id] = nil
+      end
       @uploaded_map = UploadedMap.new(:map => params[:uploaded_picture][:pic])
       if status = @uploaded_map.save
         session[:uploaded_map_id] = @uploaded_map.id
