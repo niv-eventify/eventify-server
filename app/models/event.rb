@@ -241,7 +241,11 @@ class Event < ActiveRecord::Base
   end
 
   def has_map?
-    !map_link.blank? || (map && !map.url.blank?)
+    !map_link.blank? || has_image_map?
+  end
+
+  def has_image_map?
+    map && !map.url.blank?
   end
 
   def should_resend_sms?

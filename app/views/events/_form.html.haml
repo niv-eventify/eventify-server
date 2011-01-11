@@ -46,7 +46,7 @@
     != link_to_remote _("Remove Map"), :url => event_event_maps_path(:event_id => @event.id || 0), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_images').hide()", :after => "jQuery('#map_holder').html('');jQuery('#map_box').hide();stage2.previewMap();"
 - if f.object.has_map? || !@map.blank?
   != javascript_tag("jQuery('#show_map').click()")
-- else
+- if !f.object.has_image_map?
   != javascript_tag("jQuery('.current_map_images').hide()")
 
 %ol

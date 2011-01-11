@@ -9,7 +9,6 @@ class EventMapsController < InheritedResources::Base
       require_user
       event_by_user_or_host
       @event.map = nil
-      @event.map_link = nil
       @event.save
     end
     render :nothing => true
