@@ -10,5 +10,5 @@ class UploadedMap < ActiveRecord::Base
     },
     :url => ':s3_domain_url'
   attr_accessible :map
-  validates_attachment_size :map, :less_than => 2.megabytes
+  validates_attachment_size :map, :less_than => 2.megabytes, :message => _("File size should be less than %{max_file_size}MB") % {:max_file_size => 2}
 end

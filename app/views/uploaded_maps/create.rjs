@@ -1,4 +1,7 @@
-page << "alert('#{_("An error occurred. Please try uploading your map again.")}')"
+page << "alert('#{@errors}')"
 page << 'jQuery("#map_holder").removeClass("preview")'
 page.replace_html("#map_holder", :partial => 'events/map_image', :locals => {:map => @map})
-page << 'jQuery("#map_box").hide()' unless !@map.blank? && !@map.url.blank?
+if @map.blank? || @map.url.blank?
+  page << 'jQuery("#map_box").hide()'
+  page << 'jQuery(".current_map_images").hide()'
+end

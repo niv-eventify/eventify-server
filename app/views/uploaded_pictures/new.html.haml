@@ -4,4 +4,4 @@
       %strong= _("Upload Picture")
     - form_for(@uploaded_picture, :url => uploaded_pictures_path(:format => 'js'), :html => {:multipart => true, :target => 'upload_frame', :class => "download-form"}) do |f|
       = f.object.errors.on(:base)
-      != render(:partial => "upload_form", :locals => {:f => f})
+      != render(:partial => "upload_form", :locals => {:f => f, :max_file_size => "4"})

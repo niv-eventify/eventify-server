@@ -7,7 +7,7 @@
           = _("Select File")
         %input#file.file{:type => "file", :size => "38", :name => "uploaded_picture[pic]"}
       %p
-        = _("File should be less than 4MB")
+        = _("File size should be less than %{max_file_size}MB") % {:max_file_size => max_file_size}
   .f-row
     %input#certify.input-check{:type => "checkbox"}
     %label{:for => "certify"}

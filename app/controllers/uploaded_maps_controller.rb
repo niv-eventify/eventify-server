@@ -19,17 +19,22 @@ class UploadedMapsController < InheritedResources::Base
       if status = @uploaded_map.save
         session[:uploaded_map_id] = @uploaded_map.id
         @map = @uploaded_map.map
+      else
+        @errors = @uploaded_map.errors.on(:map)
       end
     else
       @event = Event.find(params[:event_id])
       @event.map = params[:uploaded_picture][:pic]
       if status = @event.save
         @map = @event.map
+      else
+        @errors = @event.errors.on(:map)
       end
     end
     if status
       responds_to_parent{render :show}
     else
+      @errors ||= _("An error occurred. Please try uploading your map again or contact support at support@eventify.co.il")
       responds_to_parent{render :create}
     end
   end
