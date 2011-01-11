@@ -1,13 +1,13 @@
 class UploadedMapsController < InheritedResources::Base
-  actions :new, :create, :show
-  respond_to :html, :except => :create
+  actions :new, :create
+  respond_to :html, :only => :new
   respond_to :js, :only => :create
   def new
     @event = params[:event]
     @uploaded_map = UploadedMap.new()
     render :new, :layout => false
   end
-  
+
   def create
     if params[:event_id].to_i == 0
       if !session[:uploaded_map_id].blank?
