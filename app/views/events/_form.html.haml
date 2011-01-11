@@ -41,7 +41,7 @@
   - event_text_input(f, :map_link, _("Map Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"}) do
     = _("or")
     %br
-  != link_to _("Upload Map"), new_uploaded_map_path(:event => @event), :class => "nyroModal"
+  != link_to _("Upload Map"), new_uploaded_map_path(:event => @event), :class => "nyroModal query_address_link"
   .f-row.current_map_images
     != link_to_remote _("Remove Map"), :url => event_event_maps_path(:event_id => @event.id || 0), :method => :delete, :confirm => _("Are you sure?"), :before => "jQuery('.current_map_images').hide()", :after => "jQuery('#map_holder').html('');jQuery('#map_box').hide();stage2.previewMap();"
 - if f.object.has_map? || !@map.blank?
