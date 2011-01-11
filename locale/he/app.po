@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2011-01-04 12:25+0200\n"
+"POT-Creation-Date: 2011-01-11 12:11+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,21 +53,21 @@ msgstr ""
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
-#: app/models/event.rb:319
+#: app/models/event.rb:323
 msgid "%{event_name} on %{date} at %{time}%{location}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:316
+#: app/models/event.rb:320
 msgid ""
 "%{event_name} on %{date} at %{time}%{location}. Invite sent to your email. %"
 "{host_name}"
 msgstr ""
 
-#: app/models/event.rb:322
+#: app/models/event.rb:326
 msgid "%{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:358
+#: app/models/event.rb:362
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
@@ -105,10 +105,6 @@ msgstr ""
 
 #: app/helpers/events_helper.rb:115
 msgid "(sent)"
-msgstr ""
-
-#: app/views/events/_form.html.haml:43
-msgid "2MB Max"
 msgstr ""
 
 #: app/models/contact_importer.rb:54 app/models/contact_importer.rb:67
@@ -157,7 +153,7 @@ msgstr ""
 msgid "Add End date &amp; Time"
 msgstr ""
 
-#: app/views/events/_form.html.haml:37
+#: app/views/events/_form.html.haml:38
 msgid "Add Map"
 msgstr ""
 
@@ -234,6 +230,12 @@ msgstr ""
 
 #: app/views/contact_importers/show.html.haml:18
 msgid "An error occured during importing contacts from %{name}"
+msgstr ""
+
+#: app/controllers/uploaded_maps_controller.rb:37
+msgid ""
+"An error occurred. Please try uploading your map again or contact support at "
+"support@eventify.co.il"
 msgstr ""
 
 #: app/views/reminders/_index.html.haml:22
@@ -314,7 +316,7 @@ msgstr ""
 #: app/views/guest_importers/_csv.html.haml:18
 #: app/views/guest_importers/_import.html.haml:28
 #: app/views/guest_importers/_email.html.haml:31
-#: app/views/uploaded_pictures/new.html.haml:23
+#: app/views/uploaded_pictures/_upload_form.html.haml:17
 #: app/views/users/_edit.html.haml:12
 #: app/views/contact_importers/_edit.html.haml:13
 #: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
@@ -345,7 +347,7 @@ msgstr ""
 msgid "Cancelled events"
 msgstr ""
 
-#: app/models/event.rb:463
+#: app/models/event.rb:467
 msgid "Cancelled: %{event_name}"
 msgstr ""
 
@@ -380,13 +382,13 @@ msgstr ""
 msgid "Change design"
 msgstr ""
 
-#: app/models/event.rb:284
+#: app/models/event.rb:288
 msgid ""
 "Changes: %{event_name} on %{date} at %{time}%{location}. Invite sent to your "
 "email. %{host_name}"
 msgstr ""
 
-#: app/models/event.rb:287
+#: app/models/event.rb:291
 msgid "Changes: %{event_name} on %{date} at %{time}. %{host_name}"
 msgstr ""
 
@@ -624,7 +626,7 @@ msgstr ""
 msgid "Event Summary Page"
 msgstr ""
 
-#: app/controllers/events_controller.rb:109
+#: app/controllers/events_controller.rb:112
 msgid "Event canceled."
 msgstr ""
 
@@ -664,11 +666,11 @@ msgstr ""
 msgid "Event summary"
 msgstr ""
 
-#: app/controllers/events_controller.rb:89
+#: app/controllers/events_controller.rb:92
 msgid "Event updated"
 msgstr ""
 
-#: app/controllers/events_controller.rb:89
+#: app/controllers/events_controller.rb:92
 msgid "Event updated, but some reminders disabled"
 msgstr ""
 
@@ -718,8 +720,10 @@ msgstr ""
 msgid "FAQ | Eventify"
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:16
-msgid "File should be less than 4MB"
+#: app/models/uploaded_picture.rb:17 app/models/uploaded_map.rb:13
+#: app/models/event.rb:69
+#: app/views/uploaded_pictures/_upload_form.html.haml:10
+msgid "File size should be less than %{max_file_size}MB"
 msgstr ""
 
 #: app/views/guests/index.html.haml:46
@@ -768,7 +772,7 @@ msgstr ""
 msgid "Guests"
 msgstr ""
 
-#: app/views/events/_form.html.haml:52
+#: app/views/events/_form.html.haml:55
 msgid "Guests can see other attendees"
 msgstr ""
 
@@ -806,11 +810,11 @@ msgstr ""
 msgid "Here your can manage contracts, and import them from your email!"
 msgstr ""
 
-#: app/models/event.rb:457
+#: app/models/event.rb:461
 msgid "Hi,%{event_name} has been cancelled.%{host_name}"
 msgstr ""
 
-#: app/views/events/_form.html.haml:38
+#: app/views/events/_form.html.haml:39
 msgid "Hide Map"
 msgstr ""
 
@@ -902,7 +906,7 @@ msgid ""
 "In your page you can track the events you’ve created, and create new ones!"
 msgstr ""
 
-#: app/controllers/events_controller.rb:121
+#: app/controllers/events_controller.rb:124
 #: app/views/invitations/edit.html.haml:16
 #: vendor/plugins/astrails-user-auth/app/controllers/passwords_controller.rb:19
 msgid ""
@@ -1000,10 +1004,6 @@ msgstr ""
 #: app/views/events/_toolbar_preview.html.haml:7
 #: app/views/rsvps/_toolbar.html.haml:8 app/views/rsvps/_toolbar.html.haml:10
 msgid "Map"
-msgstr ""
-
-#: app/views/events/_form.html.haml:43
-msgid "Map Image"
 msgstr ""
 
 #: app/views/events/_form.html.haml:41
@@ -1308,7 +1308,7 @@ msgstr ""
 msgid "Please upload a CSV file"
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:22
+#: app/views/uploaded_pictures/_upload_form.html.haml:16
 msgid "Please upload a valid image file"
 msgstr ""
 
@@ -1436,11 +1436,11 @@ msgstr ""
 msgid "Reminder: %{event_name}"
 msgstr ""
 
-#: app/models/event.rb:300
+#: app/models/event.rb:304
 msgid "Reminder:%{event_name} on %{date} at %{time}%{location}.%{host_name}"
 msgstr ""
 
-#: app/models/event.rb:303
+#: app/models/event.rb:307
 msgid "Reminder:%{event_name} on %{date} at %{time}.%{host_name}"
 msgstr ""
 
@@ -1518,7 +1518,7 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:13
+#: app/views/uploaded_pictures/_upload_form.html.haml:7
 msgid "Select File"
 msgstr ""
 
@@ -1612,13 +1612,13 @@ msgid ""
 "list before changing the name"
 msgstr ""
 
-#: app/views/events/_event_form.html.haml:40
+#: app/views/events/_event_form.html.haml:41
 msgid ""
 "Some of your text doesn't fit. Try shortening your text or reducing the font "
 "size."
 msgstr ""
 
-#: app/models/event.rb:453
+#: app/models/event.rb:457
 msgid "Sorry, %{event_name} has been cancelled"
 msgstr ""
 
@@ -1662,7 +1662,7 @@ msgstr ""
 msgid "The newly approved invitees are:"
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:20
+#: app/views/uploaded_pictures/_upload_form.html.haml:14
 msgid "The picture I uploaded does not violate any copyright laws"
 msgstr ""
 
@@ -1706,12 +1706,17 @@ msgstr ""
 msgid "Updating RSVP status, please wait..."
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:22
+#: app/views/uploaded_pictures/_upload_form.html.haml:16
 msgid "Upload"
+msgstr ""
+
+#: app/views/events/_form.html.haml:44
+msgid "Upload Map"
 msgstr ""
 
 #: app/views/uploaded_pictures/new.html.haml:4
 #: app/views/uploaded_pictures/_empty_thumbnail.html.haml:5
+#: app/views/uploaded_maps/new.html.haml:4
 msgid "Upload Picture"
 msgstr ""
 
@@ -1765,7 +1770,7 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: app/controllers/events_controller.rb:119
+#: app/controllers/events_controller.rb:122
 msgid "You already have an account, please login with your email and password."
 msgstr ""
 
@@ -1789,7 +1794,7 @@ msgstr ""
 msgid "You can change your name and password here."
 msgstr ""
 
-#: app/views/events/_form.html.haml:59
+#: app/views/events/_form.html.haml:62
 msgid "You didn't save the event."
 msgstr ""
 
@@ -1813,7 +1818,7 @@ msgstr ""
 msgid "You must be logged out to access this page"
 msgstr ""
 
-#: app/views/events/_form.html.haml:40
+#: app/views/events/_form.html.haml:36
 msgid "You must fill out the address field in order to find a map"
 msgstr ""
 
@@ -2201,7 +2206,7 @@ msgstr ""
 msgid "end date should be in a future"
 msgstr ""
 
-#: app/views/events/_form.html.haml:35 app/views/events/_form.html.haml:40
+#: app/views/events/_form.html.haml:35 app/views/events/_form.html.haml:36
 msgid "ex. 5th Avenue, Manhattan"
 msgstr ""
 
@@ -2227,7 +2232,7 @@ msgstr ""
 msgid "ex. john.doe@gmail.com"
 msgstr ""
 
-#: app/helpers/rsvps_helper.rb:74 app/views/events/_form.html.haml:40
+#: app/helpers/rsvps_helper.rb:74 app/views/events/_form.html.haml:36
 msgid "find address"
 msgstr ""
 
@@ -2469,6 +2474,6 @@ msgstr ""
 msgid "to Calendar"
 msgstr ""
 
-#: app/views/uploaded_pictures/new.html.haml:22
+#: app/views/uploaded_pictures/_upload_form.html.haml:16
 msgid "you have to agree to the terms in order to upload a picture"
 msgstr ""
