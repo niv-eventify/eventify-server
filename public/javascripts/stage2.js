@@ -327,6 +327,10 @@
       jQuery("#map_box").hide();
       return;
     }
+    if(link.indexOf("http") != 0) {
+      link = "http://" + link;
+      jQuery("#event_map_link").val(link)
+    }
     jQuery("#map_holder").html("<iframe src='" + link + "'></iframe>");
     jQuery("#map_box").show();
   }
