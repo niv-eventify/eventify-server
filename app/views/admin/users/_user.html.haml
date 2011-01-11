@@ -5,7 +5,7 @@
     - if user.is_admin?
       (admin)
   %td= user.email
-  %td= !user.activated_at.blank? ? "" : "true"
+  %td= user.activated_at.blank? ? "" : "true"
   %td= Guest.find_by_sql(["SELECT events.user_id from guests JOIN events ON guests.event_id = events.id where guests.email = ? AND guests.created_at < ?", user.email, user.created_at]).length > 0 ? "true" : ""
   %td= user.events.count
   %td= user.payments.paid.sum(:amount).format_cents
