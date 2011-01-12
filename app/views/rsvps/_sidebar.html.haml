@@ -12,6 +12,8 @@
         .side-box-row.side-box-row-alt
           %h3= _("Export to your calendar:")
           != render(:partial => 'shared/export_links', :locals => {:lnk => :rsvp_ical_path, :event => resource.email_token, :email => false})
+        .side-box-row.side-box-row-alt
+          %iframe{:src => "http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.eventify.co.il&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=21", :scrolling => "no", :frameborder => "0", :style => "border:none; overflow:hidden; width:90px; height:21px;", :allowTransparency => "true"}
   - unless resource.event.things.count.zero?
     != render(:partial => 'takings/edit')
   != link_to_banner
