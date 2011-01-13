@@ -1281,3 +1281,9 @@ h2.weak {
   height: 203px;
   padding-top: 171px;
 }
+div.overflow_visible {
+  overflow: visible !important;
+}
+#like_holder{
+  text-align: left;
+}
