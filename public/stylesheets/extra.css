@@ -1289,3 +1289,6 @@ div.overflow_visible {
 #like_holder{
   text-align: left;
 }
+.hebrew .box .text-h p strong{
+  font-size: 1.2em;
+}
