@@ -186,12 +186,14 @@ div.cmf-skinned-text {
   position: absolute;
   overflow-y: hidden;
   z-index: 100;
+  white-space: nowrap;
 }
 .msg-holder {
   text-align: center;
   position: absolute;
   overflow-y: hidden;
   z-index: 100;
+  white-space: nowrap;
 }
 .msg-holder .title, .title-holder .title{
   margin: 0;

@@ -99,7 +99,8 @@
 .title_holder, .msg_holder {
 	position: absolute;
 	z-index: 100;
-    overflow-y: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
 }
 .hebrew .title_holder, .hebrew .msg_holder {
 	direction: rtl;
