@@ -9,6 +9,7 @@
       %meta{ :name => "description", :content => @meta_description}
     - if @meta_keywords
       %meta{ :name => "keywords", :content => @meta_keywords || ""}
+    %meta{ :property => "fb:app_id", :content => "139096766151419"}
     %title!= @page_title || h(controller.action_name)
     != render(:partial => "layouts/html_head")
     - unless request.ssl?
