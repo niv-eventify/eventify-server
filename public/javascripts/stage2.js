@@ -490,9 +490,9 @@ jQuery(document).ready(function(){
     zIndex: 200
   });
   jQuery("input,textarea").focus(function(){
-    pageTracker._trackEvent('Forms', "New Event", this.name, "focus");
+    _gaq.push(['_trackEvent', 'Forms', 'New Event', this.name, 'focus']);
   });
   jQuery("input,textarea").change(function(){
-    pageTracker._trackEvent('Forms', "New Event", this.name, "change");
+    _gaq.push(['_trackEvent', 'Forms', 'New Event', this.name, 'change']);
   });
 });
