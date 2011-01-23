@@ -44,11 +44,15 @@
           %h3= _("Add manually:")
           %p.rsvp-filter
             %strong= _("Filter by RSVP:")
-            != link_to _("All"), event_guests_path(@event), :class => scope_class
             != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
+            %span= " / "
             != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
+            %span= " / "
             != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
+            %span= " / "
             != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
+            %span= " / "
+            != link_to _("All"), event_guests_path(@event), :class => scope_class
 
           %table#guests.info-table
             != render(:partial => "guests_header", :locals => {:check_all => true})
