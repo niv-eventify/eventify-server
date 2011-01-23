@@ -489,4 +489,10 @@ jQuery(document).ready(function(){
     appendTo: 'body',
     zIndex: 200
   });
+  jQuery("input,textarea").focus(function(){
+    pageTracker._trackEvent('Forms', "New Event", this.name, "focus");
+  });
+  jQuery("input,textarea").change(function(){
+    pageTracker._trackEvent('Forms', "New Event", this.name, "change");
+  });
 });
