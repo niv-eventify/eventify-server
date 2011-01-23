@@ -489,10 +489,10 @@ jQuery(document).ready(function(){
     appendTo: 'body',
     zIndex: 200
   });
-  jQuery("input,textarea").focus(function(){
-    _gaq.push(['_trackEvent', 'New Event', this.name, 'focus']);
+  jQuery("input, textarea, select").focus(function(){
+    _gaq.push(['_trackEvent', 'Event Form', this.name + '_focus', jQuery(this).val()]);
   });
-  jQuery("input,textarea").change(function(){
-    _gaq.push(['_trackEvent', 'New Event', this.name, 'change']);
+  jQuery("input, textarea, select").change(function(){
+    _gaq.push(['_trackEvent', 'Event Form', this.name + '_change', jQuery(this).val()]);
   });
 });
