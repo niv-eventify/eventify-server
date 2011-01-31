@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2011-01-11 12:11+0200\n"
+"POT-Creation-Date: 2011-01-31 17:27+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,7 +71,7 @@ msgstr ""
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:83
+#: app/views/summaries/show.html.haml:85
 msgid "%{percent} %"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Advance Options"
 msgstr ""
 
-#: app/views/guests/index.html.haml:47
+#: app/views/guests/index.html.haml:61
 msgid "All"
 msgstr ""
 
@@ -255,7 +255,7 @@ msgstr ""
 #: app/views/events/_form.html.haml:46
 #: app/views/events/_actions_menu.html.haml:5
 #: app/views/invitations/edit.html.haml:5
-#: app/views/summaries/show.html.haml:123
+#: app/views/summaries/show.html.haml:125
 #: app/views/reminders/_reminder.html.haml:10
 #: app/views/contacts/_contact.html.haml:6
 #: app/views/admin/users/_user.html.haml:13
@@ -290,7 +290,7 @@ msgstr ""
 msgid "Billing address - missing zip code"
 msgstr ""
 
-#: app/views/guests/index.html.haml:51 app/views/summaries/show.html.haml:57
+#: app/views/guests/index.html.haml:57 app/views/summaries/show.html.haml:59
 msgid "Bounced emails"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgid "Cancel Event | Eventify"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:5
-#: app/views/summaries/show.html.haml:123
+#: app/views/summaries/show.html.haml:125
 msgid "Cancel event"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgid ""
 "sms and facebook!"
 msgstr ""
 
-#: app/views/welcome/_container123.html.haml:13
+#: app/views/welcome/_container123.html.haml:14
 msgid "Choose an invite"
 msgstr ""
 
@@ -605,7 +605,7 @@ msgstr ""
 msgid "Emails"
 msgstr ""
 
-#: app/views/welcome/_container123.html.haml:21
+#: app/views/welcome/_container123.html.haml:23
 msgid "Enter event details"
 msgstr ""
 
@@ -634,7 +634,7 @@ msgstr ""
 msgid "Event cancelled - no guests to notify or guests are already notified."
 msgstr ""
 
-#: app/views/summaries/show.html.haml:126
+#: app/views/summaries/show.html.haml:128
 msgid "Event cancelled:"
 msgstr ""
 
@@ -747,11 +747,11 @@ msgstr ""
 msgid "Forgot password?"
 msgstr ""
 
-#: app/views/welcome/_container123.html.haml:14
+#: app/views/welcome/_container123.html.haml:15
 msgid "From our fabelous gallery or upload your own pic"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:121
+#: app/views/summaries/show.html.haml:123
 msgid "Full Guests List"
 msgstr ""
 
@@ -767,8 +767,8 @@ msgstr ""
 msgid "Guest List"
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:23 app/views/payments/new.html.haml:37
-#: app/views/payments/new.html.haml:79 app/views/summaries/show.html.haml:60
+#: app/views/rsvps/show_more.html.haml:24 app/views/payments/new.html.haml:37
+#: app/views/payments/new.html.haml:79 app/views/summaries/show.html.haml:62
 msgid "Guests"
 msgstr ""
 
@@ -777,11 +777,11 @@ msgid "Guests can see other attendees"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:10
-#: app/views/summaries/show.html.haml:130
+#: app/views/summaries/show.html.haml:132
 msgid "Guests notified"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:52
+#: app/views/summaries/show.html.haml:54
 msgid "Guests summary"
 msgstr ""
 
@@ -842,7 +842,7 @@ msgstr ""
 msgid "ID:"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:132
+#: app/views/summaries/show.html.haml:134
 #: app/views/pages/no_invitation_en.html.haml:1
 #: app/views/pages/no_invitation_en.html.haml:4
 msgid "If some of your guests didn't recieve the invitation"
@@ -956,7 +956,7 @@ msgstr ""
 msgid "Invitations | Eventify"
 msgstr ""
 
-#: app/views/welcome/_container123.html.haml:29
+#: app/views/welcome/_container123.html.haml:32
 msgid "Invite Friends!"
 msgstr ""
 
@@ -980,7 +980,7 @@ msgstr ""
 msgid "Loading CSV file, please wait..."
 msgstr ""
 
-#: app/views/rsvps/show_more.html.haml:25
+#: app/views/rsvps/show_more.html.haml:26
 msgid "Loading guests..."
 msgstr ""
 
@@ -1011,7 +1011,7 @@ msgid "Map Link"
 msgstr ""
 
 #: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:5
-#: app/views/guests/index.html.haml:50
+#: app/views/guests/index.html.haml:51
 msgid "May Be"
 msgstr ""
 
@@ -1128,11 +1128,15 @@ msgstr ""
 msgid "No guests"
 msgstr ""
 
+#: app/views/guests/index.html.haml:59
+msgid "No invitation sent"
+msgstr ""
+
 #: app/views/reminders/_index.html.haml:10
 msgid "No reminders defined yet"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:85
+#: app/views/summaries/show.html.haml:87
 msgid "No things to bring"
 msgstr ""
 
@@ -1140,12 +1144,12 @@ msgstr ""
 msgid "No user was found with that email address"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:73
+#: app/views/guests/index.html.haml:55 app/views/summaries/show.html.haml:75
 #: app/views/shared/_rsvp_tabs.html.haml:8
 msgid "Not Opened Invitation"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:71
+#: app/views/guests/index.html.haml:53 app/views/summaries/show.html.haml:73
 #: app/views/shared/_rsvp_tabs.html.haml:7
 #: app/views/shared/_rsvp_tabs.html.haml:10
 msgid "Not responded"
@@ -1160,7 +1164,7 @@ msgid "Notifications are being sent."
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:8
-#: app/views/summaries/show.html.haml:128
+#: app/views/summaries/show.html.haml:130
 msgid "Notify guests"
 msgstr ""
 
@@ -1351,11 +1355,11 @@ msgstr ""
 msgid "Pricing | Eventify"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:94
+#: app/views/summaries/show.html.haml:96
 msgid "Pring Guests List"
 msgstr ""
 
-#: app/views/rsvps/_info.html.haml:12 app/views/summaries/show.html.haml:96
+#: app/views/rsvps/_info.html.haml:12 app/views/summaries/show.html.haml:98
 msgid "Print Invitation"
 msgstr ""
 
@@ -1375,12 +1379,12 @@ msgstr ""
 msgid "RSVP"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:67
+#: app/views/summaries/show.html.haml:69
 #: app/views/shared/_rsvp_tabs.html.haml:4
 msgid "RSVP may be"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:69
+#: app/views/summaries/show.html.haml:71
 #: app/views/shared/_rsvp_tabs.html.haml:5
 msgid "RSVP no"
 msgstr ""
@@ -1401,7 +1405,7 @@ msgstr ""
 msgid "RSVP summary|When a guest updates RSVP"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:65
+#: app/views/summaries/show.html.haml:67
 #: app/views/shared/_rsvp_tabs.html.haml:3
 msgid "RSVP yes"
 msgstr ""
@@ -1526,7 +1530,7 @@ msgstr ""
 msgid "Select None"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:82
+#: app/views/summaries/show.html.haml:84
 msgid "Selected"
 msgstr ""
 
@@ -1549,7 +1553,7 @@ msgstr ""
 msgid "Send Invitations | Eventify"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:76
+#: app/views/summaries/show.html.haml:78
 msgid "Send Message to Guests"
 msgstr ""
 
@@ -1666,7 +1670,7 @@ msgstr ""
 msgid "The picture I uploaded does not violate any copyright laws"
 msgstr ""
 
-#: app/views/events/show.html.haml:21 app/views/summaries/show.html.haml:78
+#: app/views/events/show.html.haml:21 app/views/summaries/show.html.haml:80
 #: app/views/things/_index.html.haml:2 app/views/takings/_index.html.haml:2
 msgid "Things to bring"
 msgstr ""
@@ -1690,11 +1694,11 @@ msgstr ""
 msgid "Total"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:62
+#: app/views/summaries/show.html.haml:64
 msgid "Total arriving guests"
 msgstr ""
 
-#: app/views/guests/index.html.haml:43 app/views/guests/index.html.haml:59
+#: app/views/guests/index.html.haml:43 app/views/guests/index.html.haml:69
 msgid "Total guests - %{total_guests}"
 msgstr ""
 
@@ -1766,7 +1770,7 @@ msgid "Who brings"
 msgstr ""
 
 #: app/models/guest.rb:116 app/views/rsvps/_new.html.haml:4
-#: app/views/guests/index.html.haml:48
+#: app/views/guests/index.html.haml:47
 msgid "Yes"
 msgstr ""
 
@@ -1778,11 +1782,11 @@ msgstr ""
 msgid "You bring"
 msgstr ""
 
-#: app/views/welcome/_container123.html.haml:22
+#: app/views/welcome/_container123.html.haml:24
 msgid "You can also upload a map and a persoanl message"
 msgstr ""
 
-#: app/views/welcome/_container123.html.haml:30
+#: app/views/welcome/_container123.html.haml:33
 msgid "You can also upload a map and a personal message"
 msgstr ""
 
@@ -2037,7 +2041,7 @@ msgstr ""
 msgid "change RSVP|change"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:133
+#: app/views/summaries/show.html.haml:135
 msgid "click here for help"
 msgstr ""
 
@@ -2185,7 +2189,7 @@ msgstr ""
 msgid "does't look like an email"
 msgstr ""
 
-#: app/helpers/application_helper.rb:87 app/views/summaries/show.html.haml:88
+#: app/helpers/application_helper.rb:87 app/views/summaries/show.html.haml:90
 #: app/views/contacts/_contact.html.haml:5
 msgid "edit"
 msgstr ""
@@ -2396,8 +2400,8 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/guests/index.html.haml:33 app/views/summaries/show.html.haml:99
-#: app/views/summaries/show.html.haml:102
+#: app/views/guests/index.html.haml:33 app/views/summaries/show.html.haml:101
+#: app/views/summaries/show.html.haml:104
 msgid "search"
 msgstr ""
 
