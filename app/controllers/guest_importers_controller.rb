@@ -19,7 +19,7 @@ class GuestImportersController < ApplicationController
         if @error
           render_new_guests_import_form(page)
         else
-          flash[:notice] = _("The following names have no email address and have not been imported: ") + @no_mails.join(", ")
+          flash[:notice] = _("The following names have no email address and have not been imported: ") + @no_mails.join(", ") unless @no_mails.blank?
           page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
           page << "jQuery('body').css('cursor', 'default')"
         end
@@ -28,6 +28,7 @@ class GuestImportersController < ApplicationController
   end
 
   def new
+    flash[:notice] = ""
     params[:contact_source] ||= "gmail"
   end
 
