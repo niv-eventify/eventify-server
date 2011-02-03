@@ -20,4 +20,27 @@
       .loading.popup-btns{:style => "display:none"}
         = _("Loading CSV file, please wait...")
 
+#upload_file.import.lb-popup.lb-popup-1
+  .c
+    .popup-heading
+      %strong= s_(GuestImportersController::TITLES["email_list"])
+
+    - form_tag event_guest_importers_path(@event), :target => "upload_frame", :class => "download-form" do |f|
+      - if @error
+        %p.error-msg= @error
+      %fieldset
+        .brown-box
+          .brown-box-holder
+            .f-row
+              != text_area_tag(:email_list)
+              != hidden_field_tag :source, "email_list"
+              != hidden_field_tag :contact_source, "email_list"
+      .contact-btns.popup-btns
+        %br
+        != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();jQuery(this).parents('form').submit()", :class => "btn csv-submit"
+        != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+        %br
+      .loading.popup-btns{:style => "display:none"}
+        = _("Loading CSV file, please wait...")
+
 %iframe#upload_frame{:name => "upload_frame", :style => "display: none"}

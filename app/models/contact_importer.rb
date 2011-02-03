@@ -41,6 +41,7 @@ class ContactImporter < ActiveRecord::Base
 
   def self.import_contacts(username, password, contact_source, csv)
     error = nil
+    no_mails = nil
 
     contacts = case contact_source
     when 'gmail', 'hotmail', 'yahoo'
@@ -56,11 +57,11 @@ class ContactImporter < ActiveRecord::Base
       end
     when 'aol'
       begin
-       contacts = Blackbook.get(:username => username, :password => password)
-     rescue Blackbook::BlackbookError, ArgumentError
-       error = $!
-       nil
-     end
+        contacts = Blackbook.get(:username => username, :password => password)
+      rescue Blackbook::BlackbookError, ArgumentError
+        error = $!
+        nil
+      end
     when 'csv'
       begin
         res = Astrails::OutlookContact.get(csv)
@@ -70,9 +71,19 @@ class ContactImporter < ActiveRecord::Base
         error = _("A problem importing your contacts occured, please try again later.")
         nil
       end
+    when 'email_list'
+      begin
+        res = Astrails::EmailList.get(csv)
+        error = _("A problem importing your contacts occured, please try again later.") if res[:contacts].blank?
+        no_mails = res[:no_mails] unless res[:no_mails].blank?
+        res[:contacts]
+      rescue
+        error = _("A problem importing your contacts occured, please try again later.")
+        nil
+      end
     end
 
-    [contacts.try(:uniq), error]
+    [contacts.try(:uniq), error, no_mails]
   end
 
   def self.parse_name_and_email(c)

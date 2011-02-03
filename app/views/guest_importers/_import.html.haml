@@ -1,6 +1,7 @@
 .import
   .popup-heading
     %strong= title
+    != render :partial => 'layouts/flashes'
 
   - form_tag event_guest_importers_path(@event), :id => "import_guests" do
     .events-holder
