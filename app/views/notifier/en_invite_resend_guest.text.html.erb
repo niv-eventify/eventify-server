@@ -8,9 +8,9 @@ Please click the envelope to see the updated invitation and RSVP to the event
 <br/><br/>
 <%= link_to(image_tag("http://eventify.co.il/images/envelope.png", :style => "border:0"), @url) %>
 <br/><br/>
-If clicking the envelope does not bring you to the invitation page, copy the following link and paste it in your browser.
+If you cannot see the envelope, click the following link:
 <br/>
-<%= @url %>
+<%= link_to @url, @url %>
 <br/><br/>
 Please do not reply to this email.
 <br/>
