@@ -74,16 +74,15 @@ class ContactImporter < ActiveRecord::Base
     when 'email_list'
       begin
         res = Astrails::EmailList.get(csv)
-        error = _("A problem importing your contacts occured, please try again later.") if res[:contacts].blank?
-        no_mails = res[:no_mails] unless res[:no_mails].blank?
-        res[:contacts]
+        error = _("A problem importing your contacts occured, please try again later.") if res.blank?
+        res
       rescue
         error = _("A problem importing your contacts occured, please try again later.")
         nil
       end
     end
 
-    [contacts.try(:uniq), error, no_mails]
+    [contacts.try(:uniq), error]
   end
 
   def self.parse_name_and_email(c)

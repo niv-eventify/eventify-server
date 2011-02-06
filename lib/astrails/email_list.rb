@@ -6,7 +6,7 @@ module Astrails
         return nil if email_list.blank?
         email_list = email_list.gsub(/</, "").gsub(/>/,"").gsub(/\r/, "").gsub(/\n/, "").gsub(/\t/, "")
         data_arr = email_list.split(/[,|;]/)
-        res = {:contacts => [], :no_mails => []}
+        res = []
         0.step(data_arr.length - 1) do |index|
           contact = data_arr[index].split(/ /)
           name = email = ""
@@ -17,13 +17,13 @@ module Astrails
               email = $&
             end
           end
-          if email.blank?
-            res[:no_mails] << name
+          if email.blank? and not name.blank?
+            res << [name, nil]
             next
           end
           name = name.strip
           name = email if name.blank?
-          res[:contacts] << [name, email]
+          res << [name, email]
         end
         res          
       end

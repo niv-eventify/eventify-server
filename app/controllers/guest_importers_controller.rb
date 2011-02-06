@@ -19,7 +19,6 @@ class GuestImportersController < ApplicationController
         if @error
           render_new_guests_import_form(page)
         else
-          flash[:notice] = _("The following names have no email address and have not been imported: ") + @no_mails.join(", ") unless @no_mails.blank?
           page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
           page << "jQuery('body').css('cursor', 'default')"
         end
@@ -47,26 +46,27 @@ protected
 
   def _load_csv_file
     @contacts = []
-
+    contacts = []
     unless params[:csvfile].blank?
       contacts, error = ContactImporter.import_contacts(nil, nil, "csv", params[:csvfile])
-      @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts && contacts.is_a?(Array)
       @error = error.to_s if error
-    else
+    end
+    contacts1 = []
+    unless params[:email_list].blank?
+      contacts1, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], params[:email_list])
+      contacts.concat(contacts1.nil? ? [] : contacts1)
+      @error1 = error.to_s if error
+    end
+    if params[:csvfile].blank? and params[:email_list].blank?
       @error = _("Please upload a CSV file")
     end
+    contacts.uniq!;
+    @contacts = ContactImporter.contacts_to_openstruct(contacts) unless contacts.blank?
   end
 
   def _load_from_emails
     @contacts = []
     contacts, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], nil)
-    @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts && contacts.is_a?(Array)
-    @error = error.to_s if error
-  end
-
-  def _load_from_email_list
-    @contacts = []
-    contacts, error, @no_mails = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], params[:email_list])
     @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts && contacts.is_a?(Array)
     @error = error.to_s if error
   end
@@ -78,8 +78,6 @@ protected
       _load_csv_file
     elsif "email" == params[:source]
       _load_from_emails
-    elsif "email_list" == params[:source]
-      _load_from_email_list
     end
   end
 

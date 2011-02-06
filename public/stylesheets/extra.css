@@ -1292,9 +1292,6 @@ div.overflow_visible {
 .hebrew .box .text-h p strong{
   font-size: 1.2em;
 }
-#nyroModalContent div.flash.notice {
-  width: 610px;
-}
 textarea#email_list {
   width: 100%;
   height: 90px;
