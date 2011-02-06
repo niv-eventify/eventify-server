@@ -27,7 +27,6 @@ class GuestImportersController < ApplicationController
   end
 
   def new
-    flash[:notice] = ""
     params[:contact_source] ||= "gmail"
   end
 
@@ -60,8 +59,7 @@ protected
     if params[:csvfile].blank? and params[:email_list].blank?
       @error = _("Please upload a CSV file")
     end
-    contacts.uniq!;
-    @contacts = ContactImporter.contacts_to_openstruct(contacts) unless contacts.blank?
+    @contacts = ContactImporter.contacts_to_openstruct(contacts.uniq) unless contacts.blank?
   end
 
   def _load_from_emails

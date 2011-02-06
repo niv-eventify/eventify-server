@@ -65,7 +65,7 @@ class ContactImporter < ActiveRecord::Base
     when 'csv'
       begin
         res = Astrails::OutlookContact.get(csv)
-        error = _("A problem importing your contacts occured, please try again later.") unless res
+        error = _("A problem importing your contacts occured, only Excel files or a CSV files allowed.") unless res
         res
       rescue
         error = _("A problem importing your contacts occured, please try again later.")
