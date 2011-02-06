@@ -1,7 +1,7 @@
 #upload_file.import.lb-popup.lb-popup-1
   .c
     .popup-heading
-      %strong= s_(GuestImportersController::TITLES["csv"])
+      %strong= _("Advanced import methods")
 
     - form_tag event_guest_importers_path(@event), :multipart => true, :target => "upload_frame", :class => "download-form" do
       - if @error
