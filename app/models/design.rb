@@ -82,7 +82,7 @@ class Design < ActiveRecord::Base
     errors.add(:base, "select at least one category") if classifications.blank?
   end
 
-  def stage2_preview_dimensions
+  def stage2_preview_dimensions(current_locale)
     ratio =   1.6     #fullsize/preview_size
 
     @stage2_preview_dimensions ||= {
@@ -90,7 +90,7 @@ class Design < ActiveRecord::Base
       :left =>   "#{(text_top_x/ratio).to_int}px",
       :width =>  "#{(text_width/ratio).to_int}px",
       :height => "#{(text_height/ratio).to_int}px",
-      'text-align' => "#{text_align}",
+      'text-align' => text_align == "center" ? text_align : current_locale == "he" ? "right" : "left",
       :color => "rgb(#{message_color})",
       "font-family" => "#{font_body}"
     }
@@ -100,11 +100,11 @@ class Design < ActiveRecord::Base
     !title_width.blank?
   end
   
-  def stage2_title_dimensions
+  def stage2_title_dimensions(current_locale)
     ratio =   1.6     #fullsize/preview_size
 
     res = {
-      'text-align' => "#{text_align}",
+      'text-align' => text_align == "center" ? text_align : current_locale == "he" ? "right" : "left",
       :color => "rgb(#{title_color})",
       "font-family" => "#{font_title}"
     }

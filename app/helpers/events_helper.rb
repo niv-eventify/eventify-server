@@ -72,7 +72,7 @@ module EventsHelper
   end
 
   def stage2_message_css(event)
-    event.design.stage2_preview_dimensions.keys.map {|k| "#{k}:#{event.design.stage2_preview_dimensions[k]}"}.join(";")
+    event.design.stage2_preview_dimensions(current_locale).keys.map {|k| "#{k}:#{event.design.stage2_preview_dimensions(current_locale)[k]}"}.join(";")
   end
 
   def stage2_free_text_css(event)
@@ -85,7 +85,7 @@ module EventsHelper
   end
 
   def stage2_title_css(event)
-    title_params = event.design.stage2_title_dimensions
+    title_params = event.design.stage2_title_dimensions(current_locale)
     title_params["font-family"] = event.font_title if not event.font_title.blank?
     title_params[:color] = event.title_color if not event.title_color.blank?
     title_params["font-size"] = "#{event.title_font_size.to_int}px" if not event.title_font_size.blank?
