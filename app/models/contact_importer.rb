@@ -41,7 +41,6 @@ class ContactImporter < ActiveRecord::Base
 
   def self.import_contacts(username, password, contact_source, csv)
     error = nil
-    no_mails = nil
 
     contacts = case contact_source
     when 'gmail', 'hotmail', 'yahoo'

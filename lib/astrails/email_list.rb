@@ -25,7 +25,7 @@ module Astrails
           name = email if name.blank?
           res << [name, email]
         end
-        res          
+        res
       end
     end
   end
