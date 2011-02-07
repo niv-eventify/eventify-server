@@ -11,8 +11,12 @@ module Astrails
         e_id = email_column_id(importer.data)
 
         if n_id.blank? || e_id.blank?
+          email_idx = 1
+          if importer.data[0].length > 2
+            importer.data[0].each_with_index{|data, idx| email_idx = idx unless String::EMAIL_REGEX.match(data).nil?}
+          end
           return importer.data.map do |id|
-            [id[0], id[1]]
+            [id[0], id[email_idx]]
           end
         end
 
