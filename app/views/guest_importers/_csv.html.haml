@@ -21,7 +21,7 @@
               != hidden_field_tag :contact_source, "email_list"
       .contact-btns.popup-btns
         %br
-        != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();jQuery(this).parents('form').submit()", :class => "btn csv-submit"
+        != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();clearInputsBeforeFormSubmission('email_list');jQuery(this).parents('form').submit()", :class => "btn csv-submit"
         != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
         %br
       .loading.popup-btns{:style => "display:none"}

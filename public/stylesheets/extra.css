@@ -1295,4 +1295,5 @@ div.overflow_visible {
 textarea#email_list {
   width: 100%;
   height: 90px;
+  overflow: auto;
 }
