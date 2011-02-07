@@ -3,7 +3,8 @@ module GuestImportersHelper
     page << <<-JAVASCRIPT
       jQuery.nyroModalManual({content: #{render(:partial => @source).to_json}});
       jQuery('li.#{params[:contact_source] || 'gmail'}').addClass('active');
-      jQuery('div.#{params[:contact_source] || 'gmail'}_form').show()
+      jQuery('div.#{params[:contact_source] || 'gmail'}_form').show();
+      clearInputs("email_list");
     JAVASCRIPT
   end
 end

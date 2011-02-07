@@ -17,7 +17,7 @@
         .brown-box
           .brown-box-holder
             .f-row
-              != text_area_tag(:email_list)
+              != text_area_tag(:email_list, nil, :def_value => _("1. Enter your personal email in a seperate window.\r\n2. Insert your guests' emails into the 'to' line\r\n3. Copy the 'to' line and paste it here.\r\n4. Click the import button"))
               != hidden_field_tag :contact_source, "email_list"
       .contact-btns.popup-btns
         %br
