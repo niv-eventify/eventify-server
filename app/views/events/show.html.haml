@@ -19,5 +19,6 @@
       != link_to _('Reminders'), event_reminders_path(@event), :class => 'link-reminders'
     %li
       != link_to _('Things to bring'), event_things_path(@event), :class => 'link-things'
+!= render(:partial => "toolbar_preview")
 != render(:partial => "preview")
 
