@@ -489,10 +489,12 @@ jQuery(document).ready(function(){
     appendTo: 'body',
     zIndex: 200
   });
-  jQuery("input, textarea, select").focus(function(){
-    _gaq.push(['_trackEvent', 'Event Form', this.name + '_focus', jQuery(this).val()]);
-  });
-  jQuery("input, textarea, select").change(function(){
-    _gaq.push(['_trackEvent', 'Event Form', this.name + '_change', jQuery(this).val()]);
-  });
+  if(typeof _gaq != 'undefined') {
+    jQuery("input, textarea, select").focus(function(){
+      _gaq.push(['_trackEvent', 'Event Form', this.name + '_focus', jQuery(this).val()]);
+    });
+    jQuery("input, textarea, select").change(function(){
+      _gaq.push(['_trackEvent', 'Event Form', this.name + '_change', jQuery(this).val()]);
+    });
+  }
 });
