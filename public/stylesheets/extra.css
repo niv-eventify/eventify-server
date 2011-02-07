@@ -1296,4 +1296,5 @@ textarea#email_list {
   width: 100%;
   height: 90px;
   overflow: auto;
+  font-size: 12px;
 }
