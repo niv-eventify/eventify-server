@@ -5,6 +5,7 @@
   != stylesheet_link_tag "calendar", "nyroModal.full", "colorPicker", "rsvps"
   != javascript_include_tag "mootools", "calendar", "fieldSelection", "jquery.nyroModal", "jquery.colorPicker", "stage2", "rsvps", "jquery.unload"
 != render(:partial => "event_form")
+!= render(:partial => "toolbar_preview")
 != render(:partial => "preview")
 != render(:partial => "font_toolbar", :locals => {:toolbar_id => "title"})
 != render(:partial => "font_toolbar", :locals => {:toolbar_id => "msg"})
