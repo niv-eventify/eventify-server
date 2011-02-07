@@ -9,7 +9,7 @@ describe SummariesController do
     @user = Factory.create(:user)
     UserSession.create(@user)
     @event = stub_model(Event, :starting_at => 10.days.from_now.utc, :user => @user, :default_sms_message => "foo bar", :default_sms_message_for_resend => "bar foo")
-    @event.stub!(:design).and_return(stub_model(Design))
+    @event.stub!(:design).and_return(stub_model(Design, :text_top_x => 0, :text_top_y => 0, :text_width => 900, :text_height => 600, :text_align => "center", :color => "rgb(10,10,10)", :font_body => "arial"))
     controller.current_user.events.stub!(:find).and_return(@event)
   end
 
