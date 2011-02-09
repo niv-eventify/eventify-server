@@ -7,9 +7,9 @@ class Category < ActiveRecord::Base
   has_many :designs, :through => :classifications, :conditions => "designs.disabled_at IS NULL" do
     def popular(offset)
       if offset >= 0
-        by_ordering.find(:first, :offset => offset)
+        find(:first, :offset => offset)
       else
-        by_ordering.find(:first, :offset => rand(self.count() - 1) + 1)
+        find(:first, :offset => rand(self.count() - 1) + 1)
       end
     end
   end
