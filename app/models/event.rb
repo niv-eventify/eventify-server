@@ -73,6 +73,18 @@ class Event < ActiveRecord::Base
     :msg_color, :title_color, :font_title, :font_body, :allow_seeing_other_guests, :tz,
     :cancellation_sms, :cancellation_email, :cancellation_email_subject
 
+  has_attached_file :invitation_thumb,
+    :storage        => :s3,
+    :bucket         => GlobalPreference.get(:s3_bucket) || "junk",
+    :styles         => {:original => "900x600", :small => "176x117>"},
+    :path =>        "invitation_thumbs/:id/:style/:filename",
+    :default_url   => "",
+    :s3_credentials => {
+      :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
+      :secret_access_key => GlobalPreference.get(:s3_secret) || "junk",
+    },
+    :url => ':s3_domain_url'
+
   datetime_select_accessible :starting_at, :ending_at
 
   validates_presence_of :category_id, :design_id, :name, :starting_at
@@ -151,6 +163,30 @@ class Event < ActiveRecord::Base
     return unless starting_at_changed?
     disabled = reminders.not_sent.collect(&:adjust!)
     @reminders_disabled = disabled.any?
+  end
+
+  def set_invitation_thumbnail
+    send_later(:set_invitation_thumbnail!)
+  end
+
+  def set_invitation_thumbnail!
+    bottom_pics = [] #[url,geometry]
+    cropped_pictures.find_all_by_window_id(design.windows).each do |cp|
+      window = cp.window
+      bottom_pics << [cp.pic.url, "#{window.width}x#{window.height}+#{window.top_x}+#{window.top_y}"]
+    end
+    res = ImageMerger::merge_two_images(design.card.url, bottom_pics, design.card_file_name)
+    self.invitation_thumb = res
+    self.save
+  end
+
+  def remove_invitation_thumbnail
+    send_later(:remove_invitation_thumbnail!)
+  end
+
+  def remove_invitation_thumbnail!
+    self.invitation_thumb = nil
+    self.save
   end
 
   before_save :set_http_in_map_link

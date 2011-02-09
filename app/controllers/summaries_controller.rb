@@ -4,6 +4,10 @@ class SummariesController < InheritedResources::Base
   around_filter :set_time_zone
   actions :show
 
+  def show
+    @thumb = @event.invitation_thumb.nil? ? @event.design.card.url(:list) : @event.invitation_thumb.url(:small)
+    show!
+  end
 protected
   def resource
     event_by_user_or_host

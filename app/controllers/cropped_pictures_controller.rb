@@ -15,6 +15,8 @@ class CroppedPicturesController < InheritedResources::Base
       if @cropped_picture.event_id.to_i == 0
         session[:cropped_picture_ids] = session[:cropped_picture_ids] || []
         session[:cropped_picture_ids] << @cropped_picture.id
+      else
+        Event.find(params[:event]).set_invitation_thumbnail
       end
       if "true" == params[:just_save]
         render :index
@@ -33,6 +35,8 @@ class CroppedPicturesController < InheritedResources::Base
   end
 
   def destroy
+    @cropped_picture = CroppedPicture.find(params[:id])
+    @cropped_picture.event.set_invitation_thumbnail unless @cropped_picture.event_id.to_i == 0
     destroy! do |format|
       format.js{render :nothing => true}
     end

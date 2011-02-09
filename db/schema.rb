@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101223113223) do
+ActiveRecord::Schema.define(:version => 20110208121833) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -130,47 +130,51 @@ ActiveRecord::Schema.define(:version => 20101223113223) do
     t.datetime "ending_at"
     t.string   "location_name"
     t.string   "location_address"
-    t.string   "map_link",                   :limit => 2048
+    t.string   "map_link",                      :limit => 2048
     t.string   "map_file_name"
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
-    t.string   "guest_message",              :limit => 345
+    t.string   "guest_message",                 :limit => 345
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stage_passed"
-    t.string   "language",                   :limit => 16
+    t.string   "language",                      :limit => 16
     t.string   "host_mobile_number"
     t.string   "sms_message"
     t.datetime "rsvp_summary_send_at"
-    t.integer  "rsvp_summary_send_every",                    :default => 2
+    t.integer  "rsvp_summary_send_every",                       :default => 2
     t.datetime "last_summary_sent_at"
-    t.boolean  "allow_seeing_other_guests",                  :default => true
-    t.integer  "title_font_size",                            :default => 22
-    t.integer  "msg_font_size",                              :default => 20
+    t.boolean  "allow_seeing_other_guests",                     :default => true
+    t.integer  "title_font_size",                               :default => 22
+    t.integer  "msg_font_size",                                 :default => 20
     t.string   "title_text_align"
     t.string   "msg_text_align"
     t.string   "font_body"
     t.string   "title_color"
     t.string   "msg_color"
-    t.integer  "sms_messages_count",                         :default => 0
-    t.boolean  "user_is_activated",                          :default => false
-    t.string   "tz",                         :limit => 128
-    t.boolean  "any_invitation_sent",                        :default => false
+    t.integer  "sms_messages_count",                            :default => 0
+    t.boolean  "user_is_activated",                             :default => false
+    t.string   "tz",                            :limit => 128
+    t.boolean  "any_invitation_sent",                           :default => false
     t.string   "sms_resend_message"
     t.string   "font_title"
     t.datetime "canceled_at"
     t.string   "cancellation_sms"
-    t.string   "cancellation_email",         :limit => 8192
+    t.string   "cancellation_email",            :limit => 8192
     t.string   "cancellation_email_subject"
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
-    t.string   "invitation_title",           :limit => 100
-    t.integer  "emails_plan",                                :default => 0
-    t.integer  "sms_plan",                                   :default => 0
-    t.integer  "prints_plan",                                :default => 0
-    t.integer  "prints_ordered",                             :default => 0
+    t.string   "invitation_title",              :limit => 100
+    t.integer  "emails_plan",                                   :default => 0
+    t.integer  "sms_plan",                                      :default => 0
+    t.integer  "prints_plan",                                   :default => 0
+    t.integer  "prints_ordered",                                :default => 0
+    t.string   "invitation_thumb_file_name"
+    t.string   "invitation_thumb_content_type"
+    t.integer  "invitation_thumb_file_size"
+    t.datetime "invitation_thumb_updated_at"
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"

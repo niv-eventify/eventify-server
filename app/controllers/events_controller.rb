@@ -91,9 +91,11 @@ class EventsController < InheritedResources::Base
       success.html do
         flash[:notice] = resource.reminders_disabled? ? _("Event updated, but some reminders disabled") : _("Event updated")
         if "true" == params[:update_design]
+          @event.remove_invitation_thumbnail
           if @event.design.windows.blank?
             return redirect_to(edit_event_path(@event, :wizard => params[:wizard]))
           else
+            @event.set_invitation_thumbnail
             return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
           end
         end
