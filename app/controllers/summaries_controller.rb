@@ -5,7 +5,7 @@ class SummariesController < InheritedResources::Base
   actions :show
 
   def show
-    @thumb = @event.invitation_thumb.nil? ? @event.design.card.url(:list) : @event.invitation_thumb.url(:small)
+    @thumb = @event.invitation_thumb.file? ? @event.invitation_thumb.url(:small) : @event.design.card.url(:list)
     show!
   end
 protected
