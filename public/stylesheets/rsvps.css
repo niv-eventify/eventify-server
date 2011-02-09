@@ -1,9 +1,11 @@
 
 @font-face {
-    font-family: "סימן קריאה";
-    src: url("/fonts/ExclamReg.eot");
-    src: local("exclam"),local("exclamregular"),
-      url("/fonts/ExclamReg.TTF") format("truetype");
+  font-family: "סימן קריאה";
+  src: url("/fonts/ExclamReg.eot");
+  src: local("exclam"),local("ExclamReg"),
+  url("/fonts/ExclamReg.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
 
 @font-face {
@@ -17,7 +19,7 @@
 @font-face {
 	font-family: 'כוס חלב';
 	src: url('/fonts/aglassofmilkreg-webfont.eot');
-	src: local('AGlassOfMilkReg'), local('AGlassOfMilkReg'), url('/fonts/aglassofmilkreg-webfont.woff') format('woff'), url('/fonts/aglassofmilkreg-webfont.ttf') format('truetype'), url('/fonts/aglassofmilkreg-webfont.svg#webfontos4qb89T') format('svg');
+	src: local('AGlassOfMilkReg'), url('/fonts/aglassofmilkreg-webfont.woff') format('woff'), url('/fonts/aglassofmilkreg-webfont.ttf') format('truetype'), url('/fonts/aglassofmilkreg-webfont.svg#webfontos4qb89T') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
