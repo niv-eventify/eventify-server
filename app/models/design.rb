@@ -37,7 +37,7 @@ class Design < ActiveRecord::Base
   after_create :assign_root_classification
 
   has_attached_file :card,
-    :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "119x79>"},
+    :styles         => {:small => "67x50>", :stage2 => "561x374>", :list => "176x117>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
     :path =>        "designs/:id/:style/:filename",
