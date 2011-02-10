@@ -151,9 +151,10 @@ protected
     UploadedPicture.find_all_by_id(session[:uploaded_picture_ids]).each do |pic|
       pic.update_attribute(:event, @event)
     end
-    CroppedPicture.find_all_by_id(session[:cropped_picture_ids]).each do |pic|
+    cp = CroppedPicture.find_all_by_id(session[:cropped_picture_ids]).each do |pic|
       pic.update_attribute(:event, @event)
     end
+    @event.set_invitation_thumbnail unless cp.blank?
   end
 
   def past_events?

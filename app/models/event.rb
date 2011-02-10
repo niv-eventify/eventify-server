@@ -175,6 +175,7 @@ class Event < ActiveRecord::Base
       window = cp.window
       bottom_pics << [cp.pic.url, "#{window.width}x#{window.height}+#{window.top_x}+#{window.top_y}"]
     end
+    return if bottom_pics.blank?
     res = ImageMerger::merge_two_images(design.card.url, bottom_pics, design.card_file_name)
     self.invitation_thumb = res
     self.save
