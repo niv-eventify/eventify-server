@@ -757,10 +757,14 @@ p.takings-changed {
 .next-g-btn, .prev-g-btn {
 	display: none;
 }
-
+.hebrew .main-box h1 {
+  font-size: 1.95em;
+  font-weight: normal;
+}
 .main-box h1{
-	font-size: 1.95em;
+	font-size: 1.45em;
 	margin: 5px 0 0;
+	font-weight: bold;
 }
 .form-col-delete, .hebrew .form-col-delete {
 	padding-right:0;
@@ -1259,7 +1263,8 @@ h2.weak {
 .import.reminders {
   padding-bottom: 0;
 }
-.hebrew .main-box h2 { font-size: 1.3em;}
+.main-box h2, .hebrew .main-box h2 { font-size: 1.3em;}
+
 .hebrew h3.things-header{
   font-size: 120%;
 }
@@ -1309,4 +1314,8 @@ textarea#email_list {
 }
 .hebrew .foot-box .fb_edge_widget_with_comment {
   margin: -6px 15px 0 0;
+  float: right;
+}
+.foot-box .fb_edge_widget_with_comment {
+  float: left;
 }
