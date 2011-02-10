@@ -1298,3 +1298,9 @@ textarea#email_list {
   overflow: auto;
   font-size: 12px;
 }
+.foot-box ul {
+  width: 320px;
+}
+.foot-box .fb_edge_widget_with_comment {
+  margin-top: -6px;
+}

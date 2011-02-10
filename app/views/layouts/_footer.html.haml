@@ -22,4 +22,22 @@
               %li!= link_to AVAILABLE_LOCALE_NAMES[locale], locale_url_for(locale)
 
       %p= _("All right resevred to Eventify ©")
+      %p.like
+        #fb-root
+        :javascript
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId: '139096766151419',
+              status: true,
+              cookie: true,
+              xfbml: true
+            });
+          };
+          (function() {
+            var e = document.createElement('script'); e.async = true;
+            e.src = document.location.protocol +
+              '//connect.facebook.net/en_US/all.js';
+            document.getElementById('fb-root').appendChild(e);
+          }());
+        %fb:like{:href => "http://www.eventify.co.il", :layout => "standard", :show_faces => "false", :width => "290"}
       %p.by!= _("Design and UI %{link}") % {:link => link_to(_("Cat&amp;Dog Studio"), "#")}
