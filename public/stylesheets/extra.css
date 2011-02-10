@@ -1299,8 +1299,14 @@ textarea#email_list {
   font-size: 12px;
 }
 .foot-box ul {
-  width: 320px;
+  width: 310px;
+}
+.hebrew .foot-box ul {
+  width: 310px;
 }
 .foot-box .fb_edge_widget_with_comment {
-  margin-top: -6px;
+  margin: -6px 0 0 15px;
+}
+.hebrew .foot-box .fb_edge_widget_with_comment {
+  margin: -6px 15px 0 0;
 }
