@@ -1304,3 +1304,8 @@ textarea#email_list {
 .info-container-row {
   margin-top: 4px;
 }
+
+.boxe-wrap .pict img{
+  width: 118px;
+  height: 79px;
+}

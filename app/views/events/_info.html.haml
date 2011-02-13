@@ -1,6 +1,6 @@
 - event.with_time_zone do
   .pict
-    != image_tag(event.design.card.url(:list))
+    != image_tag(event.invitation_thumb.file? ? event.invitation_thumb.url(:small) : event.design.card.url(:list))
   .boxe-text
     %p
       %strong= _("Hosts:")
