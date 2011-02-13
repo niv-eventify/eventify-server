@@ -49,8 +49,6 @@
           .info-container-row
             %strong.heading= _("Export to your calendar:")
             != render(:partial => 'shared/export_links', :locals => {:lnk => :event_ical_path, :event => @event, :email => true})
-        .info-container-row
-          %iframe{:src => "http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.eventify.co.il&amp;layout=standard&amp;show_faces=false&amp;width=430&amp;action=like&amp;colorscheme=light&amp;height=50", :scrolling => "no", :frameborder => "0", :style => "border:none; overflow:hidden; width:430px; height:50px;", :allowTransparency => "true"}
       .column
         %h2= _("Guests summary")
         .lists

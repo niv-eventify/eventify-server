@@ -1336,3 +1336,6 @@ textarea#email_list {
   float: left;
 }
 
+body {
+  padding-bottom: 90px;
+}
