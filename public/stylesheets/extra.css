@@ -1353,3 +1353,19 @@ textarea#email_list {
 .subnav {
   padding: 50px 0 0;
 }
+
+.stage-1 #first_header {
+  padding: 0 0 10px;
+}
+
+.stage-1 #first_header h3{
+  float: left;
+  margin: 0 20px 0 0;
+  line-height: 34px;
+}
+
+.hebrew .stage-1 #first_header h3{
+  float: right;
+  margin: 0 0 0 20px;
+  line-height: 27px;
+}

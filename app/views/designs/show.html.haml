@@ -1,5 +1,5 @@
 - @page_title = _("Design | Eventify")
-- @content_css_class = "stars-bg stage-3"
+- @content_css_class = "stars-bg stage-3 stage-1"
 
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full", "jquery.Jcrop", "rsvps"
@@ -15,21 +15,21 @@
 
     .side-area
       %h1= _("Invitation Design")
-      .side-area-h
+      .side-area-h#first_header
         %h3
           = _("You can always:")
-        .btns-h
+        %span.btns-h
           - if current_locale == "he"
             %a.btn-right.change-design{:href => "#"}= _("Change design")
           - else
             %a.btn-left.change-design{:href => "#"}= _("Change design")
-        .divider &nbsp;
         - unless @event.new_record?
           :javascript
             stage1.event_designs_path = #{designs_path(:event_id => @event).to_json};
         :javascript
           stage1.cetagory_id = #{@category.id};
       - if @design.windows.length > 0
+        .divider &nbsp;
         .side-area-h
           %h3
             = _("Upload your own pictures and insert them into the invitation")
