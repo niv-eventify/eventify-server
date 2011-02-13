@@ -14,11 +14,10 @@
     }
   }
 - events_content_section(2, @event, :next => {:func => "on_next_clicked()"}) do
-  .content-section-heading
-    %h1= _("Please fill out the events details")
   .twocolumns
 
     .side-area
+      %h1= _("Please fill out the events details")
       - semantic_form_for(@event, :live_validations => true, :html => {:class => "form new-event", :multipart => true}) do |f|
         != f.hidden_field :design_id
         != f.hidden_field :msg_font_size

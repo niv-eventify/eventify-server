@@ -1336,6 +1336,16 @@ textarea#email_list {
   float: left;
 }
 
+.side-area h1 {
+  margin: 0 0 12px 0;
+  color: #523733;
+  font-size: 1.8em;
+  font-weight: normal;
+  line-height: 1.1em;
+  border-bottom: 1px solid #D4D1CE;
+  padding-bottom: 16px;
+}
+
 #header .header-area {
   min-height: 94px;
 }
