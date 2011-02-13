@@ -1336,3 +1336,10 @@ textarea#email_list {
   float: left;
 }
 
+#header .header-area {
+  min-height: 94px;
+}
+
+.subnav {
+  padding: 50px 0 0;
+}

@@ -32,8 +32,6 @@
       .personal-menu-c
         %strong= _("Hello, %{user}") % {:user => current_user.name}
 
-        %p
-          - link_to_next_event
         .personal-menu-h
           .personal-menu-h-frame
             #mypage.opener!= link_to_function(_("My Page"), "")
