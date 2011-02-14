@@ -1374,3 +1374,12 @@ textarea#email_list {
 body {
   padding-bottom: 90px;
 }
+
+#event_invitation_title_input .textarea-bg {
+  background-image: url("/images/bg-textarea-small.gif");
+  height: 50px;
+}
+
+#event_invitation_title_input .textarea-bg textarea {
+  height: 43px;
+}
