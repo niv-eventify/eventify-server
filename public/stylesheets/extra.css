@@ -1383,3 +1383,7 @@ body {
 #event_invitation_title_input .textarea-bg textarea {
   height: 43px;
 }
+
+.alt-page .logo {
+  top: 16px;
+}

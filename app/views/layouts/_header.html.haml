@@ -3,11 +3,11 @@
     %strong.logo
       %a{ :href => "/" }
         Eventify
+    .search-form
+    %ul#top-nav
+      != render(:partial => "layouts/top_categories")
+      %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
     - unless @skip_header
-      .search-form
-      %ul#top-nav
-        != render(:partial => "layouts/top_categories")
-        %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
       .top-user-menu
         != render(:partial => "layouts/user_menu")
     %div
