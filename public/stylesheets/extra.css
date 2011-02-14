@@ -1251,6 +1251,7 @@ li.home_page a{
 }
 h2.weak {
   font-weight: normal;
+  font-size: 1.4em;
 }
 #event_type {
   visibility: hidden;
@@ -1368,4 +1369,8 @@ textarea#email_list {
   float: right;
   margin: 0 0 0 20px;
   line-height: 27px;
+}
+
+body {
+  padding-bottom: 90px;
 }
