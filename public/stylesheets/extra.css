@@ -318,8 +318,8 @@ div.flash.notice {
 }
 
 ul.contact-tabset li.hotmail a {background: url(/images/bg-tab-hotmail.gif) no-repeat;}
-ul.contact-tabset li.csv a {background: url(/images/bg-tab-csv.gif) no-repeat;}
-.hebrew ul.contact-tabset li.csv a {background: url(/images/bg-tab-csv-he.gif) no-repeat;}
+ul.contact-tabset li.csv a {background: url(/images/bg-tab-other-en.gif) no-repeat;}
+.hebrew ul.contact-tabset li.csv a {background: url(/images/bg-tab-other.gif) no-repeat;}
 ul.contact-tabset li.active a,
 .hebrew ul.contact-tabset li.active a{
 	background-position: 0 -88px;
@@ -1401,23 +1401,45 @@ body {
   display: inline;
   height: 50px;
 }
+
 span.add_manually {
   margin-top: 15px;
   font-size: 14px;
   line-height: 50px;
 }
+
 span.add_manually a{
   color: #41BDCD;
   font-weight: bold;
 }
+
 .stars-bg.stage-3 .content-area {
   min-height: 0;
 }
+
 #list_holder {
   width: 100%;
   height: 50px;
   margin-top: 10px;
 }
+
 .guest_list {
   display: none;
+}
+ul.contact-tabset li.csv {
+    padding: 0 0 0 6px;
+}
+.hebrew ul.contact-tabset li.csv {
+    padding: 0 6px 0 0;
+}
+ul.contact-tabset li.csv a{
+  text-indent: 0;
+  font-size: 28px;
+  text-align: center;
+  line-height: 78px;
+  font-weight: bold;
+}
+ul.contact-tabset {
+  width: 595px;
+  margin: 0 0 0 -4px;
 }
