@@ -24,47 +24,45 @@
     .info-area-tab
       .holder
         .frame
-          %h3= _("Add from existing contact list:")
           != render(:partial => "import")
-
-          .cancel-form
-            .input-area
-              - form_tag event_guests_path(@event), :method => :get, :onsubmit => "jQuery('body').css('cursor', 'wait');return true", :autocomplete => "off" do
-                != text_field_tag "query", params[:query], :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}", :autocomplete => "off"
-                != link_to image_tag("icon-close.gif"), event_guests_path(@event), :class => "close-btn", :onclick => "jQuery('body').css('cursor', 'wait');return true"
-              :javascript
-                jQuery(function(){
-                  clearInputs("search_guests");
-                  jQuery("#cancel_search").click(function(){
-                    jQuery("#search_guests").val("").blur();
+          .guest_list
+            .cancel-form
+              .input-area
+                - form_tag event_guests_path(@event), :method => :get, :onsubmit => "jQuery('body').css('cursor', 'wait');return true", :autocomplete => "off" do
+                  != text_field_tag "query", params[:query], :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}", :autocomplete => "off"
+                  != link_to image_tag("icon-close.gif"), event_guests_path(@event), :class => "close-btn", :onclick => "jQuery('body').css('cursor', 'wait');return true"
+                :javascript
+                  jQuery(function(){
+                    clearInputs("search_guests");
+                    jQuery("#cancel_search").click(function(){
+                      jQuery("#search_guests").val("").blur();
+                    });
                   });
-                });
 
-          %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
-          %h3= _("Add manually:")
-          %p.rsvp-filter
-            %strong= _("Filter by RSVP:")
-            != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
-            %span= " / "
-            != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
-            %span= " / "
-            != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
-            %span= " / "
-            != link_to _("Not responded"), event_guests_path(@event, :rsvp_not_rsvped => true), :class => scope_class(:rsvp_not_rsvped)
-            %span= " / "
-            != link_to _("Not Opened Invitation"), event_guests_path(@event, :rsvp_not_opened_invite => true), :class => scope_class(:rsvp_not_opened_invite)
-            %span= " / "
-            != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
-            %span= " / "
-            != link_to _("No invitation sent"), event_guests_path(@event, :no_invitation_sent => true), :class => scope_class(:no_invitation_sent)
-            %span= " / "
-            != link_to _("All"), event_guests_path(@event), :class => scope_class
+            %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
+            %p.rsvp-filter
+              %strong= _("Filter by RSVP:")
+              != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
+              %span= " / "
+              != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
+              %span= " / "
+              != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
+              %span= " / "
+              != link_to _("Not responded"), event_guests_path(@event, :rsvp_not_rsvped => true), :class => scope_class(:rsvp_not_rsvped)
+              %span= " / "
+              != link_to _("Not Opened Invitation"), event_guests_path(@event, :rsvp_not_opened_invite => true), :class => scope_class(:rsvp_not_opened_invite)
+              %span= " / "
+              != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
+              %span= " / "
+              != link_to _("No invitation sent"), event_guests_path(@event, :no_invitation_sent => true), :class => scope_class(:no_invitation_sent)
+              %span= " / "
+              != link_to _("All"), event_guests_path(@event), :class => scope_class
 
-          %table#guests.info-table
-            != render(:partial => "guests_header", :locals => {:check_all => true})
-            %tbody
-              != render(:partial => "guest", :collection => collection)
-        
-              != render(:partial => "new")
-          %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
-          != will_paginate(collection, :renderer => DesignsWillPaginate)
+            %table#guests.info-table
+              != render(:partial => "guests_header", :locals => {:check_all => true})
+              %tbody
+                != render(:partial => "guest", :collection => collection)
+
+                != render(:partial => "new")
+            %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
+            != will_paginate(collection, :renderer => DesignsWillPaginate)

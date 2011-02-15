@@ -22,7 +22,7 @@
       .contact-btns.popup-btns
         %br
         != link_to_function _("Import"), "jQuery(this).parents('.contact-btns').hide();jQuery('.import .loading').show();clearInputsBeforeFormSubmission('email_list');jQuery(this).parents('form').submit()", :class => "btn csv-submit"
-        != link_to_function _("Cancel"), "jQuery.nyroModalRemove()", :class => "btn"
+        != link_to_function _("Cancel"), "show_nyro_loading(function(){jQuery.ajax({url: '#{new_event_guest_importer_path(@event, :source => 'email')}', type: 'get', dataType:'script'});});", :class => "btn"
         %br
       .loading.popup-btns{:style => "display:none"}
         = _("Loading CSV file, please wait...")

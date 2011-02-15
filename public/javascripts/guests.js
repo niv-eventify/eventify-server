@@ -1,4 +1,5 @@
 jQuery(document).ready(function() {
+    jQuery(".guest_list").toggle(jQuery("table#guests tbody tr").length > 1);
 		var mass_update = function(attribute, is_true, ckeckboxes) {
 			var ids = [];
 			jQuery.each(ckeckboxes, function(i, c){

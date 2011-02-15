@@ -8,6 +8,8 @@
         %ul.contact-tabset
           - each_import_source("csv") do |klass, name|
             %li.source_select{:class => klass}!= link_to_function name, "jQuery('li.source_select').removeClass('active');jQuery(this).parents('li').addClass('active');jQuery('.source-form').hide();jQuery('.#{klass}_form').show()"
+          %li.source_select.csv!= link_to_function _("Other"), "show_nyro_loading(function(){jQuery.ajax({url: '#{new_event_guest_importer_path(@event, :source => 'csv')}', type: 'get', dataType:'script'});});"
+
         - each_import_source("csv") do |klass, name|
           .contact-tab.source-form{:style => "display:none", :class => "#{klass}_form"}
             .contact-tab-t

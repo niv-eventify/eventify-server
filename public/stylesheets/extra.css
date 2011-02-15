@@ -1374,3 +1374,50 @@ textarea#email_list {
 body {
   padding-bottom: 90px;
 }
+
+.contact-list li a, .contact-list li.address-book a {
+  background-image: url("/images/big_import.gif");
+  width: 250px;
+}
+
+.contact-list li.mail strong {
+  background: url("/images/at.gif") no-repeat scroll 5px 5px transparent;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0 5px 0 50px;
+}
+.hebrew .contact-list li.mail strong {
+  background: url("/images/at.gif") no-repeat scroll 200px 5px transparent;
+  padding: 0 50px 0 5px;
+}
+.hebrew .contact-list li.address-book strong {
+  background: url("/images/ico-address-book.gif") no-repeat scroll 212px 9px transparent;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.contact-list {
+  padding-top: 10px;
+  display: inline;
+  height: 50px;
+}
+span.add_manually {
+  margin-top: 15px;
+  font-size: 14px;
+  line-height: 50px;
+}
+span.add_manually a{
+  color: #41BDCD;
+  font-weight: bold;
+}
+.stars-bg.stage-3 .content-area {
+  min-height: 0;
+}
+#list_holder {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+}
+.guest_list {
+  display: none;
+}

@@ -1,18 +1,18 @@
-%ul.contact-list
-  %li.mail
-    %a{ :href => new_event_guest_importer_path(@event, :source => "email")}
-      %strong
-        %span
-          = _("Import from mail")
-          %em= _("(google, yahoo, etc.)")
-  %li.file
-    %a{ :href => new_event_guest_importer_path(@event, :source => "csv")}
-      %strong
-        %span= _("Advanced Import")
-  %li.address-book
-    %a{ :href => new_event_guest_importer_path(@event, :source => "addressbook")}
-      %strong
-        %span= _("Import from eventify's address book")
+#list_holder
+  %ul.contact-list
+    %li.mail
+      %a{ :href => new_event_guest_importer_path(@event, :source => "email")}
+        %strong
+          %span
+            = _("Import from mail")
+    - unless @event.user.contacts.blank?
+      %li.address-book
+        %a{ :href => new_event_guest_importer_path(@event, :source => "addressbook")}
+          %strong
+            %span= _("Import from eventify's address book")
+  %span.add_manually
+    = _("or")
+    != link_to_function _("Add manually:"), "jQuery('.guest_list').show();"
 
 :javascript
   jQuery(function(){
