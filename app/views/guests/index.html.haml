@@ -40,23 +40,24 @@
                   });
 
             %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
-            %p.rsvp-filter
-              %strong= _("Filter by RSVP:")
-              != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
-              %span= " / "
-              != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
-              %span= " / "
-              != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
-              %span= " / "
-              != link_to _("Not responded"), event_guests_path(@event, :rsvp_not_rsvped => true), :class => scope_class(:rsvp_not_rsvped)
-              %span= " / "
-              != link_to _("Not Opened Invitation"), event_guests_path(@event, :rsvp_not_opened_invite => true), :class => scope_class(:rsvp_not_opened_invite)
-              %span= " / "
-              != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
-              %span= " / "
-              != link_to _("No invitation sent"), event_guests_path(@event, :no_invitation_sent => true), :class => scope_class(:no_invitation_sent)
-              %span= " / "
-              != link_to _("All"), event_guests_path(@event), :class => scope_class
+            - unless params[:wizard]
+              %p.rsvp-filter
+                %strong= _("Filter by RSVP:")
+                != link_to _("Yes"), event_guests_path(@event, :rsvp_yes => true), :class => scope_class(:rsvp_yes)
+                %span= " / "
+                != link_to _("No"), event_guests_path(@event, :rsvp_no => true), :class => scope_class(:rsvp_no)
+                %span= " / "
+                != link_to _("May Be"), event_guests_path(@event, :rsvp_maybe => true), :class => scope_class(:rsvp_maybe)
+                %span= " / "
+                != link_to _("Not responded"), event_guests_path(@event, :rsvp_not_rsvped => true), :class => scope_class(:rsvp_not_rsvped)
+                %span= " / "
+                != link_to _("Not Opened Invitation"), event_guests_path(@event, :rsvp_not_opened_invite => true), :class => scope_class(:rsvp_not_opened_invite)
+                %span= " / "
+                != link_to _("Bounced emails"), event_guests_path(@event, :bounced => true), :class => scope_class(:bounced)
+                %span= " / "
+                != link_to _("No invitation sent"), event_guests_path(@event, :no_invitation_sent => true), :class => scope_class(:no_invitation_sent)
+                %span= " / "
+                != link_to _("All"), event_guests_path(@event), :class => scope_class
 
             %table#guests.info-table
               != render(:partial => "guests_header", :locals => {:check_all => true})

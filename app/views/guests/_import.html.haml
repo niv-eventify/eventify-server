@@ -12,7 +12,7 @@
             %span= _("Import from eventify's address book")
   %span.add_manually
     = _("or")
-    != link_to_function _("Add manually:"), "jQuery('.guest_list').show();"
+    != link_to_function _("Add manually:"), "jQuery('.guest_list').show();jQuery('.add_manually').hide();"
 
 :javascript
   jQuery(function(){
