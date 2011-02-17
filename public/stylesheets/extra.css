@@ -1396,6 +1396,14 @@ body {
   font-size: 14px;
 }
 
+.contact-list li a strong {
+  height: 50px;
+}
+
+.contact-list li a:hover, .contact-list li a.active{
+  background-position: 0 -50px;
+}
+
 .contact-list {
   padding-top: 10px;
   display: inline;
