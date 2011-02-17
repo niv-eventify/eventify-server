@@ -27,6 +27,7 @@ class GuestsController < InheritedResources::Base
 
   def index
     index! do |success|
+      @guests_count = @event.guests.count
       success.html { redirect_changes_disabled(@event) }
     end
   end

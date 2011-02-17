@@ -39,7 +39,7 @@
                     });
                   });
 
-            %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
+            %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @guests_count}
             - unless params[:wizard]
               %p.rsvp-filter
                 %strong= _("Filter by RSVP:")
@@ -65,5 +65,6 @@
                 != render(:partial => "guest", :collection => collection)
 
                 != render(:partial => "new")
-            %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @event.guests.count}
+            - unless @guests_count < 10
+              %h2.total_guests= _("Total guests - %{total_guests}") % {:total_guests => @guests_count}
             != will_paginate(collection, :renderer => DesignsWillPaginate)
