@@ -1,6 +1,6 @@
 - cid = contact.respond_to?(:uid) ? contact.uid : contact.id
 %tr[contact]
-  %td!= check_box_tag "contact[#{cid}][import]", "1", false, :class => "checkable"
+  %td!= check_box_tag "contact[#{cid}][import]", "1", @check_all_by_default, :class => "checkable"
   %td
     = contact.name
     != hidden_field_tag "contact[#{cid}][name]", contact.name

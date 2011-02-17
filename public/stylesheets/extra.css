@@ -1451,3 +1451,24 @@ ul.contact-tabset {
   width: 595px;
   margin: 0 0 0 -4px;
 }
+
+#event_invitation_title_input .textarea-bg {
+  background-image: url("/images/bg-textarea-small.gif");
+  height: 50px;
+}
+
+#event_invitation_title_input .textarea-bg textarea {
+  height: 43px;
+}
+
+.alt-page .logo {
+  top: 16px;
+}
+
+.hebrew .table-box table thead td {
+  text-align: right;
+}
+
+.hebrew .table-box table td {
+  text-align: right;
+}

@@ -12,6 +12,7 @@ class GuestImportersController < ApplicationController
 
   def create
     return _import_guests  unless params[:source]
+    @check_all_by_default = false
     _load_from_source
     @contacts.sort! {|a, b| a.name <=> b.name}
     responds_to_parent do
@@ -54,6 +55,7 @@ protected
     unless params[:email_list].blank?
       contacts1, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], params[:email_list])
       contacts.concat(contacts1.nil? ? [] : contacts1)
+      @check_all_by_default = true if params[:csvfile].blank?
       @error1 = error.to_s if error
     end
     if params[:csvfile].blank? and params[:email_list].blank?
