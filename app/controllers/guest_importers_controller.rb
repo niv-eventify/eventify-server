@@ -81,16 +81,13 @@ protected
 
   def _import_guests
     new_contacts = selected_contracts
-
-    guests_imported = @event.guests.import(new_contacts)
+    guests_imported = @event.guests.import(new_contacts, params[:save_to_addressbook])
     flash[:notice] = n_("%d guest imported", "%d guests imported", guests_imported) % guests_imported
-    
     if params[:save_to_addressbook] && !guests_imported.blank?
       new_contacts.each do |g|
         current_user.contacts.add(g["name"], g["email"])
       end
     end
-
     redirect_to event_guests_path(@event)
   end
 end

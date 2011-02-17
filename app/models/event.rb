@@ -12,11 +12,10 @@ class Event < ActiveRecord::Base
   DEFAULT_TIME_ZONE = "Jerusalem"
 
   has_many :guests do
-    def import(new_guests)
+    def import(new_guests, save_as_contact)
       guests_imported = 0
-
       new_guests.each do |g|
-        guest = build(:name => g["name"], :email => g["email"], :mobile_phone => g["mobile"])
+        guest = build(:name => g["name"], :email => g["email"], :mobile_phone => g["mobile"], :save_as_contact => save_as_contact)
         guest.send_email = true unless guest.email.blank?
         guests_imported += 1 if guest.save
       end

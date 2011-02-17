@@ -68,6 +68,8 @@ class Guest < ActiveRecord::Base
   before_update :check_unbounce
   after_create :save_to_contacts
 
+  attr_accessor :save_as_contact
+  attr_accessible :save_as_contact
   has_many :sms_messages
 
   has_many :takings
@@ -365,6 +367,7 @@ class Guest < ActiveRecord::Base
 
   attr_reader :suggested_name
   def save_to_contacts
+    return unless save_as_contact
     suggested_name = event.user.contacts.find_by_email(email).try(:name) if event.user.contacts.add(name, email).new_record?
     @suggested_name = suggested_name if suggested_name && suggested_name != name
   end
