@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110208121833) do
+ActiveRecord::Schema.define(:version => 20110221100325) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(:version => 20110208121833) do
     t.string   "map_content_type"
     t.integer  "map_file_size"
     t.datetime "map_updated_at"
-    t.string   "guest_message",                 :limit => 345
+    t.string   "guest_message",                 :limit => 1024
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "stage_passed"
@@ -166,7 +166,7 @@ ActiveRecord::Schema.define(:version => 20110208121833) do
     t.datetime "cancellation_sent_at"
     t.boolean  "cancel_by_sms"
     t.boolean  "cancel_by_email"
-    t.string   "invitation_title",              :limit => 100
+    t.string   "invitation_title",              :limit => 1024
     t.integer  "emails_plan",                                   :default => 0
     t.integer  "sms_plan",                                      :default => 0
     t.integer  "prints_plan",                                   :default => 0
@@ -175,6 +175,14 @@ ActiveRecord::Schema.define(:version => 20110208121833) do
     t.string   "invitation_thumb_content_type"
     t.integer  "invitation_thumb_file_size"
     t.datetime "invitation_thumb_updated_at"
+    t.integer  "text_top_x"
+    t.integer  "text_top_y"
+    t.integer  "text_width"
+    t.integer  "text_height"
+    t.integer  "title_top_x"
+    t.integer  "title_top_y"
+    t.integer  "title_width"
+    t.integer  "title_height"
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"

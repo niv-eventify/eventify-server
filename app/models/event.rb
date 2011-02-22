@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
   validates_associated :user, :on => :create, :if => proc { |e| e.user.activated_at.blank? }
 
   DEFAULT_TIME_ZONE = "Jerusalem"
+  RATIO = 1.6 #fullsize/preview_size
 
   has_many :guests do
     def import(new_guests, save_as_contact)
@@ -69,7 +70,8 @@ class Event < ActiveRecord::Base
 
   attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
     :location_name, :location_address, :map_link, :invitation_title, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
-    :msg_color, :title_color, :font_title, :font_body, :allow_seeing_other_guests, :tz,
+    :msg_color, :title_color, :font_title, :text_top_x, :text_top_y, :text_width, :text_height,
+    :title_top_x, :title_top_y, :title_width, :title_height, :font_body, :allow_seeing_other_guests, :tz,
     :cancellation_sms, :cancellation_email, :cancellation_email_subject
 
   has_attached_file :invitation_thumb,
@@ -546,6 +548,52 @@ class Event < ActiveRecord::Base
   def set_free_plans
     plan, price = Eventify.emails_plan(1)
     self.emails_plan = plan if price.zero? && emails_plan < plan
+  end
+
+  def stage2_preview_dimensions(current_locale, ratio)
+    res = {
+      'text-align' => msg_text_align.blank? ? nil : msg_text_align == "center" ? msg_text_align : current_locale == "he" ? "right" : "left",
+      :color => msg_color.blank? ? nil : "rgb(#{msg_color})",
+      "font-size" => msg_font_size.blank? ? nil : "#{msg_font_size.to_int}px",
+      "font-family" => "#{font_body}"
+    }
+    r = ratio || RATIO
+    unless text_width.blank?
+      res.merge!({
+        :width =>  "#{(text_width/r).to_int}px",
+        :height => "#{(text_height/r).to_int}px"
+      })
+    end
+    unless text_top_y.blank?
+      res.merge!({
+        :top =>    "#{(text_top_y/r).to_int}px",
+        :left =>   "#{(text_top_x/r).to_int}px",
+      })
+    end
+    @stage2_preview_dimensions ||= res.delete_if{|key,value| value.blank?}
+  end
+
+  def stage2_title_dimensions(current_locale, ratio)
+    res = {
+      'text-align' => title_text_align.blank? ? nil : title_text_align == "center" ? title_text_align : current_locale == "he" ? "right" : "left",
+      :color => title_color.blank? ? nil : "rgb(#{title_color})",
+      "font-size" => title_font_size.blank? ? nil : "#{title_font_size.to_int}px",
+      "font-family" => "#{font_title}"
+    }
+    r = ratio || RATIO
+    unless title_width.blank?
+      res.merge!({
+        :width =>  "#{(title_width/r).to_int}px",
+        :height => "#{(title_height/r).to_int}px"
+      })
+    end
+    unless title_top_y.blank?
+      res.merge!({
+        :top =>    "#{(title_top_y/r).to_int}px",
+        :left =>   "#{(title_top_x/r).to_int}px",
+      })
+    end
+    @stage2_title_dimensions ||= res.delete_if{|key,value| value.blank?}
   end
 
 protected

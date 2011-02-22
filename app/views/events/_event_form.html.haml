@@ -28,6 +28,14 @@
         != f.hidden_field :title_color
         != f.hidden_field :font_title
         != f.hidden_field :font_body
+        != f.hidden_field :text_top_x
+        != f.hidden_field :text_top_y
+        != f.hidden_field :text_width
+        != f.hidden_field :text_height
+        != f.hidden_field :title_top_x
+        != f.hidden_field :title_top_y
+        != f.hidden_field :title_width
+        != f.hidden_field :title_height
         != f.hidden_field :category_id
         != hidden_field_tag :just_save
         != hidden_field_tag :garden_id, @garden.id unless @garden.blank?

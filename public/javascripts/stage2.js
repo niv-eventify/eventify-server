@@ -3,8 +3,6 @@
   max_free_text_font_size: 0,
   curr_title_font_size: 0,
   curr_free_text_font_size: 0,
-  title_scroll_width: 0,
-  free_text_scroll_width: 0,
   months_arr: [],
   seperated_title: false,
   prev_event_invitation_title: "",
@@ -21,18 +19,22 @@
         overflow = true;
       }
     } else {
-      if(jQuery(".msg-holder").height() < jQuery("#free_text").height()) {
+      stage2.title_clone.scrollTop(1);
+      if(stage2.title_clone.scrollTop() == 1) {
         overflow = true;
       }
-      if(jQuery(".title-holder").height() < jQuery("#title").height()) {
+      stage2.free_text_clone.scrollTop(1);
+      if(stage2.free_text_clone.scrollTop() == 1) {
         overflow = true;
       }
     }
-    if(jQuery("#title")[0].scrollWidth > stage2.title_scroll_width) {
-        overflow = true;
+    stage2.free_text_clone.scrollLeft(-1);
+    if(stage2.free_text_clone.scrollLeft() == -1) {
+      overflow = true;
     }
-    if(jQuery("#free_text")[0].scrollWidth > stage2.free_text_scroll_width) {
-        overflow = true;
+    stage2.title_clone.scrollLeft(-1);
+    if(stage2.title_clone.scrollLeft() == -1) {
+      overflow = true;
     }
     return overflow;
   },
@@ -56,8 +58,8 @@
     var findReplace = [[/&/g, "&amp;"], [/</g, "&lt;"], [/>/g, "&gt;"], [/ /g, "&nbsp;"], [/\n/g, "<BR />"]]
     for(var i = 0; i < findReplace.length; i++)//it's important to do the replaces in the order of the array
       text = text.replace(findReplace[i][0], findReplace[i][1]);
-
     jQuery("#" + targetId).html(text);
+    stage2[targetId + "_clone"].html(text);
     if(!allowOverFlow) {
       protectionCounter = 0;
       while(stage2.isTextOverflow() && protectionCounter < 20) {
@@ -106,10 +108,12 @@
   showTitleBorder: function() {
     var selector = stage2.seperated_title ? ".title-holder" : "#title";
     jQuery(selector).css("border", "1px dashed red");
+    stage2.hideMsgBorder();
   },
   showMsgBorder: function() {
     var selector = stage2.seperated_title ? ".msg-holder" : "#free_text";
     jQuery(selector).css("border", "1px dashed red");
+    stage2.hideTitleBorder();
   },
   hideTitleBorder: function() {
     var selector = stage2.seperated_title ? ".title-holder" : "#title";
@@ -165,6 +169,7 @@
 
     jQuery('#toolbar_title a.font-plus').click(function(){
         stage2.change_font_size_by(1, "title");
+        stage2.cloneTextBoxes('.title-holder', 'title');
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
@@ -173,6 +178,7 @@
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
         stage2.change_font_size_by(-1, "title");
+        stage2.cloneTextBoxes('.title-holder', 'title');
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
@@ -181,6 +187,7 @@
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
         stage2.change_font_size_by(1, "free_text");
+        stage2.cloneTextBoxes('.msg-holder', 'free_text');
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
@@ -189,6 +196,7 @@
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
         stage2.change_font_size_by(-1, "free_text");
+        stage2.cloneTextBoxes('.msg-holder', 'free_text');
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
@@ -203,6 +211,7 @@
         currSelected.css("font-family",currSelected.html());
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("font-family",currSelected.html());
         jQuery("#event_font_title").val(currSelected.html());
+        stage2.cloneTextBoxes('.title-holder', 'title');
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
@@ -216,6 +225,7 @@
         currSelected.css("font-family",currSelected.html());
         jQuery('#free_text, .msg').css("font-family",currSelected.html());
         jQuery("#event_font_body").val(currSelected.html());
+        stage2.cloneTextBoxes('.msg-holder', 'free_text');
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
@@ -309,17 +319,6 @@
     jQuery('.form.new-event').submit();
   },
 
-  setScrollWidths: function() {
-    var title_bk = jQuery("#title").html();
-    var free_text_bk = jQuery("#free_text").html();
-    jQuery("#title").html("");
-    jQuery("#free_text").html("");
-    stage2.title_scroll_width = jQuery("#title")[0].scrollWidth;
-    stage2.free_text_scroll_width = jQuery("#free_text")[0].scrollWidth;
-    jQuery("#title").html(title_bk);
-    jQuery("#free_text").html(free_text_bk);
-  },
-
   previewMap: function() {
     if(jQuery("#map_holder img").length > 0) return;//there is a map image already shown
     var link = jQuery("#event_map_link").val()
@@ -333,6 +332,36 @@
     }
     jQuery("#map_holder").html("<iframe src='" + link + "'></iframe>");
     jQuery("#map_box").show();
+  },
+  setTextPosition: function(holder, otherElSelector, ui){
+    jQuery.fn.unload_monit_set();
+    jQuery('#event_' + holder + '_top_x').val(Math.ceil(ui.position.left*1.6));
+    jQuery('#event_' + holder + '_top_y').val(Math.ceil(ui.position.top*1.6));
+    jQuery(otherElSelector).css({
+      top: ui.position.top,
+      left: ui.position.left
+    });
+    if(ui.size){
+      jQuery('#event_' + holder + '_width').val(Math.ceil(ui.size.width*1.6));
+      jQuery('#event_' + holder + '_height').val(Math.ceil(ui.size.height*1.6));
+      jQuery(otherElSelector).css({
+        width: ui.size.width,
+        height: ui.size.height
+      });
+    }
+    stage2.setOverflowWarning();
+  },
+
+  cloneTextBoxes: function(parentSelector, target) {
+    jQuery("#" + target + "_clone").remove();
+    stage2[target + "_clone"] = jQuery('#' + target).clone().attr('id', target + '_clone').css({
+      overflow: 'auto',
+      visibility: 'hidden',
+      height: jQuery(parentSelector).css('height'),
+      width: jQuery(parentSelector).css('width'),
+      paddingRight: 0,
+      zIndex: -1
+    }).appendTo(jQuery(parentSelector));
   }
 }
 jQuery(document).ready(function(){
@@ -340,9 +369,33 @@ jQuery(document).ready(function(){
   jQuery(".ending_at_time_select select.short:first").addClass("marg");
   jQuery('select').customSelect();
   stage2.seperated_title = (jQuery(".title-holder").length == 1);
+  stage2.cloneTextBoxes('.msg-holder', 'free_text');
+  stage2.cloneTextBoxes('.title-holder', 'title');
   stage2.initToolbars();
-  stage2.hideMsgBorder();
-  stage2.hideTitleBorder();
+  stage2.showMsgBorder();
+  stage2.showTitleBorder();
+  jQuery(".msg-holder").resizable({
+    handles: 'n,e,s,w',
+    stop: function(event, ui){
+      stage2.cloneTextBoxes('.msg-holder', 'free_text');
+      stage2.setTextPosition("text", ".msg_holder", ui);
+    }
+  }).draggable({
+    stop: function(event, ui){
+      stage2.setTextPosition("text", ".msg_holder", ui);
+    }
+  });
+  jQuery(".title-holder").resizable({
+    handles: 'n,e,s,w',
+    stop: function(event, ui){
+      stage2.cloneTextBoxes('.title-holder', 'title');
+      stage2.setTextPosition("title", ".title_holder", ui);
+    }
+  }).draggable({
+    stop: function(event, ui){
+      stage2.setTextPosition("title", ".title_holder", ui);
+    }
+  });
   stage2.previewMap();
   if(jQuery("#event_starting_at_day").val() != "" && jQuery("#event_starting_at_month").val() != "" && jQuery("#event_starting_at_year").val() != "") {
     jQuery("#starting_at_mock").val(jQuery("#event_starting_at_day").val() + "." + jQuery("#event_starting_at_month").val() + "." + jQuery("#event_starting_at_year").val());
@@ -353,8 +406,6 @@ jQuery(document).ready(function(){
   if(jQuery("#ending_at_mock").val() == "" && jQuery("#event_ending_at_4i").val() == "" && jQuery("#event_ending_at_5i").val() == "") {
     stage2.hide_ending_at_block();
   }
-
-  stage2.setScrollWidths();
 
   stage2.location = jQuery("#event_location_name").val();
   stage2.startDate = jQuery("#starting_at_mock").val();
@@ -478,8 +529,8 @@ jQuery(document).ready(function(){
     }
     jQuery(this).attr('href','http://maps.google.com/?hl=he&t=m&q=' + addr)
   });
-  set_counter("#event_invitation_title", "#event_invitation_title_input .inline-hints", 100);
-  set_counter("#event_guest_message", "#event_guest_message_input .inline-hints", 345);
+  set_counter("#event_invitation_title", "#event_invitation_title_input .inline-hints", 1024);
+  set_counter("#event_guest_message", "#event_guest_message_input .inline-hints", 1024);
   jQuery(".side-area input, .side-area textarea").unload_monit();
   jQuery("#event_map_link").live("blur", function(){
     stage2.previewMap();

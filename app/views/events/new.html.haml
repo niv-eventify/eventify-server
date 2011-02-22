@@ -3,7 +3,7 @@
 - params[:wizard] = "true"
 
 - content_for(:head) do
-  != stylesheet_link_tag "calendar", "nyroModal.full", "colorPicker", "rsvps"
+  != stylesheet_link_tag "jquery-ui", "calendar", "nyroModal.full", "colorPicker", "rsvps"
   != javascript_include_tag "mootools", "calendar", "jquery.nyroModal", "jquery.colorPicker", "stage2", "rsvps", "jquery.unload"
 != render(:partial => "event_form")
 != render(:partial => "toolbar_preview")

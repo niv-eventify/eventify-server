@@ -16,9 +16,9 @@
 
   - event_text_input(f, :name, _("Event name"), {:required => true}, "#{_('ex. My 40th birthday')}")
 - f.inputs do
-  - event_input_text(f, :invitation_title, _("Invitation Title"), _("(100 symbols max)"), "#{_("#{_('Your Invitation Title Here')}")}")
+  - event_input_text(f, :invitation_title, _("Invitation Title"), _("(1024 symbols max)"), "#{_("#{_('Your Invitation Title Here')}")}")
 - f.inputs do
-  - event_input_text(f, :guest_message, _("Message to Guests"), _("(345 symbols max)"), "#{_("ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June at 22:00 &#13;&#10;at The Neighborhood Bar")}")
+  - event_input_text(f, :guest_message, _("Message to Guests"), _("(1024 symbols max)"), "#{_("ex. Please come and celebrate my 40th birthday.&#13;&#10;On the 20th of June at 22:00 &#13;&#10;at The Neighborhood Bar")}")
 != form_divider
 - f.inputs do
   - event_date_time_select_combo(f, :starting_at) do
