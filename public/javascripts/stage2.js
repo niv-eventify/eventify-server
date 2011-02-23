@@ -44,9 +44,11 @@
     if(id == "title") {
       jQuery("#event_title_font_size").val(new_font_size);
       jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", new_font_size + "px");
+      stage2.cloneTextBoxes('.title-holder', 'title');
     } else {
       jQuery("#event_msg_font_size").val(new_font_size);
       jQuery(".background_holder .msg").css("font-size", new_font_size + "px");
+      stage2.cloneTextBoxes('.msg-holder', 'free_text');
     }
     stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
   },
@@ -169,7 +171,6 @@
 
     jQuery('#toolbar_title a.font-plus').click(function(){
         stage2.change_font_size_by(1, "title");
-        stage2.cloneTextBoxes('.title-holder', 'title');
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
@@ -178,7 +179,6 @@
     });
     jQuery('#toolbar_title a.font-minus').click(function(){
         stage2.change_font_size_by(-1, "title");
-        stage2.cloneTextBoxes('.title-holder', 'title');
         stage2.setOverflowWarning();
         stage2.showTitleBorder();
         stage2.setToolbarsPosition();
@@ -187,7 +187,6 @@
     });
     jQuery('#toolbar_msg a.font-plus').click(function(){
         stage2.change_font_size_by(1, "free_text");
-        stage2.cloneTextBoxes('.msg-holder', 'free_text');
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
@@ -196,7 +195,6 @@
     });
     jQuery('#toolbar_msg a.font-minus').click(function(){
         stage2.change_font_size_by(-1, "free_text");
-        stage2.cloneTextBoxes('.msg-holder', 'free_text');
         stage2.setOverflowWarning();
         stage2.showMsgBorder();
         stage2.setToolbarsPosition();
@@ -372,8 +370,8 @@ jQuery(document).ready(function(){
   stage2.cloneTextBoxes('.msg-holder', 'free_text');
   stage2.cloneTextBoxes('.title-holder', 'title');
   stage2.initToolbars();
-  stage2.showMsgBorder();
-  stage2.showTitleBorder();
+  stage2.hideMsgBorder();
+  stage2.hideTitleBorder();
   jQuery(".msg-holder").resizable({
     handles: 'n,e,s,w',
     stop: function(event, ui){

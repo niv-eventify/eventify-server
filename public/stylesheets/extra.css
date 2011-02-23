@@ -203,7 +203,6 @@ div.cmf-skinned-text {
 .title-holder{
   margin: 0;
   font-size: 22px;
-  line-height: 1.2em;
   overflow: hidden;
   padding-right: 0px;
   min-height: 1em;
@@ -211,7 +210,6 @@ div.cmf-skinned-text {
 .msg-holder{
   margin: 0;
   font-size: 20px;
-  line-height: 1em;
   overflow: hidden;
   padding-right: 0px;
   min-height: 1em;

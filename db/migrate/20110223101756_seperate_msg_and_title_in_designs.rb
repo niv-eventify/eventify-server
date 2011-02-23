@@ -9,11 +9,11 @@ class SeperateMsgAndTitleInDesigns < ActiveRecord::Migration
         d.title_top_x = old_text_top_x
         d.title_top_y = old_text_top_y
         d.title_width = old_text_width
-        d.title_height = (old_text_height.to_f / 3).ceil
+        d.title_height = (old_text_height.to_f / 4).ceil
         d.text_top_x = old_text_top_x
-        d.text_top_y = old_text_top_y + ((old_text_height.to_f / 3).ceil) + 5
+        d.text_top_y = old_text_top_y + ((old_text_height.to_f / 4).ceil) + 5
         d.text_width = old_text_width
-        d.text_height = (old_text_height.to_f * 2 / 3).ceil
+        d.text_height = (old_text_height.to_f * 3 / 4).ceil
         d.save
       end
     end
