@@ -23,7 +23,7 @@ class SeperateMsgAndTitleInDesigns < ActiveRecord::Migration
     Design.find(:all).each do |d|
       unless d.text_width != d.title_width || d.title_top_x != d.text_top_x
         d.text_top_y = d.title_top_y
-        d.text_height = d.title_height * 3
+        d.text_height = d.title_height * 4
         d.title_top_x = nil
         d.title_top_y = nil
         d.title_width = nil
