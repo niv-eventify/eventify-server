@@ -10,6 +10,12 @@
   msg_first_font_change: false,
   workingOnTitle: false,
   workingOnMsg: false,
+  justChangedTitle: false,
+  justChangedMsg: false,
+  delayedShowMsgBorder: null,
+  delayedShowTitleBorder: null,
+  cancelTitleBlur: false,
+  cancelMsgBlur: false,
 
   isTextOverflow: function() {
     var overflow = false;
@@ -38,11 +44,11 @@
     jQuery("#" + id).css("font-size", new_font_size + "px");
     if(id == "title") {
       jQuery("#event_title_font_size").val(new_font_size);
-      jQuery(".background_holder .title_holder, .background_holder .title").css("font-size", new_font_size + "px");
+      jQuery(".background_holder .title_holder").css("font-size", new_font_size + "px");
       stage2.cloneTextBoxes('.title-holder', 'title');
     } else {
       jQuery("#event_msg_font_size").val(new_font_size);
-      jQuery(".background_holder .msg").css("font-size", new_font_size + "px");
+      jQuery(".background_holder .msg-holder").css("font-size", new_font_size + "px");
       stage2.cloneTextBoxes('.msg-holder', 'free_text');
     }
     stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
@@ -90,39 +96,41 @@
   },
 
   show_title_border: function() {
-    jQuery(".title-holder").css("border", "1px dashed red").css('z-index', function(index,value){return value+1;});
+    jQuery(".title-holder").css("border", "1px dashed red");
     stage2.setToolbarsPosition();
     jQuery('#toolbar_title').css("visibility", "visible");
     stage2.hide_msg_border();
   },
   show_msg_border: function() {
-    jQuery(".msg-holder").css("border", "1px dashed red").css('z-index', function(index,value){return value+1;});
+    jQuery(".msg-holder").css("border", "1px dashed red");
     stage2.setToolbarsPosition();
     jQuery('#toolbar_msg').css("visibility", "visible");
     stage2.hide_title_border();
   },
   hide_title_border: function() {
-    jQuery(".title-holder").css("border", "").css('z-index', function(index,value){return value-1;});
+    jQuery(".title-holder").css("border", "");
     jQuery('#toolbar_title').css("visibility", "hidden");
+    stage2.workingOnTitle = false;
   },
   hide_msg_border: function() {
-    jQuery(".msg-holder").css("border", "").css('z-index', function(index,value){return value-1;});
+    jQuery(".msg-holder").css("border", "");
     jQuery('#toolbar_msg').css("visibility", "hidden");
+    stage2.workingOnMsg = false;
   },
   alignTitle: function(align) {
-        jQuery('#title').css('text-align',align);
+        jQuery('#title-holder').css('text-align',align);
         jQuery('#event_title_text_align').val(align);
+        jQuery(".background_holder .title_holder").css("text-align",align);
         stage2.show_title_border();
         jQuery.fn.unload_monit_set();
-        jQuery(".background_holder .title_holder, .background_holder .title").css("text-align",align);
   },
 
-  alignFreeText: function(align) {
-        jQuery('#free_text').css("text-align",align);
+  alignMsg: function(align) {
+        jQuery('#msg-holder').css("text-align",align);
         jQuery('#event_msg_text_align').val(align);
-        stage2.show_title_border();
+        jQuery(".msg_holder").css("text-align",align);
+        stage2.show_msg_border();
         jQuery.fn.unload_monit_set();
-        jQuery(".msg").css("text-align",align);
   },
 
   initToolbars: function() {
@@ -139,15 +147,15 @@
         return false;
     });
     jQuery('#toolbar_msg li.a-l a').click(function(){
-        stage2.alignFreeText("left")
+        stage2.alignMsg("left")
         return false;
     });
     jQuery('#toolbar_msg li.a-c a').click(function(){
-        stage2.alignFreeText("center")
+        stage2.alignMsg("center")
         return false;
     });
     jQuery('#toolbar_msg li.a-r a').click(function(){
-        stage2.alignFreeText("right")
+        stage2.alignMsg("right")
         return false;
     });
 
@@ -190,6 +198,8 @@
         stage2.cloneTextBoxes('.title-holder', 'title');
         stage2.setOverflowWarning();
         stage2.show_title_border();
+        stage2.justChangedTitle = true;
+        stage2.workingOnTitle = false;
         if(stage2.title_first_font_change){
           jQuery.fn.unload_monit_set();
         }
@@ -203,6 +213,8 @@
         stage2.cloneTextBoxes('.msg-holder', 'free_text');
         stage2.setOverflowWarning();
         stage2.show_msg_border();
+        stage2.justChangedMsg = true;
+        stage2.workingOnMsg = false;
         if(stage2.msg_first_font_change){
           jQuery.fn.unload_monit_set();
         }
@@ -222,6 +234,8 @@
         jQuery('.background_holder .title_holder, .background_holder .title, #title').css("color",jQuery(this).val());
         jQuery("#event_title_color").val(jQuery(this).val());
         jQuery.fn.unload_monit_set();
+        stage2.justChangedTitle = true;
+        stage2.workingOnTitle = false;
     });
     jQuery("#pallete_title").colorPicker();
     if(jQuery("#event_title_color").val().length > 0)
@@ -231,6 +245,8 @@
         jQuery('#free_text, .msg').css("color",jQuery(this).val());
         jQuery("#event_msg_color").val(jQuery(this).val());
         jQuery.fn.unload_monit_set();
+        stage2.justChangedMsg = true;
+        stage2.workingOnMsg = false;
     });
     jQuery("#pallete_msg").colorPicker();
     if(jQuery("#event_msg_color").val().length > 0)
@@ -339,9 +355,26 @@
   },
 
   bindTitleEvents: function() {
-    jQuery(".title-holder").mouseover(function(){
+    jQuery(".title-holder").mouseenter(function(){
       if(stage2.workingOnMsg) return;
+      if(stage2.justChangedMsg) {
+        if(stage2.delayedShowTitleBorder) return;
+        stage2.delayedShowTitleBorder = setTimeout(function(){
+          if(!stage2.workingOnMsg) {
+            stage2.show_title_border();
+            jQuery(".title-holder").css('z-index', '101');
+          }
+          stage2.justChangedMsg = false;
+          stage2.delayedShowTitleBorder = null;
+        }, 1000);
+        return;
+      }
+      clearTimeout(stage2.delayedShowMsgBorder);
+      stage2.delayedShowMsgBorder = null;
       stage2.show_title_border();
+      jQuery(this).css('z-index', '101');
+    }).mouseleave(function(){
+      jQuery(this).css('z-index', '100');
     }).resizable({
       handles: 'all',
       autoHide: true,
@@ -368,9 +401,23 @@
     });
   },
   bindMsgEvents: function() {
-    jQuery(".msg-holder").mouseover(function(){
+    jQuery(".msg-holder").mouseenter(function(){
       if(stage2.workingOnTitle) return;
+      if(stage2.justChangedTitle) {
+        if(stage2.delayedShowMsgBorder) return;
+        stage2.delayedShowMsgBorder = setTimeout(function(){
+          if(!stage2.workingOnTitle) stage2.show_msg_border();
+          stage2.justChangedTitle = false;
+          stage2.delayedShowMsgBorder = null;
+        }, 1000);
+        return;
+      }
+      clearTimeout(stage2.delayedShowTitleBorder);
+      stage2.delayedShowTitleBorder = null;
       stage2.show_msg_border();
+      jQuery(this).css('z-index', '101');
+    }).mouseleave(function(){
+      jQuery(this).css('z-index', '100');
     }).resizable({
       handles: 'all',
       autoHide: true,
@@ -395,7 +442,7 @@
         stage2.workingOnMsg = true;
       }
     });
-  },
+  }
 }
 jQuery(document).ready(function(){
   jQuery(".starting_at_time_select select.short:first").addClass("marg");
@@ -486,12 +533,26 @@ jQuery(document).ready(function(){
     stage2.show_msg_border();
   });
   jQuery("#event_guest_message").blur(function(){
+    if(stage2.cancelMsgBlur){
+      stage2.cancelMsgBlur = false;
+      return;
+    }
     stage2.hide_msg_border();
+  });
+  jQuery("#toolbar_msg").mousedown(function(){
+    stage2.cancelMsgBlur = true;
   });
   jQuery("#event_invitation_title").focus(function(){
     stage2.show_title_border();
   });
+  jQuery("#toolbar_title").mousedown(function(){
+    stage2.cancelTitleBlur = true;
+  });
   jQuery("#event_invitation_title").blur(function(){
+    if(stage2.cancelTitleBlur) {
+      stage2.cancelTitleBlur = false;
+      return;
+    }
     stage2.hide_title_border();
   });
   jQuery(".title-holder,.msg-holder").css("cursor", "pointer");
@@ -502,6 +563,7 @@ jQuery(document).ready(function(){
   jQuery(".msg-holder").click(function(){
     jQuery("#event_guest_message").focus();
   });
+  
   stage2.bindTitleEvents();
   stage2.bindMsgEvents();
 
@@ -510,7 +572,7 @@ jQuery(document).ready(function(){
     var t = e.target || e.srcElement;
     t = jQuery(t);
     var clickedColorPallete = t.parents("#color_selector").length > 0;
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'free_text']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #free_text, .selectOptions.select_msg').length == 0;
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"), ['toolbar_msg', 'event_guest_message', 'msg-holder']) == -1) && t.parents('#toolbar_msg, #event_guest_message, #msg-holder, .selectOptions.select_msg').length == 0;
     if(!clickedColorPallete) {
       if(clickedElsewhere && jQuery('#toolbar_msg').css("visibility") == "visible"){
         stage2.hide_msg_border();
@@ -518,7 +580,7 @@ jQuery(document).ready(function(){
         stage2.show_msg_border();
       }
     }
-    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_invitation_title', 'title']) == -1) && t.parents('#toolbar_title, #event_invitation_title, #title, .selectOptions.select_title').length == 0;;
+    var clickedElsewhere = (jQuery.inArray(t.attr("id"),['toolbar_title', 'event_invitation_title', 'title-holder']) == -1) && t.parents('#toolbar_title, #event_invitation_title, #title-holder, .selectOptions.select_title').length == 0;;
     if(!clickedColorPallete) {
       if(clickedElsewhere && jQuery('#toolbar_title').css("visibility") == "visible"){
         stage2.hide_title_border();

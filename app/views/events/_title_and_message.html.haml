@@ -1,11 +1,7 @@
-- if event.design.is_seperated_title?
-  .title-holder{:style => title_position_css(event)}
-    #title.title
-      != (h(event.invitation_title) || "").gsub(/\n/, "<br/>").gsub(/ /, "&nbsp;")
-.msg-holder{:style => message_position_css(event)}
-  - if !event.design.is_seperated_title? 
-    #title.title{:style => title_position_css(event)}
-      != (h(event.invitation_title) || "").gsub(/\n/, "<br/>").gsub(/ /, "&nbsp;")
+#title-holder.title-holder{:style => title_position_css(event)}
+  #title.title
+    != (h(event.invitation_title) || "").gsub(/\n/, "<br/>").gsub(/ /, "&nbsp;")
+#msg-holder.msg-holder{:style => message_position_css(event)}
   #free_text.free_text
     != (h(event.guest_message) || "").gsub(/\n/, "<br/>").gsub(/ /, "&nbsp;")
 - set_windows(event, 1.605)
