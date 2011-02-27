@@ -273,6 +273,16 @@
 .window img {
 	width: 100%;
 }
+.image-h{
+  width: 561px;
+  height: 374px;
+}
+.image-background-holder{
+  width: 561px;
+  height: 374px;
+  z-index:100;
+  position:absolute;
+}
 .image-holder img, .image-h img {
 	z-index: 100;
 	position: relative;
