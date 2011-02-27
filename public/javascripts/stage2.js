@@ -48,7 +48,7 @@
       stage2.cloneTextBoxes('.title-holder', 'title');
     } else {
       jQuery("#event_msg_font_size").val(new_font_size);
-      jQuery(".background_holder .msg-holder").css("font-size", new_font_size + "px");
+      jQuery(".background_holder .msg_holder").css("font-size", new_font_size + "px");
       stage2.cloneTextBoxes('.msg-holder', 'free_text');
     }
     stage2["curr_" + id + "_font_size"] = parseInt(jQuery("#" + id).css("font-size"));
@@ -118,19 +118,19 @@
     stage2.workingOnMsg = false;
   },
   alignTitle: function(align) {
-        jQuery('#title-holder').css('text-align',align);
-        jQuery('#event_title_text_align').val(align);
-        jQuery(".background_holder .title_holder").css("text-align",align);
-        stage2.show_title_border();
-        jQuery.fn.unload_monit_set();
+    jQuery('#title-holder').css('text-align',align);
+    jQuery('#event_title_text_align').val(align);
+    jQuery(".background_holder .title_holder").css("text-align",align);
+    stage2.show_title_border();
+    jQuery.fn.unload_monit_set();
   },
 
   alignMsg: function(align) {
-        jQuery('#msg-holder').css("text-align",align);
-        jQuery('#event_msg_text_align').val(align);
-        jQuery(".msg_holder").css("text-align",align);
-        stage2.show_msg_border();
-        jQuery.fn.unload_monit_set();
+    jQuery('#msg-holder').css("text-align",align);
+    jQuery('#event_msg_text_align').val(align);
+    jQuery(".msg_holder").css("text-align",align);
+    stage2.show_msg_border();
+    jQuery.fn.unload_monit_set();
   },
 
   initToolbars: function() {
