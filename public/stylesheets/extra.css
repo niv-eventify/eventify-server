@@ -1371,36 +1371,36 @@ body {
   padding-bottom: 90px;
 }
 
-.contact-list li a, .contact-list li.address-book a {
+.contact-list1 li a, .contact-list1 li.address-book a {
   background-image: url("/images/big_import.gif");
   width: 250px;
 }
 
-.contact-list li.mail strong {
+.contact-list1 li.mail strong {
   background: url("/images/at.gif") no-repeat scroll 5px 5px transparent;
   font-weight: bold;
   font-size: 14px;
   padding: 0 5px 0 50px;
 }
-.hebrew .contact-list li.mail strong {
+.hebrew .contact-list1 li.mail strong {
   background: url("/images/at.gif") no-repeat scroll 200px 5px transparent;
   padding: 0 50px 0 5px;
 }
-.hebrew .contact-list li.address-book strong {
+.hebrew .contact-list1 li.address-book strong {
   background: url("/images/ico-address-book.gif") no-repeat scroll 212px 9px transparent;
   font-weight: bold;
   font-size: 14px;
 }
 
-.contact-list li a strong {
+.contact-list1 li a strong {
   height: 50px;
 }
 
-.contact-list li a:hover, .contact-list li a.active{
+.contact-list1 li a:hover, .contact-list1 li a.active{
   background-position: 0 -50px;
 }
 
-.contact-list {
+.contact-list1 {
   padding-top: 10px;
   display: inline;
   height: 50px;
