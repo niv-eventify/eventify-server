@@ -555,7 +555,6 @@ jQuery(document).ready(function(){
     }
     stage2.hide_title_border();
   });
-  jQuery(".title-holder,.msg-holder").css("cursor", "pointer");
 
   jQuery(".title-holder").click(function(){
     jQuery("#event_invitation_title").focus();

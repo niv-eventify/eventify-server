@@ -187,6 +187,10 @@ div.cmf-skinned-text {
   overflow: hidden;
   z-index: 100;
   white-space: nowrap;
+  margin: 0;
+  font-size: 22px;
+  padding-right: 0px;
+  cursor: pointer;
 }
 .msg-holder {
   text-align: center;
@@ -194,30 +198,20 @@ div.cmf-skinned-text {
   overflow: hidden;
   z-index: 100;
   white-space: nowrap;
+  margin: 0;
+  font-size: 20px;
+  padding-right: 0px;
+  cursor: pointer;
 }
 
 .msg-holder.ui-resizable, .title-holder.ui-resizable {
   position: absolute;
 }
 
-.title-holder{
-  margin: 0;
-  font-size: 22px;
-  overflow: hidden;
-  padding-right: 0px;
-  min-height: 1em;
-}
-.msg-holder{
-  margin: 0;
-  font-size: 20px;
-  overflow: hidden;
-  padding-right: 0px;
-  min-height: 1em;
-}
 .hebrew .msg-holder, .hebrew .title-holder {
 	direction: rtl;
 }
-.hebrew .msg-holder .title, .hebrew .title-holder .title, .hebrew .msg-holder .free_text {
+.hebrew .title-holder .title, .hebrew .msg-holder .free_text {
   overflow: hidden;
 }
 .blue-btn-mdl {

@@ -1,6 +1,5 @@
 .visual-box
   .holder
     .frame
-      .image-h
-        != image_tag(@event.design.card.url(:stage2), :size => "561x374")
+      .image-h{:style => "background-image: url('#{@event.design.card.url(:stage2)}');width: 561px;height: 374px;"}
         != render(:partial => "events/title_and_message", :locals => {:event => @event})
