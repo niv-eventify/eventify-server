@@ -13,4 +13,7 @@ class EventMapsController < InheritedResources::Base
     end
     render :nothing => true
   end
+  def show
+    render :nothing => true
+  end
 end
