@@ -27,7 +27,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :events do |event|
     event.resources :guests, :collection => {:mass_update => :put}
     event.resources :things
-    event.resource :event_maps
+    event.resource :event_maps, :only => [:destroy]
     event.resources :payments, :only => [:new, :edit, :update, :create]
     event.resources :reminders
     event.resource :design
