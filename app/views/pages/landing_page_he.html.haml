@@ -10,3 +10,55 @@
   #header2{:style => "position: absolute; right: 15px; top: 180px; width: 440px; height: 180px; z-index: 2;"}
     %h1{:style => "font-size: 16px; line-height: 22px;"}
       מתכננים יום הולדת? עצבו עם ילדכם את ההזמנה המדהימה ביותר והזמינו את החברים באימייל ובסמס
+.start-box
+  != link_to _("Click here to start!"), url_for(lobby_path), :class => "btn-start-long"
+#lower_panel{:style => "background-image: url('/images/lower-panel-top.png'); background-position: center top; background-repeat: no-repeat; background-color: rgb(255,255,255); position: relative; width: 100%; height: 260px"}
+  .date-box.landing-page-remind
+    .holder
+      .frame
+        .text-block
+          %h2
+            הזכר לי
+          %p
+            %strong
+              רוצה לתכנן אירוע ולא לשכוח?
+          %p
+            קבע לך תזכורת שתשלח ישירות למייל
+        %form.remind-form{:action => "#"}
+          %fieldset
+            %dl
+              %dt
+                תאריך:
+              %dd
+                %a.calendar-link{:href => "#"}
+                  calendar
+            .row
+              %label{:for => "email-field"}
+                אימייל:
+              .text
+                %input#email-field.text{:type => "text", :value =>""}
+            .btn-hold
+              %a{:href => "#"}
+                שלח
+        %span.email-label
+  .feature-box{:style => "position: relative; left: -100px; top: 20px; width: 364px; height: 74px; z-index: 1;"}
+    .green-bullet{:style => "background-image: url('/images/green-arrow.png'); height: 26px; width: 32px; float: right;"}
+    .feature-text{:style => "padding: 0 45px 0 0;"}
+      .feature-title{:style => "font-size: 16px; line-height: 19px; font-weight: bold;"}
+        Very Important Point
+      .feature-body{:style => "font-size: 13px; line-height: 18px;"}
+        Very Important Point
+  .feature-box{:style => "position: relative; left: -100px; top: 20px; width: 364px; height: 74px; z-index: 1;"}
+    .green-bullet{:style => "background-image: url('/images/green-arrow.png'); height: 26px; width: 32px; float: right;"}
+    .feature-text{:style => "padding: 0 45px 0 0;"}
+      .feature-title{:style => "font-size: 16px; line-height: 19px; font-weight: bold;"}
+        Very Important Point
+      .feature-body{:style => "font-size: 13px; line-height: 18px;"}
+        Very Important Point
+  .feature-box{:style => "position: relative; left: -100px; top: 20px; width: 364px; height: 74px; z-index: 1;"}
+    .green-bullet{:style => "background-image: url('/images/green-arrow.png'); height: 26px; width: 32px; float: right;"}
+    .feature-text{:style => "padding: 0 45px 0 0;"}
+      .feature-title{:style => "font-size: 16px; line-height: 19px; font-weight: bold;"}
+        Very Important Point
+      .feature-body{:style => "font-size: 13px; line-height: 18px;"}
+        Very Important Point

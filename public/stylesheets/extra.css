@@ -1468,3 +1468,77 @@ ul.contact-tabset {
 .hebrew .table-box table td {
   text-align: right;
 }
+.hebrew .btn-start-long {
+  background-position: 0 0;
+  padding: 0 0 0 21px;  
+}
+.btn-start-long {
+  background: url("/images/btn-start-long.gif") no-repeat scroll 0 -64px transparent;
+  color: #FFFFFF;
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  height: 64px;
+  line-height: 62px;
+  margin: 15px auto 4px;
+  padding: 0 21px 0 0;
+  position: relative;
+  text-align: center;
+  width: 290px;
+}
+.hebrew .landing-page-remind {
+  margin: 10px 0 0 200px;
+  float: left;
+}
+.hebrew .landing-page-remind .email-label{
+  left: 7px;
+  right: auto;
+}
+.landing-page-remind .email-label{
+  background: url("../images/email-label.png") no-repeat scroll 0 0 transparent;
+  font-size: 0;
+  height: 157px;
+  line-height: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 15px;
+  top: -9px;
+  width: 81px;  
+}
+.landing-page-remind .row{
+  overflow: hidden;
+  padding: 0 0 17px;
+  width: 100%;
+}
+.hebrew .landing-page-remind .frame {
+    padding: 25px 14px 18px 90px;
+}
+.hebrew .landing-page-remind label {
+    float: right;
+    font-weight: bold;
+}
+.hebrew .landing-page-remind .text {
+    margin: 0 40px 7px 0;
+}
+
+.hebrew .landing-page-remind .btn-hold {
+  margin: 0 110px 0 0;
+}
+.landing-page-remind .btn-hold {
+    margin: 0 0 0 -5px;
+    overflow: hidden;
+    text-align: center;
+    width: 85px;
+}
+.landing-page-remind .btn-hold a {
+    background: url("../images/btn-6.gif") no-repeat scroll 0 0 transparent;
+    color: #FFFFFF;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+    height: 27px;
+    line-height: 25px;
+    margin: 0 0 0 4px;
+    text-align: center;
+    width: 82px;
+}
