@@ -1542,3 +1542,7 @@ ul.contact-tabset {
     text-align: center;
     width: 82px;
 }
+.quoted_text {
+  font-size: 12px;
+  padding: 1px 55px 2px 0;
+}

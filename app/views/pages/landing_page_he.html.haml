@@ -12,7 +12,7 @@
       מתכננים יום הולדת? עצבו עם ילדכם את ההזמנה המדהימה ביותר והזמינו את החברים באימייל ובסמס
 .start-box
   != link_to _("Click here to start!"), url_for(lobby_path), :class => "btn-start-long"
-#lower_panel{:style => "background-image: url('/images/lower-panel-top.png'); background-position: center top; background-repeat: no-repeat; background-color: rgb(255,255,255); position: relative; width: 100%; height: 260px"}
+#lower_panel{:style => "background-image: url('/images/lower-panel-top.png'); background-position: center top; background-repeat: no-repeat; background-color: rgb(255,255,255); position: relative; width: 100%; height: 380px"}
   .date-box.landing-page-remind
     .holder
       .frame
@@ -62,3 +62,11 @@
         Very Important Point
       .feature-body{:style => "font-size: 13px; line-height: 18px;"}
         Very Important Point
+  #quote-box{:style => "width: 740px; height: 135px; margin: 15px auto;"}
+    #quote{:style => "height: 75px; background-image: url('/images/bg-comment-huge.gif');"}
+    #quoted{:style => "height: 70px; padding: 10px 0;"}
+      %img{:src => "/images/quoted_thumb.png", :style => "float:right;"}
+      #quoted_name.quoted_text{:style => "font-weight: bold;"}
+        שרון רומאנו
+      #quoted_city.quoted_text
+        רחובות
