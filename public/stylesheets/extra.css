@@ -1507,11 +1507,11 @@ ul.contact-tabset {
 }
 .landing-page-remind .row{
   overflow: hidden;
-  padding: 0 0 17px;
+  padding: 6px 0;
   width: 100%;
 }
 .hebrew .landing-page-remind .frame {
-    padding: 25px 14px 18px 90px;
+    padding: 25px 14px 14px 90px;
 }
 .hebrew .landing-page-remind label {
     float: right;
