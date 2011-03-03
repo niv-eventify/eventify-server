@@ -1,0 +1,9 @@
+%tr
+  %td= landing_page.id
+  %td= landing_page.language
+  %td= landing_page.category.send("name_#{landing_page.language}")
+  %td= landing_page.friendly_url
+  %td!= image_tag landing_page.image.url(:lp), :width => "50%", :height => "50%"
+  %td!= image_tag landing_page.quoted.url(:thumb)
+  %td!= link_to "Delete", admin_landing_page_path(landing_page), :method => :delete, :confirm => "Are you sure?"
+  %td!= link_to "Edit", edit_admin_landing_page_path(landing_page)

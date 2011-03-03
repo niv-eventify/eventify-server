@@ -1,0 +1,23 @@
+!= f.error_messages
+
+- f.inputs do
+  != f.input :language, :as => :select, :label => "Language", :collection => ["he", "en"]
+- f.inputs do
+  != f.select :category_id, categories_for_admin_designs  
+- f.inputs do
+  != f.input :friendly_url, :label => "Friendly URL"
+  != f.input :h1, :label => "H1"
+  != f.input :h2, :label => "H2"
+  != f.input :item1_header, :label => "Item 1 Header"
+  != f.input :item1_body, :label => "Item 1 Body"
+  != f.input :item2_header, :label => "Item 2 Header"
+  != f.input :item2_body, :label => "Item 2 Body"
+  != f.input :item3_header, :label => "Item 3 Header"
+  != f.input :item3_body, :label => "Item 3 Body"
+  != f.input :quote, :label => "Quote"
+  != f.input :quoted_name, :label => "Quoted Name"
+  != f.input :quoted_city, :label => "Quoted City"
+
+- f.inputs do
+  != f.input :image, :as => :file, :label => "Invitation Example"
+  != f.input :quoted, :as => :file, :label => "Quoted person avatar"

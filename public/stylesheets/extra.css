@@ -1511,38 +1511,167 @@ ul.contact-tabset {
   width: 100%;
 }
 .hebrew .landing-page-remind .frame {
-    padding: 25px 14px 14px 90px;
+  padding: 25px 14px 14px 90px;
 }
 .hebrew .landing-page-remind label {
-    float: right;
-    font-weight: bold;
+  float: right;
+  font-weight: bold;
 }
 .hebrew .landing-page-remind .text {
-    margin: 0 40px 7px 0;
+  margin: 0;
+  float: right;
+  padding: 0 5px 0 0;
+  width: 165px;
 }
-
+.hebrew .landing-page-remind input.text {
+  width: 155px;
+  padding: 4px 4px 0 0;
+}
 .hebrew .landing-page-remind .btn-hold {
   margin: 0 110px 0 0;
 }
 .landing-page-remind .btn-hold {
-    margin: 0 0 0 -5px;
-    overflow: hidden;
-    text-align: center;
-    width: 85px;
+  margin: 0 0 0 -5px;
+  overflow: hidden;
+  text-align: center;
+  width: 85px;
 }
 .landing-page-remind .btn-hold a {
-    background: url("../images/btn-6.gif") no-repeat scroll 0 0 transparent;
-    color: #FFFFFF;
-    float: right;
-    font-size: 14px;
-    font-weight: bold;
-    height: 27px;
-    line-height: 25px;
-    margin: 0 0 0 4px;
-    text-align: center;
-    width: 82px;
+  background: url("../images/btn-6.gif") no-repeat scroll 0 0 transparent;
+  color: #FFFFFF;
+  float: right;
+  font-size: 14px;
+  font-weight: bold;
+  height: 27px;
+  line-height: 25px;
+  margin: 0 0 0 4px;
+  text-align: center;
+  width: 82px;
 }
 .quoted_text {
   font-size: 12px;
   padding: 1px 55px 2px 0;
+}
+#upper_panel_top {
+  background-image: url('/images/bg-panel-top.png');
+  background-position: center top;
+  background-repeat: repeat-x;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  height: 46px;
+  border-top: 1px solid rgb(204, 204, 204);
+  margin-top: 35px;
+}
+#upper_panel_center {
+  border-bottom: 1px solid rgb(204, 204, 204);
+  background-color: rgb(255, 255, 255);
+  background-image: url('/images/bg-panel-center.png');
+  background-position: center bottom;
+  background-repeat: repeat-x;
+  margin: 0;
+  position: relative;
+  width: 100%;
+  height: 364px;
+}
+#upper_panel_center .header1{
+  position: absolute;
+  right: 15px;
+  top: 0px;
+  width: 440px;
+  height: 180px;
+  z-index: 2;
+}
+#upper_panel_center .header1 h1{
+  font-size: 30px;
+  line-height: 38px;
+}
+#upper_panel_center .upper_panel_image {
+  position: absolute;
+  left: 10px;
+  top: -35px;
+  width: 480px;
+  height: 352px;
+  z-index: 5;
+}
+#upper_panel_center .panel-separator{
+  background-color: #e7e7e7;
+  position: absolute;
+  right: 15px;
+  top: 160px;
+  width: 440px;
+  height: 1px;
+  z-index: 4;
+}
+#upper_panel_center .header2{
+  position: absolute;
+  right: 15px;
+  top: 180px;
+  width: 440px;
+  height: 180px;
+  z-index: 2;
+}
+#upper_panel_center .header2 h2{
+  font-size: 16px;
+  line-height: 22px;
+}
+#lower_panel{
+  background-image: url('/images/lower-panel-top.png');
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: rgb(255,255,255);
+  position: relative;
+  width: 100%;
+  height: 380px
+}
+#lower_panel .feature-box{
+  position: relative;
+  left: -100px;
+  top: 20px;
+  width: 364px;
+  height: 74px;
+  z-index: 1;
+}
+#lower_panel .green-bullet{
+  background-image: url('/images/green-arrow.png');
+  height: 26px;
+  width: 32px;
+  float: right;
+}
+#lower_panel .feature-text{
+  padding: 0 45px 0 0;
+}
+#lower_panel .feature-title{
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: bold;
+}
+#lower_panel .feature-body{
+  font-size: 13px;
+  line-height: 18px;
+}
+#quote-box{
+  width: 740px;
+  height: 135px;
+  margin: 15px auto;
+}
+#quote{
+  height: 75px;
+  background-image: url('/images/bg-comment-huge.gif');
+}
+#quote_text{
+  font-size: 18px;
+  line-height: 26px;
+  font-style: italic;
+  padding: 10px;
+}
+#quoted{
+  height: 70px;
+  padding: 10px 0;
+}
+#quoted img{
+  float:right;
+}
+#quoted_name {
+  font-weight: bold;
 }

@@ -1,0 +1,17 @@
+%h3 Landing Pages
+
+!= link_to "New", new_admin_landing_page_path
+
+%table
+  %tr
+    %th ID
+    %th Lang
+    %th Category
+    %th Friendly URL
+    %th Image
+    %th Quoted Thumb
+    %th &nbsp;
+    %th &nbsp;
+  != render(:partial => @landing_pages)
+
+!= will_paginate(@landing_pages)

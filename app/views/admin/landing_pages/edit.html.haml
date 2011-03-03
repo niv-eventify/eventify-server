@@ -1,0 +1,8 @@
+%h1 Edit Design
+
+- semantic_form_for(@landing_page, :live_validations => false, :url => admin_landing_page_path(@landing_page), :html => {:multipart => true}) do |f|
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Update"
+  != link_to _("Cancel"), admin_landing_pages_path
