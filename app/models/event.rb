@@ -167,6 +167,7 @@ class Event < ActiveRecord::Base
   end
 
   def set_invitation_thumbnail
+    return unless id > 0
     send_later(:set_invitation_thumbnail!)
   end
 
