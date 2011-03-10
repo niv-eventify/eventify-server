@@ -218,6 +218,7 @@ class Guest < ActiveRecord::Base
   def send_sms_invitation!(resend = false)
     sms =  event.with_time_zone do
       msg = resend ? event.sms_resend_message : event.sms_message
+      logger.info("guest_id: #{id}, msg: #{msg}")
       sms_messages.create!(:kind => "invitation", :message => msg)
     end
 
