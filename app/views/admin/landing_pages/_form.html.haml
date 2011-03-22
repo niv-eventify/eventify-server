@@ -6,8 +6,8 @@
   != f.select :category_id, categories_for_admin_designs  
 - f.inputs do
   != f.input :friendly_url, :label => "Friendly URL"
-  != f.input :h1, :label => "H1"
-  != f.input :h2, :label => "H2"
+  != f.input :h1, :as => :text, :label => "H1"
+  != f.input :h2, :as => :text, :label => "H2"
   != f.input :item1_header, :label => "Item 1 Header"
   != f.input :item1_body, :label => "Item 1 Body"
   != f.input :item2_header, :label => "Item 2 Header"

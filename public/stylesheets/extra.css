@@ -1585,6 +1585,7 @@ ul.contact-tabset {
 #upper_panel_center .header1 h1{
   font-size: 30px;
   line-height: 38px;
+  margin: 0 10px;
 }
 #upper_panel_center .upper_panel_image {
   position: absolute;
@@ -1614,6 +1615,7 @@ ul.contact-tabset {
 #upper_panel_center .header2 h2{
   font-size: 16px;
   line-height: 22px;
+  margin: 0 10px;
 }
 #lower_panel{
   background-image: url('/images/lower-panel-top.png');
@@ -1656,8 +1658,9 @@ ul.contact-tabset {
   margin: 15px auto;
 }
 #quote{
-  height: 75px;
+  height: 107px;
   background-image: url('/images/bg-comment-huge.gif');
+  background-repeat: no-repeat;
 }
 #quote_text{
   font-size: 18px;

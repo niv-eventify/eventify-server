@@ -8,7 +8,7 @@ class LandingPage < ActiveRecord::Base
     :styles         => {:lp => "480x352>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
-    :path =>        "landing_pages/:id/:style/:filename",
+    :path =>        "landing_pages/:id/image/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",
@@ -22,7 +22,7 @@ class LandingPage < ActiveRecord::Base
     :styles         => {:thumb => "45x45>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
-    :path =>        "landing_pages/:id/:style/:filename",
+    :path =>        "landing_pages/:id/quoted/:style/:filename",
     :default_url   => "",
     :s3_credentials => {
       :access_key_id     => GlobalPreference.get(:s3_key) || "junk",

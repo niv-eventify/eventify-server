@@ -2,12 +2,14 @@
 #upper_panel_top
 #upper_panel_center
   .header1
-    %h1= @landing_page.h1
+    %h1
+      != @landing_page.h1.gsub("\n", "<BR/>").gsub(" ", "&nbsp;")
   .upper_panel_image
     != image_tag @landing_page.image.url(:lp), :width => "100%", :height => "100%"
   .panel-separator
   .header2
-    %h2= @landing_page.h2
+    %h2
+      != @landing_page.h2.gsub("\n", "<BR/>").gsub(" ", "&nbsp;")
 .start-box
   != link_to _("Click here to start!"), category_designs_path(@landing_page.category), :class => "btn-start-long"
 #lower_panel
