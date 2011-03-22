@@ -1480,7 +1480,7 @@ ul.contact-tabset {
   font-weight: bold;
   height: 64px;
   line-height: 62px;
-  margin: 15px auto 4px;
+  margin: 5px auto 4px;
   padding: 0 21px 0 0;
   position: relative;
   text-align: center;
@@ -1589,7 +1589,7 @@ ul.contact-tabset {
 }
 #upper_panel_center .upper_panel_image {
   position: absolute;
-  left: 10px;
+  left: 25px;
   top: -35px;
   width: 416px;
   height: 305px;
