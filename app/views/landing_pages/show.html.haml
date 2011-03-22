@@ -53,7 +53,7 @@
     #quote
       #quote_text= "\"#{@landing_page.quote}\""
     #quoted
-      - if @landing_page.quoted.blank?
+      - if @landing_page.quoted.url.blank?
         %img{:src => "/images/quoted_thumb.png"}
       -else
         != image_tag @landing_page.quoted.url(:thumb)

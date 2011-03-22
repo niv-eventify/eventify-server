@@ -5,7 +5,7 @@ class LandingPage < ActiveRecord::Base
   attr_accessible :category_id, :language, :friendly_url, :h1, :h2, :item1_header, :item1_body, :item2_header, :item2_body, :item3_header, :item3_body, :quote, :quoted_name, :quoted_city
   
   has_attached_file :image,
-    :styles         => {:lp => "480x352>"},
+    :styles         => {:lp => "416x305>"},
     :storage        => :s3,
     :bucket         => GlobalPreference.get(:s3_bucket),
     :path =>        "landing_pages/:id/image/:style/:filename",

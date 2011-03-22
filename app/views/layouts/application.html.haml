@@ -33,5 +33,5 @@
         != render(:partial => 'layouts/header')
       - unless @skip_footer
         != render(:partial => 'layouts/footer')
-    - unless request.ssl?
+    - unless request.ssl? || @skip_feedback
       != render(:partial => "layouts/kampyle_feedback")
