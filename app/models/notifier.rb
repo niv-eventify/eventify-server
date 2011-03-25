@@ -70,7 +70,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(guest)
     from        guest.event.user.email
     sent_on     Time.now.utc
-    body        :guest => guest, :message => message
+    body        :guest => guest, :message => message, :url => rsvp_url(guest.email_token)
   end
 
 end
