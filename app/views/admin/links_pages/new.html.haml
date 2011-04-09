@@ -1,0 +1,13 @@
+- content_for(:head) do
+  != stylesheet_link_tag "rsvps", "../CLEditor/jquery.cleditor"
+  != javascript_include_tag "../CLEditor/jquery.cleditor.min"
+
+%h1 New Links Page
+
+- semantic_form_for(@links_page, :live_validations => false, :url => admin_links_pages_path) do |f|
+  = f.object.errors.on(:base)
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Save"
+  != link_to _("Cancel"), admin_links_pages_path

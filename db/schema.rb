@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110302191323) do
+ActiveRecord::Schema.define(:version => 20110331193248) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -292,6 +292,14 @@ ActiveRecord::Schema.define(:version => 20110302191323) do
     t.string   "quoted_content_type"
     t.integer  "quoted_file_size"
     t.datetime "quoted_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "links_pages", :force => true do |t|
+    t.string   "language"
+    t.string   "friendly_url"
+    t.string   "page_html"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

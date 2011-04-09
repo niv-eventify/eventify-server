@@ -1,0 +1,12 @@
+- content_for(:head) do
+  != stylesheet_link_tag "../CLEditor/jquery.cleditor"
+  != javascript_include_tag "../CLEditor/jquery.cleditor.min"
+
+%h1 Edit Links Page
+
+- semantic_form_for(@links_page, :live_validations => false, :url => admin_links_page_path(@links_page), :html => {:multipart => true}) do |f|
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Update"
+  != link_to _("Cancel"), admin_links_pages_path

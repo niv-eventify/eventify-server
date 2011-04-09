@@ -23,6 +23,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :events
     admin.resources :gardens
     admin.resources :landing_pages
+    admin.resources :links_pages
   end
 
   map.resources :events do |event|
@@ -63,6 +64,6 @@ ActionController::Routing::Routes.draw do |map|
   map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
   map.resources :cropped_pictures
   map.connect "/1234a3a5e723d2e0fa3e43fbef0c3dac", :controller => :send_grid_events, :action => :create, :conditions => {:method => :post}
-
+  map.resource :links_page
   map.connect '*friendly_url', :controller => 'landing_pages', :action => 'show'
 end

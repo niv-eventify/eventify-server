@@ -1,0 +1,14 @@
+%h3 Links Pages
+
+!= link_to "New", new_admin_links_page_path
+
+%table
+  %tr
+    %th ID
+    %th Lang
+    %th Friendly URL
+    %th &nbsp;
+    %th &nbsp;
+  != render(:partial => @links_pages)
+
+!= will_paginate(@links_pages)

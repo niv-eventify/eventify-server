@@ -1,0 +1,6 @@
+%tr
+  %td= links_page.id
+  %td= links_page.language
+  %td= links_page.friendly_url
+  %td!= link_to "Delete", admin_links_page_path(links_page), :method => :delete, :confirm => "Are you sure?"
+  %td!= link_to "Edit", edit_admin_links_page_path(links_page)

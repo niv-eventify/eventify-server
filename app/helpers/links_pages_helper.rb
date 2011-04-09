@@ -1,0 +1,2 @@
+module LinksPagesHelper
+end
