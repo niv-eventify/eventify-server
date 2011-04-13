@@ -10,6 +10,7 @@
         %li!= link_to _("Pricing"), page_path("pricing")
         %li!= link_to _("Contact Us"), page_path("contact")
         %li!= link_to _("Terms of Use"), page_path("terms")
+        %li!= link_to _("Links"), url_for(:controller => "landing_pages", :action => "show", :friendly_url => _("Links"))
 
         - if current_user.try(:is_admin?)
           %li!= link_to "i18n", translation_keys_path(:per_page => 10000)

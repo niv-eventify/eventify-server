@@ -1678,3 +1678,6 @@ ul.contact-tabset {
 #quoted_name {
   font-weight: bold;
 }
+.foot-box ul li {
+  padding: 0 6px;
+}

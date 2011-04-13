@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2011-03-22 22:40+0200\n"
+"POT-Creation-Date: 2011-04-13 18:08+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -212,7 +212,7 @@ msgstr ""
 msgid "All Contacts"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:24
+#: app/views/layouts/_footer.html.haml:25
 msgid "All right resevred to Eventify ©"
 msgstr ""
 
@@ -327,6 +327,8 @@ msgstr ""
 #: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
 #: app/views/passwords/_edit.html.haml:8
 #: app/views/cropped_pictures/_new.html.haml:13
+#: app/views/admin/links_pages/new.html.haml:13
+#: app/views/admin/links_pages/edit.html.haml:12
 #: app/views/admin/gardens/new.html.haml:9
 #: app/views/admin/gardens/edit.html.haml:8
 #: app/views/admin/designs/new.html.haml:9
@@ -362,7 +364,7 @@ msgstr ""
 msgid "Card Number:"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:43
+#: app/views/layouts/_footer.html.haml:44
 msgid "Cat&amp;Dog Studio"
 msgstr ""
 
@@ -521,7 +523,7 @@ msgstr ""
 msgid "Design"
 msgstr ""
 
-#: app/views/layouts/_footer.html.haml:43
+#: app/views/layouts/_footer.html.haml:44
 msgid "Design and UI %{link}"
 msgstr ""
 
@@ -990,6 +992,10 @@ msgstr ""
 
 #: app/views/things/_things_header.html.haml:5
 msgid "Item Name"
+msgstr ""
+
+#: app/views/layouts/_footer.html.haml:13
+msgid "Links"
 msgstr ""
 
 #: app/views/guest_importers/_csv.html.haml:28
