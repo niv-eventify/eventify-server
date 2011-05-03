@@ -6,6 +6,9 @@
   != f.select :category_id, categories_for_admin_designs  
 - f.inputs do
   != f.input :friendly_url, :label => "Friendly URL"
+  != f.input :title, :label => "Page/meta title"
+  != f.input :meta_description, :label => "Meta description"
+  != f.input :meta_keywords, :label => "Meta keywords"
   != f.input :h1, :as => :text, :label => "H1"
   != f.input :h2, :as => :text, :label => "H2"
   != f.input :item1_header, :label => "Item 1 Header"

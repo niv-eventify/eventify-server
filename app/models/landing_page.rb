@@ -2,7 +2,7 @@ class LandingPage < ActiveRecord::Base
   belongs_to :category
   validates_presence_of :category_id, :language, :friendly_url, :h1, :h2, :item1_header, :item1_body, :item2_header, :item2_body, :item3_header, :item3_body, :quote, :quoted_name, :quoted_city
   validates_uniqueness_of :friendly_url, :message => "must be unique"
-  attr_accessible :category_id, :language, :friendly_url, :h1, :h2, :item1_header, :item1_body, :item2_header, :item2_body, :item3_header, :item3_body, :quote, :quoted_name, :quoted_city
+  attr_accessible :category_id, :language, :friendly_url, :title, :meta_description, :meta_keywords, :h1, :h2, :item1_header, :item1_body, :item2_header, :item2_body, :item3_header, :item3_body, :quote, :quoted_name, :quoted_city
   
   has_attached_file :image,
     :styles         => {:lp => "416x305>"},

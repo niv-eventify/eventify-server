@@ -5,11 +5,12 @@ class LandingPagesController < InheritedResources::Base
     @skip_feedback = true
     @landing_page = LandingPage.find_by_friendly_url_and_language(params[:friendly_url], current_locale)
     if @landing_page
+      @page_title = @landing_page.title
+      @meta_keywords = @landing_page.meta_keywords
+      @meta_description = @landing_page.meta_description
       show!
     elsif !(@links_page = LinksPage.find_by_friendly_url_and_language(params[:friendly_url], current_locale)).blank?
       render "links_pages/show"
-    else
-      render :file => 'public/404.html', :status => '404'
     end
   end
 end
