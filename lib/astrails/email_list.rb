@@ -21,7 +21,8 @@ module Astrails
             res << [name, nil]
             next
           end
-          name = name.strip
+          # remove starting \" and ending \" from names
+          name = name.strip.gsub(/^\\\"/, "").gsub(/\\\"$/,"")
           name = email if name.blank?
           res << [name, email]
         end
