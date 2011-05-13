@@ -554,7 +554,7 @@ class Event < ActiveRecord::Base
   def stage2_preview_dimensions(current_locale, ratio)
     res = {
       'text-align' => msg_text_align.blank? ? nil : msg_text_align == "center" ? msg_text_align : current_locale == "he" ? "right" : "left",
-      :color => msg_color.blank? ? nil : "rgb(#{msg_color})",
+      :color => msg_color.blank? ? nil : msg_color,
       "font-size" => msg_font_size.blank? ? nil : "#{msg_font_size.to_int}px",
       "font-family" => "#{font_body}"
     }
@@ -577,7 +577,7 @@ class Event < ActiveRecord::Base
   def stage2_title_dimensions(current_locale, ratio)
     res = {
       'text-align' => title_text_align.blank? ? nil : title_text_align == "center" ? title_text_align : current_locale == "he" ? "right" : "left",
-      :color => title_color.blank? ? nil : "rgb(#{title_color})",
+      :color => title_color.blank? ? nil : title_color,
       "font-size" => title_font_size.blank? ? nil : "#{title_font_size.to_int}px",
       "font-family" => "#{font_title}"
     }

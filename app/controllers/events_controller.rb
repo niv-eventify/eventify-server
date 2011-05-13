@@ -154,7 +154,7 @@ protected
     cp = CroppedPicture.find_all_by_id(session[:cropped_picture_ids]).each do |pic|
       pic.update_attribute(:event, @event)
     end
-    @event.set_invitation_thumbnail unless cp.blank?
+    @event.set_invitation_thumbnail unless cp.blank? || !logged_in?
   end
 
   def past_events?
