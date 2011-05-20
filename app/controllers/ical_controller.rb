@@ -6,9 +6,15 @@ class IcalController < InheritedResources::Base
   actions :show, :create
 
   def create
-    Notifier.deliver_ical_attachment(parent, current_user)
+    guest = Guest.find_by_id(params[:email_recipient])
+    send_to = guest || current_user
+    Notifier.deliver_ical_attachment(parent, send_to)
     flash[:notice] = _("Event details sent to your email")
-    redirect_to summary_path(parent)
+    if guest
+      redirect_to rsvp_path(guest.email_token, :more => true)
+    else
+      redirect_to summary_path(parent)
+    end
   end
 
   def show
