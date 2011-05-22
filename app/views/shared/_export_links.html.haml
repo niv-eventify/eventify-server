@@ -2,4 +2,4 @@
   %li!= link_to image_tag("icon-date.gif", :height => "29", :alt => "", :width => "31"), send(lnk, event), :title => _("Export to iCal")
   %li!= link_to image_tag("logo-micro.gif", :height => "29", :alt => "", :width => "81"), send(lnk, event, :convert => true), :title => _("Export to Outlook")
   - if email
-    %li!= link_to image_tag("logo-google.gif", :height => "29", :alt => "", :width => "81"), event_ical_path(event_id, :email_recipient => email_recipient), :method => :post, :title => _("Send to My Gmail"), :confirm => (_("Send event details to %{email}?") % { :email => current_user.email })
+    %li!= link_to image_tag("logo-google.gif", :height => "29", :alt => "", :width => "81"), event_ical_path(event_id, :email_recipient => email_recipient), :method => :post, :title => _("Send to My Gmail"), :confirm => (_("Send event details to %{email}?") % { :email => (email_recipient || current_user).email })

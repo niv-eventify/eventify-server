@@ -7,8 +7,9 @@ class IcalController < InheritedResources::Base
 
   def create
     guest = Guest.find_by_id(params[:email_recipient])
+    @parent = guest.blank? ? parent : (guest.try(:event) || raise(ActiveRecord::RecordNotFound))
     send_to = guest || current_user
-    Notifier.deliver_ical_attachment(parent, send_to)
+    Notifier.deliver_ical_attachment(@parent, send_to)
     flash[:notice] = _("Event details sent to your email")
     if guest
       redirect_to rsvp_path(guest.email_token, :more => true)
