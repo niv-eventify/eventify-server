@@ -3,7 +3,7 @@ class RsvpsController < InheritedResources::Base
   actions :show, :update, :edit
   respond_to :js, :only => [:update, :edit]
 #  respond_to :iphone, :only => :show
-  after_filter :clear_flash, :only => :update
+#  after_filter :clear_flash, :only => :update
 #  before_filter :adjust_format_for_iphone
   around_filter :set_timezone, :only => :show
 
@@ -18,7 +18,11 @@ class RsvpsController < InheritedResources::Base
 
     redirect_opts = {:action => "show", :id => resource.email_token, :more => "true"}
     respond_to do |wants|
-      wants.html {redirect_to(redirect_opts) }
+      wants.html {
+        redirect_opts[:updated] = "true"
+        flash[:notice] = _("Your update was successfully sent to the host")
+        redirect_to(redirect_opts)
+      }
       wants.js do
         render(:update) { |page| page.redirect_to(redirect_opts) }
       end
@@ -30,6 +34,7 @@ class RsvpsController < InheritedResources::Base
       format.html{
         resource.update_attribute(:first_viewed_invitation_at, Time.now) unless resource.first_viewed_invitation_at
         if "true" == params[:more]
+          @updated = params[:updated]
           resource.attendees_count ||= 1
           render :action => "show_more"
         else
