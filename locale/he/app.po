@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2011-04-13 18:08+0300\n"
+"POT-Creation-Date: 2011-05-27 11:33+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -661,7 +661,7 @@ msgstr ""
 msgid "Event details are changed"
 msgstr ""
 
-#: app/controllers/ical_controller.rb:10
+#: app/controllers/ical_controller.rb:13
 msgid "Event details sent to your email"
 msgstr ""
 
@@ -1620,7 +1620,7 @@ msgid "Send following message to %{guests_count}"
 msgstr ""
 
 #: app/views/shared/_export_links.html.haml:5
-msgid "Send to My Email"
+msgid "Send to My Gmail"
 msgstr ""
 
 #: app/views/guests/_guests_header.html.haml:20
@@ -1893,6 +1893,10 @@ msgstr ""
 #: vendor/plugins/astrails-user-auth/app/controllers/user_session_controller.rb:11
 #: vendor/plugins/astrails-user-auth/app/controllers/user_session_controller.rb:31
 msgid "Your account has been disabled, please contact support."
+msgstr ""
+
+#: app/controllers/rsvps_controller.rb:23
+msgid "Your update was successfully sent to the host"
 msgstr ""
 
 #: locale/yml_import.rb:79
