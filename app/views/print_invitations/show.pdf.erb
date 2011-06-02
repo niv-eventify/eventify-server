@@ -1,19 +1,12 @@
 <div class="invitation_pdf">
   <div class="background_holder" style="position: relative">
     <%= image_tag(@event.design.card.url, :class => "back") %>
-    <% if @event.design.is_seperated_title? %>
-      <div class="title_holder" style="<%= title_position_css(@event, 1) %>">
-        <div class="title">
-          <%= (@event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
-        </div>
+    <div class="title_holder" style="<%= title_position_css(@event,1.6, true) %>">
+      <div class="title">
+        <%= (@event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
       </div>
-    <% end %>
-    <div class="msg_holder" style="<%= message_position_css(@event, 1) %>">
-      <% if !@event.design.is_seperated_title? %>
-        <div class="title" style="<%= title_position_css(@event) %>">
-          <%= (@event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
-        </div>
-      <% end %>
+    </div>
+    <div class="msg_holder" style="<%= message_position_css(@event,1.6, true) %>">
       <div class="msg">
         <%= (@event.guest_message || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
       </div>
@@ -36,19 +29,12 @@
 <div class="invitation_pdf">
   <div class="background_holder" style="position: relative">
     <%= image_tag(@event.design.card.url, :class => "back") %>
-    <% if @event.design.is_seperated_title? %>
-      <div class="title_holder" style="<%= title_position_css(@event, 1) %>">
-        <div class="title">
-          <%= (@event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
-        </div>
+    <div class="title_holder" style="<%= title_position_css(@event, 1.6, true) %>">
+      <div class="title">
+        <%= (@event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
       </div>
-    <% end %>
-    <div class="msg_holder" style="<%= message_position_css(@event, 1) %>">
-      <% if !@event.design.is_seperated_title? %>
-        <div class="title" style="<%= title_position_css(@event) %>">
-          <%= (@event.invitation_title || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
-        </div>
-      <% end %>
+    </div>
+    <div class="msg_holder" style="<%= message_position_css(@event, 1.6, true) %>">
       <div class="msg">
         <%= (@event.guest_message || "").gsub("\n", "<BR/>").gsub(" ", "&nbsp;") %>
       </div>

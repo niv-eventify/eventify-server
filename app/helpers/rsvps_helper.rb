@@ -1,11 +1,19 @@
 module RsvpsHelper
-  def title_position_css(event, position_fix_ratio = 1.6)
+  def title_position_css(event, position_fix_ratio = 1.6, max_fix_top_left = false)
     title_params = event.design.stage2_title_dimensions(current_locale).merge(event.stage2_title_dimensions(current_locale, position_fix_ratio))
+    if max_fix_top_left
+      title_params[:left] = "#{(title_params[:left].to_f * 1.6).to_i}px"
+      title_params[:top] = "#{(title_params[:top].to_f * 1.6).to_i}px"
+    end
     title_params.keys.map {|k| "#{k}:#{title_params[k]}"}.join(";")
   end
 
-  def message_position_css(event, position_fix_ratio = 1.6)
+  def message_position_css(event, position_fix_ratio = 1.6, max_fix_top_left = false)
     msg_params = event.design.stage2_preview_dimensions(current_locale).merge(event.stage2_preview_dimensions(current_locale, position_fix_ratio))
+    if max_fix_top_left
+      msg_params[:left] = "#{(msg_params[:left].to_f * 1.6).to_i}px"
+      msg_params[:top] = "#{(msg_params[:top].to_f * 1.6).to_i}px"
+    end
     msg_params.keys.map {|k| "#{k}:#{msg_params[k]}"}.join(";")
   end
 
