@@ -13,6 +13,7 @@
       window.location.hash = "guest_added";
     });
     jQuery("input[name=guest[email]]").live("change", function(){
+      //fix bug when copying addresses from gmail - they sometimes add a hidden whitespace
       jQuery(this).val(jQuery(this).val().replace(/[\s\u200B]/,""));
     })
   });
