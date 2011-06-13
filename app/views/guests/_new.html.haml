@@ -12,5 +12,8 @@
     jQuery("#new_guest_row form").submit(function(){
       window.location.hash = "guest_added";
     });
+    jQuery("input[name=guest[email]]").live("change", function(){
+      jQuery(this).val(jQuery(this).val().replace(/[\s\u200B]/,""));
+    })
   });
   

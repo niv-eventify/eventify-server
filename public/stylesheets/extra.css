@@ -1421,6 +1421,10 @@ span.add_manually a{
   min-height: 0;
 }
 
+.hebrew .stage-3 .t-col-2 input.input-text {
+  direction: ltr;
+}
+
 #list_holder {
   width: 100%;
   height: 50px;
