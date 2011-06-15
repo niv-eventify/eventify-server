@@ -37,7 +37,7 @@
     var show_buttons = function(){ jQuery(".btns-hold.update-rsvp").show(); };
     jQuery(".side-box-row input, .side-box-row textarea").focus(show_buttons).click(show_buttons).keyup(show_buttons);
     jQuery(".side-box-row input").numeric();
-    if(guest_rsvp.message_to_host.length > 0 || "#{@updated}" == "true") return;
+    if((guest_rsvp.message_to_host && guest_rsvp.message_to_host.length > 0) || "#{@updated}" == "true") return;
     if(jQuery("#rsvp_attendees_count").is(":visible"))
         jQuery("#rsvp_attendees_count").focus();
     else
