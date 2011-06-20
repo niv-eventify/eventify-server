@@ -37,6 +37,7 @@ protected
   end
 
   def selected_contracts
+    return [] if params[:contact].blank?
     returning([]) do |res|
       params[:contact].keys.each do |k|
         res << params[:contact][k] if "1" == params[:contact][k][:import]
