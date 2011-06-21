@@ -1244,6 +1244,8 @@ li.home_page a{
 }
 .hebrew .logo {
   background-image: url("/images/logo_he.gif");
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -629px;
 }
 h2.weak {
   font-weight: normal;
@@ -1689,4 +1691,3 @@ span#updating_rsvp_status {
   font-size:12px;
   font-weight: bold;
 }
-.promo-t {background: url(/images/bg-promo-t.gif) no-repeat;}

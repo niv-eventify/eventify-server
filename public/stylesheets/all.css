@@ -423,7 +423,11 @@ p{margin:0;}
 	margin: 12px 0 0 0;
 	background: url(/images/bg-promo-c.gif) repeat-y;
 }
-.promo-t {background: url(/images/bg-promo-t.jpg) no-repeat;}
+.promo-t {
+  background-image: url(/images/bg-promo-t.gif);
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -10px;
+}
 .promo-b {
 	position: relative;
 	padding: 17px 0 0;
@@ -575,7 +579,8 @@ a.next {
 }
 .main-box .btn-start:hover{text-decoration:none;}
 .hebrew .main-box .btn-start{
-	background-position:0 0;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -348px;
 	padding:0 0 0 21px;
 } 
 .box {
@@ -979,6 +984,8 @@ a.next {
 	margin:0 5px 0 0;
 	float: right;
 	background: url(/images/btn-brown-l.gif) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -496px;
 }
 .btn-brown:hover{ text-decoration: none;}
 .hebrew .btn-brown{float: left;}
@@ -1009,6 +1016,8 @@ a.next {
 	padding: 0 0 0 32px;
 	float: left;
 	background:url(/images/btn-blue-sml.gif) no-repeat 0 0;
+/*  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -534px;*/
 }
 .blue-btn-sml span{
 	padding:0 0 0 14px;
@@ -1025,6 +1034,8 @@ a.next {
 .hebrew .blue-btn-sml span {
 	padding:0 14px 0 0;
 	background:#f8f8f8 url(/images/btn-blue-sml.gif) no-repeat 100% 0;
+/*  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -534px;	*/
 	font-size: 1.2em;
 }
 .blue-btn-sml:hover{ text-decoration: none;}
@@ -1037,8 +1048,8 @@ a.next {
 .img-box-hover .blue-btn-sml span{background-position: 0 -17px;}
 .hebrew .img-box:hover .blue-btn-sml,
 .hebrew .img-box-hover .blue-btn-sml {
-	color: #fff;
-	background-position: 0 -17px;
+  color: #fff;
+  background-position: 0px -17px;
 }
 .hebrew .img-box:hover .blue-btn-sml span,
 .hebrew .img-box-hover .blue-btn-sml span{background-position: 100% -17px;}
@@ -1046,6 +1057,8 @@ a.next {
 	overflow: hidden;
 	text-indent: -9999px;
 	background: url(/images/ico-plus.gif) no-repeat;
+	background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -588px;
 	width: 25px;
 	height: 21px;
 	float: left;
@@ -5394,10 +5407,26 @@ ul.contact-tabset li.active a ,
 .subnav li.btn-1 .opener em{background:url(/images/bg-subnav-r.png) no-repeat;}
 .subnav li.btn-2 .opener span{background:url(/images/bg-subnav-l-2.png) no-repeat;}
 .subnav li.btn-2 .opener em{background:url(/images/bg-subnav-r-2.png) no-repeat;}
-.hebrew .subnav li.btn-1 .opener span{background:url(/images/bg-subnav-l-rtl.png) no-repeat;}
-.hebrew .subnav li.btn-1 .opener em{background:url(/images/bg-subnav-r-rtl.png) no-repeat;}
-.hebrew .subnav li.btn-2 .opener span{background:url(/images/bg-subnav-l-2-rtl.png) no-repeat;}
-.hebrew .subnav li.btn-2 .opener em{background:url(/images/bg-subnav-r-2-rtl.png) no-repeat;}
+.hebrew .subnav li.btn-1 .opener span{
+  background:url(/images/bg-subnav-l-rtl.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -703px;
+}
+.hebrew .subnav li.btn-1 .opener em{
+  background:url(/images/bg-subnav-r-rtl.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -812px;
+}
+.hebrew .subnav li.btn-2 .opener span{
+  background:url(/images/bg-subnav-l-2-rtl.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1128px;
+}
+.hebrew .subnav li.btn-2 .opener em{
+  background:url(/images/bg-subnav-r-2-rtl.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1237px;
+}
 .subnav li .opener em{
 	float:left;
 	width:12px;
@@ -5439,8 +5468,16 @@ ul.contact-tabset li.active a ,
 	height:14px;
 	overflow:hidden;
 }
-.subnav li.btn-1 .menu-list .top{background:url(/images/bg-subnav-drop-top.png) no-repeat;}
-.subnav li.btn-1 .menu-list .btm{background:url(/images/bg-subnav-drop-btm.png) no-repeat;}
+.subnav li.btn-1 .menu-list .top{
+  background:url(/images/bg-subnav-drop-top.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -921px;
+}
+.subnav li.btn-1 .menu-list .btm{
+  background:url(/images/bg-subnav-drop-btm.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1094px;
+}
 .subnav li.btn-1 .menu-list .mid{background:url(/images/bg-subnav-drop-mid.png) repeat-y;}
 .subnav li .menu-list .mid{width:100%;}
 .subnav .menu-list .mid:after {
@@ -5448,7 +5485,11 @@ ul.contact-tabset li.active a ,
 	display:block;
 	clear:both;
 }
-.subnav li.btn-2 .menu-list .top{background:url(/images/bg-subnav-drop-top-2.png) no-repeat;}
+.subnav li.btn-2 .menu-list .top{
+  background:url(/images/bg-subnav-drop-top-2.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1346px;
+}
 .subnav li.btn-2 .menu-list .btm{background:url(/images/bg-subnav-drop-btm-2.png) no-repeat;}
 .subnav li.btn-2 .menu-list .mid{background:url(/images/bg-subnav-drop-mid-2.png) repeat-y;}
 .subnav .menu-list .inner{
@@ -5467,8 +5508,16 @@ ul.contact-tabset li.active a ,
 	height:6px;
 	overflow:hidden;
 }
-.subnav .inner-box .bg-t{background:url(/images/bg-subnav-inner-t.png) no-repeat;}
-.subnav .inner-box .bg-b{background:url(/images/bg-subnav-inner-b.png) no-repeat;}
+.subnav .inner-box .bg-t{
+  background:url(/images/bg-subnav-inner-t.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -955px;
+}
+.subnav .inner-box .bg-b{
+  background:url(/images/bg-subnav-inner-b.png) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1068px;
+}
 .subnav .inner-box .bg-m{
 	background:#f9f6f2;
 	height:1%;
@@ -5487,6 +5536,8 @@ ul.contact-tabset li.active a ,
 }
 .subnav .form .txt{
 	background:url(/images/bg-input-sign.gif) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -981px;
 	width:168px;
 	padding:0 11px;
 	overflow:hidden;
@@ -5507,6 +5558,8 @@ ul.contact-tabset li.active a ,
 .subnav .form .sbmt{
 	float:right;
 	background:url(/images/btn-sbmt.gif) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1025px;
 	width:81px;
 	height:23px;
 	overflow:hidden;
