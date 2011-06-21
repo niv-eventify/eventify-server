@@ -102,6 +102,6 @@ protected
   def event_by_user_or_host
     event_id = params[:event_id] || params[:id]
     host = Host.find_by_event_id_and_email(event_id, current_user.email)
-    @event = (!host.nil? && host.event) || current_user.events.find(event_id)
+    @event = (!host.nil? && host.event) || (current_user.is_super_admin && Event.find(event_id)) || current_user.events.find(event_id)
   end
 end
