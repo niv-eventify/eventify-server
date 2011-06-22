@@ -925,6 +925,8 @@ ul.contact-tabset li.active a ,
 }
 .minus {
 	background: url(/images/ico-minus.gif) no-repeat;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: -10px -1639px;
 	visibility: visible;
 	margin: 20px 20px 0;
 }
@@ -1220,6 +1222,8 @@ li.home_page a{
 }
 .hebrew li.home_page a{
   background: url("/images/homeicon.png") no-repeat scroll 99% 0px transparent;
+  background-image: url(/images/home_page_sprite1.png);
+  background-position: 33px -1748px;
   padding: 0 18px 0 0;
   float: left;
 }
