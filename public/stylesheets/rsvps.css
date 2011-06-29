@@ -120,11 +120,11 @@
 }
 
 #envelope {
-	width:578px;
-	height:572px;
-	background-image: url('/images/envelope1.png');
-	text-align: center;
-	margin: 0 auto;
+    width:578px;
+    height:572px;
+    background-image: url('/images/envelope1.png') no-repeat;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .toolbar {
