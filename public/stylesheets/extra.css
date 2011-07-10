@@ -941,7 +941,9 @@ span.event-changes-disabled {
 }
 
 ul.tabset li.tab-1 a {
-	background:url("/images/bg-tab-1.png") no-repeat scroll 0 0 transparent;
+    background:url("/images/bg-tab-1.png") no-repeat scroll 0 0 transparent;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -442px;
 }
 ul.tabset li.tab-1 a.active {
 	background:url("/images/bg-tab-1-h.png") no-repeat scroll 0 0 transparent;
@@ -953,19 +955,25 @@ ul.tabset li.tab-1 a.active {
 	background:url("/images/bg-tabset-green.gif") no-repeat scroll 100% 0 transparent;
 }
 ul.tabset li.tab-2 a {
-	background:url("/images/bg-tab-2.png") no-repeat scroll 0 0 transparent;
+    background:url("/images/bg-tab-2.png") no-repeat scroll 0 0 transparent;
 }
 ul.tabset li.tab-2 a.active {
-	background:url("/images/bg-tab-2-h.png") no-repeat scroll 0 0 transparent;
+    background:url("/images/bg-tab-2-h.png") no-repeat scroll 0 0 transparent;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -528px;
 }
 .tabs-container #tab-2 {
 	background:url("/images/bg-tabset-orange-en.gif") no-repeat scroll 0 0 transparent;
 }
 .hebrew .tabs-container #tab-2 {
-	background:url("/images/bg-tabset-orange.gif") no-repeat scroll 100% 0 transparent;
+    background:url("/images/bg-tabset-orange.gif") no-repeat scroll 100% 0 transparent;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -1963px -10px;
 }
 ul.tabset li.tab-3 a {
-	background:url("/images/bg-tab-3.png") no-repeat scroll 0 0 transparent;
+    background:url("/images/bg-tab-3.png") no-repeat scroll 0 0 transparent;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -614px;
 }
 ul.tabset li.tab-3 a.active {
 	background:url("/images/bg-tab-3-h.png") no-repeat scroll 0 0 transparent;
@@ -977,7 +985,9 @@ ul.tabset li.tab-3 a.active {
 	background:url("/images/bg-tabset-red.gif") no-repeat scroll 100% 0 transparent;
 }
 ul.tabset li.tab-4 a {
-	background:url("/images/bg-tab-4.png") no-repeat scroll 0 0 transparent;
+    background:url("/images/bg-tab-4.png") no-repeat scroll 0 0 transparent;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -796px;
 }
 ul.tabset li.tab-4 a.active {
 	background:url("/images/bg-tab-4-h.png") no-repeat scroll 0 0 transparent;
@@ -1028,10 +1038,12 @@ ul.tabset {
 	float: left;
 }
 .print_btns .item1{
-	float: right;
-	width: 133px;
-	text-align: center;
-	background:url("/images/bg-link-box-item-turk.gif") no-repeat scroll 0 0 transparent;
+    float: right;
+    width: 133px;
+    text-align: center;
+    background:url("/images/bg-link-box-item-turk.gif") no-repeat scroll 0 0 transparent;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -331px;
 }
 .hebrew .print_btns .item1{
 	float: left;

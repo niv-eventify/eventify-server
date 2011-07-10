@@ -462,207 +462,207 @@ LI.home_page A {ruins english
 }
 */
 
-.side-box {
+.side-box {done
   background-image: url(/images/bg-sidebox-c.gif);
-  background-image: url(/images/rsvp_more_spriteme2.png);
+  background-image: url(/images/rsvp_more_sprite2.png);
   background-position: -10px 0px;
 }
-.content-box {
+.content-box {done
   background-image: url(/images/bg-content-box-c.gif);
-  background-image: url(/images/rsvp_more_spriteme2.png);
+  background-image: url(/images/rsvp_more_sprite2.png);
   background-position: -360px 0px;
 }
-.side-box .holder {
+.side-box .holder {done  - y position changed to -429px
   background-image: url(/images/bg-sidebox-b.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -10px 419px;
 }
-.content-box .holder {
+.content-box .holder {done
   background-image: url(/images/bg-content-box-t.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -360px -10px;
 }
-.content-box .frame {
+.content-box .frame {not done - problem - there are two frames that need seperate css for this to work
   background-image: url(/images/bg-content-box-b.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -999px 518px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew #tab-2 {
+.hebrew #tab-2 {done
   background-image: url(/images/bg-tabset-orange.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -1963px -10px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew .tabs-container #tab-2 {
+.hebrew .tabs-container #tab-2 {done
   background-image: url(/images/bg-tabset-orange.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -1963px -10px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew .tabs-container #tab-2 {
+.hebrew .tabs-container #tab-2 {done
   background-image: url(/images/bg-tabset-orange.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -1963px -10px;
 }
-.tabs-container .tabs-bottom {
+.tabs-container .tabs-bottom {done
   background-image: url(/images/bg-tabs-alt-b.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -2581px 69px;
 }
-.tabs-container .info-col .info-col-row {
+.tabs-container .info-col .info-col-row {done
   background-image: url(/images/bg-sep-alt.gif);
-  background-image: url(/images/rsvp_more_spriteme3.png);
+  background-image: url(/images/rsvp_more_sprite3.png);
   background-position: -3199px 52px;
 }
-.side-box-heading {
+.side-box-heading {done
   background-image: url(/images/bg-sidebox-t-brown.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -10px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew .link-box LI.item-1 {
+.hebrew .link-box LI.item-1 {done
   background-image: url(/images/bg-link-box-item-green.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -73px;
 }
 This is one of multiple rules that use this background image:
 
-.link-box LI.item-1 {
+.link-box LI.item-1 {done - need to do other colored buttons manually
   background-image: url(/images/bg-link-box-item-green.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -73px;
 }
-.answered-form .text {
+.answered-form .text {done
   background-image: url(/images/bg-text-custom.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -120px;
 }
 This is one of multiple rules that use this background image:
 
-.answered-form .row {
+.answered-form .row {not done - doesn't work out of the box
   background-image: url(/images/bg-answered-form.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -337px -162px;
 }
 This is one of multiple rules that use this background image:
 
-.answered-form .row .hold {
+.answered-form .row .hold {not done - doesn't work out of the box
   background-image: url(/images/bg-answered-form.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -337px -162px;
 }
-.answered-form .row2 .textarea {
+.answered-form .row2 .textarea {done
   background-image: url(/images/bg-textarea-3.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -211px;
 }
-.print_btns .item1 {
+.print_btns .item1 {done
   background-image: url(/images/bg-link-box-item-turk.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -331px;
 }
-.content-box-heading {
+.content-box-heading {done
   background-image: url(/images/bg-content-box-heading.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -378px;
 }
 This is one of multiple rules that use this background image:
 
-UL.tabset LI A {
+UL.tabset LI A {done
   background-image: url(/images/bg-tab-1.png);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -442px;
 }
 This is one of multiple rules that use this background image:
 
-UL.tabset LI.tab-1 A {
+UL.tabset LI.tab-1 A {done
   background-image: url(/images/bg-tab-1.png);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -442px;
 }
-UL.tabset LI.tab-2 A.active {
+UL.tabset LI.tab-2 A.active {done - need to do other tabs
   background-image: url(/images/bg-tab-2-h.png);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -528px;
 }
-UL.tabset LI.tab-3 A {
+UL.tabset LI.tab-3 A {done
   background-image: url(/images/bg-tab-3.png);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -614px;
 }
-.hebrew .tabs-container .info-cols .note-box {
+.hebrew .tabs-container .info-cols .note-box {done
   background-image: url(/images/bg-comment-lrg.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -738px;
 }
-UL.tabset LI.tab-4 A {
+UL.tabset LI.tab-4 A {done
   background-image: url(/images/bg-tab-4.png);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: -10px -796px;
 }
 This is one of multiple rules that use this background image:
 
-.link-box LI.item-1 A {
+.link-box LI.item-1 A {ruins english
   background-image: url(/images/ico-14.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 64px -875px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew .link-box LI.item-1 A {
+.hebrew .link-box LI.item-1 A {done
   background-image: url(/images/ico-14.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 64px -875px;
 }
-UL.logos LI {
+UL.logos LI {not done - doesn't work out of the box
   background-image: url(/images/bg-links-separator.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 32px -911px;
 }
 This is one of multiple rules that use this background image:
 
-UL.tabset LI.tab-1 A STRONG {
+UL.tabset LI.tab-1 A STRONG {ruins english
   background-image: url(/images/icon-done.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 123px -950px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew UL.tabset LI.tab-1 A STRONG {
+.hebrew UL.tabset LI.tab-1 A STRONG {done
   background-image: url(/images/icon-done.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 123px -950px;
 }
 This is one of multiple rules that use this background image:
 
-UL.tabset LI.tab-2 A STRONG {
+UL.tabset LI.tab-2 A STRONG {ruins english
   background-image: url(/images/icon-qwe.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 124px -982px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew UL.tabset LI.tab-2 A STRONG {
+.hebrew UL.tabset LI.tab-2 A STRONG {done
   background-image: url(/images/icon-qwe.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 124px -982px;
 }
 This is one of multiple rules that use this background image:
 
-UL.tabset LI.tab-3 A STRONG {
+UL.tabset LI.tab-3 A STRONG {ruins english
   background-image: url(/images/icon-close-1.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 124px -1014px;
 }
 This is one of multiple rules that use this background image:
 
-.hebrew UL.tabset LI.tab-3 A STRONG {
+.hebrew UL.tabset LI.tab-3 A STRONG {done
   background-image: url(/images/icon-close-1.gif);
-  background-image: url(/images/rsvp_more_spriteme4.png);
+  background-image: url(/images/rsvp_more_sprite4.png);
   background-position: 124px -1014px;
 }

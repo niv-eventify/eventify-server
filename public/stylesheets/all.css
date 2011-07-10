@@ -3935,10 +3935,10 @@ ul.logos {
 }
 .hebrew ul.logos {margin: 0 -5px 0 -10px;}
 ul.logos li{
-	padding: 0 6px;
-	background: url(/images/bg-links-separator.gif) no-repeat 0 3px;
-	float: left;
-	list-style: none;
+    padding: 0 6px;
+    background: url(/images/bg-links-separator.gif) no-repeat 0 3px;
+    float: left;
+    list-style: none;
 }
 .hebrew ul.logos li {
 	float: right;
@@ -4171,16 +4171,17 @@ ul.tabset li{
 	margin:0 0 0 -7px;
 }
 ul.tabset li a{
-	font-size: 12px;
-	height: 55px;
-	line-height: 24px;
-	color: #fff;
-	float:left;
-	padding:11px 0 0 12px;
-	width: 145px;
-	background: url(/images/bg-tab-1.png) no-repeat;
-	cursor:pointer;
-
+    font-size: 12px;
+    height: 55px;
+    line-height: 24px;
+    color: #fff;
+    float:left;
+    padding:11px 0 0 12px;
+    width: 145px;
+    background: url(/images/bg-tab-1.png) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -442px;
+    cursor:pointer;
 }
 .hebrew ul.tabset li a {padding:11px 12px 0 0;}
 ul.tabset li a strong{
@@ -4192,28 +4193,34 @@ ul.tabset li a strong{
 ul.tabset li a strong span{font-weight: normal;}
 ul.tabset li.tab-1 a {background: url(/images/bg-tab-1.gif) no-repeat;}
 ul.tabset li.tab-1 a strong{
-	padding: 0 0 0 15px;
-	background: url(/images/icon-done.gif) no-repeat 0 6px;
+    padding: 0 0 0 15px;
+    background: url(/images/icon-done.gif) no-repeat 0 6px;
 }
 ul.tabset li.tab-2 a strong{
-	padding: 0 0 0 15px;
-	background: url(/images/icon-qwe.gif) no-repeat 0 6px;
+    padding: 0 0 0 15px;
+    background: url(/images/icon-qwe.gif) no-repeat 0 6px;
 }
 ul.tabset li.tab-3 a strong{
-	padding: 0 0 0 15px;
-	background: url(/images/icon-close-1.gif) no-repeat 0 6px;
+    padding: 0 0 0 15px;
+    background: url(/images/icon-close-1.gif) no-repeat 0 6px;
 }
 .hebrew ul.tabset li.tab-1 a strong{
-	padding: 0 15px 0 0;
-	background: url(/images/icon-done.gif) no-repeat 100% 6px;
+    padding: 0 15px 0 0;
+    background: url(/images/icon-done.gif) no-repeat 100% 6px;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: 123px -950px;
 }
 .hebrew ul.tabset li.tab-2 a strong{
-	padding: 0 15px 0 0;
-	background: url(/images/icon-qwe.gif) no-repeat 100% 6px;
+    padding: 0 15px 0 0;
+    background: url(/images/icon-qwe.gif) no-repeat 100% 6px;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: 124px -982px;
 }
 .hebrew ul.tabset li.tab-3 a strong{
-	padding: 0 15px 0 0;
-	background: url(/images/icon-close-1.gif) no-repeat 100% 6px;
+    padding: 0 15px 0 0;
+    background: url(/images/icon-close-1.gif) no-repeat 100% 6px;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: 124px -1014px;
 }
 ul.tabset li a.active{
 	background:url(/images/bg-tab-1-h.png) no-repeat;
@@ -4243,13 +4250,21 @@ div.tab {
 .tabs-container #tab-5 {background: url(/images/bg-tabset-brown-en.gif) no-repeat 0 0;}
 .tabs-container #tab-6 {background: url(/images/bg-tabset-gray-en.gif) no-repeat 0 0;}
 .hebrew #tab-1 {background: url(/images/bg-tabset-green.gif) no-repeat 0 0;}
-.hebrew #tab-2 {background: url(/images/bg-tabset-orange.gif) no-repeat 0 0;}
+.hebrew #tab-2 {
+    background: url(/images/bg-tabset-orange.gif) no-repeat 0 0;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -1963px -10px;
+}
 .hebrew #tab-3 {background: url(/images/bg-tabset-red.gif) no-repeat 0 0;}
 .hebrew #tab-4 {background: url(/images/bg-tabset-blue.gif) no-repeat 0 0;}
 .hebrew #tab-5 {background: url(/images/bg-tabset-brown.gif) no-repeat 0 0;}
 .hebrew #tab-6 {background: url(/images/bg-tabset-gray.gif) no-repeat 0 0;}
 .hebrew .tabs-container #tab-1 {background: url(/images/bg-tabset-green.gif) no-repeat 100% 0;}
-.hebrew .tabs-container #tab-2 {background: url(/images/bg-tabset-orange.gif) no-repeat 100% 0;}
+.hebrew .tabs-container #tab-2 {
+    background: url(/images/bg-tabset-orange.gif) no-repeat 100% 0;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -1963px -10px;
+}
 .hebrew .tabs-container #tab-3 {background: url(/images/bg-tabset-red.gif) no-repeat 100% 0;}
 .hebrew .tabs-container #tab-4 {background: url(/images/bg-tabset-blue.gif) no-repeat 100% 0;}
 .hebrew .tabs-container #tab-5 {background: url(/images/bg-tabset-brown.gif) no-repeat 100% 0;}
@@ -4353,19 +4368,25 @@ div.tab {
 }
 .hebrew #sidebar-1{float: right;}
 .side-box {
-	overflow: hidden;
-	background: url(/images/bg-sidebox-c.gif) repeat-y;
-	width: 330px;
-	margin-bottom: 15px;
+    overflow: hidden;
+    background: url(/images/bg-sidebox-c.gif) repeat-y;
+    background-image: url(/images/rsvp_more_sprite2.png);
+    background-position: -10px 0px;
+    width: 330px;
+    margin-bottom: 15px;
 }
 .side-box .holder {
-	padding-bottom: 15px;
-	background: url(/images/bg-sidebox-b.gif) no-repeat 0 100%;
+    padding-bottom: 15px;
+    background: url(/images/bg-sidebox-b.gif) no-repeat 0 100%;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -10px 429px;
 }
 .side-box-heading {
-	background: url(/images/bg-sidebox-t-brown.gif) no-repeat;
-	height: 43px;
-	padding: 0 20px;
+    background: url(/images/bg-sidebox-t-brown.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -10px;
+    height: 43px;
+    padding: 0 20px;
 }
 .side-box-heading h2{
 	padding: 12px 0 0;
@@ -4423,11 +4444,17 @@ div.tab {
 	color:#fff;
 }
 .hebrew .link-box li a  {padding: 0 25px 0 5px;}
-.link-box li.item-1 a {background: url(/images/ico-14.gif) no-repeat 9px 7px;}
+.link-box li.item-1 a {
+    background: url(/images/ico-14.gif) no-repeat 9px 7px;
+}
 .link-box li.item-2 a {background: url(/images/ico-13.gif) no-repeat 9px 7px;}
 .link-box li.item-3 a {background: url(/images/ico-12.gif) no-repeat 9px 7px;}
 .hebrew .link-box li.item-2{background: url(/images/bg-link-box-item-orange.gif) no-repeat;}
-.hebrew .link-box li.item-1{background: url(/images/bg-link-box-item-green.gif) no-repeat;}
+.hebrew .link-box li.item-1{
+    background: url(/images/bg-link-box-item-green.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -73px;
+}
 .link-box li.item-text{
 	background:none;
 	width:auto;
@@ -4442,8 +4469,16 @@ div.tab {
 .hebrew .link-box li.item-text a{padding-right:5px;}
 .hebrew .link-box li.item-text a:hover{text-decoration:none;}
 .link-box li.item-2{background: url(/images/bg-link-box-item-orange.gif) no-repeat;}
-.link-box li.item-1{background: url(/images/bg-link-box-item-green.gif) no-repeat;}
-.hebrew .link-box li.item-1 a {background: url(/images/ico-14.gif) no-repeat 74px 7px;}
+.link-box li.item-1{
+    background: url(/images/bg-link-box-item-green.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -73px;
+}
+.hebrew .link-box li.item-1 a {
+    background: url(/images/ico-14.gif) no-repeat 74px 7px;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: 64px -875px;
+}
 .hebrew .link-box li.item-2 a {background: url(/images/ico-13.gif) no-repeat 74px 7px;}
 .hebrew .link-box li.item-3 a {background: url(/images/ico-12.gif) no-repeat 74px 7px;}
 .side-box-blue {background: url(/images/bg-sidebox-c-blue.gif) repeat-y;}
@@ -4457,18 +4492,20 @@ div.tab {
 	padding:5px 0 0;
 }
 .answered-form .row{
-	float:left;
-	background:url(/images/bg-answered-form.gif) no-repeat 100% 0;
-	height:29px;
-	padding:0 7px 0 0;
-	margin:0 0 5px;
+    float:left;
+    background:url(/images/bg-answered-form.gif) no-repeat 100% 0;
+    height:29px;
+    padding:0 7px 0 0;
+    margin:0 0 5px;
 }
-.hebrew .answered-form .row{float:right;}
+.hebrew .answered-form .row{
+    float:right;
+}
 .answered-form .row .hold{
-	float:left;
-	background:url(/images/bg-answered-form.gif) no-repeat;
-	height:22px;
-	padding:3px 0 4px 4px;
+    float:left;
+    background:url(/images/bg-answered-form.gif) no-repeat;
+    height:22px;
+    padding:3px 0 4px 4px;
 }
 .answered-form label{
 	float:left;
@@ -4480,12 +4517,14 @@ div.tab {
 }
 .hebrew .answered-form label{padding:0 0 0 12px;}
 .answered-form .text{
-	width:30px;
-	float:left;
-	background:url(/images/bg-text-custom.gif) no-repeat;
-	height:22px;
-	overflow:hidden;
-	padding:0 10px;
+    width:30px;
+    float:left;
+    background:url(/images/bg-text-custom.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -120px;
+    height:22px;
+    overflow:hidden;
+    padding:0 10px;
 }
 .answered-form .text input{
 	width:100%;
@@ -4509,12 +4548,14 @@ div.tab {
 	float:none;
 }
 .answered-form .row2 .textarea{
-	background:url(/images/bg-textarea-3.gif) no-repeat;
-	width:281px;
-	height:90px;
-	padding:5px;
-	display:block;
-	overflow:hidden;
+    background:url(/images/bg-textarea-3.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -211px;
+    width:281px;
+    height:90px;
+    padding:5px;
+    display:block;
+    overflow:hidden;
 }
 .answered-form .row2 .textarea textarea{
 	margin:0;
@@ -4668,16 +4709,22 @@ div.tab {
 }
 .hebrew #content-column {float: left;}
 .content-box {
-	overflow: hidden;
-	width: 619px;
-	background: url(/images/bg-content-box-c.gif) repeat-y;
-	margin: 0 0 17px;
+    overflow: hidden;
+    width: 619px;
+    background: url(/images/bg-content-box-c.gif) repeat-y;
+    background-image: url(/images/rsvp_more_sprite2.png);
+    background-position: -360px 0px;    
+    margin: 0 0 17px;
 }
-.content-box .holder{background: url(/images/bg-content-box-t.gif) no-repeat;}
+.content-box .holder{
+    background: url(/images/bg-content-box-t.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -360px -10px;
+}
 .content-box .frame{
-	overflow: hidden;
-	height: 1%;
-	background: url(/images/bg-content-box-b.gif) no-repeat 0 100%;
+    overflow: hidden;
+    height: 1%;
+    background: url(/images/bg-content-box-b.gif) no-repeat 0 100%;
 }
 .content-box-holder {
 	overflow: hidden;
@@ -4752,9 +4799,11 @@ div.tab {
 }
 .d-list dd a:hover { text-decoration: none;}
 .content-box-heading {
-	padding: 0 17px;
-	background: url(/images/bg-content-box-heading.gif) no-repeat;
-	height: 44px;
+    padding: 0 17px;
+    background: url(/images/bg-content-box-heading.gif) no-repeat;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -378px;
+    height: 44px;
 }
 .content-box-heading h3{
 	font-weight: normal;
@@ -4772,8 +4821,10 @@ div.tab {
 .hebrew .tabs-container {padding: 8px 10px 5px 11px;}
 .tabs-container .tabs-block{background:#f5f1eb;}
 .tabs-container .tabs-bottom{
-	padding: 0 16px 8px;
-	background: url(/images/bg-tabs-alt-b.gif) no-repeat 0 100%;
+    padding: 0 16px 8px;
+    background: url(/images/bg-tabs-alt-b.gif) no-repeat 0 100%;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -2581px 69px;
 }
 .tabs-container .info-cols {
 	overflow: hidden;
@@ -4785,7 +4836,11 @@ div.tab {
 	margin-bottom: -5px;
 	background: url(/images/bg-comment-en-lrg.gif)  no-repeat 0 -38px;
 }
-.hebrew .tabs-container .info-cols .note-box {background: url(/images/bg-comment-lrg.gif)  no-repeat 0 -38px;}
+.hebrew .tabs-container .info-cols .note-box {
+    background: url(/images/bg-comment-lrg.gif)  no-repeat 0 -38px;
+    background-image: url(/images/rsvp_more_sprite4.png);
+    background-position: -10px -738px;
+}
 .tabs-container .info-col{
 	width: 170px;
 	margin: 0 14px;
@@ -4794,9 +4849,11 @@ div.tab {
 .hebrew .tabs-container .info-cols  {direction: ltr;}
 .hebrew .tabs-container .info-col { direction: rtl;}
 .tabs-container .info-col .info-col-row{
-	margin: 0 0 -1px;
-	padding: 11px 0;
-	background: url(/images/bg-sep-alt.gif) no-repeat 0 100%;
+    margin: 0 0 -1px;
+    padding: 11px 0;
+    background: url(/images/bg-sep-alt.gif) no-repeat 0 100%;
+    background-image: url(/images/rsvp_more_sprite3.png);
+    background-position: -3199px 52px;
 }
 .tabs-container .info-bottom,
 .hebrew .tabs-container .info-bottom {margin-top: -16px;}
@@ -5678,19 +5735,20 @@ ul.contact-tabset li.active a ,
 	left:15px;
 }
 .lang li{
-	float:right;
-	background:url(/images/sep-lang.gif) no-repeat 100% 50%;
-	padding:0 7px 0 0;
-	margin:0 0 0 6px;
-	font-size:1.1em;
-	line-height:1.273em;
+    float:right;
+    background:url(/images/sep-lang.gif) no-repeat 100% 50%;
+    padding:0 7px 0 0;
+    margin:0 0 0 6px;
+    font-size:1.0em;
+    line-height:1.273em;
 }
 .hebrew .lang li{
   background-image: url(/images/home_page_sprite1.png);
   background-position: -10px -1716px;
-	float:left;
-	margin:0 6px 0 0;
-	padding:0 0 0 7px;
+    float:left;
+    margin:0 6px 0 0;
+    padding:0 0 0 7px;
+    font-size:1.1em;
 }
 .lang li:first-child{
 	padding:0;
