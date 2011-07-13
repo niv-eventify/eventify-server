@@ -7,6 +7,7 @@ class DesignsController < InheritedResources::Base
   def index
     super do |format|
       format.html do
+        @include_google_plusone = true
         seo = current_locale == "en" ? Seo::SEO_EN : Seo::SEO_HE
         features = current_locale == "en" ? Seo::FEATURES_EN : Seo::FEATURES_HE
         if cat_seo = seo["cat_#{@category.id}".to_sym]

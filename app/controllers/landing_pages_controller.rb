@@ -6,6 +6,7 @@ class LandingPagesController < InheritedResources::Base
     @landing_page = LandingPage.find_by_friendly_url_and_language(params[:friendly_url], current_locale)
 
     if @landing_page
+      @include_google_plusone = true
       @page_title = @landing_page.title
       @meta_keywords = @landing_page.meta_keywords
       @meta_description = @landing_page.meta_description
