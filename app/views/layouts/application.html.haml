@@ -35,3 +35,5 @@
         != render(:partial => 'layouts/footer')
     - unless request.ssl? || @skip_feedback
       != render(:partial => "layouts/kampyle_feedback")
+    .plusOne
+      != render(:partial => "layouts/google_plusone")

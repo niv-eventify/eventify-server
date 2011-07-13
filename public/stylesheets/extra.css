@@ -1707,3 +1707,7 @@ span#updating_rsvp_status {
   font-size:12px;
   font-weight: bold;
 }
+.plusOne {
+    position: absolute;
+    top: 97px;
+}

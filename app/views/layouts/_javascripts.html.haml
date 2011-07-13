@@ -4,3 +4,5 @@
 - else
   != javascript_include_tag "jquery"
   != javascript_include_tag "jquery-ui"
+%script{ :src => 'https://apis.google.com/js/plusone.js', :type => 'text/javascript', :charset => 'utf-8' }
+  != render(:partial => "layouts/google_plusone_header")
