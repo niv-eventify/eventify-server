@@ -2918,9 +2918,14 @@ ul.list li{
     font-size:1.2em;
     line-height:1.5em;
 }
-.boxe-wrap .boxe-text p strong {
+.boxe-wrap .boxe-text p strong{
     float:left;
     width:60px;
+}
+#nyroModalContent .popup-heading .boxe-wrap .boxe-text p strong  {
+    font-size: 1.2em;
+    line-height: 1.2em;
+    font-weight: bold;
 }
 .hebrew .boxe-wrap .boxe-text p strong {
     float:right;

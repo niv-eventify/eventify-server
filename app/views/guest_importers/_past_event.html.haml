@@ -1,0 +1,8 @@
+.boxe
+  .boxe-top
+    .boxe-btm
+      .heading
+        %h4
+          != link_to h(past_event.name), summary_path(past_event)
+      .boxe-wrap
+        != render(:partial => "events/info", :locals => {:event => past_event, :show_preview => false})

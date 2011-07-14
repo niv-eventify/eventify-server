@@ -2,12 +2,13 @@ class GuestImportersController < ApplicationController
   before_filter :require_user, :event_by_user_or_host
   before_filter :set_source, :only => :new
 
-  SOURCES = ["email", "csv", "addressbook", "email_list"]
+  SOURCES = ["email", "csv", "addressbook", "email_list", "past_events"]
   TITLES = {
     "email" => N_("Import from mail"),
     "csv" => N_("Import CSV file"),
     "addressbook" => N_("Import from eventify's address book"),
-    "email_list" => N_("Import from existing email list")
+    "email_list" => N_("Import from existing email list"),
+    "past_events" => N_("Import guests from past events")
   }
 
   def create
@@ -34,6 +35,7 @@ class GuestImportersController < ApplicationController
 protected
   def set_source
     @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)
+    @past_events = current_user.events
   end
 
   def selected_contracts

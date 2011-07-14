@@ -671,6 +671,9 @@ li.thing .sel-holder {
 .hebrew .import {
     direction:rtl
 }
+.hebrew .import.past_events {
+    width: 610px;
+}
 
 .import .table-box .holder {
     height:250px;

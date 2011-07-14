@@ -1,0 +1,7 @@
+.import.past_events
+  .popup-heading
+    %strong= s_(GuestImportersController::TITLES["past_events"])
+    - if @error
+      %p.error-msg= @error
+    .holder    
+      != render(:partial => "past_event", :collection => @past_events)
