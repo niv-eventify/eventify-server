@@ -4,5 +4,8 @@
       .heading
         %h4
           != link_to h(past_event.name), summary_path(past_event)
+        .edit
+          .edit-bg
+            != link_to_function _("Import guests from this event"), "", :class => "open-edit"
       .boxe-wrap
         != render(:partial => "events/info", :locals => {:event => past_event, :show_preview => false})
