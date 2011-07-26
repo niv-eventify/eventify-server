@@ -1727,11 +1727,19 @@ span#updating_rsvp_status {
     background: none;    
 }
 .hebrew .import.past_events .boxe .heading .edit a {
-    padding: 0 20px 0 40px;
+    padding: 0 47px;
 }
 .import.past_events .boxe .heading .edit-bg {
-    width: 220px;
+    width: 200px;
 }
 .hebrew .import.past_events .boxe .heading .edit-bg:hover, .hebrew .import.past_events .boxe .heading .hover {
     background-position: 35px 0;
-}    
+}
+.hebrew .import.past_events .boxe .heading .edit-bg:hover,
+.hebrew .import.past_events .boxe .heading .hover {
+    background:url(/images/bg-edit-hov-large.gif) no-repeat;
+}
+.import.past_events .boxe .heading .edit-bg:hover,
+.import.past_events .boxe .heading .hover {
+    background:url(/images/bg-edit-hov-large-en.gif) no-repeat;
+}
