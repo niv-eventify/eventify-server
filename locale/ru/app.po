@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2011-05-27 11:33+0300\n"
+"POT-Creation-Date: 2011-07-27 20:41+0300\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,7 +31,7 @@ msgid_plural "%d contacts imported"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/controllers/guest_importers_controller.rb:87
+#: app/controllers/guest_importers_controller.rb:90
 msgid "%d guest imported"
 msgid_plural "%d guests imported"
 msgstr[0] ""
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Add Map"
 msgstr ""
 
-#: app/views/guests/_import.html.haml:15
+#: app/views/guests/_import.html.haml:20
 msgid "Add manually:"
 msgstr ""
 
@@ -897,6 +897,18 @@ msgstr ""
 msgid "Import from mail"
 msgstr ""
 
+#: app/views/guests/_import.html.haml:17
+msgid "Import from past events"
+msgstr ""
+
+#: app/controllers/guest_importers_controller.rb:11
+msgid "Import guests from past events"
+msgstr ""
+
+#: app/views/guest_importers/_past_event.html.haml:9
+msgid "Import guests from this event"
+msgstr ""
+
 #: app/views/contact_importers/show.html.haml:9
 msgid "Importing Contacts from %{name}"
 msgstr ""
@@ -970,7 +982,7 @@ msgstr ""
 msgid "Invitations to send: %{email_count} by email and %{sms_count} by SMS"
 msgstr ""
 
-#: app/controllers/designs_controller.rb:20
+#: app/controllers/designs_controller.rb:21
 msgid "Invitations | Eventify"
 msgstr ""
 
@@ -1334,7 +1346,7 @@ msgstr ""
 msgid "Please select from the list"
 msgstr ""
 
-#: app/controllers/guest_importers_controller.rb:62
+#: app/controllers/guest_importers_controller.rb:65
 msgid "Please upload a CSV file"
 msgstr ""
 
@@ -1351,7 +1363,7 @@ msgid "Prev"
 msgstr ""
 
 #: app/helpers/events_wizard_helper.rb:46
-#: app/helpers/events_wizard_helper.rb:50 app/views/events/_info.html.haml:18
+#: app/helpers/events_wizard_helper.rb:50 app/views/events/_info.html.haml:19
 msgid "Preview"
 msgstr ""
 
@@ -2278,7 +2290,7 @@ msgstr ""
 msgid "ex. john.doe@gmail.com"
 msgstr ""
 
-#: app/helpers/rsvps_helper.rb:59 app/views/events/_form.html.haml:36
+#: app/helpers/rsvps_helper.rb:67 app/views/events/_form.html.haml:36
 msgid "find address"
 msgstr ""
 
@@ -2404,7 +2416,7 @@ msgstr[1] ""
 msgid "open"
 msgstr ""
 
-#: app/views/events/_form.html.haml:42 app/views/guests/_import.html.haml:14
+#: app/views/events/_form.html.haml:42 app/views/guests/_import.html.haml:19
 #: app/views/users/_edit.html.haml:11 app/views/passwords/_edit.html.haml:7
 msgid "or"
 msgstr ""
@@ -2455,7 +2467,7 @@ msgstr ""
 msgid "should be in a future"
 msgstr ""
 
-#: app/helpers/rsvps_helper.rb:55 app/helpers/rsvps_helper.rb:57
+#: app/helpers/rsvps_helper.rb:63 app/helpers/rsvps_helper.rb:65
 msgid "show map"
 msgstr ""
 
