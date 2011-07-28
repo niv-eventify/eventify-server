@@ -74,6 +74,11 @@ protected
     @error = error.to_s if error
   end
 
+  def _load_from_past_event
+    contacts = Event.find_by_id(params[:target_event]).guests.map{|g| [g.name, g.email, g.mobile_phone]}
+    @contacts = ContactImporter.contacts_to_openstruct(contacts.uniq) unless contacts.blank?
+  end
+
   def _load_from_source
     set_source
 
@@ -81,6 +86,8 @@ protected
       _load_csv_file
     elsif "email" == params[:source]
       _load_from_emails
+    elsif "past_events" == params[:source]
+      _load_from_past_event
     end
   end
 

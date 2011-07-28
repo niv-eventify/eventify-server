@@ -1,7 +1,12 @@
 .import.past_events
-  .popup-heading
-    %strong= s_(GuestImportersController::TITLES["past_events"])
-    - if @error
-      %p.error-msg= @error
-    .holder    
-      != render(:partial => "past_event", :collection => @past_events)
+  - form_tag event_guest_importers_path(@event), :target => "upload_frame" do
+    != hidden_field_tag :contact_source, "past_events"
+    != hidden_field_tag :source, "past_events"
+    != hidden_field_tag :target_event, ""
+    .popup-heading
+      %strong= s_(GuestImportersController::TITLES["past_events"])
+      - if @error
+        %p.error-msg= @error
+      .holder    
+        != render(:partial => "past_event", :collection => @past_events)
+%iframe#upload_frame{:name => "upload_frame", :style => "display: none"}
