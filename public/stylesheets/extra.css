@@ -1716,6 +1716,7 @@ span#updating_rsvp_status {
 }
 .import.past_events .boxe .heading h4 {
     width: 360px;
+    font-size: 1.8em;
 }
 .import.past_events .boxe .heading .edit{
     width: 220px;
@@ -1728,9 +1729,11 @@ span#updating_rsvp_status {
 }
 .hebrew .import.past_events .boxe .heading .edit a {
     padding: 0 47px;
+    width: 200px;
 }
 .import.past_events .boxe .heading .edit-bg {
     width: 200px;
+    padding: 0px;
 }
 .hebrew .import.past_events .boxe .heading .edit-bg:hover, .hebrew .import.past_events .boxe .heading .hover {
     background-position: 35px 0;
