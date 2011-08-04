@@ -1394,7 +1394,7 @@ body {
 
 .contact-list1 li a, .contact-list1 li.address-book a {
   background-image: url("/images/big_import.gif");
-  width: 250px;
+  width: 240px;
 }
 
 .contact-list1 li.mail strong {
