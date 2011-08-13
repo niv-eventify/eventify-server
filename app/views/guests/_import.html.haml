@@ -10,6 +10,11 @@
         %a{ :href => new_event_guest_importer_path(@event, :source => "addressbook")}
           %strong
             %span= _("Import from eventify's address book")
+    - unless @event.user.events.length < 2
+      %li.address-book
+        %a{ :href => new_event_guest_importer_path(@event, :source => "past_events")}
+          %strong
+            %span= _("Import from past events")
   %span.add_manually
     = _("or")
     != link_to_function _("Add manually:"), "jQuery('.guest_list').show();jQuery('.add_manually').hide();"

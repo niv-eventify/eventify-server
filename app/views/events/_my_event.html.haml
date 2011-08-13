@@ -8,5 +8,5 @@
         - if my_event.changes_allowed?
           != render(:partial => "edit_menu", :locals => {:event => my_event})
       .boxe-wrap
-        != render(:partial => "info", :locals => {:event => my_event})
+        != render(:partial => "info", :locals => {:event => my_event, :show_preview => true})
         != render(:partial => "actions_menu", :locals => {:event => my_event})

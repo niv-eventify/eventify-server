@@ -86,12 +86,13 @@ class ContactImporter < ActiveRecord::Base
 
   def self.parse_name_and_email(c)
     if c.is_a?(Array)
-      name, email = c.first, c.last
+      name, email, mobile = c[0], c[1], c[2]
     elsif c.is_a?(Hash)
       name = c[:name] || c[:Name]
-      email = c[:email] ||c [:Email]
+      email = c[:email] || c [:Email]
+      mobile = c[:mobile]
     end
-    [name || email, email]
+    [name || email, email, mobile]
   end
 
   def self.contacts_to_openstruct(contacts)
@@ -99,10 +100,10 @@ class ContactImporter < ActiveRecord::Base
 
     contacts.map do |contact|
       returning(OpenStruct.new) do |res|
-        name, email = parse_name_and_email(contact)
+        name, email, mobile = parse_name_and_email(contact)
         res.name = name || email
         res.email = email
-        res.mobile = nil
+        res.mobile = mobile
         res.uid = id
         id += 1
       end

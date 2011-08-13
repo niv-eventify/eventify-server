@@ -2,12 +2,13 @@ class GuestImportersController < ApplicationController
   before_filter :require_user, :event_by_user_or_host
   before_filter :set_source, :only => :new
 
-  SOURCES = ["email", "csv", "addressbook", "email_list"]
+  SOURCES = ["email", "csv", "addressbook", "email_list", "past_events"]
   TITLES = {
     "email" => N_("Import from mail"),
     "csv" => N_("Import CSV file"),
     "addressbook" => N_("Import from eventify's address book"),
-    "email_list" => N_("Import from existing email list")
+    "email_list" => N_("Import from existing email list"),
+    "past_events" => N_("Import guests from past events")
   }
 
   def create
@@ -34,6 +35,7 @@ class GuestImportersController < ApplicationController
 protected
   def set_source
     @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)
+    @past_events = current_user.events
   end
 
   def selected_contracts
@@ -72,6 +74,11 @@ protected
     @error = error.to_s if error
   end
 
+  def _load_from_past_event
+    contacts = Event.find_by_id(params[:target_event]).guests.map{|g| [g.name, g.email, g.mobile_phone]}
+    @contacts = ContactImporter.contacts_to_openstruct(contacts.uniq) unless contacts.blank?
+  end
+
   def _load_from_source
     set_source
 
@@ -79,6 +86,8 @@ protected
       _load_csv_file
     elsif "email" == params[:source]
       _load_from_emails
+    elsif "past_events" == params[:source]
+      _load_from_past_event
     end
   end
 

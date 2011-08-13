@@ -1,0 +1,10 @@
+.boxe
+  .boxe-top
+    .boxe-btm
+      .heading
+        %h4=h(past_event.name)
+        .edit
+          .edit-bg
+            != link_to_function _("Import guests from this event"), "jQuery('input[name=\"target_event\"]').val(#{past_event.id});jQuery(this).parents('form').submit()", :class => "open-edit"
+      .boxe-wrap
+        != render(:partial => "events/info", :locals => {:event => past_event, :show_preview => false})
