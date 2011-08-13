@@ -1,7 +1,7 @@
 <span style="font-size:16px;font-weight:bold;color:#41BDCD;font-family:arial;line-height:110%;">שלום <%= h(@event.user.name)%>,</span>
 <br/>
 <br/>
-להלן השינויים באישורי ההשתתפות לארוע: "<%= @event.name %>" בתאריך <%= @event.starting_at.to_s(:isra_date) %> בשעה <%= @start_time %>
+להלן השינויים באישורי ההשתתפות לארוע: "<%= @event.name %>" בתאריך <%= @start_date %> בשעה <%= @start_time %>
 <br/>
 <ul style="list-style-type:circle;">
 <%- Event::RSVP_SUMMARY_HEADER.each_with_index do |rsvp, index| -%>

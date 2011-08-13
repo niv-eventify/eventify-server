@@ -70,10 +70,12 @@ module Event::Summary
     summary_since = last_summary_sent_at || created_at
     self.last_summary_sent_at = Time.now.utc
     save!
-    start_time = self.with_time_zone do
-      self.starting_at.to_s(:isra_time)
+    start_datetime = self.with_time_zone do
+      ::Time.zone.utc_to_local(self.starting_at)
     end
-    I18n.with_locale(language) {Notifier.deliver_guests_summary(self, rsvps, summary_since, start_time)}
+    start_time = start_datetime.to_s(:isra_time)
+    start_date = start_datetime.to_s(:isra_date)
+    I18n.with_locale(language) {Notifier.deliver_guests_summary(self, rsvps, summary_since, start_time, start_date)}
   end
 
   def guests_for_this_summary!
