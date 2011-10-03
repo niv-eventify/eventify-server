@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110413145438) do
+ActiveRecord::Schema.define(:version => 20110621194410) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -294,6 +294,9 @@ ActiveRecord::Schema.define(:version => 20110413145438) do
     t.datetime "quoted_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.string   "meta_description"
+    t.string   "meta_keywords"
   end
 
   create_table "links_pages", :force => true do |t|
@@ -445,7 +448,7 @@ ActiveRecord::Schema.define(:version => 20110413145438) do
 
   create_table "users", :force => true do |t|
     t.string   "name",                :limit => 48
-    t.string   "email",               :limit => 100,                   :null => false
+    t.string   "email",               :limit => 100,                    :null => false
     t.string   "crypted_password",    :limit => 128
     t.string   "password_salt",       :limit => 20
     t.string   "persistence_token",   :limit => 128
@@ -463,6 +466,7 @@ ActiveRecord::Schema.define(:version => 20110413145438) do
     t.datetime "updated_at"
     t.datetime "disabled_at"
     t.boolean  "is_free",                            :default => true
+    t.boolean  "is_super_admin",                     :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

@@ -35,7 +35,7 @@ class GuestImportersController < ApplicationController
 protected
   def set_source
     @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)
-    @past_events = current_user.events
+    @past_events = current_user.events.find(:all, :order => "created_at DESC")[1..-1]
   end
 
   def selected_contracts
