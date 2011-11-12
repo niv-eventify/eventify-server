@@ -68,7 +68,7 @@ class Event < ActiveRecord::Base
   attr_accessible :map
   validates_attachment_size :map, :less_than => 2.megabytes, :message => _("File size should be less than %{max_file_size}MB") % {:max_file_size => 2}
 
-  attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at, 
+  attr_accessible :category_id, :design_id, :name, :starting_at, :ending_at,
     :location_name, :location_address, :map_link, :invitation_title, :guest_message, :category, :design, :msg_font_size, :title_font_size, :msg_text_align, :title_text_align,
     :msg_color, :title_color, :font_title, :text_top_x, :text_top_y, :text_width, :text_height,
     :title_top_x, :title_top_y, :title_width, :title_height, :font_body, :allow_seeing_other_guests, :tz,
@@ -91,7 +91,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :category_id, :design_id, :name, :starting_at
   validates_length_of :invitation_title, :maximum => 100, :allow_nil => true, :allow_blank => true
   validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
-  
+
   # sms sending validations
   attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
   attr_accessible :sms_message, :sms_resend_message, :host_mobile_number, :delay_sms_sending, :resend_invitations,
@@ -173,11 +173,12 @@ class Event < ActiveRecord::Base
 
   def set_invitation_thumbnail!
     bottom_pics = [] #[url,geometry]
-    cropped_pictures.find_all_by_window_id(design.windows).each do |cp|
+    self.cropped_pictures.find_all_by_window_id(design.windows).each do |cp|
       window = cp.window
       bottom_pics << [cp.pic.url, "#{window.width}x#{window.height}+#{window.top_x}+#{window.top_y}"]
     end
     return if bottom_pics.blank?
+    logger.info("set_invitation_thumbnail! - event id: #{self.id}, bottom_pics: #{bottom_pics}")
     res = ImageMerger::merge_two_images(design.card.url, bottom_pics, design.card_file_name)
     self.invitation_thumb = res
     self.save
@@ -334,7 +335,7 @@ class Event < ActiveRecord::Base
   def default_reminder_message
     with_time_zone do
       opts = {
-        :event_name => name, 
+        :event_name => name,
         :host_name => user.name,
         :date => starting_at.to_s(:isra_date),
         :time => starting_at.to_s(:isra_time),
@@ -350,7 +351,7 @@ class Event < ActiveRecord::Base
   def default_sms_message
     with_time_zone do
       opts = {
-        :event_name => name, 
+        :event_name => name,
         :host_name => user.name,
         :date => starting_at.to_s(:isra_date),
         :time => starting_at.to_s(:isra_time),
