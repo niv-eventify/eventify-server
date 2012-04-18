@@ -2,6 +2,7 @@ class CreateDesigners < ActiveRecord::Migration
   def self.up
     create_table :designers do |t|
       t.integer :user_id
+      t.string :friendly_url
       t.string :name
       t.text :about
       t.string :link1
@@ -28,6 +29,7 @@ class CreateDesigners < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :designers, [:friendly_url], :unique => true
     add_column :designs, :designer_id, :integer
   end
 

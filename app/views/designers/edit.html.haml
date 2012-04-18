@@ -1,0 +1,50 @@
+- @page_title=_("Edit Designer Profile | Eventify")
+
+- content_for(:head) do
+  != javascript_include_tag "designer"
+
+.top-text
+  %h2= _("Hello %{username},") % {:username => h(current_user.name)}
+  %p= _("Here you can edit your designer profile")
+
+- page_with_tabs(:designer) do
+  .events-holder
+    .table-box.table-box-alt
+      .table-box-t
+        .holder
+          .forms-block
+            - semantic_form_for(@designer, :live_validations => true, :html => {:class => "form edit_designer", :multipart => true}) do |f|
+              = f.object.errors.on(:base)
+
+              != hidden_field_tag :delete_avatar
+              != hidden_field_tag :delete_work1
+              != hidden_field_tag :delete_work2
+              != hidden_field_tag :delete_work3
+
+              - event_input_text(f, :about, _("About me"), "")
+              .friendly_url_explained
+                %p= _("Please select a designer name to be show in the url of your eventify page.<br/>For example: suppose your designer name is 'good designs':<br/>the resulting url will be: 'www.eventify.co.il/designer/good-designs")
+
+              - event_text_input(f, :friendly_url, _("Designer Name"), :live => false, :input_html => {:class => "input-text"})
+              - event_text_input(f, :link1, _("Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"})
+              - f.inputs :class => "files avatar" do
+                %h4= _("Avatar")
+                - unless @designer.avatar.url(:thumb).blank?
+                  %li.thumbnail#avatar
+                    .thumb
+                      %span.remove_attr#remove_avatar="remove"
+                      %img{:src => @designer.avatar.url(:thumb)}
+
+                != f.input :avatar
+              - f.inputs :class => "files" do
+                %h4= _("Upload your personal work")
+                - for attr in [:work1, :work2, :work3]
+                  - unless @designer.send(attr).url(:thumb).blank?
+                    %li.thumbnail{:id=>"#{attr}"}
+                      .thumb
+                        %span.remove_attr{:id => "remove_#{attr}"}="remove"
+                        %img{:src => @designer.send(attr).url(:thumb)}
+                  != f.input attr
+              .forms-block-btns
+                != link_to_function _("Save"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
+                != link_to _("Cancel"), edit_designer_path(@designer), :class => "btn"

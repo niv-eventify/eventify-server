@@ -55,7 +55,7 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resource   :ical, :controller => "ical"
     rsvp.resources :takings
   end
-  map.resources :designers
+  map.resources :designers, :except => :show
   map.resources :takings
   map.resources :uploaded_pictures
   map.resources :uploaded_maps
@@ -67,5 +67,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :cropped_pictures
   map.connect "/1234a3a5e723d2e0fa3e43fbef0c3dac", :controller => :send_grid_events, :action => :create, :conditions => {:method => :post}
   map.resource :links_page
+  map.connect '/designers/:friendly_url', :controller => 'designers', :action => 'show'
   map.connect '*friendly_url', :controller => 'landing_pages', :action => 'show'
 end

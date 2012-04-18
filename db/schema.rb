@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20111011141849) do
 
   create_table "designers", :force => true do |t|
     t.integer  "user_id"
+    t.string   "friendly_url"
     t.string   "name"
     t.text     "about"
     t.string   "link1"
@@ -110,6 +111,8 @@ ActiveRecord::Schema.define(:version => 20111011141849) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "designers", ["friendly_url"], :name => "index_designers_on_friendly_url", :unique => true
 
   create_table "designs", :force => true do |t|
     t.integer  "creator_id"
