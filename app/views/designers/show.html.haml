@@ -1,0 +1,62 @@
+- @page_title=_("Designer Profile | Eventify")
+
+- content_for(:head) do
+  != stylesheet_link_tag "jquery-ui", "rsvps", "nyroModal.full"
+  != javascript_include_tag "designer", "jquery.nyroModal"
+
+
+.designer
+  .info
+    .side_col
+      .avatar
+        %img.css3pie{:src => @designer.avatar.url(:medium)}
+      .links
+        - unless @designer.link1.blank?
+          .link_row
+            %span.title= _("Site/Blog:")
+            %span.link
+              %a{:href => @designer.link1}= @designer.link1
+        .link_row
+          %span.title= _("Vote for me:")
+          #fb-root
+          :javascript
+            window.fbAsyncInit = function() {
+              FB.init({
+                appId: '139096766151419',
+                status: true,
+                cookie: true,
+                xfbml: true
+              });
+            };
+            (function() {
+              var e = document.createElement('script'); e.async = true;
+              e.src = document.location.protocol +
+                '//connect.facebook.net/en_US/all.js';
+              document.getElementById('fb-root').appendChild(e);
+            }());
+          %fb:like{:href => "http://www.eventify.co.il/designers/#{@designer.friendly_url}", :layout => "button_count", :show_faces => "false", :width => "120"}
+
+    .center_col
+      .name
+        = @designer.name
+      .about
+        != (h(@designer.about) || "").gsub("\n", "<BR/>")
+  #tab_holder
+    .tab_title= _("Gallery")
+    %ul
+      %li
+        %a{:href => "#invitations_tab"}= "הזמנות"
+      %li
+        %a{:href => "#work_tab"}= "תיק עבודות"
+    #invitations_tab
+      .image-boxes-h
+        - @designer.designs.in_groups_of(3).each do |group|
+          .image-boxes-h-row
+            - group.compact.each do |d|
+              .img-box
+                != render(:partial => "designs/selector", :locals => {:event => nil, :design => d, :category => d.categories.first})
+    #work_tab
+      - for attr in [:work1, :work2, :work3]
+        - unless @designer.send(attr).url(:medium).blank?
+          %div.work{:id => attr}
+            %img.css3pie{:src => @designer.send(attr).url(:medium)}
