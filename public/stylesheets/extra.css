@@ -4,6 +4,10 @@
       url("/fonts/arial.ttf") format("truetype");
 }
 
+.css3pie {
+  behavior: url("/stylesheets/PIE.htc");
+}
+
 a.signup-out {
     float:right;
     margin:83px 5px 0 5px;
@@ -518,7 +522,6 @@ li.thing.active span.name {
     margin:0 0 5px 5px;
     float:left;
     border-radius:5px;
-    -moz-border-radius:5px;
 }
 
 .hebrew .rounded {
@@ -735,7 +738,7 @@ p.takings-changed {
     line-height:1.2em;
 }
 .terms p {
-    padding-bottom: 5px;    
+    padding-bottom: 5px;
 }
 .hebrew .import ul.contact-tabset {
     margin:0 -12px;
@@ -798,7 +801,7 @@ p.takings-changed {
 
 table#contacts {
     table-layout: auto;
-  width: 100%;  
+  width: 100%;
 }
 
 .import .contact-btns {
@@ -1171,7 +1174,7 @@ em.counter {
 
 .events-holder.payments {
   margin:0 18px;
-  width:760px 
+  width:760px
 }
 
 .send-message-guests-link {
@@ -1495,7 +1498,7 @@ ul.contact-tabset {
 }
 .hebrew .btn-start-long {
   background-position: 0 0;
-  padding: 0 0 0 21px;  
+  padding: 0 0 0 21px;
 }
 .btn-start-long {
   background: url("/images/btn-start-long.gif") no-repeat scroll 0 -64px transparent;
@@ -1528,7 +1531,7 @@ ul.contact-tabset {
   position: absolute;
   right: 15px;
   top: -9px;
-  width: 81px;  
+  width: 81px;
 }
 .landing-page-remind .row{
   overflow: hidden;
@@ -1725,7 +1728,7 @@ span#updating_rsvp_status {
     width: 200px;
 }
 .import.past_events .boxe .heading .edit a {
-    background: none;    
+    background: none;
 }
 .hebrew .import.past_events .boxe .heading .edit a {
     padding: 0 47px;
@@ -1745,4 +1748,175 @@ span#updating_rsvp_status {
 .import.past_events .boxe .heading .edit-bg:hover,
 .import.past_events .boxe .heading .hover {
     background:url(/images/bg-edit-hov-large-en.gif) no-repeat;
+}
+.edit_designer form.edit_designer li.string{
+  height: 40px;
+}
+.edit_designer fieldset{
+  width: 350px;
+}
+.edit_designer .files{
+  float: left;
+  clear: both;
+}
+form.edit_designer li label{
+  width: 100px;
+}
+form.edit_designer li {
+  clear: both;
+}
+.edit_designer .files label{
+  display: none;
+}
+.hebrew .edit_designer .files{
+  float: right;
+}
+.edit_designer .thumbnail img{
+  float: left;
+}
+.edit_designer li.thumbnail{
+  margin: 5px 0;
+}
+.edit_designer .thumbnail .thumb{
+  line-height: 100px;
+  font-size:14px;
+  float: right;
+  width: 200px;
+  font-weight: bold;
+}
+.edit_designer .thumbnail .thumb span{
+  font-size: 10px;
+  color: #add8e6;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.edit_designer h4{
+  font-size: 13px;
+}
+
+.designer{
+  width: 850px;
+  margin: 10px auto;
+  font-family: 'אינפרא';
+}
+.designer .info{
+  height: 305px;
+  clear: both;
+}
+.hebrew .designer .info .center_col {
+  width: 55%;
+  float: left;
+  padding: 0 0 0 20px;
+}
+.designer .info .side_col {
+  float: left;
+  width: 35%;
+  height: 100%;
+}
+.hebrew .designer .info .side_col {
+  float: right;
+  padding: 43px 30px 0 0;
+  height: 280px;
+}
+.hebrew .designer .info .side_col .links{
+  padding-top: 10px;
+  width: 222px;
+}
+.hebrew .designer .info .side_col .links span{
+  float: right;
+  color: black;
+  padding: 0 5px;
+}
+.hebrew .designer .info .side_col .links .link{
+  float: left;
+  padding: 0 5px;
+  width: 150px;
+}
+.hebrew .designer .info .side_col .links .link a{
+  float: left;
+  text-align: left;
+}
+.designer .info .link_row {
+  padding: 0 0 10px 0;
+  height: 30px;
+}
+.hebrew .designer .info .center_col .about {
+  font-size: 16px;
+}
+.hebrew .designer .info .center_col .name {
+  font-size: 22px;
+  text-align: center;
+  padding: 10px;
+}
+.designer .info .side_col .avatar img{
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #D5D4D2;
+  padding: 5px;
+}
+.designer #tab_holder {
+  background: url("/images/designers_page_seperator_x.jpg") repeat-x;
+  min-height: 50px;
+  margin-top: 40px;
+  border: none;
+}
+.hebrew #tab_holder .tab_title {
+  float: right;
+  font-size: 28px;
+  padding: 5px 30px;
+}
+
+#tab_holder #work_tab .work img{
+  margin: 5px 0 25px 0;
+  border: 2px solid #EDEDEC;
+  border-radius: 10px;
+}
+#tab_holder #work_tab #work1 {
+  float: left;
+}
+#tab_holder #work_tab #work2 {
+  float: right;
+}
+#tab_holder #work_tab #work3 {
+  margin: 0 auto;
+  clear: both;
+  text-align: center;
+}
+
+#tab_holder #work_tab .work img{
+  padding: 6px;
+}
+
+.designer .ui-widget-header {
+  background: none;
+  border: none
+}
+.designer .ui-widget-header .ui-state-default{
+  background: url("/images/designer_tab.png") no-repeat;
+  border: none;
+  width: 100px;
+  margin: 5px 20px 0 0;
+}
+.designer .ui-widget-header .ui-state-default a{
+  color: #738393;
+}
+.hebrew .designer .ui-widget-header .ui-state-default{
+  font-family: 'אינפרא';
+  font-size: 15px;
+}
+.designer .ui-widget-header .ui-state-active{
+  background-image: url("/images/designer_tab_active.png");
+}
+.designer .ui-widget-header .ui-state-active a{
+  color: #473D5F;
+}
+.hebrew .designer .ui-tabs .ui-tabs-nav li a {
+  padding: 2px 0;
+  margin-bottom: 2px;
+  text-align: center;
+  width:100px;
+}
+.designer .fb_edge_widget_with_comment {
+  height: 50px;
+  float: left;
 }
