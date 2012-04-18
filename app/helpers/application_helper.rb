@@ -6,7 +6,7 @@ module ApplicationHelper
     {:title => N_("Events"), :id => :events, :url => "/events"},
     {:title => N_("Address Book"), :id => :contacts, :url => "/contacts"},
     {:title => N_("Payments"), :id => :payments, :url => "/my/payments"},
-    {:title => N_("Settings"), :id => :settings, :url => "/profile"},
+    {:title => N_("Profile"), :id => :settings, :url => "/profile"}
   ]
 
   def page_title(title=nil)
@@ -22,8 +22,11 @@ module ApplicationHelper
   end
 
   def tabs_navigation(current_tab)
+    user_navigation = USER_NAVIGATION
+    designer = Designer.find_by_user_id(current_user)
+    user_navigation << {:title => N_("Designer"), :id => :designer, :url => edit_designer_path(designer)} unless designer.nil?
     haml_tag(:ul, :class => "tabs") do
-      USER_NAVIGATION.each do |t|
+      user_navigation.each do |t|
         opts = {}
         opts[:class] = "active" if current_tab == t[:id]
         haml_tag(:li, opts) do
@@ -45,7 +48,7 @@ module ApplicationHelper
 
           haml_tag(:li, :class => (active ? "active" : "")) do
             haml_concat link_to(e.first, url_for(params.merge(:past => e.last.first, :cancelled => e.last.last)))
-          end          
+          end
         end
       end
     end
@@ -84,7 +87,7 @@ module ApplicationHelper
 
   def link_to_inline_edit(object, attribute, extra_class = "")
     haml_tag(:div, :class => "inline_#{dom_id(object)}_#{attribute}", :style => "display:none")
-    haml_concat link_to_remote(h(object.send(attribute).blank? ? _("edit") : object.send(attribute)), 
+    haml_concat link_to_remote(h(object.send(attribute).blank? ? _("edit") : object.send(attribute)),
       :url => send("edit_event_#{object.class.name.downcase}_path", object.event_id, object, :attribute => attribute),
       :method => :get, :html => {:title => object.send(attribute).to_s, :class => "link_to_edit #{extra_class}"})
   end
@@ -154,7 +157,7 @@ module ApplicationHelper
   def resource_remote_form(resource, attribute, short_css_class = true, hidden_true_attribute = nil)
     klass = ""
     klass << " short" if short_css_class && !resource.send(attribute).is_a?(String)
-    fields_opts = {:input_css_class => klass, 
+    fields_opts = {:input_css_class => klass,
       :container_class => "inline_#{dom_id(resource)}_#{attribute}"}
     form_remote_for resource, :builder => ShortTableCellFormBuilder::Builder, :url => send("event_#{resource.class.name.downcase}_path", resource.event_id, resource), :method => :put do |f|
       haml_concat f.text_field(attribute, fields_opts.merge(:autocomplete => :off))

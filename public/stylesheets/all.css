@@ -118,7 +118,7 @@ p{margin:0;}
 }
 .hebrew .search-form input.text {
     padding-right:2px;
-    width: 235px; 
+    width: 235px;
 }
 #top-nav {
     margin: 17px 0 0;
@@ -161,7 +161,7 @@ p{margin:0;}
     color: #fff;
     text-decoration: none;
     background: url(/images/bg-top-nav-h-en.png) no-repeat;
-} 
+}
 .hebrew #top-nav li a:hover {background: url(/images/bg-top-nav-h.png) no-repeat;}
 .popup {
     position: absolute;
@@ -551,7 +551,7 @@ a.next {
     float: left;
     border-right: 1px solid #dcd7d6;
     min-height: 134px;
-    text-align:center; 
+    text-align:center;
 }
 * html .main-box { height: 134px;}
 .hebrew .main-box{
@@ -586,7 +586,7 @@ a.next {
   background-image: url(/images/home_page_sprite1.png);
   background-position: -10px -348px;
     padding:0 0 0 21px;
-} 
+}
 .box {
     border-right: 1px solid #dcd7d6;
     float: left;
@@ -780,7 +780,7 @@ a.next {
 .hebrew .remind-box{
     float:right;
     margin:0 0 0 10px;
-} 
+}
 .events-box .holder,
 .remind-box .holder{background:url(/images/bg-remind-box.gif) no-repeat -392px 100%;}
 .events-box .frame,
@@ -1151,7 +1151,7 @@ a.next {
 .hebrew .tabset-nav li.active a {margin: 0 -5px 0 0;}
 .tabset-nav li.active:first-child a{background: url(/images/bg-tab-nav-item-l-first.gif) no-repeat !important;}
 .hebrew .tabset-nav li.active:first-child a{background: url(/images/bg-tab-nav-item-l.gif) no-repeat !important;}
-.hebrew .tabset-nav li.active:first-child a span{background: url(/images/bg-tab-nav-item-r-first.gif) no-repeat 100% 0 !important;} 
+.hebrew .tabset-nav li.active:first-child a span{background: url(/images/bg-tab-nav-item-r-first.gif) no-repeat 100% 0 !important;}
 .tabset-nav li a span{
     cursor: pointer;
     padding: 0 40px 0 64px;
@@ -1390,7 +1390,7 @@ span.note {
     background:url(/images/bg-select1-r.gif) no-repeat 100% 0;
     z-index:3;
 }
-.selectAreaType2-replaced .selectButton{background:url(/images/bg-select-btn.gif) no-repeat 100% 0;} 
+.selectAreaType2-replaced .selectButton{background:url(/images/bg-select-btn.gif) no-repeat 100% 0;}
 .hebrew .selectArea .selectButton{ background:url(/images/bg-select2-l.gif) no-repeat;}
 .hebrew .selectAreaType2-replaced .selectButton{background:url(/images/bg-select-btn-l.gif) no-repeat;}
 .selectOptions{
@@ -1529,7 +1529,7 @@ span.note {
     float: right;
     margin: 0 0 0 5px;
 }
-.hebrew .checkboxArea, 
+.hebrew .checkboxArea,
 .hebrew .checkboxAreaChecked{
     float:right;
     margin:2px 2px 0 7px;
@@ -1591,7 +1591,7 @@ span.note {
 }
 .hebrew .btns-h a {margin: 0 0 0 10px;}
 .btn-left {float: left;}
-.btn-right {float:right;} 
+.btn-right {float:right;}
 .btns-h span {
     display: block;
     overflow: hidden;
@@ -2157,7 +2157,7 @@ a.info{
     font-size: 1.2em;
     color: #41bdcd;
     margin:  0 0 0 2px;
-    text-decoration: underline; 
+    text-decoration: underline;
 }
 .add-btn:hover{ text-decoration: none;}
 .error-msg-box {
@@ -3842,7 +3842,7 @@ a.lb-popup-btn-close:hover{ text-decoration: none;}
 .info-container{
     overflow: hidden;
     width: 947px;
-    margin: 0 -1px 7px; 
+    margin: 0 -1px 7px;
     background: url(/images/bg-info-container-c.gif) repeat-y;
 }
 .info-container .holder{background: url(/images/bg-info-container-t.gif) no-repeat;}
@@ -4718,7 +4718,7 @@ div.tab {
     width: 619px;
     background: url(/images/bg-content-box-c.gif) repeat-y;
     background-image: url(/images/rsvp_more_sprite2.png);
-    background-position: -360px 0px;    
+    background-position: -360px 0px;
     margin: 0 0 17px;
 }
 .content-box .holder{
@@ -5565,7 +5565,7 @@ ul.contact-tabset li.active a ,
 .subnav li.btn-1 .menu-list .mid{
   background:url(/images/bg-subnav-drop-mid.png) repeat-y;
   background-image: url(/images/home_page_sprite2.png);
-  background-position: -1265px 0px;  
+  background-position: -1265px 0px;
 }
 .subnav li .menu-list .mid{width:100%;}
 .subnav .menu-list .mid:after {
@@ -5581,12 +5581,12 @@ ul.contact-tabset li.active a ,
 .subnav li.btn-2 .menu-list .btm{
   background:url(/images/bg-subnav-drop-btm-2.png) no-repeat;
   background-image: url(/images/home_page_sprite1.png);
-  background-position: -10px -1422px;  
+  background-position: -10px -1422px;
 }
 .subnav li.btn-2 .menu-list .mid{
   background:url(/images/bg-subnav-drop-mid-2.png) repeat-y;
   background-image: url(/images/home_page_sprite2.png);
-  background-position: -1528px 0px;  
+  background-position: -1528px 0px;
 }
 .subnav .menu-list .inner{
     float:left;
@@ -5881,7 +5881,7 @@ ul.contact-tabset li.active a ,
     padding: 0 5px;
 }
 .t-b-btn-1 {
-    margin-top:16px; 
+    margin-top:16px;
     padding: 7px 0 0;
     width: 94px;
     background: url(/images/t-b-btn-1-en.gif) no-repeat;
@@ -5891,7 +5891,7 @@ ul.contact-tabset li.active a ,
     background: url(/images/t-b-btn-1-en.gif) no-repeat 0 100%;
 }
 .t-b-btn-2 {
-    margin-top:17px; 
+    margin-top:17px;
     padding: 7px 0 0;
     width: 89px;
     background: url(/images/t-b-btn-2-en.gif) no-repeat;
@@ -5901,7 +5901,7 @@ ul.contact-tabset li.active a ,
     background: url(/images/t-b-btn-2-en.gif) no-repeat 0 100%;
 }
 .t-b-btn-3 {
-    margin-top:14px; 
+    margin-top:14px;
     padding: 10px 0 0;
     width: 59px;
     background: url(/images/t-b-btn-3-en.gif) no-repeat;
@@ -5911,7 +5911,7 @@ ul.contact-tabset li.active a ,
     background: url(/images/t-b-btn-3-en.gif) no-repeat 0 100%;
 }
 .t-b-btn-4 {
-    margin-top:14px; 
+    margin-top:14px;
     padding: 8px 0 0;
     width:143px;
     background: url(/images/t-b-btn-4-en.gif) no-repeat;
@@ -5939,7 +5939,7 @@ ul.contact-tabset li.active a ,
     display: inline;
     margin: 0 -1px 0 0;
     padding: 2px 9px 2px 0;
-    background: url(/images/bg-tools-bar.gif) no-repeat 100% 0; 
+    background: url(/images/bg-tools-bar.gif) no-repeat 100% 0;
     float: left;
     height: 18px;
     position: relative;
@@ -6349,11 +6349,11 @@ ul.text-align li.a-r a {background: url(/images/ico-align-right.gif) no-repeat;}
 .pricing .agree .checkboxArea,
 .pricing .agree .checkboxAreaChecked{
     margin:2px 6px 0 0;
-} 
+}
 .hebrew .pricing .agree .checkboxArea,
 .hebrew .pricing .agree .checkboxAreaChecked{
     margin:2px 0 0 6px;
-} 
+}
 .pricing .agree label{
     float:left;
     font-size:0.9em;
