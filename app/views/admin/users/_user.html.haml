@@ -10,5 +10,6 @@
   %td= user.events.count
   %td= user.payments.paid.sum(:amount).format_cents
   %td.is_free= user.is_free?
-  %td!= link_to_remote "Toggle Free User", :url => admin_user_path(user), :method => :put, :confirm => _("Are you sure?")
+  %td!= link_to_remote "Toggle Free User", :url => admin_user_path(user), :method => :put, :confirm => _("Are you sure?"), :with => "'todo=toggle_free'"
+  %td!= link_to_remote "Create Designer", :url => admin_user_path(user), :method => :put, :confirm => _("Are you sure?"), :with => "'todo=create_designer'"
   %td!= link_to "user's events", admin_events_path(:by_user_id => user.id)

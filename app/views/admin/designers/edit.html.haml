@@ -1,0 +1,10 @@
+%h1 Edit Designer
+
+- semantic_form_for(@designer, :live_validations => false, :url => admin_designer_path(@designer)) do |f|
+  != f.error_messages
+
+  - for design in @designer.designs
+    != link_to image_tag(design.card.url(:small)), admin_design_path(design)
+
+  != f.submit "Update"
+  != link_to _("Cancel"), admin_designs_path

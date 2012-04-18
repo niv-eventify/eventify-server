@@ -1,6 +1,7 @@
 class Design < ActiveRecord::Base
   has_many :classifications
   has_many :categories, :through => :classifications
+  belongs_to :designer, :class_name => "Designer"
   belongs_to :creator, :class_name => "User"
   has_many :windows
 
@@ -9,8 +10,8 @@ class Design < ActiveRecord::Base
   validates_presence_of :text_top_x, :text_top_y, :text_width, :text_height
   validates_numericality_of :text_top_x, :text_top_y, :text_width, :text_height
   validates_numericality_of :title_top_x, :title_top_y, :title_width, :title_height, :allow_nil => true
-  
-  attr_accessible :category_id, :text_top_x, :text_top_y, :text_width, :text_height,
+
+  attr_accessible :category_id, :designer_id, :text_top_x, :text_top_y, :text_width, :text_height,
     :title_top_x, :title_top_y, :title_width, :title_height, :font_title, :font_body, :title_color,
     :message_color, :text_align, :in_carousel, :ordering, :redirect_to_category,
     :classification_attributes
@@ -99,7 +100,7 @@ class Design < ActiveRecord::Base
   def is_seperated_title?
     !title_width.blank?
   end
-  
+
   def stage2_title_dimensions(current_locale)
     ratio =   1.6     #fullsize/preview_size
 

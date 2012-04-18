@@ -3,6 +3,8 @@
 
 %h3!= categories_list(@design)
 
+%h3!= link_to "Designer name: #{@design.designer.name}   id: #{@design.designer.id}", edit_admin_designer_path(@design.designer) unless @design.designer.nil?
+
 %h4 Text Area
 Topx:
 = @design.text_top_x
@@ -33,7 +35,7 @@ font color:
 = @design.title_color
 
 %h4 general info
-text align: 
+text align:
 = @design.text_align
 %br
 Order:

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110621194410) do
+ActiveRecord::Schema.define(:version => 20111011141849) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -86,6 +86,31 @@ ActiveRecord::Schema.define(:version => 20110621194410) do
     t.datetime "updated_at"
   end
 
+  create_table "designers", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "about"
+    t.string   "link1"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "work1_file_name"
+    t.string   "work1_content_type"
+    t.integer  "work1_file_size"
+    t.datetime "work1_updated_at"
+    t.string   "work2_file_name"
+    t.string   "work2_content_type"
+    t.integer  "work2_file_size"
+    t.datetime "work2_updated_at"
+    t.string   "work3_file_name"
+    t.string   "work3_content_type"
+    t.integer  "work3_file_size"
+    t.datetime "work3_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "designs", :force => true do |t|
     t.integer  "creator_id"
     t.datetime "disabled_at"
@@ -119,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20110621194410) do
     t.string   "font_title"
     t.integer  "ordering",              :default => 0
     t.integer  "redirect_to_category"
+    t.integer  "designer_id"
   end
 
   create_table "events", :force => true do |t|

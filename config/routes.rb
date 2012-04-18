@@ -19,6 +19,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.namespace :admin do |admin|
     admin.resources :designs
+    admin.resources :designers
     admin.resources :users
     admin.resources :events
     admin.resources :gardens
@@ -54,6 +55,7 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resource   :ical, :controller => "ical"
     rsvp.resources :takings
   end
+  map.resources :designers
   map.resources :takings
   map.resources :uploaded_pictures
   map.resources :uploaded_maps
