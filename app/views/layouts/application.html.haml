@@ -14,7 +14,8 @@
     %title!= @page_title || h(controller.action_name)
     != render(:partial => "layouts/html_head")
     - unless request.ssl?
-      != render(:partial => "layouts/kampyle_feedback_head")
+      - unless IS_STAGE
+        != render(:partial => "layouts/kampyle_feedback_head")
     /[if IE]
       != stylesheet_link_tag 'ie', :media => 'screen'
     /[if lt IE 7]
@@ -36,7 +37,7 @@
         != render(:partial => 'layouts/header')
       - unless @skip_footer
         != render(:partial => 'layouts/footer')
-    - unless request.ssl? || @skip_feedback
+    - unless request.ssl? || @skip_feedback || IS_STAGE
       != render(:partial => "layouts/kampyle_feedback")
     - if @include_google_plusone
       .plusOne
