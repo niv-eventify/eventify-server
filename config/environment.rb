@@ -37,10 +37,11 @@ Rails::Initializer.run do |config|
   config.gem 'fastercsv', :lib => false, :version => '1.5.0'
   config.gem 'hoptoad_notifier', :version => "2.1.3"
   config.gem 'blackbook', :lib => false
+  config.gem 'mechanize', :lib => false, :version => "0.9.3"
   config.gem 'contacts', :lib => false, :version => "1.2.3"
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
-  config.gem 'rspec', :lib => false, :version => '1.3.0'
+  #config.gem 'rspec', :lib => false, :version => '1.3.0'
   config.gem "icalendar", :version => "1.1.4", :lib => false
   config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.15'
   config.gem "json", :version => "1.2.0"
