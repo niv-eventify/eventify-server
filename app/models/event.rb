@@ -507,6 +507,9 @@ class Event < ActiveRecord::Base
     _("Cancelled: %{event_name}") % { :event_name => name }
   end
 
+  def is_premium?
+    return design.designer
+  end
   def payments_required?
     return false if user.is_free?
 
@@ -518,7 +521,7 @@ class Event < ActiveRecord::Base
   end
 
   def guests_payments_required?
-    guests.count > emails_plan
+    guests.count > emails_plan && is_premium?
   end
 
   def sms_payments_required?

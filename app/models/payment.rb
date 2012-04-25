@@ -139,7 +139,7 @@ class Payment < ActiveRecord::Base
 
   def upgrade_plan(plan, new_count, old_count)
     if plan == :emails_plan
-      plan = :premium_emails_plan if self.event.design.designer
+      plan = :premium_emails_plan if self.event.is_premium?
     end
     new_plan, full_payment = Eventify.send(plan, new_count)
     _, already_paid        = Eventify.send(plan, old_count)
