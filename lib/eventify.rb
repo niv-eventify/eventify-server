@@ -5,32 +5,54 @@ module Eventify
   if DUMMY_PAYMENT_PROGRAM
     EMAILS_PLAN_PROPERTIES = [
       [0..1, [1, 0]],
-      [2..2, [2, 100]],
-      [3..300, [300, 25000]],
-      [301..400, [400, 35000]],
-      [401..500, [500, 45000]]
+      [2..2, [2, 0]],
+      [3..300, [300, 0]],
+      [301..400, [400, 0]],
+      [401..500, [500, 0]]
+    ]
+    PREMIUM_EMAILS_PLAN_PROPERTIES = [
+      [0..1, [1, 0]],
+      [2..2, [2, 2000]],
+      [3..300, [300, 3000]],
+      [301..400, [400, 5000]],
+      [401..500, [500, 9000]]
     ]
     SMS_BATCH = 5
   else
     EMAILS_PLAN_PROPERTIES = [
-      [0..20, [20, 0]],
-      [21..100, [100, 0]],
-      [101..200, [200, 0]],
-      [201..300, [300, 0]],
-      [301..500, [500, 0]]
+      [0..2, [2, 0]],
+      [3..20, [20, 0]],
+      [21..50, [50, 0]],
+      [51..100, [100, 0]],
+      [101..500, [500, 0]]
     ]
+    PREMIUM_EMAILS_PLAN_PROPERTIES = [
+      [0..2, [2, 0]],
+      [3..20, [20, 2000]],
+      [21..50, [50, 3000]],
+      [51..100, [100, 5000]],
+      [101..500, [500, 9000]]
+    ]
+
     SMS_BATCH = 20
   end
 
+  SMS_PRICE = 35 # 0.35nis
 
-    SMS_PRICE = 35 # 0.35nis
-
-    PRINTS_BATCH = 50
-    PRINTS_PRICE = 375 # 3.75nis
+  PRINTS_BATCH = 50
+  PRINTS_PRICE = 375 # 3.75nis
 
   class << self
     def emails_plan(count, override_max_price = nil)
       EMAILS_PLAN_PROPERTIES.each do |p|
+        return p.last if p.first.include?(count)
+      end
+
+      [count, count * (override_max_price || 100)]
+    end
+
+    def premium_emails_plan(count, override_max_price = nil)
+      PREMIUM_EMAILS_PLAN_PROPERTIES.each do |p|
         return p.last if p.first.include?(count)
       end
 

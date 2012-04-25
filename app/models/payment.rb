@@ -17,15 +17,15 @@ class Payment < ActiveRecord::Base
     :ccv2, :email, :user_ident, :phone_number]
   attr_reader :payment_status_description
 
-  validates_presence_of :emails_plan, :sms_plan, 
-    # :prints_plan, 
+  validates_presence_of :emails_plan, :sms_plan,
+    # :prints_plan,
     :amount,
     :cc, :expiration_month, :expiration_year, :name_on_card,
-    :ccv2, :email, :user_ident, :phone_number, 
+    :ccv2, :email, :user_ident, :phone_number,
     :on => :update
 
   named_scope :paid, :conditions => "paid_at IS NOT NULL"
-  named_scope :for_list, :order => "paid_at DESC", :include => :event 
+  named_scope :for_list, :order => "paid_at DESC", :include => :event
 
   before_validation_on_create :set_plans
 
@@ -87,9 +87,9 @@ class Payment < ActiveRecord::Base
     self.sms_plan_prev = event.sms_plan
     self.prints_plan_prev = event.prints_plan
 
-    _, self.pay_sms        = Payment.upgrade_plan(:sms_plan, sms_plan.to_i, event.sms_plan)
-    _, self.pay_prints     = Payment.upgrade_plan(:prints_plan, prints_plan.to_i, event.prints_plan)
-    _, self.pay_emails     = Payment.upgrade_plan(:emails_plan, emails_plan.to_i, event.emails_plan)
+    _, self.pay_sms        = upgrade_plan(:sms_plan, sms_plan.to_i, event.sms_plan)
+    _, self.pay_prints     = upgrade_plan(:prints_plan, prints_plan.to_i, event.prints_plan)
+    _, self.pay_emails     = upgrade_plan(:emails_plan, emails_plan.to_i, event.emails_plan)
   end
 
   def load_payment_details(opts)
@@ -115,9 +115,9 @@ class Payment < ActiveRecord::Base
   end
 
   def calc_defaults
-    self.sms_plan, @extra_payment_sms       = Payment.upgrade_plan(:sms_plan, event.total_sms_count, event.sms_plan)
-    self.prints_plan, @extra_payment_prints = Payment.upgrade_plan(:prints_plan, event.prints_ordered, event.prints_plan)
-    self.emails_plan, extra_payment_emails  = Payment.upgrade_plan(:emails_plan, event.total_invitations_count, event.emails_plan)
+    self.sms_plan, @extra_payment_sms       = upgrade_plan(:sms_plan, event.total_sms_count, event.sms_plan)
+    self.prints_plan, @extra_payment_prints = upgrade_plan(:prints_plan, event.prints_ordered, event.prints_plan)
+    self.emails_plan, extra_payment_emails  = upgrade_plan(:emails_plan, event.total_invitations_count, event.emails_plan)
 
     self.amount = @extra_payment_sms + @extra_payment_prints + extra_payment_emails
     self
@@ -133,11 +133,14 @@ class Payment < ActiveRecord::Base
   end
 
   def email_upgrade_price(to_count)
-    _, price = Payment.upgrade_plan(:emails_plan, to_count, event.emails_plan)
+    _, price = upgrade_plan(:emails_plan, to_count, event.emails_plan)
     price < 0 ? 0 : price
   end
 
-  def self.upgrade_plan(plan, new_count, old_count)
+  def upgrade_plan(plan, new_count, old_count)
+    if plan == :emails_plan
+      plan = :premium_emails_plan if self.event.design.designer
+    end
     new_plan, full_payment = Eventify.send(plan, new_count)
     _, already_paid        = Eventify.send(plan, old_count)
 
