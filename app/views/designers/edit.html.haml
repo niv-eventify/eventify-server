@@ -21,19 +21,20 @@
               != hidden_field_tag :delete_work2
               != hidden_field_tag :delete_work3
 
-              - event_input_text(f, :about, _("About me"), "")
-              .friendly_url_explained
-                %p= _("Please select a designer name to be show in the url of your eventify page.<br/>For example: suppose your designer name is 'good designs':<br/>the resulting url will be: 'www.eventify.co.il/designer/good-designs")
+              - f.inputs do
+                - event_input_text(f, :about, _("About me"), "")
+                .friendly_url_explained
+                  %p= _("Please select a designer name to be show in the url of your eventify page.<br/>For example: suppose your designer name is 'good designs':<br/>the resulting url will be: 'www.eventify.co.il/designer/good-designs")
 
-              - event_text_input(f, :friendly_url, _("Designer Name"), :live => false, :input_html => {:class => "input-text"})
-              - event_text_input(f, :link1, _("Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"})
-              - f.inputs :class => "files avatar" do
-                %h4= _("Avatar")
-                - unless @designer.avatar.url(:thumb).blank?
-                  %li.thumbnail#avatar
-                    .thumb
-                      %span.remove_attr#remove_avatar="remove"
-                      %img{:src => @designer.avatar.url(:thumb)}
+                - event_text_input(f, :friendly_url, _("Designer Name"), :live => false, :input_html => {:class => "input-text"})
+                - event_text_input(f, :link1, _("Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"})
+                - f.inputs :class => "files avatar" do
+                  %h4= _("Avatar")
+                  - unless @designer.avatar.url(:thumb).blank?
+                    %li.thumbnail#avatar
+                      .thumb
+                        %span.remove_attr#remove_avatar="remove"
+                        %img{:src => @designer.avatar.url(:thumb)}
 
                 != f.input :avatar
               - f.inputs :class => "files" do
