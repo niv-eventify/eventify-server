@@ -1920,3 +1920,19 @@ form.edit_designer li {
   height: 50px;
   float: left;
 }
+
+form.edit_designer li.designer_is_activated label{
+  width: 200px;
+  padding-bottom: 2px;
+}
+form.edit_designer p.error-msg{
+  clear: both;
+  padding: 0 104px 4px 0;
+}
+form.edit_designer p.designer-error-msg{
+  padding: 0 4px 4px 0;
+}
+
+#designer_terms {
+  text-decoration: underline;
+}

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111011141849) do
+ActiveRecord::Schema.define(:version => 20120516060045) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(:version => 20111011141849) do
     t.datetime "work3_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_activated"
   end
 
   add_index "designers", ["friendly_url"], :name => "index_designers_on_friendly_url", :unique => true

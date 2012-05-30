@@ -1,8 +1,9 @@
 class Designer < ActiveRecord::Base
   belongs_to :user
   has_many :designs
-  attr_accessible :user, :about, :friendly_url, :link1
-
+  attr_accessible :user, :about, :friendly_url, :link1, :is_activated
+  validates_uniqueness_of :friendly_url
+  validates_presence_of :friendly_url
   has_attached_file :avatar,
     :styles         => {:thumb => "100x100>", :medium => "200x200>"},
     :storage        => :s3,
@@ -59,7 +60,14 @@ class Designer < ActiveRecord::Base
   attr_accessible :work3
   validates_attachment_size :work3, :less_than => 2.megabytes
 
+  def validate_on_update
+    if !self.is_activated
+      errors.add(:is_activated, _("Please agree to the terms of use."))
+    end
+  end
+
   def name
     user.name
   end
+
 end
