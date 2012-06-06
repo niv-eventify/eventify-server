@@ -28,7 +28,7 @@
   - form_for :payment, resource, :url => event_payments_path(@event), :html => {:class => "pricing-form"} do |f|
     %fieldset
       != hidden_field_tag :back, params[:back]
-      .section
+      .section{:style => (@event.is_premium? ? "":"display:none;")}
         %dl
           %dt= _("Invitation Package -")
           %dd= _("Number of invitations sent in this event: %{guests_count}") % {:guests_count => @invitations_count}
@@ -48,7 +48,7 @@
                         %strong= resource.email_upgrade_price(p.last.first).format_cents(false)
                         %span.price{:style => "display:none"}= resource.email_upgrade_price(p.last.first)
                         ₪
-                      
+
               != link_to_function "open", "", :class => "btn-open"
       .section.sms-package
         != f.hidden_field :sms_plan
