@@ -52,7 +52,7 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_not_opened_invite, {:conditions => "guests.first_viewed_invitation_at IS NULL AND guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1 AND guests.rsvp IS NULL"}
   named_scope :not_bounced_by_email, lambda { |email|
     {
-      :include => :event, 
+      :include => :event,
       :conditions => ["guests.bounced_at IS NULL AND guests.email = ? AND events.starting_at >= ?", email, Time.now.utc]
     }
   }
@@ -265,7 +265,7 @@ class Guest < ActiveRecord::Base
       event.with_time_zone do
         if reminder.by_email? && self.send_email?
           # TODO: handle delivery errors
-      
+
           Notifier.deliver_guest_reminder(self, reminder.email_subject, reminder.email_body)
           reminder.reminder_logs.create(:guest_id => self.id, :destination => email, :message => "#{reminder.email_subject}/#{reminder.email_body}", :status => "success", :kind => "email")
         end
@@ -365,7 +365,7 @@ class Guest < ActiveRecord::Base
         sms = sms_messages.create!(:kind => "cancel", :message => message)
         sms.send_sms!
       end
-    end    
+    end
   end
 
   attr_reader :suggested_name

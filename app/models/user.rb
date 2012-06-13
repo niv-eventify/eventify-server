@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   include Astrails::Auth::Model
   attr_accessible :name, :password, :password_confirmation, :old_password
   attr_accessor :old_password
-  validates_presence_of :name
+  validates_presence_of :name, :if => :strip_name
   validate :old_passwords, :on => :update
 
   named_scope :enabled, {:conditions => "users.disabled_at IS NULL"}
@@ -46,6 +46,11 @@ class User < ActiveRecord::Base
 
   has_many :events
   has_many :payments
+
+  def strip_name
+    self.name.strip!
+    return true
+  end
 
   # allow not activated users to access just created events
   def active?
