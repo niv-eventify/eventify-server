@@ -52,7 +52,7 @@
                   %label{:for => :designer_is_activated}
                     =_("I agree to the")
                     %a{:id => "designer_terms", :href => page_path("designer_terms"), :target => "_blank"}=_("terms of use")
-                  - if f.object.errors.on(:is_activated).any?
+                  - if !f.object.errors.empty? && f.object.errors.on(:is_activated).any?
                     %p.error-msg.designer-error-msg= f.object.errors.on(:is_activated)
               .forms-block-btns
                 != link_to_function _("Save"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"

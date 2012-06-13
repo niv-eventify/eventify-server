@@ -69,5 +69,4 @@ class Designer < ActiveRecord::Base
   def name
     user.name
   end
-
 end
