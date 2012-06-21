@@ -13,7 +13,7 @@ class Admin::UsersController < InheritedResources::Base
          if curr_designer
            page << "alert('already has a designer');window.location='#{edit_admin_designer_url(curr_designer)}'"
          end
-         curr_designer = Designer.create(:user => resource, :friendly_url => resource.name.gsub(" ", "-"))
+         curr_designer = Designer.create(:user => resource, :friendly_url => resource.name.gsub(" ", "-").downcase)
          page << "window.location='#{edit_admin_designer_url(curr_designer)}'"
        end
     elsif todo == 'toggle_free'
