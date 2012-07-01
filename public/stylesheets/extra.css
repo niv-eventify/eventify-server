@@ -1955,6 +1955,12 @@ form.edit_designer p.designer-error-msg{
   direction: rtl;
 }
 
+.designer_instructions .pic_legend {
+  text-align: center;
+  font-weight: bold;
+  width: 900px;
+}
+
 .regular_link {
   text-decoration: underline;
   color: blue;

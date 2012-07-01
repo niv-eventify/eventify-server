@@ -55,14 +55,14 @@
       צבעים מומלצים לכיתוב בגוף ההזמנה ובכותרת ההזמנה מתוך הצבעים הבאים:
     #color_selection
       %label{:for => "pallete"}=_("Selected color (r,g,b):")
-      %span#color_rgb=("None selected yet")
+      %span#color_rgb=_("None selected yet")
       %input{:id => "pallete", :size => "1", :name => "pallete", :type => "text", :style => "", :value => "FFFFFF"}
   %a.regular_link{:href => "/designers/download/designer_empty"}="להורדת קובץ ריק"
   %br
   %br
   %p
     האתר שלנו מכיל טכנולוגיה שמאפשרת למשתמשים לשלב תמונות שלהם בתוך גוף ההזמנה. (
-    %a.regular_link{:href => "http://www.eventify.co.il/events/0/design?category_id=11&design_id=1521"}="לחצו לראות דוגמה חיה"
+    %a.regular_link{:href => "http://www.eventify.co.il/events/0/design?category_id=11&design_id=1521", :target => "_blank"}="לחצו לראות דוגמה חיה"
     ). הזמנות אלה זוכות להצלחה גדולה באתר ואתם מוזמנים ליצור כדוגמתם.
   %p
     להלן הסברים, מושגים ודוגמא:
@@ -78,5 +78,21 @@
       %li
         %b
           קבצים עם תמונות לדוגמה יופיעו באתר עם התמונות וזו וחובתכם לודא שיש לכם זכויות יוצרים על התמונות ושכל אדם המופיע בתמונות אלו יודע שתמונותיו יהיו באתר ואישר את הופעתו בהם.
-
+  .pic_legend=_("Example with empty windows")
+  %img{:src => "/images/example_empty.png"}
+  %br
+  %br
+  .pic_legend=_("Example with sample pictures")
+  %img{:src => "/images/example_with_pics.png"}
+  %br
+  %br
+  %p
+    לשאלות נוספות - אנא פנו ל-
+    %a.regular_link{:href => "mailto:designers@eventify.co.il", :target => "_blank"}
+      designers@eventify.co.il
+    ונשמח לעזור.
+  %p
+    בברכה,
+  %p
+    צוות Eventify
 
