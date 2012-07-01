@@ -1936,3 +1936,26 @@ form.edit_designer p.designer-error-msg{
 #designer_terms {
   text-decoration: underline;
 }
+
+.hebrew .img-box .designer_link {
+  visibility: hidden;
+}
+
+.hebrew .img-box:hover .designer_link, .hebrew .img-box-hover .designer_link {
+  margin:27px 0 0 12px;
+  float:left;
+  font-size:12px;
+  visibility: visible;
+}
+.designer_instructions #font_examples {
+  display: none;
+}
+
+.hebrew .font_row {
+  direction: rtl;
+}
+
+.regular_link {
+  text-decoration: underline;
+  color: blue;
+}

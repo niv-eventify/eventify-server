@@ -56,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resources :takings
   end
   map.resources :designers, :except => :show
+  map.designer_download '/designers/download/:file', :controller => :designers, :action => :download
   map.resources :takings
   map.resources :uploaded_pictures
   map.resources :uploaded_maps

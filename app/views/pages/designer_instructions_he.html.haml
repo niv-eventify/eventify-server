@@ -1,0 +1,82 @@
+- content_for(:head) do
+  != javascript_include_tag "jquery.colorPicker", "jquery.nyroModal"
+  != stylesheet_link_tag "rsvps", "colorPicker", "nyroModal.full"
+
+:javascript
+  function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+  function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+  function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+  function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+  $(document).ready(function(){
+    $("#pallete").colorPicker();
+    $("#pallete").change(function() {
+      var color = $(this).val();
+      $("#color_rgb").html(hexToR(color) + "," + hexToG(color) + "," + hexToB(color));
+      $(".color_picker").css("background-image", "none").css("background-color", color);
+    });
+  });
+
+
+
+.terms.designer_instructions
+  %h2{:style => "text-align: center;"}
+    תוכנית המעצבים - הוראות למעצבים
+  %p
+    מעצבים יקרים,
+    %br
+    תודה שבחרתם להצטרף לתוכנית המעצבים של Eventify.
+  %p
+    להלן הדרישות הטכניות מההזמנות כדי שיפעלו באופן מיטבי באתר:
+  %ol
+    %li
+      יש להשתמש בקבצי PNG ברזולוציה של 300 DPI.
+    %li
+      גודל ההזמנה אורך 900 פיקסלים, גובה 600 פיקסלים.
+    %li
+      יש לצרף קובץ טקסט הכולל עבור המלבן המיועד לכותרת ועבור המלבן המיועד לגוף ההזמנה את שלושת הנתונים הבאים:
+      %ol{:style => "list-style-type:hebrew;"}
+        %li
+          הקואורדינטות (X,Y) של פינה שמאלית העליונה
+        %li
+          רוחב בפיקסלים.
+        %li
+          גובה בפיקסלים.
+      %a.regular_link{:href => "/designers/download/designer_example"}="דוגמא לקובץ"
+  %p
+    במסגרת השירות אותו אנו נותנים למשתמשינו, ישנה "המלצת השף". הכוונה היא להמלצת המעצב לגבי הגופן בו נכתב תוכן ההזמנה והצבעים המומלצים על ידי המעצב לכותרת ההזמנה ולגוף ההזמנה. לצורך כך עליכם להוסיף לקובץ הטקסט גם:
+  %ol
+    %li
+      גופן מומלץ מבין
+      != link_to "הגופנים הבאים:", "#font_examples", :class => "nyroModal regular_link"
+      #font_examples
+        - ["כוס חלב","בלנדר","אינפרא","סימן קריאה","קריסטייל","ספידמן","קרטיב קרח","מכבי בלוק","פלסטיק","רענן","Arial","David","Times New Roman","Tahoma","Arial Black", "Miriam"].each do |font|
+          .font_row{:style => "font-family: #{font};font-size: 22px;line-height:28px;"}="מסיבת יום ההולדת של עמרי וטנא - אצלינו באכזיב - משפחת דגן"
+    %li
+      צבעים מומלצים לכיתוב בגוף ההזמנה ובכותרת ההזמנה מתוך הצבעים הבאים:
+    #color_selection
+      %label{:for => "pallete"}=_("Selected color (r,g,b):")
+      %span#color_rgb=("None selected yet")
+      %input{:id => "pallete", :size => "1", :name => "pallete", :type => "text", :style => "", :value => "FFFFFF"}
+  %a.regular_link{:href => "/designers/download/designer_empty"}="להורדת קובץ ריק"
+  %br
+  %br
+  %p
+    האתר שלנו מכיל טכנולוגיה שמאפשרת למשתמשים לשלב תמונות שלהם בתוך גוף ההזמנה. (
+    %a.regular_link{:href => "http://www.eventify.co.il/events/0/design?category_id=11&design_id=91"}="לחצו לראות דוגמה חיה"
+    ). הזמנות אלה זוכות להצלחה גדולה באתר ואתם מוזמנים ליצור כדוגמתם.
+  %p
+    להלן הסברים, מושגים ודוגמא:
+    %ol
+      %li
+        חלון - איזור בהזמנה אליו אפשר להעלות תמונה אישית. על החלון להיות שקוף (או שקוף למחצה). תמונת המשתמש תופיע "מאחורי" ההזמנה.
+      %li
+        הזמנה יכולה להכיל מספר חלונות.
+      %li
+        מסגרת החלון - מלבן שמקיף את החלון (בתוספת שוליים של כשני פיקסלים). לתוך מסגרת החלון תכנס התמונה שהעלה המשתמש. מסגרות של חלונות סמוכים לא יכולים לחפוף זה את זה. הדבר יצור מצב לא רצוי שבו תמונה אחת דורסת את שכנתה.
+      %li
+        על ההזמנה להכיל שני קבצים: האחד עם החלונות, השני קובץ בו החלונות מכילים תמונות לדוגמא. קובץ זה יוצג למשתמשים בגלריה שלנו.
+      %li
+        %b
+          קבצים עם תמונות לדוגמה יופיעו באתר עם התמונות וזו וחובתכם לודא שיש לכם זכויות יוצרים על התמונות ושכל אדם המופיע בתמונות אלו יודע שתמונותיו יהיו באתר ואישר את הופעתו בהם.
+
+

@@ -1,5 +1,5 @@
 class DesignersController< InheritedResources::Base
-  before_filter :require_user, :except => :show
+  before_filter :require_user, :except => [:show, :download]
   actions :edit, :update, :show
 
   def edit
@@ -27,5 +27,9 @@ class DesignersController< InheritedResources::Base
     else
       render :file => "#{Rails.root}/public/404.html?#{params[:friendly_url]}", :layout => false, :status => 404
     end
+  end
+
+  def download
+    send_file "#{RAILS_ROOT}/private/#{params[:file]}.txt", :type=>"text/plain"
   end
 end
