@@ -42,6 +42,9 @@ module Eventify
   PRINTS_BATCH = 50
   PRINTS_PRICE = 375 # 3.75nis
 
+  DESIGNER_PERCENTAGE = 0.3
+  DESIGNER_MINIMAL_PAYMENT = 100
+
   class << self
     def emails_plan(count, override_max_price = nil)
       EMAILS_PLAN_PROPERTIES.each do |p|
