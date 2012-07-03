@@ -8,8 +8,8 @@ require "vladify/www_app"
 require "vladify/whenever"
 # require "vladify/workling"
 
-set :repository, "git@alpha.astrails.com:eventify/eventify-server"
-
+#set :repository, "git@alpha.astrails.com:eventify/eventify-server"
+set :repository, "git@bitbucket.org:ncaner/eventify-server.git"
 
 desc "production"
 task :prod do
