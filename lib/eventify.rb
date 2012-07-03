@@ -42,6 +42,7 @@ module Eventify
   PRINTS_BATCH = 50
   PRINTS_PRICE = 375 # 3.75nis
 
+  #TODO: In case we wish to change this after some designers exist - we'll need to add this data on a per designer level with the current values inserted for all existing designers
   DESIGNER_PERCENTAGE = 0.3
   DESIGNER_MINIMAL_PAYMENT = 100
 
