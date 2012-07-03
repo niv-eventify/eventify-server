@@ -22,7 +22,7 @@ module ApplicationHelper
   end
 
   def tabs_navigation(current_tab)
-    user_navigation = USER_NAVIGATION
+    user_navigation = Array.new(USER_NAVIGATION)
     designer = Designer.find_by_user_id(current_user)
     user_navigation << {:title => N_("Designer"), :id => :designer, :url => edit_designer_path(designer)} unless designer.nil?
     haml_tag(:ul, :class => "tabs") do
