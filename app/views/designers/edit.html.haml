@@ -24,7 +24,9 @@
               - f.inputs do
                 - event_input_text(f, :about, _("About me"), "")
                 .friendly_url_explained
-                  %p= _("Please select a designer name to be show in the url of your eventify page.<br/>For example: suppose your designer name is 'good designs':<br/>the resulting url will be: 'www.eventify.co.il/designer/good-designs")
+                  %p= _("Please select a designer name to be show in the url of your eventify page.")
+                  %p=_("For example: suppose your designer name is 'good designs':")
+                  %p=_("the resulting url will be: 'www.eventify.co.il/designer/good-designs_html")
 
                 - event_text_input(f, :friendly_url, _("Designer Name"), :live => false, :input_html => {:class => "input-text"})
                 - event_text_input(f, :link1, _("Link"), :live => false, :input_html => {:class => "input-text", :maxlength => "2048"})
