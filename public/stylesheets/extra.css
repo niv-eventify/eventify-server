@@ -1965,3 +1965,16 @@ form.edit_designer p.designer-error-msg{
   text-decoration: underline;
   color: blue;
 }
+
+#payments_edit_guests_link {
+  float: left;
+  margin: 10px;
+}
+
+.is_agree_to_terms{
+  margin: 10px;
+}
+
+.underline {
+  text-decoration: underline;
+}

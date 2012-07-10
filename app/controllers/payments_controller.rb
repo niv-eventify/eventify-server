@@ -42,11 +42,22 @@ class PaymentsController < InheritedResources::Base
   def create
     build_resource
     resource.user_id = current_user.id
+    unless resource.user.is_agreed_to_terms
+      if params[:is_agree_to_terms] != "1"
+        reload_payment
+        flash.now[:error] = _("Please agree to the terms of use.")
+        render :action => "new"
+        return
+      else
+        resource.user.is_agreed_to_terms = true
+        resource.user.save
+      end
+    end
     if resource.save
       redirect_to edit_resource_url(resource, ssl_host_and_port.merge(:back => params[:back]))
     else # shouldn't happen unless someone hacks form html manually
       reload_payment
-      flash.now[:error] = _("Please choose a package that reflects your event")
+      flash.now[:error] = resource.errors.on(:base)
       render :action => "new"
     end
   end

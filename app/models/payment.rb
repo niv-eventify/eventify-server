@@ -99,7 +99,8 @@ class Payment < ActiveRecord::Base
   end
 
   def validate
-    errors.add(:base, "manual hack?") if self.amount != calculated_amount || payment_is_not_enough?
+    errors.add(:base, _("Please agree to the terms of use.")) unless self.user.is_agreed_to_terms?
+    errors.add(:base, _("Please choose a package that reflects your event")) if self.amount != calculated_amount || payment_is_not_enough?
   end
 
   def set_names_from_user

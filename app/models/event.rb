@@ -530,7 +530,7 @@ class Event < ActiveRecord::Base
   end
 
   def guests_payments_required?
-    guests.invite_by_email.count > emails_plan && is_premium? && !is_free_premium?(guests.invite_by_email.count)
+    guests.invite_by_email.count > emails_plan
   end
 
   def sms_payments_required?
