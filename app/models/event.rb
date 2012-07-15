@@ -511,16 +511,12 @@ class Event < ActiveRecord::Base
     return (not design.designer.blank?)
   end
 
-  def is_paid_for_premium?(count=self.emails_plan)
-    return Eventify.premium_emails_plan(count)[1] > 0
-  end
-
-  def is_free_premium?(count=self.emails_plan)
-    return !is_paid_for_premium?(count)
+  def is_paid_for_invitations?(count=self.emails_plan)
+    return (self.is_premium? ? Eventify.premium_emails_plan(count)[1] > 0 : Eventify.emails_plan(count)[1] > 0)
   end
 
   def payments_required?
-    return false if user.is_free?
+    return false if user.is_free? && !self.is_premium?
 
     guests_payments_required? || sms_payments_required? || prints_payments_required?
   end

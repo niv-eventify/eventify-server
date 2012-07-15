@@ -86,8 +86,8 @@ class EventsController < InheritedResources::Base
 
   def update
     return _cancel_sms if "true" == params[:cancel_sms]
-    if "true" == params[:update_design] and @event.is_premium? and @event.is_paid_for_premium?
-      flash[:error] = _("already sent premium invitations")
+    if "true" == params[:update_design] && @event.is_paid_for_invitations?
+      flash[:error] = _("Sorry, you can't change the design after the invitations were sent.")
       return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
     end
 
