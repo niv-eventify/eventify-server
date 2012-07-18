@@ -18,7 +18,7 @@ task :prod do
 end
 
 task :stage do
-  set :domain, "astrails@eventify.astrails.com"
+  set :domain, "astrails@staging.eventify.co.il"
   set :application, "eventify.astrails.com"
 end
 
