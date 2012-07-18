@@ -25,7 +25,7 @@ protected
     @collection = if !params[:query].blank?
       Guest.search("#{params[:query]}*", :with => {:event_id => parent.id}).paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
     elsif params[:print]
-      parent.guests.all
+      parent.guests.by_rsvp
     else
       parent.guests.send(rsvp_filter).paginate(:page => params[:page], :per_page => (params[:per_page] || @columns_count * 6))
     end

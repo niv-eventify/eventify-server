@@ -44,6 +44,8 @@ class Guest < ActiveRecord::Base
   named_scope :with_ids, lambda {|ids| {:conditions => ["guests.id in (?)", ids]}}
   named_scope :summary_email_not_sent, :conditions => "guests.summary_email_sent_at IS NULL"
 
+  named_scope :by_rsvp, :order => "rsvp,name"
+  named_scope :by_name, :order => "name"
   named_scope :rsvp_no,             :conditions => {:rsvp => 0}
   named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
