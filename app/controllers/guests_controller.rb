@@ -10,6 +10,9 @@ class GuestsController < InheritedResources::Base
   has_scope :rsvp_not_rsvped
   has_scope :rsvp_not_opened_invite
   has_scope :no_invitation_sent
+  has_scope :by_name
+
+  before_filter :add_by_name, :only => :index
 
   after_filter :clear_flash
 
@@ -60,7 +63,7 @@ class GuestsController < InheritedResources::Base
   end
 
 protected
-  
+
   def begin_of_association_chain
     event_by_user_or_host
   end
@@ -91,4 +94,8 @@ protected
     !(params.keys.collect(&:to_sym) & scopes_configuration.keys).blank?
   end
   helper_method :_any_scope?
+
+  def add_by_name
+    params[:by_name] = true
+  end
 end
