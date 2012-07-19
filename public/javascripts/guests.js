@@ -1,5 +1,5 @@
 jQuery(document).ready(function() {
-    var showTable = jQuery("table#guests tbody tr").length > 1;
+    var showTable = jQuery("table#guests tbody tr").length > 1 || has_filter;
     jQuery('.add_manually').toggle(!showTable)
     jQuery(".guest_list").toggle(showTable);
 		var mass_update = function(attribute, is_true, ckeckboxes) {

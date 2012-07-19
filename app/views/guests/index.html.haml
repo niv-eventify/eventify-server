@@ -2,6 +2,8 @@
 - @content_css_class = "stars-bg stage-3"
 - content_for :head do
   != stylesheet_link_tag "nyroModal.full"
+  :javascript
+    var has_filter = #{@has_filter}
   != javascript_include_tag("jquery.floatheader.min", "guests", "jquery.nyroModal", "jquery.unload")
   :javascript
     jQuery(function(){

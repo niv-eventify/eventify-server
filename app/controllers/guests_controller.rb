@@ -31,6 +31,7 @@ class GuestsController < InheritedResources::Base
   def index
     index! do |success|
       @guests_count = @event.guests.count
+      @has_filter = !params[:query].blank? || _any_scope?
       success.html { redirect_changes_disabled(@event) }
     end
   end
@@ -91,7 +92,9 @@ protected
   helper_method :_is_scoped_by?
 
   def _any_scope?
-    !(params.keys.collect(&:to_sym) & scopes_configuration.keys).blank?
+    scope_keys = scopes_configuration.keys
+    scope_keys.delete(:by_name)
+    !(params.keys.collect(&:to_sym) & scope_keys).blank?
   end
   helper_method :_any_scope?
 
