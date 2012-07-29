@@ -94,7 +94,7 @@
           ₪
         != f.hidden_field :amount
       .nav
-        != link_to_function _("Continue"), "jQuery('form.pricing-form').submit()", :class => "btn-continue"
+        != link_to_function _("Continue"), "submit_payment()", :class => "btn-continue"
         != link_to _("Edit Guests"), event_guests_path(resource.event_id), :id => "payments_edit_guests_link", :class => "underline"
         - unless current_user.is_agreed_to_terms
           %div.is_agree_to_terms
@@ -102,3 +102,24 @@
           %label{:for => "is_agree_to_terms"}=_("I agree to the")
           %a.underline{:href => page_path("terms"), :target => "_blank"}=_("terms of use")
 
+:javascript
+  function submit_payment() {
+    var data = jQuery('form.pricing-form').serialize();
+    jQuery.ajax({
+      url: "#{event_payments_path(@event)}",
+      type: "POST",
+      dataType: "json",
+      data: data,
+      success: function(data){
+        if(data.error) {
+          alert(data.error);
+          return;
+        }
+        //alert(data.payment_url);
+        window.open(data.payment_url, "PaymentPage", "status=1,location=0,height=570,width=720");
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert(textStatus);
+      }
+    });
+  }

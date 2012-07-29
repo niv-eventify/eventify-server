@@ -3,8 +3,9 @@ class DesignersController< InheritedResources::Base
   actions :edit, :update, :show
 
   def edit
-    if id == 0
-      id = current_user.designer.id
+    @designer = Designer.find_by_user_id(current_user.id)
+    if @designer.blank?
+      redirect_to profile_path
     end
     edit!
   end

@@ -115,4 +115,49 @@ module Netpay
         :Comment => transaction_description)
     end
   end
+
+  class HostedPage
+    @@opts = {
+      :trans_currency => "ILS",
+      :trans_installments => 1,
+      :skin_no => 1,
+      :disp_paymentType => "CC",
+      :disp_lng => "he-il",
+      :disp_lngList => "hide"
+    }
+    def initialize(payment, payment_details, redirect_to, notify_to)
+      opts = {
+        :merchantID => NETPAY_MERCHANT_ID,
+        :trans_amount => sprintf("%d.%02d", payment.amount/100, payment.amount%100),
+        :client_fullName => payment.name_on_card,
+        :client_email => payment.email,
+        :trans_refNum => payment.id,
+        :disp_payFor => payment_details,
+        :url_redirect => redirect_to,
+        :url_notify => notify_to
+      }
+      @opts = @@opts.merge(opts)
+    end
+    def get_url
+      str_to_signature = ""
+      @url = "https://services.netpay-intl.com/hosted/?"
+      @opts.each_pair do |key, value|
+        #value = CGI::escape(value.to_s)
+        str_to_signature += value.to_s
+        @url += "#{key}=#{CGI::escape(value.to_s)}&"
+      end
+      str_to_signature += NETPAY_PERSONAL_HASH
+      @signature = Base64.encode64(Digest::SHA256.digest(str_to_signature)).chomp
+      @url += "signature=#{CGI::escape(@signature)}"
+    end
+    def self.validate_response(params)
+      #replyCode + trans_id + PersonalHashKey
+      debugger
+      str_to_signature = "#{params[:replyCode]}#{params[:trans_id]}#{NETPAY_PERSONAL_HASH}"
+      params[:signature] == Base64.encode64(Digest::SHA256.digest(str_to_signature))
+    end
+    def self.success?(reply_code)
+      "000" == reply_code
+    end
+  end
 end

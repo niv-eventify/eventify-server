@@ -3,15 +3,13 @@ class PaymentError < RuntimeError; end
 class Payment < ActiveRecord::Base
   belongs_to :user
   belongs_to :event
-  belongs_to :succeed_netpay_log, :class_name => "NetpayLog"
   has_many   :payment_attempts, :class_name => "NetpayLog", :foreign_key => :context
 
-  attr_accessor :cc, :expiration_month, :expiration_year, :name_on_card,
-    :ccv2, :email, :user_ident, :phone_number, :transaction_description
+  attr_accessor :email, :name_on_card
 
   attr_reader :extra_payment_sms, :extra_payment_prints
 
-  attr_accessible :emails_plan, :sms_plan, :prints_plan, :amount
+  attr_accessible :emails_plan, :sms_plan, :prints_plan, :amount, :transaction_id
 
   PAYMENT_DETAILS_FIELDS = [:cc, :expiration_month, :expiration_year, :name_on_card,
     :ccv2, :email, :user_ident, :phone_number]
@@ -19,10 +17,7 @@ class Payment < ActiveRecord::Base
 
   validates_presence_of :emails_plan, :sms_plan,
     # :prints_plan,
-    :amount,
-    :cc, :expiration_month, :expiration_year, :name_on_card,
-    :ccv2, :email, :user_ident, :phone_number,
-    :on => :update
+    :amount, :transaction_id, :on => :update
 
   named_scope :paid, :conditions => "paid_at IS NOT NULL"
   named_scope :for_list, :order => "paid_at DESC", :include => :event
@@ -56,7 +51,24 @@ class Payment < ActiveRecord::Base
     599 => N_("Declined by issuing bank")
   }
 
+  def finalize_payment!(params)
+    unless Netpay::HostedPage.success?(params[:replyCode])
+      @payment_status_description = _(params[:replyDesc])
+      raise PaymentError
+    end
+    self.paid_at = params[:trans_date]
+    self.transaction_id = params[:trans_id]
+    save!
+    # update event plans
+    self.event.emails_plan = emails_plan
+    self.event.sms_plan = sms_plan
+    self.event.prints_plan = prints_plan.to_i
+    self.event.save!
+    true
+  end
+
   def pay!
+    #the old way of paying. Kept for code reference
     raise ActiveRecord::RecordInvalid.new(self) unless valid?
 
     transaction_description = _("Eventify - payment for %{event_name}") % {:event_name => event.name}
@@ -90,12 +102,6 @@ class Payment < ActiveRecord::Base
     _, self.pay_sms        = upgrade_plan(:sms_plan, sms_plan.to_i, event.sms_plan)
     _, self.pay_prints     = upgrade_plan(:prints_plan, prints_plan.to_i, event.prints_plan)
     _, self.pay_emails     = upgrade_plan(:emails_plan, emails_plan.to_i, event.emails_plan)
-  end
-
-  def load_payment_details(opts)
-    PAYMENT_DETAILS_FIELDS.each do |f|
-      self.send("#{f}=", opts[f])
-    end
   end
 
   def validate

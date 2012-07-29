@@ -4,7 +4,7 @@ class PaymentsController < InheritedResources::Base
   before_filter :ssl_redirect, :only => :edit
   before_filter :ssl_required, :only => :update
   before_filter :verify_paid, :only => :update
-
+  respond_to :js, :only => :create
   skip_before_filter :setup_localization, :only => [:edit, :update]
   before_filter      :setup_localization_skip_domain, :only => [:edit, :update]
 
@@ -21,22 +21,37 @@ class PaymentsController < InheritedResources::Base
 
   def edit
     resource.set_names_from_user
-    edit!
+    payment_details = _("%{email_plan} %{emails} - %{email_price} ₪, %{sms_plan} %{sms} - %{sms_price} ₪") % {:email_plan => resource.emails_plan, :emails => _('Emails'), :email_price => resource.pay_emails.format_cents, :sms_plan => resource.sms_plan, :sms => _("SMS"), :sms_price => resource.pay_sms.format_cents}
+    @payment_url = Netpay::HostedPage.new(resource, payment_details, update_event_payment_url(resource.event.id, resource.id), netpay_log_url).get_url
+    render :json => {:payment_url => @payment_url}.to_json
   end
 
   def update
-    resource.load_payment_details(params[:payment])
-
+    #if !Netpay::HostedPage.validate_response(params)
+    #  raise ActiveRecord::RecordInvalid.new(resource)
+    #end
     begin
-      resource.pay!
-      flash[:notice] = _("Paid successfully.")
-      redirect_to_back_page
-    rescue ActiveRecord::RecordInvalid
-      render :action => :edit
+      resource.finalize_payment!(params)
+      @redirect_url = get_path_to_back_page
     rescue PaymentError
-      flash.now[:error] = _("A problem occured: %{error_description}") % {:error_description => resource.payment_status_description}
-      render :action => :edit
+      @error_msg = _("A problem occured: %{error_description}") % {:error_description => resource.payment_status_description || _("Payment failed")}
     end
+    render :action => "update"
+    #  render :action => :edit
+    #end
+    #redirect_to_back_page
+    #resource.load_payment_details(params[:payment])
+    #
+    #begin
+    #  resource.pay!
+    #  flash[:notice] = _("Paid successfully.")
+    #  redirect_to_back_page
+    #rescue ActiveRecord::RecordInvalid
+    #  render :action => :edit
+    #rescue PaymentError
+    #  flash.now[:error] = _("A problem occured: %{error_description}") % {:error_description => resource.payment_status_description}
+    #  render :action => :edit
+    #end
   end
 
   def create
@@ -44,35 +59,34 @@ class PaymentsController < InheritedResources::Base
     resource.user_id = current_user.id
     unless resource.user.is_agreed_to_terms
       if params[:is_agree_to_terms] != "1"
-        reload_payment
-        flash.now[:error] = _("Please agree to the terms of use.")
-        render :action => "new"
+        render :json => {:error => _("Please agree to the terms of use.")}.to_json
         return
       else
         resource.user.is_agreed_to_terms = true
         resource.user.save
       end
     end
-    if resource.save
-      redirect_to edit_resource_url(resource, ssl_host_and_port.merge(:back => params[:back]))
-    else # shouldn't happen unless someone hacks form html manually
-      reload_payment
-      flash.now[:error] = resource.errors.on(:base)
-      render :action => "new"
+    create! do |success, failure|
+      success.js {
+        redirect_to edit_event_payment_path(resource.event.id, resource.id)
+      }
+      failure.js {
+        render :json => {:error => resource.errors.on(:base)}.to_json
+      }
     end
   end
 
 protected
   def verify_paid
-    redirect_to_back_page unless resource.paid_at.nil?
+    redirect_to get_path_to_back_page unless resource.paid_at.nil?
   end
 
-  def redirect_to_back_page
+  def get_path_to_back_page
     case params[:back]
     when "cancellations"
-      redirect_to edit_cancellation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
+      edit_cancellation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
     else # any or 'invitations'
-      redirect_to edit_invitation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
+      edit_invitation_url(resource.event_id, :locale => current_locale, :protocol => "http://")
     end
   end
 

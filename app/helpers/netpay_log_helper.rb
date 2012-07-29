@@ -1,0 +1,2 @@
+module NetpayLogHelper
+end

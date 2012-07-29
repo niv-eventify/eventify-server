@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120708142927) do
+ActiveRecord::Schema.define(:version => 20120724184858) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -338,17 +338,21 @@ ActiveRecord::Schema.define(:version => 20120708142927) do
   end
 
   create_table "netpay_logs", :force => true do |t|
-    t.string   "request",       :limit => 1024
-    t.string   "response",      :limit => 1024
-    t.string   "exception"
-    t.string   "netpay_status", :limit => 3
-    t.integer  "http_code"
+    t.string   "replyCode",          :limit => 3
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "context"
+    t.string   "replyDesc"
+    t.string   "trans_id"
+    t.datetime "trans_date"
+    t.float    "trans_amount"
+    t.string   "trans_currency"
+    t.integer  "trans_installments"
+    t.string   "trans_refNum"
+    t.string   "client_id",          :limit => 10
+    t.string   "paymentDisplay"
+    t.string   "client_fullName"
+    t.string   "client_phoneNum"
   end
-
-  add_index "netpay_logs", ["context"], :name => "index_netpay_logs_on_context"
 
   create_table "payments", :force => true do |t|
     t.integer  "user_id"
@@ -357,7 +361,7 @@ ActiveRecord::Schema.define(:version => 20120708142927) do
     t.integer  "emails_plan"
     t.integer  "sms_plan"
     t.integer  "prints_plan"
-    t.integer  "succeed_netpay_log_id"
+    t.string   "transaction_id"
     t.datetime "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"

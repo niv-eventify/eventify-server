@@ -1,0 +1,8 @@
+:javascript
+  var redirect_url = "#{@redirect_url}"
+  if(redirect_url) {
+    window.opener.location.href = redirect_url;
+  } else {
+    window.opener.alert("#{@error_msg}");
+  }
+  window.close();

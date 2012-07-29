@@ -31,7 +31,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :guests, :collection => {:mass_update => :put}
     event.resources :things
     event.resource :event_maps
-    event.resources :payments, :only => [:new, :edit, :update, :create]
+    event.resources :payments, :only => [:new, :edit, :update, :create], :member => {:update => :get}
     event.resources :reminders
     event.resource :design
     event.resources :other_guests
@@ -43,6 +43,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.resources :cancellations
   map.resources :print_invitations
+  map.netpay_log "/netpay_log", :controller => :netpay_log, :action => :create
 
   map.namespace :my do |my|
     my.resources :payments, :only => :index
@@ -55,7 +56,7 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resource   :ical, :controller => "ical"
     rsvp.resources :takings
   end
-  map.resources :designers, :except => :show
+  map.resources :designers, :except => [:show, :edit]
   map.designer_download '/designers/download/:file', :controller => :designers, :action => :download
   map.resources :takings
   map.resources :uploaded_pictures
@@ -63,6 +64,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :designs do |design|
     design.resources :windows
   end
+  map.designer "/designer", :controller => :designers, :action => :edit
   map.lobby "/lobby", :controller => "lobby", :action => "index"
   map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
   map.resources :cropped_pictures
