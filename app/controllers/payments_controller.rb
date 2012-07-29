@@ -1,8 +1,6 @@
 class PaymentsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
-  before_filter :ssl_redirect, :only => :edit
-  before_filter :ssl_required, :only => :update
   before_filter :verify_paid, :only => :update
   respond_to :js, :only => :create
   skip_before_filter :setup_localization, :only => [:edit, :update]
