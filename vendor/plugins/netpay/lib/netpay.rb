@@ -153,7 +153,7 @@ module Netpay
     def self.validate_response(params)
       #replyCode + trans_id + PersonalHashKey
       str_to_signature = "#{params[:replyCode]}#{params[:trans_id]}#{NETPAY_PERSONAL_HASH}"
-      return true || params[:signature] == Base64.encode64(Digest::SHA256.digest(str_to_signature))
+      return params[:signature] == Base64.encode64(Digest::SHA256.digest(str_to_signature)).chomp || params[:signature] == Base64.encode64(Digest::MD5.digest(str_to_signature)).chomp
     end
     def self.success?(reply_code)
       "000" == reply_code

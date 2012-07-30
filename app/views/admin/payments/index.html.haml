@@ -1,0 +1,23 @@
+%h3
+  Payments
+  (
+  = collection.total_entries
+  )
+
+%table
+  %tr
+    %th ID
+    %th User
+    %th Event
+    %th Amount
+    %th Transaction ID
+    %th Emails Plan
+    %th SMS Plan
+    %th Paid At
+    %th Emails Plan Prev
+    %th SMS Plan Prev
+    %th Pay Emails
+    %th Pay SMS
+  != render collection
+
+!= will_paginate(collection)

@@ -69,7 +69,7 @@ class PaymentsController < InheritedResources::Base
         redirect_to edit_event_payment_path(resource.event.id, resource.id)
       }
       failure.js {
-        render :json => {:error => resource.errors.on(:base)}.to_json
+        render :json => {:error => resource.errors.on(:base),:to_refresh => true}.to_json
       }
     end
   end
