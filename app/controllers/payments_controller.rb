@@ -25,9 +25,9 @@ class PaymentsController < InheritedResources::Base
   end
 
   def update
-    #if !Netpay::HostedPage.validate_response(params)
-    #  raise ActiveRecord::RecordInvalid.new(resource)
-    #end
+    if !Netpay::HostedPage.validate_response(params)
+      raise ActiveRecord::RecordInvalid.new(resource)
+    end
     begin
       resource.finalize_payment!(params)
       @redirect_url = get_path_to_back_page
