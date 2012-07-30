@@ -4,7 +4,7 @@ class NetpayLogController < InheritedResources::Base
 
   def create
     build_resource
-    if !Netpay::HostedPage.validate_response(params)
+    unless Netpay::HostedPage.validate_response(params)
       raise ActiveRecord::RecordInvalid.new(resource)
     end
     resource.replyCode = params[:replyCode]

@@ -25,7 +25,7 @@ class PaymentsController < InheritedResources::Base
   end
 
   def update
-    if !Netpay::HostedPage.validate_response(params)
+    unless Netpay::HostedPage.validate_response(params)
       raise ActiveRecord::RecordInvalid.new(resource)
     end
     begin
