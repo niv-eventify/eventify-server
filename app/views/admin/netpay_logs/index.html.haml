@@ -1,0 +1,24 @@
+%h3
+  Payments
+  (
+  = collection.total_entries
+  )
+
+%table
+  %tr
+    %th ID
+    %th Reply Code 
+    %th Reply Desc
+    %th Trans ID
+    %th Amount
+    %th Currency
+    %th Installments
+    %th TransRefNum
+    %th Client Full Name
+    %th Client Phone Num
+    %th Client ID
+    %th Trans Date
+    %th Payment Display
+  != render collection
+
+!= will_paginate(collection)

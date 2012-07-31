@@ -26,7 +26,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :landing_pages
     admin.resources :links_pages
     admin.resources :payments
-    #admin.resources :netpay_logs
+    admin.resources :netpay_logs
   end
 
   map.resources :events do |event|
