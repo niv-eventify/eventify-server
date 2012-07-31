@@ -1,6 +1,13 @@
 - @page_title = _("Pricing | Eventify")
 
 - content_for :head do
+  :css
+    #content .content-area {
+      width: 984px;
+    }
+    .hebrew .pricing {
+      padding-left: 0px;
+    }
   != javascript_include_tag "jquery.package_price"
   :javascript
     jQuery(function(){
