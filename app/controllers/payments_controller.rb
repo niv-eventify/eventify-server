@@ -34,7 +34,7 @@ class PaymentsController < InheritedResources::Base
     rescue PaymentError
       @error_msg = _("A problem occured: %{error_description}") % {:error_description => resource.payment_status_description || _("Payment failed")}
     end
-    render :action => "update"
+    render :action => "update", :layout => false
     #  render :action => :edit
     #end
     #redirect_to_back_page

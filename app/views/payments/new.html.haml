@@ -97,7 +97,7 @@
       .total-bar
         %span.label= _("Total")
         %em
-          %strong#total_amount= resource.amount.format_cents
+          %strong#total_amount= (resource.amount < 0 ? 0 : resource.amount.format_cents)
           ₪
         != f.hidden_field :amount
       .nav
@@ -112,6 +112,7 @@
 :javascript
   function submit_payment() {
     var data = jQuery('form.pricing-form').serialize();
+    jQuery('body').css('cursor', 'wait');
     jQuery.ajax({
       url: "#{event_payments_path(@event)}",
       type: "POST",
@@ -127,6 +128,7 @@
         }
         //alert(data.payment_url);
         window.open(data.payment_url, "PaymentPage", "status=1,location=0,height=570,width=720");
+        jQuery('body').css('cursor', 'default');
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert(textStatus);
