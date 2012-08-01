@@ -113,6 +113,7 @@
   function submit_payment() {
     var data = jQuery('form.pricing-form').serialize();
     jQuery('body').css('cursor', 'wait');
+    var popup = window.open("", "PaymentPage", "status=1,location=0,height=570,width=720");
     jQuery.ajax({
       url: "#{event_payments_path(@event)}",
       type: "POST",
@@ -127,7 +128,7 @@
           return;
         }
         //alert(data.payment_url);
-        window.open(data.payment_url, "PaymentPage", "status=1,location=0,height=570,width=720");
+        popup.location.href = data.payment_url;
         jQuery('body').css('cursor', 'default');
       },
       error: function(jqXHR, textStatus, errorThrown) {
