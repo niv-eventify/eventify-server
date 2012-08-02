@@ -1,14 +1,8 @@
 - @page_title = _("Pricing | Eventify")
 
 - content_for :head do
-  :css
-    #content .content-area {
-      width: 984px;
-    }
-    .hebrew .pricing {
-      padding-left: 0px;
-    }
   != javascript_include_tag "jquery.package_price"
+  %style= "#content .content-area {width: 990px;} .hebrew .pricing {padding-left: 0px;}"
   :javascript
     jQuery(function(){
       jQuery("input[name=payment[emails_plan]]").click(function(){
