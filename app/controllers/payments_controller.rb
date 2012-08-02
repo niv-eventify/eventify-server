@@ -64,6 +64,10 @@ class PaymentsController < InheritedResources::Base
         resource.user.save
       end
     end
+    if params[:payment][:amount].to_i <= 0
+      render :json => {:redirect_to => get_path_to_back_page}.to_json
+      return
+    end
     create! do |success, failure|
       success.js {
         redirect_to edit_event_payment_path(resource.event.id, resource.id)

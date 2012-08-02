@@ -123,8 +123,14 @@
         if(data.error) {
           alert(data.error);
           if(data.to_refresh === true){
+            popup.close();
             window.location.reload();
           }
+          return;
+        }
+        if(data.redirect_to) {
+          popup.close();
+          window.location.href = data.redirect_to;
           return;
         }
         //alert(data.payment_url);
