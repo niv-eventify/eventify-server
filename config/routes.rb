@@ -58,7 +58,7 @@ ActionController::Routing::Routes.draw do |map|
     rsvp.resource   :ical, :controller => "ical"
     rsvp.resources :takings
   end
-  map.resources :designers, :except => [:show, :edit]
+  map.resources :designers, :only => :update
   map.designer_download '/designers/download/:file', :controller => :designers, :action => :download
   map.resources :takings
   map.resources :uploaded_pictures
@@ -66,12 +66,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :designs do |design|
     design.resources :windows
   end
-  map.designer "/designer", :controller => :designers, :action => :edit
+  map.edit_designer "/designer", :controller => :designers, :action => :edit
   map.lobby "/lobby", :controller => "lobby", :action => "index"
   map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
   map.resources :cropped_pictures
   map.connect "/1234a3a5e723d2e0fa3e43fbef0c3dac", :controller => :send_grid_events, :action => :create, :conditions => {:method => :post}
   map.resource :links_page
-  map.connect '/designers/:friendly_url', :controller => 'designers', :action => 'show'
+  map.show_designer '/designers/:friendly_url', :controller => 'designers', :action => 'show'
   map.connect '*friendly_url', :controller => 'landing_pages', :action => 'show'
 end

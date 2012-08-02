@@ -58,4 +58,4 @@
                     %p.error-msg.designer-error-msg= f.object.errors.on(:is_activated)
               .forms-block-btns
                 != link_to_function _("Save"), "jQuery(this).parents('form').get(0).submit()", :class => "btn"
-                != link_to _("Cancel"), designer_path(@designer), :class => "btn"
+                != link_to _("Cancel"), show_designer_path(@designer.friendly_url), :class => "btn"

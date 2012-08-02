@@ -6,6 +6,7 @@ class DesignersController< InheritedResources::Base
     @designer = Designer.find_by_user_id(current_user.id)
     if @designer.blank?
       redirect_to profile_path
+      return
     end
     edit!
   end
