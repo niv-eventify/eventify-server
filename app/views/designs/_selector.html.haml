@@ -6,5 +6,5 @@
           != update_design_link(event, design, category, "", image_tag(design.preview.url(:medium), :alt => "", :size=>"218x145"))
       != update_design_link(event, design, category)
       - unless design.designer.blank?
-        != link_to _("Designer's Page"), "/designers/#{design.designer.friendly_url}", :class => "designer_link"
+        != link_to _("Designer's Page"), show_designer_path(design.designer.friendly_url), :class => "designer_link"
       != design_zoom(event, design, category)

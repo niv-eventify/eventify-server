@@ -18,4 +18,6 @@
   != image_tag(@design.preview.url(:lightbox))
   %div{:style => "width: 667px"}
     != update_design_link(@event, @design, @category, "blue-btn-mdl")
+    - unless @design.designer.blank?
+      != link_to _("Designer's Page"), show_designer_path(@design.designer.friendly_url),:class => "designer_link_zoom"
     != design_zoomout(@event, @design, @category)

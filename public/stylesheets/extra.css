@@ -1947,6 +1947,13 @@ form.edit_designer p.designer-error-msg{
   font-size:12px;
   visibility: visible;
 }
+
+.hebrew .designer_link_zoom {
+    margin: 20px 0 0 218px;
+    float: left;
+    font-size: 14px;
+}
+
 .designer_instructions #font_examples {
   display: none;
 }
