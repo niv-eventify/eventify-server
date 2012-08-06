@@ -1942,7 +1942,7 @@ form.edit_designer p.designer-error-msg{
 }
 
 .hebrew .img-box:hover .designer_link, .hebrew .img-box-hover .designer_link {
-  margin:27px 0 0 12px;
+  margin:27px 0 0 20px;
   float:left;
   font-size:12px;
   visibility: visible;
