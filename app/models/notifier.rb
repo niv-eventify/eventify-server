@@ -3,6 +3,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def invite_resend_guest(guest)
     subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]
+    reply_to    guest.event.user.email
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -21,6 +22,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def invite_guest(guest)
     subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]
+    reply_to    guest.event.user.email
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
