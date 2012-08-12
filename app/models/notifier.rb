@@ -13,6 +13,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def event_cancelled(guest, message_subject, message_text)
     subject     message_subject
     recipients  [guest.email_recipient]
+    reply_to    guest.event.user.email
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -32,6 +33,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def guest_reminder(guest, subj, message)
     subject     subj
     recipients  [guest.email_recipient]
+    reply_to    guest.event.user.email
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -50,6 +52,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def taking_removed(guest, thing)
     subject     guest.event.name
     recipients  [guest.email_recipient]
+    reply_to    guest.event.user.email
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -69,6 +72,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def message_to_guest(guest,message)
     subject     message.subject
     recipients  [guest.email_recipient]
+    reply_to    guest.event.user.email
     _set_receipient_header(guest)
     from        guest.event.user.email
     sent_on     Time.now.utc
