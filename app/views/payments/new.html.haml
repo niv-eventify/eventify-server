@@ -97,15 +97,14 @@
       .nav
         != link_to_function _("Continue"), "submit_payment()", :class => "btn-continue"
         != link_to _("Edit Guests"), event_guests_path(resource.event_id), :id => "payments_edit_guests_link", :class => "underline"
-        - unless current_user.is_agreed_to_terms
-          %div.is_agree_to_terms
-          %input{:type => "checkbox", :name => "is_agree_to_terms", :id => "is_agree_to_terms", :value => "1"}
-          %label{:for => "is_agree_to_terms"}=_("I agree to the")
-          %a.underline{:href => page_path("terms"), :target => "_blank"}=_("terms of use")
+        %div.is_agree_to_terms
+        %input{:type => "checkbox", :name => "is_agree_to_terms", :id => "is_agree_to_terms", :value => "1"}
+        %label{:for => "is_agree_to_terms"}=_("I agree to the")
+        %a.underline{:href => page_path("terms"), :target => "_blank"}=_("terms of use")
 
 :javascript
   function submit_payment() {
-    if(jQuery('#is_agree_to_terms').length > 0 && jQuery('#is_agree_to_terms:checked').length == 0){
+    if(jQuery('#is_agree_to_terms:checked').length == 0){
       alert("#{_("Please agree to the terms of use.")}");
       return;
     }

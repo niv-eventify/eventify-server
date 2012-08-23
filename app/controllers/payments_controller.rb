@@ -55,14 +55,13 @@ class PaymentsController < InheritedResources::Base
   def create
     build_resource
     resource.user_id = current_user.id
+    unless params[:is_agree_to_terms] == "1"
+      render :json => {:error => _("Please agree to the terms of use.")}.to_json
+      return
+    end
     unless resource.user.is_agreed_to_terms
-      if params[:is_agree_to_terms] != "1"
-        render :json => {:error => _("Please agree to the terms of use.")}.to_json
-        return
-      else
-        resource.user.is_agreed_to_terms = true
-        resource.user.save
-      end
+      resource.user.is_agreed_to_terms = true
+      resource.user.save
     end
     if params[:payment][:amount].to_i <= 0
       render :json => {:redirect_to => get_path_to_back_page}.to_json
