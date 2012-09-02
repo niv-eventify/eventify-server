@@ -39,7 +39,8 @@ Rails::Initializer.run do |config|
   config.gem 'hoptoad_notifier', :version => "2.1.3"
   config.gem 'blackbook', :lib => false
   config.gem 'mechanize', :lib => false, :version => "0.9.3"
-  config.gem 'contacts', :lib => false, :version => "1.2.3"
+  config.gem 'gdata', :lib => false, :version => "1.1.2"
+  config.gem 'contacts', :lib => false, :version => "1.2.4"
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
   #config.gem 'rspec', :lib => false, :version => '1.3.0'
