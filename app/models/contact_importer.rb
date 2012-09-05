@@ -11,7 +11,7 @@ class ContactImporter < ActiveRecord::Base
   end
   validates_inclusion_of :contact_source, :in => SOURCES.keys, :message => "not included in the list"
   attr_accessible :contact_source
-  
+
   attr_accessor :username, :password, :csv, :validate_importing
   attr_accessible :username, :password, :csv, :validate_importing
 
@@ -49,9 +49,11 @@ class ContactImporter < ActiveRecord::Base
         connection.contacts
       rescue Contacts::StandardError, Contacts::ContactsError
         error = $!
+        logger.error("Error importing contacts: #{error.message}")
         nil
-      rescue
+      rescue Exception => e
         error = _("A problem importing your contacts occured, please try again later.")
+        logger.error("Error importing contacts: #{e.message}")
         nil
       end
     when 'aol'
@@ -89,7 +91,7 @@ class ContactImporter < ActiveRecord::Base
       name, email, mobile = c[0], c[1], c[2]
     elsif c.is_a?(Hash)
       name = c[:name] || c[:Name]
-      email = c[:email] || c [:Email]
+      email = c[:email] || c[:Email]
       mobile = c[:mobile]
     end
     [name || email, email, mobile]
