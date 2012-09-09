@@ -16,11 +16,16 @@
   delayedShowTitleBorder: null,
   cancelTitleBlur: false,
   cancelMsgBlur: false,
+  is_user_closed_warning: false,
 
   isTextOverflow: function() {
     var overflow = false;
+    if(stage2.is_user_closed_warning) {
+      return false;
+    }
     stage2.curr_free_text_font_size = parseInt(jQuery("#free_text").css("font-size"));
     stage2.curr_title_font_size = parseInt(jQuery("#title").css("font-size"));
+//    parseFloat(jQuery('#title').css('line-height'),10) * (jQuery('#title br').length+0.5) + parseFloat(jQuery('#title').css('font-size'),10)/2
     stage2.title_clone.scrollTop(1);
     if(stage2.title_clone.scrollTop() == 1) {
       overflow = true;
@@ -559,7 +564,7 @@ jQuery(document).ready(function(){
   jQuery(".msg-holder").click(function(){
     jQuery("#event_guest_message").focus();
   });
-  
+
   stage2.bindTitleEvents();
   stage2.bindMsgEvents();
 
@@ -605,6 +610,11 @@ jQuery(document).ready(function(){
     opacity: 0.7,
     appendTo: 'body',
     zIndex: 200
+  });
+  jQuery("a.warning_close_button").click(function(){
+    stage2.is_user_closed_warning = true;
+    jQuery(".overflow_warning").hide();
+    return false;
   });
   if(typeof _gaq != 'undefined') {
     jQuery("input, textarea, select").focus(function(){

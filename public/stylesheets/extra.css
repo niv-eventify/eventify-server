@@ -1106,9 +1106,10 @@ em.counter {
 
 .overflow_warning {
     display: none;
-    padding: 2px;
+    padding: 6px;
     text-align: left;
-    border: 2px solid red;
+    border: 2px solid #41BDCD;
+    border-radius: 5px;
     font-size: 1em;
     position: absolute;
     width: 120px;
@@ -1984,4 +1985,15 @@ form.edit_designer p.designer-error-msg{
 
 .underline {
   text-decoration: underline;
+}
+.warning_close_button {
+  background: url("/images/home_page_sprite1.png") no-repeat scroll -10px -1505px transparent;
+  display: block;
+  height: 42px;
+  outline: 0 none;
+  position: absolute;
+  right: -24px;
+  text-indent: -9999em;
+  top: -24px;
+  width: 42px;
 }
