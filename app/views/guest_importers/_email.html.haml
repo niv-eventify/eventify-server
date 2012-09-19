@@ -17,6 +17,7 @@
                 - form_tag event_guest_importers_path(@event), :builder => MiddleBoxFormBuilder::Builder, :target => "upload_frame", :class => "contact-form" do
                   != hidden_field_tag :contact_source, klass
                   != hidden_field_tag :source, "email"
+                  != hidden_field_tag :ctoken, @ctoken
                   .form-row
                     != label_tag _("Email or Username")
                     .input-bg-contact
@@ -25,6 +26,14 @@
                     != label_tag _("Password")
                     .input-bg-contact
                       != password_field_tag :password, params[:contact_source] == klass ? params[:password] : ""
+                  - unless @image_url.blank?
+                    .form-row
+                      != label_tag _("What's written here?")
+                      %img{:src => @image_url}
+                    .form-row
+                      != label_tag " "
+                      .input-bg-contact
+                        != text_field_tag :captcha, ""
                   .contact-btns
                     %br
                     %br

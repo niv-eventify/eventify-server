@@ -19,6 +19,14 @@ class GuestImportersController < ApplicationController
     responds_to_parent do
       render(:update) do |page|
         if @error
+          split_error = @error.split(" : ")
+          if split_error[0] == "CaptchaRequired"
+            split_code = split_error[1].split("%3A")
+            @image_url = "http://www.google.com/accounts/#{split_error[1]}"
+            #@image_url = "http://www.google.com/accounts/#{split_code[0]}"
+            @ctoken = CGI::unescape(split_error[1].split("?ctoken=")[1])
+            @error = nil
+          end
           render_new_guests_import_form(page)
         else
           page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
@@ -69,7 +77,7 @@ protected
 
   def _load_from_emails
     @contacts = []
-    contacts, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], nil)
+    contacts, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], nil,params[:ctoken], params[:captcha])
     @contacts = ContactImporter.contacts_to_openstruct(contacts) if contacts && contacts.is_a?(Array)
     @error = error.to_s if error
   end

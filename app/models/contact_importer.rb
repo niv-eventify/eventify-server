@@ -39,11 +39,28 @@ class ContactImporter < ActiveRecord::Base
     SOURCES[contact_source]
   end
 
-  def self.import_contacts(username, password, contact_source, csv)
+  def self.import_contacts(username, password, contact_source, csv, ctoken=nil, captcha=nil)
     error = nil
 
     contacts = case contact_source
-    when 'gmail', 'hotmail', 'yahoo'
+    when 'gmail'
+      begin
+        if ctoken && captcha
+          connection = Contacts::Gmail.new(username, password, :captcha_token => ctoken, :captcha_response => captcha)
+        else
+          connection = Contacts::Gmail.new(username, password)
+        end
+        connection.contacts
+      rescue Contacts::StandardError, Contacts::ContactsError
+        error = $!
+        logger.error("Error importing contacts: #{error.message}")
+        nil
+      rescue Exception => e
+        error = _("A problem importing your contacts occured, please try again later.")
+        logger.error("Error importing contacts: #{e.message}")
+        nil
+      end
+    when 'hotmail', 'yahoo'
       begin
         connection = Contacts.new(contact_source.to_sym, username, password)
         connection.contacts
