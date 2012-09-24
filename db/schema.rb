@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724184858) do
+ActiveRecord::Schema.define(:version => 20120924125818) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -499,7 +499,7 @@ ActiveRecord::Schema.define(:version => 20120724184858) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "disabled_at"
-    t.boolean  "is_free",                            :default => true
+    t.boolean  "is_free",                            :default => false
     t.boolean  "is_super_admin",                     :default => false
     t.boolean  "is_agreed_to_terms"
   end
