@@ -68,7 +68,7 @@ p{margin:0;}
     overflow: visible;
 }
 .logo {
-    background: url(/images/logo.gif) no-repeat;
+    background: url(/images/logo_no_beta.gif) no-repeat;
     width:198px;
     height:54px;
     position: absolute;
