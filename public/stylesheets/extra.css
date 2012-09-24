@@ -1266,9 +1266,9 @@ li.home_page a{
   height:auto;
 }
 .hebrew .logo {
-  background-image: url("/images/logo_he.gif");
-  background-image: url(/images/home_page_sprite1.png);
-  background-position: -10px -629px;
+  background-image: url("/images/logo_no_beta.gif");
+  /*background-image: url(/images/home_page_sprite1.png);*/
+  /*background-position: -10px -629px;*/
 }
 h2.weak {
   font-weight: normal;

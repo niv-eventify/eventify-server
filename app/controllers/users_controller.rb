@@ -7,6 +7,7 @@ class UsersController < InheritedResources::Base
   def create
     user = build_resource
     user.is_admin = true if User.count.zero?
+    user.is_free = false
     if user.save_without_session_maintenance
       I18n.with_locale(current_locale){user.deliver_activation_instructions!}
       flash[:notice] = _("Your account has been created. Please check your e-mail for your account activation instructions!")

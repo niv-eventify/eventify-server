@@ -5840,7 +5840,7 @@ ul.contact-tabset li.active a ,
     height: 29px;
     float: right;
     position: relative;
-    background: url(/images/logo-toolbar.gif) no-repeat;
+    background: url(/images/logo-toolbar_no_beta.gif) no-repeat;
 }
 .hebrew .toolbar-logo {
     margin: 17px 14px 0 34px;
