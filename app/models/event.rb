@@ -89,8 +89,8 @@ class Event < ActiveRecord::Base
   datetime_select_accessible :starting_at, :ending_at
 
   validates_presence_of :category_id, :design_id, :name, :starting_at
-  validates_length_of :invitation_title, :maximum => 100, :allow_nil => true, :allow_blank => true
-  validates_length_of :guest_message, :maximum => 345, :allow_nil => true, :allow_blank => true
+  validates_length_of :invitation_title, :maximum => 1024, :allow_nil => true, :allow_blank => true
+  validates_length_of :guest_message, :maximum => 1024, :allow_nil => true, :allow_blank => true
 
   # sms sending validations
   attr_accessor :send_invitations_now, :delay_sms_sending, :resend_invitations
