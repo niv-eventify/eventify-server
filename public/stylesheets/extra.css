@@ -1,5 +1,4 @@
 @font-face {
-@font-face {
     font-family: "Arial";
     src: local("Arial"),local("arial"),
       url("/fonts/arial.ttf") format("truetype");
@@ -265,7 +264,6 @@ div.cmf-skinned-text {
 }
 
 div.flash {
-    height:;
     font-size:1.2em;
     padding:11px 15px;
     background:#f1f3c6;
