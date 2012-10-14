@@ -6,10 +6,27 @@
     jQuery(function(){
       jQuery("a.send-message-guests-link").click(function(){
         var url = jQuery(this).attr("href");
-        show_nyro_loading(function(){jQuery.ajax({url: url, type: "get", dataType:'script'});});
+        show_nyro_loading(function(){
+          jQuery.ajax({
+            url: url,
+            type: "get",
+            dataType:'script',
+            success:function(){
+              jQuery('input:checkbox').customCheckbox();
+              jQuery('input:checkbox').change(function(){
+                jQuery('#guests_message_filter').val('');
+                if($('input[name="filter_check"][value="all"]:not(:checked)').length > 0){
+                  jQuery('input:checkbox[name="filter_check"]:checked').each(function(){
+                    jQuery('#guests_message_filter').val($(this).val() + ',' + jQuery('#guests_message_filter').val());
+                  });
+                }
+              });
+            }
+          });
+        });
         return false;
       });
-    })
+    });
 - @content_css_class = "stars-bg"
 
 - events_content_section(5, @event, {}, :content_section_class => "content-section-alt") do

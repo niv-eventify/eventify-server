@@ -1,3 +1,25 @@
+%fieldset
+  != f.hidden_field :filter
+  .f-row
+    %h3=_("Who do you want to send the message to?")
+    %ul.check-list
+      %li
+        %input#check-popup-1.input-check{:type => "checkbox", :value => :all, :name => :filter_check}
+          %label{:for => "check-popup-1"}=_("All")
+      %li
+        %input#check-popup-2.input-check{:type => "checkbox", :value => :yes, :name => :filter_check}
+          %label{:for => "check-popup-2"}=_("Yes")
+      %li
+        %input#check-popup-3.input-check{:type => "checkbox", :value => :no, :name => :filter_check}
+          %label{:for => "check-popup-3"}=_("No")
+    %ul.check-list
+      %li
+        %input#check-popup-4.input-check{:type => "checkbox", :value => :maybe, :name => :filter_check}
+          %label{:for => "check-popup-4"}=_("Maybe")
+      %li
+        %input#check-popup-5.input-check{:type => "checkbox", :value => :not_responded, :name => :filter_check}
+          %label{:for => "check-popup-5"}=_("Not responded")
+
 .f-row.f-row-alt
   .f-row-1
     != f.label :subject, _("Email subject")

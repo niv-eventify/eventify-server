@@ -4,12 +4,12 @@ class GuestsMessage < ActiveRecord::Base
 
   validates_presence_of :subject , :body
 
-  attr_accessible :subject , :body
-  
+  attr_accessible :subject , :body, :filter
+
   after_create :send_email_to_guests
 
   def send_email_to_guests
-    event.guests.invite_by_email.each do |guest|
+    Guest.filter_rsvps(filter, event).each do |guest|
       send_later(:send_message_to_guests, guest)
     end
   end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924125818) do
+ActiveRecord::Schema.define(:version => 20121007061247) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -281,6 +281,7 @@ ActiveRecord::Schema.define(:version => 20120924125818) do
     t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "filter"
   end
 
   add_index "guests_messages", ["event_id"], :name => "index_guests_messages_on_event_id"

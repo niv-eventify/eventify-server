@@ -49,6 +49,7 @@ class Guest < ActiveRecord::Base
   named_scope :rsvp_no,             :conditions => {:rsvp => 0}
   named_scope :rsvp_yes,            :conditions => {:rsvp => 1}
   named_scope :rsvp_maybe,          :conditions => {:rsvp => 2}
+  #not_responded = not_rsvped + not_opened_invite
   named_scope :rsvp_not_responded,  {:conditions => "guests.rsvp IS NULL AND guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1"}
   named_scope :rsvp_not_rsvped, {:conditions => "guests.first_viewed_invitation_at IS NOT NULL AND guests.rsvp IS NULL"}
   named_scope :rsvp_not_opened_invite, {:conditions => "guests.first_viewed_invitation_at IS NULL AND guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = 1 AND guests.rsvp IS NULL"}
@@ -202,6 +203,28 @@ class Guest < ActiveRecord::Base
 
       mass_prepare_sms(guests)
     end
+  end
+
+  def self.filter_rsvps(filter, current_event)
+    guests = []
+    filter_arr = filter.split(",")
+    if filter_arr.length == 0
+      guests = current_event.guests
+    else
+      if filter_arr.include?("no")
+        guests.concat(current_event.guests.rsvp_no)
+      end
+      if filter_arr.include?("yes")
+        guests.concat(current_event.guests.rsvp_yes)
+      end
+      if filter_arr.include?("maybe")
+        guests.concat(current_event.guests.rsvp_maybe)
+      end
+      if filter_arr.include?("not_responded")
+        guests.concat(current_event.guests.rsvp_not_responded)
+      end
+    end
+    return guests
   end
 
   def self.mass_prepare_sms(guests)
