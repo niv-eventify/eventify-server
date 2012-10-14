@@ -151,7 +151,7 @@ div.cmf-skinned-text {
 .hebrew #nyroModalContent .blue-btn-mdl:hover span, #nyroModalContent .blue-btn-mdl.hover span{background-position: 100% -26px;}
 
 .promo-gallery {
-    margin: -172px 0px 40px 125px;
+    margin: -172px 0 40px 125px;
 }
 .promo-b{
     padding: 0 0 8px 0;
@@ -193,7 +193,7 @@ div.cmf-skinned-text {
   white-space: nowrap;
   margin: 0;
   font-size: 22px;
-  padding-right: 0px;
+  padding-right: 0;
   cursor: pointer;
 }
 .msg-holder {
@@ -204,7 +204,7 @@ div.cmf-skinned-text {
   white-space: nowrap;
   margin: 0;
   font-size: 20px;
-  padding-right: 0px;
+  padding-right: 0;
   cursor: pointer;
 }
 
@@ -539,15 +539,15 @@ li.thing.active span.name {
     background:url(/images/taking-close.gif);
     width:7px;
     height:7px;
-    text-indent:0px;
+    text-indent:0;
     display:inline-block;
     vertical-align:middle;
-    margin: -2px 7px 0px 0px;
+    margin: -2px 7px 0 0;
     text-decoration:none;
 }
 
 .hebrew .taking-remove {
-    margin: -2px 0px 0px 7px;
+    margin: -2px 0 0 7px;
 }
 
 .taking-remove:hover {
@@ -564,11 +564,11 @@ li.thing.active span.name {
 
 .content-box-holder {
     width: 561px;
-    padding: 15px 0px 13px 30px;
+    padding: 15px 0 13px 30px;
 }
 
 .hebrew .content-box-holder {
-    padding: 15px 28px 13px 0px;
+    padding: 15px 28px 13px 0;
 }
 
 * html .emails-phones {
@@ -622,7 +622,7 @@ li.thing .sel-holder {
 
 .lists-h ul.list {
     margin: 0 0 0 5px;
-    border-bottom: 0px;
+    border-bottom: 0;
     padding: 10px 6px 0 7px;
     width: 117px;
 }
@@ -867,8 +867,8 @@ table#contacts {
 ul.contact-tabset li.yahoo a {background: url(/images/bg-tab-yahoo.gif) no-repeat;}
 .hebrew ul.contact-tabset li.yahoo a {background: url(/images/bg-tab-yahoo-en.gif) no-repeat;}
 ul.contact-tabset li.yahoo { padding-left: 4px;}
-.hebrew ul.contact-tabset li.yahoo { padding-right: 4px;padding-left:0px;}
-.hebrew .import ul.contact-tabset li.yahoo { padding-right: 12px;padding-left:0px;}
+.hebrew ul.contact-tabset li.yahoo { padding-right: 4px;padding-left:0;}
+.hebrew .import ul.contact-tabset li.yahoo { padding-right: 12px;padding-left:0;}
 ul.contact-tabset li a:hover,
 .hebrew ul.contact-tabset li a:hover,
 ul.contact-tabset li.active a ,
@@ -930,8 +930,8 @@ ul.contact-tabset li.active a ,
 }
 .minus {
     background: url(/images/ico-minus.gif) no-repeat;
-  background-image: url(/images/home_page_sprite1.png);
-  background-position: -10px -1639px;
+    background-image: url(/images/home_page_sprite1.png);
+    background-position: -10px -1639px;
     visibility: visible;
     margin: 20px 20px 0;
 }
@@ -1185,11 +1185,11 @@ em.counter {
 }
 
 .new_guests_message .error-msg {
-  padding: 0px 0px 4px 132px;
+  padding: 0 0 4px 132px;
 }
 
 .hebrew .new_guests_message .error-msg {
-  padding: 0px 132px 4px 0px;
+  padding: 0 132px 4px 0;
 }
 
 .def-list dt.blue,
@@ -1197,8 +1197,8 @@ em.counter {
 
 .stage-3 .page-nav {
     background: none;
-    padding-top: 0px;
-    margin-top: 0px;
+    padding-top: 0;
+    margin-top: 0;
 }
 #summary_other_guests .tabs-bottom {
     padding: 0 8px 12px;
@@ -1233,13 +1233,13 @@ li.home_page{
   width: 80px;
 }
 li.home_page a{
-  background: url("/images/homeicon.png") no-repeat scroll 1% 0px transparent;
+  background: url("/images/homeicon.png") no-repeat scroll 1% 0 transparent;
   color: #56C8D7;
   float: right;
   padding: 0 0 0 18px;
 }
 .hebrew li.home_page a{
-  background: url("/images/homeicon.png") no-repeat scroll 99% 0px transparent;
+  background: url("/images/homeicon.png") no-repeat scroll 99% 0 transparent;
   background-image: url(/images/home_page_sprite1.png);
   background-position: 33px -1748px;
   padding: 0 18px 0 0;
@@ -1605,7 +1605,7 @@ ul.contact-tabset {
 #upper_panel_center .header1{
   position: absolute;
   right: 15px;
-  top: 0px;
+  top: 0;
   width: 440px;
   height: 180px;
   z-index: 2;
@@ -1736,7 +1736,7 @@ span#updating_rsvp_status {
 }
 .import.past_events .boxe .heading .edit-bg {
     width: 200px;
-    padding: 0px;
+    padding: 0;
 }
 .hebrew .import.past_events .boxe .heading .edit-bg:hover, .hebrew .import.past_events .boxe .heading .hover {
     background-position: 35px 0;
