@@ -300,3 +300,7 @@
 	z-index: 52;
 	display: none;
 }
+
+#nyroModalWrapper {
+    border-radius: 10px;
+}
