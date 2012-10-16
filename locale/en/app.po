@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: version 0.0.1\n"
-"POT-Creation-Date: 2012-08-02 09:16+0300\n"
+"POT-Creation-Date: 2012-10-16 08:26+0200\n"
 "PO-Revision-Date: 2009-12-23 22:46+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: app/views/payments/new.html.haml:34
+#: app/views/payments/new.html.haml:28
 msgid " - upgrade"
 msgstr ""
 
@@ -31,7 +31,7 @@ msgid_plural "%d contacts imported"
 msgstr[0] ""
 msgstr[1] ""
 
-#: app/controllers/guest_importers_controller.rb:97
+#: app/controllers/guest_importers_controller.rb:105
 msgid "%d guest imported"
 msgid_plural "%d guests imported"
 msgstr[0] ""
@@ -55,7 +55,7 @@ msgid ""
 "%{sms_price} ₪"
 msgstr ""
 
-#: app/models/notifier.rb:40
+#: app/models/notifier.rb:44
 msgid "%{event_name} - RSVP summary"
 msgstr ""
 
@@ -77,7 +77,7 @@ msgstr ""
 msgid "%{host_name}'s %{event_name} event"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:84
+#: app/views/summaries/show.html.haml:101
 msgid "%{percent} %"
 msgstr ""
 
@@ -112,14 +112,15 @@ msgid ""
 "it here.&#13;&#10;4. Click the import button"
 msgstr ""
 
-#: app/models/contact_importer.rb:67
+#: app/models/contact_importer.rb:86
 msgid ""
 "A problem importing your contacts occured, only Excel files or a CSV files "
 "allowed."
 msgstr ""
 
-#: app/models/contact_importer.rb:54 app/models/contact_importer.rb:70
-#: app/models/contact_importer.rb:76 app/models/contact_importer.rb:79
+#: app/models/contact_importer.rb:59 app/models/contact_importer.rb:72
+#: app/models/contact_importer.rb:89 app/models/contact_importer.rb:95
+#: app/models/contact_importer.rb:98
 msgid "A problem importing your contacts occured, please try again later."
 msgstr ""
 
@@ -200,7 +201,7 @@ msgstr ""
 msgid "Address Book | Eventify"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:47 app/views/rsvps/_info.html.haml:22
+#: app/views/summaries/show.html.haml:64 app/views/rsvps/_info.html.haml:22
 msgid "Address:"
 msgstr ""
 
@@ -213,6 +214,7 @@ msgstr ""
 msgid "Advanced import methods"
 msgstr ""
 
+#: app/views/guests_messages/_form.html.haml:8
 #: app/views/guests/index.html.haml:62
 msgid "All"
 msgstr ""
@@ -269,7 +271,7 @@ msgstr ""
 #: app/views/admin/users/_user.html.haml:14
 #: app/views/contacts/_contact.html.haml:6
 #: app/views/events/_actions_menu.html.haml:5
-#: app/views/events/_form.html.haml:50 app/views/summaries/show.html.haml:124
+#: app/views/events/_form.html.haml:50 app/views/summaries/show.html.haml:141
 #: app/views/reminders/_reminder.html.haml:10
 #: app/views/invitations/edit.html.haml:5
 msgid "Are you sure?"
@@ -303,7 +305,7 @@ msgstr ""
 msgid "Billing address - missing zip code"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:58 app/views/guests/index.html.haml:58
+#: app/views/summaries/show.html.haml:75 app/views/guests/index.html.haml:58
 msgid "Bounced emails"
 msgstr ""
 
@@ -329,7 +331,7 @@ msgstr ""
 #: app/views/admin/links_pages/edit.html.haml:12
 #: app/views/contacts/new.html.haml:19 app/views/contacts/edit.html.haml:19
 #: app/views/users/_edit.html.haml:12
-#: app/views/guest_importers/_email.html.haml:33
+#: app/views/guest_importers/_email.html.haml:42
 #: app/views/guest_importers/_csv.html.haml:25
 #: app/views/guest_importers/_import.html.haml:29
 #: app/views/uploaded_pictures/_upload_form.html.haml:17
@@ -348,7 +350,7 @@ msgid "Cancel Event | Eventify"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:5
-#: app/views/summaries/show.html.haml:124
+#: app/views/summaries/show.html.haml:141
 msgid "Cancel event"
 msgstr ""
 
@@ -456,7 +458,7 @@ msgstr ""
 msgid "Contacts"
 msgstr ""
 
-#: app/views/payments/new.html.haml:104
+#: app/views/payments/new.html.haml:98
 msgid "Continue"
 msgstr ""
 
@@ -496,8 +498,8 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: app/views/events/_info.html.haml:9 app/views/summaries/show.html.haml:33
-#: app/views/summaries/show.html.haml:40
+#: app/views/events/_info.html.haml:9 app/views/summaries/show.html.haml:50
+#: app/views/summaries/show.html.haml:57
 #: app/views/landing_pages/show.html.haml:27
 #: app/views/rsvps/_info.html.haml:30 app/views/rsvps/_info.html.haml:36
 msgid "Date:"
@@ -540,6 +542,7 @@ msgid "Designer Profile | Eventify"
 msgstr ""
 
 #: app/views/designs/_selector.html.haml:9
+#: app/views/designs/_zoom.html.haml:22
 msgid "Designer's Page"
 msgstr ""
 
@@ -581,7 +584,7 @@ msgstr ""
 msgid "Edit Designer Profile | Eventify"
 msgstr ""
 
-#: app/views/payments/new.html.haml:105 app/views/invitations/edit.html.haml:4
+#: app/views/payments/new.html.haml:99 app/views/invitations/edit.html.haml:4
 #: app/views/invitations/_edit.html.haml:28
 msgid "Edit Guests"
 msgstr ""
@@ -603,18 +606,18 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: app/views/guests_messages/_form.html.haml:8
+#: app/views/guests_messages/_form.html.haml:30
 #: app/views/cancellations/_email.html.haml:12
 #: app/views/reminders/_form.html.haml:30
 msgid "Email body"
 msgstr ""
 
-#: app/views/guest_importers/_email.html.haml:21
+#: app/views/guest_importers/_email.html.haml:22
 #: app/views/contact_importers/_edit.html.haml:8
 msgid "Email or Username"
 msgstr ""
 
-#: app/views/guests_messages/_form.html.haml:3
+#: app/views/guests_messages/_form.html.haml:25
 #: app/views/cancellations/_email.html.haml:11
 #: app/views/reminders/_form.html.haml:25
 msgid "Email subject"
@@ -655,7 +658,7 @@ msgstr ""
 msgid "Event cancelled - no guests to notify or guests are already notified."
 msgstr ""
 
-#: app/views/summaries/show.html.haml:127
+#: app/views/summaries/show.html.haml:144
 msgid "Event cancelled:"
 msgstr ""
 
@@ -671,7 +674,7 @@ msgstr ""
 msgid "Event details sent to your email"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:38 app/views/rsvps/_info.html.haml:35
+#: app/views/summaries/show.html.haml:55 app/views/rsvps/_info.html.haml:35
 msgid "Event ends at"
 msgstr ""
 
@@ -732,8 +735,7 @@ msgstr ""
 msgid "Export to iCal"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:50 app/views/rsvps/_sidebar.html.haml:13
-#: app/views/rsvps/_toolbar.html.haml:14
+#: app/views/summaries/show.html.haml:67 app/views/rsvps/_sidebar.html.haml:13
 msgid "Export to your calendar:"
 msgstr ""
 
@@ -780,7 +782,7 @@ msgstr ""
 msgid "From our fabelous gallery or upload your own pic"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:122
+#: app/views/summaries/show.html.haml:139
 msgid "Full Guests List"
 msgstr ""
 
@@ -800,8 +802,8 @@ msgstr ""
 msgid "Guest List"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:62 app/views/payments/new.html.haml:44
-#: app/views/payments/new.html.haml:86 app/views/rsvps/show_more.html.haml:24
+#: app/views/summaries/show.html.haml:79 app/views/payments/new.html.haml:38
+#: app/views/payments/new.html.haml:80 app/views/rsvps/show_more.html.haml:24
 msgid "Guests"
 msgstr ""
 
@@ -810,11 +812,11 @@ msgid "Guests can see other attendees"
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:10
-#: app/views/summaries/show.html.haml:131
+#: app/views/summaries/show.html.haml:148
 msgid "Guests notified"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:53
+#: app/views/summaries/show.html.haml:70
 msgid "Guests summary"
 msgstr ""
 
@@ -871,7 +873,7 @@ msgstr ""
 msgid "Hours"
 msgstr ""
 
-#: app/views/designers/edit.html.haml:55 app/views/payments/new.html.haml:109
+#: app/views/designers/edit.html.haml:55 app/views/payments/new.html.haml:102
 msgid "I agree to the"
 msgstr ""
 
@@ -879,13 +881,13 @@ msgstr ""
 msgid "I already have an account"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:134
+#: app/views/summaries/show.html.haml:151
 #: app/views/pages/no_invitation_en.html.haml:1
 #: app/views/pages/no_invitation_en.html.haml:4
 msgid "If some of your guests didn't recieve the invitation"
 msgstr ""
 
-#: app/views/guest_importers/_email.html.haml:32
+#: app/views/guest_importers/_email.html.haml:41
 #: app/views/guest_importers/_csv.html.haml:24
 #: app/views/guest_importers/_import.html.haml:28
 #: app/views/contact_importers/_edit.html.haml:12
@@ -935,21 +937,21 @@ msgstr ""
 msgid "Importing Contacts from %{name}"
 msgstr ""
 
-#: app/views/guest_importers/_email.html.haml:38
+#: app/views/guest_importers/_email.html.haml:47
 msgid "Importing, please wait..."
 msgstr ""
 
-#: app/views/payments/new.html.haml:42
+#: app/views/payments/new.html.haml:36
 msgid ""
 "In case you wish to add more invitations, you can select a bigger package"
 msgstr ""
 
-#: app/views/payments/new.html.haml:84
+#: app/views/payments/new.html.haml:78
 msgid ""
 "In case you wish to print more invitations, you can select a bigger package"
 msgstr ""
 
-#: app/views/payments/new.html.haml:65
+#: app/views/payments/new.html.haml:59
 msgid "In case you wish to send more SMSs, you can select a bigger package"
 msgstr ""
 
@@ -976,7 +978,7 @@ msgstr ""
 msgid "Invitation Design"
 msgstr ""
 
-#: app/views/payments/new.html.haml:40
+#: app/views/payments/new.html.haml:34
 msgid "Invitation Package -"
 msgstr ""
 
@@ -1070,9 +1072,13 @@ msgstr ""
 msgid "Map Link"
 msgstr ""
 
-#: app/models/guest.rb:120 app/views/rsvps/_new.html.haml:5
+#: app/models/guest.rb:121 app/views/rsvps/_new.html.haml:5
 #: app/views/guests/index.html.haml:52
 msgid "May Be"
+msgstr ""
+
+#: app/views/guests_messages/_form.html.haml:18
+msgid "Maybe"
 msgstr ""
 
 #: app/views/reminders/_index.html.haml:18
@@ -1175,8 +1181,8 @@ msgstr ""
 msgid "Next event:"
 msgstr ""
 
-#: app/models/guest.rb:120 app/views/rsvps/_new.html.haml:6
-#: app/views/guests/index.html.haml:50
+#: app/models/guest.rb:121 app/views/guests_messages/_form.html.haml:14
+#: app/views/rsvps/_new.html.haml:6 app/views/guests/index.html.haml:50
 msgid "No"
 msgstr ""
 
@@ -1192,7 +1198,7 @@ msgstr ""
 msgid "No reminders defined yet"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:86
+#: app/views/summaries/show.html.haml:103
 msgid "No things to bring"
 msgstr ""
 
@@ -1205,13 +1211,14 @@ msgid "None selected yet"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:8
-#: app/views/summaries/show.html.haml:74 app/views/guests/index.html.haml:56
+#: app/views/summaries/show.html.haml:91 app/views/guests/index.html.haml:56
 msgid "Not Opened Invitation"
 msgstr ""
 
+#: app/views/guests_messages/_form.html.haml:21
 #: app/views/shared/_rsvp_tabs.html.haml:7
 #: app/views/shared/_rsvp_tabs.html.haml:10
-#: app/views/summaries/show.html.haml:72 app/views/guests/index.html.haml:54
+#: app/views/summaries/show.html.haml:89 app/views/guests/index.html.haml:54
 msgid "Not responded"
 msgstr ""
 
@@ -1224,7 +1231,7 @@ msgid "Notifications are being sent."
 msgstr ""
 
 #: app/views/events/_actions_menu.html.haml:8
-#: app/views/summaries/show.html.haml:129
+#: app/views/summaries/show.html.haml:146
 msgid "Notify guests"
 msgstr ""
 
@@ -1238,15 +1245,15 @@ msgstr ""
 msgid "Number of Guests"
 msgstr ""
 
-#: app/views/payments/new.html.haml:64
+#: app/views/payments/new.html.haml:58
 msgid "Number of SMSs to send: %{sms_count}"
 msgstr ""
 
-#: app/views/payments/new.html.haml:41
+#: app/views/payments/new.html.haml:35
 msgid "Number of invitations sent in this event: %{guests_count}"
 msgstr ""
 
-#: app/views/payments/new.html.haml:83
+#: app/views/payments/new.html.haml:77
 msgid "Number of printed invitations you requested: %{prints_count}"
 msgstr ""
 
@@ -1298,7 +1305,7 @@ msgstr ""
 
 #: app/views/user_session/new.html.haml:7
 #: app/views/user_session/_new.html.haml:4
-#: app/views/guest_importers/_email.html.haml:25
+#: app/views/guest_importers/_email.html.haml:26
 #: app/views/contact_importers/_edit.html.haml:9
 msgid "Password"
 msgstr ""
@@ -1337,7 +1344,8 @@ msgid "Please add at least one guest"
 msgstr ""
 
 #: app/models/payment.rb:108 app/models/designer.rb:65
-#: app/controllers/payments_controller.rb:60
+#: app/controllers/payments_controller.rb:59
+#: app/views/payments/new.html.haml:106
 msgid "Please agree to the terms of use."
 msgstr ""
 
@@ -1358,7 +1366,7 @@ msgstr ""
 msgid "Please select from the list"
 msgstr ""
 
-#: app/controllers/guest_importers_controller.rb:65
+#: app/controllers/guest_importers_controller.rb:73
 msgid "Please upload a CSV file"
 msgstr ""
 
@@ -1396,7 +1404,7 @@ msgstr ""
 msgid "Pricing"
 msgstr ""
 
-#: app/views/payments/new.html.haml:34
+#: app/views/payments/new.html.haml:28
 msgid "Pricing Summary%{upgrade_status}"
 msgstr ""
 
@@ -1404,15 +1412,15 @@ msgstr ""
 msgid "Pricing | Eventify"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:95
+#: app/views/summaries/show.html.haml:112
 msgid "Pring Guests List"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:97 app/views/rsvps/_info.html.haml:12
+#: app/views/summaries/show.html.haml:114 app/views/rsvps/_info.html.haml:12
 msgid "Print Invitation"
 msgstr ""
 
-#: app/views/payments/new.html.haml:82
+#: app/views/payments/new.html.haml:76
 msgid "Printed Invitations Package -"
 msgstr ""
 
@@ -1430,12 +1438,12 @@ msgid "RSVP"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:4
-#: app/views/summaries/show.html.haml:68
+#: app/views/summaries/show.html.haml:85
 msgid "RSVP may be"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:5
-#: app/views/summaries/show.html.haml:70
+#: app/views/summaries/show.html.haml:87
 msgid "RSVP no"
 msgstr ""
 
@@ -1456,7 +1464,7 @@ msgid "RSVP summary|When a guest updates RSVP"
 msgstr ""
 
 #: app/views/shared/_rsvp_tabs.html.haml:3
-#: app/views/summaries/show.html.haml:66
+#: app/views/summaries/show.html.haml:83
 msgid "RSVP yes"
 msgstr ""
 
@@ -1532,7 +1540,7 @@ msgstr ""
 
 #: app/controllers/payments_controller.rb:22
 #: app/views/my/payments/index.html.haml:15
-#: app/views/payments/new.html.haml:67 app/views/reminders/_form.html.haml:11
+#: app/views/payments/new.html.haml:61 app/views/reminders/_form.html.haml:11
 msgid "SMS"
 msgstr ""
 
@@ -1541,7 +1549,7 @@ msgstr ""
 msgid "SMS Message"
 msgstr ""
 
-#: app/views/payments/new.html.haml:63
+#: app/views/payments/new.html.haml:57
 msgid "SMS Package - "
 msgstr ""
 
@@ -1588,7 +1596,7 @@ msgstr ""
 msgid "Select color:"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:83
+#: app/views/summaries/show.html.haml:100
 msgid "Selected"
 msgstr ""
 
@@ -1616,7 +1624,7 @@ msgstr ""
 msgid "Send Invitations | Eventify"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:77
+#: app/views/summaries/show.html.haml:94
 msgid "Send Message to Guests"
 msgstr ""
 
@@ -1683,7 +1691,7 @@ msgid ""
 "list before changing the name"
 msgstr ""
 
-#: app/views/events/_event_form.html.haml:49
+#: app/views/events/_event_form.html.haml:50
 msgid ""
 "Some of your text doesn't fit. Try shortening your text or reducing the font "
 "size."
@@ -1746,7 +1754,7 @@ msgid "The picture I uploaded does not violate any copyright laws"
 msgstr ""
 
 #: app/views/takings/_index.html.haml:2 app/views/things/_index.html.haml:2
-#: app/views/events/show.html.haml:21 app/views/summaries/show.html.haml:79
+#: app/views/events/show.html.haml:21 app/views/summaries/show.html.haml:96
 msgid "Things to bring"
 msgstr ""
 
@@ -1759,16 +1767,16 @@ msgid "This is a past event. You cannot change it."
 msgstr ""
 
 #: app/helpers/events_helper.rb:20 app/views/events/_info.html.haml:12
-#: app/views/summaries/show.html.haml:35 app/views/summaries/show.html.haml:42
+#: app/views/summaries/show.html.haml:52 app/views/summaries/show.html.haml:59
 #: app/views/rsvps/_info.html.haml:32 app/views/rsvps/_info.html.haml:38
 msgid "Time"
 msgstr ""
 
-#: app/views/payments/new.html.haml:98
+#: app/views/payments/new.html.haml:92
 msgid "Total"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:64
+#: app/views/summaries/show.html.haml:81
 msgid "Total arriving guests"
 msgstr ""
 
@@ -1845,7 +1853,11 @@ msgstr ""
 msgid "Welcome to %{domain}"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:30 app/views/rsvps/_info.html.haml:16
+#: app/views/guest_importers/_email.html.haml:31
+msgid "What's written here?"
+msgstr ""
+
+#: app/views/summaries/show.html.haml:47 app/views/rsvps/_info.html.haml:16
 #: app/views/rsvps/_info.html.haml:27
 msgid "Where:"
 msgstr ""
@@ -1854,8 +1866,12 @@ msgstr ""
 msgid "Who brings"
 msgstr ""
 
-#: app/models/guest.rb:120 app/views/rsvps/_new.html.haml:4
-#: app/views/guests/index.html.haml:48
+#: app/views/guests_messages/_form.html.haml:4
+msgid "Who do you want to send the message to?"
+msgstr ""
+
+#: app/models/guest.rb:121 app/views/guests_messages/_form.html.haml:11
+#: app/views/rsvps/_new.html.haml:4 app/views/guests/index.html.haml:48
 msgid "Yes"
 msgstr ""
 
@@ -1927,7 +1943,7 @@ msgstr ""
 msgid "Your Name"
 msgstr ""
 
-#: app/controllers/users_controller.rb:12
+#: app/controllers/users_controller.rb:13
 msgid ""
 "Your account has been created. Please check your e-mail for your account "
 "activation instructions!"
@@ -1946,99 +1962,99 @@ msgstr ""
 msgid "Your update was successfully sent to the host"
 msgstr ""
 
-#: locale/yml_import.rb:66
+#: locale/yml_import.rb:71
 msgid "activerecord.errors.full_messages.format"
 msgstr "{{attribute}} {{message}}"
 
-#: locale/yml_import.rb:77
+#: locale/yml_import.rb:75
 msgid "activerecord.errors.messages.accepted"
 msgstr "must be accepted"
 
-#: locale/yml_import.rb:60
+#: locale/yml_import.rb:77
 msgid "activerecord.errors.messages.blank"
 msgstr "can't be blank"
 
-#: locale/yml_import.rb:59
+#: locale/yml_import.rb:61
 msgid "activerecord.errors.messages.confirmation"
 msgstr "doesn't match confirmation"
 
-#: locale/yml_import.rb:75
+#: locale/yml_import.rb:72
 msgid "activerecord.errors.messages.empty"
 msgstr "can't be empty"
 
-#: locale/yml_import.rb:64
+#: locale/yml_import.rb:67
 msgid "activerecord.errors.messages.equal_to"
 msgstr "must be equal to {{count}}"
 
-#: locale/yml_import.rb:70
+#: locale/yml_import.rb:63
 msgid "activerecord.errors.messages.even"
 msgstr "must be even"
 
-#: locale/yml_import.rb:65
+#: locale/yml_import.rb:69
 msgid "activerecord.errors.messages.exclusion"
 msgstr "is reserved"
 
-#: locale/yml_import.rb:61
+#: locale/yml_import.rb:68
 msgid "activerecord.errors.messages.greater_than"
 msgstr "must be greater than {{count}}"
 
-#: locale/yml_import.rb:68
+#: locale/yml_import.rb:64
 msgid "activerecord.errors.messages.greater_than_or_equal_to"
 msgstr "must be greater than or equal to {{count}}"
 
-#: locale/yml_import.rb:78
+#: locale/yml_import.rb:74
 msgid "activerecord.errors.messages.inclusion"
 msgstr "is not included in the list"
 
-#: locale/yml_import.rb:73
+#: locale/yml_import.rb:60
 msgid "activerecord.errors.messages.invalid"
 msgstr "is invalid"
 
-#: locale/yml_import.rb:62
+#: locale/yml_import.rb:76
 msgid "activerecord.errors.messages.less_than"
 msgstr "must be less than {{count}}"
 
-#: locale/yml_import.rb:76
+#: locale/yml_import.rb:59
 msgid "activerecord.errors.messages.less_than_or_equal_to"
 msgstr "must be less than or equal to {{count}}"
 
-#: locale/yml_import.rb:63
+#: locale/yml_import.rb:70
 msgid "activerecord.errors.messages.not_a_number"
 msgstr "is not a number"
 
-#: locale/yml_import.rb:69
+#: locale/yml_import.rb:65
 msgid "activerecord.errors.messages.odd"
 msgstr "must be odd"
 
-#: locale/yml_import.rb:72
+#: locale/yml_import.rb:62
 msgid "activerecord.errors.messages.record_invalid"
 msgstr "Validation failed: {{errors}}"
 
-#: locale/yml_import.rb:71
+#: locale/yml_import.rb:78
 msgid "activerecord.errors.messages.taken"
 msgstr "has already been taken"
 
-#: locale/yml_import.rb:79
+#: locale/yml_import.rb:66
 msgid "activerecord.errors.messages.too_long"
 msgstr "is too long (maximum is {{count}} characters)"
 
-#: locale/yml_import.rb:67
+#: locale/yml_import.rb:79
 msgid "activerecord.errors.messages.too_short"
 msgstr "is too short (minimum is {{count}} characters)"
 
-#: locale/yml_import.rb:74
+#: locale/yml_import.rb:73
 msgid "activerecord.errors.messages.wrong_length"
 msgstr "is the wrong length (should be {{count}} characters)"
 
-#: locale/yml_import.rb:48
+#: locale/yml_import.rb:19
 msgid "activerecord.errors.template.body"
 msgstr "There were problems with the following fields:"
 
-#: locale/yml_import.rb:43
+#: locale/yml_import.rb:54
 msgid "activerecord.errors.template.header.one"
 msgstr "1 error prohibited this {{model}} from being saved"
 
-#: locale/yml_import.rb:47
+#: locale/yml_import.rb:51
 msgid "activerecord.errors.template.header.other"
 msgstr "{{count}} errors prohibited this {{model}} from being saved"
 
@@ -2046,7 +2062,7 @@ msgstr "{{count}} errors prohibited this {{model}} from being saved"
 msgid "already would be brought by somebody else"
 msgstr ""
 
-#: locale/yml_import.rb:82
+#: locale/yml_import.rb:90
 msgid "authlogic.attributes.user_session.email"
 msgstr "email"
 
@@ -2054,59 +2070,59 @@ msgstr "email"
 msgid "authlogic.attributes.user_session.login"
 msgstr "login"
 
-#: locale/yml_import.rb:86
+#: locale/yml_import.rb:98
 msgid "authlogic.attributes.user_session.password"
 msgstr "password"
 
-#: locale/yml_import.rb:98
+#: locale/yml_import.rb:99
 msgid "authlogic.attributes.user_session.remember_me"
 msgstr "remember me"
 
-#: locale/yml_import.rb:96
+#: locale/yml_import.rb:88
 msgid "authlogic.error_messages.consecutive_failed_logins_limit_exceeded"
 msgstr "Consecutive failed logins limit exceeded, account is disabled."
 
-#: locale/yml_import.rb:87
+#: locale/yml_import.rb:84
 msgid "authlogic.error_messages.email_invalid"
 msgstr "should look like an email address."
 
-#: locale/yml_import.rb:92
+#: locale/yml_import.rb:94
 msgid "authlogic.error_messages.login_blank"
 msgstr "can not be blank"
 
-#: locale/yml_import.rb:99
+#: locale/yml_import.rb:87
 msgid "authlogic.error_messages.login_invalid"
 msgstr "should use only letters, numbers, spaces, and .-_@ please."
 
-#: locale/yml_import.rb:89
+#: locale/yml_import.rb:83
 msgid "authlogic.error_messages.login_not_found"
 msgstr "is not valid"
 
-#: locale/yml_import.rb:95
+#: locale/yml_import.rb:89
 msgid "authlogic.error_messages.no_authentication_details"
 msgstr "You did not provide any details for authentication."
 
-#: locale/yml_import.rb:93
+#: locale/yml_import.rb:80
 msgid "authlogic.error_messages.not_active"
 msgstr "Your account is not active"
 
-#: locale/yml_import.rb:84
+#: locale/yml_import.rb:86
 msgid "authlogic.error_messages.not_approved"
 msgstr "Your account is not approved"
 
-#: locale/yml_import.rb:91
+#: locale/yml_import.rb:95
 msgid "authlogic.error_messages.not_confirmed"
 msgstr "Your account is not confirmed"
 
-#: locale/yml_import.rb:88
+#: locale/yml_import.rb:85
 msgid "authlogic.error_messages.password_blank"
 msgstr "can not be blank"
 
-#: locale/yml_import.rb:80
+#: locale/yml_import.rb:93
 msgid "authlogic.error_messages.password_invalid"
 msgstr "is not valid"
 
-#: locale/yml_import.rb:83
+#: locale/yml_import.rb:96
 msgid "authlogic.models.user_session"
 msgstr "UserSession"
 
@@ -2130,7 +2146,7 @@ msgstr ""
 msgid "change RSVP|change"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:135
+#: app/views/summaries/show.html.haml:152
 msgid "click here for help"
 msgstr ""
 
@@ -2150,123 +2166,123 @@ msgstr ""
 msgid "contacts tab|Import"
 msgstr ""
 
-#: locale/yml_import.rb:6
+#: locale/yml_import.rb:8
 msgid "date.formats.default"
 msgstr "%Y-%m-%d"
 
-#: locale/yml_import.rb:1
+#: locale/yml_import.rb:2
 msgid "date.formats.long"
 msgstr "%B %d, %Y"
 
-#: locale/yml_import.rb:8
+#: locale/yml_import.rb:11
 msgid "date.formats.short"
 msgstr "%b %d"
 
-#: locale/yml_import.rb:54
+#: locale/yml_import.rb:15
 msgid "datetime.distance_in_words.about_x_hours.one"
 msgstr "about 1 hour"
 
-#: locale/yml_import.rb:41
+#: locale/yml_import.rb:14
 msgid "datetime.distance_in_words.about_x_hours.other"
 msgstr "about {{count}} hours"
 
-#: locale/yml_import.rb:26
+#: locale/yml_import.rb:33
 msgid "datetime.distance_in_words.about_x_months.one"
 msgstr "about 1 month"
 
-#: locale/yml_import.rb:25
+#: locale/yml_import.rb:38
 msgid "datetime.distance_in_words.about_x_months.other"
 msgstr "about {{count}} months"
 
-#: locale/yml_import.rb:20
+#: locale/yml_import.rb:13
 msgid "datetime.distance_in_words.about_x_years.one"
 msgstr "about 1 year"
 
-#: locale/yml_import.rb:58
+#: locale/yml_import.rb:30
 msgid "datetime.distance_in_words.about_x_years.other"
 msgstr "about {{count}} years"
 
-#: locale/yml_import.rb:46
+#: locale/yml_import.rb:55
 msgid "datetime.distance_in_words.half_a_minute"
 msgstr "half a minute"
 
-#: locale/yml_import.rb:36
+#: locale/yml_import.rb:34
 msgid "datetime.distance_in_words.less_than_x_minutes.one"
 msgstr "less than a minute"
 
-#: locale/yml_import.rb:57
+#: locale/yml_import.rb:17
 msgid "datetime.distance_in_words.less_than_x_minutes.other"
 msgstr "less than {{count}} minutes"
 
-#: locale/yml_import.rb:33
+#: locale/yml_import.rb:32
 msgid "datetime.distance_in_words.less_than_x_seconds.one"
 msgstr "less than 1 second"
 
-#: locale/yml_import.rb:24
+#: locale/yml_import.rb:21
 msgid "datetime.distance_in_words.less_than_x_seconds.other"
 msgstr "less than {{count}} seconds"
 
-#: locale/yml_import.rb:40
+#: locale/yml_import.rb:56
 msgid "datetime.distance_in_words.over_x_years.one"
 msgstr "over 1 year"
 
-#: locale/yml_import.rb:17
+#: locale/yml_import.rb:53
 msgid "datetime.distance_in_words.over_x_years.other"
 msgstr "over {{count}} years"
 
-#: locale/yml_import.rb:38
+#: locale/yml_import.rb:26
 msgid "datetime.distance_in_words.x_days.one"
 msgstr "1 day"
 
-#: locale/yml_import.rb:52
+#: locale/yml_import.rb:31
 msgid "datetime.distance_in_words.x_days.other"
 msgstr "{{count}} days"
 
-#: locale/yml_import.rb:16
+#: locale/yml_import.rb:12
 msgid "datetime.distance_in_words.x_minutes.one"
 msgstr "1 minute"
 
-#: locale/yml_import.rb:28
+#: locale/yml_import.rb:52
 msgid "datetime.distance_in_words.x_minutes.other"
 msgstr "{{count}} minutes"
 
-#: locale/yml_import.rb:37
+#: locale/yml_import.rb:49
 msgid "datetime.distance_in_words.x_months.one"
 msgstr "1 month"
 
-#: locale/yml_import.rb:51
+#: locale/yml_import.rb:20
 msgid "datetime.distance_in_words.x_months.other"
 msgstr "{{count}} months"
 
-#: locale/yml_import.rb:39
+#: locale/yml_import.rb:16
 msgid "datetime.distance_in_words.x_seconds.one"
 msgstr "1 second"
 
-#: locale/yml_import.rb:53
+#: locale/yml_import.rb:22
 msgid "datetime.distance_in_words.x_seconds.other"
 msgstr "{{count}} seconds"
 
-#: locale/yml_import.rb:32
+#: locale/yml_import.rb:27
 msgid "datetime.prompts.day"
 msgstr "Day"
 
-#: locale/yml_import.rb:49
+#: locale/yml_import.rb:35
 msgid "datetime.prompts.hour"
 msgstr "Hour"
 
-#: locale/yml_import.rb:13
+#: locale/yml_import.rb:46
 msgid "datetime.prompts.minute"
 msgstr "Minute"
 
-#: locale/yml_import.rb:12
+#: locale/yml_import.rb:57
 msgid "datetime.prompts.month"
 msgstr "Month"
 
-#: locale/yml_import.rb:50
+#: locale/yml_import.rb:39
 msgid "datetime.prompts.second"
 msgstr "Seconds"
 
-#: locale/yml_import.rb:14
+#: locale/yml_import.rb:45
 msgid "datetime.prompts.year"
 msgstr "Year"
 
@@ -2280,7 +2296,7 @@ msgstr ""
 
 #: app/helpers/application_helper.rb:90
 #: app/views/contacts/_contact.html.haml:5
-#: app/views/summaries/show.html.haml:89
+#: app/views/summaries/show.html.haml:106
 msgid "edit"
 msgstr ""
 
@@ -2330,19 +2346,19 @@ msgstr ""
 msgid "find address"
 msgstr ""
 
-#: locale/yml_import.rb:97
+#: locale/yml_import.rb:82
 msgid "flash.passwords.update.notice"
 msgstr "Password changed"
 
-#: locale/yml_import.rb:90
+#: locale/yml_import.rb:91
 msgid "flash.user_session.create.notice"
 msgstr "Logged in"
 
-#: locale/yml_import.rb:85
+#: locale/yml_import.rb:92
 msgid "flash.user_session.destroy.notice"
 msgstr "Goodbye"
 
-#: locale/yml_import.rb:94
+#: locale/yml_import.rb:97
 msgid "flash.users.update.notice"
 msgstr "User details updated"
 
@@ -2374,71 +2390,71 @@ msgstr ""
 msgid "mail or sms - choose a delivery method"
 msgstr ""
 
-#: app/models/guest.rb:131
+#: app/models/guest.rb:132
 msgid "not yet responded"
 msgstr ""
 
-#: locale/yml_import.rb:22
+#: locale/yml_import.rb:58
 msgid "number.currency.format.delimiter"
 msgstr ","
 
-#: locale/yml_import.rb:23
+#: locale/yml_import.rb:44
 msgid "number.currency.format.format"
 msgstr "%u%n"
 
-#: locale/yml_import.rb:31
+#: locale/yml_import.rb:24
 msgid "number.currency.format.separator"
 msgstr "."
 
-#: locale/yml_import.rb:35
+#: locale/yml_import.rb:28
 msgid "number.currency.format.unit"
 msgstr "$"
 
-#: locale/yml_import.rb:21
+#: locale/yml_import.rb:48
 msgid "number.format.delimiter"
 msgstr ","
 
-#: locale/yml_import.rb:55
+#: locale/yml_import.rb:25
 msgid "number.format.separator"
 msgstr "."
 
-#: locale/yml_import.rb:29
+#: locale/yml_import.rb:50
 msgid "number.human.format.delimiter"
 msgstr ""
 
-#: locale/yml_import.rb:19
+#: locale/yml_import.rb:47
 msgid "number.human.storage_units.format"
 msgstr "%n %u"
 
-#: locale/yml_import.rb:34
+#: locale/yml_import.rb:42
 msgid "number.human.storage_units.units.byte.one"
 msgstr "Byte"
 
-#: locale/yml_import.rb:42
+#: locale/yml_import.rb:36
 msgid "number.human.storage_units.units.byte.other"
 msgstr "Bytes"
 
-#: locale/yml_import.rb:27
+#: locale/yml_import.rb:18
 msgid "number.human.storage_units.units.gb"
 msgstr "GB"
 
-#: locale/yml_import.rb:45
+#: locale/yml_import.rb:41
 msgid "number.human.storage_units.units.kb"
 msgstr "KB"
 
-#: locale/yml_import.rb:56
+#: locale/yml_import.rb:43
 msgid "number.human.storage_units.units.mb"
 msgstr "MB"
 
-#: locale/yml_import.rb:30
+#: locale/yml_import.rb:23
 msgid "number.human.storage_units.units.tb"
 msgstr "TB"
 
-#: locale/yml_import.rb:44
+#: locale/yml_import.rb:37
 msgid "number.percentage.format.delimiter"
 msgstr ""
 
-#: locale/yml_import.rb:18
+#: locale/yml_import.rb:29
 msgid "number.precision.format.delimiter"
 msgstr ""
 
@@ -2490,8 +2506,8 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: app/views/summaries/show.html.haml:100
-#: app/views/summaries/show.html.haml:103 app/views/guests/index.html.haml:34
+#: app/views/summaries/show.html.haml:117
+#: app/views/summaries/show.html.haml:120 app/views/guests/index.html.haml:34
 msgid "search"
 msgstr ""
 
@@ -2523,23 +2539,23 @@ msgstr ""
 msgid "start date should be in a future"
 msgstr ""
 
-#: locale/yml_import.rb:10
+#: locale/yml_import.rb:4
 msgid "support.array.last_word_connector"
 msgstr ", and "
 
-#: locale/yml_import.rb:11
+#: locale/yml_import.rb:6
 msgid "support.array.two_words_connector"
 msgstr " and "
 
-#: locale/yml_import.rb:9
+#: locale/yml_import.rb:7
 msgid "support.array.words_connector"
 msgstr ", "
 
-#: locale/yml_import.rb:15
+#: locale/yml_import.rb:40
 msgid "support.select.prompt"
 msgstr "Please select"
 
-#: app/views/designers/edit.html.haml:56 app/views/payments/new.html.haml:110
+#: app/views/designers/edit.html.haml:56 app/views/payments/new.html.haml:103
 msgid "terms of use"
 msgstr ""
 
@@ -2552,23 +2568,23 @@ msgstr ""
 msgid "time cannot be blank"
 msgstr ""
 
-#: locale/yml_import.rb:2
+#: locale/yml_import.rb:9
 msgid "time.am"
 msgstr "am"
 
-#: locale/yml_import.rb:3
+#: locale/yml_import.rb:10
 msgid "time.formats.default"
 msgstr "%a, %d %b %Y %H:%M:%S %z"
 
-#: locale/yml_import.rb:7
+#: locale/yml_import.rb:5
 msgid "time.formats.long"
 msgstr "%B %d, %Y %H:%M"
 
-#: locale/yml_import.rb:5
+#: locale/yml_import.rb:3
 msgid "time.formats.short"
 msgstr "%d %b %H:%M"
 
-#: locale/yml_import.rb:4
+#: locale/yml_import.rb:1
 msgid "time.pm"
 msgstr "pm"
 
