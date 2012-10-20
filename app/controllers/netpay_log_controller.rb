@@ -21,6 +21,12 @@ class NetpayLogController < InheritedResources::Base
     resource.client_phoneNum = params[:client_phoneNum]
 
     if resource.save!
+      payment = Payment.find(resource.trans_refNum)
+      begin
+        payment.finalize_payment!(params)
+      rescue PaymentError
+        logger.debug("PaymentError: #{PaymentError}")
+      end
       render :nothing => true
     end
   end
