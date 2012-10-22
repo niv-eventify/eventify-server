@@ -97,6 +97,10 @@ class Design < ActiveRecord::Base
     }
   end
 
+  def is_premium?
+    return (not self.designer.blank?)
+  end
+
   def is_seperated_title?
     !title_width.blank?
   end

@@ -508,11 +508,15 @@ class Event < ActiveRecord::Base
   end
 
   def is_premium?
-    return (not design.designer.blank?)
+    return design.is_premium?
   end
 
-  def is_paid_for_invitations?(count=self.emails_plan)
-    return (self.is_premium? ? Eventify.premium_emails_plan(count)[1] > 0 : Eventify.emails_plan(count)[1] > 0)
+  def is_paid_for_invitations?
+    payments = Payment.find_all_by_event_id(self.id)
+    res = false
+    payments.each{|p| res = res || !(p.paid_at.nil? || p.pay_emails.nil?)}
+    return res
+    #return (self.is_premium? ? Eventify.premium_emails_plan(count)[1] > 0 : Eventify.emails_plan(count)[1] > 0)
   end
 
   def payments_required?
@@ -555,9 +559,14 @@ class Event < ActiveRecord::Base
   end
 
   before_create :set_free_plans
-  def set_free_plans
-    plan, price = Eventify.emails_plan(1)
-    self.emails_plan = plan if price.zero? && emails_plan < plan
+  def set_free_plans(design_id=nil)
+    if design_id
+      plan_method = Design.find(design_id).is_premium? ? :premium_emails_plan : :emails_plan
+    else
+      plan_method = self.is_premium? ? :premium_emails_plan : :emails_plan
+    end
+    plan, price = Eventify.send(plan_method,1)
+    self.emails_plan = plan if price.zero?
   end
 
   def stage2_preview_dimensions(current_locale, ratio)

@@ -86,9 +86,13 @@ class EventsController < InheritedResources::Base
 
   def update
     return _cancel_sms if "true" == params[:cancel_sms]
-    if "true" == params[:update_design] && @event.is_paid_for_invitations?
-      flash[:error] = _("Sorry, you can't change the design after the invitations were sent.")
-      return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
+    if "true" == params[:update_design]
+      if @event.is_paid_for_invitations?
+        flash[:error] = _("Sorry, you can't change the design after the invitations were sent.")
+        return redirect_to(event_design_path(@event, @event.design, :wizard => params[:wizard]))
+      else
+        @event.set_free_plans(params[:event][:design_id])
+      end
     end
 
     update! do |success, failure|
