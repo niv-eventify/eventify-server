@@ -1,6 +1,11 @@
 module PaymentsHelper
-  def emails_plans
-    current_locale == "he" ? Eventify::EMAILS_PLAN_PROPERTIES.reverse : Eventify::EMAILS_PLAN_PROPERTIES
+  def emails_plans(event)
+    if event.is_premium?
+      current_locale == "he" ? Eventify::PREMIUM_EMAILS_PLAN_PROPERTIES.reverse : Eventify::PREMIUM_EMAILS_PLAN_PROPERTIES
+    else
+      current_locale == "he" ? Eventify::EMAILS_PLAN_PROPERTIES.reverse : Eventify::EMAILS_PLAN_PROPERTIES
+    end
+
   end
 
   def current_plan?(plan)

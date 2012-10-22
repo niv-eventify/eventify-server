@@ -31,7 +31,10 @@
       != hidden_field_tag :back, params[:back]
       .section
         %dl
-          %dt= _("Invitation Package -")
+          - if @event.is_premium?
+            %dt= _("Premium Invitation Package -")
+          - else
+            %dt= _("Invitation Package -")
           %dd= _("Number of invitations sent in this event: %{guests_count}") % {:guests_count => @invitations_count}
         %p= _("In case you wish to add more invitations, you can select a bigger package")
         .invite
@@ -40,7 +43,7 @@
           .slide
             .slide-hold
               %ul
-                - emails_plans.each_with_index do |p, indx|
+                - emails_plans(@event).each_with_index do |p, indx|
                   %li{:class => li_class_for_email_plan(p, indx)}
                     - emails_radio(p, indx)
                     %label{:for => "radio-quantity-#{indx}"}
