@@ -514,7 +514,7 @@ class Event < ActiveRecord::Base
   def is_paid_for_invitations?
     payments = Payment.find_all_by_event_id(self.id)
     res = false
-    payments.each{|p| res = res || !(p.paid_at.nil? || p.pay_emails.nil?)}
+    payments.each{|p| res = res || (p.paid_at && p.pay_emails > 0)}
     return res
     #return (self.is_premium? ? Eventify.premium_emails_plan(count)[1] > 0 : Eventify.emails_plan(count)[1] > 0)
   end
