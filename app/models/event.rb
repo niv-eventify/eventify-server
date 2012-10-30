@@ -288,6 +288,10 @@ class Event < ActiveRecord::Base
     map && !map.url.blank?
   end
 
+  def has_movie?
+    !Movie.find_by_event_id(self.id).nil?
+  end
+
   def should_resend_sms?
     !guests.any_invitation_sent.not_invited_by_sms.count.zero?
   end

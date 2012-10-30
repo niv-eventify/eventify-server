@@ -20,6 +20,9 @@
     != render(:partial => "toolbar")
 
     #invitation{:style => "display:none;"}
-      .background_holder
-        != image_tag(resource.event.design.card.url, :class => "back")
-        != render(:partial => "postcard", :locals => {:event => resource.event})
+      - if @movie.blank?
+        .background_holder
+          != image_tag(resource.event.design.card.url, :class => "back")
+          != render(:partial => "postcard", :locals => {:event => resource.event})
+      - else
+        - get_movie_iframe_preview(@movie)

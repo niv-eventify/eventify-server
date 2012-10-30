@@ -33,6 +33,7 @@ class RsvpsController < InheritedResources::Base
     respond_to do |format|
       format.html{
         resource.update_attribute(:first_viewed_invitation_at, Time.now) unless resource.first_viewed_invitation_at
+        @movie = Movie.find_by_event_id(resource.event.id)
         if "true" == params[:more]
           @updated = params[:updated]
           resource.attendees_count ||= 1
@@ -41,7 +42,6 @@ class RsvpsController < InheritedResources::Base
           if current_locale != resource.event.language
             return redirect_to rsvp_url(:id => params[:id], :host => locale_domain_for(resource.event.language))
           end
-
           render :action => "show", :layout => false
         end
       }

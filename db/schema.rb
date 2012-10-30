@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007061247) do
+ActiveRecord::Schema.define(:version => 20121030055119) do
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"
@@ -149,6 +149,17 @@ ActiveRecord::Schema.define(:version => 20121007061247) do
     t.integer  "ordering",              :default => 0
     t.integer  "redirect_to_category"
     t.integer  "designer_id"
+  end
+
+  create_table "embedding_providers", :force => true do |t|
+    t.string   "name"
+    t.string   "src"
+    t.string   "get_params_for_preview"
+    t.string   "get_params_for_stage2"
+    t.string   "html_attrs_for_preview"
+    t.string   "html_attrs_for_stage2"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "events", :force => true do |t|
@@ -334,6 +345,14 @@ ActiveRecord::Schema.define(:version => 20121007061247) do
     t.string   "language"
     t.string   "friendly_url"
     t.text     "page_html"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "movies", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "embedding_provider_id"
+    t.string   "in_site_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
