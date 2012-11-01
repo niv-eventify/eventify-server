@@ -6,6 +6,7 @@ class SummariesController < InheritedResources::Base
 
   def show
     @thumb = @event.invitation_thumb.file? ? @event.invitation_thumb.url(:small) : @event.design.card.url(:list)
+    @movie = Movie.find_by_event_id(@event.id)
     show!
   end
 protected

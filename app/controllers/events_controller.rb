@@ -19,10 +19,14 @@ class EventsController < InheritedResources::Base
       redirect_to event_guests_path(@event)
       return
     end
-
+    @movie = Movie.find_by_event_id(@event.id)
     show!
   end
 
+  def edit
+    @movie = Movie.find_by_event_id(resource.id)
+    edit!
+  end
   def create
     redirect_to "/" and return unless params[:event_type].blank?
     if !logged_in? && params[:event] && params[:event][:user_attributes]
