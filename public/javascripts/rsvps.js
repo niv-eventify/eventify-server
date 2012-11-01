@@ -27,8 +27,10 @@
       rsvps.dialog_height = height;
       rsvps.dialog_width = Math.ceil(height * 1.5);
     }
-    jQuery("#" + invitation_id + " .background_holder, #" + invitation_id).css("width",rsvps.dialog_width + "px");
-    jQuery("#" + invitation_id + " .background_holder, #" + invitation_id).css("height",rsvps.dialog_height + "px");
+    var back_holder_selector = "#" + invitation_id + " .background_holder";
+    var movie_iframe_selector = "#" + invitation_id + " iframe";
+    jQuery(back_holder_selector + ", #" + invitation_id + ", " + movie_iframe_selector).css("width",rsvps.dialog_width + "px");
+    jQuery(back_holder_selector + ", #" + invitation_id + ", " + movie_iframe_selector).css("height",rsvps.dialog_height + "px");
     rsvps.minimized_by = 900 / rsvps.dialog_width;
 
     jQuery("#" + invitation_id + " .background_holder .window").each(function(){
@@ -100,6 +102,7 @@ jQuery(document).ready(function(jQuery){
       rsvps.replacedMsgHolder = rsvps.cloneTextBox(elts.content, "msg_holder");
     },
     endShowContent: function(elts, settings){
+      jQuery("#nyroModalContent iframe:hidden").show();
       jQuery('.toolbar').show();
     },
     endRemove: function(elts, settings){
