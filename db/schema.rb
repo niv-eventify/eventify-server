@@ -9,7 +9,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121030055119) do
+ActiveRecord::Schema.define(:version => 20121101093805) do
+
+  create_table "backgrounds", :force => true do |t|
+    t.integer  "event_id"
+    t.string   "rsvp_file_name"
+    t.string   "rsvp_content_type"
+    t.integer  "rsvp_file_size"
+    t.datetime "rsvp_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name_en"

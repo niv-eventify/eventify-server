@@ -3,6 +3,7 @@ class Event < ActiveRecord::Base
   belongs_to :category
   belongs_to :design
 
+  has_many :backgrounds
   has_many :hosts
   accepts_nested_attributes_for :hosts, :allow_destroy => true
 

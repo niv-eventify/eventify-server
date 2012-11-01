@@ -42,6 +42,7 @@ ActionController::Routing::Routes.draw do |map|
     event.resources :guest_importers
     event.resources :bounces
     event.resources :guests_messages
+    event.resources :backgrounds
   end
   map.resources :cancellations
   map.resources :print_invitations

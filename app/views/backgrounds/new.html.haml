@@ -1,0 +1,9 @@
+%h1 New Background
+
+- semantic_form_for(@background, :live_validations => false, :url => event_backgrounds_path, :html => {:multipart => true}) do |f|
+  = f.object.errors.on(:base)
+
+  != render :partial => "form", :locals => { :f => f }
+
+  != f.submit "Save"
+  != link_to _("Cancel"), event_backgrounds_path
