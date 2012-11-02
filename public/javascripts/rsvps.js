@@ -77,7 +77,7 @@ jQuery(document).ready(function(jQuery){
     rsvps.envelopeTimeout = setTimeout(function(){
       rsvps.maxWaitTimeReached = true;
       rsvps.showRealInvitation();
-    }, 5000);
+    }, 7000);
   }
   if(jQuery.browser.msie) {
     jQuery(".msg, .title").each(function(){
@@ -114,6 +114,7 @@ jQuery(document).ready(function(jQuery){
 });
 jQuery(window).load(function () {
   if(jQuery("#envelope").length > 0) {
+    jQuery("#envelope").show();
     if(rsvps.maxWaitTimeReached) return;
     clearTimeout(rsvps.envelopeTimeout);
     jQuery('#envelope').crossSlide({

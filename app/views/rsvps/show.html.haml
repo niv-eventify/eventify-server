@@ -15,10 +15,9 @@
       != stylesheet_link_tag 'lt7', :media => 'screen'
     - unless IS_STAGE
       != render(:partial => "layouts/google_analytics")
+  %body{ :class => body_class, :style => "overflow:hidden;" }
     - if resource.event.backgrounds.length > 0
-      %style
-        != rsvp_background(resource.event)
-  %body{ :class => body_class }
+      - rsvp_background(resource.event)
     #envelope!= link_to '', '#invitation'
     != render(:partial => "toolbar")
 
