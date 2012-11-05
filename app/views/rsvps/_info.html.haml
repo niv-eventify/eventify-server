@@ -2,15 +2,18 @@
   .holder
     .frame
       .content-box-holder
-        .image-holder
-          - if @movie.blank?
-            != image_tag(resource.event.design.card.url(:stage2))
-            / %img{ :src => "images/img-ill-6-en.jpg", :height => "395", :alt => "image", :width => "587" }
-            != render(:partial => "events/title_and_message", :locals => {:event => resource.event})
-          - else
+        #invitation_holder.image-holder
+          != image_tag(resource.event.design.card.url(:stage2))
+          / %img{ :src => "images/img-ill-6-en.jpg", :height => "395", :alt => "image", :width => "587" }
+          != render(:partial => "events/title_and_message", :locals => {:event => resource.event})
+        #iframe_holder.image-holder
+          - unless @movie.blank?
             - get_movie_iframe_stage2(@movie)
         .print_btns
           %ul.link-box
+            - unless @movie.blank?
+              %li.item1
+                != link_to _("Play Invitation"), "#", :class => "play-movie"
             %li.item1
               != link_to _("Print Invitation"), "#{rsvp_path(resource.email_token)}.pdf"
         %h3= resource.event.name

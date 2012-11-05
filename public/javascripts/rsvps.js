@@ -111,6 +111,8 @@ jQuery(document).ready(function(jQuery){
       jQuery(this.selector + ' .background_holder .title_holder').replaceWith(rsvps.replacedTitleHolder);
     }
   });
+  var iframe = jQuery('#invitation iframe')[0];
+  handlePlayer(iframe, "#nyroModalContent .background_holder");
 });
 jQuery(window).load(function () {
   if(jQuery("#envelope").length > 0) {

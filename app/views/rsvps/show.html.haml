@@ -8,7 +8,8 @@
     %title=_("Invitation | Eventify")
     != stylesheet_link_tag 'nyroModal.full', 'rsvps', :media => 'all'
     != render(:partial => "layouts/javascripts")
-    != javascript_include_tag 'jquery.nyroModal', 'jquery.cross-slide', 'rsvps'
+    != javascript_include_tag 'http://a.vimeocdn.com/js/froogaloop2.min.js'
+    != javascript_include_tag 'jquery.nyroModal', 'jquery.cross-slide', 'videoplayer', 'rsvps'
     /[if IE]
       != stylesheet_link_tag 'ie', :media => 'screen'
     /[if lt IE 7]
@@ -27,4 +28,7 @@
           != image_tag(resource.event.design.card.url, :class => "back")
           != render(:partial => "postcard", :locals => {:event => resource.event})
       - else
+        .background_holder{:style => "display:none;"}
+          != image_tag(resource.event.design.card.url, :class => "back")
+          != render(:partial => "postcard", :locals => {:event => resource.event})
         - get_movie_iframe_preview(@movie)

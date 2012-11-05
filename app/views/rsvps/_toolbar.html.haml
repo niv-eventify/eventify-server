@@ -2,7 +2,10 @@
   .toolbar-bg
     %strong.toolbar-logo
       != link_to "Eventify", "/", :target => "_blank"
-    != link_to content_tag(:span, _("Event Details")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-1"
+    - if @movie.blank?
+      != link_to content_tag(:span, _("Event Details")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-1"
+    -else
+      != link_to content_tag(:span, _("Play Again")), "#", :class => "t-b-btn t-b-btn-1 play-movie"
     != link_to content_tag(:span, _("to Calendar")), rsvp_ical_path(resource.email_token, :convert => true), :class => "t-b-btn t-b-btn-2"
     - if resource.event.map && !resource.event.map.url.blank?
       != link_to content_tag(:span, _("Map")), resource.event.map.url, :class => "t-b-btn t-b-btn-3", :target => "_blank"
