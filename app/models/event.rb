@@ -513,6 +513,7 @@ class Event < ActiveRecord::Base
   end
 
   def is_premium?
+    #TODO: when there are premium design with no designer change this method
     return design.is_premium?
   end
 
@@ -521,7 +522,6 @@ class Event < ActiveRecord::Base
     res = false
     payments.each{|p| res = res || (!p.paid_at.nil? && p.pay_emails > 0)}
     return res
-    #return (self.is_premium? ? Eventify.premium_emails_plan(count)[1] > 0 : Eventify.emails_plan(count)[1] > 0)
   end
 
   def payments_required?
@@ -565,12 +565,14 @@ class Event < ActiveRecord::Base
 
   before_create :set_free_plans
   def set_free_plans(design_id=nil)
-    if design_id
-      plan_method = Design.find(design_id).is_premium? ? :premium_emails_plan : :emails_plan
+    if self.event_type == EVENT_TYPES[:MOVIE]
+      #event type should remain MOVIE if I only change the design
+    elsif design_id
+      self.event_type = Design.find(design_id).is_premium? ? EVENT_TYPES[:PREMIUM] : EVENT_TYPES[:STANDARD]
     else
-      plan_method = self.is_premium? ? :premium_emails_plan : :emails_plan
+      self.event_type = self.design.is_premium? ? EVENT_TYPES[:PREMIUM] : EVENT_TYPES[:STANDARD]
     end
-    plan, price = Eventify.send(plan_method,1)
+    plan, price = Eventify.emails_plan(self.event_type, 1)
     self.emails_plan = plan if price.zero?
   end
 

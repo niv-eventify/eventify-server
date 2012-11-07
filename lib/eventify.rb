@@ -3,7 +3,7 @@ module Eventify
   # all prices are in ogorot
 
   if DUMMY_PAYMENT_PROGRAM
-    EMAILS_PLAN_PROPERTIES = [
+    STANDARD_EMAILS_PLAN_PROPERTIES = [
       [0..4, [4, 0]],
       [4..5, [5, 500]],
       [5..300, [300, 2000]],
@@ -19,9 +19,17 @@ module Eventify
       [301..400, [400, 5000]],
       [401..500, [500, 9000]]
     ]
+    MOVIE_EMAILS_PLAN_PROPERTIES = [
+      [0..1, [1, 0]],
+      [2..2, [2, 3000]],
+      [3..4, [4, 4000]],
+      [5..300, [300, 5000]],
+      [301..400, [400, 15000]],
+      [401..500, [500, 19000]]
+    ]
     SMS_BATCH = 1
   else
-    EMAILS_PLAN_PROPERTIES = [
+    STANDARD_EMAILS_PLAN_PROPERTIES = [
       [0..30, [30, 0]],
       [31..60, [60, 4000]],
       [61..100, [100, 8000]],
@@ -37,6 +45,14 @@ module Eventify
       [251..400, [400, 41000]],
       [401..700, [700, 71000]]
     ]
+    MOVIE_EMAILS_PLAN_PROPERTIES = [
+      [0..2, [2, 0]],
+      [3..40, [40, 14000]],
+      [41..100, [100, 21000]],
+      [101..250, [250, 36000]],
+      [251..400, [400, 51000]],
+      [401..700, [700, 81000]]
+    ]
 
     SMS_BATCH = 20
   end
@@ -51,16 +67,9 @@ module Eventify
   DESIGNER_MINIMAL_PAYMENT = 100
 
   class << self
-    def emails_plan(count, override_max_price = nil)
-      EMAILS_PLAN_PROPERTIES.each do |p|
-        return p.last if p.first.include?(count)
-      end
-
-      [count, count * (override_max_price || 100)]
-    end
-
-    def premium_emails_plan(count, override_max_price = nil)
-      PREMIUM_EMAILS_PLAN_PROPERTIES.each do |p|
+    def emails_plan(event_type, count, override_max_price = nil)
+      plan = self.const_get("#{EVENT_TYPES_KEYS[event_type]}_EMAILS_PLAN_PROPERTIES")
+      plan.each do |p|
         return p.last if p.first.include?(count)
       end
 

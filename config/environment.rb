@@ -19,6 +19,12 @@ NETPAY_PERSONAL_HASH = "2G9PTR5C6M"
 NETPAY_SKIP_SSL = true
 ::IS_STAGE = true # override in extra.rb
 ::DUMMY_PAYMENT_PROGRAM = IS_STAGE
+EVENT_TYPES = {
+  :STANDARD => 10,
+  :PREMIUM => 20,
+  :MOVIE => 30
+}
+EVENT_TYPES_KEYS = EVENT_TYPES.invert
 
 Rails::Initializer.run do |config|
   if "irb" == $0

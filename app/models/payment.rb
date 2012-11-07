@@ -145,12 +145,15 @@ class Payment < ActiveRecord::Base
   end
 
   def upgrade_plan(plan, new_count, old_count)
+    #TODO: this needs to be modified when I make it possible to add a movie event after payment where maid to non movie events
     if plan == :emails_plan
-      plan = :premium_emails_plan if self.event.is_premium?
+      #plan = :premium_emails_plan if self.event.is_premium?
+      new_plan, full_payment = Eventify.emails_plan(self.event.event_type, new_count)
+      _, already_paid        = Eventify.emails_plan(self.event.event_type, old_count)
+    else
+      new_plan, full_payment = Eventify.send(plan, new_count)
+      _, already_paid        = Eventify.send(plan, old_count)
     end
-    new_plan, full_payment = Eventify.send(plan, new_count)
-    _, already_paid        = Eventify.send(plan, old_count)
-
     [new_plan, full_payment - already_paid]
   end
 end

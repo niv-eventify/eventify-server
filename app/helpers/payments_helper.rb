@@ -1,11 +1,17 @@
 module PaymentsHelper
-  def emails_plans(event)
-    if event.is_premium?
-      current_locale == "he" ? Eventify::PREMIUM_EMAILS_PLAN_PROPERTIES.reverse : Eventify::PREMIUM_EMAILS_PLAN_PROPERTIES
-    else
-      current_locale == "he" ? Eventify::EMAILS_PLAN_PROPERTIES.reverse : Eventify::EMAILS_PLAN_PROPERTIES
-    end
 
+  EVENT_TYPES_PACKAGE_DISPLAY = {
+      :STANDARD => N_("Invitation Package -"),
+      :PREMIUM => N_("Premium Invitation Package -"),
+      :MOVIE => N_("Movie Invitation Package -")
+  }
+  def emails_plan_package_display(event)
+    EVENT_TYPES_PACKAGE_DISPLAY[EVENT_TYPES_KEYS[event.event_type]]
+  end
+
+  def emails_plans(event)
+    plan = Eventify.const_get("#{EVENT_TYPES_KEYS[event.event_type]}_EMAILS_PLAN_PROPERTIES")
+    current_locale == "he" ? plan.reverse : plan
   end
 
   def current_plan?(plan)

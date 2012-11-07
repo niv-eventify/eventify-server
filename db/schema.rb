@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121101093805) do
+ActiveRecord::Schema.define(:version => 20121105192431) do
 
   create_table "backgrounds", :force => true do |t|
     t.integer  "event_id"
@@ -234,6 +234,7 @@ ActiveRecord::Schema.define(:version => 20121101093805) do
     t.integer  "title_top_y"
     t.integer  "title_width"
     t.integer  "title_height"
+    t.integer  "event_type",                                    :default => 10
   end
 
   add_index "events", ["starting_at", "canceled_at", "rsvp_summary_send_at"], :name => "start_cancel_summary_sent"
