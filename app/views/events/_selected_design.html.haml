@@ -2,8 +2,5 @@
   .holder
     .frame
       .image-h
-        - if @movie.blank?
-          .image-background-holder{:style => "background-image: url('#{@event.design.card.url(:stage2)}');"}
-          != render(:partial => "events/title_and_message", :locals => {:event => @event})
-        - else
-          - get_movie_iframe_stage2(@movie)
+        .image-background-holder{:style => "background-image: url('#{@event.design.card.url(:stage2)}');"}
+        != render(:partial => "events/title_and_message", :locals => {:event => @event})

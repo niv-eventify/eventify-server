@@ -1,7 +1,4 @@
 #invitation{:style => "display:none;"}
-  - if @movie.blank?
-    .background_holder
-      %img.back{:src => "#{@event.design.card.url}"}
-      != render(:partial => "rsvps/postcard", :locals => {:event => @event})
-  - else
-    - get_movie_iframe_preview(@movie)
+  .background_holder
+    %img.back{:src => "#{@event.design.card.url}"}
+    != render(:partial => "rsvps/postcard", :locals => {:event => @event})
