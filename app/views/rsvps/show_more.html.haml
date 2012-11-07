@@ -2,8 +2,11 @@
 - @content_area_css_class = "overflow_visible"
 - content_for(:head) do
   != stylesheet_link_tag "rsvps", "nyroModal.full"
-  != javascript_include_tag 'http://a.vimeocdn.com/js/froogaloop2.min.js'
-  != javascript_include_tag "jquery.nyroModal", "jquery.numeric.min", "videoplayer"
+  - unless @movie.nil?
+    != javascript_include_tag 'json2'
+    != javascript_include_tag 'http://a.vimeocdn.com/js/froogaloop2.min.js'
+    != javascript_include_tag "videoplayer"
+  != javascript_include_tag "jquery.nyroModal", "jquery.numeric.min"
   :javascript
     $(document).ready(function(){
       if(jQuery.browser.msie) {
