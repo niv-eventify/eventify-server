@@ -9,7 +9,7 @@ class Payment < ActiveRecord::Base
 
   attr_reader :extra_payment_sms, :extra_payment_prints
 
-  attr_accessible :emails_plan, :sms_plan, :prints_plan, :amount, :transaction_id
+  attr_accessible :emails_plan, :sms_plan, :prints_plan, :amount, :transaction_id, :is_agreed_to_terms
 
   PAYMENT_DETAILS_FIELDS = [:cc, :expiration_month, :expiration_year, :name_on_card,
     :ccv2, :email, :user_ident, :phone_number]
@@ -105,7 +105,7 @@ class Payment < ActiveRecord::Base
   end
 
   def validate
-    errors.add(:base, _("Please agree to the terms of use.")) unless self.user.is_agreed_to_terms?
+    errors.add(:base, _("Please agree to the terms of use.")) unless self.is_agreed_to_terms?
     errors.add(:base, _("Please choose a package that reflects your event")) if self.amount != calculated_amount || payment_is_not_enough?
   end
 

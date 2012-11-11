@@ -101,7 +101,7 @@
         != link_to_function _("Continue"), "submit_payment()", :class => "btn-continue"
         != link_to _("Edit Guests"), event_guests_path(resource.event_id), :id => "payments_edit_guests_link", :class => "underline"
         %div.is_agree_to_terms
-        %input{:type => "checkbox", :name => "is_agree_to_terms", :id => "is_agree_to_terms", :value => "1"}
+        %input{:type => "checkbox", :name => "payment[is_agreed_to_terms]", :id => "is_agree_to_terms", :value => "1"}
         %label{:for => "is_agree_to_terms"}=_("I agree to the")
         %a.underline{:href => page_path("terms"), :target => "_blank"}=_("terms of use")
 
