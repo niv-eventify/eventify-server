@@ -106,6 +106,7 @@ class Payment < ActiveRecord::Base
 
   def validate
     errors.add(:base, _("Please agree to the terms of use.")) unless self.is_agreed_to_terms?
+    #logger.debug("NIV: #{self.amount} #{calculated_amount} #{payment_is_not_enough?}")
     errors.add(:base, _("Please choose a package that reflects your event")) if self.amount != calculated_amount || payment_is_not_enough?
   end
 
@@ -132,7 +133,8 @@ class Payment < ActiveRecord::Base
 
   def calculated_amount
     set_plans unless pay_sms || pay_prints || pay_emails
-    pay_sms + pay_prints + pay_emails
+    total = pay_sms + pay_prints + pay_emails
+    total <= 0 ? 0 : total
   end
 
   def upgrade?

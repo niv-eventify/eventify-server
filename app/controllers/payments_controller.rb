@@ -5,7 +5,7 @@ class PaymentsController < InheritedResources::Base
   respond_to :js, :only => :create
   skip_before_filter :setup_localization, :only => [:edit, :update]
   before_filter      :setup_localization_skip_domain, :only => [:edit, :update]
-
+  before_filter      :set_no_cache, :only => [:update]
 
   actions :new, :edit, :update, :create
 
@@ -14,6 +14,7 @@ class PaymentsController < InheritedResources::Base
   def new
     build_resource
     reload_payment
+    @redirect_url = get_path_to_back_page
     new!
   end
 

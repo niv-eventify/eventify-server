@@ -94,9 +94,13 @@
       .total-bar
         %span.label= _("Total")
         %em
-          %strong#total_amount= (resource.amount < 0 ? 0 : resource.amount.format_cents)
+          %strong#total_amount= get_amount_or_zero
           ₪
         != f.hidden_field :amount
+        :javascript
+          jQuery(function(){
+            jQuery(window).trigger('amount-changed');
+          })
       .nav
         != link_to_function _("Continue"), "submit_payment()", :class => "btn-continue"
         != link_to _("Edit Guests"), event_guests_path(resource.event_id), :id => "payments_edit_guests_link", :class => "underline"
@@ -141,4 +145,11 @@
         alert(textStatus);
       }
     });
+    var watchClose = setInterval(function() {
+        if (popup.closed) {
+         clearTimeout(watchClose);
+         setTimeout(function(){window.location.reload();}, 1000);
+        }
+    }, 400);
   }
+

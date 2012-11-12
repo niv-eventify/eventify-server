@@ -38,4 +38,8 @@ module PaymentsHelper
   def years_for_select
     (Time.now.utc.year..10.years.from_now.utc.year).to_a
   end
+
+  def get_amount_or_zero
+    resource.amount < 0 ? 0 : resource.amount.format_cents
+  end
 end
