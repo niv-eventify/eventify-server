@@ -10,7 +10,7 @@
 				var new_count = parseInt(count.html()) + batch_size;
 				count.html(new_count);
 				fld.val(new_count);
-				var new_price = parseInt(parseFloat(price.html()) * 100 + unit_price * batch_size);
+				var new_price = Math.round(parseFloat(price.html()) * 100 + unit_price * batch_size);
 				price.html((new_price/100).toFixed(2));
 				jQuery(window).trigger('amount-changed');
 			});
@@ -20,7 +20,7 @@
 					current_count -= batch_size;
 					count.html(current_count);
 					fld.val(current_count);
-					var new_price = parseInt(parseFloat(price.html()) * 100 - unit_price * batch_size);
+					var new_price = Math.round(parseFloat(price.html()) * 100 - unit_price * batch_size);
 					price.html((new_price/100).toFixed(2));
 					jQuery(window).trigger('amount-changed');
 				}

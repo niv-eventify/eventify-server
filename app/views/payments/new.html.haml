@@ -19,7 +19,7 @@
         var amount = users + sms + printings;
 
         jQuery("#payment_amount").val(amount)
-        jQuery("#total_amount").html((amount/100).toFixed(2));
+        jQuery("#total_amount").html(amount>0 ? (amount/100).toFixed(2) : 0);
       });
     });
 
@@ -140,16 +140,16 @@
         //alert(data.payment_url);
         popup.location.href = data.payment_url;
         jQuery('body').css('cursor', 'default');
+        var watchClose = setInterval(function() {
+            if (popup.closed) {
+             clearTimeout(watchClose);
+             window.location.reload();
+            }
+        }, 400);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert(textStatus);
       }
     });
-    var watchClose = setInterval(function() {
-        if (popup.closed) {
-         clearTimeout(watchClose);
-         setTimeout(function(){window.location.reload();}, 1000);
-        }
-    }, 400);
   }
 
