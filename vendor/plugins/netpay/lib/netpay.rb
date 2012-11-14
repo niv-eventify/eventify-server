@@ -152,8 +152,13 @@ module Netpay
       @url += "signature=#{CGI::escape(@signature)}"
     end
     def self.validate_response(params)
+      if params[:merchantID] == NETPAY_MERCHANT_ID
+        curr_secret = NETPAY_PERSONAL_HASH
+      elsif params[:merchantID] == NETPAY_MERCHANT_ID_DEBUG
+        curr_secret = NETPAY_PERSONAL_HASH_DEBUG
+      end
       #replyCode + trans_id + PersonalHashKey
-      str_to_signature = "#{params[:replyCode]}#{params[:trans_id]}#{NETPAY_PERSONAL_HASH}"
+      str_to_signature = "#{params[:replyCode]}#{params[:trans_id]}#{curr_secret}"
       return params[:signature] == Base64.encode64(Digest::SHA256.digest(str_to_signature)).chomp
     end
     def self.success?(reply_code)
