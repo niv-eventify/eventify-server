@@ -1,7 +1,6 @@
 class PaymentsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
-  before_filter :verify_paid, :only => :update
   respond_to :js, :only => :create
   skip_before_filter :setup_localization, :only => [:edit, :update]
   before_filter      :setup_localization_skip_domain, :only => [:edit, :update]
@@ -71,10 +70,6 @@ class PaymentsController < InheritedResources::Base
   end
 
 protected
-  def verify_paid
-    redirect_to get_path_to_back_page unless resource.paid_at.nil?
-  end
-
   def get_path_to_back_page
     case params[:back]
     when "cancellations"
