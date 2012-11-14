@@ -143,7 +143,7 @@
         var watchClose = setInterval(function() {
             if (popup.closed) {
              clearTimeout(watchClose);
-             window.location.reload();
+             setTimeout(function(){window.location.reload();},500);
             }
         }, 400);
       },
