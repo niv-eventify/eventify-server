@@ -18,7 +18,7 @@ class Bounce
           g.bounce!(bounce.at("status").innerHTML, "bounced: #{bounce.at('reason').innerHTML}")
         end
       end
-      self.blocks.parsed_response['blocks'].each do |block|
+      self.blocks.parsed_response['blocks']['block'].each do |block|
         if g = Guest.not_bounced_by_email(block["email"]).first
           g.bounce!(block["status"], "blocked: #{block['reason']}")
         end
