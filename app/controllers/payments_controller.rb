@@ -1,11 +1,10 @@
 class PaymentsController < InheritedResources::Base
   before_filter :require_user
   belongs_to :event
-  before_filter :verify_paid, :only => :update
   respond_to :js, :only => :create
   skip_before_filter :setup_localization, :only => [:edit, :update]
   before_filter      :setup_localization_skip_domain, :only => [:edit, :update]
-
+  before_filter      :set_no_cache, :only => [:update]
 
   actions :new, :edit, :update, :create
 
@@ -14,6 +13,7 @@ class PaymentsController < InheritedResources::Base
   def new
     build_resource
     reload_payment
+    @redirect_url = get_path_to_back_page
     new!
   end
 
@@ -55,14 +55,6 @@ class PaymentsController < InheritedResources::Base
   def create
     build_resource
     resource.user_id = current_user.id
-    unless params[:is_agree_to_terms] == "1"
-      render :json => {:error => _("Please agree to the terms of use.")}.to_json
-      return
-    end
-    unless resource.user.is_agreed_to_terms
-      resource.user.is_agreed_to_terms = true
-      resource.user.save
-    end
     if params[:payment][:amount].to_i <= 0
       render :json => {:redirect_to => get_path_to_back_page}.to_json
       return
@@ -78,10 +70,6 @@ class PaymentsController < InheritedResources::Base
   end
 
 protected
-  def verify_paid
-    redirect_to get_path_to_back_page unless resource.paid_at.nil?
-  end
-
   def get_path_to_back_page
     case params[:back]
     when "cancellations"

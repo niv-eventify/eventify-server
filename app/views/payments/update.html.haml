@@ -5,4 +5,4 @@
   } else {
     window.opener.alert("#{@error_msg}");
   }
-  window.close();
+  setTimeout(function(){window.close();},200);

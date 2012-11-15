@@ -126,8 +126,9 @@ module Netpay
       :disp_lngList => "hide"
     }
     def initialize(payment, payment_details, redirect_to, notify_to)
+      @secret = payment.user.is_super_admin ? NETPAY_PERSONAL_HASH_DEBUG : NETPAY_PERSONAL_HASH
       opts = {
-        :merchantID => NETPAY_MERCHANT_ID,
+        :merchantID => payment.user.is_super_admin ? NETPAY_MERCHANT_ID_DEBUG : NETPAY_MERCHANT_ID,
         :trans_amount => sprintf("%d.%02d", payment.amount/100, payment.amount%100),
         :client_fullName => payment.name_on_card,
         :client_email => payment.email,
@@ -146,13 +147,18 @@ module Netpay
         str_to_signature += value.to_s
         @url += "#{key}=#{CGI::escape(value.to_s)}&"
       end
-      str_to_signature += NETPAY_PERSONAL_HASH
+      str_to_signature += @secret
       @signature = Base64.encode64(Digest::SHA256.digest(str_to_signature)).chomp
       @url += "signature=#{CGI::escape(@signature)}"
     end
     def self.validate_response(params)
+      if params[:merchantID] == NETPAY_MERCHANT_ID.to_s
+        curr_secret = NETPAY_PERSONAL_HASH
+      elsif params[:merchantID] == NETPAY_MERCHANT_ID_DEBUG.to_s
+        curr_secret = NETPAY_PERSONAL_HASH_DEBUG
+      end
       #replyCode + trans_id + PersonalHashKey
-      str_to_signature = "#{params[:replyCode]}#{params[:trans_id]}#{NETPAY_PERSONAL_HASH}"
+      str_to_signature = "#{params[:replyCode]}#{params[:trans_id]}#{curr_secret}"
       return params[:signature] == Base64.encode64(Digest::SHA256.digest(str_to_signature)).chomp
     end
     def self.success?(reply_code)

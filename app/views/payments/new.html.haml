@@ -19,7 +19,7 @@
         var amount = users + sms + printings;
 
         jQuery("#payment_amount").val(amount)
-        jQuery("#total_amount").html((amount/100).toFixed(2));
+        jQuery("#total_amount").html(amount>0 ? (amount/100).toFixed(2) : 0);
       });
     });
 
@@ -91,14 +91,18 @@
       .total-bar
         %span.label= _("Total")
         %em
-          %strong#total_amount= (resource.amount < 0 ? 0 : resource.amount.format_cents)
+          %strong#total_amount= get_amount_or_zero
           ₪
         != f.hidden_field :amount
+        :javascript
+          jQuery(function(){
+            jQuery(window).trigger('amount-changed');
+          })
       .nav
         != link_to_function _("Continue"), "submit_payment()", :class => "btn-continue"
         != link_to _("Edit Guests"), event_guests_path(resource.event_id), :id => "payments_edit_guests_link", :class => "underline"
         %div.is_agree_to_terms
-        %input{:type => "checkbox", :name => "is_agree_to_terms", :id => "is_agree_to_terms", :value => "1"}
+        %input{:type => "checkbox", :name => "payment[is_agreed_to_terms]", :id => "is_agree_to_terms", :value => "1"}
         %label{:for => "is_agree_to_terms"}=_("I agree to the")
         %a.underline{:href => page_path("terms"), :target => "_blank"}=_("terms of use")
 
@@ -133,9 +137,16 @@
         //alert(data.payment_url);
         popup.location.href = data.payment_url;
         jQuery('body').css('cursor', 'default');
+        var watchClose = setInterval(function() {
+            if (popup.closed) {
+             clearTimeout(watchClose);
+             setTimeout(function(){window.location.reload();},500);
+            }
+        }, 400);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         alert(textStatus);
       }
     });
   }
+

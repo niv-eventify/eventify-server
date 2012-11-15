@@ -104,4 +104,8 @@ protected
     host = Host.find_by_event_id_and_email(event_id, current_user.email)
     @event = (!host.nil? && host.event) || (current_user.is_super_admin && Event.find(event_id)) || current_user.events.find(event_id)
   end
+
+  def set_no_cache
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+  end
 end
