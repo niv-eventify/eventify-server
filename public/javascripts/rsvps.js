@@ -112,7 +112,9 @@ jQuery(document).ready(function(jQuery){
     }
   });
   var iframe = jQuery('#invitation iframe')[0];
-  handlePlayer(iframe, "#nyroModalContent .background_holder");
+  if(!typeof(handlePlayer) == "undefind"){
+    handlePlayer(iframe, "#nyroModalContent .background_holder");
+  }
 });
 jQuery(window).load(function () {
   if(jQuery("#envelope").length > 0) {

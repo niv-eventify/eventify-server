@@ -2,6 +2,8 @@
 - content_for(:head) do
   != stylesheet_link_tag "nyroModal.full", "rsvps"
   != javascript_include_tag "jquery.nyroModal", "rsvps"
+  -#!= javascript_include_tag 'http://a.vimeocdn.com/js/froogaloop2.min.js'
+  -#!= javascript_include_tag "videoplayer"
 
 .top-text
   %h2= _("Hello %{username},") % {:username => h(current_user.name)}
