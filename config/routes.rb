@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :pages, :controller => 'pages', :only => [:show]
 
+  map.connect "/contacts/failure", :controller => :guest_importers, :action => :import_failure
   map.resources :contacts
   map.resources :contact_importers
   map.resources :categories do |category|
@@ -71,6 +72,8 @@ ActionController::Routing::Routes.draw do |map|
   map.lobby "/lobby", :controller => "lobby", :action => "index"
   map.carousel "/carousel.xml", :controller => "welcome", :action => "index", :format => "xml"
   map.resources :cropped_pictures
+  map.connect "/contacts/gmail/callback", :controller => :guest_importers, :action => :gmail_callback
+
   map.connect "/1234a3a5e723d2e0fa3e43fbef0c3dac", :controller => :send_grid_events, :action => :create, :conditions => {:method => :post}
   map.resource :links_page
   map.show_designer '/designers/:friendly_url', :controller => 'designers', :action => 'show'

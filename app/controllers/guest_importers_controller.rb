@@ -40,6 +40,14 @@ class GuestImportersController < ApplicationController
     params[:contact_source] ||= "gmail"
   end
 
+  def gmail_callback
+    @contacts = request.env['omnicontacts.contacts']
+    render :text => @contacts
+  end
+
+  def import_failure
+    render :text => params[:error_message]
+  end
 protected
   def set_source
     @source = SOURCES.member?(params[:source]) ? params[:source] : raise(ActiveRecord::RecordNotFound)

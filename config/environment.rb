@@ -19,6 +19,10 @@ NETPAY_PERSONAL_HASH_DEBUG = "2G9PTR5C6M"
 #NETPAY_MERCHANT_ID = 7517686   #Real
 #NETPAY_PERSONAL_HASH = "JFH957AG2E" #Real
 NETPAY_SKIP_SSL = true
+
+GMAIL_CLIENT_SECRET="EBIR7t9CjPovD_4jYbVK6rV8"
+GMAIL_CLIENT_ID="514171054687.apps.googleusercontent.com"
+
 ::IS_STAGE = true # override in extra.rb
 ::DUMMY_PAYMENT_PROGRAM = IS_STAGE
 EVENT_TYPES = {
@@ -51,6 +55,7 @@ Rails::Initializer.run do |config|
   config.gem 'mechanize', :lib => false, :version => "0.9.3"
   config.gem 'gdata', :lib => false, :version => "1.1.1"
   config.gem 'contacts', :lib => false, :version => "1.2.4"
+  config.gem 'omnicontacts', :lib => false, :version => "0.2.2"
   config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
   #config.gem 'rspec', :lib => false, :version => '1.3.0'
