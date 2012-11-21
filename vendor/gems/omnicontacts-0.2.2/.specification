@@ -1,0 +1,182 @@
+--- !ruby/object:Gem::Specification 
+name: omnicontacts
+version: !ruby/object:Gem::Version 
+  hash: 19
+  prerelease: false
+  segments: 
+  - 0
+  - 2
+  - 2
+  version: 0.2.2
+platform: ruby
+authors: 
+- Diego Castorina
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2012-07-11 00:00:00 +03:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rack
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :runtime
+  version_requirements: *id001
+- !ruby/object:Gem::Dependency 
+  name: json
+  prerelease: false
+  requirement: &id002 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :runtime
+  version_requirements: *id002
+- !ruby/object:Gem::Dependency 
+  name: simplecov
+  prerelease: false
+  requirement: &id003 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id003
+- !ruby/object:Gem::Dependency 
+  name: rake
+  prerelease: false
+  requirement: &id004 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id004
+- !ruby/object:Gem::Dependency 
+  name: rack-test
+  prerelease: false
+  requirement: &id005 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id005
+- !ruby/object:Gem::Dependency 
+  name: rspec
+  prerelease: false
+  requirement: &id006 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 0
+        version: "0"
+  type: :development
+  version_requirements: *id006
+description: A generalized Rack middleware for importing contacts from major email providers.
+email: 
+- diegocastorina@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- .gitignore
+- Gemfile
+- Gemfile.lock
+- README.md
+- Rakefile
+- lib/omnicontacts.rb
+- lib/omnicontacts/authorization/oauth1.rb
+- lib/omnicontacts/authorization/oauth2.rb
+- lib/omnicontacts/builder.rb
+- lib/omnicontacts/http_utils.rb
+- lib/omnicontacts/importer.rb
+- lib/omnicontacts/importer/gmail.rb
+- lib/omnicontacts/importer/hotmail.rb
+- lib/omnicontacts/importer/yahoo.rb
+- lib/omnicontacts/integration_test.rb
+- lib/omnicontacts/middleware/base_oauth.rb
+- lib/omnicontacts/middleware/oauth1.rb
+- lib/omnicontacts/middleware/oauth2.rb
+- omnicontacts.gemspec
+- spec/omnicontacts/authorization/oauth1_spec.rb
+- spec/omnicontacts/authorization/oauth2_spec.rb
+- spec/omnicontacts/http_utils_spec.rb
+- spec/omnicontacts/importer/gmail_spec.rb
+- spec/omnicontacts/importer/hotmail_spec.rb
+- spec/omnicontacts/importer/yahoo_spec.rb
+- spec/omnicontacts/integration_test_spec.rb
+- spec/omnicontacts/middleware/base_oauth_spec.rb
+- spec/omnicontacts/middleware/oauth1_spec.rb
+- spec/omnicontacts/middleware/oauth2_spec.rb
+- spec/spec_helper.rb
+has_rdoc: true
+homepage: http://github.com/Diego81/omnicontacts
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 23
+      segments: 
+      - 1
+      - 3
+      - 6
+      version: 1.3.6
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: A generalized Rack middleware for importing contacts from major email providers.
+test_files: []
+
