@@ -45,7 +45,7 @@ class GuestImportersController < ApplicationController
     @contacts.each do |contact|
       puts "Contact found: name => #{contact[:name]}, email => #{contact[:email]}"
     end
-    render :partial => :oauth2_callback, :layout => false
+    render :file => "guest_importers/oauth2_callback", :layout => false
   end
 
   def import_failure
