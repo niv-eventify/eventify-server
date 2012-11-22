@@ -6,6 +6,9 @@
     var has_filter = #{@has_filter}
   != javascript_include_tag("jquery.floatheader.min", "guests", "jquery.nyroModal", "jquery.unload")
   :javascript
+    function parse_oauth2_response(oauth2_response){
+      alert(oauth2_response);
+    }
     jQuery(function(){
       jQuery("table#guests").floatHeader();
       jQuery("#new_guest_row input:text").unload_monit(#{_("You didn't save the last added guest.").to_json});

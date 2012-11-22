@@ -1,5 +1,5 @@
 class GuestImportersController < ApplicationController
-  before_filter :require_user, :event_by_user_or_host
+  before_filter :require_user, :event_by_user_or_host, :except => [:gmail_callback, :import_failure]
   before_filter :set_source, :only => :new
 
   SOURCES = ["email", "csv", "addressbook", "email_list", "past_events"]
@@ -42,7 +42,10 @@ class GuestImportersController < ApplicationController
 
   def gmail_callback
     @contacts = request.env['omnicontacts.contacts']
-    render :text => @contacts
+    @contacts.each do |contact|
+      puts "Contact found: name => #{contact[:name]}, email => #{contact[:email]}"
+    end
+    render :partial => :oauth2_callback, :layout => false
   end
 
   def import_failure
@@ -100,6 +103,8 @@ protected
 
     if "csv" == params[:source]
       _load_csv_file
+    elsif "oauth2" == params[:source]
+      _load_from_oauth2
     elsif "email" == params[:source]
       _load_from_emails
     elsif "past_events" == params[:source]
