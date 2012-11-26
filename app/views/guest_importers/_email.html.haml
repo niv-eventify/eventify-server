@@ -11,10 +11,12 @@
           %li.source_select.csv!= link_to_function _("Other"), "show_nyro_loading(function(){jQuery.ajax({url: '#{new_event_guest_importer_path(@event, :source => 'csv')}', type: 'get', dataType:'script'});});"
 
         - each_import_source("csv") do |klass, name|
-          - unless klass=="gmail"
-            .contact-tab.source-form{:style => "display:none", :class => "#{klass}_form"}
-              .contact-tab-t
-                .contact-tab-b
+          .contact-tab.source-form{:style => "display:none", :class => "#{klass}_form"}
+            .contact-tab-t
+              .contact-tab-b
+                - if klass=="gmail"
+                  != link_to _("Import"), "/contacts/gmail", :target => "_blank", :class => "btn csv-submit"
+                - else
                   - form_tag event_guest_importers_path(@event), :builder => MiddleBoxFormBuilder::Builder, :target => "upload_frame", :class => "contact-form" do
                     != hidden_field_tag :contact_source, klass
                     != hidden_field_tag :source, "email"
@@ -46,6 +48,4 @@
                       %br
                     .loading{:style => "display:none"}
                       = _("Importing, please wait...")
-          - else
-            != link_to _("Import"), "/contacts/gmail", :target => "_blank", :class => "btn csv-submit"
 %iframe#upload_frame{:name => "upload_frame", :style => "display: none"}

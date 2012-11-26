@@ -7,7 +7,15 @@
   != javascript_include_tag("jquery.floatheader.min", "guests", "jquery.nyroModal", "jquery.unload")
   :javascript
     function parse_oauth2_response(oauth2_response){
-      alert(oauth2_response);
+      var data = {
+        "oauth2_data": oauth2_response,
+        "source": "email"
+      }
+      show_nyro_loading(function(){jQuery.ajax({
+        url: "#{event_guest_importers_path(@event.id)}",
+        data: data,
+        type: "post"
+      });});
     }
     jQuery(function(){
       jQuery("table#guests").floatHeader();

@@ -16,7 +16,26 @@ class GuestImportersController < ApplicationController
     @check_all_by_default = false
     _load_from_source
     @contacts.sort! {|a, b| a.name <=> b.name}
-    responds_to_parent do
+    if params[:oauth2_data].blank?
+      responds_to_parent do
+        render(:update) do |page|
+          if @error
+            split_error = @error.split(" : ")
+            if split_error[0] == "CaptchaRequired"
+              split_code = split_error[1].split("%3A")
+              @image_url = "http://www.google.com/accounts/#{split_error[1]}"
+              #@image_url = "http://www.google.com/accounts/#{split_code[0]}"
+              @ctoken = CGI::unescape(split_error[1].split("?ctoken=")[1])
+              @error = nil
+            end
+            render_new_guests_import_form(page)
+          else
+            page << "jQuery.nyroModalManual({content:#{render(:partial => "import", :locals => {:title => s_(GuestImportersController::TITLES[@source]), :contacts => @contacts}).to_json}})"
+            page << "jQuery('body').css('cursor', 'default')"
+          end
+        end
+      end
+    else
       render(:update) do |page|
         if @error
           split_error = @error.split(" : ")
@@ -41,15 +60,13 @@ class GuestImportersController < ApplicationController
   end
 
   def gmail_callback
-    @contacts = request.env['omnicontacts.contacts']
-    @contacts.each do |contact|
-      puts "Contact found: name => #{contact[:name]}, email => #{contact[:email]}"
-    end
+    @contacts = CGI::escape(YAML::dump(request.env['omnicontacts.contacts']))
     render :file => "guest_importers/oauth2_callback", :layout => false
   end
 
   def import_failure
-    render :text => params[:error_message]
+    @error_message = params[:error_message]
+    render :file => "guest_importers/oauth2_failure", :layout => false
   end
 protected
   def set_source
@@ -86,6 +103,11 @@ protected
     @contacts = ContactImporter.contacts_to_openstruct(contacts.uniq) unless contacts.blank?
   end
 
+  def _load_from_oauth2
+    contacts = YAML::load(CGI::unescape(params[:oauth2_data]))
+    @contacts = ContactImporter.contacts_to_openstruct(contacts.uniq) unless contacts.blank?
+  end
+
   def _load_from_emails
     @contacts = []
     contacts, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], nil,params[:ctoken], params[:captcha])
@@ -103,10 +125,12 @@ protected
 
     if "csv" == params[:source]
       _load_csv_file
-    elsif "oauth2" == params[:source]
-      _load_from_oauth2
     elsif "email" == params[:source]
-      _load_from_emails
+      if params[:oauth2_data].blank?
+        _load_from_emails
+      else
+        _load_from_oauth2
+      end
     elsif "past_events" == params[:source]
       _load_from_past_event
     end
