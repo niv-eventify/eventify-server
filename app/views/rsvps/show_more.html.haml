@@ -9,12 +9,14 @@
   != javascript_include_tag "jquery.nyroModal", "jquery.numeric.min"
   :javascript
     $(document).ready(function(){
-      if(jQuery.browser.msie) {
+      if (jQuery.browser.msie) {
         jQuery("#free_text").html(jQuery("#free_text").html().replace(/ /g, ""));
         jQuery("#title").html(jQuery("#title").html().replace(/ /g, ""));
       }
-      var iframe = jQuery('#iframe_holder iframe')[0];
-      handlePlayer(iframe, "#invitation_holder");
+      if (!typeof(handlePlayer) === "undefind") {
+        var iframe = jQuery('#iframe_holder iframe')[0];
+        handlePlayer(iframe, "#invitation_holder");
+      }
     });
 - @skip_header = @skip_footer = true; @extra_body_class = "alt-page"
 
