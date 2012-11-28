@@ -160,6 +160,8 @@ protected
   end
 
   def set_uploaded_pictures
+    return false if @event.id.nil?
+
     UploadedPicture.find_all_by_id(session[:uploaded_picture_ids]).each do |pic|
       pic.update_attribute(:event, @event)
     end
