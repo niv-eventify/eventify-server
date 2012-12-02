@@ -4,6 +4,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]
     reply_to    guest.event.user.email
+    content_type    "multipart/alternative"
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -14,6 +15,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     subject     message_subject
     recipients  [guest.email_recipient]
     reply_to    guest.event.user.email
+    content_type    "multipart/alternative"
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -24,6 +26,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     subject     guest.event.invitation_email_subject
     recipients  [guest.email_recipient]
     reply_to    guest.event.user.email
+    content_type    "multipart/alternative"
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -34,6 +37,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     subject     subj
     recipients  [guest.email_recipient]
     reply_to    guest.event.user.email
+    content_type    "multipart/alternative"
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -43,6 +47,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def guests_summary(event, guests_groups, summary_since, start_time, start_date)
     subject     _("%{event_name} - RSVP summary") % {:event_name => event.name}
     recipients  [event.user.email]
+    content_type    "multipart/alternative"
     _set_receipient_header(event.user)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -53,6 +58,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     subject     guest.event.name
     recipients  [guest.email_recipient]
     reply_to    guest.event.user.email
+    content_type    "multipart/alternative"
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
@@ -72,6 +78,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
   def message_to_guest(guest,message)
     subject     message.subject
     recipients  [guest.email_recipient]
+    content_type    "multipart/alternative"
     _set_receipient_header(guest)
     from        guest.event.user.email
     sent_on     Time.now.utc
