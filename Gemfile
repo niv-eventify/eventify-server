@@ -2,7 +2,7 @@ source :gemcutter
 source "http://gems.github.com/"
 ruby "1.8.7"
 
-gem 'rails', '2.3.4'
+gem 'rails', '~> 2.3.4'
 
 gem 'aws-s3', '0.5.1'
 gem 'authlogic', '2.1.1'
