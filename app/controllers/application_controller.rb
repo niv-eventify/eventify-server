@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Astrails::Auth::Controller
+  require 'user-agent'
   def home_path
     # this is where users is redirected after login
     events_path
