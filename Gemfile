@@ -2,17 +2,17 @@ source :gemcutter
 source "http://gems.github.com/"
 ruby "1.8.7"
 
-gem "rails", "~> 2.3.4"
+gem 'rails', '2.3.4'
 
 gem 'aws-s3', '0.5.1'
 gem 'authlogic', '2.1.1'
 gem 'ruby-debug'
 gem 'whenever'
-gem 'will_paginate'
-gem 'formtastic', "0.9.1"
+gem 'will_paginate', '~> 2.3.16'
+gem 'formtastic', '0.9.1'
 gem 'haml', '>= 2.0.9'
 gem 'mocha', '0.9.8'
-gem 'fast_gettext', '0.4.17'
+gem 'fast_gettext', :path => File.join(File.dirname(__FILE__), '/vendor/gems/fast_gettext-0.4.17')
 gem "gettext", '2.1.0'
 gem "grosser-pomo", '>=0.5.1'
 gem 'fastercsv', '1.5.0'
@@ -34,8 +34,8 @@ gem "parseexcel", '0.5.2'
 gem "roo", '1.3.9'
 gem "astrails-user-agent", "1.0.0"
 gem "httparty", '0.6.0'
-gem "newrelic_rpm", '2.13.2'
-
+gem 'newrelic_rpm', '2.13.2'
+gem 'mysql'
 # bundler requires these gems in all environments
 gem "nokogiri", "1.4.2"
 gem "geokit"

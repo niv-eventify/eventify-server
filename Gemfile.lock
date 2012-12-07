@@ -1,0 +1,177 @@
+PATH
+  remote: vendor/gems/fast_gettext-0.4.17
+  specs:
+    fast_gettext (0.4.17)
+
+GEM
+  remote: http://rubygems.org/
+  remote: http://gems.github.com/
+  specs:
+    GData (0.0.4)
+      builder (>= 2.1.2)
+      hoe (>= 1.2.1)
+    actionmailer (2.3.4)
+      actionpack (= 2.3.4)
+    actionpack (2.3.4)
+      activesupport (= 2.3.4)
+      rack (~> 1.0.0)
+    activerecord (2.3.4)
+      activesupport (= 2.3.4)
+    activeresource (2.3.4)
+      activesupport (= 2.3.4)
+    activesupport (2.3.4)
+    after_commit (1.0.10)
+      activerecord (>= 1.15.6, < 3.0.0)
+    astrails-user-agent (1.0.0)
+    authlogic (2.1.1)
+      activesupport
+    aws-s3 (0.5.1)
+      builder
+      mime-types
+      xml-simple
+    blackbook (1.0.4)
+      fastercsv (>= 1.2.0)
+      hoe (>= 1.5.0)
+      mechanize (>= 0.7.0)
+    builder (3.1.4)
+    chronic (0.8.0)
+    columnize (0.3.6)
+    contacts (1.2.4)
+      gdata (= 1.1.1)
+      json (>= 0.4.1)
+    crack (0.1.7)
+    diff-lcs (1.1.3)
+    factory_girl (2.5.1)
+      activesupport
+    faker (1.1.2)
+      i18n (~> 0.5)
+    fastercsv (1.5.0)
+    ffmike-query_trace (0.0.2)
+      activerecord
+    formtastic (0.9.1)
+    gdata (1.1.1)
+    geokit (1.6.5)
+      multi_json
+    gettext (2.1.0)
+      locale (>= 2.0.5)
+    grosser-pomo (0.5.1)
+    haml (3.1.7)
+    hoe (3.3.1)
+      rake (>= 0.8, < 11.0)
+    hoptoad_notifier (2.1.3)
+      activesupport
+    hpricot (0.8.6)
+    httparty (0.6.0)
+      crack (= 0.1.7)
+    i18n (0.6.1)
+    icalendar (1.1.4)
+    inaction_mailer (0.6)
+    json (1.2.0)
+    libxml-ruby (2.3.3)
+    linecache (0.46)
+      rbx-require-relative (> 0.0.4)
+    locale (2.0.8)
+    mechanize (0.9.3)
+      nokogiri (>= 1.2.1)
+    mime-types (1.19)
+    mocha (0.9.8)
+      rake
+    multi_json (1.4.0)
+    mysql (2.9.0)
+    newrelic_rpm (2.13.2)
+    nokogiri (1.4.2)
+    omnicontacts (0.2.2)
+      json
+      rack
+    parseexcel (0.5.2)
+    rack (1.0.1)
+    rails (2.3.4)
+      actionmailer (= 2.3.4)
+      actionpack (= 2.3.4)
+      activerecord (= 2.3.4)
+      activeresource (= 2.3.4)
+      activesupport (= 2.3.4)
+      rake (>= 0.8.3)
+    rails-footnotes (3.6.7)
+    rake (10.0.2)
+    rbx-require-relative (0.0.9)
+    rchardet (1.2)
+    riddle (1.5.3)
+    roo (1.3.9)
+      GData (>= 0.0.4)
+      hpricot (>= 0.6)
+      libxml-ruby (>= 1.1.3)
+      rubyzip (>= 0.9.1)
+      spreadsheet (>= 0.6.4)
+    rspec (2.12.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
+    rspec-core (2.12.1)
+    rspec-expectations (2.12.0)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.12.0)
+    rspec-rails (1.3.2)
+      rack (>= 1.0.0)
+      rspec (>= 1.3.0)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
+    ruby-debug-base (0.10.4)
+      linecache (>= 0.3)
+    ruby-ole (1.2.11.5)
+    rubyzip (0.9.9)
+    spreadsheet (0.7.5)
+      ruby-ole (>= 1.0)
+    thinking-sphinx (1.3.15)
+      activerecord (>= 1.15.6)
+      after_commit (>= 1.0.5)
+      riddle (>= 1.0.9)
+    whenever (0.8.0)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
+    will_paginate (2.3.16)
+    xml-simple (1.1.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  astrails-user-agent (= 1.0.0)
+  authlogic (= 2.1.1)
+  aws-s3 (= 0.5.1)
+  blackbook
+  contacts (= 1.2.4)
+  factory_girl
+  faker
+  fast_gettext!
+  fastercsv (= 1.5.0)
+  ffmike-query_trace
+  formtastic (= 0.9.1)
+  gdata (= 1.1.1)
+  geokit
+  gettext (= 2.1.0)
+  grosser-pomo (>= 0.5.1)
+  haml (>= 2.0.9)
+  hoptoad_notifier (= 2.1.3)
+  httparty (= 0.6.0)
+  icalendar (= 1.1.4)
+  inaction_mailer
+  json (= 1.2.0)
+  mechanize (= 0.9.3)
+  mocha (= 0.9.8)
+  mysql
+  newrelic_rpm (= 2.13.2)
+  nokogiri (= 1.4.2)
+  omnicontacts (= 0.2.2)
+  parseexcel (= 0.5.2)
+  rails (= 2.3.4)
+  rails-footnotes
+  rchardet (= 1.2)
+  roo (= 1.3.9)
+  rspec
+  rspec-rails (= 1.3.2)
+  ruby-debug
+  thinking-sphinx (= 1.3.15)
+  whenever
+  will_paginate (~> 2.3.16)

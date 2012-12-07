@@ -1,7 +1,7 @@
 # Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
+#RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -36,39 +36,39 @@ Rails::Initializer.run do |config|
   if "irb" == $0
     config.logger = Logger.new(STDOUT)
   end
-  config.gem 'aws-s3', :version => '0.5.1', :lib => "aws/s3"
-  config.gem 'authlogic', :version => '2.1.1'
-  config.gem 'ruby-debug', :library => false
+#  config.gem 'aws-s3', :version => '0.5.1', :lib => "aws/s3"
+#  config.gem 'authlogic', :version => '2.1.1'
+#  config.gem 'ruby-debug', :library => false
   rpass = (GlobalPreference.get(:rack_bug_password) || 'event123') rescue 'event123'
   config.middleware.use 'Rack::Bug', :password => rpass
-  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org'
-  config.gem 'will_paginate', :source => 'http://gemcutter.org'
-  config.gem 'formtastic', :source => 'http://gemcutter.org', :version => "0.9.1"
-  config.gem 'haml', :version => '>= 2.0.9'
-  config.gem 'mocha', :version => '0.9.8', :library => false
-  config.gem 'fast_gettext', :version => '0.4.17'
-  config.gem "gettext", :lib => false, :version => '2.1.0'
-  config.gem "grosser-pomo", :lib => false, :source=>"http://gems.github.com/", :version => '>=0.5.1'
-  config.gem 'fastercsv', :lib => false, :version => '1.5.0'
-  config.gem 'hoptoad_notifier', :version => "2.1.3"
-  config.gem 'blackbook', :lib => false
-  config.gem 'mechanize', :lib => false, :version => "0.9.3"
-  config.gem 'gdata', :lib => false, :version => "1.1.1"
-  config.gem 'contacts', :lib => false, :version => "1.2.4"
-  config.gem 'omnicontacts', :lib => false, :version => "0.2.2"
-  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
-  config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
-  #config.gem 'rspec', :lib => false, :version => '1.3.0'
-  config.gem "icalendar", :version => "1.1.4", :lib => false
-  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.15'
-  config.gem "json", :version => "1.2.0"
-  config.gem "fastercsv", :version => '1.5.0'
-  config.gem "rchardet", :version => '1.2'
-  config.gem "parseexcel", :version => '0.5.2'
-  config.gem "roo", :version => '1.3.9'
-  config.gem "astrails-user-agent", :version => "1.0.0", :lib => "user-agent"
-  config.gem "httparty", :version => '0.6.0'
-  config.gem "newrelic_rpm", :version => '2.13.2'
+#  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org'
+#  config.gem 'will_paginate', :source => 'http://gemcutter.org'
+#  config.gem 'formtastic', :source => 'http://gemcutter.org', :version => "0.9.1"
+#  config.gem 'haml', :version => '>= 2.0.9'
+#  config.gem 'mocha', :version => '0.9.8', :library => false
+#  config.gem 'fast_gettext', :version => '0.4.17'
+#  config.gem "gettext", :lib => false, :version => '2.1.0'
+#  config.gem "grosser-pomo", :lib => false, :source=>"http://gems.github.com/", :version => '>=0.5.1'
+#  config.gem 'fastercsv', :lib => false, :version => '1.5.0'
+#  config.gem 'hoptoad_notifier', :version => "2.1.3"
+#  config.gem 'blackbook', :lib => false
+#  config.gem 'mechanize', :lib => false, :version => "0.9.3"
+#  config.gem 'gdata', :lib => false, :version => "1.1.1"
+#  config.gem 'contacts', :lib => false, :version => "1.2.4"
+#  config.gem 'omnicontacts', :lib => false, :version => "0.2.2"
+#  config.gem 'whenever', :lib => false, :source => 'http://gemcutter.org/'
+#  config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
+#  #config.gem 'rspec', :lib => false, :version => '1.3.0'
+#  config.gem "icalendar", :version => "1.1.4", :lib => false
+#  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx', :version => '1.3.15'
+#  config.gem "json", :version => "1.2.0"
+#  config.gem "fastercsv", :version => '1.5.0'
+#  config.gem "rchardet", :version => '1.2'
+#  config.gem "parseexcel", :version => '0.5.2'
+#  config.gem "roo", :version => '1.3.9'
+#  config.gem "astrails-user-agent", :version => "1.0.0", :lib => "user-agent"
+#  config.gem "httparty", :version => '0.6.0'
+#  config.gem "newrelic_rpm", :version => '2.13.2'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
