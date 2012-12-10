@@ -3,6 +3,9 @@ source 'http://gems.github.com/'
 ruby '1.8.7'
 
 gem 'rails', '~> 2.3.4'
+gem 'delayed_job', '~>2.0.7'
+#gem 'delayed_job_active_record', '~>0.2.0'
+
 gem 'i18n', '0.3.7'
 gem 'aws-s3', '0.5.1'
 gem 'authlogic', '2.1.1'
@@ -43,6 +46,7 @@ gem 'pg'
 gem 'rdoc'
 gem 'vlad', '1.4.0'
 gem 'rake', '0.8.7'
+
 group :development do
   gem 'inaction_mailer'
   gem 'ffmike-query_trace'
