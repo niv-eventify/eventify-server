@@ -11,7 +11,7 @@ module Event::Summary
     base.extend(ClassMethods)
     base.class_eval do
       named_scope :overdue_summary, lambda {{:conditions => ["events.rsvp_summary_send_at < ?", Time.now.utc]}}
-      named_scope :delayed_summary, :conditions => "events.user_is_activated = 1 AND events.rsvp_summary_send_every in (2, 3)" # others - send on demand
+      named_scope :delayed_summary, :conditions => "events.user_is_activated = '1' AND events.rsvp_summary_send_every in (2, 3)" # others - send on demand
       before_update :update_summary
       attr_accessible :rsvp_summary_send_every
     end
