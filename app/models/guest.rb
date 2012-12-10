@@ -25,19 +25,19 @@ class Guest < ActiveRecord::Base
   named_scope :invite_by_sms, {:conditions => {:send_sms => true}}
   named_scope :invite_by_email, {:conditions => {:send_email => true}}
 
-  named_scope :invited_or_scheduled, {:conditions => "((guests.sms_invitation_sent_at IS NOT NULL OR guests.send_sms_invitation_at IS NOT NULL) AND guests.send_sms = 1) OR (guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = '1')"}
+  named_scope :invited_or_scheduled, {:conditions => "((guests.sms_invitation_sent_at IS NOT NULL OR guests.send_sms_invitation_at IS NOT NULL) AND guests.send_sms = '1') OR (guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = '1')"}
 
   named_scope :invited_by_email, {:conditions => "guests.email_invitation_sent_at IS NOT NULL AND guests.send_email = '1'"}
-  named_scope :invited_by_sms, {:conditions => "guests.sms_invitation_sent_at IS NOT NULL AND guests.send_sms = 1"}
+  named_scope :invited_by_sms, {:conditions => "guests.sms_invitation_sent_at IS NOT NULL AND guests.send_sms = '1'"}
 
-  named_scope :any_invitation_sent, {:conditions => "guests.any_invitation_sent = 1"}
-  named_scope :no_invitation_sent, {:conditions => "guests.any_invitation_sent = 0"}
+  named_scope :any_invitation_sent, {:conditions => "guests.any_invitation_sent = '1'"}
+  named_scope :no_invitation_sent, {:conditions => "guests.any_invitation_sent = '0'"}
 
-  named_scope :not_invited_by_sms, {:conditions => "guests.send_sms_invitation_at IS NULL AND guests.sms_invitation_sent_at IS NULL AND guests.send_sms = 1"}
+  named_scope :not_invited_by_sms, {:conditions => "guests.send_sms_invitation_at IS NULL AND guests.sms_invitation_sent_at IS NULL AND guests.send_sms = '1'"}
   named_scope :sms_invitation_failed, {:conditions => "guests.sms_invitation_failed_at IS NOT NULL"}
 
-  named_scope :scheduled_to_invite_by_sms, {:conditions => "guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = 1"}
-  named_scope :scheduled_to_invite_by_sms_overdue, lambda {{:conditions => ["guests.send_sms_invitation_at < ? AND guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = 1", Time.now.utc]}}
+  named_scope :scheduled_to_invite_by_sms, {:conditions => "guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = '1'"}
+  named_scope :scheduled_to_invite_by_sms_overdue, lambda {{:conditions => ["guests.send_sms_invitation_at < ? AND guests.send_sms_invitation_at IS NOT NULL AND guests.send_sms = '1'", Time.now.utc]}}
 
   named_scope :not_invited_by_email, {:conditions => "guests.send_email_invitation_at IS NULL AND guests.email_invitation_sent_at IS NULL AND guests.send_email = '1'"}
 
