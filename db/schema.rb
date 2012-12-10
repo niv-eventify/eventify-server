@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121105192431) do
+ActiveRecord::Schema.define(:version => 20121111061059) do
 
   create_table "backgrounds", :force => true do |t|
     t.integer  "event_id"
@@ -375,7 +375,7 @@ ActiveRecord::Schema.define(:version => 20121105192431) do
     t.string   "replyDesc"
     t.string   "trans_id"
     t.datetime "trans_date"
-    t.float    "trans_amount"
+    t.integer  "trans_amount",       :limit => 255, :precision => 255, :scale => 0
     t.string   "trans_currency"
     t.integer  "trans_installments"
     t.string   "trans_refNum"
@@ -402,6 +402,7 @@ ActiveRecord::Schema.define(:version => 20121105192431) do
     t.integer  "pay_sms"
     t.integer  "pay_emails"
     t.integer  "pay_prints"
+    t.boolean  "is_agreed_to_terms", :default => false
   end
 
   add_index "payments", ["event_id"], :name => "index_payments_on_event_id"
