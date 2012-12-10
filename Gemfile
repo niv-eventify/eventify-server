@@ -42,6 +42,7 @@ gem 'geokit'
 gem 'pg'
 gem 'rdoc'
 gem 'vlad', '1.4.0'
+gem 'rake', '0.8.7'
 group :development do
   gem 'inaction_mailer'
   gem 'ffmike-query_trace'
