@@ -8,7 +8,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
-    body        :guest => guest, :url => rsvp_url(guest.email_token)
+    body        :guest => guest, :url => rsvp_url(guest.email_token, :host => host)
   end
 
   def event_cancelled(guest, message_subject, message_text)
@@ -30,7 +30,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
-    body        :guest => guest, :url => rsvp_url(guest.email_token)
+    body        :guest => guest, :url => rsvp_url(guest.email_token, :host => host)
   end
 
   def guest_reminder(guest, subj, message)
@@ -41,7 +41,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(guest)
     from        "Eventify <invitations@#{domain}>"
     sent_on     Time.now.utc
-    body        :guest => guest, :message => message, :url => rsvp_url(guest.email_token)
+    body        :guest => guest, :message => message, :url => rsvp_url(guest.email_token, :host => host)
   end
 
   def guests_summary(event, guests_groups, summary_since, start_time, start_date)
@@ -82,7 +82,7 @@ class Notifier < Astrails::Auth::LocalizedActionMailer
     _set_receipient_header(guest)
     from        guest.event.user.email
     sent_on     Time.now.utc
-    body        :guest => guest, :message => message, :url => rsvp_url(guest.email_token)
+    body        :guest => guest, :message => message, :url => rsvp_url(guest.email_token, :host => host)
   end
 
 end
