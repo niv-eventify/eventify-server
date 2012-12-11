@@ -1,5 +1,8 @@
+
 module Delayed
   class Job < ActiveRecord::Base
+    # Imortant: delayed job requires some attributes to be accessible - make sure they are
+    attr_accessible :priority, :payload_object, :handler, :run_at, :failed_at
     def invoke_job
       logger.info "#{Time.now.utc} start delayed job #{payload_object.inspect}"
       payload_object.perform
