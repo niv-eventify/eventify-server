@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111061059) do
+ActiveRecord::Schema.define(:version => 20121211065643) do
 
   create_table "backgrounds", :force => true do |t|
     t.integer  "event_id"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20121111061059) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "designers", :force => true do |t|
     t.integer  "user_id"
