@@ -38,7 +38,7 @@ gem 'astrails-user-agent', '1.0.0'
 gem 'httparty', '0.6.0'
 gem 'newrelic_rpm', '2.13.2'
 gem 'wkhtmltopdf-heroku'
-
+gem 'wicked_pdf'
 # bundler requires these gems in all environments
 gem 'nokogiri', '1.4.2'
 gem 'geokit'

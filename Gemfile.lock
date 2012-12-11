@@ -138,6 +138,8 @@ GEM
     whenever (0.8.0)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
+    wicked_pdf (0.8.0)
+      rails
     will_paginate (2.3.16)
     wkhtmltopdf-heroku (1.0.0)
     xml-simple (1.1.2)
@@ -188,5 +190,6 @@ DEPENDENCIES
   thinking-sphinx (~> 1.4.10)
   vlad (= 1.4.0)
   whenever
+  wicked_pdf
   will_paginate (~> 2.3.16)
   wkhtmltopdf-heroku
