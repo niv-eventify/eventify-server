@@ -80,7 +80,6 @@ GEM
     mocha (0.9.8)
       rake
     multi_json (1.5.0)
-    mysql (2.9.0)
     newrelic_rpm (2.13.2)
     nokogiri (1.4.2)
     omnicontacts (0.2.2)
@@ -140,6 +139,7 @@ GEM
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
     will_paginate (2.3.16)
+    wkhtmltopdf-heroku (1.0.0)
     xml-simple (1.1.2)
 
 PLATFORMS
@@ -171,7 +171,6 @@ DEPENDENCIES
   json (= 1.2.0)
   mechanize (= 0.9.3)
   mocha (= 0.9.8)
-  mysql
   newrelic_rpm (= 2.13.2)
   nokogiri (= 1.4.2)
   omnicontacts (= 0.2.2)
@@ -190,3 +189,4 @@ DEPENDENCIES
   vlad (= 1.4.0)
   whenever
   will_paginate (~> 2.3.16)
+  wkhtmltopdf-heroku

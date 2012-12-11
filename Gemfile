@@ -4,7 +4,6 @@ ruby '1.8.7'
 
 gem 'rails', '~> 2.3.4'
 gem 'delayed_job', '~>2.0.7'
-#gem 'delayed_job_active_record', '~>0.2.0'
 
 gem 'i18n', '0.3.7'
 gem 'aws-s3', '0.5.1'
@@ -38,7 +37,8 @@ gem 'roo', '1.3.9'
 gem 'astrails-user-agent', '1.0.0'
 gem 'httparty', '0.6.0'
 gem 'newrelic_rpm', '2.13.2'
-gem 'mysql'
+gem 'wkhtmltopdf-heroku'
+
 # bundler requires these gems in all environments
 gem 'nokogiri', '1.4.2'
 gem 'geokit'
