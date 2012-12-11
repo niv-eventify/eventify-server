@@ -79,7 +79,7 @@ GEM
     mime-types (1.19)
     mocha (0.9.8)
       rake
-    multi_json (1.4.0)
+    multi_json (1.5.0)
     mysql (2.9.0)
     newrelic_rpm (2.13.2)
     nokogiri (1.4.2)
