@@ -33,7 +33,7 @@ class ContactImportersController < ApplicationController
     if @contact_importer.csv?
       @contact_importer.import!
     else
-      @contact_importer.send_later(:import!, @contact_importer.username, @contact_importer.password)
+      @contact_importer.delay.import!(@contact_importer.username, @contact_importer.password)
     end
 
     redirect_to contact_importer_path(@contact_importer)

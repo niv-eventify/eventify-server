@@ -50,7 +50,7 @@ describe CancellationsController do
     end
 
     it "nothing to do" do
-      @event.should_not_receive(:send_later).with(:send_cancellation!)
+      @event.should_not_receive(:send_cancellation!)
       put :update, :id => @event.id, :event => {}
       @event.cancellation_sent_at.should be_nil
       response.should redirect_to(summary_path(@event))
@@ -58,13 +58,13 @@ describe CancellationsController do
     end
 
     it "should not send if cant validate" do
-      @event.should_not_receive(:send_later).with(:send_cancellation!)
+      @event.should_not_receive(:send_cancellation!)
       put :update, :id => @event.id, :event => {:cancel_by_email => "true"}
       response.should be_success
     end
 
     it "should send" do
-      @event.should_receive(:send_later).with(:send_cancellation!)
+      @event.should_receive(:send_cancellation!)
       put :update, :id => @event.id, :event => {
         :cancel_by_email => "true", 
         :cancel_by_sms => "true", 

@@ -92,7 +92,7 @@ describe Taking do
         @guest.save
         @guest.rsvp = 0
 
-        Notifier.should_not_receive(:send_later).with(:deliver_taking_removed, @guest, @thing)
+        Notifier.should_not_receive(:deliver_taking_removed).with(@guest, @thing)
         @guest.save
       end
     end

@@ -174,7 +174,7 @@ class Guest < ActiveRecord::Base
   end
 
   def delayed_send_summary_status
-    send_later(:send_summary_status) if rsvp_changed? && event.immediately_send_rsvp?
+    self.delay.send_summary_status if rsvp_changed? && event.immediately_send_rsvp?
   end
 
   def send_summary_status
@@ -239,7 +239,7 @@ class Guest < ActiveRecord::Base
     self.delayed_sms_resend = nil
     save!
 
-    send_later(:send_sms_invitation!, resend)
+    self.delay.send_sms_invitation!(resend)
   end
 
   def send_sms_invitation!(resend = false)
@@ -263,7 +263,7 @@ class Guest < ActiveRecord::Base
     self.any_invitation_sent = true
     save!
 
-    send_later(:send_email_invitation!, resend)
+    self.delay.send_email_invitation!(resend)
   end
 
   def send_email_invitation!(resend = false)

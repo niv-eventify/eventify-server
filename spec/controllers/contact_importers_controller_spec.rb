@@ -76,7 +76,7 @@ describe ContactImportersController do
         (ContactImporter::SOURCES.keys - ["csv"]).each do |s|
           it "should delayed run importing for #{s}" do
             @importer.stub!(:contact_source).and_return(s)
-            @importer.should_receive(:send_later).with(:import!, "user", "password")
+            @importer.should_receive(:import!).with("user", "password")
             put :update, :id => s, :contact_importer => {:username => "user", :password => "password"}
             response.should redirect_to("/contact_importers/#{s}")
           end          

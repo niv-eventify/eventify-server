@@ -288,7 +288,7 @@ describe Guest do
     it "should not reset when need to send rsvp immediately" do
       @guest.event.stub!(:immediately_send_rsvp?).and_return(true)
       @guest.rsvp = 2
-      @guest.should_receive(:send_later).with(:send_summary_status)
+      @guest.should_receive(:send_summary_status)
       @guest.save!
       @guest.summary_email_sent_at.should_not be_nil
     end

@@ -24,7 +24,7 @@ module Event::Summary
         break unless e
 
         e.update_next_summary_send!
-        e.send_later(:send_summary_email!)
+        e.delay.send_summary_email!
       end
     end
 

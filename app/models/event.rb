@@ -169,7 +169,7 @@ class Event < ActiveRecord::Base
 
   def set_invitation_thumbnail
     return unless id > 0
-    send_later(:set_invitation_thumbnail!)
+    self.delay.set_invitation_thumbnail!
   end
 
   def set_invitation_thumbnail!
@@ -186,7 +186,7 @@ class Event < ActiveRecord::Base
   end
 
   def remove_invitation_thumbnail
-    send_later(:remove_invitation_thumbnail!)
+    self.delay.remove_invitation_thumbnail!
   end
 
   def remove_invitation_thumbnail!
@@ -210,7 +210,7 @@ class Event < ActiveRecord::Base
     self.cancellation_sent_at = Time.now.utc
     # TODO return false when not enough money to proceed with sms
     save!
-    send_later(:send_cancellation!)
+    self.delay.send_cancellation!
     true
   end
 
@@ -271,7 +271,7 @@ class Event < ActiveRecord::Base
       sms_at = best_time_to_send_invitation_sms(delay_sms_sending && allow_delayed_sms?)
       guests.not_invited_by_sms.update_all ["send_sms_invitation_at = ?", sms_at]
 
-      send_later(:delayed_send_invitations)
+      self.delay.delayed_send_invitations
     end
   end
 

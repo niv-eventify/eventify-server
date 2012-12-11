@@ -10,7 +10,7 @@ class GuestsMessage < ActiveRecord::Base
 
   def send_email_to_guests
     Guest.filter_rsvps(filter, event).each do |guest|
-      send_later(:send_message_to_guests, guest)
+      self.delay.send_message_to_guests(guest)
     end
   end
 
