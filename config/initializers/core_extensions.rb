@@ -4,12 +4,7 @@ class Array
   end
 end
 
-
-module Delayed
-  class Job < ActiveRecord::Base
-    attr_accessible :priority, :payload_object, :run_at
-  end
-end
+Delayed::Backend::ActiveRecord::Job.attr_accessible :priority, :payload_object, :run_at, :locked_at, :failed_at, :locked_by
 
 
 class ActiveRecord::Base
