@@ -19,24 +19,24 @@
 
 # Learn more: http://github.com/javan/whenever
 
-set :cron_log, "#{RAILS_ROOT}/log/cron.log"
+#set :cron_log, "#{RAILS_ROOT}/log/cron.log"
 
-every 15.minutes do
-  runner "Reminder.send_reminders"
-end
-
-every 4.minutes do
-  runner "Guest.delayed_sms_cron_job"
-end
-
-every 1.hour do
-  runner "Event.summary_cron_job"
-end
-
-every 5.minutes do
-  rake "ts:index"
-end
-
-every 4.hours do
-  runner "Bounce.cron_job"
-end
+#every 1.hour do
+#  runner "Reminder.send_reminders"
+#end
+#
+#every 4.minutes do
+#  runner "Guest.delayed_sms_cron_job"
+#end
+#
+#every 1.hour do
+#  runner "Event.summary_cron_job"
+#end
+#
+#every 5.minutes do
+#  rake "ts:index"
+#end
+#
+#every 4.hours do
+#  runner "Bounce.cron_job"
+#end
