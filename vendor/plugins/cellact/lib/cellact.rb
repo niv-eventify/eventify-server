@@ -68,7 +68,7 @@ module Cellact
 
     def self._send_sms!(request_xml)
       begin
-        res = Net::HTTP.post_form(URI.parse(Cellact::URL), 'XMLString' => request_xml)
+        res = Net::HTTPS.post_form(URI.parse(Cellact::URL), 'XMLString' => request_xml)
         if res.is_a?(Net::HTTPOK)
           [res.body, nil]
         else
