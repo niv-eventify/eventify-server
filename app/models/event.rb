@@ -312,6 +312,7 @@ class Event < ActiveRecord::Base
       if g.scheduled_to_invite_by_sms?
         g.delayed_sms_resend = resend
         g.save!
+        g.prepare_sms_invitation!
       end
     end
   end
