@@ -1,5 +1,5 @@
 module Cellact
-  URL = "http://la.cellactpro.com/unistart5.asp"
+  URL = "https://cellactpro.net/GlobalSms/ExternalClient/GlobalAPI.asp"
 
   class FlowLogger
     def request(&block)
@@ -49,16 +49,18 @@ module Cellact
       xml.PALO do |palo|
         palo.HEAD do |head|
           head.FROM @from
-          head.APP "LA", :USER => @user, :PASSWORD => @password
+          head.APP "", :USER => @user, :PASSWORD => @password
           head.CMD "sendtextmt"
-          head.TTL((2.days/60).to_s) # 2 days in minutes
+          #head.TTL((2.days/60).to_s) # 2 days in minutes
         end
         palo.BODY do |body|
-          body.SENDER @sender
           body.CONTENT text
           body.DEST_LIST do |dl|
             dl.TO mobile
           end
+        end
+        palo.OPTIONAL do |body|
+          body.CALLBACK @sender
         end
       end
       res

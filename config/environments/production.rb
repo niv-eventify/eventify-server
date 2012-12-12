@@ -28,8 +28,8 @@ config.action_view.cache_template_loading            = true
 # config.threadsafe!
 
 SMS_FROM = "eventify"
-SMS_USER = "eventify"
-SMS_PASSWORD = "Croatia684"
+SMS_USER = "niv"
+SMS_PASSWORD = "k9Hgs5c"
 
 
 config.action_mailer.delivery_method = :smtp

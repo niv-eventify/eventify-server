@@ -20,7 +20,7 @@ config.action_mailer.raise_delivery_errors = false
 require 'ruby-debug'
 
 SMS_FROM = "eventify"
-SMS_USER = "eventify"
-SMS_PASSWORD = "Croatia684"
+SMS_USER = "niv"
+SMS_PASSWORD = "k9Hgs5c"
 
 load EXTRA_ENVIR_FILE if File.exists?(EXTRA_ENVIR_FILE)
