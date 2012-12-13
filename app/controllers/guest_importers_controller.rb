@@ -60,7 +60,9 @@ class GuestImportersController < ApplicationController
   end
 
   def gmail_callback
+    logger.info("omnicontacts.contacts: #{request.env['omnicontacts.contacts']}")
     @contacts = CGI::escape(YAML::dump(request.env['omnicontacts.contacts']))
+    logger.info("parsed omnicontacts.contacts: #{@contacts}")
     render :file => "guest_importers/oauth2_callback", :layout => false
   end
 
