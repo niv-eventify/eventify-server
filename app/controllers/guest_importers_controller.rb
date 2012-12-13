@@ -61,8 +61,8 @@ class GuestImportersController < ApplicationController
 
   def gmail_callback
     logger.info("omnicontacts.contacts: #{request.env['omnicontacts.contacts']}")
-    @contacts = CGI::escape(YAML::dump(request.env['omnicontacts.contacts']))
-    logger.info("parsed omnicontacts.contacts: #{@contacts}")
+    @oauth2_response = CGI::escape(YAML::dump(request.env['omnicontacts.contacts']))
+    logger.info("parsed omnicontacts.contacts: #@oauth2_response")
     render :file => "guest_importers/oauth2_callback", :layout => false
   end
 
@@ -92,7 +92,6 @@ protected
       contacts, error = ContactImporter.import_contacts(nil, nil, "csv", params[:csvfile])
       @error = error.to_s if error
     end
-    contacts1 = []
     unless params[:email_list].blank?
       contacts1, error = ContactImporter.import_contacts(params[:username], params[:password], params[:contact_source], params[:email_list])
       contacts.concat(contacts1.nil? ? [] : contacts1)
