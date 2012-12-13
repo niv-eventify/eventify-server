@@ -4,11 +4,11 @@ class GuestImportersController < ApplicationController
 
   SOURCES = ["email", "csv", "addressbook", "email_list", "past_events"]
   TITLES = {
-    "email" => N_("Import from mail"),
-    "csv" => N_("Import CSV file"),
-    "addressbook" => N_("Import from eventify's address book"),
-    "email_list" => N_("Import from existing email list"),
-    "past_events" => N_("Import guests from past events")
+    :email => N_("Import from mail"),
+    :csv => N_("Import CSV file"),
+    :addressbook => N_("Import from eventify's address book"),
+    :email_list => N_("Import from existing email list"),
+    :past_events => N_("Import guests from past events")
   }
 
   def create
@@ -22,7 +22,7 @@ class GuestImportersController < ApplicationController
           if @error
             split_error = @error.split(" : ")
             if split_error[0] == "CaptchaRequired"
-              split_code = split_error[1].split("%3A")
+              #split_code = split_error[1].split("%3A")
               @image_url = "http://www.google.com/accounts/#{split_error[1]}"
               #@image_url = "http://www.google.com/accounts/#{split_code[0]}"
               @ctoken = CGI::unescape(split_error[1].split("?ctoken=")[1])
@@ -40,7 +40,7 @@ class GuestImportersController < ApplicationController
         if @error
           split_error = @error.split(" : ")
           if split_error[0] == "CaptchaRequired"
-            split_code = split_error[1].split("%3A")
+            #split_code = split_error[1].split("%3A")
             @image_url = "http://www.google.com/accounts/#{split_error[1]}"
             #@image_url = "http://www.google.com/accounts/#{split_code[0]}"
             @ctoken = CGI::unescape(split_error[1].split("?ctoken=")[1])

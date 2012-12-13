@@ -12,9 +12,9 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 EXTRA_ENVIR_FILE = File.join(File.dirname(__FILE__), '/extra.rb')
 
-NETPAY_MERCHANT_ID = 1415119 # demo, overide in extra.rb
-NETPAY_PERSONAL_HASH = "2G9PTR5C6M"
-NETPAY_MERCHANT_ID_DEBUG = 1415119 # demo, overide in extra.rb
+NETPAY_MERCHANT_ID = ENV['NETPAY_MERCHANT_ID'].to_i || 1415119 # demo, overide in extra.rb
+NETPAY_PERSONAL_HASH = ENV['NETPAY_PERSONAL_HASH'] || "2G9PTR5C6M"
+NETPAY_MERCHANT_ID_DEBUG = 1415119
 NETPAY_PERSONAL_HASH_DEBUG = "2G9PTR5C6M"
 #NETPAY_MERCHANT_ID = 7517686   #Real
 #NETPAY_PERSONAL_HASH = "JFH957AG2E" #Real
@@ -23,7 +23,7 @@ NETPAY_SKIP_SSL = true
 GMAIL_CLIENT_SECRET="EBIR7t9CjPovD_4jYbVK6rV8"
 GMAIL_CLIENT_ID="514171054687.apps.googleusercontent.com"
 
-::IS_STAGE = true # override in extra.rb
+::IS_STAGE = ENV['IS_STAGE']=="false" ? false : true
 ::DUMMY_PAYMENT_PROGRAM = IS_STAGE
 EVENT_TYPES = {
   :STANDARD => 10,
