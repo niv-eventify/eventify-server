@@ -1,5 +1,5 @@
 if Rails.env.production?
-  font_dir = File.join(Dir.home, ".fonts")
+  font_dir = File.join(ENV['HOME'], ".fonts")
   Dir.mkdir(font_dir) unless Dir.exists?(font_dir)
 
   Dir.glob(Rails.root.join("public", "fonts", "*")).each do |font|
