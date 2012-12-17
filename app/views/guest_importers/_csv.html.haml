@@ -7,13 +7,13 @@
       - if @error
         %p.error-msg= @error
       %fieldset
-        %h2= s_(GuestImportersController::TITLES["csv"])
+        %h2= s_(GuestImportersController::TITLES[:csv])
         .brown-box
           .brown-box-holder
             .f-row
               != file_field_tag :csvfile, :size => "68"
               != hidden_field_tag :source, "csv"
-        %h2= s_(GuestImportersController::TITLES["email_list"])
+        %h2= s_(GuestImportersController::TITLES[:email_list])
         .brown-box
           .brown-box-holder
             .f-row

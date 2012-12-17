@@ -1,6 +1,6 @@
 .import
   .popup-heading
-    %strong= s_(GuestImportersController::TITLES["email"])
+    %strong= s_(GuestImportersController::TITLES[:email])
     - if @error
       %p.error-msg= @error
     .holder

@@ -4,7 +4,7 @@
     != hidden_field_tag :source, "past_events"
     != hidden_field_tag :target_event, ""
     .popup-heading
-      %strong= s_(GuestImportersController::TITLES["past_events"])
+      %strong= s_(GuestImportersController::TITLES[:past_events])
       - if @error
         %p.error-msg= @error
       .holder    

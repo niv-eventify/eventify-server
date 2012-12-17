@@ -114,7 +114,7 @@
           != link_to content_tag(:strong, content_tag(:span, _("Print Invitation"))), print_invitation_path(@event, :format => :pdf), :class => "print"
       - form_remote_tag :url => event_other_guests_path(@event, :separate_not_responded => true) , :method => :get, :html => {:method => :get, :class => "cancel-form"} do
         .input-area
-          != text_field_tag "query", _("search"), :class => "i-text", :id => "guests_query"
+          != text_field_tag "by_name_or_email", _("search"), :class => "i-text", :id => "guests_query"
           != link_to_function image_tag("icon-close.gif"), "", :class => "close-btn"
           :javascript
             jQuery(function(){
