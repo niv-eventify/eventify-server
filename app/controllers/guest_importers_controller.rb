@@ -9,7 +9,7 @@ class GuestImportersController < ApplicationController
     :addressbook => N_("Import from eventify's address book"),
     :email_list => N_("Import from existing email list"),
     :past_events => N_("Import guests from past events")
-  }
+  }.with_indifferent_access
 
   def create
     return _import_guests  unless params[:source]
