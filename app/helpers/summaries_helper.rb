@@ -17,8 +17,8 @@ module SummariesHelper
     txt = content_tag(:strong, title + content_tag(:span, "(#{count})"))
     haml_tag(:li, :class => "tab-#{tab_index}") do
       if 5 == tab_index
-        query = params[:query] || params[:previous_query]
-        haml_concat link_to_remote(txt, :url => other_guests_path(:query => query, :separate_not_responded => params[:separate_not_responded]), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
+        query = params[:by_name_or_email] || params[:previous_query]
+        haml_concat link_to_remote(txt, :url => other_guests_path(:by_name_or_email => query, :separate_not_responded => params[:separate_not_responded]), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
       else
         haml_concat link_to_remote(txt, :url => other_guests_path(:filter => filter, :separate_not_responded => params[:separate_not_responded]), :method => :get, :html => html_tabs_options(tab_index, active_tab_index))
       end
@@ -26,9 +26,9 @@ module SummariesHelper
   end
 
   def other_guests_path(opts)
-    if !params[:query].blank?
+    if !params[:by_name_or_email].blank?
       opts[:previous_query_entries_count] = collection.total_entries
-      opts[:previous_query] = params[:query]
+      opts[:previous_query] = params[:by_name_or_email]
     elsif !params[:previous_query].blank?
       opts[:previous_query_entries_count] = params[:previous_query_entries_count]
       opts[:previous_query] = params[:previous_query]
@@ -54,7 +54,7 @@ module SummariesHelper
     when "maybe"
       2
     else
-      params[:query].blank? ? 1 : 5
+      params[:by_name_or_email].blank? ? 1 : 5
     end
   end
 

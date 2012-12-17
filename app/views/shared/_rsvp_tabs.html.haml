@@ -8,7 +8,7 @@
       - link_to_guests_filter(_("Not Opened Invitation"), "not_opened_invite", parent.guests.rsvp_not_opened_invite.count, 6)
     - else
       - link_to_guests_filter(_("Not responded"), "not_responded", parent.guests.rsvp_not_responded.count, 4)
-    - unless params[:query].blank?
-      - link_to_guests_filter(_("Search Results"), "", collection.total_entries, 5)
-    - if !params[:previous_query_entries_count].blank? && params[:query].blank?
-      - link_to_guests_filter(_("Search Results"), "", params[:previous_query_entries_count].to_i, 5)
+    - unless params[:by_name_or_email].blank?
+      - link_to_guests_filter(_("Search Results"), "by_name_or_email", collection.total_entries, 5)
+    - if !params[:previous_query_entries_count].blank? && params[:by_name_or_email].blank?
+      - link_to_guests_filter(_("Search Results"), "by_name_or_email", params[:previous_query_entries_count].to_i, 5)

@@ -72,9 +72,7 @@ protected
   end
 
   def _load_collection
-    if params[:query].blank?
-      end_of_association_chain.paginate(_page_opts.merge(:include => :sms_messages))
-    end
+    end_of_association_chain.paginate(_page_opts.merge(:include => :sms_messages))
   end
 
   def _page_opts

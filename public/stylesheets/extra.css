@@ -972,8 +972,8 @@ ul.tabset li.tab-2 a.active {
 }
 .hebrew .tabs-container #tab-2 {
     background:url("/images/bg-tabset-orange.gif") no-repeat scroll 100% 0 transparent;
-    background-image: url(/images/rsvp_more_sprite3.png);
-    background-position: -1963px -10px;
+    /*background-image: url(/images/rsvp_more_sprite3.png);*/
+    /*background-position: -1963px -10px;*/
 }
 ul.tabset li.tab-3 a {
     background:url("/images/bg-tab-3.png") no-repeat scroll 0 0 transparent;
