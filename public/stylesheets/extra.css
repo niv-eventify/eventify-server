@@ -779,7 +779,7 @@ p.takings-changed {
 }
 
 .tools-b {
-    overflow:none;
+    overflow:hidden;
 }
 
 .selectArea .center{

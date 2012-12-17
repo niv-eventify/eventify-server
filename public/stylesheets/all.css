@@ -418,10 +418,10 @@ p{margin:0;}
     height: 500px;
 }
 .promo {
-    width: 969px;
-    overflow: hidden;
-    margin: 12px 0 0 0;
-    background: url(/images/bg-promo-c.gif) repeat-y;
+  width: 969px;
+  overflow: hidden;
+  margin: 12px 0 0 0;
+  background: url(/images/bg-promo-c.gif) repeat-y;
   background-image: url(/images/home_page_sprite2.png);
   background-position: -10px 0px;
 }
@@ -431,58 +431,58 @@ p{margin:0;}
   background-position: -10px -10px;
 }
 .promo-b {
-    position: relative;
-    padding: 17px 0 0;
-    overflow: hidden;
-    height: 1%;
-    background: url(/images/bg-promo-b.gif) no-repeat 0 100%;
+  position: relative;
+  padding: 17px 0 0;
+  overflow: hidden;
+  height: 1%;
+  background: url(/images/bg-promo-b.gif) no-repeat 0 100%;
   background-image: url(/images/home_page_sprite3.png);
   background-position: -10px 310px;
 }
 a.gallery-arrow-prev,
 a.gallery-arrow-next {
-    position: absolute;
-    top:95px;
-    overflow: hidden;
-    text-indent: -9999px;
-    width: 38px;
-    height: 84px;
-    cursor: pointer;
+  position: absolute;
+  top:95px;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 38px;
+  height: 84px;
+  cursor: pointer;
 }
 a.gallery-arrow-prev {
-    left:0;
-    background: url(/images/bg-gallery-arrow-l.png) no-repeat;
+  left:0;
+  background: url(/images/bg-gallery-arrow-l.png) no-repeat;
 }
 a.gallery-arrow-next {
-    right: 0;
-    background: url(/images/bg-gallery-arrow-r.png) no-repeat;
+  right: 0;
+  background: url(/images/bg-gallery-arrow-r.png) no-repeat;
 }
 a.gallery-arrow-prev:hover,
 a.gallery-arrow-next:hover{ text-decoration: none;}
 .promo-gallery {
-    width: 718px;
-    margin: 0 0 0 116px;
-    overflow: hidden;
+  width: 718px;
+  margin: 0 0 0 116px;
+  overflow: hidden;
 }
 .hebrew .promo-gallery { margin: 0 135px 0 0;}
 .promo-gallery  img{ display: block;}
 .promo-nav {
-    background: url(/images/bg-promo-nav.jpg) no-repeat 0 100%;
-    height: 48px;
-    width: 969px;
-    margin: -3px 0 0;
-    position:relative;
+  background: url(/images/bg-promo-nav.jpg) no-repeat 0 100%;
+  height: 48px;
+  width: 969px;
+  margin: -3px 0 0;
+  position:relative;
 }
 a.prev,
 a.next{
-    overflow: hidden;
-    text-indent: -9999px;
-    width: 34px;
-    height: 32px;
-    float: left;
-    background: url(/images/btn-arrow-l.gif) no-repeat 13px 8px;
-    margin: 16px 0 0;
-    text-decoration: none;
+  overflow: hidden;
+  text-indent: -9999px;
+  width: 34px;
+  height: 32px;
+  float: left;
+  background: url(/images/btn-arrow-l.gif) no-repeat 13px 8px;
+  margin: 16px 0 0;
+  text-decoration: none;
 }
 a.next {
     width: 33px;
