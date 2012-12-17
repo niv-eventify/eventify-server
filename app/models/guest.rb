@@ -2,11 +2,6 @@ class Guest < ActiveRecord::Base
   belongs_to :event
   validates_presence_of :name
 
-  define_index do
-    indexes name, email
-    has :event_id
-  end
-
   MASS_UPDATABLE = ["send_sms", "send_email"]
 
   validates_format_of   :email, :with => String::EMAIL_REGEX, :message => N_("does't look like an email"), :allow_blank => true, :allow_nil => true
@@ -60,6 +55,11 @@ class Guest < ActiveRecord::Base
     }
   }
   named_scope :bounced, {:conditions => "guests.bounced_at IS NOT NULL"}
+  named_scope :by_name_or_email, lambda { |search_val|
+    s_val = "%#{search_val}%"
+    {:conditions => ["guests.name LIKE ? OR guests.email LIKE ?", s_val, s_val]
+    }
+  }
 
   after_create :reset_event_stage_passed
   after_update :check_invitation_failures # TODO -smth is wrong here

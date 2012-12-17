@@ -10,9 +10,7 @@ class GuestsController < InheritedResources::Base
   has_scope :rsvp_not_rsvped
   has_scope :rsvp_not_opened_invite
   has_scope :no_invitation_sent
-  has_scope :by_name
-
-  before_filter :add_by_name, :only => :index
+  has_scope :by_name_or_email
 
   after_filter :clear_flash
 
@@ -76,9 +74,6 @@ protected
   def _load_collection
     if params[:query].blank?
       end_of_association_chain.paginate(_page_opts.merge(:include => :sms_messages))
-    else
-      event_by_user_or_host
-      Guest.search(params[:query], :with => {:event_id => @event.id}, :allow_star => true).paginate(_page_opts)
     end
   end
 
@@ -93,12 +88,7 @@ protected
 
   def _any_scope?
     scope_keys = scopes_configuration.keys
-    scope_keys.delete(:by_name)
     !(params.keys.collect(&:to_sym) & scope_keys).blank?
   end
   helper_method :_any_scope?
-
-  def add_by_name
-    params[:by_name] = true
-  end
 end

@@ -30,6 +30,7 @@ class PaymentsController < InheritedResources::Base
     end
     begin
       resource.finalize_payment!(params)
+      flash[:notice] = _("Paid successfully.")
       @redirect_url = get_path_to_back_page
     rescue PaymentError
       @error_msg = _("A problem occured: %{error_description}") % {:error_description => resource.payment_status_description || _("Payment failed")}

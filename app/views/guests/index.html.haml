@@ -42,7 +42,7 @@
             .cancel-form
               .input-area
                 - form_tag event_guests_path(@event), :method => :get, :onsubmit => "jQuery('body').css('cursor', 'wait');return true", :autocomplete => "off" do
-                  != text_field_tag "query", params[:query], :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}", :autocomplete => "off"
+                  != text_field_tag "by_name_or_email", params[:by_name_or_email], :id => "search_guests", :class => "i-text", :def_value => "#{_("search")}", :autocomplete => "off"
                   != link_to image_tag("icon-close.gif"), event_guests_path(@event), :class => "close-btn", :onclick => "jQuery('body').css('cursor', 'wait');return true"
                 :javascript
                   jQuery(function(){
