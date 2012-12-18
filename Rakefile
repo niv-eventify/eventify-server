@@ -9,7 +9,6 @@ require 'rdoc/task'
 
 require 'tasks/rails'
 
-require 'thinking_sphinx/tasks'
 
 task :cruise_control do
   system "cp ../database.yml config/database.yml"
