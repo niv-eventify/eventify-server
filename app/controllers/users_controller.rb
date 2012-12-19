@@ -41,6 +41,7 @@ class UsersController < InheritedResources::Base
     if @user.email != params[:email] && !current_user.is_admin?
       flash[:error] = "In order to change your email please contact support@eventify.co.il"
       redirect_to users_path
+      return
     end
     # manual update protected attributes
     if current_user.is_admin?
