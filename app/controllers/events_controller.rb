@@ -29,10 +29,10 @@ class EventsController < InheritedResources::Base
   end
   def create
     redirect_to "/" and return unless params[:event_type].blank?
-    if !logged_in? && params[:event] && params[:event][:user_attributes]
-      params[:event].trust(:user_attributes)
-      params[:event][:user_attributes].trust(:email)
-    end
+#    if !logged_in? && params[:event] && params[:event][:user_attributes]
+#      params[:event].trust(:user_attributes)
+#      params[:event][:user_attributes].trust(:email)
+#    end
 
     # will allow passing params[:event][:tz] in a future
     Time.use_zone(params[:event] && params[:event][:tz] || Event::DEFAULT_TIME_ZONE) do

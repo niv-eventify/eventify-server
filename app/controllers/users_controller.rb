@@ -38,6 +38,10 @@ class UsersController < InheritedResources::Base
       redirect_to users_path
       return
     end
+    if @user.email != params[:email] && !current_user.is_admin?
+      flash[:error] = "In order to change your email please contact support@eventify.co.il"
+      redirect_to users_path
+    end
     # manual update protected attributes
     if current_user.is_admin?
       @user.is_admin = params[:user].delete(:is_admin) if params[:user] && params[:user][:is_admin]
@@ -85,10 +89,10 @@ class UsersController < InheritedResources::Base
     @user ||= params[:id] ? User.find(params[:id]) : current_user
   end
 
-  def build_resource
-    params[:user].try(:trust, :email)
-    super
-  end
+  #def build_resource
+  #  params[:user].try(:trust, :email)
+  #  super
+  #end
 
   # this will set global preference :domain to the current domain
   # when we create the first user.

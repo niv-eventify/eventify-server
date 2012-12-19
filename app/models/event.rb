@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :hosts, :allow_destroy => true
 
   accepts_nested_attributes_for :user
+  attr_accessible :user_attributes
   validates_associated :user, :on => :create, :if => proc { |e| e.user.activated_at.blank? }
 
   DEFAULT_TIME_ZONE = "Jerusalem"
