@@ -19,6 +19,7 @@ class IcalController < InheritedResources::Base
   end
 
   def show
+    #this is for downloading the ics/vcs files
     should_convert = "true" == params[:convert]
     send_data parent.to_ical(should_convert), :disposition=>'inline', :filename=> parent.ical_filename(should_convert), :type => "text/calendar; charset=UTF-8"
   end

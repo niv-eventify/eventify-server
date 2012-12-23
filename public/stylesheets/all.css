@@ -3867,7 +3867,7 @@ a.lb-popup-btn-close:hover{ text-decoration: none;}
 .hebrew .columns {background: url(/images/bg-columns.gif) repeat-y 172px 0;}
 .main-column {
     float: left;
-    width: 433px;
+    width: 444px;
     padding: 14px 22px 10px 5px;
 }
 .hebrew .main-column{
@@ -4040,7 +4040,7 @@ ul.logos li{
 }
 .column-1{
     float: left;
-    width: 162px;
+    width: 150px;
     padding: 8px 0 0 11px;
 }
 .hebrew .column-1{

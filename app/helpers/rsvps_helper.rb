@@ -68,3 +68,13 @@ module RsvpsHelper
     end
   end
 end
+
+  def google_calendar_url(event_id)
+    event = Event.find(event_id)
+    event.with_time_zone do
+      start_at = event.starting_at.utc.strftime('%4Y%2m%2dT%2H%2M%2SZ')
+      ending_at_date_time = event.ending_at.blank? ? event.starting_at + 2.hours : event.ending_at
+      end_at = ending_at_date_time.utc.strftime('%4Y%2m%2dT%2H%2M%2SZ')
+      "http://www.google.com/calendar/event?action=TEMPLATE&text=#{event.name}&dates=#{start_at}/#{end_at}&details=#{event.invitation_title}&location=#{event.location_address}&trp=false&sprop=www.eventify.co.il&sprop=name:Eventify"
+    end
+  end

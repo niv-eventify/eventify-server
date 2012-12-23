@@ -11,7 +11,7 @@
             != render(:partial => 'edit')
         .side-box-row.side-box-row-alt
           %h3= _("Export to your calendar:")
-          != render(:partial => 'shared/export_links', :locals => {:lnk => :rsvp_ical_path, :event => resource.email_token, :event_id => resource.event_id, :email_recipient => resource, :email => resource.email.include?("@gmail.com")})
+          != render(:partial => 'shared/export_links', :locals => {:lnk => :rsvp_ical_path, :event => resource.email_token, :event_id => resource.event_id, :email_recipient => resource})
         #like_holder.side-box-row.side-box-row-alt.overflow_visible
           #fb-root
           :javascript

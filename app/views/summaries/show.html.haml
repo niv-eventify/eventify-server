@@ -65,7 +65,7 @@
                 %dd= @event.location_address
           .info-container-row
             %strong.heading= _("Export to your calendar:")
-            != render(:partial => 'shared/export_links', :locals => {:lnk => :event_ical_path, :event => @event, :event_id => @event.id, :email_recipient => nil, :email => @event.user.email.include?("@gmail.com")})
+            != render(:partial => 'shared/export_links', :locals => {:lnk => :event_ical_path, :event => @event, :event_id => @event.id, :email_recipient => nil})
       .column
         %h2= _("Guests summary")
         .lists
