@@ -261,7 +261,7 @@
     jQuery('.show_ending_at, .hide_ending_at').toggle();
     jQuery('.ending_at_block').css('display','block');
     if ("" == jQuery("#ending_at_mock").val()) {
-        stage2.set_ending_at(stage2.starting_at());
+        stage2.set_ending_at_as_start_date();
     }
   },
 
@@ -282,29 +282,25 @@
     var start_date = jQuery("#starting_at_mock").val().split(".");
     start_date.push(jQuery("#event_starting_at_4i").val());
     start_date.push(jQuery("#event_starting_at_5i").val());
-    return new Date(start_date[2], start_date[1], start_date[0], start_date[3], start_date[4]);
+    return new Date(start_date[2], start_date[1]-1, start_date[0], start_date[3], start_date[4]);
   },
 
   ending_at: function () {
     var ending_date = jQuery("#ending_at_mock").val().split(".");
     ending_date.push(jQuery("#event_ending_at_4i").val());
     ending_date.push(jQuery("#event_ending_at_5i").val());
-    return new Date(ending_date[2], ending_date[1], ending_date[0], ending_date[3], ending_date[4]);
+    return new Date(ending_date[2], ending_date[1]-1, ending_date[0], ending_date[3], ending_date[4]);
   },
 
-  set_ending_at: function(date) {
-    var hrs = date.getHours().toString();
-    if (hrs.length < 2) hrs = "0" + hrs;
-    var min = date.getMinutes().toString();
-    if (min.length < 2) min = "0" + min;
+  set_ending_at_as_start_date: function() {
     jQuery("#ending_at_mock").val(jQuery("#starting_at_mock").val());
-    jQuery("#event_ending_at_year").val(date.getFullYear());
-    jQuery("#event_ending_at_month").val(date.getMonth() + 1);
-    jQuery("#event_ending_at_day").val(date.getDate());
-    jQuery("#event_ending_at_4i").val(hrs);
-    jQuery("#event_ending_at_5i").val(min);
-    jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(hrs);
-    jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(min);
+    jQuery("#event_ending_at_year").val(jQuery("#event_starting_at_year").val());
+    jQuery("#event_ending_at_month").val(jQuery("#event_starting_at_month").val());
+    jQuery("#event_ending_at_day").val(jQuery("#event_starting_at_day").val());
+    jQuery("#event_ending_at_4i").val(jQuery("#event_starting_at_4i").val());
+    jQuery("#event_ending_at_5i").val(jQuery("#event_starting_at_5i").val());
+    jQuery("#event_ending_at_4i").prev(".selectArea").find(".center").html(jQuery("#event_starting_at_4i").val());
+    jQuery("#event_ending_at_5i").prev(".selectArea").find(".center").html(jQuery("#event_starting_at_5i").val());
   },
 
   submit_form: function(is_resend_invitation) {
@@ -515,22 +511,6 @@ jQuery(document).ready(function(){
     months: stage2.months_arr
   });
 
-  var old_start_date = stage2.starting_at();
-  setInterval(function(){
-      if (stage2.starting_at().getTime() == old_start_date.getTime()) {
-          return;
-      }
-      jQuery("#starting_at_mock").trigger('change');
-      if ('block' == jQuery('.ending_at_block').css('display')) {
-          if ("" == jQuery("#ending_at_mock").val()) {
-              stage2.set_ending_at(stage2.starting_at());
-          }
-          else if (stage2.ending_at() < stage2.starting_at()) {
-              stage2.set_ending_at(stage2.starting_at());
-          }
-      }
-      old_start_date = stage2.starting_at();
-  }, 200);
   jQuery("#event_guest_message").focus(function(){
     stage2.show_msg_border();
   });
