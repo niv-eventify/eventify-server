@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211065643) do
+ActiveRecord::Schema.define(:version => 20121226123720) do
 
   create_table "backgrounds", :force => true do |t|
     t.integer  "event_id"
@@ -283,14 +283,14 @@ ActiveRecord::Schema.define(:version => 20121211065643) do
     t.datetime "email_invitation_failed_at"
     t.datetime "summary_email_sent_at"
     t.string   "message_to_host"
-    t.integer  "sms_messages_count",         :default => 0
+    t.integer  "sms_messages_count",                         :default => 0
     t.datetime "send_email_invitation_at"
     t.datetime "send_sms_invitation_at"
-    t.boolean  "any_invitation_sent",        :default => false
-    t.boolean  "delayed_sms_resend",         :default => false
+    t.boolean  "any_invitation_sent",                        :default => false
+    t.boolean  "delayed_sms_resend",                         :default => false
     t.datetime "bounced_at"
     t.string   "bounce_status"
-    t.string   "bounce_reason"
+    t.string   "bounce_reason",              :limit => 2048
     t.datetime "cancellation_sms_sent_at"
     t.datetime "cancellation_email_sent_at"
     t.datetime "first_viewed_invitation_at"
