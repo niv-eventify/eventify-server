@@ -632,16 +632,16 @@ protected
   end
 
   def _disable_reminders!
-    reminders.update_all("is_active = 0")
+    reminders.update_all("is_active = '0'")
   end
 
   def _cancel_sms_reminders!
-    reminders.update_all("by_sms = 0")
-    reminders.update_all("is_active = 0", "by_sms = 0 AND by_email = 0")
+    reminders.update_all("by_sms = '0'")
+    reminders.update_all("is_active = '0'", "by_sms = '0' AND by_email = '0'")
   end
 
   def _cancel_sms_invitations!
-    guests.update_all("send_sms = 0")
+    guests.update_all("send_sms = '0'")
   end
 
 private
