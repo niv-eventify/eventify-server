@@ -6,6 +6,8 @@
   replacedMsgHolder: null,
   envelopeTimeout: null,
   maxWaitTimeReached: false,
+  lastWindowHeight: null,
+  lastWindowWidth: null,
 
   adjust_dialogs_size: function() {
     jQuery("div[id ^= 'invitation']").each(function(){
@@ -73,6 +75,10 @@
   }
 }
 jQuery(document).ready(function(jQuery){
+  rsvps.lastWindowHeight = $(window).height();
+  rsvps.lastWindowWidth = $(window).width();
+  rsvps.adjust_dialogs_size();
+
   if(jQuery("#envelope").length > 0) {
     rsvps.envelopeTimeout = setTimeout(function(){
       rsvps.maxWaitTimeReached = true;
@@ -85,8 +91,13 @@ jQuery(document).ready(function(jQuery){
     });
   }
   jQuery(".toolbar").hide();
-  rsvps.adjust_dialogs_size();
-  jQuery(window).resize(function(){rsvps.adjust_dialogs_size();});
+  jQuery(window).resize(function(){
+    if(rsvps.lastWindowHeight != $(window).height() && rsvps.lastWindowWidth != $(window).width()){
+      rsvps.lastWindowHeight = $(window).height(); 
+      rsvps.lastWindowWidth = $(window).width();
+      rsvps.adjust_dialogs_size();
+    }
+  });
   jQuery('.toolbar_preview').appendTo('body');
   jQuery('a.preview.nyroModal').nyroModal({
     processHandler: function(settings){
