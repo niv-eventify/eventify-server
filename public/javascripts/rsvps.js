@@ -75,8 +75,8 @@
   }
 }
 jQuery(document).ready(function(jQuery){
-  rsvps.lastWindowHeight = $(window).height();
-  rsvps.lastWindowWidth = $(window).width();
+  rsvps.lastWindowHeight =jQuery(window).height();
+  rsvps.lastWindowWidth = jQuery(window).width();
   rsvps.adjust_dialogs_size();
 
   if(jQuery("#envelope").length > 0) {
@@ -92,9 +92,9 @@ jQuery(document).ready(function(jQuery){
   }
   jQuery(".toolbar").hide();
   jQuery(window).resize(function(){
-    if(rsvps.lastWindowHeight != $(window).height() && rsvps.lastWindowWidth != $(window).width()){
-      rsvps.lastWindowHeight = $(window).height(); 
-      rsvps.lastWindowWidth = $(window).width();
+    if(rsvps.lastWindowHeight != jQuery(window).height() && rsvps.lastWindowWidth != jQuery(window).width()){
+      rsvps.lastWindowHeight = jQuery(window).height(); 
+      rsvps.lastWindowWidth = jQuery(window).width();
       rsvps.adjust_dialogs_size();
     }
   });
