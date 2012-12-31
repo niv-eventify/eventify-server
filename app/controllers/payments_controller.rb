@@ -5,7 +5,7 @@ class PaymentsController < InheritedResources::Base
   skip_before_filter :setup_localization, :only => [:edit, :update]
   before_filter      :setup_localization_skip_domain, :only => [:edit, :update]
   before_filter      :set_no_cache, :only => [:update]
-
+  before_filter      :event_by_user_or_host, :only => [:new]
   actions :new, :edit, :update, :create
 
   filter_parameter_logging :cc, :expiration_month, :expiration_year, :ccv2, :user_ident
