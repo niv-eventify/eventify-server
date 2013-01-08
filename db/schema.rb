@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226123720) do
+ActiveRecord::Schema.define(:version => 20130108152836) do
 
   create_table "backgrounds", :force => true do |t|
     t.integer  "event_id"
@@ -302,7 +302,7 @@ ActiveRecord::Schema.define(:version => 20121226123720) do
   create_table "guests_messages", :force => true do |t|
     t.integer  "event_id"
     t.string   "subject"
-    t.string   "body"
+    t.string   "body",       :limit => 2048
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "filter"
