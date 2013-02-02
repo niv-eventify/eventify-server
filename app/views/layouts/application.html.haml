@@ -25,9 +25,9 @@
     - if IS_STAGE
       %link{:id => "agtzfmNzc2ZpZGRsZXIMCxIEUGFnZRiTjwsM", :rel => "stylesheet", :type => "text/css", :href => "http://www.webputty.net/css/agtzfmNzc2ZpZGRsZXIMCxIEUGFnZRiTjwsM"}
       %script{:type => "text/javascript", :src => "http://www.webputty.net/js/agtzfmNzc2ZpZGRsZXIMCxIEUGFnZRiTjwsM"}
-    - else
-      != render(:partial => "layouts/google_analytics")
   %body{:class => body_class}
+    - if !IS_STAGE
+      != render(:partial => "layouts/google_analytics")
     #wrapper
       #main
         #content{:class => @content_css_class}

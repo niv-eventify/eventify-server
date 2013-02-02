@@ -99,7 +99,7 @@
             jQuery(window).trigger('amount-changed');
           })
       .nav
-        != link_to_function _("Continue"), "submit_payment()", :class => "btn-continue"
+        != link_to_function _("Continue"), "dataLayer.push({'event': 'GAevent', 'eventCategory': 'submit_payment',  'eventAction': 'click', 'eventValue': #{get_amount_or_zero}});submit_payment()", :class => "btn-continue"
         != link_to _("Edit Guests"), event_guests_path(resource.event_id), :id => "payments_edit_guests_link", :class => "underline"
         %div.is_agree_to_terms
         %input{:type => "checkbox", :name => "payment[is_agreed_to_terms]", :id => "is_agree_to_terms", :value => "1"}
