@@ -112,8 +112,7 @@
       alert("#{_("Please agree to the terms of use.")}");
       return;
     }
-    var amount = "#{get_amount_or_zero}"
-    dataLayer.push({'event': 'GAevent', 'eventCategory': 'submit_payment',  'eventAction': 'click', 'eventValue': amount});
+    dataLayer.push({'event': 'GAevent', 'eventCategory': 'submit_payment',  'eventAction': 'click', 'eventValue': jQuery("#total_amount").html());
     var data = jQuery('form.pricing-form').serialize();
     jQuery('body').css('cursor', 'wait');
     var popup = window.open("", "PaymentPage", "status=1,location=0,height=570,width=720");
