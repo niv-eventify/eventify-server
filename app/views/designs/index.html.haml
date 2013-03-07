@@ -3,11 +3,11 @@
   != javascript_include_tag "jquery.nyroModal"
 
 .twocolumns
-  .content-wrapper
+  .content-wrapper{:itemscope => true, :itemtype => "http://schema.org/ImageGallery"}
     .content-wrapper-top
       != will_paginate(collection, :renderer => DesignsWillPaginate)
-      %h1= _("Invitations for ") + @category.name
-      %h2.weak
+      %h1{:itemprop => "name"}= _("Invitations for ") + @category.name
+      %h2.weak{:itemprop => "description"}
         = @description
         %b>= @feature
     .image-boxes-h

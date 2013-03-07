@@ -2,8 +2,8 @@
   .img-box-t
     .img-box-b
       .content-h
-        .image
-          != update_design_link(event, design, category, "", image_tag(design.preview.url(:medium), :alt => "", :size=>"218x145"))
+        .image{:itemscope => true, :itemtype => "http://schema.org/ImageObject"}
+          != update_design_link(event, design, category, "", image_tag(design.preview.url(:medium), :alt => "", :size => "218x145", :itemprop => "image"))
       != update_design_link(event, design, category)
       - unless design.designer.blank?
         != link_to _("Designer's Page"), show_designer_path(design.designer.friendly_url), :class => "designer_link"
