@@ -2003,3 +2003,9 @@ form.edit_designer p.designer-error-msg{
 #nyroModalWrapper {
     border-radius: 10px;
 }
+
+.links_pages a{
+  text-decoration: underline;
+  color: blue;
+}
+  

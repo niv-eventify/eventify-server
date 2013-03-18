@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108152836) do
+ActiveRecord::Schema.define(:version => 20130318070037) do
 
   create_table "backgrounds", :force => true do |t|
     t.integer  "event_id"
@@ -360,6 +360,9 @@ ActiveRecord::Schema.define(:version => 20130108152836) do
     t.text     "page_html"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "title"
+    t.string   "meta_description"
+    t.string   "meta_keywords"
   end
 
   create_table "movies", :force => true do |t|

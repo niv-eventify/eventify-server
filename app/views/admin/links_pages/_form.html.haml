@@ -4,6 +4,9 @@
   != f.input :language, :as => :select, :label => "Language", :collection => ["he", "en"]
 - f.inputs do
   != f.input :friendly_url, :label => "Friendly URL"
+  != f.input :title, :label => "Page/meta title"
+  != f.input :meta_description, :label => "Meta description"
+  != f.input :meta_keywords, :label => "Meta keywords"
 - f.inputs do
   != f.text_area :page_html, :label => "HTML"
 :javascript
