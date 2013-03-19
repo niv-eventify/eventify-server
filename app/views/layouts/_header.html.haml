@@ -7,7 +7,7 @@
     %ul#top-nav
       != render(:partial => "layouts/top_categories")
       %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
-      %li!= link_to "Online Invitationsן", "online-invitations", :class => "top"
+      %li!= link_to "Online Invitations", "online-invitations", :class => "top"
     - unless @skip_header
       .top-user-menu
         != render(:partial => "layouts/user_menu")
