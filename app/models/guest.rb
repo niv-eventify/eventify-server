@@ -324,7 +324,7 @@ class Guest < ActiveRecord::Base
   end
 
   def email_recipient
-    "#{name} <#{email}>"
+    "#{name.strip} <#{email}>"
   end
 
   def check_invitation_failures
