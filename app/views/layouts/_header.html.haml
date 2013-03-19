@@ -1,13 +1,13 @@
 #header
   .header-area
     %strong.logo
-      %a{:href => "/", :title => _("הזמנות לאירועים וניהול מוזמנים לאירוע")}
+      %a{:href => "/", :title => _("Online invitations and guests managements")}
         Eventify
     .search-form
     %ul#top-nav
       != render(:partial => "layouts/top_categories")
       %li!= link_to _("FAQ"), page_path("faq"), :class => "top"
-      %li!= link_to "הזמנות אונליין", "online-invitations", :class => "top"
+      %li!= link_to "Online Invitationsן", "online-invitations", :class => "top"
     - unless @skip_header
       .top-user-menu
         != render(:partial => "layouts/user_menu")
