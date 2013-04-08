@@ -11,7 +11,7 @@
       != link_to content_tag(:span, _("Map")), resource.event.map.url, :class => "t-b-btn t-b-btn-3", :target => "_blank"
     - elsif !resource.event.map_link.blank?
       != link_to content_tag(:span, _("Map")), resource.event.map_link, :class => "t-b-btn t-b-btn-3", :target => "_blank"
-    - if false && resource.rsvp
+    - if resource.rsvp
       != link_to content_tag(:span, _("RSVPS")), rsvp_path(resource.email_token, :more => true), :class => "t-b-btn t-b-btn-4"
     - else
       %a{:href => "#rsvps_dialog", :id => "rsvps_dialog_opener", :class => "t-b-btn t-b-btn-4"}
