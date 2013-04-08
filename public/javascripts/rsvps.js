@@ -72,7 +72,7 @@
       }
     });
     jQuery(".toolbar").show();
-    if(typeof(handlePlayer) === "undefind"){
+    if(typeof(handlePlayer) === "undefined"){
       rsvps.startRsvpsPopupTimer();
     }
     jQuery("#rsvps_dialog_opener").click(function(){
@@ -141,7 +141,7 @@ jQuery(document).ready(function(jQuery){
     }
   });
   var iframe = jQuery('#invitation iframe')[0];
-  if(typeof(handlePlayer) !== "undefind"){
+  if(typeof(handlePlayer) !== "undefined"){
     handlePlayer(iframe, "#nyroModalContent .background_holder");
   }
 });
