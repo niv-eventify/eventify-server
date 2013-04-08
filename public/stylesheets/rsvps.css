@@ -307,5 +307,32 @@
 }
 
 #nyroModalWrapper {
-    border-radius: 10px;
+  border-radius: 10px;
+  border: 1px solid #6B6B6B;
+}
+
+.nyroModalDom {
+  padding: 5px;
+}
+
+.nyroModalCloseButton {
+  background: url("/images/home_page_sprite1.png") no-repeat scroll -10px -1505px transparent;
+  z-index: 1010;
+}
+
+body.rsvps {
+  min-width: 0;
+}
+
+.side-box-row {
+  border-bottom: none;
+  width: 295px;
+}
+
+.d-list dt {
+  width: 60px;
+}
+
+.hebrew .rsvp-form {
+  direction: rtl;
 }

@@ -1,0 +1,28 @@
+.side-box-row
+  %h3= _("You're invited to %{event_name}, please RSVP") % {:event_name => resource.event.name}
+  %dl.d-list
+    - unless resource.event.location_name.blank?
+      %dt= _("Where:")
+      %dd
+        = resource.event.location_name
+        !=  show_map_when_needed(true)
+    - unless resource.event.location_address.blank?
+      %dt= _("Address:")
+      %dd
+        = resource.event.location_address
+    %dt= _("Date:")
+    %dd= resource.event.starting_at.to_s(:isra_date)
+    %dt= _("Time")
+    %dd= resource.event.starting_at.to_s(:isra_time)
+
+    - unless resource.event.ending_at.blank?
+      %div= _("Event ends at")
+      %dt= _("Date:")
+      %dd= resource.event.ending_at.to_s(:isra_date)
+      %dt= _("Time")
+      %dd= resource.event.ending_at.to_s(:isra_time)
+  %ul.link-box
+    %li.item-1!= link_to_rsvp_update(_("Yes"), 1)
+    %li.item-2!= link_to_rsvp_update(_("May Be"), 2)
+    %li.item-3!= link_to_rsvp_update(_("No"), 0)
+  %span#updating_rsvp_status{:style => "display:none"}= _("Updating RSVP status, please wait...")

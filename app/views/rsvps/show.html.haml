@@ -6,8 +6,8 @@
     %meta{ :name => "title", :content => _("Online Invitations, Event Planning and Managing – Eventify")}
     %meta{ :name => "description", :content => _("Online invitations made easy. Create & manage online invitations with templates to match any event! Plan your event in style!")}
     %title=_("Invitation | Eventify")
-    != stylesheet_link_tag 'nyroModal.full', 'rsvps', :media => 'all'
-    != render(:partial => "layouts/javascripts")
+    != stylesheet_link_tag 'nyroModal.full', 'all', 'rsvps', 'jquery-ui', :media => 'all'
+    != render :partial => "layouts/javascripts", :locals => {:jquery_version => "1.4.2"}
     - unless @movie.nil?
       != javascript_include_tag 'json2'
       != javascript_include_tag 'http://a.vimeocdn.com/js/froogaloop2.min.js'
@@ -19,7 +19,7 @@
       != stylesheet_link_tag 'lt7', :media => 'screen'
     - unless IS_STAGE
       != render(:partial => "layouts/google_analytics")
-  %body{ :class => body_class, :style => "overflow:hidden;" }
+  %body.rsvps{ :class => body_class, :style => "overflow:hidden;" }
     - if resource.event.backgrounds.length > 0
       - rsvp_background(resource.event)
     #envelope!= link_to '', '#invitation'
@@ -35,3 +35,6 @@
           != image_tag(resource.event.design.card.url, :class => "back")
           != render(:partial => "postcard", :locals => {:event => resource.event})
         - get_movie_iframe_preview(@movie)
+    #rsvps_dialog{:style => "display:none;"}
+      .rsvp-form
+        != render(:partial => 'new_dialog')

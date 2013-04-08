@@ -8,7 +8,7 @@ function handlePlayer(iframe, invitation_selector){
   });
 
 // Call the API when a button is pressed
-  $('.play-movie').bind('click', function() {
+  jQuery('.play-movie').live('click', function() {
     jQuery(invitation_selector).hide();
     jQuery(iframe).show();
     player.api('seekTo','1');
@@ -19,11 +19,17 @@ function handlePlayer(iframe, invitation_selector){
 //    player.api('pause');
 //    jQuery(iframe).hide();
 //    jQuery(invitation_selector).show();
+//    if(typeof(rsvps) !== "undefined"){
+//      rsvps.startRsvpsPopupTimer();
+//    }
   }
 
   function onFinish(id) {
     jQuery(iframe).hide();
     jQuery(invitation_selector).show();
+    if(typeof(rsvps) !== "undefined"){
+      rsvps.startRsvpsPopupTimer();
+    }
   }
 
 //  function onPlayProgress(data, id) {

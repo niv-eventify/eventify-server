@@ -17,7 +17,7 @@
 
   adjust_dialog_size: function(invitation_id) {
     var width = jQuery(window).width() - 62;
-    var height = jQuery(window).height() - 63;
+    var height = jQuery(window).height() - 63 - 64 - 10;//the second and third are the height of the toolbar and the margins
 
     var ratio = width / height;
     if(ratio < 1.5) {
@@ -72,6 +72,24 @@
       }
     });
     jQuery(".toolbar").show();
+    if(typeof(handlePlayer) === "undefind"){
+      rsvps.startRsvpsPopupTimer();
+    }
+    jQuery("#rsvps_dialog_opener").click(function(){
+      jQuery("#rsvps_dialog").dialog({
+        height: "auto",
+        width: "auto",
+        resizable: false,
+        draggable: true
+      });
+      $(".ui-dialog-titlebar").hide();
+    });
+  },
+
+  startRsvpsPopupTimer: function() {
+    setTimeout(function(){
+      jQuery("#rsvps_dialog_opener").click();
+    }, 7000);
   }
 }
 jQuery(document).ready(function(jQuery){
@@ -93,7 +111,7 @@ jQuery(document).ready(function(jQuery){
   jQuery(".toolbar").hide();
   jQuery(window).resize(function(){
     if(rsvps.lastWindowHeight != jQuery(window).height() && rsvps.lastWindowWidth != jQuery(window).width()){
-      rsvps.lastWindowHeight = jQuery(window).height(); 
+      rsvps.lastWindowHeight = jQuery(window).height();
       rsvps.lastWindowWidth = jQuery(window).width();
       rsvps.adjust_dialogs_size();
     }
@@ -123,7 +141,7 @@ jQuery(document).ready(function(jQuery){
     }
   });
   var iframe = jQuery('#invitation iframe')[0];
-  if(!typeof(handlePlayer) == "undefind"){
+  if(typeof(handlePlayer) !== "undefind"){
     handlePlayer(iframe, "#nyroModalContent .background_holder");
   }
 });
