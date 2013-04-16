@@ -4188,7 +4188,10 @@ ul.tabset li a{
     background-position: -10px -442px;
     cursor:pointer;
 }
-.hebrew ul.tabset li a {padding:11px 12px 0 0;}
+.hebrew ul.tabset li a {
+  padding:11px 12px 0 0;
+  text-align: right;
+}
 ul.tabset li a strong{
     display: block;
     height: 25px;
