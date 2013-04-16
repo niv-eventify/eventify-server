@@ -13,7 +13,7 @@
         jQuery("#free_text").html(jQuery("#free_text").html().replace(/ /g, ""));
         jQuery("#title").html(jQuery("#title").html().replace(/ /g, ""));
       }
-      if (typeof(handlePlayer) !== "undefind") {
+      if (typeof(handlePlayer) !== "undefined") {
         var iframe = jQuery('#iframe_holder iframe')[0];
         handlePlayer(iframe, "#invitation_holder");
       }
