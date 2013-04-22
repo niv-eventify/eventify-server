@@ -11,6 +11,7 @@ class GuestsController < InheritedResources::Base
   has_scope :rsvp_not_opened_invite
   has_scope :no_invitation_sent
   has_scope :by_name_or_email
+  has_scope :by_name, :default => true
 
   after_filter :clear_flash
 
