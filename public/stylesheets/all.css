@@ -6084,7 +6084,7 @@ ul.text-align li.a-r a {background: url(/images/ico-align-right.gif) no-repeat;}
     line-height:1.4em;
     font-size:1.2em;
 }
-.hebrew .pricing{padding:31px 0 0 123px;}
+.hebrew .pricing{padding:31px 0 0 0px;}
 .pricing h2{
     font-size:2.08em;
     font-weight:normal;
@@ -6104,7 +6104,7 @@ ul.text-align li.a-r a {background: url(/images/ico-align-right.gif) no-repeat;}
     margin:0;
     font-size:1.5em;
 }
-.pricing-form .section{
+.expricing-form .section{
     margin:0 0 30px;
     padding:0 0 19px;
     border-bottom:1px solid #d6d6d6;

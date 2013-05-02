@@ -1,6 +1,6 @@
 - @page_title = _("Pricing")
 
-.top-text
+#pricing_page.top-text
   %h2= _("Pricing")
   %p
     בימים אלו, לאחר תקופה ארוכה של פתיחת שירות המוזמנים בחינם ובכדי להבטיח את המשך הנאתכם משימוש באתר שלנו, עברנו למודל פרימיום (freemium).
@@ -21,4 +21,42 @@
     נשמח לקבל פידבקים ולענות על כל שאלה.
   %p
     צוות Eventify.
+
+  .pricing
+    .heading
+      %h3= _("Pricing Summary")
+    .pricing-form
+      .section
+        %dl
+          %dt= _("Standard Invitations")
+        .invite
+          != render(:partial => "payments/header", :locals => {:item => "#{_('Guests')}"})
+          .result-panel{:style => "display:none;"}
+          .slide
+            .slide-hold
+              %ul
+                - Eventify.const_get(:STANDARD_EMAILS_PLAN_PROPERTIES).reverse().each_with_index do |p, indx|
+                  %li
+                    %label{:for => "radio-quantity-#{indx}"}
+                      %span.quantity= _("#{p.first.first} - #{p.first.last}")
+                      %span.price
+                        %strong= p.last.last.format_cents(false)
+                        ₪
+      .section
+        %dl
+          %dt= _("Premium Invitations")
+        .invite
+          != render(:partial => "payments/header", :locals => {:item => "#{_('Guests')}"})
+          .result-panel{:style => "display:none;"}
+          .slide
+            .slide-hold
+              %ul
+                - Eventify.const_get(:PREMIUM_EMAILS_PLAN_PROPERTIES).reverse().each_with_index do |p, indx|
+                  %li
+                    %label{:for => "radio-quantity-#{indx}"}
+                      %span.quantity= _("#{p.first.first} - #{p.first.last}")
+                      %span.price
+                        %strong= p.last.last.format_cents(false)
+                        ₪
+
 
