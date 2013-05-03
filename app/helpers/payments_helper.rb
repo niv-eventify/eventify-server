@@ -1,9 +1,9 @@
 module PaymentsHelper
 
   EVENT_TYPES_PACKAGE_DISPLAY = {
-      :STANDARD => N_("Invitation Package -"),
-      :PREMIUM => N_("Premium Invitation Package -"),
-      :MOVIE => N_("Movie Invitation Package -")
+      :STANDARD => N_("Invitation Package"),
+      :PREMIUM => N_("Premium Invitation Package"),
+      :MOVIE => N_("Movie Invitation Package")
   }
   def emails_plan_package_display(event)
     EVENT_TYPES_PACKAGE_DISPLAY[EVENT_TYPES_KEYS[event.event_type]]

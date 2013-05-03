@@ -31,7 +31,7 @@
       != hidden_field_tag :back, params[:back]
       .section
         %dl
-          %dt= emails_plan_package_display(@event)
+          %dt= "#{emails_plan_package_display(@event)} -"
           %dd= _("Number of invitations sent in this event: %{guests_count}") % {:guests_count => @invitations_count}
         %p= _("In case you wish to add more invitations, you can select a bigger package")
         .invite
