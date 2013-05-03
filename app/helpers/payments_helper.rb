@@ -4,7 +4,7 @@ module PaymentsHelper
       :STANDARD => N_("Invitation Package"),
       :PREMIUM => N_("Premium Invitation Package"),
       :MOVIE => N_("Movie Invitation Package")
-  }
+  }.with_indifferent_access
   def emails_plan_package_display(event)
     EVENT_TYPES_PACKAGE_DISPLAY[EVENT_TYPES_KEYS[event.event_type]]
   end
