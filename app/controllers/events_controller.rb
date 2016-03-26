@@ -7,7 +7,7 @@ class EventsController < InheritedResources::Base
   around_filter :set_event_time_zone, :only => [:new, :edit, :update, :show, :index]
   after_filter :set_uploaded_pictures, :only => :create
 
-  actions :create, :new, :edit, :update, :index, :show, :destroy
+  actions :create, :edit, :update, :index, :show, :destroy
 
   before_filter :redirect_disabled_events, :only => [:show, :edit, :update]
 
